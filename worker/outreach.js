@@ -69,6 +69,7 @@ export function programLevel(track, goal) {
 // The program names, in each language, live with the award names.
 export { PROGRAM_NAMES } from './award-names.js';
 import { PROGRAM_NAMES } from './award-names.js';
+import { gradingDigestLine } from './grading/review.js';
 
 /* "1peter 3" (student_activity.last_unit) -> the course's name and the page to
  * go on with: the next unit, or the course's first page if that was the last. */
@@ -188,8 +189,10 @@ export async function candidates(env, asOf = new Date()) {
   const t = asOf.getTime();
   const iso = (ms) => new Date(ms).toISOString();
   const rows = (await env.DB.prepare(
-    `SELECT a.*, (SELECT MAX(o.sent_at) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'quiet') AS last_quiet_note,
-            (SELECT COUNT(*) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'not_started') AS not_started_notes
+    // Only notes that actually went out count. A failed send (status 'failed') must not
+    // stop the next day's run from trying that student again.
+    `SELECT a.*, (SELECT MAX(o.sent_at) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'quiet' AND o.status = 'sent') AS last_quiet_note,
+            (SELECT COUNT(*) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'not_started' AND o.status = 'sent') AS not_started_notes
      FROM student_activity a
      WHERE a.email IS NOT NULL AND a.email <> '' AND a.contact_opt_out_at IS NULL AND lower(a.email) <> ?
        AND a.last_progress_at <= ?`)
@@ -274,10 +277,12 @@ export async function digest(env, asOf = new Date()) {
   const courseName = (code) => (catalog.completions[code]?.name || code).replace(/\s*\|\s*$/, '');
   const byStudent = {};
   for (const f of finished) (byStudent[f.name] ??= []).push(courseName(f.code));
+  const gradingLine = await gradingDigestLine(env, asOf);
   const KIND = { quiet: 'quiet 3 weeks', not_started: 'not started after a week' };
   const lines = [
     `The week to ${day(asOf.toISOString())}`,
     `${total} students; ${active} made progress in the last ${QUIET_DAYS} days.`,
+    ...(gradingLine ? [gradingLine] : []),
     '',
     `NOTES SENT TO STUDENTS (${notes.length})`,
     ...(notes.length ? notes.map((n) => `  ${day(n.sent_at)}  ${n.name} <${n.email}>  ${KIND[n.kind] || n.kind}, ${n.lang || 'English (default)'}` +

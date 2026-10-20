@@ -12,7 +12,7 @@ const queue = pages.slice();
 async function work(){
   while(queue.length){
     const f = queue.shift();
-    const c = await b.newContext(); const p = await c.newPage();
+    const c = await b.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }); const p = await c.newPage();
     const errs=[]; p.on('pageerror',e=>errs.push(e.message));
     try{
       await p.goto(`http://127.0.0.1:8821/${f}`,{waitUntil:'load',timeout:15000});

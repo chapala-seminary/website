@@ -16,6 +16,7 @@
  */
 import fs from 'node:fs';
 import { chromium } from 'playwright';
+import { waitForCatalogLanding } from './lib/catalog-landing.mjs';
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const CHROME = process.env.CHROME_PATH;
@@ -28,7 +29,7 @@ const units = fs.readdirSync('dist').filter((f) => f.endsWith('.html') && html(f
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function context(seed) {
-  const ctx = await browser.newContext({ locale: 'en-US' });
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  locale: 'en-US' });
   await ctx.addInitScript((s) => {
     if (sessionStorage.getItem('seeded')) return;
     for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v);
@@ -103,8 +104,8 @@ async function spanishPage(page, file) {
   await spanishPage(p, 'CTSUnit2.html'); await p.waitForTimeout(200);
   const g = await p.evaluate(() => document.getElementById('greeting').textContent);
   ok(/Bienvenido, Ana Prueba — Certificado de Ministerio/.test(g), `the greeting in Spanish reads "${g}"`);
-  const box = await p.evaluate(() => [...document.querySelectorAll('[data-cts-rrbox] *')].filter((e) => e.offsetParent !== null && !e.children.length).map((e) => e.textContent.trim()).join(' | '));
-  ok(/Lecturas con Honores/.test(box) && !/Honors Readings|Open the Reading Room/.test(box), `the honours box in Spanish reads "${box}"`);
+  const box = await p.locator('[data-cts-rrbox]').innerText();
+  ok(/Lecturas del curso/.test(box) && /honores son opcionales/i.test(box) && !/Course Readings|Certificate and Associate|Honors Readings|Open the Reading Room/.test(box), `the honours box in Spanish reads "${box}"`);
   await ctx.close();
   const ctx2 = await context({ cts_lang: 'es' });
   const h = await ctx2.newPage();
@@ -171,13 +172,18 @@ async function spanishPage(page, file) {
 
 /* 7. the catalog link */
 {
-  const ctx = await context(student('cert'));
+  // This is a navigation fixture, not an attempted registration without an
+  // email. Keep background sync from inserting a registration warning above
+  // the catalog after the browser has followed its anchor.
+  const ctx = await context({ ...student('cert'), cts_student: JSON.stringify({ name: 'Catalog Tester', track: 'cert', _tester: true }) });
   const p = await ctx.newPage();
   await p.goto(`${BASE}/CTSOTSCertificate.html`, { waitUntil: 'load' });
   await p.click('a[href="/index.html#catalog"]');
-  await p.waitForTimeout(2000);          // the front page scrolls smoothly
-  const r = await p.evaluate(() => ({ url: location.pathname + location.hash, top: Math.round(document.getElementById('catalog').getBoundingClientRect().top) }));
-  ok(r.url === '/index.html#catalog' && Math.abs(r.top) < 200, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top}px from the top`);
+  // Smooth scrolling and late layout changes can move the catalog between a
+  // successful wait and a separate geometry read. Require a settled position
+  // and return the URL/position from that same observation.
+  const r = await waitForCatalogLanding(p);
+  ok(r.landed, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top === null ? 'missing' : Math.round(r.top)}px from the top`);
   await ctx.close();
 }
 

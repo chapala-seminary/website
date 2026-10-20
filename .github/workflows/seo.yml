@@ -1,0 +1,37 @@
+name: SEO and Lighthouse
+on:
+  pull_request:
+    branches: [beta]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: robots, sitemap, hreflang, llms, JSON-LD, links, HTML
+        run: |
+          node tools/verify-sitemap.mjs dist
+          node tools/verify-seo.mjs dist
+          node tools/verify-seo-links.mjs dist
+          node tools/verify-seo-html.mjs dist
+      - name: Lighthouse (mobile)
+        run: |
+          npx --yes serve dist -l 4173 --no-clipboard &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ >/dev/null && break; sleep 1; done
+          npx --yes lighthouse --version
+          node tools/lighthouse-seo.mjs http://127.0.0.1:4173
+      - name: Keep the Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-seo
+          path: docs/SEO-LIGHTHOUSE.md

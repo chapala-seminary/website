@@ -18,7 +18,9 @@ function ok(cond, label, detail) {
   if (!cond) fails.push(label + (detail ? `\n        ${detail}` : ''));
 }
 const post = (p, b, init = {}) => fetch(BASE + p, {
-  method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b), ...init });
+  // This file tests the records API under the rules it had before AI grading;
+  // the server grades in live mode (test/grading-api.test.mjs), the old rules are asked for.
+  method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b), ...init });
 const get = p => fetch(BASE + p);
 
 async function jget(p) { const r = await get(p); return { status: r.status, body: await r.json().catch(() => null) }; }
@@ -28,9 +30,8 @@ async function jpost(p, b) { const r = await post(p, b); return { status: r.stat
 
 for (const [payload, why] of [
   [{}, 'no name'],
-  ...[undefined, null, '', '   ', '\t\n', '—', 'not-an-address', 42, 'a@b', 'a@b.c'.repeat(40)].map(email =>
-    [{ name: 'Email Required', track: 'cert', email }, `invalid or missing email ${JSON.stringify(email)}`]),
-  [{ name: 'Email Required', track: 'cert', separate: true }, 'separate registration without email'],
+  ...['—', 'not-an-address', 42, 'a@b', 'a@b.c'.repeat(40)].map(email =>
+    [{ name: 'Email Required', track: 'cert', email }, `invalid email ${JSON.stringify(email)}`]),
   [{ name: 'A' }, 'no track'],
   [{ name: 'A', track: 'wizard' }, 'unknown track'],
   [{ name: 'x'.repeat(200), track: 'cert' }, 'name over the length cap'],
@@ -38,6 +39,20 @@ for (const [payload, why] of [
 ]) {
   const r = await jpost('/api/register', payload);
   ok(r.status === 400, `register with ${why} should be rejected, got ${r.status}`);
+}
+
+const noMail = await jpost('/api/register', { name: 'No Email', track: 'cert' });
+ok(noMail.status === 201 && noMail.body?.code && noMail.body?.student?.email == null, 'a registration with no email enrolls', JSON.stringify(noMail.body?.student));
+const blankMail = await jpost('/api/register', { name: 'Blank Email', track: 'cert', email: '   ', separate: true });
+ok(blankMail.status === 201 && blankMail.body?.student?.email == null, 'a blank email is stored as none', JSON.stringify(blankMail.body));
+const againNoMail = await jpost('/api/register', { name: 'No Email', track: 'cert' });
+ok(againNoMail.status === 201 && againNoMail.body?.code !== noMail.body?.code, 'the same name without an email is a new student, not a blocked duplicate');
+const added = await jpost('/api/sync', { code: noMail.body?.code, student: { email: 'later@example.org' } });
+ok(added.status === 200 && added.body?.student?.email === 'later@example.org', 'an email added later is kept');
+const kept = await jpost('/api/sync', { code: noMail.body?.code, student: { email: '' } });
+ok(kept.status === 200 && kept.body?.student?.email === 'later@example.org', 'a later blank email does not erase the address on the record');
+for (const id of [noMail.body?.code, blankMail.body?.code, againNoMail.body?.code]) {
+  if (id) await fetch(BASE + '/api/student/' + id, { method: 'DELETE' });
 }
 
 const reg = await jpost('/api/register', {
@@ -50,6 +65,34 @@ ok(/^CTS-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.tes
   `student code has the documented shape`, `got ${CODE}`);
 ok(reg.body?.student?.name === 'María de la Cruz', 'the name survives a round trip with its accents');
 ok(reg.body?.student?.heard === 'referral' && reg.body?.student?.country === 'MX', 'country and how they heard of the seminary are kept');
+
+for (const [typed, stored] of [['EEUU', 'US'], ['Estados Unidos', 'US'], ['México', 'MX'], ['Narnia', 'Narnia'], ['America', 'America']]) {
+  const email = `country-alias-${checks}-${typed.length}@example.test`;
+  const alias = await jpost('/api/register', { name: `Country Alias ${checks}`, email, country: typed, track: 'cert' });
+  ok(alias.status === 201 && alias.body?.student?.country === stored, `${typed} is stored as ${stored}`, `got ${alias.body?.student?.country}`);
+  if (alias.body?.code) await fetch(BASE + '/api/student/' + alias.body.code, { method: 'DELETE' });
+}
+const syncAlias = await jpost('/api/register', {
+  name: 'Country Sync Alias', email: 'country-sync-alias@example.test', country: 'Narnia', track: 'cert',
+});
+const syncedCountry = await jpost('/api/sync', {
+  code: syncAlias.body?.code,
+  student: { name: 'Country Sync Alias', email: 'country-sync-alias@example.test', country: 'EEUU', track: 'cert' },
+});
+ok(syncedCountry.status === 200 && syncedCountry.body?.student?.country === 'US', 'a later sync maps EEUU to US', `got ${syncedCountry.body?.student?.country}`);
+if (syncAlias.body?.code) await fetch(BASE + '/api/student/' + syncAlias.body.code, { method: 'DELETE' });
+
+// The unit-page sign-up stores Associate as "ad"; the server must accept it and
+// record "associate", on registration and on a later sync, or those students
+// never reach the seminary record.
+for (const [typed, stored] of [['ad', 'associate'], ['assoc', 'associate'], ['mth', 'thm']]) {
+  const email = `track-alias-${typed}-${checks}@example.test`;
+  const r = await jpost('/api/register', { name: `Track Alias ${typed}`, email, track: typed });
+  ok(r.status === 201 && r.body?.student?.track === stored, `register with track ${typed} is stored as ${stored}`, `got ${r.status} ${r.body?.student?.track}`);
+  const s = await jpost('/api/sync', { code: r.body?.code, student: { name: `Track Alias ${typed}`, email, track: typed } });
+  ok(s.status === 200 && s.body?.student?.track === stored, `sync with track ${typed} is accepted as ${stored}`, `got ${s.status} ${s.body?.student?.track}`);
+  if (r.body?.code) await fetch(BASE + '/api/student/' + r.body.code, { method: 'DELETE' });
+}
 
 const second = await jpost('/api/register', { name: 'Someone Else', email: 'someone-else@example.org', track: 'cert' });
 ok(second.body?.code && second.body.code !== CODE, 'two registrations get different codes');
@@ -229,7 +272,8 @@ for (const level of ['certificate', 'associate', 'thm', 'mdiv'])
 
 // Pass the rest of 1 Peter and the certificate is supported.
 await jpost('/api/sync', { code: CODE, progress: Array.from({ length: 12 }, (_, i) => ({ course: '1peter', unit: i + 1, completedAt: T_LATE })) });
-const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive', page: 'CTS1PeterCertificate.html' });
+// The browser's title is ignored: the server names the award (ChatGPT's final audit, item B).
+const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: 'Doctor of Divinity, honoris causa', page: 'CTS1PeterCertificate.html' });
 ok(cert.status === 201, `issuing a certificate returned ${cert.status}`);
 const VC = cert.body?.verifyCode;
 
@@ -289,6 +333,14 @@ ok(ws1.status === 201, `a single-page course certificate is issued once its comp
 const v = await jget(`/api/verify/${VC}`);
 ok(v.status === 200 && v.body?.valid === true && v.body?.name === 'María Cruz',
   'the verification API confirms a real certificate under the current name');
+ok(v.body?.title === '1 Peter Intensive — Master of Theology',
+  `the certificate carries the server's title, not the one the browser sent (${v.body?.title})`);
+const wsv = await jget(`/api/verify/${ws1.body?.verifyCode}`);
+ok(wsv.body?.title && !/^Preaching$/.test(wsv.body.title) && /— Master of Theology$/.test(wsv.body.title),
+  `a single-page course certificate is named by the server too (${wsv.body?.title})`);
+const degreeTitle = await jpost('/api/certificate', { code: CODE, level: 'thm', title: '<b>Doctorate</b>' });
+ok(degreeTitle.status !== 201 || (await jget(`/api/verify/${degreeTitle.body.verifyCode}`)).body?.title === 'Master of Theology',
+  'a degree is named by the server, never by the browser');
 ok((await jget('/api/verify/ZZZZZZZZZZ')).status === 404, 'an unknown verification code is not confirmed');
 
 const page = await get(`/verify/${VC}`);
@@ -409,12 +461,60 @@ ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'PUT' })).status === 40
 
 /* ---- deletion ------------------------------------------------------------- */
 
+/* Written answers (docs/ai-grading.md, section 10): a student who asks to be
+   forgotten takes their attempts, answers, appeals, queue entries and the
+   faculty's calibration marks on those answers with them. These need the
+   database itself to look at, so they run when the suite hands it over. */
+const STATE = process.env.STATE, CONFIG = process.env.CONFIG || 'test/wrangler.local.jsonc';
+let rowsOf = null;
+if (STATE) {
+  const { execFileSync } = await import('node:child_process');
+  const q = (command) => JSON.parse((s => s.slice(s.indexOf('[')))(execFileSync('npx',
+    ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE, '--config', CONFIG, '--json', '--command', command],
+    { stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 64 * 1024 * 1024 }).toString()))[0].results;
+  const count = (sql) => q(`SELECT COUNT(*) AS n FROM (${sql})`)[0].n;
+  /* wrangler takes seconds and blocks this process; the connections the Worker closed meanwhile are
+     noticed only once the event loop turns, so give it a moment before the next request. */
+  rowsOf = async (id) => {
+    const out = {
+      attempts: count(`SELECT 1 FROM attempts WHERE student_id = '${id}'`),
+      answer_grades: count(`SELECT 1 FROM answer_grades WHERE student_id = '${id}'`),
+      appeals: count(`SELECT 1 FROM appeals WHERE student_id = '${id}'`),
+      calibration: count(`SELECT 1 FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
+      grade_queue: count(`SELECT 1 FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
+    };
+    await new Promise((r) => setTimeout(r, 500));
+    return out;
+  };
+  const live = (p, b) => fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json().catch(() => null) }));
+  const a = await live('/api/attempt', { code: CODE, scope: 'u:CTSJohn/1', lang: 'en' });
+  ok(a.status === 200 && a.body?.attemptId, 'a student can open an attempt, for the deletion check', JSON.stringify(a));
+  const words = 'here is my own careful explanation of what the passage teaches and why it matters for the church today';
+  const g = await live('/api/grade', { code: CODE, attemptId: a.body?.attemptId, items: [
+    { qid: a.body?.items?.sa?.[0], answer: `one ${words} [[not_met]]` },
+    { qid: a.body?.items?.fill?.[0], answer: 'zzz nothing' }] });
+  const g2 = await live('/api/grade', { code: CODE, attemptId: a.body?.attemptId, items: [{ qid: a.body?.items?.sa?.[1], answer: `two ${words} [[error]]` }] });
+  ok(g.status === 200 && g.body?.items?.length === 2 && g2.status === 200, 'and have written answers graded, one of them waiting for the model', JSON.stringify([g, g2]));
+  const gradeId = g.body?.items?.[0]?.gradeId;
+  ok((await live('/api/appeal', { code: CODE, gradeId, note: 'please look again' })).status === 200, 'and ask for one to be reviewed');
+  await new Promise((r) => setTimeout(r, 500));
+  q(`INSERT INTO calibration (grade_id, marked_by, human_verdict, marked_at, week) VALUES (${Number(gradeId)}, 'deletion-test@example.test', 'met', '2026-01-01T00:00:00Z', '2026-W01')`);
+  await new Promise((r) => setTimeout(r, 500));
+  const before = await rowsOf(CODE);
+  ok(before.attempts >= 1 && before.answer_grades === 3 && before.appeals === 1 && before.calibration === 1 && before.grade_queue >= 1,
+    'the record holds attempts, answers, an appeal, a calibration mark and a queued answer', JSON.stringify(before));
+}
+
 const del = await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' });
 ok(del.status === 200, `delete returned ${del.status}`);
 ok((await jget(`/api/student/${CODE}`)).status === 404, 'the record is gone after deletion');
 ok((await jget(`/api/verify/${VC}`)).status === 404, 'and so are the certificates issued from it');
 ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' })).status === 404,
   'deleting twice is a 404, not an error');
+if (rowsOf) {
+  const after = await rowsOf(CODE);
+  ok(Object.values(after).every((n) => n === 0), 'deleting the record deletes their attempts, written answers, appeals, calibration marks and queued answers', JSON.stringify(after));
+}
 
 /* -------------------------------------------------------------------------- */
 

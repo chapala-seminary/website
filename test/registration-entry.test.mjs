@@ -16,7 +16,7 @@ let checks=0;
 try {
  for(const lang of ['en','es','fr']) for(const [file,nameField,emailField,save] of entries){
   console.log(`Checking ${lang}/${file}`);
-  const ctx=await browser.newContext();let code;
+  const ctx=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });let code;
   try {
    await ctx.route('**/*',r=>new URL(r.request().url()).origin===new URL(base).origin?r.continue():r.abort());
    await ctx.addInitScript(()=>localStorage.setItem('cts_done_codes',JSON.stringify(['CTSOTS','CTSNT','CTSST','CTSEVANGELISM','CTSPM','CTSCH','WISESPEAK'])));
@@ -30,7 +30,13 @@ try {
    }
    await page.locator(emailField).fill(email);
    if(await page.locator('#reg-country').count()) await page.locator('#reg-country').selectOption('MX');
-   for(const field of ['#studentCountry','#regCountry']) if(await page.locator(field).count())await page.locator(field).fill('Test');
+   for(const field of ['#studentCountry','#regCountry']) {
+    const country=page.locator(field);
+    if(await country.count()){
+     if((await country.evaluate(el=>el.tagName))==='SELECT') await country.selectOption('MX');
+     else await country.fill('MX');
+    }
+   }
    await page.locator(save).click();
    assert.equal(await page.evaluate(()=>!!window.CTS_SYNC),true,`${lang}/${file}: sync client loaded`);checks++;
    await page.evaluate(()=>window.CTS_SYNC.sync());
@@ -43,7 +49,7 @@ try {
    const again=await page.evaluate(()=>window.CTS_SYNC.sync());
    assert.equal(await page.evaluate(()=>localStorage.getItem('cts_student_code')),code);checks++;
    // A second browser restores exactly this record, not a second registration.
-   const second=await browser.newContext();try{
+   const second=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });try{
     const recovery=await second.newPage();await recovery.goto(`${base}/cts-backup.html?cts_lang=${lang}`);
     const restored=await recovery.evaluate(c=>window.CTS_SYNC.restore(c),code);
     assert.equal(restored.ok,true);checks++;
@@ -55,7 +61,7 @@ try {
   }
  }
  for(const lang of ['en','es','fr']) for(const missing of [false,true]) {
-  const context=await browser.newContext();let code, unavailable=!missing;
+  const context=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });let code, unavailable=!missing;
   try {
    const email=`retry-${crypto.randomUUID()}@example.test`;
    await context.route('**/api/register',route=>unavailable?route.fulfill({status:503,contentType:'application/json',body:'{"error":"temporarily unavailable"}'}):route.continue());
@@ -64,11 +70,21 @@ try {
     localStorage.setItem('cts_ots_progress',JSON.stringify({unit1:true}));
    },{email,missing});
    const page=await context.newPage();await page.goto(`${base}/cts-backup.html?cts_lang=${lang}`);
+   if(missing){
+    await page.waitForFunction(()=>!!localStorage.getItem('cts_student_code'),null,{timeout:18000});
+    code=await page.evaluate(()=>localStorage.getItem('cts_student_code'));
+    assert.equal(await page.locator('#cts-registration-problem').count(),0);checks++;
+    const state=await (await fetch(base+'/api/student/'+code)).json();
+    assert.equal(state.student.email,null);checks++;
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cts_ots_progress')).unit1),true);checks++;
+    await page.locator('#cts-email-optional').waitFor({timeout:18000});
+    assert.ok(await page.locator('#cts-email-optional').isVisible());checks++;
+    continue;
+   }
    await page.locator('#cts-registration-problem').waitFor();
    assert.ok(await page.locator('#cts-registration-problem').innerText());checks++;
    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cts_ots_progress')).unit1),true);checks++;
    assert.equal(await page.evaluate(()=>localStorage.getItem('cts_student_code')),null);checks++;
-   if(missing)await page.locator('#cts-registration-problem input').fill(email);
    unavailable=false;await page.locator('#cts-registration-problem button').click();
    await page.waitForFunction(()=>!!localStorage.getItem('cts_student_code'));
    code=await page.evaluate(()=>localStorage.getItem('cts_student_code'));

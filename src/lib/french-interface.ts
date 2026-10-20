@@ -17,6 +17,7 @@ export const FRENCH_LABELS: Record<string, string> = {
   'Reading With Honors': 'Lecture avec mention',
   'Course units': 'Unités du cours',
   'Contents': 'Sommaire',
+  'Breadcrumb': 'Fil d’Ariane',
 };
 /* Frame text inside the lesson body (src/lib/partials.ts), where a lang-fr
    span would change the lesson text that tools/prose-baseline.mjs records. */
@@ -24,6 +25,13 @@ export const FRENCH_FRAME: Record<string, string> = {
   'Honors Readings': 'Lectures pour la mention',
   'This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.': 'Ce cours propose cinq lectures complètes &mdash; lisez-en trois en entier pour l’obtenir <b>avec mention</b>.',
   'Open the Reading Room &rarr;': 'Ouvrir la salle de lecture &rarr;',
+  'World Religions has a separate set of five master’s assigned readings, linked above; the honors selections below are optional.': 'Le cours sur les religions du monde possède cinq lectures assignées distinctes pour le master, indiquées ci-dessus ; les textes ci-dessous pour la mention sont facultatifs.',
+  'Required-reading exam': 'Examen des lectures obligatoires',
+  'Master’s assigned readings (all five)': 'Lectures assignées du master (les cinq)',
+  '<b>M.Div. and Th.M.:</b> all five assigned readings are part of the course. Their separate exam is required after activation; see its page for the current rule. Honors remains optional and does not replace the exam.': '<b>M.Div. et Th.M. :</b> les cinq lectures assignées font partie du cours. Leur examen distinct est obligatoire après son activation ; consultez sa page pour la règle en vigueur. La mention reste facultative et ne remplace pas l’examen.',
+  'Course Readings — Required and Honors': 'Lectures du cours — obligatoires et avec mention',
+  '<b>Certificate and Associate:</b> honors is optional. Read any three of the five selections for honors; no separate required-reading exam is needed.': '<b>Certificat et diplôme associé :</b> la mention est facultative. Lisez trois des cinq textes pour la mention ; aucun examen distinct des lectures obligatoires n’est exigé.',
+  'Open Course Readings &rarr;': 'Ouvrir les lectures du cours &rarr;',
 };
 
 export function frenchInterface(root: HTMLElement, file = '') {

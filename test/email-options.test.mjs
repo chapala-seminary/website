@@ -8,7 +8,7 @@ const STATE = process.env.EMAIL_TEST_STATE || '.wrangler-local';
 let checks = 0;
 function ok(value, message) { assert.ok(value, message); checks++; }
 async function post(path, body) {
-  const res = await fetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  const res = await fetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(body) });
   return { status: res.status, body: await res.json() };
 }
 async function student(label) {
@@ -76,7 +76,7 @@ ok(results.filter(r => r.status === 200).length === 1, 'simultaneous link/code c
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   for (const lang of ['en', 'es']) {
-    const s = await student('browser-' + lang), ctx = await browser.newContext();
+    const s = await student('browser-' + lang), ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
     await ctx.addInitScript(s => {
       localStorage.setItem('cts_student_code', s.code);
       localStorage.setItem('cts_student', JSON.stringify({ name: 'Email Options', email: s.email, track: 'cert' }));
@@ -96,7 +96,7 @@ try {
     await ctx.close();
   }
   const recipient = await student('recipient'), other = await student('other-device'), ch = await challenge(recipient);
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await ctx.addInitScript(s => {
     localStorage.setItem('cts_student_code', s.code);
     localStorage.setItem('cts_student', JSON.stringify({ name: 'Other Student', email: s.email, track: 'cert' }));

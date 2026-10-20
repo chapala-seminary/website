@@ -2178,12 +2178,12 @@ function loadState(){
       // (set at the seminary's main registration) so a Masters-track student is
       // graded at the correct rigor here without re-registering on this page.
       const shared = JSON.parse(localStorage.getItem('cts_student') || 'null');
-      if(shared && shared.name && shared.email){
+      if(shared && shared.name){
         const sharedTrack = String(localStorage.getItem('cts_track') || shared.track || shared.program || '').toLowerCase();
         let track = 'cert';
         if(sharedTrack === 'mdiv' || /master of divinity|m\.div/.test(sharedTrack)) track = 'mdiv';
         else if(sharedTrack === 'thm' || sharedTrack === 'mth' || /master of theology|m\.th|th\.m/.test(sharedTrack)) track = 'mtheol';
-        state.registration = { name: shared.name, email: shared.email, country: shared.country || '', track };
+        state.registration = { name: shared.name, email: shared.email || '', country: shared.country || '', track };
         saveState();
       }
     }
@@ -2198,7 +2198,7 @@ function renderRegStatus(){
     el.innerHTML = `<span class="lang-en">Registered: <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.en}</span>
                     <span class="lang-es">Registrado: <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.es}</span>`;
     document.getElementById('studentName').value = state.registration.name;
-    document.getElementById('studentEmail').value = state.registration.email;
+    document.getElementById('studentEmail').value = state.registration.email || '';
     document.getElementById('studentCountry').value = state.registration.country;
     document.getElementById('programTrack').value = state.registration.track;
   }
@@ -2208,8 +2208,12 @@ document.getElementById('saveRegBtn').addEventListener('click',()=>{
   const email = document.getElementById('studentEmail').value.trim();
   const country = document.getElementById('studentCountry').value.trim();
   const track = document.getElementById('programTrack').value;
-  if(!name||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!country){
-    alert(document.body.classList.contains('spanish')?'Por favor complete todos los campos':'Please complete all fields');
+  if(!name||!country){
+    alert(document.body.classList.contains('spanish')?'Escriba su nombre y su país. El correo es opcional.':'Enter your name and country. Email is optional.');
+    return;
+  }
+  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    alert(document.body.classList.contains('spanish')?'Deje el correo en blanco para inscribirse, o escriba una dirección válida.':'Leave email blank to enroll, or enter a valid address.');
     return;
   }
   const trackChanged = state.registration && state.registration.track !== track;
@@ -2708,6 +2712,7 @@ updateProgress();
 </script>
   <script src="cts-track.js" defer></script>
   <script src="cts-curriculum.js?v=20260915a" defer></script>
+<script src="/assets/js/cts-countries.js"></script>
 <script src="/assets/js/cts-sync.js" defer></script>
 </body>
 </html>

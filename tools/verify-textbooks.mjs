@@ -97,8 +97,7 @@ for (const b of books) {
   const book = page(`${b.page}.html`), test = page(`${b.page}Test.html`);
   ok(!!book, `${b.page}.html was not built`);
   ok(!!test, `${b.page}Test.html was not built`);
-  if (b.requiredFrom === null) ok(!linksTo(index, `${b.page}.html`), `pilot ${b.page} should not appear as mandatory on front page`);
-  else ok(linksTo(index, `${b.page}.html`), `the front page does not list ${b.page}`);
+  ok(linksTo(index, `${b.page}.html`), `the front page does not list available textbook ${b.page}`);
   if (book) ok(book.includes(`${b.page}Test.html`), `${b.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${b.page}.html`), `${b.page}Test.html does not lead back to the book`);
@@ -170,9 +169,8 @@ for (const r of readings) {
   const room = page(`${r.page}.html`), test = page(`${r.page}Test.html`);
   ok(!!room, `${r.page}.html was not built`);
   ok(!!test, `${r.page}Test.html was not built`);
-  // a test not yet in force is reached from its course and its room, not listed on the front page
-  if (pending) ok(!linksTo(index, `${r.page}.html`), `the front page lists ${r.page}, which is not yet in force`);
-  else ok(linksTo(index, `${r.page}.html`), `the front page does not list the required readings ${r.page}`);
+  // Available readings remain discoverable independently of activation.
+  ok(linksTo(index, `${r.page}.html`), `the front page does not list available readings ${r.page}`);
   if (test && pending) ok(/not yet required/.test(test), `${r.page}Test.html does not say the test is not yet required`);
   if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
   if (test) {

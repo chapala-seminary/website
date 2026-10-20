@@ -1380,3 +1380,45 @@ Robert asked for these to go to production ahead of AI grading. They are AI-writ
 * **CTSLA lessons** (approved by Robert): the unit 11 summary table, the unit 10 and unit 11 summaries, Romans 1:16–17 and the Luther and Erasmus dates in unit 9 (`la-lessons.md`).
 * **Not changed (for Dr. Cook)**: contested doctrine; the lesson that misquotes 1 John 1:7 (CTSPT 2); the "four titles" sentence in the CTS unit 9 lesson; "a dozen words" in CTSLA unit 11.
 * Spanish and French were changed with each English change, and are marked machine-written (`tr.*.status = machine`, `from` = the new source). Every model answer passes its keywords in every language, and no changed question passes as its own answer. The content, prose and lesson-render baselines were re-recorded for these pages only.
+
+## 15 October 2026 — Home header navigation
+
+At Robert's request, Course Catalog now sits in the sticky home header beside
+the language selectors, with a wrapping layout on phones. The student-sync
+script no longer inserts the master's requirements paragraph above every page.
+Requirement dates still load and completion checks are unchanged; program and
+course pages retain their existing requirement explanations.
+
+
+## Wayne’s reading and examination review — 15 October 2026
+
+All textbook and required-reading exams now give correctness feedback during an
+attempt and source-linked teaching explanations for missed questions after
+submission. Available readings and tests are easier to find; course boxes
+distinguish optional honors from master’s assigned readings, and Torrey’s page
+clearly labels the five excerpts. Native language controls and fully translated
+pages resist browser retranslation. See [the change and verification record](wayne-feedback-2026-10-15.md).
+
+## 19 October 2026 — exam counts, French reading-room labels, chart languages
+
+Three exam banks were shorter than the rest of the seminary. Pentecostal units
+1–12 had 7 multiple-choice questions, Counseling Situations units 0–12 had 10,
+and Ruth and Esther unit 1 had 18. Each is now 20, with the fill-in and
+short-answer banks left at 10. A certificate still passes at 90 percent, which
+is 18 of 20. Ruth and Esther unit 1’s heading now says `(20 · 90%)`. The new
+questions are marked machine-written in French and want a reader’s check.
+
+Chart and timeline labels that were drawn twice — English on one line, Spanish
+on the next, with the French of the Spanish line copied from the English —
+are one label now. The page shows the reader’s language. Spanish that was
+already on the page is marked human. Spanish written for a label that had
+none, including dates (`c. 2000 BC` → `c. 2000 a. C.`), is marked machine.
+Hebrew and Greek letters, Strong’s numbers, and names that are the same in
+each language stay as they are.
+
+Reading-room digests were already in French. The honors list a script builds
+after the page loads was not: it showed the English title, and two checks
+(“enter your name”, “check the box”) had no French. Each shelf title now has
+a French title, the list uses it, and those checks speak French. So does the
+note that appears once three readings are chosen. The record kept in this
+browser is still the English title.

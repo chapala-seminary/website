@@ -65,7 +65,7 @@
 </div>
 <p class="limit-note no-print" id="limitNote"></p>
 <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="Why We Interpret, and the Heart of the Interpreter — a CTS survey (Terry &amp; Owen)" data-title-es="Por Qué Interpretamos, y el Corazón del Intérprete — un estudio del STC (Terry y Owen)">
+<article class="entry" data-id="1" data-title-en="Why We Interpret, and the Heart of the Interpreter — a CTS survey (Terry &amp; Owen)" data-title-es="Por Qué Interpretamos, y el Corazón del Intérprete — un estudio del STC (Terry y Owen)" data-title-fr="Pourquoi nous interprétons, et le cœur de l’interprète — une étude du STC (Terry et Owen)">
 <div class="locus">
 <span class="lang-en">Foundations · Why We Interpret · The Interpreter’s Heart</span>
 <span class="lang-es">Fundamentos · Por qué interpretamos · El corazón del intérprete</span>
@@ -159,7 +159,7 @@
 <label class="pick"><input data-pick="1" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="2" data-title-en="The Golden Rule: Context and the Plain Sense — a CTS survey (Terry)" data-title-es="La Regla de Oro: El Contexto y el Sentido Llano — un estudio del STC (Terry)">
+<article class="entry" data-id="2" data-title-en="The Golden Rule: Context and the Plain Sense — a CTS survey (Terry)" data-title-es="La Regla de Oro: El Contexto y el Sentido Llano — un estudio del STC (Terry)" data-title-fr="La règle d’or : le contexte et le sens obvie — une étude du STC (Terry)">
 <div class="locus">
 <span class="lang-en">Method · The Literal Sense · Context Is King</span>
 <span class="lang-es">Método · El sentido literal · El contexto es rey</span>
@@ -249,7 +249,7 @@
 <label class="pick"><input data-pick="2" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="3" data-title-en="Reading Each Book by Its Kind: Genre and Figures — a CTS survey (Bullinger &amp; Trench)" data-title-es="Leer Cada Libro Según su Clase: Género y Figuras — un estudio del STC (Bullinger y Trench)">
+<article class="entry" data-id="3" data-title-en="Reading Each Book by Its Kind: Genre and Figures — a CTS survey (Bullinger &amp; Trench)" data-title-es="Leer Cada Libro Según su Clase: Género y Figuras — un estudio del STC (Bullinger y Trench)" data-title-fr="Lire chaque livre selon son genre : genres littéraires et figures — une étude du STC (Bullinger et Trench)">
 <div class="locus">
 <span class="lang-en">Genre · Literary Types · Figures · The Parables</span>
 <span class="lang-es">Género · Tipos literarios · Figuras · Las parábolas</span>
@@ -339,7 +339,7 @@
 <label class="pick"><input data-pick="3" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="4" data-title-en="Scripture Interprets Scripture — a CTS survey (Terry &amp; Farrar)" data-title-es="La Escritura Interpreta la Escritura — un estudio del STC (Terry y Farrar)">
+<article class="entry" data-id="4" data-title-en="Scripture Interprets Scripture — a CTS survey (Terry &amp; Farrar)" data-title-es="La Escritura Interpreta la Escritura — un estudio del STC (Terry y Farrar)" data-title-fr="L’Écriture interprète l’Écriture — une étude du STC (Terry et Farrar)">
 <div class="locus">
 <span class="lang-en">The Analogy of Faith · The Unity of Scripture</span>
 <span class="lang-es">La analogía de la fe · La unidad de la Escritura</span>
@@ -435,7 +435,7 @@
 <label class="pick"><input data-pick="4" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="5" data-title-en="Seeing Christ, and Obeying — a CTS survey (Hodgkin, Fairbairn, Watson)" data-title-es="Ver a Cristo, y Obedecer — un estudio del STC (Hodgkin, Fairbairn, Watson)">
+<article class="entry" data-id="5" data-title-en="Seeing Christ, and Obeying — a CTS survey (Hodgkin, Fairbairn, Watson)" data-title-es="Ver a Cristo, y Obedecer — un estudio del STC (Hodgkin, Fairbairn, Watson)" data-title-fr="Voir Christ, et obéir — une étude du STC (Hodgkin, Fairbairn, Watson)">
 <div class="locus">
 <span class="lang-en">Christ-Centered Reading · Meditation · the Capstone</span>
 <span class="lang-es">Lectura centrada en Cristo · Meditación · la culminación</span>
@@ -716,7 +716,8 @@
     var note = document.getElementById('limitNote');
     if(full){
       note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
-                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>" +
+                       "<span class='lang-fr'>Trois choisies. Décochez-en une pour changer votre sélection.</span>";
     } else {
       note.textContent = "";
     }
@@ -734,17 +735,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -762,7 +766,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

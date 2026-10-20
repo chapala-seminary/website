@@ -31,7 +31,7 @@ const without = pages.filter((f) => !/cts-certify\.js/.test(fs.readFileSync(`dis
 ok(without.length === 0, `${without.length} certificate page(s) do not load cts-certify.js`, without.slice(0, 6).join(' '));
 
 async function device() {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -43,7 +43,7 @@ async function device() {
    loaded first because that is where the engine writes the old keys the
    certificate page reads (verify-certificate-unlock.mjs says why). */
 const course = catalog.courses['1peter'];
-const seed = { name: 'Certify Test', track: 'cert', email: 'certify-signup@example.org' };
+const seed = { name: 'Certify Test', track: 'cert', email: `certify-signup-${Date.now()}@example.org` };
 async function finishedStudent(d, extra = {}) {
   await d.page.goto(`${BASE}/CTS1PeterUnit1.html`, { waitUntil: 'load' });
   await d.page.evaluate(([s, units, extra]) => {
@@ -82,9 +82,9 @@ const one = await device();
 const CODE = await finishedStudent(one);
 ok(/^CTS-/.test(CODE || ''), 'the finished student has a student code', `got ${CODE}`);
 
-let devCode = null, startStatus = null;
+let devCode = null, startStatus = null, retryAfter = 0;
 one.page.on('response', async (r) => {
-  if (/\/api\/email\/start$/.test(r.url())) { startStatus = r.status(); try { devCode = (await r.json()).devCode; } catch {} }
+  if (/\/api\/email\/start$/.test(r.url())) { startStatus = r.status(); retryAfter = Number(r.headers()['retry-after'] || 0); try { devCode = (await r.json()).devCode; } catch {} }
 });
 await one.page.goto(`${BASE}/CTS1PeterCertificate.html`, { waitUntil: 'load' });
 await waitFor(one.page, () => document.getElementById('cts-cert-email'));
@@ -102,10 +102,18 @@ ok(s.err && s.email, 'a malformed email is refused on the page', s.err);
 await one.page.fill('#cts-cert-email', 'certify@example.org');
 await one.page.click('#cts-cert-panel button[data-act="send"]');
 await waitFor(one.page, () => document.getElementById('cts-cert-code'));
+// Registration now sends confirmation automatically. A second request must
+// respect the real server's resend cooldown, just as a student would.
+if (startStatus === 429 && retryAfter > 0) {
+  await one.page.waitForTimeout(retryAfter * 1000 + 200);
+  await one.page.click('#cts-cert-panel button[data-act="send"]');
+  await waitFor(one.page, () => document.getElementById('cts-cert-code'));
+}
 s = await panelState(one.page);
 ok(startStatus === 200 && s.codeBox, `asking for a code reaches the Worker and moves to the code step (${startStatus})`, s.text.slice(0, 120));
 ok(/certify@example\.org/.test(s.text), 'the code step names the address the code went to');
 ok(/^\d{6}$/.test(devCode || ''), 'the test Worker handed back the code instead of sending it', `got ${devCode}`);
+if (!s.codeBox) throw new Error(`Certificate email step failed: HTTP ${startStatus}; ${s.text}`);
 
 // the wrong code first
 await one.page.fill('#cts-cert-code', devCode === '000000' ? '111111' : '000000');

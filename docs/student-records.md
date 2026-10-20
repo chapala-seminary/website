@@ -208,14 +208,14 @@ never handed to whoever typed it; the front page instead offers **Email me
 my code**, which sends it to that address, and a box to type it into. "Not
 you? Register separately" covers two people with one name sharing an
 address (`separate: true`). Same email, different name registers as always.
-Since 12 Oct 2026, every new registration requires a nonblank email address
-with a valid basic format (including `separate: true`). The bilingual form
-rejects it before saving locally; `/api/register` rejects it with 400 before
-creating a record. Signup does not require email verification. Existing
-student codes, account lookup and syncing remain available without email;
-no database constraint or migration is applied to existing students.
-A browser-only legacy student without an email can still study locally, but
-must provide an email before a new server account can be created.
+Since 19 Oct 2026, email is optional again at registration. A blank address
+enrolls and studies; an address that is present must still look like one,
+and `/api/register` rejects a malformed one with 400 before creating a
+record. Signup does not require email verification. A confirmed address is
+still what returns a lost code and delivers a certificate. Existing student
+codes, stored addresses, account lookup and syncing are unchanged; no
+database constraint or migration is applied. A later sync that sends a blank
+email does not erase an address already on the record.
 
 `cts-sync.js` keeps the pause (`cts_reg_existing`, holding the name and
 email it was for) and sends nothing while it holds -- no retry each poll --

@@ -26,7 +26,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - run: npm test
+      - name: Run the full test suite
+        run: npm test
       - name: Refuse an outdated or dirty production checkout
         run: node tools/verify-production-branch.mjs
       - name: Deploy the tested main commit

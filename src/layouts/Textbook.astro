@@ -8,6 +8,7 @@
  * pages (3 Oct 2026).
  */
 import { version } from '../lib/version';
+import { live } from '../lib/grading-mode';
 
 interface Bi { en: string; es: string; fr?: string }
 interface Book { slug: string; page: string; course: string; title: Bi; subtitle?: Bi; credits?: Bi; edition: string }
@@ -32,12 +33,6 @@ const reading = kind === 'reading-test';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
-    />
     <link rel="stylesheet" href={version('/assets/css/cts.css')} />
   </head>
   <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind} data-textbook-kind={reading ? 'reading' : 'textbook'}>
@@ -104,8 +99,10 @@ const reading = kind === 'reading-test';
       </div>
     </footer>
 
+    {live && sync && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
     <script is:inline src={version('/assets/js/cts-textbook.js')}></script>
     {sync && <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>}
+    {!live && sync && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
   </body>
 </html>

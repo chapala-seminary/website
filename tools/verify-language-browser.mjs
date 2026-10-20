@@ -3,13 +3,16 @@
 import fs from 'node:fs';
 import { chromium } from 'playwright';
 const BASE = process.argv[2] || 'http://127.0.0.1:8897';
-const files = fs.readdirSync('.astro/language-base').filter(f => f.endsWith('.html') && !f.startsWith('_'));
+// Pages with no <body> (Google's site-verification file) get no language
+// versions (tools/language-pages.mjs), so there is nothing to check.
+const files = fs.readdirSync('.astro/language-base').filter(f => f.endsWith('.html') && !f.startsWith('_')
+  && /<body[\s>]/i.test(fs.readFileSync('.astro/language-base/' + f, 'utf8')));
 const browser = await chromium.launch(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {});
 const fails = []; let done = 0;
 fails.push = function (...items) {if (this.length < 30) console.log("ISSUE", ...items); return Array.prototype.push.apply(this,items);};
 const jobs = files.flatMap(file => ['en','es','fr'].flatMap(lang => [false,true].map(phone => ({file,lang,phone}))));
 async function worker() {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await ctx.route("**/*", route => new URL(route.request().url()).origin === new URL(BASE).origin ? route.continue() : route.abort());
   await ctx.addInitScript(() => {
     // Study-page rendering requires the foundation. Gating itself remains
@@ -71,7 +74,7 @@ async function worker() {
 }
 await Promise.all(Array.from({length:6},worker));
 // Explicit choice wins over saved language; query and fragment survive.
-const ctx = await browser.newContext(); const p = await ctx.newPage();
+const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }); const p = await ctx.newPage();
 await p.goto(`${BASE}/CTSUnit1.html?cts_lang=en`);
 await p.evaluate(() => {localStorage.setItem('cts_lang','both'); localStorage.setItem('cts_ots_u1_state',JSON.stringify({mcAnswers:[2,...Array(19).fill(null)],saAnswers:['A saved draft response.',...Array(9).fill('')],fillAnswers:['saved phrase',...Array(9).fill('')]}));});
 await p.goto(`${BASE}/CTSUnit1.html?keep=1#lesson`);
@@ -83,7 +86,7 @@ await Promise.all([p.waitForURL(url=>url.pathname === '/CTSUnit1.html' && url.se
 if (await p.evaluate(()=>localStorage.getItem('cts_lang')) !== 'en') fails.push('explicit English choice did not override Spanish memory');
 await ctx.close();
 // Storage denial still permits explicit navigation and source toggling.
-const blocked = await browser.newContext({locale:'es-ES'}); const bp = await blocked.newPage();
+const blocked = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' }, locale:'es-ES'}); const bp = await blocked.newPage();
 await bp.addInitScript(() => {Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked storage');}});});
 await bp.goto(`${BASE}/es/CTSUnit1.html?cts_lang=es`); await bp.locator('#cts-show-source').check();
 if (await bp.evaluate(()=>document.body.dataset.showSource) !== 'true') fails.push('source switch failed with storage disabled');

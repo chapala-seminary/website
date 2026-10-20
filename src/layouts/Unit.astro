@@ -10,6 +10,14 @@
 import { shell } from '../lib/shell';
 import { version } from '../lib/version';
 import catalog from '../../worker/catalog.json';
+import { live, liveUnit, unitScope } from '../lib/grading-mode';
+import { CODES } from '../lib/countries.mjs';
+
+const countryName = {
+  en: new Intl.DisplayNames(['en'], { type: 'region' }),
+  es: new Intl.DisplayNames(['es'], { type: 'region' }),
+  fr: new Intl.DisplayNames(['fr'], { type: 'region' }),
+};
 
 interface Unit {
   course: string;
@@ -68,7 +76,11 @@ const tbMap = catalog.textbooks as Record<string, { page: string; kind: string; 
 const required = (cat.tests ?? []).map((slug) => ({ slug, page: tbMap[slug].page, kind: tbMap[slug].kind,
   ...('requiredFrom' in tbMap[slug] ? { requiredFrom: tbMap[slug].requiredFrom } : {}) }));
 const first = cat.tests?.[0] ?? null;
-const unitJson = JSON.stringify({ ...unit,
+/* Live mode (docs/ai-grading.md): the page carries no answers, accept lists,
+   model answers, keywords, rubrics or multiple-choice keys, and every
+   question has its id. Shadow mode: the unit exactly as it was. */
+const unitData = live ? liveUnit(unit, unitScope(pagePrefix, unit.unit)) : unit;
+const unitJson = JSON.stringify({ ...unitData,
   completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units,
                 // the course's Master's textbook, which the master's tracks must pass the test of
                 textbook: first,
@@ -94,12 +106,12 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
-    />
+    <script is:inline>
+      try {
+        var ctsStudent = JSON.parse(localStorage.getItem("cts_student") || "null");
+        if (ctsStudent && ctsStudent.name) document.documentElement.classList.add("cts-registered");
+      } catch (e) {}
+    </script>
     <link rel="stylesheet" href={version('/assets/css/cts.css')} />
     {/* The 102 per-page stylesheets are gone; `styles` is kept in the schema
         only so a course with a genuinely special need can opt back in, and
@@ -120,6 +132,13 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <header class="cts-masthead">
       <div class="wrap" set:html={masthead || `<h1>${title}</h1>`} />
     </header>
+    <nav class="cts-crumbs wrap" aria-label="Breadcrumb" data-cts-chrome>
+      <a href="/index.html"><span class="lang-en">Home</span><span class="lang-es">Inicio</span><span class="lang-fr">Accueil</span></a>
+      {' · '}
+      <a href={`/${pagePrefix}Course.html`}><span class="lang-en">Course</span><span class="lang-es">Curso</span><span class="lang-fr">Cours</span></a>
+      {' · '}
+      <span class="lang-en">Unit {unit.unit}</span><span class="lang-es">Unidad {unit.unit}</span><span class="lang-fr">Unité {unit.unit}</span>
+    </nav>
 
     <nav class="cts-nav" aria-label="Course units" data-cts-chrome>
       <div class="wrap">
@@ -163,16 +182,16 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           forty-four sets of field names -- which is why cts-engine.js still
           reads five spellings of "name". The engine hides this once a student
           is registered; a student registers once, in any course, for all. */}
-      <section class="reg-form" id="cts-register" hidden data-cts-chrome>
+      <section class="reg-form" id="cts-register" data-cts-chrome>
         <h2>
           <span class="lang-en">Register once, for every course</span>
           <span class="lang-es">Regístrese una vez, para todos los cursos</span>
           <span class="lang-fr">Une seule inscription pour tous les cours</span>
         </h2>
         <p>
-          <span class="lang-en">Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Keep the code private, like a password. A confirmed email is needed only to receive a certificate. <a href="/CTSPrivacy.html">What we keep</a>.</span>
-          <span class="lang-es">Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su código de estudiante, para que pueda continuar en cualquier dispositivo. Mantenga el código en privado, como una contraseña. Solo se necesita un correo confirmado para recibir un certificado. <a href="/CTSPrivacy.html">Lo que guardamos</a>.</span>
-          <span class="lang-fr">Votre progression est enregistrée dans ce navigateur et conservée par le séminaire sous votre code étudiant, pour continuer sur tout appareil. Gardez ce code privé, comme un mot de passe. Une adresse e-mail confirmée est nécessaire uniquement pour recevoir un certificat. <a href="/CTSPrivacy.html">Les informations conservées</a>.</span>
+          <span class="lang-en">Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Keep the code private, like a password. Email is optional. Add one so we can return your student code, send reminders, and deliver a certificate. You can enroll and keep studying without it. <a href="/CTSPrivacy.html">What we keep</a>.</span>
+          <span class="lang-es">Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su código de estudiante, para que pueda continuar en cualquier dispositivo. Mantenga el código en privado, como una contraseña. El correo es opcional. Añádalo para que podamos devolverle su código, enviarle recordatorios y entregarle el certificado. Puede inscribirse y seguir estudiando sin él. <a href="/CTSPrivacy.html">Lo que guardamos</a>.</span>
+          <span class="lang-fr">Votre progression est enregistrée dans ce navigateur et conservée par le séminaire sous votre code étudiant, pour continuer sur tout appareil. Gardez ce code privé, comme un mot de passe. L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle. <a href="/CTSPrivacy.html">Les informations conservées</a>.</span>
         </p>
         <div class="registration-fields">
           <div class="full">
@@ -184,12 +203,18 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
             <input id="regName" type="text" autocomplete="name" />
           </div>
           <div class="full">
-            <label for="regEmail"><span class="lang-en">Email (required)</span><span class="lang-es">Correo electrónico (obligatorio)</span><span class="lang-fr">Adresse e-mail (obligatoire)</span></label>
-            <input id="regEmail" type="email" autocomplete="email" required />
+            <label for="regEmail"><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span><span class="lang-fr">Adresse e-mail (facultative)</span></label>
+            <input id="regEmail" type="email" autocomplete="email" maxlength="160" />
           </div>
-          <div>
+          <div class="full">
             <label for="regCountry"><span class="lang-en">Country</span><span class="lang-es">País</span><span class="lang-fr">Pays</span></label>
-            <input id="regCountry" type="text" autocomplete="country-name" />
+            <select id="regCountry" required autocomplete="country">
+              <option value="" data-en="Country — select" data-es="País — seleccione" data-fr="Pays — choisissez">Country — select</option>
+              {CODES.map((code) => (
+                <option value={code} data-en={countryName.en.of(code)} data-es={countryName.es.of(code)} data-fr={countryName.fr.of(code)}>{countryName.en.of(code)}</option>
+              ))}
+              <option value="OT" data-en="Other / Prefer not to say" data-es="Otro / Prefiero no decir" data-fr="Autre / Je préfère ne pas répondre">Other / Prefer not to say</option>
+            </select>
           </div>
           <div>
             <label for="regTrack"><span class="lang-en">Study track</span><span class="lang-es">Trayecto de estudio</span><span class="lang-fr">Parcours d’études</span></label>
@@ -255,6 +280,8 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span class="lang-fr">Séminaire théologique de Chapala · Formation théologique gratuite en anglais, en espagnol et en français.</span>
         </span>
         <span>
+          <a href={`/${pagePrefix}Course.html`}><span class="lang-en">Course overview</span><span class="lang-es">Resumen del curso</span><span class="lang-fr">Présentation du cours</span></a>
+          &nbsp;·&nbsp;
           <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span><span class="lang-fr">Tous les cours</span></a>
           &nbsp;·&nbsp;
           <a href="/cts-backup.html"><span class="lang-en">Save my progress</span><span class="lang-es">Guardar mi progreso</span><span class="lang-fr">Enregistrer ma progression</span></a>
@@ -265,17 +292,21 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     </footer>
 
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
-    <script is:inline src={version('/assets/js/cts-record.js')}></script>
-    <script is:inline src={version('/assets/js/cts-engine.js')}></script>
-    {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)}></script>)}
+    <script is:inline src={version('/assets/js/cts-record.js')} defer></script>
+    {live && <script is:inline src={version('/assets/js/cts-grading.js')} defer></script>}
+    <script is:inline src={version('/assets/js/cts-engine.js')} defer></script>
+    {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)} defer></script>)}
     {/* The lesson and the exam are never shown together, so the browser's
         Find cannot search the lesson for an answer (Dr. Cook's review, 29 Sept). */}
-    <script is:inline src={version('/assets/js/cts-exam-view.js')}></script>
-    <script is:inline src={version('/assets/js/cts-fields-lang.js')}></script>
+    <script is:inline src={version('/assets/js/cts-exam-view.js')} defer></script>
+    <script is:inline src={version('/assets/js/cts-fields-lang.js')} defer></script>
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See
         docs/student-records.md. */}
     <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>
+    {/* Shadow mode only: posts each submitted unit to /api/shadow, so the AI
+        can grade real answers before the switch. Students see nothing. */}
+    {!live && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
   </body>
 </html>

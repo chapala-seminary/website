@@ -219,6 +219,9 @@ figcaption,.illustration .caption{font-size:.85rem;color:var(--muted);
 .course-complete{margin-top:var(--s2);color:var(--ok-ink);font-weight:600}
 
 /* ── Registration ───────────────────────────────────────────────────────── */
+/* A returning student is marked on <html> before the first paint, so the
+   card is never drawn and then removed. A new student sees it in the HTML. */
+html.cts-registered #cts-register{display:none!important}
 .reg-form,.registration-panel,.registration-card,.registration-section,
 .register{background:var(--card);border:1px solid var(--rule);
   border-top:4px solid var(--gold);border-radius:var(--r);
@@ -305,9 +308,13 @@ textarea{min-height:120px;line-height:1.6;resize:vertical}
    than a class (#teach-en, #sa-note-es). Leaving those out is how a page ends
    up showing both languages at once while every class-based check passes. */
 body.lang-en :is(.lang-es,.es-only,.block-es,.es-lbl,.pane.es,.teach-es,span.es,div.es,section.es,
+                 .lang-fr,.fr-only,.block-fr,.fr-lbl,
                  #teach-es,#sa-note-es,#sa-badge-es,#titleEs,#t-title-es){display:none}
 body.lang-es :is(.lang-en,.en-only,.block-en,.en-lbl,.pane.en,.teach-en,span.en,div.en,section.en,
+                 .lang-fr,.fr-only,.block-fr,.fr-lbl,
                  #teach-en,#sa-note-en,#sa-badge-en,#titleEn,#t-title-en){display:none}
+body.lang-fr :is(.lang-es,.es-only,.block-es,.es-lbl,.pane.es,.teach-es,span.es,div.es,section.es){display:none}
+body.lang-fr :is(.lang-en,.en-only,.block-en,.en-lbl):has(~ .lang-fr){display:none}
 body.lang-both :is(.lang-es,.es-only,.block-es,.pane.es,.teach-es,div.es,section.es,
                    #teach-es,#sa-note-es){
   display:block;color:var(--muted);margin-top:var(--s1)}
@@ -327,6 +334,8 @@ body.lang-es #teach-es.hide,body.lang-both #teach-es.hide{display:block!importan
 .anchor{display:block;position:relative;top:-72px;visibility:hidden}
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
+.cts-crumbs{font-size:.92rem;padding:.4rem 0 .2rem;color:var(--muted)}
+.cts-crumbs a{color:var(--accent)}
 .cts-foot{border-top:1px solid var(--rule);color:var(--muted);font-size:.88rem}
 .cts-foot .wrap{padding-block:var(--s4) var(--s6);
                 display:flex;flex-wrap:wrap;gap:var(--s3);
@@ -381,3 +390,10 @@ body.lang-both .tb-book.lang-es{color:var(--ink)}
 /* The test page. */
 .tb-test .cts-fill h3{margin-top:0}
 .tb-test .actions{margin-top:var(--s4)}
+
+/* Submitted textbook/reading exam teaching review. */
+.tb-review{margin-top:2rem;font-weight:normal;line-height:1.6}
+.tb-review:empty{display:none}
+.tb-review-item{padding:1.25rem 0;border-top:1px solid var(--line,#d8cbb7)}
+.tb-review-item blockquote{margin:1rem 0;padding:.5rem 1rem;border-left:3px solid var(--gold,#b08324);overflow-wrap:anywhere}
+.tb-review-item h3{margin:.25rem 0}

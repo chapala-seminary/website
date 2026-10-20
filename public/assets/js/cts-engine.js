@@ -73,6 +73,16 @@
   var U = window.CTS_UNIT;
   if (!U) { console.error("[cts] no CTS_UNIT for this page"); return; }
 
+  /* TWO MODES (docs/ai-grading.md section 1), told apart by the page itself.
+     A page built in live mode says grading: "live" and carries no answer keys:
+     every click and answer goes to the server through cts-grading.js, and the
+     LIVE branches below are the only grading there is. A shadow-mode page says
+     nothing, and everything below that is not marked LIVE is the engine as it
+     was: the browser grades, and each submitted attempt is also announced to
+     cts-shadow.js. The old grading code is kept whole, for that mode. */
+  var LIVE = U.grading === "live";
+  var G = window.CTSGrading || null;
+
   // ---- policy ------------------------------------------------------------
   var PASS_RATIO      = 0.90;   // of multiple-choice questions, and of fill-ins and short answer where they count
   var SA_HIT_MIN      = 3;      // keyword matches needed to credit one answer
@@ -91,12 +101,16 @@
     state:    "cts_" + U.course + "_u" + U.unit + "_state",
     mcPassed: "cts_" + U.course + "_u" + U.unit + "_mc_passed",
     saLock:   "cts_" + U.course + "_u" + U.unit + "_sa_lock",
-    fullLock: "cts_" + U.course + "_u" + U.unit + "_full_lock"
+    fullLock: "cts_" + U.course + "_u" + U.unit + "_full_lock",
+    // LIVE: the attempt submitted and still waiting to be graded (new key; the others are the contract)
+    pending:  "cts_" + U.course + "_u" + U.unit + "_pending"
   };
 
   // ---- student and track -------------------------------------------------
   function student() { return jget("cts_student", null); }
   function track() {
+    // LIVE: the track on the student's record at the seminary, not this browser's
+    if (LIVE && live && live.S && live.S.track) return live.S.track;
     var s = student();
     return lsGet("cts_track") || (s && s.track) || "cert";
   }
@@ -121,11 +135,11 @@
   }
   /* Short answer counts towards passing on the master's tracks only (Wayne's
      rule, 25 Sept 2026). Still keyword-graded for now. */
-  function saCounts() { return isMasters(); }
+  function saCounts() { return LIVE && live && live.S && live.S.needs ? !!live.S.needs.sa : isMasters(); }
   /* The ten fill-ins count on every track except the Certificate of Ministry:
      they are the Associate's step up from the Certificate, and the master's
      tracks do them as well as short answer. */
-  function fillCounts() { return isAssociate() || isMasters(); }
+  function fillCounts() { return LIVE && live && live.S && live.S.needs ? !!live.S.needs.fill : (isAssociate() || isMasters()); }
 
   /* Passing the last unit is what completes a course -- not opening the
      certificate page (cts-record.js says why). Also run on load, so a course
@@ -168,7 +182,12 @@
     "romans":               { flag: function (n) { return "cts_romans_unit" + n + "_passed"; },  value: "true" },
     "re":                   { flag: function (n) { return "re_unit" + n + "_passed"; },          value: "1" },
     "cs":                   { state: "cts_cs_state" },                 // {n: {passed: true}}
-    "genesis":              { completion: "genesis" }                  // cts_genesis_uN_completion[_track]
+    "genesis":              { completion: "genesis" },                 // cts_genesis_uN_completion[_track]
+    // the single-page courses: one page, a state map per unit ({n: {passed: true}}); Ethics has
+    // a page per unit and writes cts_ethics_progress like the unit courses
+    "counseling":           { state: "cts_drakeford_state" },
+    "storytel":             { state: "cts_storytel_state" },
+    "wisespeak":            { state: "cts_wisespeak_state" }
   };
   var legacy = LEGACY[U.course] || null;
   function genesisTrack() { var t = track(); return t === "mdiv" ? "mdiv" : (t === "thm" || t === "mth") ? "thm" : "cert"; }
@@ -300,9 +319,12 @@
     /* After a failed attempt the answers stay on screen for review but are
        not kept: the next visit starts a fresh attempt. Banked MC is kept. */
     var keepMC = !graded || mcPassed || unitPassed;
-    lsSet(KEY.state, JSON.stringify({ mcAnswers: keepMC ? mcAnswers : new Array(mc.length).fill(null),
-                                      saAnswers: saAnswers, fillAnswers: fillAnswers,
-                                      fillChecked: fillChecked }));
+    var st = { mcAnswers: keepMC ? mcAnswers : new Array(mc.length).fill(null),
+               saAnswers: saAnswers, fillAnswers: fillAnswers,
+               fillChecked: fillChecked };
+    // LIVE: which attempt these belong to, so a new one starts the fill-ins empty
+    if (LIVE && live && live.attemptId) st.attemptId = live.attemptId;
+    lsSet(KEY.state, JSON.stringify(st));
   }
 
   function LETTERS(i) { return "ABCDEFGH".charAt(i); }
@@ -401,6 +423,7 @@
     var s = student();
     var done = !!(s && s.name);
     card.hidden = done;
+    document.documentElement.classList.toggle("cts-registered", done);
     if (done) return;
     var t = el("regTrack");
     if (t) t.value = track() || "cert";
@@ -422,7 +445,7 @@
       }
       renderRegister();
       renderGreeting();
-      renderQuestions();
+      if (LIVE) liveStart(); else renderQuestions();
     });
     var name = el("regName");
     if (name) name.addEventListener("input", function () { name.removeAttribute("aria-invalid"); });
@@ -511,6 +534,7 @@
   }
 
   function renderQuestions() {
+    if (LIVE) return renderLive();
     var hMc = mcHost(), hSa = saHost();
     var split = hSa && hSa !== hMc;          // page has its own short-answer area
     var h = hMc || hSa;
@@ -683,11 +707,13 @@
      the exam, and beside Submit. */
   function lockedMinutes() { return Math.max(lockRemaining(KEY.fullLock), lockRemaining(KEY.saLock)); }
   function wrongMC() {
+    if (LIVE) { var lw = 0; mc.forEach(function (q) { var r = live.mcRes[q.qid]; if (r && !r.right) lw++; }); return lw; }
     var c = 0;
     mc.forEach(function (q, i) { var a = mcAnswers[i]; if (a !== null && a !== undefined && a !== answerIndex(q)) c++; });
     return c;
   }
   function wrongFill() {
+    if (LIVE) { var lf = 0; fill.forEach(function (q) { var r = live.fillRes[q.qid]; if (r && r.verdict === "wrong") lf++; }); return lf; }
     var c = 0;
     fill.forEach(function (q, i) { if (fillChecked[i] && !unitFillRight(q, fillAnswers[i])) c++; });
     return c;
@@ -735,7 +761,7 @@
     if (top) top.innerHTML = msg ? notice(msg) : "";
     if (graded) return;
     if (msg) say(bi(msg), "#8a1f1f");
-    else { var r = resultEl(); if (r && r.textContent) say("", "#000"); }
+    else { var r = resultEl(); if (r && r.textContent && !(LIVE && live && live.working)) say("", "#000"); }
   }
   function sayLock() { var m = lockMessage(); if (m) say(bi(m), "#8a1f1f"); }
 
@@ -744,7 +770,7 @@
   function redrawAtUnlock() {
     var until = Math.max(parseInt(lsGet(KEY.saLock) || "0", 10), parseInt(lsGet(KEY.fullLock) || "0", 10));
     if (unlockTimer) clearTimeout(unlockTimer);
-    if (until > Date.now()) unlockTimer = setTimeout(renderQuestions, until - Date.now() + 250);
+    if (until > Date.now()) unlockTimer = setTimeout(LIVE ? liveAfterLock : renderQuestions, until - Date.now() + 250);
   }
 
   // ---- grading -----------------------------------------------------------
@@ -796,7 +822,8 @@
     });
   }
   function gradingUnavailableMessage() {
-    if (!saCounts() || !sa.some(function (q) { return !hasShortAnswerGrading(q); })) return null;
+    // Live pages carry no keywords: the server grades, so nothing here is missing.
+    if (LIVE || !saCounts() || !sa.some(function (q) { return !hasShortAnswerGrading(q); })) return null;
     return {
       en: "This master's exam is temporarily unavailable because its short-answer grading criteria are incomplete. Your saved work is kept. Please contact info@chapalaseminary.org.",
       es: "Este examen de maestría no está disponible temporalmente porque los criterios de calificación de las respuestas cortas están incompletos. Se conserva su trabajo guardado. Contacte a info@chapalaseminary.org.",
@@ -862,7 +889,24 @@
     if (r) r.innerHTML = '<span style="color:' + colour + '">' + msg + "</span>";
   }
 
+  /* Shadow mode: tell cts-shadow.js what was submitted and what this browser
+     decided, so the seminary can have the AI grade the same answers. Grades
+     nothing and changes nothing; with no listener it is a no-op. */
+  function announce(fillGiven, fillScore, passed) {
+    try {
+      var answers = [];
+      mc.forEach(function (q, i) { if (mcAnswers[i] !== null && mcAnswers[i] !== undefined) answers.push({ kind: "mc", index: i, choice: mcAnswers[i] }); });
+      fill.forEach(function (q, i) { if (String(fillGiven[i] || "").trim()) answers.push({ kind: "fill", index: i, answer: fillGiven[i] }); });
+      sa.forEach(function (q, i) { if (String(saAnswers[i] || "").trim()) answers.push({ kind: "sa", index: i, answer: saAnswers[i] }); });
+      document.dispatchEvent(new CustomEvent("cts:submitted", { detail: { answers: answers, clientResult: {
+        passed: !!passed, track: track(),
+        mc: { right: gradeMC(), total: mc.length }, fill: { right: fillScore, total: fill.length },
+        sa: { right: saCounts() ? gradeSA() : null, total: sa.length } } } }));
+    } catch (e) {}
+  }
+
   function submit() {
+    if (LIVE) return liveSubmit();
     var unavailable = gradingUnavailableMessage();
     if (unavailable) { say(bi(unavailable), "#8a1f1f"); return; }
     var full = lockRemaining(KEY.fullLock), saOnly = lockRemaining(KEY.saLock);
@@ -879,6 +923,7 @@
     var mcOK = mcPassed || mc.length === 0 || gradeMC() >= needMC();
     var fillOK = !fillCounts() || fill.length === 0 || gradeFill() >= needFill();
     var fillScore = gradeFill();
+    var sentFill = fillAnswers.slice();          // for cts-shadow.js, before a failed section is cleared
     if (!fillOK) {
       // shown for review during the lock; the next attempt starts empty
       fillReview = fillAnswers.slice();
@@ -886,6 +931,7 @@
       fillChecked = new Array(fill.length).fill(false);
     }
     var saOK = !saCounts() || sa.length === 0 || gradeSA() >= needSA();
+    announce(sentFill, fillScore, mcOK && fillOK && saOK);
 
     if (mcOK && !mcPassed) { lsSet(KEY.mcPassed, "1"); mcPassed = true; }
     saveState();   // a failed attempt's MC answers are shown now but not kept
@@ -931,6 +977,7 @@
     if (unitPassed) return;
     if (lockedMinutes()) { renderStatus(); sayLock(); return; }
     if (cannotPass()) { submit(); return; }
+    if (LIVE) return liveReset();
     mcAnswers = new Array(mc.length).fill(null);
     saAnswers = new Array(sa.length).fill("");
     fillAnswers = new Array(fill.length).fill("");
@@ -966,9 +1013,556 @@
   }
   function mayGoOn() {
     if (unitPassed || testMode()) return true;
+    // LIVE: a unit submitted and waiting to be graded does not hold the student back
+    if (LIVE && live && live.status === "pending") return true;
     alert(pick({ en: "Please pass Unit " + U.unit + " first.",
                  es: "Por favor apruebe la Unidad " + U.unit + " primero.", fr: "Veuillez réussir l’unité " + U.unit + " d’abord." }));
     return false;
+  }
+
+  // ======================================================================
+  // LIVE MODE (docs/ai-grading.md). Nothing below runs on a shadow-mode page.
+  //
+  // The browser holds no key and decides nothing. A multiple-choice click, a
+  // fill-in and the written answers are each sent to the server, which says
+  // what they were worth; this section draws that, and mirrors the outcome
+  // into the localStorage keys the certificate pages read. Credit shown here
+  // is only ever what a server reply said.
+  //
+  // What the browser needs from the reply, beyond docs/ai-grading.md section 7,
+  // is listed in the "Browser expectations" part of that file.
+  // ======================================================================
+  var live = {
+    S: null,              // the last /api/attempt reply (needs, banked, track...)
+    attemptId: null,
+    status: "loading",    // loading connecting unregistered ready locked failed pending passed
+    mcRes: {},            // qid -> { right, answer (index, -1 when not disclosed), why }
+    fillRes: {},          // qid -> { verdict right|wrong|pending, feedback, gradeId, by, answer }
+    saRes: {},            // qid -> { verdict met|partly|not_met|pending, feedback, gradeId, banked }
+    busy: {},             // qid -> true while a call for it is out
+    working: "",          // "reviewing" | "submitting" while the submit steps run
+    trouble: null,        // { r, retry }: the last call that did not succeed
+    stopPoll: null
+  };
+  var savedAttempt = saved.attemptId || null;
+
+  var C_GOOD = "#1f6b3b", C_BAD = "#8a1f1f", C_WARN = "#8a5a00", C_GREY = "#555";
+  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" ? l : "en"; }
+  function idxOf(a) {
+    if (typeof a === "number") return a;
+    if (typeof a === "string" && /^\d+$/.test(a)) return +a;
+    if (typeof a === "string") return "ABCDEFGH".indexOf(a.toUpperCase());
+    return -1;
+  }
+  function gid(a) { return a.gradeId != null ? a.gradeId : a.grade_id != null ? a.grade_id : null; }
+  function info(a) {
+    return { verdict: a.verdict, feedback: a.feedback || "", gradeId: gid(a), by: a.gradedBy || a.graded_by || null,
+             answer: a.correctAnswer != null ? a.correctAnswer : null, text: a.answerText != null ? a.answerText : a.answer_text != null ? a.answer_text : null };
+  }
+  function qidIndex(list, qid) { for (var i = 0; i < list.length; i++) if (list[i].qid === qid) return i; return -1; }
+
+  /* Fold verdicts the server has given into what is on screen, without
+     disturbing anything it has not mentioned. */
+  function absorb(ans) {
+    mc.forEach(function (q, i) {
+      var a = ans[q.qid];
+      if (!a || a.choice == null) return;
+      var choice = +a.choice, right = a.verdict ? a.verdict === "right" : !!a.right;
+      mcAnswers[i] = choice;
+      live.mcRes[q.qid] = { right: right, answer: a.answer != null ? idxOf(a.answer) : (right ? choice : -1), why: a.why == null ? null : a.why };
+    });
+    fill.forEach(function (q, i) {
+      var a = ans[q.qid];
+      if (!a || !a.verdict) return;
+      fillChecked[i] = true;
+      live.fillRes[q.qid] = info(a);
+      if (live.fillRes[q.qid].text != null && !String(fillAnswers[i] || "").trim()) fillAnswers[i] = live.fillRes[q.qid].text;
+    });
+    sa.forEach(function (q, i) {
+      var a = ans[q.qid];
+      if (!a || !a.verdict) return;
+      live.saRes[q.qid] = info(a);
+      if (live.saRes[q.qid].text != null && !String(saAnswers[i] || "").trim()) saAnswers[i] = live.saRes[q.qid].text;
+    });
+  }
+
+  function setLockFrom(lock) {
+    var l = G.lockOf(lock);
+    lsDel(KEY.saLock); lsDel(KEY.fullLock);
+    if (l && l.until > Date.now()) lsSet(l.part === "sa" ? KEY.saLock : KEY.fullLock, String(l.until));
+  }
+
+  /* A fresh /api/attempt reply becomes the page's state. */
+  function applyAttempt(S) {
+    live.S = S; live.attemptId = S.attemptId || null;
+    live.mcRes = {}; live.fillRes = {}; live.saRes = {}; live.busy = {};
+    var banked = S.banked || {}, ans = G.verdictsOf(S), same = !!(savedAttempt && savedAttempt === live.attemptId);
+    if (!same) {
+      // a new attempt: the multiple choice and fill-ins start empty; written
+      // answers keep what was typed, so a retake can rewrite them
+      mcAnswers = new Array(mc.length).fill(null);
+      fillAnswers = new Array(fill.length).fill("");
+      fillChecked = new Array(fill.length).fill(false);
+    }
+    savedAttempt = live.attemptId;
+    graded = false;
+    mcPassed = !!banked.mc;
+    if (mcPassed) lsSet(KEY.mcPassed, "1"); else lsDel(KEY.mcPassed);
+    var whyBy = {};
+    ((S.items && S.items.mc) || []).forEach(function (m) { if (m && m.qid) whyBy[m.qid] = m.why; });
+    Object.keys(whyBy).forEach(function (k) { if (ans[k] && ans[k].why === undefined) ans[k].why = whyBy[k]; });
+    absorb(ans);
+    (banked.fill || []).forEach(function (qid) {
+      var i = qidIndex(fill, qid);
+      if (i >= 0 && !live.fillRes[qid]) { fillChecked[i] = true; live.fillRes[qid] = { verdict: "right", feedback: "", banked: true }; }
+    });
+    (banked.sa || []).forEach(function (qid) {
+      var i = qidIndex(sa, qid);
+      if (i < 0) return;
+      var r = live.saRes[qid] || (live.saRes[qid] = { verdict: "met", feedback: "" });
+      r.banked = true; r.verdict = "met";
+    });
+    setLockFrom(S.lock);
+    saveState();
+  }
+
+  /* A reply for a click answered earlier lacks the right answer or the
+     explanation: ask again. The server returns the first result for a qid.
+     Only for an attempt whose answers the server discloses (one that passed,
+     worker/grading/attempts.js disclosureOf): while an attempt is open the
+     server says right or wrong and nothing more, and asking again would only
+     repeat that (answer-disclosure policy, Wayne, 18 Oct 2026). */
+  function fetchMissingMc() {
+    if (!live.S || live.S.disclosure !== "review") return;
+    mc.forEach(function (q, i) {
+      var r = live.mcRes[q.qid];
+      if (!r || mcAnswers[i] == null) return;
+      if (!((!r.right && r.answer < 0) || r.why === undefined)) return;
+      G.calls.mc(live.attemptId, q.qid, mcAnswers[i]).then(function (x) {
+        if (!x.ok || !x.data) return;
+        r.answer = idxOf(x.data.answer); r.why = x.data.why === undefined ? null : x.data.why;
+        if (r.right && r.answer < 0) r.answer = mcAnswers[i];
+        renderQuestions();
+      });
+    });
+  }
+
+  function trouble(r, retry) {
+    live.working = ""; live.trouble = { r: r, retry: retry }; renderQuestions();
+    if (G) G.showExpansion(r, sa.map(function (q, i) { return { qid: q.qid, field: document.querySelector('textarea[data-sa="' + i + '"]') }; }));
+  }
+
+  function liveStart() {
+    if (live.stopPoll) { live.stopPoll(); live.stopPoll = null; }
+    live.trouble = null; live.working = "";
+    if (!G) { live.status = "ready"; return trouble({ offline: true }, liveStart); }
+    if (!G.registered()) { live.status = "unregistered"; return renderQuestions(); }
+    if (unitPassed) { live.status = "passed"; renderQuestions(); return liveReview(); }
+    live.status = "connecting";
+    renderQuestions();
+    var pid = lsGet(KEY.pending);
+    (pid ? G.calls.status(pid) : Promise.resolve(null)).then(function (pr) {
+      if (pr && pr.unregistered) { live.status = "unregistered"; return renderQuestions(); }
+      if (pr && !pr.ok && (pr.offline || pr.status >= 500 || pr.status === 429)) { live.status = "ready"; return trouble(pr, liveStart); }
+      if (pr && pr.ok && pr.data) {
+        var st = String(pr.data.status || "");
+        if (st === "pending") return livePending(pid, pr.data);
+        if (st === "passed" || st === "failed") { lsDel(KEY.pending); applyResult(pr.data, true); if (st === "passed") return; }
+      } else if (pid) lsDel(KEY.pending);      // an attempt the server no longer knows
+      G.calls.attempt(U.scope, serverLang()).then(function (r) {
+        if (r.unregistered) { live.status = "unregistered"; return renderQuestions(); }
+        if (!r.ok) {
+          var lk = r.data && r.data.lock;
+          if (lk) {
+            setLockFrom(lk); live.S = null; live.status = "locked";
+            renderQuestions(); redrawAtUnlock(); return;
+          }
+          live.status = "ready";
+          return trouble(r, liveStart);
+        }
+        var S = r.data || {};
+        if (S.status === "passed") return livePass(S, true);
+        if (S.status === "pending" && S.attemptId) return livePending(S.attemptId, S);
+        applyAttempt(S);
+        live.status = lockedMinutes() ? "locked" : "ready";
+        renderQuestions();
+        fetchMissingMc();
+        redrawAtUnlock();
+      });
+    });
+  }
+
+  /* A unit already passed, opened again: the attempt that passed it may be
+     reviewed -- its right answers, explanations and model answers, which the
+     server sends only for a passed attempt. Nothing is changed by asking; if
+     the server does not say "passed", nothing is shown. */
+  function liveReview() {
+    if (!savedAttempt || !G || !G.calls.status) return;
+    G.calls.status(savedAttempt).then(function (r) {
+      if (!r || !r.ok || !r.data || String(r.data.status || "") !== "passed" || r.data.disclosure !== "review") return;
+      absorb(G.verdictsOf(r.data));
+      if (r.data.models) live.models = r.data.models;
+      renderQuestions();
+    }, function () {});
+  }
+
+  // the wait after a failed attempt is over: a fresh attempt, with the answers empty
+  function liveAfterLock() {
+    if (lockedMinutes()) { redrawAtUnlock(); return; }
+    graded = false; say("", "#000");
+    liveStart();
+  }
+
+  // ---- multiple choice: one click, one call ---------------------------------
+  function liveMC(i, j) {
+    var q = mc[i];
+    if (unitPassed || mcPassed || live.status !== "ready" || live.busy[q.qid]) return;
+    if (lockedMinutes()) { sayLock(); return; }
+    if (mcAnswers[i] !== null && mcAnswers[i] !== undefined) return;
+    live.trouble = null; live.busy[q.qid] = true;
+    renderQuestions();
+    G.calls.mc(live.attemptId, q.qid, j).then(function (r) {
+      delete live.busy[q.qid];
+      if (!r.ok || !r.data) return trouble(r, function () { live.trouble = null; liveMC(i, j); });
+      // The server keeps the first answer for a question. If an earlier click's
+      // reply was lost and this one named another option, the reply says which
+      // choice is recorded: show that one, never the last click.
+      var stored = Number.isInteger(r.data.choice) ? r.data.choice : j;
+      mcAnswers[i] = stored;
+      var right = !!r.data.right;
+      // While the attempt is open the reply is right or wrong only: no right
+      // option (-1) and no explanation (answer-disclosure policy).
+      live.mcRes[q.qid] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? stored : -1), why: r.data.why == null ? null : r.data.why };
+      saveState();
+      renderQuestions();
+    });
+  }
+
+  // ---- one fill-in: Check ---------------------------------------------------
+  function liveFill(i, value) {
+    var q = fill[i];
+    if (fillChecked[i] || unitPassed || live.status !== "ready" || live.busy[q.qid]) return;
+    if (lockedMinutes()) { sayLock(); return; }
+    if (!String(value || "").trim()) {
+      var empty = document.querySelector('input[data-fill="' + i + '"]');
+      if (empty) empty.focus();
+      return;
+    }
+    fillAnswers[i] = value; live.trouble = null; live.busy[q.qid] = true;
+    saveState();
+    renderQuestions();
+    G.calls.grade(live.attemptId, [{ qid: q.qid, answer: value }]).then(function (r) {
+      delete live.busy[q.qid];
+      if (!r.ok || !r.data) return trouble(r, function () { live.trouble = null; liveFill(i, value); });
+      absorbGraded(r.data, fill);
+      saveState();
+      renderQuestions();
+      for (var n = i + 1; n < fill.length; n++) {
+        if (!fillChecked[n]) { var next = document.querySelector('input[data-fill="' + n + '"]'); if (next) next.focus(); break; }
+      }
+    });
+  }
+  function absorbGraded(data, list) {
+    var by = {};
+    (data.items || []).forEach(function (it) { if (it && it.qid) by[it.qid] = it; });
+    absorb(by);
+    // an item the reply left out stays unchecked: nothing is assumed
+    return by;
+  }
+
+  // ---- Submit: the unchecked fill-ins, the written answers, then the attempt ----
+  function liveSubmit() {
+    var m = lockedMinutes();
+    if (m) {
+      say(bi({ en: "Locked. Review the lesson and try again in " + m + " minute(s).",
+               es: "Bloqueado. Repase la lección e inténtelo de nuevo en " + m + " minuto(s).", fr: "Examen bloqué. Révisez la leçon et réessayez dans " + m + " minute(s)." }), C_BAD);
+      return;
+    }
+    if (live.status !== "ready" || live.working || unitPassed) return;
+    live.trouble = null;
+    var fillItems = [], saItems = [];
+    fill.forEach(function (q, i) {
+      if (!fillChecked[i] && !live.fillRes[q.qid] && String(fillAnswers[i] || "").trim()) fillItems.push({ qid: q.qid, answer: fillAnswers[i] });
+    });
+    if (saCounts()) sa.forEach(function (q, i) {
+      if (!live.saRes[q.qid] && String(saAnswers[i] || "").trim()) saItems.push({ qid: q.qid, answer: saAnswers[i] });
+    });
+    function again() { live.trouble = null; liveSubmit(); }
+    function batch(items, list, working) {
+      if (!items.length) return Promise.resolve(true);
+      live.working = working; renderQuestions();
+      return G.calls.grade(live.attemptId, items).then(function (r) {
+        if (!r.ok || !r.data) { trouble(r, again); return false; }
+        absorbGraded(r.data, list); saveState();
+        return true;
+      });
+    }
+    live.working = "submitting"; renderQuestions();
+    batch(fillItems, fill, "submitting").then(function (ok) {
+      return ok ? batch(saItems, sa, "reviewing") : false;
+    }).then(function (ok) {
+      if (!ok) return;
+      live.working = "submitting"; renderQuestions();
+      return G.calls.submit(live.attemptId).then(function (r) {
+        if (!r.ok || !r.data) return trouble(r, again);
+        live.working = "";
+        applyResult(r.data, false);
+      });
+    });
+  }
+
+  /* The outcome of a submit, or of a poll that found the answer. */
+  function applyResult(R, quiet) {
+    var ans = G.verdictsOf(R);
+    absorb(ans);
+    var st = String(R.status || "");
+    if (R.models) live.models = R.models;
+    if (st === "passed") return livePass(R, quiet);
+    if (st === "failed") return liveFail(R, quiet);
+    return livePending(live.attemptId, R);
+  }
+
+  function livePass(R, quiet) {
+    unitPassed = true; mcPassed = true; graded = true; live.status = "passed"; live.working = "";
+    progress["unit" + U.unit] = true;
+    lsSet(KEY.progress, JSON.stringify(progress));
+    writeLegacy(U.unit);
+    lsSet(KEY.mcPassed, "1");
+    lsDel(KEY.saLock); lsDel(KEY.fullLock); lsDel(KEY.pending);
+    if (live.stopPoll) { live.stopPoll(); live.stopPoll = null; }
+    if (R && R.courseDone) recordCourse();       // cts-record.js writes cts_done_codes
+    saveState();
+    var r = ensureResult();
+    if (r) r.innerHTML = passedPanel();
+    renderPassedBanner();
+    var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
+    renderQuestions();
+  }
+
+  function partText(name, sc, counts) {
+    if (!sc || !counts) return null;
+    var need = sc.need != null ? sc.need : Math.ceil(sc.total * PASS_RATIO);
+    if (sc.right >= need) return null;
+    var w = { mc: ["multiple choice", "opción múltiple", "choix multiple"], fill: ["fill in the blank", "complete el espacio", "texte à compléter"],
+              sa: ["short answer", "respuesta corta", "réponse courte"] }[name];
+    var t = sc.right + "/" + sc.total;
+    return { en: w[0] + " " + t + ", need " + need, es: w[1] + " " + t + ", necesita " + need, fr: w[2] + " " + t + ", requis " + need };
+  }
+
+  function liveFail(R, quiet) {
+    graded = true; live.status = "failed"; live.working = "";
+    lsDel(KEY.pending);
+    if (live.stopPoll) { live.stopPoll(); live.stopPoll = null; }
+    var sc = R.scores, mcS = G.scoreOf(sc, "mc"), fiS = G.scoreOf(sc, "fill"), saS = G.scoreOf(sc, "sa");
+    var mcOK = mcPassed || (mcS && mcS.right >= (mcS.need != null ? mcS.need : Math.ceil(mcS.total * PASS_RATIO)));
+    if (mcOK && !mcPassed) { mcPassed = true; lsSet(KEY.mcPassed, "1"); }
+    var l = G.lockOf(R.lock);
+    if (l) setLockFrom(R.lock); else applyLock(mcOK ? KEY.saLock : KEY.fullLock);
+    var parts = [partText("mc", mcS, true), partText("fill", fiS, fillCounts()), partText("sa", saS, saCounts())].filter(Boolean);
+    var mins = lockedMinutes() || lockMinutes();
+    var part = { en: parts.length ? " — " + parts.map(function (p) { return p.en; }).join("; ") : "",
+                 es: parts.length ? " — " + parts.map(function (p) { return p.es; }).join("; ") : "",
+                 fr: parts.length ? " — " + parts.map(function (p) { return p.fr; }).join("; ") : "" };
+    saveState();
+    say(bi({ en: "Not yet" + part.en + ". Review the lesson and try again in " + mins + " minute(s).",
+               es: "Aún no" + part.es + ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s).", fr: "Pas encore réussi" + part.fr + ". Révisez la leçon et réessayez dans " + mins + " minute(s)." }), C_BAD);
+    redrawAtUnlock();
+    renderQuestions();
+  }
+
+  function livePending(id, R) {
+    live.attemptId = id || live.attemptId;
+    graded = true; live.status = "pending"; live.working = "";
+    if (live.attemptId) lsSet(KEY.pending, live.attemptId);
+    if (R && (R.answered || R.verdicts)) {
+      if (!live.S || live.S.attemptId !== live.attemptId) applyAttempt(Object.assign({}, R, { attemptId: live.attemptId }));
+      else absorb(G.verdictsOf(R));
+    }
+    var r = ensureResult();
+    if (r) r.innerHTML = '<span style="color:' + C_WARN + '">' + bi(G.S.submittedPending) + "</span>" +
+      '<p class="small" style="font-weight:400;color:#000">' + bi(G.S.pendingMore) + "</p>";
+    var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
+    if (live.stopPoll) live.stopPoll();
+    live.stopPoll = G.poll(live.attemptId, function (reply) {
+      var st = String(reply.status || "");
+      if (st === "pending" || !st) { absorb(G.verdictsOf(reply)); renderQuestions(); return false; }
+      live.stopPoll = null;
+      applyResult(reply, false);
+      if (st === "passed") { var r2 = ensureResult(); if (r2) r2.insertAdjacentHTML("afterbegin", '<p style="color:' + C_GOOD + '">' + bi(G.S.resultReady) + "</p>"); }
+      return true;
+    });
+    saveState();
+    renderQuestions();
+  }
+
+  function liveReset() {
+    // answered questions are final for the attempt (the server keeps the first answer); typing is not
+    saAnswers = saAnswers.map(function (t, i) { return live.saRes[sa[i].qid] ? t : ""; });
+    fillAnswers = fillAnswers.map(function (t, i) { return fillChecked[i] ? t : ""; });
+    saveState();
+    renderQuestions();
+    say("", "#000");
+  }
+
+  // ---- drawing --------------------------------------------------------------
+  function verdictLine(kind, res, item) {
+    if (!res) return "";
+    var v = res.verdict, cls, colour, label;
+    if (v === "right" || v === "met") { cls = "correct"; colour = C_GOOD; }
+    else if (v === "partly") { cls = "incorrect"; colour = C_WARN; }
+    else if (v === "pending") { cls = ""; colour = C_WARN; }
+    else { cls = "incorrect"; colour = C_BAD; }
+    label = G.S[v] || G.S.pending;
+    var mark = (v === "right" || v === "met") ? "&#10003; " : v === "pending" ? "" : v === "partly" ? "&#9680; " : "&#10007; ";
+    var h = '<div class="feedback-text ' + cls + '" style="color:' + colour + '">' + mark + bi(label);
+    if (kind === "fill" && v === "pending") h = '<div class="feedback-text" style="color:' + C_WARN + '">' + bi(G.S.savedPending);
+    if (res.banked) h += ' <span class="small" style="font-weight:400">· ' + bi(G.S.kept) + "</span>";
+    h += "</div>";
+    if (res.feedback) h += '<p class="small cts-grade-feedback">' + attr(res.feedback) + "</p>";
+    if (res.answer != null && v === "wrong") {
+      var a = isLanguageMap(res.answer) ? pick(res.answer) : res.answer;
+      h += '<p class="small">' + bi({ en: "Answer: ", es: "Respuesta: ", fr: "Réponse : " }) + attr(a) + "</p>";
+    }
+    var appealable = (kind === "sa" && (v === "not_met" || v === "partly")) || (kind === "fill" && v === "wrong" && res.by !== "exact" && res.by !== "rule");
+    if (appealable && !res.banked && (res.gradeId != null || item.qid)) {
+      var ap = { gradeId: res.gradeId, attemptId: live.attemptId, qid: item.qid };
+      G.appeal.remember(ap);
+      h += G.appeal.html(ap, bi);
+    }
+    return h;
+  }
+
+  function liveNotes() {
+    var st = live.status, h = "";
+    if (st === "unregistered") h += G ? G.registerHtml(bi, false) : "";
+    else if (st === "connecting" || st === "loading") h += '<p class="small" role="status">' + (G ? bi(G.S.connecting) : "") + "</p>";
+    if (live.working) h += '<p class="small" role="status" style="font-weight:600">' + bi(live.working === "reviewing" ? G.S.reviewing : G.S.submitting) + "</p>";
+    if (live.trouble && G) h += G.troubleHtml(live.trouble.r, bi);
+    if (st === "pending") h += '<p class="small" role="status" style="color:' + C_WARN + ';font-weight:600">' + bi(G.S.submittedPending) + "</p>";
+    return h;
+  }
+
+  function renderLive() {
+    var hMc = mcHost(), hSa = saHost();
+    var split = hSa && hSa !== hMc;
+    var h = hMc || hSa;
+    if (!h) return;
+    var st = live.status, out = "", outSa = "";
+    var show = !(st === "unregistered" || st === "connecting" || st === "loading" || (st === "ready" && !live.S && live.trouble));
+    var sb = submitEl();
+    if (sb) sb.disabled = !!(live.working || unitPassed || st === "unregistered" || st === "connecting" || st === "loading" || st === "pending");
+
+    if (show && mc.length) {
+      if (!split) out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple", fr: "Questions à choix multiple" }) + "</h3>";
+      if (mcPassed) out += '<p class="small">' + bi(G.S.mcKept) + "</p>";
+      mc.forEach(function (q, i) {
+        var res = live.mcRes[q.qid], chosen = mcAnswers[i], answered = chosen !== null && chosen !== undefined && !!res;
+        var busy = !!live.busy[q.qid];
+        var right = answered ? (res.right ? chosen : res.answer) : -1;
+        out += '<div class="question" data-mc="' + i + '">';
+        out += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.stem || q.text || q.prompt) + "</p>";
+        options(q).forEach(function (opt, j) {
+          var cls = "option";
+          if (chosen === j) cls += " selected";
+          if (answered) {
+            if (j === right) cls += " correct";
+            else if (j === chosen) cls += " wrong";
+          }
+          out += '<button class="' + cls + '" data-mc="' + i + '" data-opt="' + j + '" type="button"' + (busy ? " disabled" : "") + ">" +
+                 "<strong>" + LETTERS(j) + ".</strong> " + bi(document.body.dataset.pageLang && isLanguageMap(q.options) ? Object.fromEntries(Object.keys(q.options).map(function (code) {
+                   return [code, q.options[code][j]];
+                 })) : opt) + "</button>";
+        });
+        if (busy) out += '<div class="feedback-text" role="status">' + bi(G.S.checking) + "</div>";
+        else if (answered) {
+          out += res.right
+            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct !" }) + "</div>"
+            : '<div class="feedback-text incorrect">' + (right >= 0
+                ? bi({ en: "&#10007; Incorrect. Correct answer: " + LETTERS(right), es: "&#10007; Incorrecto. Respuesta correcta: " + LETTERS(right), fr: "&#10007; Incorrect. Bonne réponse : " + LETTERS(right) })
+                : bi({ en: "&#10007; Incorrect.", es: "&#10007; Incorrecto.", fr: "&#10007; Incorrect." })) + "</div>";
+          if (res.why) out += '<div class="feedback">' + bi(res.why) + "</div>";
+        }
+        out += "</div>";
+      });
+    }
+
+    if (show && fill.length) {
+      var counts = fillCounts(), locked = !!lockedMinutes();
+      out += "<h3>" + bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco", fr: "Texte à compléter" }) + "</h3>";
+      out += '<p class="small">' + (counts
+        ? bi({ en: "Type the missing word or phrase and press Check (or Enter) to see whether it is right. You need " + needFill() + " of " + fill.length + " to pass.",
+               es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver si es correcta. Necesita " + needFill() + " de " + fill.length + " para aprobar.", fr: "Saisissez le mot ou la phrase qui manque et appuyez sur Vérifier (ou Entrée). Il faut " + needFill() + " bonnes réponses sur " + fill.length + " pour réussir." })
+        : bi({ en: "For your own review: these do not count on the Certificate track. Press Check (or Enter) to see whether your answer is right.",
+               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta.", fr: "Pour vous exercer : ces questions ne comptent pas pour le certificat. Appuyez sur Vérifier (ou Entrée) pour vérifier votre réponse." })) + "</p>";
+      fill.forEach(function (q, i) {
+        var num = i + 1, done = !!fillChecked[i], busy = !!live.busy[q.qid], res = live.fillRes[q.qid];
+        var idle = live.status === "ready" && !locked;
+        out += '<div class="question" data-fill="' + i + '">';
+        out += '<p style="font-weight:bold;">' + num + ". " + bi(q.prompt) + "</p>";
+        out += '<input type="text" data-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
+               ' aria-label="' + pick({ en: "Answer ", es: "Respuesta ", fr: "Réponse " }) + num + '"' +
+               ((done || busy || !idle) ? " disabled" : "") +
+               ' style="width:100%;max-width:24em;" value="' + attr(fillAnswers[i]) + '" />';
+        if (busy) out += ' <span class="small" role="status">' + bi(G.S.checking) + "</span>";
+        else if (!done && idle) out += ' <button type="button" class="btn" data-fill-check="' + i + '">' + bi({ en: "Check", es: "Comprobar", fr: "Vérifier" }) + "</button>";
+        if (done && res) out += verdictLine("fill", res, q);
+        out += "</div>";
+      });
+    }
+
+    if (show && sa.length) {
+      var block = "";
+      if (!split) block += "<h3>" + bi({ en: "Short Answer", es: "Respuesta Corta", fr: "Réponse courte" }) + "</h3>";
+      block += '<p class="small cts-ai-note">' + bi(saCounts() ? G.S.aiNote : G.S.notGraded) + "</p>";
+      sa.forEach(function (q, i) {
+        var res = live.saRes[q.qid], banked = !!(res && res.banked);
+        var closed = !!res || live.status !== "ready" || !!lockedMinutes() || unitPassed;
+        block += '<div class="question" data-sa="' + i + '">';
+        block += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.prompt || q.stem) + "</p>";
+        var txt = String(saAnswers[i] || "");
+        if (banked && !txt.trim()) block += '<p class="small">' + bi(G.S.keptNoText) + "</p>";
+        else block += '<textarea data-sa="' + i + '" rows="4" style="width:100%;"' + (closed ? " readonly" : "") + (banked ? " aria-readonly=\"true\"" : "") + ">" +
+                 txt.replace(/</g, "&lt;") + "</textarea>";
+        if (res) block += verdictLine("sa", res, q);
+        if (live.models && live.models[q.qid] && txt.trim()) block += '<div class="model-answer">' + bi(live.models[q.qid]) + "</div>";
+        block += "</div>";
+      });
+      if (split) outSa = block; else out += block;
+    }
+
+    h.innerHTML = '<div id="cts-exam-status" role="status"></div><div id="cts-live-notes">' + liveNotes() + "</div>" + out;
+    if (split) hSa.innerHTML = outSa;
+    var scope = split ? [h, hSa] : [h];
+    scope.forEach(function (node) {
+      node.querySelectorAll("button.option").forEach(function (b) {
+        b.addEventListener("click", function () { liveMC(+b.dataset.mc, +b.dataset.opt); });
+      });
+      node.querySelectorAll("textarea[data-sa]").forEach(function (t) {
+        t.addEventListener("input", function () { saAnswers[+t.dataset.sa] = t.value; saveState(); });
+      });
+      node.querySelectorAll("input[data-fill]").forEach(function (t) {
+        t.addEventListener("input", function () {
+          var i = +t.dataset.fill;
+          if (fillChecked[i] || unitPassed) return;
+          fillAnswers[i] = t.value; saveState();
+        });
+        t.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.keyCode === 13) { e.preventDefault(); liveFill(+t.dataset.fill, t.value); }
+        });
+      });
+      node.querySelectorAll("button[data-fill-check]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var i = +b.dataset.fillCheck, t = node.querySelector('input[data-fill="' + i + '"]');
+          liveFill(i, t ? t.value : fillAnswers[i]);
+        });
+      });
+      node.querySelectorAll("[data-cts-retry]").forEach(function (b) {
+        b.addEventListener("click", function () { var t = live.trouble; live.trouble = null; if (t && t.retry) t.retry(); else liveStart(); });
+      });
+    });
+    renderStatus();
+    if (live.working) say(bi(live.working === "reviewing" ? G.S.reviewing : G.S.submitting), C_GREY);
+    if (live.trouble) { var tn = el("cts-live-notes"); if (tn && tn.scrollIntoView && !tn.getBoundingClientRect().height) tn.scrollIntoView({ block: "nearest" }); }
   }
 
   // ---- boot --------------------------------------------------------------
@@ -1002,7 +1596,10 @@
     redrawAtUnlock();
     // the countdown in the notice, without redrawing answers being typed
     setInterval(function () { if (lockedMinutes()) renderStatus(); }, 20000);
-    recordCourse();   // a course finished before completion moved here
+    /* a course finished before completion moved here. LIVE too: the progress it
+       reads is what the server's records restored into this browser (cts-sync.js),
+       and it only decides what the certificate pages show. */
+    recordCourse();
 
     if (unitPassed) {
       graded = true;
@@ -1011,6 +1608,10 @@
       var sbp = submitEl(); if (sbp) sbp.disabled = true;
       var nbp = el("nextUnitBtn"); if (nbp) nbp.disabled = false;
       renderQuestions();
+    }
+    if (LIVE) {
+      if (G) G.appeal.onChange(renderQuestions);
+      liveStart();
     }
 
     /* A control that already calls the engine from an inline onclick must not
@@ -1042,8 +1643,7 @@
     syncLangControls(langNow());
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
+  var LANG_TOGGLE_IDS = ["langToggleBtn", "langToggle", "langBtn", "btnLang", "lang-toggle"];
 
   window.CTS_ENGINE = {
     submit: submit, reset: reset, render: renderQuestions,
@@ -1053,7 +1653,8 @@
     // the grader itself, so tools/add-fill-ins.mjs's promise -- every drafted
     // answer passes -- can be checked against the page and not a copy
     fillRight: unitFillRight, shortAnswerRight: shortAnswerRight, normalise: normalise,
-    policy: { passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN }
+    policy: { passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN },
+    live: LIVE ? function () { return live; } : null
   };
 
   /* ------------------------------------------------------------------ *
@@ -1093,7 +1694,6 @@
      of pages carrying an inline onclick, and bound nothing on the rest: pressing
      Español did nothing at all on roughly 440 of the 451 unit pages. It also
      never implemented "both", which those three-button groups depend on. */
-  var LANG_TOGGLE_IDS = ["langToggleBtn", "langToggle", "langBtn", "btnLang", "lang-toggle"];
 
   function langNow() {
     if (document.body.classList.contains("lang-both")) return "both";
@@ -1179,12 +1779,25 @@
     var name = val("regName", "reg-name", "studentName", "m-name", "student-name");
     var email = val("regEmail", "reg-email", "studentEmail", "student-email");
     var error = el("regError");
-    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    function present(ids) {
+      for (var i = 0; i < ids.length; i++) if (el(ids[i])) return el(ids[i]);
+      return null;
+    }
+    var countryEl = present(["regCountry", "reg-country", "studentCountry"]);
+    var countryMissing = !!(countryEl && !countryEl.value.trim());
+    // Email is optional. A blank address enrolls. A filled one must be usable
+    // for recovery and a certificate, so a malformed one is not stored.
+    var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!name || !emailOk || countryMissing) {
       if (error) {
         error.hidden = false;
-        error.innerHTML = bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse e-mail valide pour enregistrer votre inscription." });
+        error.innerHTML = !name
+          ? bi({ en: "Enter your name to save your registration.", es: "Escriba su nombre para guardar su registro.", fr: "Saisissez votre nom pour enregistrer votre inscription." })
+          : (!emailOk
+            ? bi({ en: "Leave email blank to enroll, or enter a valid address so we can return your code and deliver a certificate.", es: "Deje el correo en blanco para inscribirse, o escriba una dirección válida para recuperar su código y recibir el certificado.", fr: "Laissez l’adresse e-mail vide pour vous inscrire, ou saisissez une adresse valide afin de récupérer votre code et de recevoir le certificat." })
+            : bi({ en: "Select your country. Choose Other if you prefer not to say.", es: "Seleccione su país. Elija Otro si prefiere no decirlo.", fr: "Choisissez votre pays. Choisissez Autre si vous préférez ne pas le dire." }));
       }
-      var invalid = el(!name ? "regName" : "regEmail");
+      var invalid = el(!name ? "regName" : (!emailOk ? "regEmail" : (countryEl && countryEl.id)));
       if (invalid) { invalid.focus(); invalid.setAttribute("aria-invalid", "true"); }
       return false;
     }
@@ -1202,4 +1815,10 @@
   }
   define("saveRegistration", readReg);
   define("saveReg", readReg);
+  // Initialize compatibility maps before boot, including when this script is
+  // deferred and readyState is already interactive. Wait for later deferred
+  // page dependencies too, as the original DOMContentLoaded startup did.
+  if (document.readyState === 'loading' || (document.readyState === 'interactive' && document.currentScript && document.currentScript.defer))
+    document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();

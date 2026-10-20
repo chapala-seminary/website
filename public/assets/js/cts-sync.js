@@ -78,7 +78,12 @@
     "romans":               { flag: function (n) { return "cts_romans_unit" + n + "_passed"; },  value: "true" },
     "re":                   { flag: function (n) { return "re_unit" + n + "_passed"; },          value: "1" },
     "cs":                   { state: "cts_cs_state" },                 // {n: {passed: true}}
-    "genesis":              { completion: "genesis" }                  // cts_genesis_uN_completion[_track]
+    "genesis":              { completion: "genesis" },                 // cts_genesis_uN_completion[_track]
+    // the single-page courses: one page, a state map per unit ({n: {passed: true}}); Ethics has
+    // a page per unit and writes cts_ethics_progress like the unit courses
+    "counseling":           { state: "cts_drakeford_state" },
+    "storytel":             { state: "cts_storytel_state" },
+    "wisespeak":            { state: "cts_wisespeak_state" }
   };
   var LEGACY_SLUG = {};                 // old slug -> engine slug
   Object.keys(LEGACY).forEach(function (c) { if (LEGACY[c].slug) LEGACY_SLUG[LEGACY[c].slug] = c; });
@@ -203,12 +208,6 @@
       if (typeof date === 'string' && !isNaN(Date.parse(date))) dates[slug] = date;
     });
     set('cts_required_from', JSON.stringify(dates));
-    var notice = document.getElementById('cts-master-requirements');
-    if (Object.keys(dates).length) {
-      if (!notice) { notice = document.createElement('aside'); notice.id = 'cts-master-requirements'; notice.className = 'card'; document.body.prepend(notice); }
-      var words = { en: 'M.Div. and Th.M.: complete the course units, the textbook test and the separate required-reading test. Each test needs 18 correct answers out of 20. Valid master’s completions recorded before activation remain valid. Certificate and Associate students do not need either test. Honors reading is optional and does not replace the tests.', es: 'M.Div. y Th.M.: complete las unidades, el examen del libro y el examen separado de lecturas requeridas. Cada examen exige 18 respuestas correctas de 20. Las finalizaciones de maestría válidas registradas antes de la activación siguen siendo válidas. Certificado y Asociado no necesitan estos exámenes. La lectura para honores es opcional y no sustituye los exámenes.', fr: 'M.Div. et Th.M.\u00a0: terminez les unités du cours, l’examen du manuel et l’examen distinct des lectures obligatoires. Chaque examen exige 18 bonnes réponses sur 20. Les validations de niveau master enregistrées avant l’activation restent acquises. Les parcours Certificat et diplôme associé n’exigent pas ces examens. La lecture pour la mention est facultative et ne remplace pas les examens.' };
-      notice.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
-    } else if (notice) notice.remove();
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
   }
   function apply(state) {
@@ -220,9 +219,16 @@
     // The server's copy fills gaps; it does not overwrite what this browser
     // has, because this browser is where the student is typing right now.
     ['name', 'email', 'country', 'track', 'goal', 'heard'].forEach(function (f) {
-      if (!local[f] && state.student[f]) local[f] = state.student[f];
+      if ((f === 'goal' ? local[f] == null : !local[f]) && state.student[f]) local[f] = state.student[f];
     });
+    // Confirmation is recorded only by the email challenge. Copy it when the
+    // server has it. A payload that omits it must not wipe a local flag.
+    if (state.student.email_verified_at) local.email_verified_at = state.student.email_verified_at;
     set('cts_student', JSON.stringify(local));
+    if (local.email_verified_at) {
+      var confirmed = document.getElementById('cts-email-confirm');
+      if (confirmed) confirmed.remove();
+    }
     if (!get('cts_track') && state.student.track) set('cts_track', state.student.track);
 
     var done = parse(get('cts_done_codes'), []);
@@ -333,10 +339,12 @@
   }
 
   var lastDigest = null;
-  var inFlight = false;
+  var inFlight = null;
 
   function syncOnce(force) {
-    if (inFlight || !available() || optedOut()) return Promise.resolve(null);
+    // A track change must wait for an older snapshot, then send the new one.
+    if (inFlight) return inFlight.then(function () { return syncOnce(force); });
+    if (!available() || optedOut()) return Promise.resolve(null);
     var snap = snapshot();
     // Nothing to sync until the student has registered in this browser.
     if (!snap.student || !snap.student.name) return Promise.resolve(null);
@@ -359,12 +367,12 @@
   }
 
   function push(snap, d) {
-    if (inFlight) return Promise.resolve(null);
+    if (inFlight) return inFlight.then(function () { return syncOnce(true); });
     // paused: wait for the student's choice rather than asking again every poll
     if (paused(snap)) { showExisting(); return Promise.resolve(null); }
-    inFlight = true;
     var code = get(CODE_KEY);
     var separate = get(SEPARATE_KEY) === who(snap.student);
+    var fresh = false;
 
     var start = code
       ? Promise.resolve(code)
@@ -385,24 +393,29 @@
       }).then(function (r) {
         if (!r || !r.code) return null;
         set(CODE_KEY, r.code);
+        fresh = true;
         try { localStorage.removeItem(EXISTING_KEY); localStorage.removeItem(SEPARATE_KEY); } catch (e) {}
         return r.code;
       });
 
-    return start.then(function (c) {
+    inFlight = start.then(function (c) {
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
-                             textbooks: snap.textbooks, lang: snap.lang });
-    }).then(function (state) {
-      if (state) {
-        apply(state); lastDigest = digest(snapshot());
+                             textbooks: snap.textbooks, lang: snap.lang })
+        .then(function (state) { return { state: state, code: c }; });
+    }).then(function (packed) {
+      if (!packed) return null;
+      if (packed.state) {
+        apply(packed.state); lastDigest = digest(snapshot());
         var problem = document.getElementById('cts-registration-problem');
         if (problem) problem.remove();
       }
-      return state;
+      try { offerEmail(packed.code, snap, packed.state, fresh); } catch (e) {}
+      return packed.state;
     }).catch(function () { showRegistrationProblem(snap.student); return null; })
-      .then(function (r) { inFlight = false; return r; });
+      .then(function (r) { inFlight = null; return r; });
+    return inFlight;
   }
 
   function showRegistrationProblem(student) {
@@ -410,31 +423,226 @@
     var note = document.createElement('section');
     note.id = 'cts-registration-problem'; note.className = 'card';
     note.setAttribute('role', 'alert');
-    var missing = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email || '');
-    var words = missing
-      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse e-mail valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
+    // A blank email is a valid enrollment. This notice is for a failed save,
+    // or for an address that was typed but is not usable.
+    var malformed = !!(student && student.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email);
+    var words = malformed
+      ? { en: 'That email address is not valid. Correct it, or clear it and enroll without one. Your work in this browser is still saved.', es: 'Ese correo no es válido. Corríjalo, o bórrelo e inscríbase sin él. Su trabajo en este navegador sigue guardado.', fr: 'Cette adresse e-mail n’est pas valide. Corrigez-la, ou effacez-la et inscrivez-vous sans elle. Votre travail dans ce navigateur reste enregistré.' }
       : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
     var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     note.innerHTML = '<p>' + text + '</p>';
-    if (missing) {
+    if (malformed) {
       var input = document.createElement('input');
-      input.type = 'email'; input.autocomplete = 'email'; input.required = true;
+      input.type = 'email'; input.autocomplete = 'email'; input.value = student.email;
       input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
       note.appendChild(input);
     }
     var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
-    var labels = { en: missing ? 'Save email and retry' : 'Try again', es: missing ? 'Guardar correo y reintentar' : 'Reintentar', fr: missing ? 'Enregistrer et réessayer' : 'Réessayer' };
+    var labels = { en: malformed ? 'Save and try again' : 'Try again', es: malformed ? 'Guardar y reintentar' : 'Reintentar', fr: malformed ? 'Enregistrer et réessayer' : 'Réessayer' };
     retry.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(labels) : labels.en;
     retry.addEventListener('click', function () {
       var input = note.querySelector('input');
       if (input) {
-        if (!input.reportValidity()) return;
-        var st = parse(get('cts_student'), {}); st.email = input.value.trim();
+        var value = input.value.trim();
+        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { input.reportValidity(); return; }
+        var st = parse(get('cts_student'), {}); st.email = value;
         set('cts_student', JSON.stringify(st));
       }
       note.remove(); syncOnce(true);
     });
     note.appendChild(retry); document.body.prepend(note);
+  }
+
+  /* Confirming an email returns a lost code, sends reminders, and unlocks a
+     certificate. It does not gate study. The note is sent once, when the code
+     is first issued. A student who already has a code sees the same note and
+     chooses when to send it, so opening a lesson does not mail everyone who
+     has not confirmed. A failed send leaves the lesson usable. */
+  var OFFER_KEY = 'cts_email_offer';
+  function sessionGet(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function sessionSet(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  function words(set) {
+    var lang = window.CTSLanguage && window.CTSLanguage.lang;
+    return (lang && set[lang]) || set.en;
+  }
+  function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || ''); }
+  function postJson(path, payload) {
+    return fetch(API + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'omit',
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (body) { return { ok: r.ok, status: r.status, body: body }; });
+    }).catch(function () { return { ok: false, status: 0, body: {} }; });
+  }
+  function offerEmail(code, snap, state, fresh) {
+    if (!code || typeof document === 'undefined' || !document.body) return;
+    var email = (snap.student && snap.student.email) || '';
+    if (!validEmail(email)) { if (!email) encourageEmail(code); return; }
+    var verified = (state && state.student && state.student.email_verified_at) || (parse(get('cts_student'), {}) || {}).email_verified_at;
+    var existing = document.getElementById('cts-email-confirm');
+    if (verified) { if (existing) existing.remove(); return; }
+    if (sessionGet('cts_email_dismiss') === code) return;
+    var box = existing || buildEmailBanner(code);
+    if (fresh && get(OFFER_KEY) !== code) {
+      set(OFFER_KEY, code);
+      sendConfirmation(code, email, box);
+    }
+  }
+  /* A student with no address is already enrolled. The note asks for one so a
+     lost code can be returned and a certificate delivered. Dismissing it
+     leaves study alone. */
+  function encourageEmail(code) {
+    if (sessionGet('cts_email_dismiss') === code) return;
+    if (document.getElementById('cts-email-confirm') || document.getElementById('cts-email-optional')) return;
+    var note = document.createElement('section');
+    note.id = 'cts-email-optional';
+    note.setAttribute('role', 'status');
+    note.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:40;margin:0 auto;max-width:720px;padding:12px 14px;background:#fbf6ea;color:#2a241d;border:2px solid #b08324;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);font:16px/1.45 Georgia,serif';
+    var p = document.createElement('p');
+    p.style.margin = '0 0 8px';
+    p.textContent = words({
+      en: 'Email is optional. Add one so we can return your student code, send reminders, and deliver a certificate. You can enroll and keep studying without it.',
+      es: 'El correo es opcional. Añádalo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede inscribirse y seguir estudiando sin él.',
+      fr: 'L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle.'
+    });
+    var status = document.createElement('p');
+    status.className = 'cts-email-status';
+    status.style.margin = '0 0 8px';
+    var input = document.createElement('input');
+    input.type = 'email'; input.autocomplete = 'email'; input.maxLength = 160;
+    input.style.cssText = 'width:16em;max-width:100%;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
+    input.setAttribute('aria-label', words({ en: 'Email', es: 'Correo electrónico', fr: 'Adresse e-mail' }));
+    function button(label, primary) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = label;
+      b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
+      return b;
+    }
+    var save = button(words({ en: 'Save email', es: 'Guardar correo', fr: 'Enregistrer l’e-mail' }), true);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    save.addEventListener('click', function () {
+      var value = input.value.trim();
+      if (!validEmail(value)) {
+        status.textContent = words({
+          en: 'Enter a valid email address, or choose Keep studying.',
+          es: 'Escriba un correo válido, o elija Seguir estudiando.',
+          fr: 'Saisissez une adresse e-mail valide, ou choisissez Continuer à étudier.'
+        });
+        return;
+      }
+      var local = parse(get('cts_student'), {}) || {};
+      local.email = value;
+      set('cts_student', JSON.stringify(local));
+      note.remove();
+      syncOnce(true);
+    });
+    keep.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
+    note.appendChild(p); note.appendChild(status); note.appendChild(input); note.appendChild(save); note.appendChild(keep);
+    document.body.appendChild(note);
+  }
+  function buildEmailBanner(code) {
+    var note = document.createElement('section');
+    note.id = 'cts-email-confirm';
+    note.setAttribute('role', 'status');
+    note.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:40;margin:0 auto;max-width:720px;padding:12px 14px;background:#fbf6ea;color:#2a241d;border:2px solid #b08324;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);font:16px/1.45 Georgia,serif';
+    var p = document.createElement('p');
+    p.style.margin = '0 0 8px';
+    p.textContent = words({
+      en: 'Confirm your email so we can return your student code, send reminders, and deliver a certificate. You can keep studying if the message is slow to arrive.',
+      es: 'Confirme su correo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede seguir estudiando si el mensaje tarda en llegar.',
+      fr: 'Confirmez votre adresse e-mail afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez continuer à étudier si le message tarde à arriver.'
+    });
+    var status = document.createElement('p');
+    status.className = 'cts-email-status';
+    status.style.margin = '0 0 8px';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'numeric';
+    input.autocomplete = 'one-time-code';
+    input.maxLength = 6;
+    input.style.cssText = 'width:8em;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
+    input.setAttribute('aria-label', words({ en: 'Six-digit code', es: 'Código de seis dígitos', fr: 'Code à six chiffres' }));
+    function button(label, primary) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
+      return b;
+    }
+    var sendBtn = button(words({ en: 'Send confirmation', es: 'Enviar confirmación', fr: 'Envoyer la confirmation' }), true);
+    var confirmBtn = button(words({ en: 'Enter code', es: 'Introducir código', fr: 'Saisir le code' }), false);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    var link = document.createElement('a');
+    link.href = '/cts-confirm-email.html';
+    link.style.color = '#6d2233';
+    link.textContent = words({ en: 'Open the confirmation page', es: 'Abrir la página de confirmación', fr: 'Ouvrir la page de confirmation' });
+    sendBtn.addEventListener('click', function () {
+      var local = parse(get('cts_student'), {}) || {};
+      sendConfirmation(code, local.email || '', note);
+    });
+    confirmBtn.addEventListener('click', function () {
+      var typed = String(input.value || '').replace(/\D/g, '');
+      if (typed.length !== 6) {
+        status.textContent = words({
+          en: 'Enter the six-digit code from the email.',
+          es: 'Escriba el código de seis dígitos del correo.',
+          fr: 'Saisissez le code à six chiffres reçu par e-mail.'
+        });
+        return;
+      }
+      postJson('/email/confirm', { code: code, verification: typed }).then(function (r) {
+        if (r.ok && r.body && r.body.verified) {
+          var local = parse(get('cts_student'), {}) || {};
+          local.email_verified_at = new Date().toISOString();
+          if (r.body.email) local.email = r.body.email;
+          set('cts_student', JSON.stringify(local));
+          note.remove();
+          return;
+        }
+        status.textContent = words({
+          en: 'That code was not accepted. You can ask for another, or keep studying and try later.',
+          es: 'Ese código no fue aceptado. Puede pedir otro, o seguir estudiando e intentarlo más tarde.',
+          fr: 'Ce code n’a pas été accepté. Vous pouvez en demander un autre, ou continuer à étudier et réessayer plus tard.'
+        });
+      });
+    });
+    keep.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
+    note.appendChild(p);
+    note.appendChild(status);
+    note.appendChild(input);
+    note.appendChild(sendBtn);
+    note.appendChild(confirmBtn);
+    note.appendChild(keep);
+    note.appendChild(link);
+    document.body.appendChild(note);
+    return note;
+  }
+  function sendConfirmation(code, email, note) {
+    var status = note.querySelector('.cts-email-status');
+    if (!validEmail(email)) {
+      status.textContent = words({
+        en: 'Add a valid email address on your registration, then send the confirmation. Your study in this browser is saved.',
+        es: 'Añada un correo válido en su registro y luego envíe la confirmación. Su estudio en este navegador está guardado.',
+        fr: 'Ajoutez une adresse e-mail valide à votre inscription, puis envoyez la confirmation. Votre étude dans ce navigateur est enregistrée.'
+      });
+      return Promise.resolve();
+    }
+    status.textContent = words({ en: 'Sending the confirmation…', es: 'Enviando la confirmación…', fr: 'Envoi de la confirmation…' });
+    return postJson('/email/start', { code: code, email: email, lang: get('cts_lang') }).then(function (r) {
+      status.textContent = r.ok
+        ? words({
+          en: 'We sent a six-digit code. Enter it here. Check the spam folder if it is not in your inbox. You can keep studying while you wait.',
+          es: 'Enviamos un código de seis dígitos. Escríbalo aquí. Revise la carpeta de correo no deseado si no está en su bandeja. Puede seguir estudiando mientras espera.',
+          fr: 'Nous avons envoyé un code à six chiffres. Saisissez-le ici. Vérifiez le dossier des indésirables s’il n’est pas dans votre boîte. Vous pouvez continuer à étudier en attendant.'
+        })
+        : words({
+          en: 'We could not send the confirmation just now. You can keep studying and confirm later from the confirmation page.',
+          es: 'No pudimos enviar la confirmación en este momento. Puede seguir estudiando y confirmar más tarde en la página de confirmación.',
+          fr: 'Nous n’avons pas pu envoyer la confirmation pour le moment. Vous pouvez continuer à étudier et confirmer plus tard sur la page de confirmation.'
+        });
+    });
   }
 
   /* Restore a record onto this device from a student code. This is the whole

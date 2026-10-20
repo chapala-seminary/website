@@ -22,7 +22,7 @@ let checks = 0;
 const fails = [];
 const ok = (c, label, detail) => { checks++; if (!c) fails.push(label + (detail ? `\n        ${detail}` : '')); };
 const jpost = async (p, b) => {
-  const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) });
+  const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b) });
   return { status: r.status, body: await r.json().catch(() => null) };
 };
 const tag = () => crypto.randomBytes(4).toString('hex');
@@ -46,10 +46,13 @@ ok(household.status === 201, 'the same email with a different name registers: tw
 const separate = await jpost('/api/register', { name: `Ana ${t}`, email, track: 'cert', separate: true });
 ok(separate.status === 201 && separate.body?.code !== first.body?.code, '"not me" registers separately');
 
-for (const blank of ['', '   ', '—'])
-  for (let i = 0; i < 2; i++)
-    ok((await jpost('/api/register', { name: `Nadie ${t}`, email: blank, track: 'cert' })).status === 400,
-      `invalid email ("${blank}") is rejected`);
+for (const blank of ['', '   ']) {
+  const firstBlank = await jpost('/api/register', { name: `Nadie ${t} ${JSON.stringify(blank)}`, email: blank, track: 'cert' });
+  const secondBlank = await jpost('/api/register', { name: `Nadie ${t} ${JSON.stringify(blank)}`, email: blank, track: 'cert' });
+  ok(firstBlank.status === 201 && firstBlank.body?.student?.email == null, `a blank email ("${blank}") enrolls`);
+  ok(secondBlank.status === 201 && secondBlank.body?.code !== firstBlank.body?.code, `the same name with no email ("${blank}") is not treated as a duplicate`);
+}
+ok((await jpost('/api/register', { name: `Nadie ${t}`, email: '—', track: 'cert' })).status === 400, 'a dash is not an email address');
 
 // Email me my code
 ok((await jpost('/api/code/email', { email: 'not-an-address' })).status === 400, 'a malformed address is refused');
@@ -70,7 +73,7 @@ ok(fourth.status === 429, 'a fourth request for one address in a day is refused'
 /* ---- the student's way through, in a browser ------------------------------ */
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function frontPage() {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));

@@ -11,8 +11,10 @@ assert.equal(root.querySelectorAll('[data-cts-fallback]').length, 0);
 assert.equal(root.querySelectorAll('.cts-translation-pending').length, 0);
 assert.ok(root.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
 assert.equal(root.querySelectorAll('#catalog a.course').length, 45);
-assert.equal(root.querySelectorAll('#textbooks a.textbook').length, 11);
-assert.ok(root.querySelector('#catalog').text.includes('traduction française provisoire, en cours de relecture'));
+assert.equal(root.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 45);
+assert.equal(root.querySelectorAll('#required-readings a.textbook.reading').length, 45);
+assert.equal(root.querySelectorAll('#textbooks a.tb-test-link').length, 90);
+assert.ok(root.querySelector('#catalog').text.includes('en anglais, en espagnol et en français'));
 // Every course has a French draft, so every card carries the badge.
 assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 45);
 assert.ok(root.querySelector('#programs')?.text.includes('15 cours') || root.text.includes('Niveau master · 15 cours'));
@@ -48,7 +50,7 @@ try {
     await page.close();
   }
   for (const width of [1280, 390]) {
-    const context = await browser.newContext({viewport:{width,height:900},locale:'fr-FR'});
+    const context = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' }, viewport:{width,height:900},locale:'fr-FR'});
     const page = await context.newPage();
     const errors=[]; page.on('pageerror', e=>errors.push(e.message));
     // Isolate presentation checks from database state and external resources.
@@ -75,10 +77,11 @@ try {
     assert.equal(dialog, 'Veuillez saisir votre nom');
     await page.locator('#reg-name').fill('French landing fixture');
     await page.locator('#reg-save').click();
-    assert.equal(dialog, 'Veuillez saisir une adresse e-mail valide pour vous inscrire');
-    await page.locator('#reg-email').fill('french-landing-fixture@example.invalid');
-    await page.locator('#reg-save').click();
     assert.equal(dialog, 'Veuillez sélectionner votre pays');
+    await page.locator('#reg-email').fill('not-an-address');
+    await page.locator('#reg-save').click();
+    assert.equal(dialog, 'Laissez l’e-mail vide pour vous inscrire, ou saisissez une adresse valide afin de récupérer votre code et de recevoir le certificat.');
+    await page.locator('#reg-email').fill('');
     await page.locator('#reg-country').selectOption('FR');
     await page.locator('#reg-track').selectOption('mdiv');
     await page.locator('#reg-save').click();
@@ -103,5 +106,5 @@ try {
     assert.deepEqual(errors,[]);
     await context.close();
   }
-  console.log('French landing: complete copy, 45 courses, 11 readings, metadata, mobile layout, source toggle and registration states — PASS');
+  console.log('French landing: complete copy, 45 courses, 45 textbooks and 45 reading sets, metadata, mobile layout, source toggle and registration states — PASS');
 } finally { await browser.close(); }

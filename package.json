@@ -7,10 +7,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "verify:rubrics": "node tools/verify-rubrics.mjs",
     "test": "test/run-tests.sh",
-    "deploy": "node tools/verify-worker-config.mjs --deploy && node tools/gen-worker-catalog.mjs --check && npm run build && node tools/prepare-production-migrations.mjs && node tools/prepare-study-plans.mjs && wrangler deploy",
+    "deploy": "node tools/verify-worker-config.mjs --deploy --mode live && node tools/gen-worker-catalog.mjs --check && CTS_GRADING_MODE=live npm run build && node tools/verify-no-keys.mjs dist && node tools/prepare-production-migrations.mjs && node tools/prepare-study-plans.mjs && node tools/sync-grading-keys.mjs --env production && wrangler deploy",
     "deploy:beta": "npm run deploy:beta:publish && node tools/check-beta-activation.mjs",
-    "deploy:beta:publish": "node tools/verify-beta-branch.mjs && node tools/verify-worker-config.mjs --deploy --env beta && node tools/gen-worker-catalog.mjs --check && node tools/prepare-beta-activation.mjs && npm run build && wrangler deploy --env beta"
+    "deploy:beta:publish": "node tools/verify-beta-branch.mjs && node tools/verify-worker-config.mjs --deploy --env beta --mode live && node tools/gen-worker-catalog.mjs --check && node tools/prepare-beta-activation.mjs && CTS_GRADING_MODE=live npm run build && node tools/verify-no-keys.mjs dist && node tools/sync-grading-keys.mjs --env beta --apply-migration && wrangler deploy --env beta",
+    "build:shadow": "CTS_GRADING_MODE=shadow astro build --outDir dist-shadow"
   },
   "dependencies": {
     "astro": "^7.3.3",

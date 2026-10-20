@@ -1,10 +1,55 @@
 # Chapala Theological Seminary — robots.txt
-# Free bilingual seminary · ChapalaSeminary.org
+# Free bilingual seminary · https://chapalaseminary.org/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
 
 User-agent: *
 Allow: /
-# The editing interface. Nothing here is content, and a signed-out visitor sees
-# only a sign-in screen, but there is no reason for it to be in an index.
+
+# Editing interface.
 Disallow: /admin/
+Disallow: /admin
+
+# Student record, progress, save-restore, and certificate-generation pages.
+# These stay on the site for students; they must not be indexed.
+Disallow: /verify
+Disallow: /verify/
+Disallow: /es/verify
+Disallow: /es/verify/
+Disallow: /fr/verify
+Disallow: /fr/verify/
+Disallow: /staff
+Disallow: /staff/
+Disallow: /cts-backup.html
+Disallow: /es/cts-backup.html
+Disallow: /fr/cts-backup.html
+Disallow: /cts-confirm-email.html
+Disallow: /es/cts-confirm-email.html
+Disallow: /fr/cts-confirm-email.html
+Disallow: /*Certificate.html
+Disallow: /es/*Certificate.html
+Disallow: /fr/*Certificate.html
 
 Sitemap: https://chapalaseminary.org/sitemap.xml

@@ -16,7 +16,7 @@ const b = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 // Acts: a course whose certificate page reads the engine's own keys, so the
 // certificate can be opened directly without first visiting a unit page.
 const fails=[]; const ok=(c,m)=>{ console.log((c?'ok   ':'FAIL ')+m); if(!c) fails.push(m); };
-async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); const posts=[]; 
+async function ctx(){ const c=await b.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }); const p=await c.newPage(); const posts=[]; 
   await p.route('https://script.google.com/**', r=>{ posts.push(r.request().postData()); r.fulfill({status:200,body:''}); });
   return {c,p,posts}; }
 // 1. certificate page with all units passed but nothing recorded: stays read-only

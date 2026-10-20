@@ -1,4 +1,5 @@
 import { loadThmStudyPlan } from './study-plans.js';
+import { canonicalCountry } from '../src/lib/countries.mjs';
 /* Chapala Theological Seminary — student records API.
  *
  * A plain fetch handler with no framework and no dependencies, so it runs
@@ -23,14 +24,24 @@ import { loadThmStudyPlan } from './study-plans.js';
  */
 
 import { activationEnvironment, activatedTests } from './test-activation.js';
+import { testContext } from './test-context.js';
+import { gradingRoute } from './grading/routes.js';
+import { isLive, legacySyncOpen, legacyCohortMember } from './grading/mode.js';
+import { completeCourseIfDone, completeSingleIfDone, loadStudent } from './grading/attempts.js';
+import { SINGLES } from './grading/singles.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
-import { awardTitle } from './award-names.js';
+import { awardTitle, officialTitle } from './award-names.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
+// Older pages store some tracks under short names (the unit-page sign-up saves
+// Associate as "ad"). Accept them and record the full name, so those students
+// still reach the seminary record instead of being refused.
+const TRACK_ALIAS = { ad: 'associate', assoc: 'associate', mth: 'thm' };
+const trackName = (t) => TRACK_ALIAS[t] || t;
 // The language a student reads in, from the language switch (cts_lang). Anything
 // else is dropped rather than refused: it is a preference, not a record.
 const lang = (v) => (['en', 'es', 'fr'].includes(v) ? v : null);
@@ -109,23 +120,6 @@ async function body(request) {
 }
 
 /* ---- reading and merging a student's state ------------------------------ */
-
-/* The activation date of a required-reading test comes from worker/catalog.json
- * (worker/awards.js testCounts). The test suite needs to see the rule both
- * before and after a date, so its configuration -- and only its: EMAIL_MODE
- * "log" with no Resend key, the same condition that lets the suite see the
- * notices it would send -- may set TEST_REQUIRED_FROM, a JSON map
- * { slug: ISO time }. tools/verify-worker-config.mjs refuses the variable in
- * the deployed configuration. */
-function testRequiredFrom(env) {
-  if (env.EMAIL_MODE !== 'log' || env.RESEND_API_KEY || !env.TEST_REQUIRED_FROM) return undefined;
-  try { const m = JSON.parse(env.TEST_REQUIRED_FROM); return m && typeof m === 'object' ? m : undefined; } catch { return undefined; }
-}
-/* What testCounts needs: the completions the record holds now, with the time
- * and level the server wrote, and the server's clock. */
-function testContext(env, completions) {
-  return { completions: completions || [], now: now(), requiredFrom: { ...activatedTests(env), ...testRequiredFrom(env) } };
-}
 
 async function loadState(env, id) {
   const student = await env.DB.prepare(
@@ -240,20 +234,24 @@ function completionRows(id, raw, tracks, studentTrack) {
 async function register(request, env) {
   const b = await body(request);
   const name = str(b.name, MAX.name, { required: true, field: 'name' });
-  const track = (str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase();
+  const track = trackName((str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase());
   if (!TRACKS.has(track)) throw new HttpError(400, 'track must be one of: ' + [...TRACKS].join(', '));
 
   /* Registering twice (Wayne, 5 Oct 2026: six students had two records).
+     Email is optional again (Wayne, 19 Oct 2026): a student with no address
+     enrolls and studies. An address that is present must look like one.
      A live record with the same email AND the same name is almost always the
      same person on a new browser, so no second record is made: the page
      offers to email that address its code instead (/api/code/email), and
      never hands the code back here -- the email is unverified, and a code
      given to whoever typed an address would give away that student's record.
      Same email, different name registers as before: two people can share an
-     address. `separate: true` is the student saying "this is not me". */
-  const email = str(b.email, MAX.email, { required: true, field: 'email' });
-  if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
-  if (b.separate !== true && email && EMAIL_RE.test(email.toLowerCase())) {
+     address. No email never matches another record. `separate: true` is the
+     student saying "this is not me". Existing codes and addresses are left
+     as they are; a later blank sync does not erase a stored address. */
+  const email = str(b.email, MAX.email, { field: 'email' });
+  if (email && !EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
+  if (b.separate !== true && email) {
     const same = await env.DB.prepare(
       `SELECT 1 FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? AND lower(trim(name)) = ? LIMIT 1`)
       .bind(email.toLowerCase(), name.toLowerCase()).first();
@@ -268,7 +266,7 @@ async function register(request, env) {
     const res = await env.DB.prepare(
       `INSERT INTO students (id, name, email, country, track, goal, heard, lang, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
-      .bind(id, name, email, str(b.country, MAX.country, { field: 'country' }),
+      .bind(id, name, email, canonicalCountry(str(b.country, MAX.country, { field: 'country' })),
         track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
     if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
   }
@@ -281,7 +279,7 @@ async function sync(request, env) {
   if (!id) throw new HttpError(400, 'a student code is required');
 
   const exists = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
+    'SELECT id, name, email, email_verified_at, country, track, goal, lang, created_at FROM students WHERE id = ?').bind(id).first();
   if (!exists) return fail(404, 'no record for that student code');
 
   const statements = [];
@@ -297,28 +295,59 @@ async function sync(request, env) {
     // changes it, so a stale device cannot swap it for an address nobody
     // confirmed.
     const name = str(s.name, MAX.name, { field: 'name' });
-    const track = (str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase() || null;
+    const track = trackName((str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase()) || null;
     if (track && !TRACKS.has(track)) throw new HttpError(400, 'unknown track: ' + track);
     statements.push(env.DB.prepare(
       `UPDATE students SET name = COALESCE(?, name),
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
-         goal = COALESCE(?, goal), heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
-      .bind(name, str(s.email, MAX.email, { field: 'email' }), str(s.country, MAX.country, { field: 'country' }),
-        track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
+         goal = CASE WHEN ? THEN ? ELSE goal END, heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
+      .bind(name, str(s.email, MAX.email, { field: 'email' }), canonicalCountry(str(s.country, MAX.country, { field: 'country' })),
+        track, Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
   // Browsers resend their full record. D1 counts an UPDATE as a write even
   // when the value stays the same, so conflict handlers only update a pass
   // whose date is earlier, or a completion whose earned level rises.
-  for (const row of progressRows(id, b.progress))
+  /* GRADING_MODE=live (docs/ai-grading.md section 7): the server is the grader of
+     record. A browser's report of what it passed is not credit, so nothing
+     below is written from it. The student's details above are still kept, and
+     the reply carries the server's own records. In shadow mode, and in a Worker
+     with no GRADING_MODE, this is exactly what it always was.
+     During the cutover window (LEGACY_SYNC_UNTIL, worker/grading/mode.js) a
+     live Worker still takes a pre-switch record's units and textbook passes
+     from the browser, as legacy credit -- but not one it has already sat a
+     live test for, so the window cannot undo a live result -- and works out
+     any completion from them itself; it takes no completion or level from
+     the browser's lists. */
+  const live = isLive(env, request);
+  const legacy = live && legacySyncOpen(env, request) && legacyCohortMember(env, request, exists.created_at);
+  const imports = !live || legacy;
+  let progressNow = imports ? progressRows(id, b.progress) : [];
+  let textbookClaims = imports ? textbookRows(id, b.textbooks) : [];
+  if (legacy && (progressNow.length || textbookClaims.length)) {
+    const sat = (await env.DB.prepare(
+      `SELECT a.scope, k.data_json FROM attempts a LEFT JOIN grading_keys k ON k.qid = a.scope || '/meta/0'
+       WHERE a.student_id = ? AND a.shadow = 0`).bind(id).all()).results ?? [];
+    const scopes = new Set(sat.map((r) => r.scope));
+    const singleUnits = new Set();
+    for (const r of sat) {
+      try { const m = r.data_json ? JSON.parse(r.data_json) : null; if (m && m.course && m.unit != null) singleUnits.add(`${m.course}\u0000${Number(m.unit)}`); } catch { /* not a single-page course */ }
+    }
+    progressNow = progressNow.filter(([, course, unit]) => {
+      const pages = catalog.courses[course]?.pages;
+      return !(pages && scopes.has(`u:${pages}/${unit}`)) && !singleUnits.has(`${course}\u0000${unit}`);
+    });
+    textbookClaims = textbookClaims.filter(([, slug]) => !scopes.has(`tb:${slug}`) && !scopes.has(`rd:${slug}`));
+  }
+  for (const row of progressNow)
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
        WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
-  const textbookRowsNow = textbookRows(id, b.textbooks);
+  const textbookRowsNow = textbookClaims;
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
@@ -331,7 +360,7 @@ async function sync(request, env) {
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  let completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  let completions = imports && !legacy ? completionRows(id, b.doneCodes, b.completionTracks, trackNow) : [];
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
      2026). The browser reports its completions on every sync, so the course
@@ -369,6 +398,26 @@ async function sync(request, env) {
           OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
+
+  /* In the cutover window the server, not the browser, decides what the
+     imported units complete: the same check a live pass runs, at the
+     record's own level, with its textbook and reading requirements. Legacy
+     units count towards a first completion only (earnedLevel). */
+  if (legacy && (progressNow.length || textbookRowsNow.length)) {
+    const learner = await loadStudent(env, id);
+    const level = studentLevel(learner.track, learner.goal);
+    const courses = new Set(progressNow.map(([, course]) => course));
+    for (const slug of courses) {
+      const single = Object.keys(SINGLES).find((code) => SINGLES[code].course === slug);
+      if (single) await completeSingleIfDone(env, learner, single, level);
+      else if (catalog.courses[slug]) await completeCourseIfDone(env, learner, slug, level);
+    }
+    for (const [, testSlug] of textbookRowsNow) {
+      const code = catalog.textbooks[testSlug]?.code;
+      const slug = code && Object.keys(catalog.courses).find((s) => catalog.courses[s].code === code);
+      if (slug && !courses.has(slug)) await completeCourseIfDone(env, learner, slug, level);
+    }
+  }
 
   // The notice to the seminary, from the request that recorded the completion
   // (Wayne's audit item 5). One per course, kept in `notifications`; a failed
@@ -409,7 +458,10 @@ async function issueCertificate(request, env) {
   const level = (str(b.level, 24, { required: true, field: 'level' }) || '').toLowerCase();
   if (!LEVELS.has(level)) throw new HttpError(400, 'level must be one of: ' + [...LEVELS].join(', '));
   let course = str(b.course, MAX.course, { required: level === 'course', field: 'course' });
-  const title = str(b.title, MAX.title, { required: true, field: 'title' });
+  // The page may still send a title (older pages do); it is checked for size
+  // and then ignored. The title of record is the server's (officialTitle,
+  // set below once the course is resolved).
+  str(b.title, MAX.title, { field: 'title' });
   // The page the student is on, for the link in their email. A filename only,
   // and only one this site serves; anything else is dropped, not echoed.
   const page = /^[A-Za-z0-9_]+\.html$/.test(String(b.page || '')) ? String(b.page) : null;
@@ -419,35 +471,49 @@ async function issueCertificate(request, env) {
   // for a course certificate, the course counts and required courses for a
   // degree (worker/awards.js). A fabricated certificate therefore needs a
   // fabricated complete record first.
+  // A course certificate names the level the course was EARNED at: the
+  // completion the record holds for it (written by the server, and only ever
+  // raised by work done at the higher level), not the student's current
+  // track. A Certificate-level course stays a Certificate-level award after a
+  // move to the Th.M. (ChatGPT's review of #125, 19 Oct 2026). A completion
+  // with no level (before migration 0003) counts at the student's own level,
+  // as degree_progress and degreeShortfall already count it. A unit course
+  // with no completion recorded (units reported by a browser-graded build,
+  // which record no level) is judged and named at the student's own level, as
+  // before: that record holds nothing better, and that level's required tests
+  // are enforced (courseShortfall).
+  const own = studentLevel(student.track, student.goal);
+  let awardLevel = own;
   if (level === 'course') {
     const c = resolveCourse(course);
     if (!c) throw new HttpError(400, 'unknown course: ' + course);
     // One stored name per course, so "ots" and "CTSOTS" are the same award.
     course = c.slug || c.code;
+    const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
+    const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+    const completion = done.find((r) => (canonicalCode(r.code) || String(r.code).toUpperCase()) === c.code);
+    if (completion) awardLevel = studentLevel(completion.track || own, completion.track ? null : student.goal);
     if (c.units) {
       const rows = await env.DB.prepare(
         'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
-      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb, testContext(env, done));
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), awardLevel, tb, testContext(env, done));
       if (why) return fail(409, why);
     } else {
       // A single-page course keeps no units; its completion code is the record.
-      const row = await env.DB.prepare(
-        'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
-      if (!row) return fail(409, 'course completion not recorded: ' + c.code);
-      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb, testContext(env, done));
+      if (!completion) return fail(409, 'course completion not recorded: ' + c.code);
+      const why = textbookShortfall(c.code, awardLevel, tb, testContext(env, done));
       if (why) return fail(409, why);
     }
   } else {
     const rows = await env.DB.prepare(
       'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
     const plan = level === 'thm' ? await loadThmStudyPlan(env, id) : null;
-    const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal), plan?.substitutions);
+    const why = degreeShortfall(level, rows.results ?? [], own, plan?.substitutions);
     if (why) return fail(409, why);
   }
+
+  const title = officialTitle(level, course, awardLevel);
+  if (!title) throw new HttpError(400, 'cannot name this award');
 
   // Re-issuing the same award returns the same code rather than a second one,
   // so a student who prints their certificate twice does not end up with two
@@ -679,6 +745,12 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM outreach WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM contact_tokens WHERE student_id = ?').bind(g),
+      // Written answers and everything that hangs on them (docs/ai-grading.md, section 10).
+      env.DB.prepare('DELETE FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g),
+      env.DB.prepare('DELETE FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g),
+      env.DB.prepare('DELETE FROM appeals WHERE student_id = ? OR grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g, g),
+      env.DB.prepare('DELETE FROM answer_grades WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM attempts WHERE student_id = ?').bind(g),
     ]),
   ]);
   return json({ deleted: true });
@@ -861,7 +933,7 @@ async function guarded(request, env, kind, run) {
   return res;
 }
 
-export async function handle(request, env) {
+export async function handle(request, env, ctx) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, '') || '/';
   const method = request.method.toUpperCase();
@@ -932,6 +1004,14 @@ export async function handle(request, env) {
       });
     }
     if (path === '/api/health') return json({ ok: true, requiredFrom: activatedTests(env) });
+
+    // AI grading: attempts, multiple choice, written answers, appeals, the shadow trial.
+    if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'
+        || path === '/api/appeal' || path === '/api/shadow') {
+      const res = await gradingRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
+      if (res) return res;
+      return fail(405, 'method not allowed');
+    }
 
     return fail(404, 'no such endpoint');
   } catch (e) {

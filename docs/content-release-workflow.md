@@ -1,99 +1,73 @@
-# Content release access and enforcement
+# Independent beta work and production promotion
 
-## GitHub safeguards and their limits
+## Daily workflow
 
-Protect both branches: require PRs, one approving review, Code Owner review,
-dismiss stale approvals, resolved review conversations, and no force pushes or
-deletion, including for administrators. Required checks are `CTS build and tests`
-and `CTS release approval`. Main allows merges only by `satoshisound` and
-`ChapalaTheological1`; beta additionally allows `chapalatheological-ai` once it
-has Write access. Only `satoshisound` has a named PR-review bypass. His own same-repository PRs
-are exempt from the faculty/AI approval check, while build/test checks still
-apply. `ChapalaTheological1` and `chapalatheological-ai` have no bypass.
+1. Use the separate `chapalatheological-ai` account with repository Write access.
+   Start from current beta. Push content or code directly to `beta`, or merge a
+   beta PR without human review. No dual-AI agreement links are required.
+2. The beta Action builds, runs the complete suite, deploys to the separate beta
+   Worker/database and verifies the published version and activation policy.
+   Failed builds/tests block publication. Check the exact release stamp and
+   affected journeys on beta; a failed final probe can follow an actual deploy.
+3. When ready, the agent opens `beta` -> `main`. Wayne checks beta and approves
+   the exact current commit using `ChapalaTheological1`, then merges. Robert
+   review is not required, including for technical changes. New commits need
+   fresh tests and Wayne approval. The agent cannot push or merge main.
+4. Main Actions tests again and deploys when production auto-deployment has been
+   enabled and its environment token is installed. Preserve approved activation
+   dates, grading modes and prior student progress.
 
-The governance workflow reads policy from the trusted base branch, never runs
-PR code with its token, checks the entire file list and publishes its status on
-the current PR head and its GitHub's temporary test merge. Review submissions rerun it; after updating evidence or a
-missed review event, comment on the PR or use its manual Run workflow input.
-A new push invalidates review evidence and approvals for the previous commit. After a
-production promotion, synchronize main back into beta through a reviewed PR
-before the next change so strict branch checks remain up to date. For main, it
-also requires the exact beta SHA's successful deployment workflow.
+Robert's `satoshisound` account can approve any PR at its exact current commit,
+including technical changes from feature branches or forks. His own PRs need no
+second reviewer, regardless of source repository. GitHub does not allow formal
+self-approval. Keep his native PR bypass; build/test checks still apply. Wayne and the AI have no production
+review bypass. Have the agent open promotions: GitHub does not allow Wayne to
+approve a PR authored by his own account.
 
-GitHub can check named human approvals, file ownership, tests, and recorded
-review links. It cannot prove that ChatGPT and Claude actually performed the
-reviews or agreed. Wayne checks the linked evidence. This is an operational
-review gate, not isolation from a malicious repository writer: a writer can
-create other Actions workflows/statuses, and org administrators can change
-settings. Keep the agent's account and credentials separate, grant no admin
-rights or bypass, and protect deployment credentials with branch-restricted
-environments. Stronger independent AI identity enforcement would require
-separate authenticated reviewer integrations.
+## Branch settings
 
-## Wayne's agent access and deployment secrets
+Beta allows Robert, Wayne and the Write-enabled AI to push, with no required
+PR reviews or pre-push status checks. Its push workflow performs tests before
+publication. Force pushes/deletion remain disabled. Production allows only
+Robert/Wayne to merge, requires a PR and resolved conversations, and dismisses stale approvals.
+Native approval count is zero: the required release-status check enforces
+Wayne/Robert approval with Robert's own-PR exception. A generic one-approval
+rule creates a misleading self-review blocker and must not be restored. Code Owner approval is not required. The trusted-base
+release checker requires Wayne's exact-commit approval and the current beta's
+successful deployment run; it does not require Robert or AI-review links.
 
-1. Keep `ChapalaTheological1` for Wayne's own reviews and production merges.
-   Do not sign the AI into this administrator account or share its token.
-2. Before granting the agent Write, put fresh deployment tokens in the `beta`
-   and `production` GitHub environments (Settings -> Environments). Their
-   deployment branch policies allow only `beta` and `main`, respectively.
-   Store `CTS_BETA_CLOUDFLARE_API_TOKEN` in beta and
-   `CTS_PRODUCTION_CLOUDFLARE_API_TOKEN` in production. Limit each Cloudflare
-   token to the CTS account and the Workers/routes, account/zone read, D1 and
-   other permissions required by the existing deploy command. Do not reuse a
-   personal multi-account token. The Actions environment supplies credentials;
-   Wayne and the AI never need them in a local session.
-3. The old beta token is currently a repository secret. Rotate it into the
-   branch-restricted beta environment, then remove the repository-level copy.
-   Do this before granting Write: branch restrictions alone do not prevent a
-   writer creating another workflow that reads a repository secret.
-4. In Settings -> Collaborators and teams, invite `chapalatheological-ai` with
-   **Write**, not Maintain or Admin. Accept the invitation while signed into
-   that account. After the invitation is accepted, add the agent to beta's protected-branch
-   allowed-push list by rerunning the protection command below. It never adds
-   the agent to main's allowed list.
-5. Authenticate Claude's GitHub integration as `chapalatheological-ai`. For a
-   terminal session, verify `gh api user --jq .login` prints that login. A
-   fine-grained token should select only this repo, with Contents and Pull
-   requests read/write and metadata read; omit Administration and Workflows.
-   Read Actions/check results if the integration needs that permission. Store
-   the token in the OS credential store or integration, never files or chat.
-6. Claude creates and merges the approved content PR to beta. Wayne checks the
-   deployed beta version and merges the approved promotion PR from his tablet.
-   Any branch-protection refusal is resolved through review, not bypass.
-
-## Initial rollout
-
-The workflow, policy files and matching branch settings must be installed on
-both beta and main before this process is fully active. After both setup PRs
-are merged, an administrator runs the following from this repo:
+After this policy is installed on both branches, an administrator runs:
 
 ```sh
 node tools/configure-release-protection.mjs --apply --checks
 ```
 
- The script refuses
-to require the checks until the policy files exist on both branches. Running
-without `--apply` previews the settings. `--apply` without `--checks` installs
-the initial human-review protections with Robert’s named exception. The initial setup PRs use native reviews with Robert’s named bypass; the base branch has no governance script yet, so its setup step
-issues no `CTS release approval` status. Full enforcement starts after both PRs
-are installed and the administrator activates the required checks. The initial main
-installation is a narrowly scoped technical setup PR, not a promotion of all
-pending beta work. During initial setup, enable only checks that already exist on
-the protected branch; then add both required check names after installation.
-Production auto-deployment starts disabled (`CTS_PRODUCTION_AUTODEPLOY_ENABLED`
-repository variable is `false`). Current main is behind beta and must not be
-published merely to install this workflow. After Robert approves and installs
-the current production baseline on main, preserves its approved activation date,
-and the production environment token is set, an administrator sets this variable
-to `true` in Settings -> Secrets and variables -> Actions -> Variables. Future
-main merges deploy automatically. Until then, the production job is skipped.
-The existing beta repository secret remains usable during token migration; the
-environment secret takes precedence once installed.
-The Swahili pilot branch currently holds offline reviewer packets. Its eventual
-site integration needs a fresh PR from current beta, with human language review;
-any required new language engine wiring comes to Robert.
+This enables `CTS build and tests` and `CTS release approval` on main only.
+`--apply` without `--checks` installs native rules during rollout; no flags
+previews the settings. Do not use the old setup tool, which restores beta reviews
+and mandatory Robert review. Synchronize production policy updates back to beta.
 
-GitHub references: [required-check behavior](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks),
-[deployment environments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments),
-and [secret scope and precedence](https://docs.github.com/en/actions/reference/security/secrets).
+## Credentials and first production activation
+
+Use `chapalatheological-ai`, never Wayne's human administrator identity. For
+CLI access, `gh api user --jq .login` must show the AI account. Use a fine-grained
+token restricted to this repository with Contents and Pull requests read/write,
+metadata read, and optional Actions/check read. Grant no Administration or
+Workflows access. Keep tokens in the credential store/integration, not files/chat.
+
+Use branch-restricted deployment environments: `beta` permits beta only;
+`production` permits main only. Store `CTS_BETA_CLOUDFLARE_API_TOKEN` and
+`CTS_PRODUCTION_CLOUDFLARE_API_TOKEN` in their respective environments, scoped
+to the CTS Cloudflare account and existing deployment commands. Rotate the old
+beta repository token into the beta environment and remove its repository copy.
+An agent with Write can otherwise create a workflow that reads repository secrets.
+
+Production automation remains disabled while
+`CTS_PRODUCTION_AUTODEPLOY_ENABLED=false`. Installing this policy does not
+publish production. Verify the approved production baseline and activation date,
+install its environment token, then set the variable to `true` to enable future
+main deployments. No local Mac is required after activation.
+
+GitHub branch checks and human reviews are operational safeguards; repository
+writers can create workflows/statuses, and administrators can change settings.
+Keep production credentials scoped to its main-only environment.

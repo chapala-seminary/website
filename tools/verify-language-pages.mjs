@@ -6,7 +6,10 @@ import { parse } from 'node-html-parser';
 import { shell } from '../src/lib/shell.ts';
 const dir = process.argv[2] || 'dist';
 const languages = ['en', 'es', 'fr'];
-const files = fs.readdirSync('.astro/language-base').filter(f => f.endsWith('.html') && !f.startsWith('_'));
+// Pages with no <body> (Google's site-verification file) get no language
+// versions (tools/language-pages.mjs), so there is nothing to check.
+const files = fs.readdirSync('.astro/language-base').filter(f => f.endsWith('.html') && !f.startsWith('_')
+  && /<body[\s>]/i.test(fs.readFileSync(path.join('.astro/language-base', f), 'utf8')));
 const shelf = JSON.parse(fs.readFileSync('src/data/reading-shelf.json', 'utf8')).rooms;
 const fails = [];
 let checks = 0;
