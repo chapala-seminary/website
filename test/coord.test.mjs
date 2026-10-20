@@ -115,7 +115,32 @@ ok(exFr.includes(strip(unit1.mc[0].stem.fr).slice(0, 25)), 'and in French when a
 
 /* ---- answer sheets ------------------------------------------------------------------------ */
 const allRight = unit1.mc.map((q) => L[q.answer]).join('');
-const sheet = (unit, letters, extra = {}) => go(`/coord/members/${memberId}/sheet`, { ...form({ unit: String(unit), letters }), headers: { 'content-type': 'application/x-www-form-urlencoded', ...extra } }, asCoord());
+// The exam version printed at the top of each unit's exam (worker/coord.js examVersion).
+const versionOf = async (unit) => (/class="exam-version">([0-9A-Z]+)</.exec(await (await go(`/coord/exam/${unit}`, {}, asCoord())).text()) || [])[1];
+const sheet = async (unit, letters, extra = {}, version) => go(`/coord/members/${memberId}/sheet`,
+  { ...form({ unit: String(unit), letters, version: version ?? await versionOf(unit) }), headers: { 'content-type': 'application/x-www-form-urlencoded', ...extra } }, asCoord());
+const attemptsFor = (unit) => db(`SELECT COUNT(*) AS n FROM attempts WHERE student_id = '${code}' AND scope = 'u:CTS/${unit}'`)[0][0].n;
+
+const v1 = await versionOf(1);
+ok(/^[0-9A-Z]{6}$/.test(v1 || '') && exText.includes(`exam version ${v1}`), 'the printed exam and its answer sheet carry the exam version', v1);
+ok(!/name="letters"[^>]*pattern=/.test(await (await go(`/coord/members/${memberId}/sheet`, {}, asCoord())).text()),
+  'the letters box has no browser pattern (one that refused X or broke in newer browsers; the server checks)');
+const noVersion = unesc(await (await sheet(1, allRight, {}, '')).text());
+ok(/Enter the exam version/.test(noVersion), 'a sheet without the exam version is refused');
+
+// ChatGPT's review of #148: a paper printed before a key changed must not be graded
+// against the new key. Print, change one key, enter the old paper: refused, nothing written.
+const [k0] = db("SELECT data_json FROM grading_keys WHERE qid = 'u:CTS/1/mc/0'")[0];
+const changed = JSON.parse(k0.data_json); changed.answer = (changed.answer + 1) % changed.options.en.length;
+db(`UPDATE grading_keys SET data_json = '${JSON.stringify(changed).replace(/'/g, "''")}' WHERE qid = 'u:CTS/1/mc/0'`);
+const v1b = await versionOf(1);
+ok(v1b && v1b !== v1, 'changing an answer key changes the exam version', `${v1} -> ${v1b}`);
+const stale = unesc(await (await sheet(1, allRight, {}, v1)).text());
+ok(/printed from exam version .* is now version .* Nothing was recorded, and the unit is not locked/.test(stale),
+  'a sheet from the old printout is refused, saying to print the current exam', stale.slice(0, 300));
+ok(attemptsFor(1) === 0, 'and no attempt was made from it (no failure, no lock)');
+db(`UPDATE grading_keys SET data_json = '${k0.data_json.replace(/'/g, "''")}' WHERE qid = 'u:CTS/1/mc/0'`);
+ok((await versionOf(1)) === v1, 'the key restored, the version is the printed one again');
 
 const shadowTry = await sheet(1, allRight, { 'x-test-grading-mode': 'shadow' });
 ok(/open when the site grades exams on the server/.test(await shadowTry.text()), 'before the site grades on the server, sheets are refused');
@@ -148,13 +173,21 @@ ok(/locked after a sheet that did not pass/.test(locked), 'the unit is locked af
 const blank = unit2.mc.map(() => 'X').join('');
 ok(/locked/.test(await (await sheet(2, blank)).text()), 'still locked for a blank sheet too');
 
+// Blank answers (X) before any lock: wrong, nothing more. Two blanks and 18 right still pass.
+const unit3 = JSON.parse(fs.readFileSync('src/content/units/CTS/3.json', 'utf8'));
+const twoBlank = unit3.mc.map((q, i) => (i < 2 ? 'x' : L[q.answer])).join('');
+const blanks = await (await sheet(3, twoBlank)).text();
+ok(/Passed: 18 of 20 right/.test(blanks), 'a sheet with two blanks (x) and 18 right passes', blanks.slice(0, 300));
+const [g3] = db(`SELECT SUM(verdict = 'wrong') AS wrong, SUM(answer_text = '') AS blank FROM answer_grades g JOIN paper_sheets p ON p.attempt_id = g.attempt_id WHERE p.student_id = '${code}' AND p.scope = 'u:CTS/3'`)[0];
+ok(g3 && g3.wrong === 2 && g3.blank === 2, 'the blanks are recorded as blank, wrong answers', JSON.stringify(g3));
+
 /* ---- what staff see ----------------------------------------------------------------------- */
 const sg = await (await go('/staff/groups', {}, asStaff)).text();
 const row = sg.split('<tr>').find((r) => r.includes(`Kenya pilot ${tag}`)) || '';
-ok(/<td>1<\/td><td>2<\/td>/.test(row), 'the staff page counts the group\'s learners and sheets', row);
+ok(/<td>1<\/td><td>3<\/td>/.test(row), 'the staff page counts the group\'s learners and sheets', row);
 ok(!sg.includes(code), 'the staff page shows no student code');
 const after = await (await go('/coord', {}, asCoord())).text();
-ok(after.includes(NAME) && /1 of 13 passed/.test(after), 'the coordinator\'s page shows the unit passed');
+ok(after.includes(NAME) && /2 of 13 passed/.test(after), 'the coordinator\'s page shows the units passed');
 
 await fetch(`${BASE}/api/student/${code}`, { method: 'DELETE' });
 

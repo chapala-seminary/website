@@ -32,7 +32,9 @@
  * settle): the same keys, the same 18-of-20 rule on the Certificate track, the
  * same lock after a failure, the same credit. The questions are taken in bank
  * order and the options in stored order -- exactly as /coord/exam prints them,
- * which is why the sitting must use that printout. Only when the site grades
+ * which is why the sitting must use that printout. Each printout carries an
+ * exam version; a sheet whose version is not the current one is refused
+ * before anything is recorded. Only when the site grades
  * on the server (GRADING_MODE live): before that, sheets are refused.
  */
 import catalog from './catalog.json';
@@ -62,6 +64,22 @@ const back = '<p class="noprint"><a href="/coord">Back to the group</a></p>';
 const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 const part = () => [...crypto.getRandomValues(new Uint8Array(4))].map((b) => ALPHABET[b % 32]).join('');
 const studentCode = () => `CTS-${part()}-${part()}-${part()}`;
+
+/* The exam version printed on a paper exam: a short code from each question's
+   position, its right option and how many options it has -- what grading a sheet
+   depends on. It tells nothing about the answers. When a key changes after a
+   paper was printed, the version changes, and that paper's sheet is refused
+   before any attempt is made (ChatGPT's review of #148, 20 Oct 2026): it is
+   never graded against keys it was not printed from. */
+async function examVersion(scope, keys) {
+  const parts = scope.qids.mc.map((qid) => {
+    const k = keys.get(qid)?.key || {};
+    return `${qid}|${k.answer}|${(k.options?.en || []).length}`;
+  });
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(parts.join('\n'))));
+  return [...digest.slice(0, 6)].map((b) => ALPHABET[b % 32]).join('');
+}
+const cleanVersion = (v) => String(v || '').toUpperCase().replace(/[^0-9A-Z]/g, '');
 
 function courseOf(group) {
   const c = catalog.courses[group.course];
@@ -197,13 +215,15 @@ async function exam(env, course, unit, langRaw) {
   }).join('');
   const langLinks = Object.entries(LANGS).map(([k, v]) => k === lang ? `<b>${v}</b>` : `<a href="?lang=${k}">${v}</a>`).join(' · ');
   const n = scope.qids.mc.length;
+  const version = await examVersion(scope, keys);
   const grid = Array.from({ length: n }, (_, i) => `<td style="border:1px solid #999;padding:6px 8px">${i + 1}. ____</td>${(i + 1) % 5 === 0 ? '</tr><tr>' : ''}`).join('');
   return page(`${title(course, lang)} — Unit ${unit}`, `<p class="noprint">${langLinks} · <a href="javascript:print()">Print</a></p>${back}
 <h1>${esc(title(course, lang))} — Unit ${unit}</h1>
+<p>Exam version: <b class="exam-version">${version}</b></p>
 <p>Name: ______________________________ &nbsp; Student code: ______________________</p>
 <p>Write the letter of the one best answer for each question on the answer sheet below.</p>
 <ol>${items}</ol>
-<h2>Answer sheet — Unit ${unit}</h2>
+<h2>Answer sheet — Unit ${unit} — exam version ${version}</h2>
 <p>Name: ______________________________ &nbsp; Student code: ______________________</p>
 <table style="width:auto"><tr>${grid}</tr></table>`);
 }
@@ -219,16 +239,19 @@ async function sheetForm(env, group, course, id, unitRaw, message = '') {
   return page(`Sheet — ${mb.name}`, `<h1>Answer sheet: ${esc(mb.name)}</h1>${message}
 ${open.length ? `<form method="post">
 <p><label>Unit<br><select name="unit">${opts}</select></label></p>
+<p><label>Exam version (printed at the top of the exam)<br>
+<input name="version" required autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="12"
+ style="font-family:ui-monospace,monospace;letter-spacing:.1em"></label></p>
 <p><label>The letters on the sheet, in order (for example ABDCA...)<br>
 <input name="letters" required autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text"
- pattern="[A-Da-d ,.-]{20,60}" style="width:100%;font-family:ui-monospace,monospace;letter-spacing:.1em"></label></p>
+ maxlength="80" style="width:100%;font-family:ui-monospace,monospace;letter-spacing:.1em"></label></p>
 <p><small>Type one letter per question, question 1 first. Spaces and commas are ignored. A question left blank on the paper
 is wrong: type the letter X for it.</small></p>
 <p><button>Grade this sheet</button></p></form>` : '<p class="ok">Every unit of this course is passed.</p>'}${back}`);
 }
 
 /* Grade one sheet. Exported for the tests' sake of naming; the route is the only caller. */
-export async function enterSheet(env, { group, course, member, unit, letters, enteredBy, live }) {
+export async function enterSheet(env, { group, course, member, unit, letters, version, enteredBy, live }) {
   if (!live) return { error: 'Paper sheets open when the site grades exams on the server. Please try again later.', status: 409 };
   if (!(course.units || []).includes(unit)) return { error: 'No such unit.', status: 400 };
   const scope = await loadScope(env, `u:${course.pages}/${unit}`);
@@ -245,15 +268,21 @@ export async function enterSheet(env, { group, course, member, unit, letters, en
   const locked = recent.find((a) => a.locked_until && Date.parse(a.locked_until) > Date.now());
   if (locked) return { error: `This unit is locked after a sheet that did not pass, until ${locked.locked_until.slice(11, 16)} UTC. Enter the new sheet after that.`, status: 423 };
 
+  const keys = await loadKeys(env, scope.qids.mc);
+  if (scope.qids.mc.some((qid) => !keys.get(qid))) return { error: 'This unit\'s answer key is incomplete on the server.', status: 409 };
+  const printed = cleanVersion(version);
+  if (!printed) return { error: 'Enter the exam version printed at the top of the exam.', status: 400 };
+  const current = await examVersion(scope, keys);
+  if (printed !== current)
+    return { error: `This paper was printed from exam version ${printed}, but the exam for Unit ${unit} is now version ${current}. `
+      + 'Print the current exam and have the learner sit it again. Nothing was recorded, and the unit is not locked.', status: 409 };
   const clean = String(letters || '').toUpperCase().replace(/[^A-Z]/g, '');
   const n = scope.qids.mc.length;
   if (clean.length !== n) return { error: `The sheet has ${clean.length} letters; this unit has ${n} questions.`, status: 400 };
-  const keys = await loadKeys(env, scope.qids.mc);
   const lang = ['en', 'es', 'fr'].includes(student.lang) ? student.lang : 'en';
   const choices = [];
   for (let i = 0; i < n; i++) {
     const k = keys.get(scope.qids.mc[i]);
-    if (!k) return { error: 'This unit\'s answer key is incomplete on the server.', status: 409 };
     const count = ((k.key.options && (k.key.options[lang] ?? k.key.options.en)) || []).length;
     const ch = clean[i];
     if (ch === 'X') { choices.push(-1); continue; }
@@ -289,7 +318,7 @@ async function sheetEntry(request, env, group, course, id, email) {
   if (!mb) return page('Not found', '<p>No such learner in this group.</p>' + back, 404);
   const form = await request.formData().catch(() => null);
   const unit = Number(form?.get('unit'));
-  const r = await enterSheet(env, { group, course, member: mb, unit, letters: form?.get('letters'), enteredBy: email, live: isLive(env, request) });
+  const r = await enterSheet(env, { group, course, member: mb, unit, letters: form?.get('letters'), version: form?.get('version'), enteredBy: email, live: isLive(env, request) });
   if (r.error) return sheetForm(env, group, course, id, String(unit), `<p class="no">${esc(r.error)}</p>`);
   const verdict = r.status === 'passed'
     ? `<p class="ok">Passed: ${r.right} of ${r.total} right.</p>${r.courseDone ? `<p class="ok">${esc(mb.name)} has now completed ${esc(title(course))}.</p>` : ''}`
