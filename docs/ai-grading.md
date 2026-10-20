@@ -356,7 +356,6 @@ Notes on the routes (as built):
   creates `unit_progress`, `course_completions` or `textbook_results` from the
   client, and it no longer sends completion notices from them. It returns the
   server's records, and the browser treats those as the truth.
-=====================================================================
 - **The production cutover window (`LEGACY_SYNC_UNTIL`, 20 Oct 2026):**
   production went from shadow to live without the planned trial and notice,
   so until this ISO time a live Worker still takes the browser's units and
