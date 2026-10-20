@@ -20,6 +20,7 @@
  */
 import { handle } from './api.js';
 import { handleStaff } from './staff.js';
+import { handleCoord } from './coord.js';
 import { scheduled, stopNotes } from './outreach.js';
 import { runQueue } from './grading/queue.js';
 import { blocksReviewAsset } from './review-assets.js';
@@ -63,7 +64,7 @@ Disallow: /
 const isCanonical = (request) =>
   CANONICAL.has(new URL(request.url).hostname.toLowerCase());
 
-const PRIVATE_PATH = /^(?:\/(?:es|fr))?\/(?:admin|verify|staff)(?:\/|$)|(?:\/(?:es|fr))?\/(?:cts-backup|cts-confirm-email)\.html$|Certificate\.html$/i;
+const PRIVATE_PATH = /^(?:\/(?:es|fr))?\/(?:admin|verify|staff|coord)(?:\/|$)|(?:\/(?:es|fr))?\/(?:cts-backup|cts-confirm-email)\.html$|Certificate\.html$/i;
 const isPrivatePath = (path) => PRIVATE_PATH.test(path);
 
 const SECURITY = {
@@ -75,7 +76,7 @@ const SECURITY = {
 };
 
 function cacheControl(path) {
-  if (isPrivatePath(path) || path === '/api' || path.startsWith('/api/') || path.startsWith('/staff') || path.startsWith('/verify'))
+  if (isPrivatePath(path) || path === '/api' || path.startsWith('/api/') || path.startsWith('/staff') || path.startsWith('/coord') || path.startsWith('/verify'))
     return 'no-store';
   if (/^\/assets\/.+\.(?:js|css|png|jpe?g|webp|woff2)$/i.test(path)) return 'public, max-age=86400';
   if (path === '/' || path.endsWith('.html') || path.endsWith('/')
@@ -140,6 +141,8 @@ async function route(request, env, ctx) {
   // The verification page in a reader's language: /fr/verify (worker/api.js).
   if (/^\/(?:es|fr)\/verify(?:\/|$)/.test(path)) return await handle(request, env);
   if (path === '/staff' || path.startsWith('/staff/')) return await handleStaff(request, env);
+  // Coordinator-led paper study (worker/coord.js): its own Access sign-in.
+  if (path === '/coord' || path.startsWith('/coord/')) return await handleCoord(request, env);
   // The teaching passages a live build keeps for the review after a passed
   // attempt (tools/exam-review.mjs): each was chosen because it holds a
   // question's answer, so only the grading API reads them (env.ASSETS, which
