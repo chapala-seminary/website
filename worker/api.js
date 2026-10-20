@@ -236,16 +236,20 @@ async function register(request, env) {
   if (!TRACKS.has(track)) throw new HttpError(400, 'track must be one of: ' + [...TRACKS].join(', '));
 
   /* Registering twice (Wayne, 5 Oct 2026: six students had two records).
+     Email is optional again (Wayne, 19 Oct 2026): a student with no address
+     enrolls and studies. An address that is present must look like one.
      A live record with the same email AND the same name is almost always the
      same person on a new browser, so no second record is made: the page
      offers to email that address its code instead (/api/code/email), and
      never hands the code back here -- the email is unverified, and a code
      given to whoever typed an address would give away that student's record.
      Same email, different name registers as before: two people can share an
-     address. `separate: true` is the student saying "this is not me". */
-  const email = str(b.email, MAX.email, { required: true, field: 'email' });
-  if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
-  if (b.separate !== true && email && EMAIL_RE.test(email.toLowerCase())) {
+     address. No email never matches another record. `separate: true` is the
+     student saying "this is not me". Existing codes and addresses are left
+     as they are; a later blank sync does not erase a stored address. */
+  const email = str(b.email, MAX.email, { field: 'email' });
+  if (email && !EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
+  if (b.separate !== true && email) {
     const same = await env.DB.prepare(
       `SELECT 1 FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? AND lower(trim(name)) = ? LIMIT 1`)
       .bind(email.toLowerCase(), name.toLowerCase()).first();

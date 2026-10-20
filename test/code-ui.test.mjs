@@ -32,12 +32,12 @@ async function device(page_ = '') {
 const one = await device();
 await one.page.selectOption('#reg-country', { index: 1 });
 await one.page.fill('#reg-name', 'Ana Ruiz');
-ok(await one.page.getAttribute('#reg-email', 'required') !== null, 'email is marked required');
+ok(await one.page.getAttribute('#reg-email', 'required') === null, 'email is optional on the form');
 for (const lang of ['en', 'es']) {
   await one.page.goto(`${BASE}/${lang === 'es' ? 'es/' : ''}index.html?cts_lang=${lang}`, { waitUntil: 'load' });
   await one.page.selectOption('#reg-country', { index: 1 });
   await one.page.fill('#reg-name', 'Ana Ruiz');
-  for (const email of ['', '   ', 'not-an-address', '—', 'a@b.c']) {
+  for (const email of ['not-an-address', '—', 'a@b.c']) {
     await one.page.fill('#reg-email', email);
     const dialog = one.page.waitForEvent('dialog');
     const clicked = one.page.click('#reg-save');
@@ -48,6 +48,22 @@ for (const lang of ['en', 'es']) {
       `invalid email (${JSON.stringify(email)}) creates no local registration or code`);
   }
 }
+const blank = await device();
+await blank.page.selectOption('#reg-country', { index: 1 });
+await blank.page.fill('#reg-name', 'Sin Correo');
+await blank.page.fill('#reg-email', '   ');
+await blank.page.click('#reg-save');
+await blank.page.waitForFunction(() => {
+  const el = document.getElementById('reg-code');
+  return el && el.style.display === 'block';
+}, null, { timeout: 15000 }).catch(() => {});
+const blankShown = await blank.page.evaluate(() => ({
+  code: window.CTS_SYNC && window.CTS_SYNC.code(),
+  email: JSON.parse(localStorage.getItem('cts_student') || '{}').email,
+}));
+ok(CODE_RE.test(blankShown.code || ''), 'a blank email still receives a student code', JSON.stringify(blankShown));
+ok(!blankShown.email, 'the saved registration keeps no email address');
+await blank.ctx.close();
 await one.page.goto(`${BASE}/index.html?cts_lang=en`, { waitUntil: 'load' });
 await one.page.selectOption('#reg-country', { index: 1 });
 await one.page.fill('#reg-name', 'Ana Ruiz');

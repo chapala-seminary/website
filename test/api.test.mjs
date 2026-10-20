@@ -30,9 +30,8 @@ async function jpost(p, b) { const r = await post(p, b); return { status: r.stat
 
 for (const [payload, why] of [
   [{}, 'no name'],
-  ...[undefined, null, '', '   ', '\t\n', '—', 'not-an-address', 42, 'a@b', 'a@b.c'.repeat(40)].map(email =>
-    [{ name: 'Email Required', track: 'cert', email }, `invalid or missing email ${JSON.stringify(email)}`]),
-  [{ name: 'Email Required', track: 'cert', separate: true }, 'separate registration without email'],
+  ...['—', 'not-an-address', 42, 'a@b', 'a@b.c'.repeat(40)].map(email =>
+    [{ name: 'Email Required', track: 'cert', email }, `invalid email ${JSON.stringify(email)}`]),
   [{ name: 'A' }, 'no track'],
   [{ name: 'A', track: 'wizard' }, 'unknown track'],
   [{ name: 'x'.repeat(200), track: 'cert' }, 'name over the length cap'],
@@ -40,6 +39,20 @@ for (const [payload, why] of [
 ]) {
   const r = await jpost('/api/register', payload);
   ok(r.status === 400, `register with ${why} should be rejected, got ${r.status}`);
+}
+
+const noMail = await jpost('/api/register', { name: 'No Email', track: 'cert' });
+ok(noMail.status === 201 && noMail.body?.code && noMail.body?.student?.email == null, 'a registration with no email enrolls', JSON.stringify(noMail.body?.student));
+const blankMail = await jpost('/api/register', { name: 'Blank Email', track: 'cert', email: '   ', separate: true });
+ok(blankMail.status === 201 && blankMail.body?.student?.email == null, 'a blank email is stored as none', JSON.stringify(blankMail.body));
+const againNoMail = await jpost('/api/register', { name: 'No Email', track: 'cert' });
+ok(againNoMail.status === 201 && againNoMail.body?.code !== noMail.body?.code, 'the same name without an email is a new student, not a blocked duplicate');
+const added = await jpost('/api/sync', { code: noMail.body?.code, student: { email: 'later@example.org' } });
+ok(added.status === 200 && added.body?.student?.email === 'later@example.org', 'an email added later is kept');
+const kept = await jpost('/api/sync', { code: noMail.body?.code, student: { email: '' } });
+ok(kept.status === 200 && kept.body?.student?.email === 'later@example.org', 'a later blank email does not erase the address on the record');
+for (const id of [noMail.body?.code, blankMail.body?.code, againNoMail.body?.code]) {
+  if (id) await fetch(BASE + '/api/student/' + id, { method: 'DELETE' });
 }
 
 const reg = await jpost('/api/register', {

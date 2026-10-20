@@ -70,11 +70,21 @@ try {
     localStorage.setItem('cts_ots_progress',JSON.stringify({unit1:true}));
    },{email,missing});
    const page=await context.newPage();await page.goto(`${base}/cts-backup.html?cts_lang=${lang}`);
+   if(missing){
+    await page.waitForFunction(()=>!!localStorage.getItem('cts_student_code'),null,{timeout:18000});
+    code=await page.evaluate(()=>localStorage.getItem('cts_student_code'));
+    assert.equal(await page.locator('#cts-registration-problem').count(),0);checks++;
+    const state=await (await fetch(base+'/api/student/'+code)).json();
+    assert.equal(state.student.email,null);checks++;
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cts_ots_progress')).unit1),true);checks++;
+    await page.locator('#cts-email-optional').waitFor({timeout:18000});
+    assert.ok(await page.locator('#cts-email-optional').isVisible());checks++;
+    continue;
+   }
    await page.locator('#cts-registration-problem').waitFor();
    assert.ok(await page.locator('#cts-registration-problem').innerText());checks++;
    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('cts_ots_progress')).unit1),true);checks++;
    assert.equal(await page.evaluate(()=>localStorage.getItem('cts_student_code')),null);checks++;
-   if(missing)await page.locator('#cts-registration-problem input').fill(email);
    unavailable=false;await page.locator('#cts-registration-problem button').click();
    await page.waitForFunction(()=>!!localStorage.getItem('cts_student_code'));
    code=await page.evaluate(()=>localStorage.getItem('cts_student_code'));
