@@ -2,7 +2,9 @@ name: Reconcile verified beta D1 migrations (beta only)
 on:
   push:
     branches: [beta]
-    paths: [.github/workflows/beta-d1-reconcile.yml]
+    paths:
+      - .github/workflows/beta-d1-reconcile.yml
+      - tools/reconcile-beta-migration-history.mjs
 permissions:
   contents: read
 jobs:
