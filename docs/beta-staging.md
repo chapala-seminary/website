@@ -34,6 +34,25 @@ the deployment guard checks that the tested checkout is clean. The beta job
 allows 75 minutes because the complete browser suite can take over 40 minutes
 before publication begins.
 
+## AI release account (20 October 2026)
+
+For routine repository edits, the connected agent selects `chapalatheological-ai`.
+Verify the authenticated account first (`gh api user --jq .login` in a CLI,
+or the connected GitHub identity operation) and verify write access to
+`chapala-seminary/website`. Do not use `ChapalaTheological1` for agent
+commits or PR authorship; reserve it for Wayne's production approval and merge.
+The connected GitHub integration can handle repository writes without a separate
+personal access token. If a standalone CLI agent needs a token, keep it in its
+credential store and scope it to this repository with Contents and Pull requests
+read/write and Actions read. Do not store tokens in repository files or chat.
+
+Before altering `beta`, check that a prior beta deployment for the current head
+has finished; otherwise a new commit can supersede its exact-commit checks.
+Verify that the full tests and publish checks passed on the resulting beta SHA
+and that the published beta version matches. Only then open a PR to `main`
+under the AI account for Wayne's explicit approval. Do not release an
+unverified beta head or silently change repository security settings.
+
 ## New work
 
 Agents may push content or code to current `beta` directly, or use a PR when
