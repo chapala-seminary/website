@@ -231,8 +231,10 @@ document.getElementById('regBtn').onclick = function() {
     const name = document.getElementById('regName').value.trim();
     const email = document.getElementById('regEmail').value.trim();
     const track = document.getElementById('regTrack').value;
-    if (!name || !email) {
-        document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
+    if (!name || (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+        document.getElementById('regStatus').innerHTML = name
+          ? "<span style='color:red'>Leave email blank to enroll, or enter a valid address.</span>"
+          : "<span style='color:red'>Please enter your name.</span>";
         return;
     }
     const student = { name, email, track, registered: new Date().toISOString() };

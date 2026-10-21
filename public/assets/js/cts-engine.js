@@ -1785,13 +1785,17 @@
     }
     var countryEl = present(["regCountry", "reg-country", "studentCountry"]);
     var countryMissing = !!(countryEl && !countryEl.value.trim());
-    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // Email is optional. A blank address enrolls. A filled one must be usable
+    // for recovery and a certificate, so a malformed one is not stored.
+    var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if (!name || !emailOk || countryMissing) {
       if (error) {
         error.hidden = false;
-        error.innerHTML = (!name || !emailOk)
-          ? bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse e-mail valide pour enregistrer votre inscription." })
-          : bi({ en: "Select your country. Choose Other if you prefer not to say.", es: "Seleccione su país. Elija Otro si prefiere no decirlo.", fr: "Choisissez votre pays. Choisissez Autre si vous préférez ne pas le dire." });
+        error.innerHTML = !name
+          ? bi({ en: "Enter your name to save your registration.", es: "Escriba su nombre para guardar su registro.", fr: "Saisissez votre nom pour enregistrer votre inscription." })
+          : (!emailOk
+            ? bi({ en: "Leave email blank to enroll, or enter a valid address so we can return your code and deliver a certificate.", es: "Deje el correo en blanco para inscribirse, o escriba una dirección válida para recuperar su código y recibir el certificado.", fr: "Laissez l’adresse e-mail vide pour vous inscrire, ou saisissez une adresse valide afin de récupérer votre code et de recevoir le certificat." })
+            : bi({ en: "Select your country. Choose Other if you prefer not to say.", es: "Seleccione su país. Elija Otro si prefiere no decirlo.", fr: "Choisissez votre pays. Choisissez Autre si vous préférez ne pas le dire." }));
       }
       var invalid = el(!name ? "regName" : (!emailOk ? "regEmail" : (countryEl && countryEl.id)));
       if (invalid) { invalid.focus(); invalid.setAttribute("aria-invalid", "true"); }

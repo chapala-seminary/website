@@ -77,10 +77,11 @@ try {
     assert.equal(dialog, 'Veuillez saisir votre nom');
     await page.locator('#reg-name').fill('French landing fixture');
     await page.locator('#reg-save').click();
-    assert.equal(dialog, 'Veuillez saisir une adresse e-mail valide pour vous inscrire');
-    await page.locator('#reg-email').fill('french-landing-fixture@example.invalid');
-    await page.locator('#reg-save').click();
     assert.equal(dialog, 'Veuillez sélectionner votre pays');
+    await page.locator('#reg-email').fill('not-an-address');
+    await page.locator('#reg-save').click();
+    assert.equal(dialog, 'Laissez l’e-mail vide pour vous inscrire, ou saisissez une adresse valide afin de récupérer votre code et de recevoir le certificat.');
+    await page.locator('#reg-email').fill('');
     await page.locator('#reg-country').selectOption('FR');
     await page.locator('#reg-track').selectOption('mdiv');
     await page.locator('#reg-save').click();

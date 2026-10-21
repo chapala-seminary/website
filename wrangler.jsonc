@@ -59,9 +59,18 @@
 	// would stop for the day once the daily allowance ran out.
 	"ai": { "binding": "AI" },
 	"vars": {
-		// "shadow": the production trial -- the AI grades and records, credit
-		// still comes from the old rules. "live" once Robert approves the switch.
-		"GRADING_MODE": "shadow",
+		// "live": the server is the grader of record (docs/ai-grading.md section 1).
+		// Wayne approved switching production from the shadow trial on 19 Oct 2026.
+		"GRADING_MODE": "live",
+		// Until this time, passes still held only in a student's browser from
+		// before the switch are taken by /api/sync as legacy credit (first
+		// completions only, never a higher level): worker/grading/mode.js.
+		// Sixty days from the switch. Remove or leave in the past to close it.
+		"LEGACY_SYNC_UNTIL": "2026-12-20T00:00:00.000Z",
+		// ...and only for records registered before this time: set it to the
+		// day production switches to live (no later), so a record made under
+		// live grading can never bring browser credit.
+		"LEGACY_SYNC_COHORT_BEFORE": "2026-10-20T18:10:35.000Z",
 		"GRADER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 		"GRADER_MODEL_FALLBACK": "@cf/openai/gpt-oss-120b",
 		"GRADER_PROMPT_VERSION": "2026-10-19.1",
@@ -85,6 +94,10 @@
 		// say which sign-in to trust, and grant nothing on their own.
 		"ACCESS_TEAM": "chapalatheological",
 		"ACCESS_AUD": "debf55802de573c5790f05b163c141178b068b01ee8c84ef0ed14c26224bb25c"
+		// Coordinator pages (/coord) use a second Access application. Leave
+		// COORD_ACCESS_AUD unset until that application exists: /coord then
+		// answers "not set up". When it is set it must be a different audience
+		// than ACCESS_AUD (docs/coordinator-setup.md).
 	},
 	// Once a day at 15:00 UTC (9:00 in Mexico City): notes to students who have
 	// gone quiet, and on Mondays the seminary's weekly summary. And every 15
@@ -163,6 +176,8 @@
 				// the same Access application covers beta's /staff
 				"ACCESS_TEAM": "chapalatheological",
 				"ACCESS_AUD": "debf55802de573c5790f05b163c141178b068b01ee8c84ef0ed14c26224bb25c"
+				// COORD_ACCESS_AUD: the beta half of the coordinator Access
+				// application. Unset until that application exists. See above.
 			},
 			"triggers": {
 				"crons": ["0 15 * * *", "*/15 * * * *"]

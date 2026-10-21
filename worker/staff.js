@@ -17,6 +17,8 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
  *   POST /staff/students/<n>/notes  stop=1 | stop=0: stop or resume notes to one student
  *   POST /staff/notes/run           run today's notes now (as the daily run would)
  *   POST /staff/digest              the weekly summary (?send=1 also emails it)
+ *   GET/POST /staff/groups          coordinator-led study groups (worker/coord.js)
+ *   POST /staff/groups/sheet        enter one paper sheet, the same rules as /coord
  *   /staff/grading/...              the faculty's grading pages (worker/staff-grading.js):
  *                                   appeals, pending answers, calibration, fill-in rulings,
  *                                   possible copying, AI usage
@@ -45,6 +47,7 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
  */
 import catalog from './catalog.json';
 import { handleGrading } from './staff-grading.js';
+import { handleStaffGroups } from './coord.js';
 import { candidates, runOutreach, digest, sendDigest, note, programLevel, PROGRAM_NAMES, QUIET_DAYS, NOT_STARTED_DAYS } from './outreach.js';
 
 const DAY = 86400000;
@@ -61,9 +64,12 @@ async function accessKeys(env) {
   return certCache.keys;
 }
 
-/** The signed-in person's email, or null. */
-export async function accessUser(request, env) {
-  if (!env.ACCESS_TEAM || !env.ACCESS_AUD) return null;
+/** The signed-in person's email, or null. `aud` is the Access application's
+ *  audience tag: the staff pages' by default; the coordinator pages pass their
+ *  own (COORD_ACCESS_AUD, worker/coord.js), so a coordinator's sign-in is
+ *  never accepted here and a staff sign-in never opens /coord. */
+export async function accessUser(request, env, aud = env.ACCESS_AUD) {
+  if (!env.ACCESS_TEAM || !aud) return null;
   const jwt = request.headers.get('cf-access-jwt-assertion') || '';
   const parts = jwt.split('.');
   if (parts.length !== 3) return null;
@@ -78,9 +84,9 @@ export async function accessUser(request, env) {
     const good = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64url(parts[2]),
       new TextEncoder().encode(parts[0] + '.' + parts[1]));
     if (!good) return null;
-    const aud = Array.isArray(claims.aud) ? claims.aud : [claims.aud];
+    const auds = Array.isArray(claims.aud) ? claims.aud : [claims.aud];
     const now = Date.now() / 1000;
-    if (!aud.includes(env.ACCESS_AUD)) return null;
+    if (!auds.includes(aud)) return null;
     if (claims.iss !== `https://${env.ACCESS_TEAM}.cloudflareaccess.com`) return null;
     if (!(claims.exp > now) || (claims.nbf && claims.nbf > now + 60)) return null;
     return claims.email || claims.sub || 'staff';
@@ -266,6 +272,10 @@ export async function handleStaff(request, env) {
   if (method === 'POST') {
     const from = request.headers.get('origin');
     if (from && from !== url.origin) return html('<p>Refused: the request did not come from this site.</p>', 403);
+  }
+  if (path === '/staff/groups' || path === '/staff/groups/sheet') {
+    const r = await handleStaffGroups(request, env, user, url, path, { esc, html, STYLE });
+    if (r) return r;
   }
   if (path === '/staff/grading' || path.startsWith('/staff/grading/'))
     return await handleGrading(request, env, user, url, path, { esc, html, json, STYLE });
