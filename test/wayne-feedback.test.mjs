@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { parse } from 'node-html-parser';
 import { chromium } from 'playwright';
+import { leafKey, loadStore } from '../tools/french-readings-lib.mjs';
 const base = process.argv[2] || 'http://127.0.0.1:8798';
 const langs = ['en','es','fr'];
 let checks=0, passages=0;
@@ -51,6 +52,41 @@ for(const bank of books) for(const lang of langs) {
       ok(plain.includes(normal(p)),`${bank.slug}/${lang}/${index}: explanation is actually in its cited source`);passages++;
     }
   }
+}
+// The reading-room notices must describe the same disclosure rule as the
+// live Worker: right/wrong while answering; keys and explanations only after
+// a pass. This copy used to promise the right answer immediately even after
+// the Worker had stopped disclosing it.
+{
+  const {memory}=loadStore();
+  const roomDir='src/body/rooms';
+  const expected={
+    en:['marked right or wrong at once','after the attempt passes'],
+    es:['correcta o incorrecta en seguida','después de aprobar el intento'],
+    fr:['correcte ou incorrecte','après la réussite de la tentative'],
+  };
+  let notices=0;
+  for(const file of fs.readdirSync(roomDir).filter(f=>f.endsWith('.html'))){
+    const root=parse(fs.readFileSync(`${roomDir}/${file}`,'utf8'));
+    for(const id of ['cts-textbook','cts-required']){
+      const notice=root.querySelector(`#${id}`);if(!notice)continue;
+      notices++;
+      const en=notice.querySelector('.lang-en'),es=notice.querySelector('.lang-es');
+      for(const [lang,node] of [['en',en],['es',es]]){
+        const text=normal(node?.text||'').toLowerCase();
+        ok(!/right answer (?:is )?shown|se muestra la correcta|mostrando la respuesta correcta/.test(text),`${file} ${id}: ${lang} does not promise an immediate key`);
+        if(id==='cts-textbook' || text.includes(expected[lang][0]))
+          for(const phrase of expected[lang])ok(text.includes(phrase),`${file} ${id}: ${lang} states the live review rule`);
+      }
+      const translated=en&&memory.get(leafKey(en.innerHTML));
+      ok(!!translated,`${file} ${id}: French translation follows the current English notice`);
+      const fr=normal(translated?.fr||'').toLowerCase();
+      ok(!/bonne réponse est indiquée/.test(fr),`${file} ${id}: French does not promise an immediate key`);
+      if(id==='cts-textbook' || normal(en?.text||'').toLowerCase().includes(expected.en[0]))
+        for(const phrase of expected.fr)ok(fr.includes(phrase),`${file} ${id}: French states the live review rule`);
+    }
+  }
+  ok(notices>=70,'the disclosure-copy check covers the textbook and reading notices',notices);
 }
 console.log(`PASS — ${passages} teaching passages verified in their linked source sections.`);
 if(process.argv.includes('--static'))process.exit(0);
