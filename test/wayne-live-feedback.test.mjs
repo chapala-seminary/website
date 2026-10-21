@@ -22,7 +22,13 @@ try{
     const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto(`${base}/${lang==='en'?'':lang+'/'}${file}?cts_lang=${lang}`);
     await page.waitForSelector('input[data-cts-fill]');
-    ok(await page.evaluate(()=>Array.isArray(CTS_TEXTBOOK_TEST.questions) && CTS_TEXTBOOK_TEST.questions.length===0 && CTS_TEXTBOOK_TEST.grading==='live'),`${slug}/${lang}: the live page ships no question bank`);
+    ok(await page.evaluate(() => {
+      const raw = [...document.scripts].map((s) => s.textContent || '').find((t) => t.includes('window.CTS_TEXTBOOK_TEST'));
+      const data = JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
+      const shown = (window.CTS_TEXTBOOK_TEST.questions || []).filter(Boolean);
+      return data.questions.length === 0 && data.grading === 'live' && shown.length === 20
+        && shown.every((q) => q.prompt && !('answer' in q) && !('accept' in q));
+    }), `${slug}/${lang}: the live page ships no question bank`);
     await page.locator('input[data-cts-fill]').first().fill('wrong response');
     await page.locator('[data-cts-fill-check="0"]').click();
     await page.waitForSelector('.cts-fill-bad');
