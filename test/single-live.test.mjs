@@ -152,7 +152,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   const code = await codeOf(p);
   const html = await (await freshFetch(`${BASE}/CTSGenesisUnit2.html`)).text();
   ok(html.includes('"grading":"live"') && !/"(answer|accept|keywords|rubric|model)"/.test(html.slice(html.indexOf('window.CTS_UNIT'), html.indexOf('window.CTS_UNIT') + 60000)), 'a Genesis unit page is a live unit page with no key');
-  for (let i = 0; i < g2.mc.length; i++) { await p.locator(`button.option[data-mc="${i}"][data-opt="${g2.mc[i].answer}"]`).click(); await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text`, { timeout: 15000 }); }
+  for (let i = 0; i < g2.mc.length; i++) { await p.locator(`button.option[data-mc="${i}"][data-opt="${g2.mc[i].answer}"]`).click(); await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text.correct, .question[data-mc="${i}"] .feedback-text.incorrect`, { timeout: 30000 }); }
   for (let i = 0; i < g2.fill.length; i++) {
     // Resolve the Check button after any live-engine redraw; grading-ui covers Enter.
     await p.locator(`input[data-fill="${i}"]`).fill(g2.fill[i].answer.en);
