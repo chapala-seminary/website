@@ -29,14 +29,15 @@
  * back with the answers so far.
  *
  * LIVE MODE (docs/ai-grading.md, a page that says grading: "live"). The page
- * carries every question's words and id but no key, and no draw: the server
- * draws the twenty (POST /api/attempt names them), grades each answer
- * (CTSFill, live), and decides the pass on Submit. This browser then mirrors
- * the outcome into the keys above. A pass shows only when the server says so;
- * a result still being graded shows "Submitted -- grading pending" and is
- * collected later (cts_textbook_<slug>_pending holds the attempt). There is no
- * practice set after a pass: a draw is the server's to make, and a second
- * attempt would be a second record.
+ * ships no question bank. The server draws the twenty and sends each one's
+ * prompt (POST /api/attempt `prompts`, and the same on the status reply).
+ * This page shows those prompts and nothing else from the bank. The server
+ * grades each answer (CTSFill, live) and decides the pass on Submit. This
+ * browser then mirrors the outcome into the keys above. A pass shows only
+ * when the server says so; a result still being graded shows "Submitted --
+ * grading pending" and is collected later (cts_textbook_<slug>_pending holds
+ * the attempt). There is no practice set after a pass: a draw is the server's
+ * to make, and a second attempt would be a second record.
  *
  * A BANK DRAWN BY READING (World Religions, revised 10 Oct 2026). When the
  * bank says `perGroup` and each question its `group`, every attempt takes
@@ -378,7 +379,60 @@
     function bankIndex(qid) {
       var m = /\/fill\/(\d+)$/.exec(String(qid));
       var i = m ? +m[1] : -1;
-      return i >= 0 && i < n && T.questions[i].qid === qid ? i : -1;
+      return i >= 0 && i < n && T.questions[i] && T.questions[i].qid === qid ? i : -1;
+    }
+    /* Put the server's drawn prompts into the empty page bank, by the index
+       in the qid. Only the three language strings are kept. Saved with the
+       attempt so a reload during the wait, or after a pass, can show the
+       same questions without asking for the whole bank. */
+    function installPrompts(list) {
+      if (!Array.isArray(list)) return false;
+      var max = n, any = false, kept = [];
+      for (var p = 0; p < list.length; p++) {
+        var item = list[p];
+        if (!item || typeof item.qid !== "string" || !item.prompt || typeof item.prompt !== "object") continue;
+        var m = /\/fill\/(\d+)$/.exec(item.qid);
+        if (!m) continue;
+        var i = +m[1], src = item.prompt, prompt = {};
+        if (typeof src.en === "string" && src.en) prompt.en = src.en;
+        if (typeof src.es === "string" && src.es) prompt.es = src.es;
+        if (typeof src.fr === "string" && src.fr) prompt.fr = src.fr;
+        if (!prompt.en && !prompt.es && !prompt.fr) continue;
+        T.questions[i] = { qid: item.qid, prompt: prompt };
+        if (i + 1 > max) max = i + 1;
+        kept.push({ qid: item.qid, prompt: prompt });
+        any = true;
+      }
+      if (!any) return false;
+      n = max;
+      state.prompts = kept;
+      return true;
+    }
+    function drawReady() {
+      if (!Array.isArray(state.draw) || !state.draw.length) return false;
+      for (var i = 0; i < state.draw.length; i++) {
+        var q = T.questions[state.draw[i]];
+        if (!q || !q.prompt) return false;
+      }
+      return true;
+    }
+    /* Install prompts and, when this is not the sitting already on screen,
+       take the server's draw order. A resumed sitting keeps its saved draw
+       so answers typed so far stay aligned. */
+    function prepareDrawn(body) {
+      if (!body) return false;
+      installPrompts(body.prompts);
+      var qids = body.items && Array.isArray(body.items.fill) && body.items.fill.length
+        ? body.items.fill
+        : (Array.isArray(body.prompts) ? body.prompts.map(function (item) { return item && item.qid; }) : []);
+      var idx = [];
+      for (var qi = 0; qi < qids.length; qi++) {
+        var at = bankIndex(qids[qi]);
+        if (at >= 0) idx.push(at);
+      }
+      var same = body.attemptId && state.attemptId === body.attemptId && drawReady();
+      if (idx.length && !same) state.draw = idx;
+      return drawReady();
     }
     function itemsOf(S) {
       var map = G.verdictsOf(S);
@@ -432,24 +486,45 @@
         if (pr && !pr.ok && (pr.offline || pr.status >= 500 || pr.status === 429)) { L.status = "ready"; return liveTrouble(pr, liveStart); }
         if (pr && pr.ok && pr.data) {
           var st = String(pr.data.status || "");
-          if (st === "pending") return livePending(pid, pr.data);
-          if (st === "passed") { lsDel(KEY.pending); return livePass(pr.data); }
-          if (st === "failed") { lsDel(KEY.pending); liveFail(pr.data); }
+          if (st === "pending" || st === "passed" || st === "failed") prepareDrawn(pr.data);
+          if (st === "pending") {
+            save();
+            if (drawReady() && !fill) mount();
+            return livePending(pid, pr.data);
+          }
+          if (st === "passed") {
+            if (drawReady() && !fill) mount();
+            lsDel(KEY.pending); return livePass(pr.data);
+          }
+          if (st === "failed") {
+            if (drawReady() && !fill) mount();
+            lsDel(KEY.pending); liveFail(pr.data); return;
+          }
         } else if (pid) lsDel(KEY.pending);
         G.calls.attempt(T.scope, serverLang()).then(function (r) {
           if (r.unregistered) { L.status = "unregistered"; return renderStatus(); }
           if (!r.ok) {
             var lk = r.data && r.data.lock;
-            if (lk) { setLock(lk); L.status = "ready"; mount(); renderStatus(); scheduleUnlock(); return; }
+            if (lk) {
+              setLock(lk); L.status = "ready";
+              if (drawReady() && !fill) mount();
+              else { renderStatus(); scheduleUnlock(); }
+              return;
+            }
             L.status = "ready"; return liveTrouble(r, liveStart);
           }
           var S = r.data || {};
-          if (S.status === "pending" && S.attemptId) return livePending(S.attemptId, S);
-          var idx = (((S.items || {}).fill) || []).map(bankIndex).filter(function (i) { return i >= 0; });
-          if (!idx.length) { L.status = "ready"; return liveTrouble({ status: 500 }, liveStart); }
+          var sameSitting = !!(S.attemptId && state.attemptId === S.attemptId);
+          if (S.status === "pending" && S.attemptId) {
+            prepareDrawn(S);
+            save();
+            if (drawReady() && !fill) mount();
+            return livePending(S.attemptId, S);
+          }
+          if (!prepareDrawn(S)) { L.status = "ready"; return liveTrouble({ status: 500 }, liveStart); }
           L.S = S; L.attemptId = S.attemptId;
-          if (state.attemptId !== S.attemptId) { state.fillAnswers = []; state.fillChecked = []; delete state.review; }
-          state.draw = idx; state.attemptId = S.attemptId;
+          if (!sameSitting) { state.fillAnswers = []; state.fillChecked = []; delete state.review; }
+          state.attemptId = S.attemptId;
           setLock(S.lock);
           L.status = "ready";
           mount();
@@ -561,11 +636,12 @@
 
     el("tb-submit").addEventListener("click", submit);
     el("tb-reset").addEventListener("click", reset);
-    mount();
     if (LIVE) {
+      if (Array.isArray(state.prompts)) installPrompts(state.prompts);
+      if (drawReady()) mount();
       if (G) { G.appeal.onChange(function () { if (fill) fill.render(); }); liveStart(); }
       else { L.status = "ready"; liveTrouble({ offline: true }, function () { location.reload(); }); }
-    }
+    } else mount();
     document.addEventListener("cts-sync-applied", renderStatus);
 
     window.CTS_TEXTBOOK = { submit: submit, reset: reset, state: function () { return state; }, draw: function () { return state.draw.slice(); } };

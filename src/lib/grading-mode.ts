@@ -44,9 +44,11 @@ export function liveUnit<T extends { mc?: Q[]; fill?: Q[]; sa?: Q[] }>(u: T, sco
   return out;
 }
 
-/* A textbook or reading test: the whole bank of prompts goes out, because
-   the server draws and the page shows the ones it names. Ids are bank
-   positions: tb:<slug>/fill/<i> (rd: for a required-reading test). */
+/* A textbook or reading test. Ids are bank positions: tb:<slug>/fill/<i>
+   (rd: for a required-reading test). `questions` here is the stripped bank,
+   for a caller that still wants it. A live page does not inline it: the
+   server sends the prompt for each question it drew
+   (worker/grading/attempts.js promptsFor). Shadow pages keep the full bank. */
 export function liveBank(bank: { slug: string; kind?: string; questions: Q[] }): { scope: string; questions: Q[] } {
   const scope = `${bank.kind === 'reading' ? 'rd' : 'tb'}:${bank.slug}`;
   return { scope, questions: bank.questions.map((q, i) => strip(q, `${scope}/fill/${i}`)) };
