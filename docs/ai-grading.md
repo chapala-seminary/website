@@ -136,9 +136,11 @@ Every short-answer item gets:
   `node tools/export-assessment-keys.mjs <dir>` writes that checkout from
   the public banks. It refuses to write inside this repo. The public files
   still hold the keys until a later change, after beta deploy is reading the
-  private checkout and a textbook test has been checked there. Do not add a
-  workflow step that checks the private repo out until that repo exists and
-  Actions has a token for it: a missing checkout would fail the beta deploy.
+  private checkout and a textbook test has been checked there. The beta
+  Actions workflow checks `chapala-seminary/assessment-keys` out with
+  repository secret `ASSESSMENT_KEYS_TOKEN` (read-only on that repo), sets
+  `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and uses
+  `continue-on-error` so a missing or bad token does not fail the deploy.
   The Christian Education bank is authored only in that private checkout.
 
 ## 5. Grading rules (server, `worker/grading/`)
