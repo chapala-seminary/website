@@ -28,19 +28,33 @@ const dropLangs = (model, langs) => (model && langs.size
   ? Object.fromEntries(Object.entries(model).filter(([l]) => !langs.has(l))) : model);
 const keepOnly = (obj, fields) => Object.fromEntries(fields.filter((f) => obj[f] !== undefined).map((f) => [f, obj[f]]));
 
+/* A private checkout of the textbook and reading banks, when one is present.
+ * ASSESSMENT_KEYS wins. Otherwise a sibling ../assessment-keys that already
+ * has textbooks/. Absent means the public content files, so a deploy that
+ * does not have the private repo yet keeps grading the banks it has. */
+export function resolveKeysRoot(root = '.') {
+  const fromEnv = process.env.ASSESSMENT_KEYS;
+  if (typeof fromEnv === 'string' && fromEnv.trim() && fs.existsSync(fromEnv)) return path.resolve(fromEnv);
+  const sibling = path.resolve(root, '..', 'assessment-keys');
+  if (fs.existsSync(path.join(sibling, 'textbooks'))) return sibling;
+  return null;
+}
+
 /** Every question that is graded, as Map qid -> { qid, kind, source, data (JSON string), rubricVersion }.
- *  `root` is the repo root. `units: false` skips the unit banks (the eval only needs units, but
- *  the sync tool wants everything). `warn` receives notes about skipped files. */
-export function buildKeyRows({ root = '.', warn = () => {} } = {}) {
+ *  `root` is the repo root. `keysRoot` is the private textbook/reading checkout
+ *  (resolveKeysRoot when omitted). Pass null to read the public files only.
+ *  `warn` receives notes about skipped files. */
+export function buildKeyRows({ root = '.', warn = () => {}, keysRoot } = {}) {
   const rows = new Map();
   const add = (qid, kind, source, data, rubricVersion = null) => {
     if (rows.has(qid)) throw new Error(`duplicate question id ${qid}`);
     rows.set(qid, { qid, kind, source, data: JSON.stringify(data), rubricVersion });
   };
+  const keys = keysRoot === undefined ? resolveKeysRoot(root) : keysRoot;
   addUnitRows(root, add);
   const catalog = readJson(path.join(root, 'worker/catalog.json'));
-  addTestRows(root, catalog, 'src/content/textbooks', 'tb', 'textbook', add, warn);
-  addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', add, warn);
+  addTestRows(root, catalog, 'src/content/textbooks', 'tb', 'textbook', add, warn, keys);
+  addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', add, warn, keys);
   addSingleRows(root, add);
   return rows;
 }
@@ -72,14 +86,38 @@ function addUnitRows(root, add) {
   }
 }
 
-function addTestRows(root, catalog, rel, tag, source, add, warn) {
+/* textbooks/<file> or readings/<file> in the private checkout. The public
+ * file still supplies draw, pass and the catalog code. Question order is the
+ * id, so a private file with a different length is ignored while the public
+ * bank still has questions: sync deletes a grading_keys row whose qid is
+ * gone, and a short file would drop answers students are still graded on. */
+function overlayQuestions(keysRoot, rel, file, slug, publicQs, warn) {
+  if (!keysRoot) return null;
+  const kind = rel.endsWith('readings') ? 'readings' : 'textbooks';
+  const p = path.join(keysRoot, kind, file);
+  if (!fs.existsSync(p)) return null;
+  let o;
+  try { o = readJson(p); } catch (e) { warn(`  ${file}: assessment-keys file does not parse (${e.message}); using the public bank`); return null; }
+  if (o.slug && o.slug !== slug) { warn(`  ${file}: assessment-keys slug "${o.slug}" does not match "${slug}"; using the public bank`); return null; }
+  const qs = o.test?.questions || o.questions;
+  if (!Array.isArray(qs)) { warn(`  ${file}: assessment-keys file has no questions; using the public bank`); return null; }
+  if (publicQs.length && qs.length !== publicQs.length) {
+    warn(`  ${file}: assessment-keys has ${qs.length} questions and the public bank has ${publicQs.length}; using the public bank so a short file cannot delete grading keys`);
+    return null;
+  }
+  return qs;
+}
+
+function addTestRows(root, catalog, rel, tag, source, add, warn, keysRoot) {
   const dir = path.join(root, rel);
   for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
     const b = readJson(path.join(dir, f));
     const t = catalog.textbooks[b.slug];
     if (!t || !b.test) { warn(`  skipped ${f}: not a test in worker/catalog.json`); continue; }
     const base = `${tag}:${b.slug}`;
-    const qs = b.test.questions || [];
+    const publicQs = b.test.questions || [];
+    const overlay = overlayQuestions(keysRoot, rel, f, b.slug, publicQs, warn);
+    const qs = overlay || publicQs;
     add(`${base}/meta/0`, 'meta', source, {
       draw: b.test.draw ?? null, pass: b.test.pass ?? null, perReading: b.test.perReading ?? null, perChapter: b.test.perChapter ?? null,
       n: qs.length, code: t.code, kind: t.kind, page: t.page,

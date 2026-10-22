@@ -583,6 +583,8 @@ for (const lang of ['es', 'fr']) {
   ok((await progressOf(code)).completions.length === 0, 'the course is not complete without its textbook test');
   const a = (await start(code, 'tb:cults')).body;
   eq([a.items.mc.length, a.items.fill.length, a.items.sa.length], [0, 20, 0], 'a textbook test draws 20 questions');
+  eq(a.prompts.map((p) => p.qid), a.items.fill, 'the drawn prompts are those questions, in that order');
+  ok(a.prompts.every((p) => p.prompt && typeof p.prompt.en === 'string' && p.prompt.en && !('answer' in p) && !('accept' in p)), 'each prompt is the question text only');
   eq(a.needs, { mc: 0, fill: 18, sa: 0 }, 'and needs 18');
   eq(new Set(a.items.fill).size, 20, 'all different');
   const again = (await start(code, 'tb:cults')).body;
@@ -593,6 +595,8 @@ for (const lang of ['es', 'fr']) {
   res = await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.slice(10).map((qid) => ({ qid, answer: answerOf(qid) })) });
   let sub = (await submit(code, a)).body;
   eq([sub.status, sub.scores.fill.right, sub.lock?.kind], ['failed', 17, 'full'], '17 of 20 fails the textbook test and locks it', sub);
+  eq(sub.prompts.map((p) => p.qid), a.items.fill, 'the failed attempt still names the same prompts, and no key');
+  ok(sub.prompts.every((p) => !('answer' in p) && !('accept' in p)), 'those prompts carry no answer');
   const mins = (Date.parse(sub.lock.until) - Date.now()) / 60000;
   ok(mins > 14 && mins <= 15.1, '15 minutes for a master\'s student', mins);
   unlock(code);
