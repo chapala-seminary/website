@@ -1,0 +1,61 @@
+{
+	// CTS Correspondence Console (issue #163, docs/correspondence-console.md).
+	//
+	// A Worker of its own, separate from the student site: its own database,
+	// its own Access application, its own deploy. Nothing here is deployed by
+	// `npm run deploy` or `npm run deploy:beta`, and nothing here is deployed at
+	// all until Wayne approves M1 (see the rollout section of the doc).
+	//
+	// Same Chapala account as the site (wrangler.jsonc explains why it is pinned).
+	"$schema": "../node_modules/wrangler/config-schema.json",
+	"name": "cts-correspondence",
+	"account_id": "119b0919229edb3185b69f1c6bd04b66",
+	"main": "src/index.js",
+	"compatibility_date": "2026-09-01",
+	"workers_dev": false,
+	"preview_urls": false,
+	"observability": { "enabled": true },
+	// Summaries by model are OFF until settings.ai_enabled is set to '1' by the
+	// owner; the binding only makes it possible.
+	"ai": { "binding": "AI" },
+	"vars": {
+		"ACCESS_TEAM": "chapalatheological",
+		// The console's OWN Access application's audience tag. Empty: the console
+		// answers "Sign-in required." to everyone.
+		"CONSOLE_ACCESS_AUD": "",
+		// email:role pairs; everyone else Access admits is a viewer.
+		"CONSOLE_ROLES": "",
+		// Addresses that are CTS's own besides the mailboxes being read: mail FROM
+		// these is CTS speaking (outbound), never a new correspondent.
+		// Personal addresses Wayne has sent CTS mail from go in the secret
+		// OWN_ADDRESSES_EXTRA, never here: this repository is public.
+		"OWN_ADDRESSES": "chapalatheological@gmail.com,info@chapalaseminary.org,chapalaseminary@gmail.com,certificates@chapalaseminary.org",
+		"SUMMARY_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+		// The ONE account automatic routine replies are sent from (Wayne, 23 Oct
+		// 2026), and its mailbox id. Never info@ (Resend's quota serves the site),
+		// never a personal account. Sending also needs settings.auto_send = 'live',
+		// set by the owner in the console, and his approval of each template.
+		"SEND_ADDRESS": "chapalatheological@gmail.com",
+		"SEND_MAILBOX": "cts-gmail"
+	},
+	"triggers": { "crons": ["*/10 * * * *", "0 13 * * *"] },
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "cts-correspondence",
+			// Created at M1 approval; until then deploy fails, on purpose.
+			"database_id": "00000000-0000-0000-0000-000000000000",
+			"migrations_dir": "migrations"
+		}
+	]
+	// Secrets (wrangler secret put --config correspondence/wrangler.jsonc):
+	//   GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET
+	//   GMAIL_REFRESH_TOKEN_<MAILBOX>   one per mailbox (all six), gmail.readonly scope only;
+	//                                   a token that can send is refused for reading
+	//   GMAIL_SEND_REFRESH_TOKEN        chapalatheological@gmail.com, gmail.send scope ONLY;
+	//                                   refused if it carries any other scope
+	//   OWN_ADDRESSES_EXTRA             the personal addresses (comma list): never in this public file
+	// The mailbox rows (ids, addresses, personal = 1) are inserted into D1 at
+	// setup, not committed: four of the six addresses are personal.
+	// There is deliberately no send_email binding.
+}
