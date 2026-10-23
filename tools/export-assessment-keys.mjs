@@ -44,6 +44,10 @@ function writeKind(kind) {
   for (const file of fs.readdirSync(src).filter((f) => f.endsWith('.json')).sort()) {
     const b = JSON.parse(fs.readFileSync(path.join(src, file), 'utf8'));
     if (!b.test?.questions) continue;
+    if (kind === 'textbooks' && b.test.questions.some((q) => !q?.answer?.en)) {
+      console.error(`${file}: public textbook banks no longer hold answers; refusing to export an answerless bank over the private checkout`);
+      process.exit(2);
+    }
     const body = { slug: b.slug, test: { questions: b.test.questions.map(keep) } };
     fs.writeFileSync(path.join(outDir, file), JSON.stringify(body, null, 2) + '\n');
     n++;

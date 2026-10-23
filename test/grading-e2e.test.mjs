@@ -29,6 +29,7 @@
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
+import { textbookQuestions } from '../tools/grading-keys-lib.mjs';
 
 const BASE = process.argv[2] || process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
@@ -51,7 +52,10 @@ function db(command) {
 const q1 = (command) => db(command)[0];
 const cron = async () => (await fetch(`${BASE}/__scheduled?cron=*%2F15+*+*+*+*`)).status;
 const unitBank = (prefix, n) => JSON.parse(fs.readFileSync(`src/content/units/${prefix}/${n}.json`, 'utf8'));
-const tbBank = (slug) => JSON.parse(fs.readFileSync(`src/content/textbooks/${slug}.json`, 'utf8'));
+const tbBank = (slug) => {
+  const { book, questions } = textbookQuestions('.', slug);
+  return { ...book, test: { ...book.test, questions } };
+};
 const RUN = Date.now().toString(36);
 
 /* ---- a student's browser ---------------------------------------------------- */

@@ -589,7 +589,8 @@ for (const lang of ['es', 'fr']) {
   eq(new Set(a.items.fill).size, 20, 'all different');
   const again = (await start(code, 'tb:cults')).body;
   eq(again.items.fill, a.items.fill, 'the same draw for the same attempt');
-  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const bank = textbookQuestions('.', 'cults').questions;
   const answerOf = (qid) => bank[idx(qid)].answer.en;
   let res = await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.slice(0, 10).map((qid, i) => ({ qid, answer: i < 3 ? 'wrong' : answerOf(qid) })) });
   res = await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.slice(10).map((qid) => ({ qid, answer: answerOf(qid) })) });

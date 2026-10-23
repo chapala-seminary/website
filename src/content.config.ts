@@ -248,7 +248,10 @@ const textbookFillFields = {
   prompt: bilingual.refine((p) => Object.values(p).every(oneBlank), {
     message: `a textbook question must contain exactly one blank, written ${BLANK}, in each language`,
   }),
-  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
+  // Textbook answers live in the private assessment-keys checkout. Public
+  // textbook JSON keeps prompt (and chapter); answer/accept are optional so
+  // the public files can omit them. Reading banks still require answers here.
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)).optional(),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
   // the reading the question is on, in a bank drawn by reading (tools/import-readings.mjs)
@@ -260,9 +263,12 @@ const textbookFill = z.object({ ...textbookFillFields, chapter: z.number().int()
   .superRefine(completeQuestionLanguages);
 /* A required-reading question may name the reading (1 to 5) it is on, so that
    every attempt draws the same number from each reading (test.perReading). */
-const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() }).strict()
-  .superRefine(completeQuestionLanguages);
-const bookHtml = z.string().min(1).superRefine((v, ctx) => {
+const readingFill = z.object({
+  ...textbookFillFields,
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
+  reading: z.number().int().min(1).optional(),
+}).strict()
+  .superRefine(completeQuestionLanguages);const bookHtml = z.string().min(1).superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
   if (found.length) ctx.addIssue({ code: 'custom', message: `HTML entities in a UTF-8 textbook: ${found.join(' ')}` });
   if (/<(script|style|iframe|img)\b/i.test(v)) ctx.addIssue({ code: 'custom', message: 'a textbook body carries text only: no scripts, styles, frames or images' });

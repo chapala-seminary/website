@@ -260,7 +260,7 @@ slug, page name, the course's catalog card, the bank file, the two titles).
 
 ## Where the answer bank lives
 
-A live test page does not include the question bank. The server sends the wording of the twenty questions it drew, and grades them from `grading_keys`. The keys are still in this public repository until the private assessment-keys checkout is what `tools/sync-grading-keys.mjs` reads on deploy. See `docs/ai-grading.md` section 4. The book text stays on the book page. A new bank, including Christian Education, is written only in that private checkout.
+A live test page does not include the question bank. The server sends the wording of the twenty questions it drew, and grades them from `grading_keys`. Public textbook JSON keeps prompts (and chapter); `answer` and `accept` live only in the private `chapala-seminary/assessment-keys` checkout that deploy and CI sync from. See `docs/ai-grading.md` section 4. The book text stays on the book page. Reading-test keys remain in this public repo for a later pass. A new bank, including Christian Education, is written only in that private checkout.
 
 ## October beta audit conversion
 

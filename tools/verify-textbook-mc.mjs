@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { chromium } from 'playwright';
+import { textbookQuestions } from './grading-keys-lib.mjs';
 const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 let checks = 0;
 const ok = (condition, label) => { assert.ok(condition, label); checks++; };
@@ -11,7 +12,8 @@ const w = {};
 vm.runInNewContext(fs.readFileSync('public/assets/js/cts-fill.js', 'utf8'), { window: w, document: {}, setTimeout, clearTimeout });
 for (const file of fs.readdirSync('src/content/textbooks')) {
   const book = JSON.parse(fs.readFileSync(`src/content/textbooks/${file}`, 'utf8'));
-  for (const [i, q] of book.test.questions.entries()) {
+  const keyed = textbookQuestions('.', book.slug).questions;
+  for (const [i, q] of keyed.entries()) {
     ok(!q.options, `${book.slug} Q${i + 1}: typed answer, no choices`);
     for (const lang of ['en', 'es']) {
       ok(w.CTSFill.fillRight(q, q.answer[lang]), `${book.slug} Q${i + 1}/${lang}: key accepted`);

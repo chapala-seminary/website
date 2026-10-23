@@ -86,12 +86,16 @@ function addUnitRows(root, add) {
   }
 }
 
+const hasAnswers = (qs) => Array.isArray(qs) && qs.length > 0 && qs.every((q) => q?.answer && typeof q.answer === 'object' && q.answer.en);
+
 /* textbooks/<file> or readings/<file> in the private checkout. The public
  * file still supplies draw, pass and the catalog code. Question order is the
  * id, so a private file with a different length is ignored while the public
  * bank still has questions: sync deletes a grading_keys row whose qid is
- * gone, and a short file would drop answers students are still graded on. */
-function overlayQuestions(keysRoot, rel, file, slug, publicQs, warn) {
+ * gone, and a short file would drop answers students are still graded on.
+ * Public textbook banks may omit answer/accept; then the private overlay is
+ * required and an answerless public fallback is refused. */
+export function overlayQuestions(keysRoot, rel, file, slug, publicQs, warn = () => {}) {
   if (!keysRoot) return null;
   const kind = rel.endsWith('readings') ? 'readings' : 'textbooks';
   const p = path.join(keysRoot, kind, file);
@@ -102,10 +106,23 @@ function overlayQuestions(keysRoot, rel, file, slug, publicQs, warn) {
   const qs = o.test?.questions || o.questions;
   if (!Array.isArray(qs)) { warn(`  ${file}: assessment-keys file has no questions; using the public bank`); return null; }
   if (publicQs.length && qs.length !== publicQs.length) {
+    if (!hasAnswers(publicQs)) {
+      warn(`  ${file}: assessment-keys has ${qs.length} questions and the public bank has ${publicQs.length}; refusing an answerless public fallback`);
+      return null;
+    }
     warn(`  ${file}: assessment-keys has ${qs.length} questions and the public bank has ${publicQs.length}; using the public bank so a short file cannot delete grading keys`);
     return null;
   }
   return qs;
+}
+
+/** Public textbook file plus private answers when the checkout is present. */
+export function textbookQuestions(root, slug, warn = () => {}) {
+  const file = `${slug}.json`;
+  const pub = readJson(path.join(root, 'src/content/textbooks', file));
+  const publicQs = pub.test?.questions || [];
+  const overlay = overlayQuestions(resolveKeysRoot(root), 'src/content/textbooks', file, slug, publicQs, warn);
+  return { book: pub, questions: overlay || publicQs, fromPrivate: !!overlay };
 }
 
 function addTestRows(root, catalog, rel, tag, source, add, warn, keysRoot) {
@@ -118,6 +135,9 @@ function addTestRows(root, catalog, rel, tag, source, add, warn, keysRoot) {
     const publicQs = b.test.questions || [];
     const overlay = overlayQuestions(keysRoot, rel, f, b.slug, publicQs, warn);
     const qs = overlay || publicQs;
+    if (tag === 'tb' && !hasAnswers(qs)) {
+      throw new Error(`${f}: textbook answers are only in the private assessment-keys checkout; set ASSESSMENT_KEYS or place ../assessment-keys beside this repo`);
+    }
     add(`${base}/meta/0`, 'meta', source, {
       draw: b.test.draw ?? null, pass: b.test.pass ?? null, perReading: b.test.perReading ?? null, perChapter: b.test.perChapter ?? null,
       n: qs.length, code: t.code, kind: t.kind, page: t.page,
@@ -126,7 +146,6 @@ function addTestRows(root, catalog, rel, tag, source, add, warn, keysRoot) {
       { ...keepOnly(q, ['prompt', 'answer', 'accept']), group: q.reading ?? q.chapter ?? null }));
   }
 }
-
 /* The single-page courses (Counseling, Narrative and WiseSpeak Preaching,
  * Ethics): `sp:<page>/<kind>/<i>`, one scope per graded section, and a meta row
  * `sp:<page>/meta/0` with what a pass records. The questions are read from the
