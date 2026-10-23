@@ -18,6 +18,9 @@ STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
 node --test test/release-governance.test.mjs
+# The correspondence console (correspondence/, issue #163): its own Worker
+# and database; these run on Node's SQLite with no server.
+node --test correspondence/test/*.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
 node --test test/assessment-keys.test.mjs
