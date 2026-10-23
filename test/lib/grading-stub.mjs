@@ -27,6 +27,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { textbookQuestions } from '../../tools/grading-keys-lib.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const CODE = 'STUBCODE1';
@@ -45,9 +46,16 @@ export function bankOf(scope) {
     const u = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/content/units', prefix, n + '.json'), 'utf8'));
     return { kind: 'u', mc: u.mc || [], fill: u.fill || [], sa: u.sa || [], title: u.title };
   }
-  const dir = m[1] === 'tb' ? 'textbooks' : 'readings';
-  const b = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/content', dir, m[2] + '.json'), 'utf8'));
-  return { kind: m[1], mc: [], fill: b.test.questions, sa: [], pass: b.test.pass, draw: b.test.draw };
+  if (m[1] === 'tb') {
+    // Public textbook JSON omits answer/accept; load keys from assessment-keys.
+    const { book, questions } = textbookQuestions(ROOT, m[2]);
+    if (!questions.every((q) => q?.answer?.en)) {
+      throw new Error(`tb:${m[2]} needs assessment-keys (public textbook files have no answer/accept)`);
+    }
+    return { kind: 'tb', mc: [], fill: questions, sa: [], pass: book.test.pass, draw: book.test.draw };
+  }
+  const b = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/content/readings', m[2] + '.json'), 'utf8'));
+  return { kind: 'rd', mc: [], fill: b.test.questions, sa: [], pass: b.test.pass, draw: b.test.draw };
 }
 const qidOf = (scope, kind, i) => `${scope}/${kind}/${i}`;
 function publicPrompt(q) {

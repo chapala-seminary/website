@@ -7,11 +7,19 @@ import vm from 'node:vm';
 import { parse } from 'node-html-parser';
 import { chromium } from 'playwright';
 import { leafKey, loadStore } from '../tools/french-readings-lib.mjs';
+import { textbookQuestions } from '../tools/grading-keys-lib.mjs';
 const base = process.argv[2] || 'http://127.0.0.1:8798';
 const langs = ['en','es','fr'];
 let checks=0, passages=0;
 const ok=(value,message)=>{assert.ok(value,message);checks++;};
-const books=['textbooks','readings'].flatMap(kind=>fs.readdirSync(`src/content/${kind}`).filter(f=>f.endsWith('.json')).map(f=>JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`))));
+/* Textbook answer/accept live in assessment-keys; public JSON has prompts only. */
+const books=['textbooks','readings'].flatMap(kind=>fs.readdirSync(`src/content/${kind}`).filter(f=>f.endsWith('.json')).map(f=>{
+  const bank=JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`,'utf8'));
+  if(kind!=='textbooks') return bank;
+  const {questions:keyed}=textbookQuestions('.', bank.slug);
+  const questions=bank.test.questions.map((q,i)=>({...q, answer:keyed[i]?.answer, ...(keyed[i]?.accept?{accept:keyed[i].accept}:{})}));
+  return {...bank, test:{...bank.test, questions}};
+}));
 const documents=new Map(), plainDocuments=new Map();
 const documentFor=file=>{if(!documents.has(file)) documents.set(file,parse(fs.readFileSync(`dist/${file}`,'utf8')));return documents.get(file);};
 const normal=s=>s.replace(/\s+/g,' ').trim();
