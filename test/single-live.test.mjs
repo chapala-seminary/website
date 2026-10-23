@@ -258,10 +258,11 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   ok(await waitText(m.p, 'Passed. This unit is recorded.'), 'Counseling unit 0, master\'s track (with the ten written answers): passed');
   ok(q1(`SELECT COUNT(*) AS n FROM course_completions WHERE student_id = '${mcode}'`)[0].n === 0, 'every unit is on record, but the course waits for its textbook test on the master\'s tracks');
   // pass the textbook test through the API, the way the test page does
-  const tb = JSON.parse(fs.readFileSync('src/content/textbooks/counseling.json', 'utf8'));
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const tbQs = textbookQuestions('.', 'counseling').questions;
   const post = async (path, body) => (await freshFetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ code: mcode, ...body }) })).json();
   const att = await post('/api/attempt', { scope: 'tb:counseling', lang: 'en' });
-  const items = att.items.fill.map((qid) => ({ qid, answer: tb.test.questions[Number(qid.split('/').pop())].answer.en }));
+  const items = att.items.fill.map((qid) => ({ qid, answer: tbQs[Number(qid.split('/').pop())].answer.en }));
   for (let i = 0; i < items.length; i += 10) await post('/api/grade', { attemptId: att.attemptId, items: items.slice(i, i + 10) });
   const res = await post(`/api/attempt/${att.attemptId}/submit`, {});
   ok(res.status === 'passed' && res.courseDone === true, 'passing the textbook test completes the course', res);

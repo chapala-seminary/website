@@ -134,14 +134,17 @@ Every short-answer item gets:
   cannot make sync delete grading keys.
 
   `node tools/export-assessment-keys.mjs <dir>` writes that checkout from
-  the public banks. It refuses to write inside this repo. The public files
-  still hold the keys until a later change, after beta deploy is reading the
-  private checkout and a textbook test has been checked there. The beta
-  Actions workflow checks `chapala-seminary/assessment-keys` out with
-  repository secret `ASSESSMENT_KEYS_TOKEN` (read-only on that repo), sets
-  `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and uses
-  `continue-on-error` so a missing or bad token does not fail the deploy.
-  The Christian Education bank is authored only in that private checkout.
+  public banks that still hold answers. It refuses to write inside this repo,
+  and refuses when public textbook files already omit `answer`/`accept` (so it
+  cannot wipe the private checkout). Public textbook JSON keeps prompts (and
+  chapter); `answer`/`accept` are only in the private checkout. Reading-test
+  and unit-exam keys remain in this public repo for a later pass. The beta and
+  pull-request Actions workflows check `chapala-seminary/assessment-keys` out
+  with repository secret `ASSESSMENT_KEYS_TOKEN` before build/test/deploy, set
+  `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and use
+  `continue-on-error` on the checkout step so a missing token fails later with
+  a clear message instead of a hard checkout error. Shadow textbook pages load
+  keys from that checkout. The Christian Education bank is authored only there.
 
 ## 5. Grading rules (server, `worker/grading/`)
 

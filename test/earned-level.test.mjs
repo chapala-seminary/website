@@ -41,7 +41,8 @@ const start = (code, scope) => post('/api/attempt', { code, scope, lang: 'en' })
 const submit = (code, a) => post(`/api/attempt/${a.attemptId}/submit`, { code });
 
 {
-  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const bank = textbookQuestions('.', 'cults').questions;
   const passTextbook = async (code) => {
     const a = (await start(code, 'tb:cults')).body;
     for (let i = 0; i < 20; i += 10)
@@ -103,7 +104,8 @@ const seedLive = (code, rows) => db(
   // through the API, then units 9 and 10 answered and both submitted at the same moment.
   const code = await student('thm');
   seedLive(code, Array.from({ length: 8 }, (_, i) => [`u:CTSCults/${i + 1}`, 'cults', i + 1]));
-  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const bank = textbookQuestions('.', 'cults').questions;
   const tb = (await start(code, 'tb:cults')).body;
   for (let i = 0; i < 20; i += 10)
     await post('/api/grade', { code, attemptId: tb.attemptId, items: tb.items.fill.slice(i, i + 10).map((qid) => ({ qid, answer: bank[idx(qid)].answer.en })) });

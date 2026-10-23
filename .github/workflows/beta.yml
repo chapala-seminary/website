@@ -25,11 +25,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run build
-      - run: npm test
-      # Private answer banks. continue-on-error: a missing or bad
-      # ASSESSMENT_KEYS_TOKEN must not fail the beta deploy; sync then keeps
-      # reading the public content files.
+      # Private answer banks must be present before build/test: public textbook
+      # JSON no longer holds answer/accept. continue-on-error: a missing token
+      # must not fail the job at checkout; later steps fail clearly if keys are absent.
       - name: Checkout private assessment keys
         id: assessment_keys
         continue-on-error: true
@@ -46,19 +44,18 @@ jobs:
             echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
             echo "Private assessment-keys checkout ready at .assessment-keys"
           else
-            echo "No private assessment-keys checkout; sync will use the public content files."
+            echo "No private assessment-keys checkout; textbook grading needs ASSESSMENT_KEYS_TOKEN."
           fi
+      - run: npm run build
+      - run: npm test
       - name: Deploy the tested beta commit
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CTS_BETA_CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: '119b0919229edb3185b69f1c6bd04b66'
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "Set CTS_BETA_CLOUDFLARE_API_TOKEN in repository Actions secrets."; exit 1; }
-          if [ -n "${ASSESSMENT_KEYS:-}" ]; then
-            echo "Deploy sync will read textbook and reading keys from ASSESSMENT_KEYS=$ASSESSMENT_KEYS"
-          else
-            echo "Deploy sync will read textbook and reading keys from the public content files"
-          fi
+          test -n "${ASSESSMENT_KEYS:-}" || { echo "ASSESSMENT_KEYS is unset; textbook sync needs the private checkout."; exit 1; }
+          echo "Deploy sync will read textbook and reading keys from ASSESSMENT_KEYS=$ASSESSMENT_KEYS"
           npm run deploy:beta:publish
       - name: Verify published beta release and activation
         run: node tools/check-beta-activation.mjs
