@@ -8,16 +8,23 @@
  *   POST /console/pause           stop every automatic step now (any signed-in reviewer or owner)
  *   POST /console/resume          start again (owner)
  *   POST /console/sync            run the mailbox sync now (reviewer, owner)
+ *   GET  /console/auto            automatic replies: mode, templates, what was sent
+ *   POST /console/auto            mode off (reviewer, owner); shadow / live, approve,
+ *                                 withdraw a template (owner only)
  *
  *   cron, every 10 minutes: sync every enabled mailbox; 13:00 UTC daily: retention.
  *
- * There is no route, function or binding here that sends email. M3 adds one,
- * behind settings.sending_enabled and the owner's allowlist.
+ * The only sending is the automatic routine reply (src/autoreply.js,
+ * src/send.js): from one account, approved templates only, behind
+ * settings.auto_send, which starts 'off'. No route sends a message.
  */
 import { consoleUser } from './access.js';
 import { dashboardData, digestText } from './digest.js';
 import { staffUpdate } from './ingest.js';
 import { syncAll, retention } from './sync.js';
+import { autoReport } from './autoreply.js';
+import { TEMPLATES, LANGS, render, templateVersion } from './templates.js';
+import { FACTS, POLICY_VERSION } from './policy.js';
 
 const NOSTORE = { 'cache-control': 'no-store', 'x-robots-tag': 'noindex, nofollow', 'referrer-policy': 'no-referrer',
   'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'" };
@@ -65,7 +72,7 @@ function dashboard(d, user) {
   return page('CTS Correspondence', `<h1>CTS Correspondence</h1><div class="sub">${esc(d.now.slice(0, 16).replace('T', ' '))} UTC · signed in as ${esc(user.email)} (${esc(user.role)})</div>
 ${d.settings.paused === '1' ? '<div class="banner">Paused: no mailbox is being read and nothing automatic runs.</div>' : ''}
 <div class="bar"><form method="post" action="/console/${d.settings.paused === '1' ? 'resume' : 'pause'}"><button ${d.settings.paused === '1' ? '' : 'class="ghost"'}>${d.settings.paused === '1' ? 'Resume' : 'Pause everything'}</button></form>
-<form method="post" action="/console/sync"><button class="ghost">Check mail now</button></form><a class="sub" href="/console/digest.txt">Digest as text</a></div>
+<form method="post" action="/console/sync"><button class="ghost">Check mail now</button></form><a class="sub" href="/console/digest.txt">Digest as text</a> · <a class="sub" href="/console/auto">Automatic replies: ${esc(d.settings.auto_send || 'off')}</a></div>
 ${need ? '' : '<p class="empty">Nothing needs you right now.</p>'}
 ${sec('For Dr. Cook to decide', s.owner)}
 ${sec('Technical problems', s.escalated, 'Stay open until the fix is checked.')}
@@ -77,6 +84,44 @@ ${sec('Conversation links to confirm', s.review_links, 'Same subject from two ma
 <div class="stat"><b>${c.bounces_hard + c.opt_outs}</b><span>do-not-contact</span></div><div class="stat"><b>${c.retrying + c.dead_letters}</b><span>unread (retrying)</span></div></div>
 ${sec('Pending replies', s.pending)}
 <h2>Mailboxes</h2>${d.mailboxes.map((m) => `<div class="card"><div class="who">${esc(m.address)}</div><div class="meta">${m.enabled ? 'reading' : 'not enabled'} · last check ${esc(m.last_sync_at || 'never')}${m.last_error ? ` · <span class="pill urgent">${esc(m.last_error)}</span>` : ''}</div></div>`).join('') || '<div class="sub">No mailbox approved yet.</div>'}`);
+}
+
+const MODE_TEXT = {
+  off: 'Off: no automatic replies are planned or sent.',
+  shadow: 'Shadow: each routine reply is written and recorded here, but NOT sent. Use this to check the texts.',
+  live: 'Live: approved routine replies are sent from chapalatheological@gmail.com.',
+};
+const STATUS_TEXT = { pending: 'waiting', shadow: 'would have sent', sending: 'sending', sent: 'sent', blocked: 'held for a person',
+  superseded: 'not needed', failed: 'failed', unknown: 'unconfirmed: check Sent', cancelled: 'cancelled' };
+
+async function autoView(env, user) {
+  const a = await autoReport(env);
+  const owner = user.role === 'owner';
+  const mode = a.settings.mode;
+  const modeForm = (m, label) => `<form method="post" action="/console/auto"><input type="hidden" name="mode" value="${m}"><button ${m === mode ? '' : 'class="ghost"'}>${label}</button></form>`;
+  const c = a.counts;
+  const tpl = a.templates.map((t) => {
+    const T = TEMPLATES[t.id];
+    const facts = T.facts.map((f) => `<div class="meta">• ${esc(FACTS[f].text)} <span class="pill">${esc(FACTS[f].status)}</span> <span class="sub">${esc(FACTS[f].source)}</span></div>`).join('');
+    const texts = LANGS.map((l) => `<details><summary class="sub">${l.toUpperCase()} text</summary><pre>${esc(render([t.id], l, 'Maria'))}</pre></details>`).join('');
+    const btn = owner ? (t.standing.ok
+      ? `<form method="post" action="/console/auto"><input type="hidden" name="withdraw" value="${t.id}"><button class="ghost">Withdraw approval</button></form>`
+      : `<form method="post" action="/console/auto"><input type="hidden" name="approve" value="${t.id}"><input type="hidden" name="version" value="${t.version}"><button>Approve this text</button></form>`) : '';
+    return `<div class="card"><div class="who">${esc(t.title)}</div><div class="meta">${t.standing.ok ? '<span class="pill">approved</span>' : `<span class="pill high">not sendable</span> ${esc(t.standing.reason)}`} · version ${t.version}</div>${facts}${texts}<div class="bar">${btn}</div></div>`;
+  }).join('');
+  const recent = a.recent.map((r) => `<div class="card"><div class="meta"><span class="pill${r.status === 'blocked' || r.status === 'unknown' || r.status === 'failed' ? ' high' : ''}">${esc(STATUS_TEXT[r.status] || r.status)}</span>
+${esc(r.display_name || r.to_addr)} · ${esc(r.intents.replace(/,/g, ', '))} · ${esc(r.language)} · ${esc(r.updated_at.slice(0, 16).replace('T', ' '))} · <a href="/console/cases/${r.case_id}">case ${r.case_id}</a></div>
+${r.reason ? `<div class="meta">${esc(r.reason)}</div>` : ''}${r.body ? `<details><summary class="sub">Text</summary><pre>${esc(r.subject || '')}
+
+${esc(r.body)}</pre></details>` : ''}</div>`).join('');
+  return html(page('Automatic replies', `<p><a class="sub" href="/console">← Console</a></p><h1>Automatic replies</h1>
+<div class="sub">Policy ${esc(POLICY_VERSION)} · up to ${a.settings.cap} a day · sent ${a.settings.delay} minutes after the student's message, unless someone answers first from any mailbox.</div>
+<div class="card">${esc(MODE_TEXT[mode])}</div>
+<div class="bar">${modeForm('off', 'Off')}${owner ? modeForm('shadow', 'Shadow (record only)') + modeForm('live', 'Live (send)') : ''}</div>
+${a.settings.paused ? '<div class="banner">Paused: nothing automatic runs, including these replies.</div>' : ''}
+<h2>Last 24 hours</h2><div class="stats">${['sent', 'shadow', 'blocked', 'superseded', 'unknown', 'failed', 'pending'].map((k) => `<div class="stat"><b>${c[k] || 0}</b><span>${esc(STATUS_TEXT[k])}</span></div>`).join('')}</div>
+<h2>Templates · a template is sent only when approved and all its facts are confirmed</h2>${tpl}
+<h2>Recent</h2>${recent || '<div class="sub">None yet.</div>'}`));
 }
 
 async function caseView(env, id, user) {
@@ -124,6 +169,7 @@ export async function handle(request, env) {
     if (p === '/console') return html(dashboard(await dashboardData(env), user));
     if (p === '/console/data.json') return json(await dashboardData(env));
     if (p === '/console/digest.txt') return txt(digestText(await dashboardData(env)));
+    if (p === '/console/auto') return autoView(env, user);
     const m = p.match(/^\/console\/cases\/(\d+)$/);
     if (m) return caseView(env, Number(m[1]), user);
     return txt('Not found', 404);
@@ -134,6 +180,29 @@ export async function handle(request, env) {
   if (p === '/console/resume') { if (user.role !== 'owner') return txt('Only the owner can resume.', 403); await setSetting(env, 'paused', '0', user.email); return back(); }
   if (user.role === 'viewer') return txt('Not allowed', 403);
   if (p === '/console/sync') { await syncAll(env); return back(); }
+  if (p === '/console/auto') {
+    const f = await request.formData();
+    const mode = f.get('mode');
+    if (mode) {
+      if (!['off', 'shadow', 'live'].includes(mode)) return txt('Unknown mode', 400);
+      if (mode !== 'off' && user.role !== 'owner') return txt('Only the owner can turn automatic replies on.', 403);
+      await setSetting(env, 'auto_send', mode, user.email);
+      return back('/console/auto');
+    }
+    if (user.role !== 'owner') return txt('Only the owner approves templates.', 403);
+    const row = await env.DB.prepare("SELECT value FROM settings WHERE key = 'approved_templates'").first();
+    let approved = {};
+    try { approved = JSON.parse(row?.value || '{}'); } catch { approved = {}; }
+    const id = f.get('approve') || f.get('withdraw');
+    if (!TEMPLATES[id]) return txt('No such template', 400);
+    if (f.get('approve')) {
+      // the version shown on the page is the one approved; if the text changed meanwhile, nothing is approved
+      if (f.get('version') !== templateVersion(id)) return txt('The text changed since the page was opened; reload and read it again.', 409);
+      approved[id] = templateVersion(id);
+    } else delete approved[id];
+    await setSetting(env, 'approved_templates', JSON.stringify(approved), user.email);
+    return back('/console/auto');
+  }
   const m = p.match(/^\/console\/cases\/(\d+)$/);
   if (m) {
     const f = await request.formData();

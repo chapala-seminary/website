@@ -30,7 +30,13 @@
 		// Personal addresses Wayne has sent CTS mail from go in the secret
 		// OWN_ADDRESSES_EXTRA, never here: this repository is public.
 		"OWN_ADDRESSES": "chapalatheological@gmail.com,info@chapalaseminary.org,chapalaseminary@gmail.com,certificates@chapalaseminary.org",
-		"SUMMARY_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast"
+		"SUMMARY_MODEL": "@cf/meta/llama-3.1-8b-instruct-fast",
+		// The ONE account automatic routine replies are sent from (Wayne, 23 Oct
+		// 2026), and its mailbox id. Never info@ (Resend's quota serves the site),
+		// never a personal account. Sending also needs settings.auto_send = 'live',
+		// set by the owner in the console, and his approval of each template.
+		"SEND_ADDRESS": "chapalatheological@gmail.com",
+		"SEND_MAILBOX": "cts-gmail"
 	},
 	"triggers": { "crons": ["*/10 * * * *", "0 13 * * *"] },
 	"d1_databases": [
@@ -44,7 +50,12 @@
 	]
 	// Secrets (wrangler secret put --config correspondence/wrangler.jsonc):
 	//   GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET
-	//   GMAIL_REFRESH_TOKEN_<MAILBOX>   one per approved mailbox, gmail.readonly scope only
-	//   OWN_ADDRESSES_EXTRA             other addresses CTS mail is sent from (comma list)
+	//   GMAIL_REFRESH_TOKEN_<MAILBOX>   one per mailbox (all six), gmail.readonly scope only;
+	//                                   a token that can send is refused for reading
+	//   GMAIL_SEND_REFRESH_TOKEN        chapalatheological@gmail.com, gmail.send scope ONLY;
+	//                                   refused if it carries any other scope
+	//   OWN_ADDRESSES_EXTRA             the personal addresses (comma list): never in this public file
+	// The mailbox rows (ids, addresses, personal = 1) are inserted into D1 at
+	// setup, not committed: four of the six addresses are personal.
 	// There is deliberately no send_email binding.
 }

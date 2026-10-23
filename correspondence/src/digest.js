@@ -48,9 +48,11 @@ export async function dashboardData(env, now = env.NOW ? env.NOW() : new Date().
     retrying: (await q(`SELECT COUNT(*) n FROM dead_letters WHERE given_up = 0`)).n || 0,
   };
   const byStatus = (await db.prepare(`SELECT track, status, COUNT(*) n FROM cases WHERE track <> 'automated' GROUP BY track, status`).all()).results || [];
-  const mailboxes = (await db.prepare('SELECT id, address, enabled, last_sync_at, last_error FROM mailboxes ORDER BY id').all()).results || [];
+  const mailboxes = (await db.prepare('SELECT id, address, enabled, personal, last_sync_at, last_error FROM mailboxes ORDER BY id').all()).results || [];
   const flags = await (await import('./sync.js')).settings(env);
-  return { now, sections, counts, byStatus, mailboxes, settings: flags };
+  const auto = await (await import('./autoreply.js')).autoReport(env);
+  counts.skipped_personal_24h = (await q(`SELECT COUNT(*) n FROM skipped_messages WHERE at >= ?`, since)).n || 0;
+  return { now, sections, counts, byStatus, mailboxes, settings: flags, auto };
 }
 
 /** The daily digest as plain text: only what needs a person. */
@@ -74,6 +76,14 @@ export function digestText(d) {
   L.push(`Last 24h: ${c.received_24h} received, ${c.automated_24h} automated (not shown).`);
   L.push(`Do-not-contact: ${c.bounces_hard} failed addresses, ${c.opt_outs} opt-outs; ${c.bounces_soft_watch} delayed addresses being watched.`);
   if (c.dead_letters || c.retrying) L.push(`Messages that could not be read: ${c.retrying} retrying, ${c.dead_letters} need a person.`);
+  if (c.skipped_personal_24h) L.push(`Personal mailboxes: ${c.skipped_personal_24h} private message(s) left unread by the console.`);
+  if (d.auto) {
+    const a = d.auto, since = Date.parse(d.now) - 86400000;
+    const recent = a.recent.filter((r) => Date.parse(r.updated_at) >= since);
+    L.push('', `Automatic replies (${a.settings.mode}): ${a.counts.sent || 0} sent, ${a.counts.shadow || 0} recorded only, ${a.counts.blocked || 0} held for a person, ${a.counts.superseded || 0} not needed.`);
+    for (const r of recent.filter((x) => ['sent', 'shadow', 'blocked', 'unknown', 'failed'].includes(x.status)).slice(0, 40))
+      L.push(`- ${r.status === 'shadow' ? 'would send' : r.status}: ${r.display_name || r.to_addr} — ${r.intents.replace(/,/g, ', ')} (${r.language}), case #${r.case_id}${r.reason && r.status !== 'shadow' ? `. ${r.reason}` : ''}`);
+  }
   for (const m of d.mailboxes) if (m.last_error) L.push(`Mailbox ${m.id}: ${m.last_error}`);
   if (d.settings.paused === '1') L.push('PAUSED: automatic processing is stopped.');
   return L.join('\n');

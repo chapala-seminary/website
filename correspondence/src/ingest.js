@@ -13,6 +13,8 @@
 import { normAddress, displayName, addressList, excerpt as makeExcerpt, questionWords, similarity } from './normalize.js';
 import { lane as laneOf, bouncedAddress, classify, flagsFor, decide, POLICY, QUIET_LANES } from './triage.js';
 import { updateSummary, nextAction, promisesIn, summaryPrompt, checkModelSummary, SUMMARY_PROMPT_VERSION } from './summary.js';
+import { ctsReason } from './relevance.js';
+import { planAutoReply } from './autoreply.js';
 
 export const DUPLICATE_QUESTION_SIMILARITY = 0.6;
 export const SOFT_BOUNCE_REVIEW_AFTER = 3;
@@ -158,6 +160,40 @@ export async function ingestMessage(env, msg) {
   const ex = makeExcerpt(msg.body);
   const base = { from_norm: from, subject: msg.subject, headers: msg.headers || {}, excerpt: ex, body: msg.body };
   const lane = outbound ? (laneOf(base, own) === 'automated' ? 'automated' : 'own_outbound') : laneOf(base, own);
+
+  // a personal mailbox: only the seminary's mail enters the ledger
+  const mailbox = await mailboxRow(env, msg.mailbox_id);
+  if (mailbox && mailbox.personal) {
+    if (await one(db, 'SELECT 1 FROM messages WHERE mailbox_id = ? AND provider_msg_id = ?', msg.mailbox_id, msg.provider_msg_id)) return { duplicate: true };
+    const why = await ctsReason(db, msg, own);
+    if (!why) {
+      await run(db, 'INSERT INTO skipped_messages (mailbox_id, provider_msg_id, at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING', msg.mailbox_id, msg.provider_msg_id, at);
+      return { skipped: true };
+    }
+  }
+
+  // the same email already stored from another mailbox (forwarding, CC, a
+  // copy in Sent): note the copy on the same case and do nothing else, so it
+  // is never counted, queued or answered twice
+  if (msg.rfc_message_id) {
+    const first = await one(db, `SELECT m.id, t.case_id FROM messages m JOIN threads t ON t.id = m.thread_id
+                                 WHERE m.rfc_message_id = ? AND m.mailbox_id <> ? AND m.copy_of IS NULL ORDER BY m.id LIMIT 1`, msg.rfc_message_id, msg.mailbox_id);
+    if (first) {
+      const th = await threadFor(db, msg, at);
+      const c = await run(db, `INSERT INTO messages (mailbox_id, provider_msg_id, thread_id, rfc_message_id, in_reply_to, direction,
+                               from_norm, to_norm, internal_ms, subject, excerpt, lane, view_url, ingested_at, copy_of)
+                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, 'copy', ?, ?, ?)
+                               ON CONFLICT(mailbox_id, provider_msg_id) DO NOTHING`,
+        msg.mailbox_id, msg.provider_msg_id, th.id, msg.rfc_message_id, msg.in_reply_to || null, outbound ? 'out' : 'in',
+        from, to.join(','), msg.internal_ms, msg.subject || null, msg.view_url || null, at, first.id);
+      if (!c.meta.changes) return { duplicate: true };
+      if (first.case_id && !th.case_id) await run(db, 'UPDATE threads SET case_id = ? WHERE id = ?', first.case_id, th.id);
+      const id = (await one(db, 'SELECT id FROM messages WHERE mailbox_id = ? AND provider_msg_id = ?', msg.mailbox_id, msg.provider_msg_id)).id;
+      if (first.case_id) await event(db, at, first.case_id, id, 'rules', 'copy', { mailbox: msg.mailbox_id, of: first.id });
+      return { messageId: id, lane: 'copy', caseId: first.case_id || null, copyOf: first.id };
+    }
+  }
+
   const thread = await threadFor(db, msg, at);
 
   // claim the message: the unique key makes a second delivery a no-op
@@ -300,7 +336,14 @@ export async function ingestMessage(env, msg) {
   }
   await saveCase(db, c, at);
   await event(db, at, caseId, messageId, 'rules', 'inbound', { category, flags, decision: d, link });
-  return { messageId, lane, caseId, category, flags, link, status: c.status, needs_owner: c.needs_owner };
+  const auto = await planAutoReply(env, { caseId, messageId, msg, excerpt: ex, category, flags, contact: counterpart, link });
+  return { messageId, lane, caseId, category, flags, link, status: auto.status || c.status, needs_owner: c.needs_owner, auto };
+}
+
+async function mailboxRow(env, id) {
+  env._mailboxes = env._mailboxes || {};
+  if (!(id in env._mailboxes)) env._mailboxes[id] = await one(env.DB, 'SELECT id, address, personal FROM mailboxes WHERE id = ?', id);
+  return env._mailboxes[id];
 }
 
 /** A person changes a case by hand (status, assignee, due date, seed labels).

@@ -90,3 +90,25 @@ test('with the model on, it can name a category the rules missed but never relax
   assert.equal((await e2.DB.prepare('SELECT category, needs_owner FROM cases WHERE id = ?').bind(r2.caseId).first()).category, 'security_privacy');
   assert.equal((await e2.DB.prepare("SELECT COUNT(*) n FROM case_events WHERE kind = 'ai_summary'").first()).n, 1, 'model calls are logged');
 });
+
+test('automatic replies page: only the owner turns them on or approves a text; anyone with rights can turn them off', async () => {
+  const { templateVersion } = await import('../src/templates.js');
+  const e = await env();
+  const page = await handle(req('/console/auto', 'viewer@example.org'), e);
+  assert.equal(page.status, 200);
+  const body = await page.text();
+  assert.match(body, /Off: no automatic replies/);
+  assert.match(body, /not yet approved by Dr\. Cook/);
+  const setting = async (k) => (await e.DB.prepare('SELECT value FROM settings WHERE key = ?').bind(k).first()).value;
+  assert.equal((await handle(req('/console/auto', 'rev@example.org', form({ mode: 'live' })), e)).status, 403);
+  assert.equal((await handle(req('/console/auto', 'rev@example.org', form({ approve: 'lost_code', version: templateVersion('lost_code') })), e)).status, 403);
+  assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ mode: 'shadow' })), e)).status, 303);
+  assert.equal(await setting('auto_send'), 'shadow');
+  assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ approve: 'lost_code', version: 'stale' })), e)).status, 409, 'approves only the text that was read');
+  assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ approve: 'lost_code', version: templateVersion('lost_code') })), e)).status, 303);
+  assert.deepEqual(JSON.parse(await setting('approved_templates')), { lost_code: templateVersion('lost_code') });
+  assert.equal((await handle(req('/console/auto', 'rev@example.org', form({ mode: 'off' })), e)).status, 303, 'a reviewer can always stop it');
+  assert.equal(await setting('auto_send'), 'off');
+  assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ withdraw: 'lost_code' })), e)).status, 303);
+  assert.deepEqual(JSON.parse(await setting('approved_templates')), {});
+});

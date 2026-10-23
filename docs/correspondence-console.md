@@ -256,6 +256,81 @@ real D1 and real Gmail before any scaling decision.
 
 ---
 
+## 10a. All six mailboxes and automatic routine replies (23 Oct 2026)
+
+Wayne, 23 Oct 2026: "Since we advertise using all emails we may need to
+include them all. I think it best to automatically respond to students for
+routine responses." Then: "check all six" (the personal accounts included;
+some may be dropped later). ChatGPT's review is in the tracker, Assistant
+Messages row 348; the founder guardrail is #163 comment 6365570007. Built in
+`migrations/0002_all_inboxes_auto_reply.sql` and `src/relevance.js`,
+`src/policy.js`, `src/templates.js`, `src/autoreply.js`, `src/send.js`.
+
+**Reading.** Each of the six connected Gmail accounts is a mailbox row with its
+own read-only token. Two are institutional (ChapalaTheological, chapalaseminary);
+four are personal, marked `personal = 1`. info@chapalaseminary.org is an alias,
+read wherever it delivers. From a personal mailbox a message enters the ledger
+only on evidence that it is the seminary's: it answers a message already in
+the ledger, it names the seminary, or its counterpart is a seminary contact and
+it speaks of study. Anything else is not stored at all, only its id, so it is
+not fetched again (ids cleared after 30 days). The personal addresses are not
+in this public repository: the mailbox rows and `OWN_ADDRESSES_EXTRA` are set
+in D1 and secrets.
+
+**One message, once.** The same email in two mailboxes (a personal account forwarding to
+ChapalaTheological; a CC; a copy in Sent) has the same Message-ID: the second
+copy is stored as a copy of the first, joins the same case, and does nothing
+else. Cases are still never merged on a sender address alone.
+
+**Automatic replies.** Only from approved templates, never written by a model:
+how to start; a group wanting to study (everyone may register now, no limit,
+partnership separate); lost student code; retaking exams; course requirements;
+is it free; how to get a certificate; languages. English, Spanish and French.
+A reply is planned when a student's message asks only these questions, and is
+due 30 minutes later. When due it is checked again against everything read from
+all six mailboxes: if anyone answered from any account, if the student wrote
+again, or if the case became one for Dr. Cook, it is not sent. Never automatic:
+partnership, faculty, money, security, doctrine, credit or any commitment;
+technical problems (they need diagnosis); offline/coordinator matters;
+completion reports and missing certificates; opt-outs; suspicious text; other
+languages; mail older than 48 hours; long or many-question letters; and the
+follow-up in a case that already had an automatic reply. A thank-you after CTS
+answered closes the case without a reply.
+
+**Policy, versioned.** `src/policy.js` lists every fact a template rests on,
+each marked confirmed (Dr. Cook), published (the live site says it), proposed
+or unverified. A template is sendable only if all its facts are confirmed or
+published AND Dr. Cook approved its exact text in the console (the approval is
+a hash of the words; any edit needs a new approval). "Languages" rests on a
+proposed fact and cannot be sent until he confirms it. Every outgoing text
+passes `validateReply()`, which blocks invented limits (pilot, small group
+first, quota, waiting list, waiting for a partnership), accreditation and
+credit promises, fees, waived exams, promises about paper exams (allowed only
+as "being developed"), the wrong title, outside links and addresses.
+
+**Sending.** One account, chapalatheological@gmail.com, with a token that
+carries `gmail.send` and nothing else (refused otherwise); reading tokens still
+refuse anything that can send. Never info@/Resend, never a personal account.
+The reply threads into the student's message (natively when it arrived in the
+sending account, by In-Reply-To/References otherwise), is marked
+`Auto-Submitted: auto-replied`, and says plainly that it is automatic and that
+a reply reaches a person. Each message gets at most one automatic answer (a
+unique key on its Message-ID); a send is tried once, and an unconfirmed one is
+marked for a person to check Sent, never retried. Daily cap 40. A run in which
+any mailbox could not be read sends nothing.
+
+**Switches.** `auto_send`: off (default) → shadow (writes exactly what would
+be sent, sends nothing) → live. Only the owner turns it on or approves texts;
+any reviewer can turn it off; Pause stops everything. The console's
+"Automatic replies" page shows each template, its facts and their standing,
+the texts in all three languages, and every reply with its status; the daily
+digest lists every reply sent or recorded.
+
+Not built here: the 7/21/42-day inactivity messages (a proposal, not approved;
+the site's `worker/outreach.js` already sends at 7 and 21 days), and the
+technical-diagnosis workflow of #161 (technical problems are never answered
+automatically; they stay escalated for a person).
+
 ## 11. Rollout — every step needs Wayne's approval
 
 | Step | What happens | Sends mail? |
@@ -263,8 +338,9 @@ real D1 and real Gmail before any scaling decision.
 | **M0** ✔ | this document, the schema, the policy matrix, the baseline | no |
 | **M1** (built) | read-only sync of **ChapalaTheological@gmail.com** (covers info@), cases, summaries, dashboard, digest | no |
 | M1 shadow week | run beside the weekly manual review; compare what each caught | no |
-| M2 | other approved CTS accounts; reviewer drafts in Gmail (thread-safe From/To); sheet import; student-record lookup; site support form | no (drafts only) |
-| M3 | owner-approved templates on an allowlist, canary first, audit and rollback | only after written authorization |
+| M2 (built 23 Oct) | all six Gmail accounts, personal ones filtered to seminary mail; copies across mailboxes | no |
+| M3 (built 23 Oct, off) | automatic routine replies: shadow first, then live with each template approved by Wayne (authorized 23 Oct for routine student replies) | only in live, approved templates only |
+| later | reviewer drafts in Gmail; sheet import; student-record lookup; site support form | no (drafts only) |
 | M4 | load test on real infrastructure; cost, lag, error rates | no |
 
 ## 12. Blockers — what only Wayne can do
@@ -282,17 +358,21 @@ real D1 and real Gmail before any scaling decision.
    `correspondence/wrangler.jsonc`, and create a **separate** Access application
    for the console's hostname naming who may sign in.
 3. **Roles:** which email is owner, which are reviewers.
-4. **Mailboxes for M2:** whether `chapalaseminary@gmail.com` (most outreach was
-   sent from it) and Wayne's personal accounts count as institutional accounts.
-   Until approved they are only recognized as CTS's own addresses (the personal
-   ones through the secret `OWN_ADDRESSES_EXTRA`, since this repository is public), so mail *from*
-   them is recognized as CTS speaking; they are not read.
+4. **Mailboxes:** decided 23 Oct 2026, all six. Each needs its own read-only
+   sign-in (`GMAIL_REFRESH_TOKEN_<ID>`), and ChapalaTheological a second,
+   send-only sign-in (`GMAIL_SEND_REFRESH_TOKEN`).
+6. **Automatic replies:** read the templates on the console's Automatic
+   replies page, approve the ones to use, confirm or correct the "languages"
+   fact, watch a shadow week, then switch to live.
 5. **Model summaries:** whether to turn `ai_enabled` on after the shadow week.
 
 ## 13. Tests
 
-`npm run test:correspondence` (also first in `test/run-tests.sh`): 36 tests, all
-passing on 22 Oct 2026 — every acceptance test in the issue, the four seed
+`npm run test:correspondence` (also first in `test/run-tests.sh`): 55 tests, all
+passing on 23 Oct 2026 (19 new: personal-mail privacy, copies across mailboxes,
+shadow and live sending, approval, superseding answers from any mailbox, never-
+automatic cases, unknown sends, caps, the founder regressions (a)–(f), the send
+token's scope, header injection, the console's switches); 36 passing on 22 Oct 2026 — every acceptance test in the issue, the four seed
 examples (synthetic stand-ins), sync and recovery against a fake Gmail, access
 and roles, model-output checks, and the rule set. The SQL was also applied to a
 local D1 with wrangler, and the Worker answered `/health` and refused

@@ -3,10 +3,14 @@
  *   syncAll(env)          every enabled mailbox (the cron calls this)
  *   syncMailbox(env, mb)  one mailbox
  *
- * Stops at once when settings.paused = '1'. Never sends anything.
+ * Stops at once when settings.paused = '1'. Reading never sends anything;
+ * after every mailbox is read, processAutoReplies() handles the routine
+ * replies that are due (src/autoreply.js), so its "has anyone answered?"
+ * check sees the newest mail from all six accounts.
  */
 import { accessToken, gmailClient, parseGmail } from './gmail.js';
 import { ingestMessage } from './ingest.js';
+import { autoSettings, processAutoReplies } from './autoreply.js';
 
 export const BUDGET = 200;            // messages per mailbox per run
 export const BOOTSTRAP_DAYS = 14;     // first run: how far back to read
@@ -27,8 +31,8 @@ async function ingestId(env, mb, client, id, stats) {
     const m = parseGmail(mb.id, await client.message(id));
     m.view_url = `https://mail.google.com/mail/?authuser=${encodeURIComponent(mb.address)}#all/${m.provider_thread_id}`;
     const r = await ingestMessage(env, m);
-    if (r.duplicate) stats.duplicates++; else stats.ingested++;
-    if (!r.duplicate && m.internal_ms > (stats.newest || 0)) stats.newest = m.internal_ms;
+    if (r.duplicate) stats.duplicates++; else if (r.skipped) stats.skipped = (stats.skipped || 0) + 1; else stats.ingested++;
+    if (!r.duplicate && !r.skipped && m.internal_ms > (stats.newest || 0)) stats.newest = m.internal_ms;
     await env.DB.prepare('DELETE FROM dead_letters WHERE mailbox_id = ? AND provider_msg_id = ?').bind(mb.id, id).run();
   } catch (e) {
     if (e.status === 404) { stats.gone++; return; }   // deleted before we read it
@@ -71,6 +75,7 @@ export async function syncMailbox(env, mb) {
     for (const id of ids) {
       // already stored: skip without a Gmail read and without using budget
       if (await env.DB.prepare('SELECT 1 FROM messages WHERE mailbox_id = ? AND provider_msg_id = ?').bind(mb.id, id).first()) { stats.duplicates++; continue; }
+      if (await env.DB.prepare('SELECT 1 FROM skipped_messages WHERE mailbox_id = ? AND provider_msg_id = ?').bind(mb.id, id).first()) { stats.duplicates++; continue; }
       if (budget-- <= 0) { stats.more = true; break; }
       await ingestId(env, mb, client, id, stats);
     }
@@ -113,6 +118,7 @@ export async function syncAll(env) {
   const s = await settings(env);
   if (s.paused === '1') return { paused: true };
   env.AI_ENABLED = s.ai_enabled === '1';
+  env._auto = await autoSettings(env);
   const mbs = (await env.DB.prepare('SELECT * FROM mailboxes WHERE enabled = 1').all()).results || [];
   const out = [];
   for (const mb of mbs) {
@@ -122,7 +128,11 @@ export async function syncAll(env) {
       out.push({ mailbox: mb.id, error: String(e.message || e) });
     }
   }
-  return { mailboxes: out };
+  // a mailbox that could not be read might hold the answer that makes an
+  // automatic reply unnecessary: no sending in a run with a read failure
+  const failedRead = out.some((r) => r.error);
+  const auto = failedRead ? { held: 'a mailbox could not be read this run' } : await processAutoReplies(env);
+  return { mailboxes: out, auto };
 }
 
 export const RETENTION_DAYS = 180;
@@ -130,5 +140,10 @@ export const RETENTION_DAYS = 180;
 export async function retention(env) {
   const cut = new Date(Date.parse(nowIso(env)) - RETENTION_DAYS * 86400000).toISOString();
   const r = await env.DB.prepare('UPDATE messages SET excerpt = NULL WHERE excerpt IS NOT NULL AND ingested_at < ?').bind(cut).run();
+  // the bodies of automatic replies are kept as long as excerpts, then cleared
+  await env.DB.prepare("UPDATE auto_replies SET body = NULL WHERE body IS NOT NULL AND updated_at < ?").bind(cut).run();
+  // ids of skipped personal mail are only needed while Gmail could list them again
+  const skipCut = new Date(Date.parse(nowIso(env)) - 30 * 86400000).toISOString();
+  await env.DB.prepare('DELETE FROM skipped_messages WHERE at < ?').bind(skipCut).run();
   return { cleared: r.meta.changes };
 }
