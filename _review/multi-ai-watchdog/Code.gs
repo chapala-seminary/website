@@ -1,5 +1,5 @@
 /**
- * CTS Multi-AI Watchdog — Google Apps Script pilot, version 0.4 (2026-10-24)
+ * CTS Multi-AI Watchdog — Google Apps Script pilot, version 0.5 (2026-10-24)
  *
  * Safe by default: No API requests unless Script Property
  * ENABLE_LIVE_REQUESTS=YES AND each job's Approval cell is APPROVED.
@@ -85,6 +85,7 @@ function ctsWatchdog() {
     var remaining = ctsPilotCapUsd_(props) - ctsReservedSpendUsd_(log);
     if (remaining <= 0) { Logger.log('Total pilot spending cap reached'); return; }
     var values = jobs.getDataRange().getValues();
+    ctsValidateJobTable_(values);
     var now = new Date();
     for (var i=1;i<values.length;i++) {
       var row = values[i].map(function(x){return x === null ? '' : String(x);});
@@ -105,6 +106,13 @@ function ctsWatchdog() {
       }
       if (state !== 'READY' && state !== 'CONTINUE') continue;
       var due = ctsReadDate_(row[8]);
+      // A corrupted/malformed schedule must never trigger an early paid call.
+      if (String(row[8]).trim() && !due) {
+        row[2]='REVIEW_REQUIRED'; row[13]='Invalid Next Run UTC date; correct before dispatch';
+        row[14]=now.toISOString(); ctsWriteRow_(jobs,i+1,row);
+        ctsLog_(log,row[0],row[1],'INVALID_SCHEDULE',row[2],row[13],0);
+        continue;
+      }
       if (due && now < due) continue;
       ctsExecuteJob_(jobs,log,i+1,row,props,now);
       break; // Exactly one paid call per watchdog tick.
@@ -156,7 +164,7 @@ function ctsExecuteJob_(jobs,log,rowNumber,row,props,now) {
     }
     row[12] = result.text.slice(-CTS.maxOutputCellCharacters);
     row[7] = new Date().toISOString(); row[14] = row[7];
-    var decision = ctsClassifyReply_(result.text,attempts+1,maxAttempts);
+    var decision = ctsClassifyReply_(result.text,attempts+1,maxAttempts,result.truncated);
     row[2] = decision;
     if (decision === 'CONTINUE') {
       row[8] = new Date(Date.now()+CTS.minimumContinuationMinutes*60000).toISOString();
@@ -225,8 +233,11 @@ function ctsBuildPrompt_(task,instructions,lesson,checkpoint) {
   return text;
 }
 
-function ctsClassifyReply_(txt,attempt,maxAttempts) {
+function ctsClassifyReply_(txt,attempt,maxAttempts,truncated) {
   var finalText=String(txt||'').trim();
+  // An HTTP success can still be an incomplete model response (token ceiling).
+  // Never accept its own DONE marker as proof of completion after forced truncation.
+  if (truncated) return attempt>=maxAttempts?'REVIEW_REQUIRED':'CONTINUE';
   if (/\[\[CTS_NEEDS_APPROVAL\]\]$/.test(finalText)) return 'WAITING_APPROVAL';
   if (/\[\[CTS_BLOCKED\]\]$/.test(finalText)) return 'BLOCKED';
   if (/\[\[CTS_DONE\]\]$/.test(finalText)) return 'DONE';
@@ -236,6 +247,17 @@ function ctsClassifyReply_(txt,attempt,maxAttempts) {
 /** Verify the provider configuration before reserving money or creating an API_STARTED.
  * Never log credentials; API keys are Script Properties only.
  */
+/** Two identically named jobs can otherwise run independently and incur duplicate charges. */
+function ctsValidateJobTable_(rows) {
+  var seen=Object.create(null);
+  for (var i=1;i<rows.length;i++) {
+    var id=String((rows[i]||[])[0]||'').trim();
+    if (!id) continue;
+    if (seen[id]) throw new Error('Duplicate Job ID '+id+' in AI Jobs; repair before any API call');
+    seen[id]=true;
+  }
+}
+
 function ctsAssertProviderReady_(provider,props) {
   if (['openai','claude','deepseek'].indexOf(provider)<0) throw new Error('Unknown provider');
   var prefix=provider.toUpperCase(), model=String(props.getProperty(prefix+'_MODEL')||'').trim();
@@ -266,6 +288,7 @@ function ctsPreflight() {
   if (!folderId) throw new Error('REPORT_FOLDER_ID missing');
   DriveApp.getFolderById(folderId).getName(); // Verify folder exists and has access.
   var values=jobs.getDataRange().getValues(), ready=[];
+  ctsValidateJobTable_(values);
   for(var i=1;i<values.length;i++) {
     var row=values[i].map(function(x){return x===null?'':String(x);});
     if(String(row[11]).toUpperCase()!=='APPROVED' ||
@@ -320,12 +343,14 @@ function ctsProviderCall_(provider,content,props) {
   if (provider==='claude') {
     return {text:(data.content||[]).filter(function(c){return c.type==='text';}).map(function(c){return c.text||'';}).join('\n'),
       inputTokens:((data.usage||{}).input_tokens||0),outputTokens:((data.usage||{}).output_tokens||0),
-      tokens:((data.usage||{}).input_tokens||0)+((data.usage||{}).output_tokens||0)};
+      tokens:((data.usage||{}).input_tokens||0)+((data.usage||{}).output_tokens||0),
+      truncated:data.stop_reason==='max_tokens'};
   }
   return {text:((((data.choices||[])[0]||{}).message||{}).content)||'',
     tokens:(data.usage||{}).total_tokens||0,
     inputTokens:(data.usage||{}).prompt_tokens||0,
-    outputTokens:(data.usage||{}).completion_tokens||0};
+    outputTokens:(data.usage||{}).completion_tokens||0,
+    truncated:((((data.choices||[])[0]||{}).finish_reason)==='length')};
 }
 
 
@@ -401,5 +426,5 @@ function ctsPositiveInt_(val,fallback) {
   var v=Number(val);return isFinite(v)&&v>=0&&Math.floor(v)===v ? v : fallback;
 }
 if (typeof module !== 'undefined' && module.exports) {
- module.exports={ctsAssertProviderReady_,ctsClassifyReply_,ctsExtractUnit_,ctsBuildPrompt_,ctsReadDate_,ctsPositiveInt_,ctsSameReply_,ctsReservedSpendUsd_,ctsEstimateReservationUsd_,ctsPilotCapUsd_,ctsEstimateUsageCostUsd_};
+ module.exports={ctsAssertProviderReady_,ctsClassifyReply_,ctsExtractUnit_,ctsBuildPrompt_,ctsReadDate_,ctsPositiveInt_,ctsSameReply_,ctsReservedSpendUsd_,ctsEstimateReservationUsd_,ctsPilotCapUsd_,ctsEstimateUsageCostUsd_,ctsValidateJobTable_};
 }
