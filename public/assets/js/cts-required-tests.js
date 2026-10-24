@@ -623,5 +623,13 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "reading",
    "requiredFrom": null
   }
+ ],
+ "CTSELECPC1": [
+  {
+   "slug": "elecpconereadings",
+   "page": "CTSElecPC1Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
  ]
 };
