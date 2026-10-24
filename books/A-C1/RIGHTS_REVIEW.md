@@ -2,6 +2,10 @@
 
 **Status: HOLD FOR MEXICO RIGHTS REVIEW before CTS publishes, translates, or republishes this reader.** This is an internal risk screen, not legal advice or a determination that every cited passage is protected.
 
+## Update — Wayne Option 2 and revised readings (24 October 2026)
+
+Wayne authorized omission of all signed/individual first-person material by authors not known to have died before 1926, while allowing Seymour (d. 1922) and unsigned periodical editorials. The raw `textbook.md` has **not** been purged and remains on hold; Claude's filtered version is separate. `reading-1.md` is now a 1,696-word unsigned No. 2 editorial-and-news selection, with the anonymous first-person police quotation and the Bro. Hill personal testimony excluded. `reading-4.md` now omits the interpreted Bro. Post passage at `[…]`. Source scan comparison and individual attribution checks remain pending; neither change authorizes publication. The former 376-word `reading-1.md` described below is superseded.
+
 ## Verified issue in the current handoff
 
 The `textbook.md` file contains a signed mission report ending **“A.G. Garr and Wife.”** (No. 2, report from Danville; the paragraph begins “When we came here from Los Angeles…”). Alfred Goodrich Garr died in **1944**. The same reader includes a quoted statement introduced **“Sister Florence Crawford says…”** (No. 2); Florence Louise Crawford died in **1936**. A separate paragraph ends **“Mrs. Anna Hall.”**; her death date has not been checked. These are not all anonymous words of William J. Seymour.
