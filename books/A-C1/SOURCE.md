@@ -1,5 +1,7 @@
 # A-C1 — Pentecostal History and Development
 
+> **RIGHTS HOLD — Mexico review needed before publication or downstream distribution (2026-10-24).** The raw 1906 newspaper reader contains separately signed contributions. Publication before 1931 establishes U.S. public-domain status but does **not** by itself clear each named author's contribution under Mexico's life-plus-100 term. A.G. Garr (d. 1944) signed a letter reproduced in textbook.md; Florence Crawford (d. 1936) is quoted. Mexico's LFDA Art. 15 expressly retains copyright protection for works in newspapers; Art. 29(I) measures named authors' terms from death. Do not treat the whole 28,181-word reader or all five readings as Mexico-rights-cleared without a contributor-level audit or legal approval. See RIGHTS_REVIEW.md. This note corrects the overbroad earlier rights screen; no files were published or deleted by this review.
+
 Status: source selection, preliminary rights screen, and raw public-domain text handoff complete on `handoff/book-sources`. The transcription source is azusabooks.org; comparison against original issue scans remains pending. This file is not an academic or legal approval.
 
 ## Textbook / documentary reader
