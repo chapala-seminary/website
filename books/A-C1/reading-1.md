@@ -1,0 +1,11 @@
+# Pentecost Has Come
+
+> Source: *The Apostolic Faith*, Vol. 1 No. 1  PENTECOST HAS COME; public-domain periodical text transcribed at https://azusabooks.org/af/LA01.shtml. Transcription checked against scan: pending. Historical testimony is presented as a primary source, not as independent verification of its claims.
+
+The power of God now has this city agitated as never before. Pentecost has surely come and with it the Bible evidences are following, many being converted and sanctified and filled with the Holy Ghost, speaking in tongues as they did on the day of Pentecost. The scenes that are daily enacted in the building on Azusa street and at Missions and churches in other parts of the city are beyond description, and the real revival has only started, as God has been working with His children mostly, getting them through to Pentecost, and laying the foundation for a mighty wave of salvation among the unconverted.
+
+The meetings are held in an old Methodist church that had been converted in part into a tenement house, leaving a larger unplastered, barn-like room on the ground floor. Here about a dozen congregated each day, holding meetings on Bonnie Brae in the evening. The writer attended a few of these meetings and being so different from anything he had seen and not hearing any speaking in tongues, he branded the teaching as third-blessing heresy, and thought that settled it. It is needless to say the writer was compelled to do a great deal of apologizing and humbling himself to get right with God.
+
+In a short time God began to manifest His power and soon the building could not contain the people. Now the meetings continue all day and into the night and the fire is kindling all over the city and surrounding towns. Proud, well-dressed preachers come in to "investigate." Soon their high looks are replaced with wonder, then conviction comes, and very often you will find them in a short time wallowing on the dirty floor, asking God to forgive them and make them as little children.
+
+It would be impossible to state how many have been converted, sanctified, and filled with the Holy Ghost. They have been and are daily going out to all points of the compass to spread this wonderful gospel.
