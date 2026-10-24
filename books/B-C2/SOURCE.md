@@ -12,11 +12,11 @@ John Leadley Dagg (1794–1884), *Manual of Theology: A Treatise on Christian Do
 
 ## Five nonoverlapping source readings
 
-1. **The Existence of God** — https://www.gracegems.org/31/dagg_manual_of_theology2.htm. Start heading: “Chapter I. Existence Of God.”. End immediately before: “Chapter II. Attributes Of God.”. Approx. 1 words including source note.
-2. **Creation** — https://www.gracegems.org/31/dagg_manual_of_theology3.htm. Start heading: “Chapter II. Works of God – CREATION”. End immediately before: “Chapter III. Works Of God – PROVIDENCE”. Approx. 1 words including source note.
-3. **The States of Christ** — https://www.gracegems.org/31/dagg_manual_of_theology5.htm. Start heading: “Chapter 2. States of Christ.”. End immediately before: “Chapter III. OFFICES Of Christ”. Approx. 1 words including source note.
-4. **The Covenant of Grace** — https://www.gracegems.org/31/dagg_manual_of_theology7.htm. Start heading: “Chapter II. Covenant of Grace”. End immediately before: “Chapter III. Blessings of Grace”. Approx. 1 words including source note.
-5. **Justification and Adoption** — https://www.gracegems.org/31/dagg_manual_of_theology7.htm. Start heading: “Section II. – Justification.”. End immediately before: “Section IV. – Regeneration.”. Approx. 1 words including source note.
+1. **The Existence of God** — https://www.gracegems.org/31/dagg_manual_of_theology2.htm. Start heading: “Chapter I. Existence Of God.”. End immediately before: “Chapter II. Attributes Of God.”. Approx. 2,111 words including source note.
+2. **Creation** — https://www.gracegems.org/31/dagg_manual_of_theology3.htm. Start heading: “Chapter II. Works of God – CREATION”. End immediately before: “Chapter III. Works Of God – PROVIDENCE”. Approx. 2,007 words including source note.
+3. **The States of Christ** — https://www.gracegems.org/31/dagg_manual_of_theology5.htm. Start heading: “Chapter 2. States of Christ.”. End immediately before: “Chapter III. OFFICES Of Christ”. Approx. 1,697 words including source note.
+4. **The Covenant of Grace** — https://www.gracegems.org/31/dagg_manual_of_theology7.htm. Start heading: “Chapter II. Covenant of Grace”. End immediately before: “Chapter III. Blessings of Grace”. Approx. 1,846 words including source note.
+5. **Justification and Adoption** — https://www.gracegems.org/31/dagg_manual_of_theology7.htm. Start heading: “Section II. – Justification.”. End immediately before: “Section IV. – Regeneration.”. Approx. 4,734 words including source note.
 
 ## Rights screen (not legal approval)
 
@@ -34,10 +34,10 @@ John Leadley Dagg (1794–1884), *Manual of Theology: A Treatise on Christian Do
 ## Inventory and gates
 
 - `textbook.md`: 29556 words, Books I/IV/VI.
-- `reading-1.md`: 1 words, The Existence of God.
-- `reading-2.md`: 1 words, Creation.
-- `reading-3.md`: 1 words, The States of Christ.
-- `reading-4.md`: 1 words, The Covenant of Grace.
-- `reading-5.md`: 1 words, Justification and Adoption.
+- `reading-1.md`: 2111 words, The Existence of God.
+- `reading-2.md`: 2007 words, Creation.
+- `reading-3.md`: 1697 words, The States of Christ.
+- `reading-4.md`: 1846 words, The Covenant of Grace.
+- `reading-5.md`: 4734 words, Justification and Adoption.
 - All text is EN transcription; no ES/FR historical edition or translation cleared here.
 - **Pending:** scan collation, textual corrections, academic review, translation and assessment bank generation by Claude. This package must not be treated as a completed CTS course.
