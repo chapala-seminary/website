@@ -22,11 +22,15 @@ Full-text transcriptions of the original issues:
 
 Committed reader: Nos. 1–2 (September–October 1906), 28,181 words including provenance notes and headings. The remaining issues are retained as candidate sources for later expansion. Preserve original headings and clearly label testimony, editorial claims, and later CTS historical notes.
 
+## Wayne's Option 2 implementation (24 October 2026)
+
+Wayne approved using verified Seymour-authored writings (Seymour d. 1922) and unsigned 1906–08 editorial articles, while excluding signed or individual first-person works by authors whose death before 1926 is not established. The raw textbook remains **on hold** because it still includes signed Garr and other contributions; Claude's separately filtered reader must be reviewed independently. The revised reading 1 selects unsigned No. 2 editorial and short mission reports (1,696 words), excluding an unidentified first-person quotation and Bro. Hill's first-person testimony. Revised reading 4 omits the interpreted message through Bro. Post at a visible ellipsis. These are source-file revisions, **not academic/legal publication approval**; attribution and original scan checks remain pending.
+
 ## Five readings
 
-1. **“Pentecost Has Come”** — No. 1 (September 1906), page 1. Start at the heading “Pentecost Has Come.” End immediately before “BRO. SEYMOUR'S CALL.”
-   - URL: https://azusabooks.org/af/LA01.shtml
-   - Focus: the Los Angeles revival's setting, early meetings, and the paper's own account of expansion.
+1. **“The Pentecostal Baptism Restored” — unsigned editorial and adjacent mission reports** — No. 2 (October 1906). Begin “All along the ages men have been preaching a partial Gospel”; end after the third-person paragraph on Rev. Adolph Rosa. Omit unidentified chief-of-police quotation at `[…]`; stop before Bro. Hill's first-person testimony. Body: **1,696 words**. Attribution and scan collation pending.
+   - URL: https://azusabooks.org/af/LA02.shtml
+   - Focus: Topeka origins, Agnes Ozman, Los Angeles expansion, contemporary mission activity and reported healings (historical claims, not medical findings).
 
 2. **“Bible Pentecost” / “Gracious Pentecostal Showers Continue to Fall”** — No. 3 (November 1906), page 1. Start at “Bible Pentecost.” End immediately before the first group of short standalone reports following the main opening article (after the paragraph ending “pray for those who are seeking”).
    - URL: https://azusabooks.org/af/LA03.shtml
@@ -36,7 +40,7 @@ Committed reader: Nos. 1–2 (September–October 1906), 28,181 words including 
    - URL: https://azusabooks.org/af/LA04.shtml
    - Focus: Bonnie Brae/Azusa chronology, Seymour and Lucy Farrow, the break with Parham's leadership, and early mission structure.
 
-4. **“Beginning of World Wide Revival”** — No. 5 (January 1907), page 1. Start at the issue title. End immediately before “PENTECOST RESTORED.”
+4. **“Beginning of World Wide Revival”** — No. 5 (January 1907), page 1. Start at the issue title. End immediately before “PENTECOST RESTORED.” The interpreted Bro. Post message is omitted at `[…]` under Wayne's Option 2 direction.
    - URL: https://azusabooks.org/af/LA05.shtml
    - Focus: retrospective on 1906, international expansion, interracial language, inter-mission cooperation, and early organizational practice.
 
@@ -62,5 +66,5 @@ Committed reader: Nos. 1–2 (September–October 1906), 28,181 words including 
 ## Handoff inventory
 
 - `textbook.md` — 28,181-word selection from Nos. 1–2.
-- `reading-1.md` through `reading-5.md` — the five source-bounded readings listed above.
+- `reading-1.md` through `reading-5.md` — the five source-bounded readings listed above; reading 1 was replaced and reading 4 was redacted on 2026-10-24.
 - All six text files state that scan comparison remains pending.
