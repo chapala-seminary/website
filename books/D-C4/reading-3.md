@@ -1,43 +1,75 @@
-# Reading 3 — Congregations and Ecclesiastical Assemblies
+# Reading 3 — Synods and the Doctrine and Power of Ordination
 
-> Exact section selection from the staged textbook. Sections 7–10; no overlap with other readings.
+> Exact contiguous selection from the staged textbook. Sections 14–18; no overlap with other readings.
 
-## 7. Of Particular Congregations.
+## 14. Of Synodical Assemblies.
 
-IT is lawful and expedient that there be fixed congregations, that is, a certain company of Christians to meet in one assembly ordinarily for publick worship. When believers multiply to such a number, that they cannot conveniently meet in one place, it is lawful and expedient that they should be divided into distinct and fixed congregations, for the better administration of such ordinances as belong unto them, and the discharge of mutual duties.
+THE scripture doth hold out another sort of assemblies for the government of the church, beside classical and congregational, all which we call Synodical.
 
-The ordinary way of dividing Christians into distinct congregations, and most expedient for edification, is by the respective bounds of their dwellings.
+Pastors and teachers, and other church-governors, (as also other fit persons, when it shall be deemed expedient,) are members of those assemblies which we call Synodical, where they have a lawful calling thereunto.
 
-First, Because they who dwell together, being bound to all kind of moral duties one to another, have the better opportunity thereby to discharge them; which moral tie is perpetual; for Christ came not to destroy the law, but to fulfil it.
+Synodical assemblies may lawfully be of several sorts, as provincial, national, and oecumenical.
 
-Secondly, The communion of saints must be so ordered, as may stand with the most convenient use of the ordinances, and discharge of moral duties, without respect of persons.
+It is lawful, and agreeable to the word of God, that there be a subordination of congregational, classical, provincial, and national assemblies, for the government of the church.
 
-Thirdly, The pastor and people must so nearly cohabit together, as that they may mutually perform their duties each to other with most conveniency.
+## 15. Of Ordination of Ministers.
 
-In this company some must be set apart to bear office.
+UNDER the head of Ordination of Ministers is to be considered, either the doctrine of ordination, or the power of it.
 
-## 8. Of the Officers of a particular Congregation.
+## 16. Touching the Doctrine of Ordination.
 
-FOR officers in a single congregation, there ought to be one at the least, both to labour in the word and doctrine, and to rule.
+NO man ought to take upon him the office of a minister of the word without a lawful calling.
 
-It is also requisite that there should be others to join in government.
+Ordination is always to be continued in the church.
 
-And likewise it is requisite that there be others to take special care for the relief of the poor.
+Ordination is the solemn setting apart of a person to some publick church office.
 
-The number of each of which is to be proportioned according to the condition of the congregation.
+Every minister of the word is to be ordained by imposition of hands, and prayer, with fasting, by those preaching presbyters to whom it doth belong.
 
-These officers are to meet together at convenient and set times, for the well ordering of the affairs of that congregation, each according to his office.
+It is agreeable to the word of God, and very expedient, that such as are to be ordained ministers, be designed to some particular church, or other ministerial charge.
 
-It is most expedient that, in these meetings, one whose office is to labour in the word and doctrine, do moderate in their proceedings.
+He that is to be ordained minister, must be duly qualified, both for life and ministerial abilities, according to the rules of the apostle.
 
-## 9. Of the Ordinances in a particular Congregation.
+He is to be examined and approved by those by whom he is to be ordained.
 
-THE ordinances in a single congregation are, prayer, thanksgiving, and singing of psalms, the word read, (although there follow no immediate explication of what is read,) the word expounded and applied, catechising, the sacraments administered, collection made for the poor, dismissing the people with a blessing.
+No man is to be ordained a minister for a particular congregation, if they of that congregation can shew just cause of exception against him.
 
-## 10. Of Church-Government, and the several sorts of Assemblies for the same.
+## 17. Touching the Power of Ordination.
 
-CHRIST hath instituted a government, and governors ecclesiastical in the church: to that purpose, the apostles did immediately receive the keys from the hand of Jesus Christ, and did use and exercise them in all the churches of the world upon all occasions.
+ORDINATION is the act of a presbytery.
 
-And Christ hath since continually furnished some in his church with gifts of government, and with commission to execute the same, when called thereunto.
+The power of ordering the whole work of ordination is in the whole presbytery, which, when it is over more congregations than one, whether these congregations be fixed or not fixed, in regard of officers or members, it is indifferent as to the point of ordination.
 
-It is lawful, and agreeable to the word of God, that the church be governed by several sorts of assemblies, which are congregational, classical, and synodical.
+It is very requisite, that no single congregation, that can conveniently associate, do assume to itself all and sole power in ordination:
+
+1. Because there is no example in scripture that any single congregation, which might conveniently associate, did assume to itself all and sole power in ordination; neither is there any rule which may warrant such a practice.
+
+2. Because there is in scripture example of an ordination in a presbytery over divers congregations; as in the church of Jerusalem, where were many congregations: these many congregations were under one presbytery , and this presbytery did ordain.
+
+The preaching presbyters orderly associated, either in cities or neighbouring villages, are those to whom the imposition of hands doth appertain, for those congregations within their bounds respectively.
+
+## 18. Concerning the Doctrinal Part of Ordination of Ministers.
+
+1. No man ought to take upon him the office of a minister of the word without a lawful calling.
+
+2. Ordination is always to be continued in the church.
+
+3. Ordination is the solemn setting apart of a person to some publick church office.
+
+4. Every minister of the word is to be ordained by imposition of hands, and prayer, with fasting, by these preaching presbyters to whom it doth belong.
+
+5. The power of ordering the whole work of ordination is in the whole presbytery, which, when it is over more congregations than one, whether those congregations be fixed or not fixed, in regard of officers or members, it is indifferent as to the point of ordination.
+
+6. It is agreeable to the word, and very expedient, that such as are to be ordained ministers be designed to some particular church, or other ministerial charge.
+
+7. He that is to be ordained minister, must be duly qualified, both for life and ministerial abilities, according to the rules of the apostle.
+
+8. He is to be examined and approved by those by whom he is to be ordained.
+
+9. No man is to be ordained a minister for a particular congregation, if they of that congregation can shew just cause of exception against him.
+
+10. Preaching presbyters orderly associated, either in cities or neighbouring villages, are those to whom the imposition of hands doth appertain, for those congregations within their bounds respectively.
+
+11. In extraordinary cases, something extraordinary may be done, until a settled order may be had, yet keeping as near as possibly may be to the rule.
+
+12. There is at this time (as we humbly conceive) an extraordinary occasion for a way of ordination for the present supply of ministers.
