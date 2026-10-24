@@ -21,6 +21,7 @@ const approveAll = (e) => set(e, 'approved_templates', JSON.stringify(Object.fro
 async function setup(mode = 'shadow', extra = {}) {
   const sent = [];
   const e = await makeEnv({ SEND_ADDRESS: CTS, SEND_MAILBOX: 'cts-gmail', OWN_ADDRESSES_EXTRA: `staff.person@example.org,${PERSONAL}`,
+    M2_RELEASE_GATE: mode === 'live' ? 'M2_SEND_APPROVED' : undefined,
     GMAIL_SEND: async (env, mime, threadId) => { sent.push({ mime, threadId }); return { id: `g${sent.length}`, threadId: threadId || 'new' }; }, ...extra });
   await e.DB.prepare("INSERT INTO mailboxes (id, address, enabled, personal, created_at) VALUES ('personal-1', ?, 1, 1, ?)").bind(PERSONAL, NOW).run();
   await set(e, 'auto_send', mode);
