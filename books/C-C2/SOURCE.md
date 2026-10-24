@@ -30,14 +30,22 @@ The `reading-*.md` files are derived directly from the corresponding textbook se
 - Do **not** import modern Spanish/French translations from external websites without their own rights basis. Commission new EN-based translations or use separately cleared historical translations. Do not treat a source link as permission to republish its modern site-specific presentation.
 - Final original-scan collation, editorial review, theological approval, ES/FR accuracy, and private answer-bank verification remain pending.
 
-## Further-study shelf (links only; check site terms independently)
+## Further-study shelf (ten historical works and comparison links)
 
-1. [Project Gutenberg — Wesley Vol. I](https://www.gutenberg.org/ebooks/59743), the assigned ten sermons and six additional sermons in the same historic volume.
-2. [Original 1771 Vol. I online transcription](https://www.gutenberg.org/cache/epub/59743/pg59743-images.html), introduction and original source context.
-3. [GITenberg mirror, PG 59743](https://github.com/GITenberg/The-Works-of-the-Rev-John-Wesley-Vol-1-of-32_59743), stable raw file and revision history.
-4. [Wesley Center 1872 Thomas Jackson sermon numbering](https://wesley.nnu.edu/john-wesley/the-sermons-of-john-wesley-1872-edition/the-sermons-of-john-wesley-thomas-jacksons-numbering/), comparison **link only**.
-5. [Wesley Center Standard Sermons index](https://wesley.nnu.edu/john-wesley/the-sermons-of-john-wesley-1872-edition/the-sermons-of-john-wesley-the-standard-sermons/), comparison **link only**.
-6. [United Methodist ResourceUMC numeric index](https://www.resourceumc.org/topics/history/john-wesley-sermons/numeric-index), comparison **link only**.
+The first seven entries are **distinct historical volumes**, with Project Gutenberg catalogs independently checked on 2026-10-24. Original works by John Wesley (1703–1791), published in the historical Bristol William Pine series beginning **1771**; volume-level catalog descriptions should be checked for precise sermon titles and print-year variants before assigning page numbers. Link-only shelf: no third-party modern translation or notes imported.
+
+1. **Wesley, *Works*, vol. I (1771), PG 59743** — https://www.gutenberg.org/ebooks/59743 . Read Sermons XI onward, beyond the assigned I–X. Extends the course's foundational doctrinal sequence.
+2. **Wesley, *Works*, vol. II (1771 series), PG 63452** — https://www.gutenberg.org/ebooks/63452 . Read the opening sermon “The Circumcision of the Heart” and subsequent sermons on inward transformation. Compare new birth and sanctification with the assigned texts.
+3. **Wesley, *Works*, vol. IV (1771 series), PG 68320** — https://www.gutenberg.org/ebooks/68320 . Read the sermon on self-denial and adjacent sermons. Applies Wesleyan theology to Christian discipleship.
+4. **Wesley, *Works*, vol. V (1771 series), PG 68742** — https://www.gutenberg.org/ebooks/68742 . Read selected doctrinal and practical sermons; identify continuities with salvation by faith. Use the book's own table of contents to select exact chapters.
+5. **Wesley, *Works*, vol. VII (1771 series), PG 73261** — https://www.gutenberg.org/ebooks/73261 . Read passages on prayer and spiritual awakening. Supports theological application and spiritual formation.
+6. **Wesley, *Works*, vol. X (1771 series), PG 73519** — https://www.gutenberg.org/ebooks/73519 . Read selected pastoral prayers and devotional pieces. Illustrates practical consequences of doctrine.
+7. **Wesley, *Works*, vol. XI (1771 series), PG 73617** — https://www.gutenberg.org/ebooks/73617 . Read biographical accounts of exemplary Christian lives. Compare lived piety with doctrinal claims.
+8. **Wesley Center, Jackson 1872 sermon numbering (comparison only)** — https://wesley.nnu.edu/john-wesley/the-sermons-of-john-wesley-1872-edition/the-sermons-of-john-wesley-thomas-jacksons-numbering/ . Crosswalk sermon numbers before citing.
+9. **Wesley Center, Standard Sermons index (comparison only)** — https://wesley.nnu.edu/john-wesley/the-sermons-of-john-wesley-1872-edition/the-sermons-of-john-wesley-the-standard-sermons/ . Locate parallel sermons; check edition differences.
+10. **United Methodist ResourceUMC sermon index (comparison only)** — https://www.resourceumc.org/topics/history/john-wesley-sermons/numeric-index . Navigate modern indexes without importing copyrighted editorial content.
+
+**Rights:** Wesley's underlying writings are well outside the general Mexico life+100 term; historical print editions predate US copyright thresholds. The linked Gutenberg editions are marked US public domain. This does not automatically clear modern notes, translations, online formatting, or editorial introductions. Individual catalog URLs were verified; **the content of every listed volume has not been exhaustively collated**.
 
 ## Claude integration
 
