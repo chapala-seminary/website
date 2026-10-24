@@ -1,5 +1,5 @@
 /**
- * CTS Multi-AI Watchdog — Google Apps Script pilot, version 0.2 (2026-10-24)
+ * CTS Multi-AI Watchdog — Google Apps Script pilot, version 0.3 (2026-10-24)
  *
  * Safe by default: No API requests unless Script Property
  * ENABLE_LIVE_REQUESTS=YES AND each job's Approval cell is APPROVED.
@@ -16,7 +16,8 @@ var CTS = {
   maxSourceCharacters: 32000,
   maxOutputCellCharacters: 22000,
   staleRunningMinutes: 15,
-  minimumContinuationMinutes: 5
+  minimumContinuationMinutes: 5,
+  absolutePilotBudgetUsd: 10
 };
 
 function ctsSpreadsheetId_() {
@@ -79,6 +80,9 @@ function ctsWatchdog() {
     if (ctsDailyCalls_(log) >= ctsPositiveInt_(props.getProperty('MAX_CALLS_PER_DAY'),12)) {
       Logger.log('Daily API call cap reached'); return;
     }
+    // Fail closed on missing cap, unpriced prior calls or a spent budget.
+    var remaining = ctsPilotCapUsd_(props) - ctsReservedSpendUsd_(log);
+    if (remaining <= 0) { Logger.log('Total pilot spending cap reached'); return; }
     var values = jobs.getDataRange().getValues();
     var now = new Date();
     for (var i=1;i<values.length;i++) {
@@ -121,11 +125,19 @@ function ctsExecuteJob_(jobs,log,rowNumber,row,props,now) {
     var text = ctsGetVettedLesson_(row[5],row[6],props);
     var previousOutput = String(row[12] || '');
     var prompt = ctsBuildPrompt_(row[3],row[4],text,attempts>0 ? previousOutput : '');
+    var reservation=ctsEstimateReservationUsd_(provider,prompt,props);
+    if (ctsReservedSpendUsd_(log)+reservation > ctsPilotCapUsd_(props)) {
+      row[2]='BUDGET_HOLD';
+      row[13]='Pilot budget would be exceeded by this next call (reserved $'+reservation.toFixed(4)+')';
+      row[14]=now.toISOString(); ctsWriteRow_(jobs,rowNumber,row);
+      ctsLog_(log,jobId,provider,'BUDGET_HOLD','BUDGET_HOLD',row[13],0); return;
+    }
     row[2] = 'RUNNING'; row[7] = now.toISOString(); row[14] = now.toISOString();
     row[9] = attempts+1; row[13] = '';
     ctsWriteRow_(jobs,rowNumber,row);
     // Log *before* HTTP dispatch: failed/time-out attempts count toward the daily cap.
-    ctsLog_(log,jobId,provider,'API_STARTED','RUNNING','Attempt '+(attempts+1)+'/'+maxAttempts,0);
+    ctsLog_(log,jobId,provider,'API_STARTED','RUNNING',
+      'Attempt '+(attempts+1)+'/'+maxAttempts+' BUDGET_RESERVE_USD='+reservation.toFixed(6),0);
     var result = ctsProviderCall_(provider,prompt,props);
     if (!result.text || !result.text.trim()) throw new Error('Provider returned empty text');
     // Never silently discard full model responses: persist append-only attempt files.
@@ -135,7 +147,8 @@ function ctsExecuteJob_(jobs,log,rowNumber,row,props,now) {
       row[2]='REVIEW_REQUIRED'; row[13]='Repeated output with no new progress';
       row[7]=new Date().toISOString(); row[14]=row[7];
       ctsWriteRow_(jobs,rowNumber,row);
-      ctsLog_(log,jobId,provider,'NO_PROGRESS','REVIEW_REQUIRED',row[13],result.tokens||0);
+      ctsLog_(log,jobId,provider,'NO_PROGRESS','REVIEW_REQUIRED',row[13]+
+        ' USAGE_COST_USD='+ctsEstimateUsageCostUsd_(provider,result.inputTokens,result.outputTokens,props).toFixed(6),result.tokens||0);
       return;
     }
     row[12] = result.text.slice(-CTS.maxOutputCellCharacters);
@@ -147,8 +160,9 @@ function ctsExecuteJob_(jobs,log,rowNumber,row,props,now) {
     } else { row[8] = ''; }
     row[13] = decision === 'REVIEW_REQUIRED' ? 'Output incomplete after attempt cap' : '';
     ctsWriteRow_(jobs,rowNumber,row);
+    var actual=ctsEstimateUsageCostUsd_(provider,result.inputTokens,result.outputTokens,props);
     ctsLog_(log,jobId,provider,'API_RESULT',decision,
-      'Attempt '+(attempts+1)+'/'+maxAttempts+'; '+result.text.slice(0,160),result.tokens||0);
+      'Attempt '+(attempts+1)+'/'+maxAttempts+' USAGE_COST_USD='+actual.toFixed(6)+'; '+result.text.slice(0,140),result.tokens||0);
   } catch(e) {
     row[13] = String(e && e.message || e).slice(0,450);
     row[2] = 'REVIEW_REQUIRED'; // Fail closed: do not repeatedly spend money on errors.
@@ -230,7 +244,9 @@ function ctsProviderCall_(provider,content,props) {
     if (!key || !model) throw new Error(provider+' API key or model not configured');
     base=isOpenAI?'https://api.openai.com/v1/chat/completions':'https://api.deepseek.com/chat/completions';
     headers={Authorization:'Bearer '+key};
-    body={model:model,max_tokens:maxTokens,messages:[{role:'user',content:content}]};
+    body={model:model,messages:[{role:'user',content:content}]};
+    if (isOpenAI) body.max_completion_tokens=maxTokens;
+    else body.max_tokens=maxTokens;
   }
   response=UrlFetchApp.fetch(base,{method:'post',contentType:'application/json',headers:headers,
     payload:JSON.stringify(body),muteHttpExceptions:true});
@@ -238,9 +254,63 @@ function ctsProviderCall_(provider,content,props) {
   if (status<200 || status>=300) throw new Error(provider+' HTTP '+status+' '+JSON.stringify(data.error||{}).slice(0,220));
   if (provider==='claude') {
     return {text:(data.content||[]).filter(function(c){return c.type==='text';}).map(function(c){return c.text||'';}).join('\n'),
+      inputTokens:((data.usage||{}).input_tokens||0),outputTokens:((data.usage||{}).output_tokens||0),
       tokens:((data.usage||{}).input_tokens||0)+((data.usage||{}).output_tokens||0)};
   }
-  return {text:((((data.choices||[])[0]||{}).message||{}).content)||'',tokens:(data.usage||{}).total_tokens||0};
+  return {text:((((data.choices||[])[0]||{}).message||{}).content)||'',
+    tokens:(data.usage||{}).total_tokens||0,
+    inputTokens:(data.usage||{}).prompt_tokens||0,
+    outputTokens:(data.usage||{}).completion_tokens||0};
+}
+
+
+/** Permanent, conservative pilot ceiling: no property can raise it beyond $10. */
+function ctsPilotCapUsd_(props) {
+  var value = Number(props.getProperty('MAX_PILOT_SPEND_USD'));
+  if (!isFinite(value)||value<=0||value>CTS.absolutePilotBudgetUsd)
+    throw new Error('Set MAX_PILOT_SPEND_USD to an authorized amount no greater than $10');
+  return value;
+}
+
+/** Each API_STARTED log reserves its worst-case forecast permanently.
+ * An unpriced historical API_STARTED makes the watchdog fail closed.
+ * This is conservative, not a claim that actual provider billing equals reserved USD.
+ */
+function ctsReservedSpendUsd_(log) {
+  var rows=log.getDataRange().getValues(), total=0;
+  for(var i=1;i<rows.length;i++) {
+    if (String(rows[i][3])!=='API_STARTED') continue;
+    var matched=String(rows[i][5]).match(/BUDGET_RESERVE_USD=([0-9]+(?:\.[0-9]+)?)/);
+    if(!matched) throw new Error('Found API_STARTED without a dollar reservation; audit before running');
+    total+=Number(matched[1]);
+  }
+  return total;
+}
+
+function ctsProviderPrices_(provider,props) {
+  var prefix=provider.toUpperCase();
+  if (['OPENAI','CLAUDE','DEEPSEEK'].indexOf(prefix)<0) throw new Error('Invalid provider for pricing');
+  var input=Number(props.getProperty(prefix+'_USD_PER_M_INPUT_TOKENS'));
+  var output=Number(props.getProperty(prefix+'_USD_PER_M_OUTPUT_TOKENS'));
+  if (!(isFinite(input)&&input>0&&isFinite(output)&&output>0))
+    throw new Error('Verified pricing not configured for '+prefix+' (USD per million input/output tokens)');
+  return {input:input,output:output};
+}
+function ctsEstimateUsageCostUsd_(provider,inputTokens,outputTokens,props) {
+  var p=ctsProviderPrices_(provider,props);
+  if (!isFinite(inputTokens)||inputTokens<0||!isFinite(outputTokens)||outputTokens<0)
+    throw new Error('Unusable API usage numbers');
+  return (inputTokens*p.input+outputTokens*p.output)/1000000;
+}
+function ctsEstimateReservationUsd_(provider,prompt,props) {
+  var maxOut=ctsPositiveInt_(props.getProperty('MAX_OUTPUT_TOKENS'),0);
+  if (maxOut<1||maxOut>4096) throw new Error('MAX_OUTPUT_TOKENS must be 1–4096 for the pilot');
+  // UTF-8 byte count conservatively bounds text input token count for typical
+  // text tokenizers, with 50% overhead for message wrapper and provider quirks.
+  var maxInput=Math.ceil(Utilities.newBlob(prompt).getBytes().length*1.5)+128;
+  var p=ctsProviderPrices_(provider,props);
+  var total=(maxInput*p.input+maxOut*p.output)/1000000;
+  return Math.ceil(total*1000000)/1000000;
 }
 
 function ctsWriteRow_(tab,rowNumber,row) {
@@ -266,5 +336,5 @@ function ctsPositiveInt_(val,fallback) {
   var v=Number(val);return isFinite(v)&&v>=0&&Math.floor(v)===v ? v : fallback;
 }
 if (typeof module !== 'undefined' && module.exports) {
- module.exports={ctsClassifyReply_,ctsExtractUnit_,ctsBuildPrompt_,ctsReadDate_,ctsPositiveInt_,ctsSameReply_};
+ module.exports={ctsClassifyReply_,ctsExtractUnit_,ctsBuildPrompt_,ctsReadDate_,ctsPositiveInt_,ctsSameReply_,ctsReservedSpendUsd_,ctsEstimateReservationUsd_,ctsPilotCapUsd_,ctsEstimateUsageCostUsd_};
 }
