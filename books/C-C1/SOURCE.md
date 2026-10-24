@@ -1,0 +1,83 @@
+# C-C1 — John Wesley and the History of Methodism
+
+## Handoff status
+
+**STATUS: SOURCE VERIFIED; TEXT EXTRACTION / FINAL RANGE COLLATION PENDING.**
+
+This manifest establishes the primary public-domain edition and a five-reading extraction plan. It does **not** certify a final 30,000-word coursebook, translations, digests, or assessment bank. No student-facing or answer-key material is included.
+
+## Primary textbook source
+
+- **Author:** John Wesley (1703–1791)
+- **Editor:** Thomas Jackson (1783–1874)
+- **Title:** *The Works of the Rev. John Wesley, A.M., Vol. I: Journals from October 14, 1735, to November 29, 1745*
+- **Edition:** Third edition, London: Wesleyan Methodist Book Room, 1872
+- **Authoritative catalog/source page:** https://www.whdl.org/en/browse/resources/9539
+- **Single-volume scan fallback:** https://media.sabda.org/alkitab-11/V6F-Z/WES_WW01.PDF
+- **Coverage:** Journal entries from 14 October 1735 through 29 November 1745
+- **Extent:** WHDL catalog: 532 pages; SABDA scan: 579 PDF pages
+- **Target coursebook size:** approximately 30,000 words, to be selected from the verified Jackson text after OCR/extraction and date-level collation
+- **License status:** Public domain. WHDL explicitly labels the resource public domain after due diligence. Wesley died in 1791 and Jackson in 1874; both underlying authorial and editorial contributions are outside Mexico's life-plus-100 term.
+- **Important boundary:** A convenient 1903 Percy Livingstone Parker abridgment is available in an unlicensed GitHub mirror, but it is **not** the cleared source for this handoff. Parker's selection, chapter arrangement, headings, and editorial matter remain excluded pending separate rights review. Final text must be transcribed/collated to the 1872 Jackson edition.
+
+### WHDL journal-extract files
+
+1. Oct. 1735–Feb. 1738  
+   https://www.whdl.org/sites/default/files/resource/book/1.1.1%2520Journal%2520Extract%2520%2528Oct.%25201735%2520-%2520Feb.%25201738%2529.pdf?language=en
+2. Feb. 1738–Aug. 1738  
+   https://www.whdl.org/sites/default/files/resource/book/1.1.2%2520Journal%2520Extract%2520%2528Feb.%25201738%2520-%2520Aug.%25201738%2529.pdf?language=en
+3. Aug. 1738–Nov. 1739  
+   https://www.whdl.org/sites/default/files/resource/book/1.1.3%2520Journal%2520Extract%2520%2528Aug.%25201738%2520-%2520Nov.%25201739%2529.pdf?language=en
+4. Nov. 1739–Sept. 1741  
+   https://www.whdl.org/sites/default/files/resource/book/1.1.4%2520Journal%2520Extract%2520%2528Nov.%25201739%2520-%2520Sept.%25201741%2529.pdf?language=en
+5. Sept. 1741–Oct. 1743  
+   https://www.whdl.org/sites/default/files/resource/book/1.1.5%2520Journal%2520Extract%2520%2528Sept.%25201741%2520-%2520Oct.%25201743%2529.pdf?language=en
+6. Sept. 1743–Nov. 1746  
+   https://www.whdl.org/sites/default/files/resource/book/1.1.6%2520Journal%2520Extract%2520%2528Sept.%25201743%2520-%2520Nov.%25201746%2529.pdf?language=en
+
+The last file extends beyond the catalog volume's stated end date; any extraction from it must stop at 29 November 1745 for this edition.
+
+## Five substantive readings — extraction plan
+
+The five readings below are course-aligned date windows in Wesley's journal. Exact page/line boundaries and word counts must be recorded against the 1872 Jackson scan before the package is marked ready.
+
+| Reading | Topic | Journal window | Primary file |
+|---|---|---|---|
+| R1 | Atlantic voyage, Moravian witness, and arrival in Georgia | 14 Oct. 1735–5 Feb. 1736 | WHDL extract 1 |
+| R2 | Georgia ministry, pastoral conflict, and departure | 6 Feb. 1736–22 Dec. 1737 | WHDL extract 1 |
+| R3 | Peter Böhler, assurance, and Aldersgate | Feb.–24 May 1738 | WHDL extracts 1–2 |
+| R4 | Bristol and the turn to field preaching | 31 Mar.–Jun. 1739 | WHDL extract 3 |
+| R5 | Early Methodist societies, discipline, and organization | Nov. 1739–Dec. 1740 | WHDL extract 4 |
+
+### Required completion work
+
+- Extract/OCR only from the Jackson 1872 scan or WHDL Jackson-derived files.
+- Collate each start/end boundary against the scan and record printed page numbers.
+- Remove duplicated prefaces, running heads, footers, and OCR artifacts.
+- Produce one approximately 30,000-word continuous textbook selection plus five non-overlapping readings.
+- Record SHA-256 checksums and exact word counts for each raw source artifact.
+- Keep any 1903 Parker-derived headings or arrangement out of the deliverable.
+- Create EN source text first; only then generate ES/FR translations and digests.
+- Build the private 40-question bank separately and keep answer keys out of public/student paths.
+
+## Supporting public-domain shelf
+
+These are supplementary sources for historical context and cross-checking, not substitutes for the Jackson journal text.
+
+1. Jackson, *Works of John Wesley*, Vol. I (WHDL): https://www.whdl.org/en/browse/resources/9539
+2. Wesley, *Works*, Vol. I (Project Gutenberg 59743): https://www.gutenberg.org/ebooks/59743
+3. Luke Tyerman, *The Life and Times of the Rev. John Wesley*, Vol. I (Project Gutenberg 69582): https://www.gutenberg.org/ebooks/69582
+4. Luke Tyerman, *The Life and Times of the Rev. John Wesley*, Vol. II (Project Gutenberg 71130): https://www.gutenberg.org/ebooks/71130
+5. Wesley sermon collection, 1872 Jackson edition (Wesley Center): https://wesley.nnu.edu/john-wesley/the-sermons-of-john-wesley-1872-edition/
+6. Wesley journal collection page (Wesley Center; use only after edition-level rights check): https://wesley.nnu.edu/john-wesley/the-journal-of-john-wesley/
+
+## Risks and blockers
+
+- The current automation environment timed out while extracting the SABDA PDF and could not directly download WHDL PDFs, so no raw transcript is committed here.
+- WHDL URL numbering and date labels are recorded from the catalog's linked resources; extraction must verify each file opens and matches the stated chronology.
+- The Parker 1903 abridgment is a useful navigation aid only. Its editorial selection and unlicensed repository copy are not approved inputs.
+- This manifest is ready for Claude to fetch the primary PDFs and build the raw Jackson-only corpus, but it is **not** a completed encrypted handoff.
+
+## Provenance note
+
+Prepared as a rights-first fast-lane source manifest. Verification performed against the WHDL catalog record, WHDL linked journal-extract inventory, SABDA scan metadata, and Project Gutenberg catalog records on 24 October 2026.
