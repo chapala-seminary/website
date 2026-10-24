@@ -38,3 +38,16 @@ Offline code review and four mock integration tests have passed. **Not approved 
 5. Before unattended production operation, have an independent security reviewer (Robert, only at final gate) check deployment scope and permissions. No changes to public website or exam keys.
 
 **Decision:** Offline preflight passes; Google Apps Script install and live integration are **blocked on authenticated account access and billing configuration**, not on source-code readiness.
+
+
+## Continuation and billing follow-up — v0.5
+
+Three additional fail-closed bugs were corrected before account installation:
+
+1. **Duplicate Job IDs:** IDs are now validated as unique across the job sheet. Previously a copied approved row could run the same work twice on successive scheduler ticks.
+2. **Malformed Next Run UTC:** invalid nonblank dates now move that job to `REVIEW_REQUIRED`. Previously invalid dates were treated as due immediately.
+3. **Token ceiling / forced truncation:** Responses returning `finish_reason=length` (OpenAI-compatible) or `stop_reason=max_tokens` (Claude) now continue if attempts remain, even if the visible text ends with `[[CTS_DONE]]`; after the attempt cap they require human review.
+
+`node tests/*.test.cjs` performed separately across all five test scripts and all passed on 2026-10-24 (offline mocks only). No external API call, subscription activation, trigger installation, or application release occurred.
+
+**Remaining verification:** Google sign-in to an Apps Script editor, authorized installation, `ctsPreflight()`, then one synthetic DeepSeek job with price/cost controls and report storage checked. Account sign-in is the only live-access dependency. The site stays untouched.
