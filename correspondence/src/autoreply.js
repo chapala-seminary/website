@@ -48,7 +48,9 @@ export async function autoSettings(env) {
   const s = Object.fromEntries(rows.map((r) => [r.key, r.value]));
   let approved = {};
   try { approved = JSON.parse(s.approved_templates || '{}'); } catch { approved = {}; }
-  return { mode: ['off', 'shadow', 'live'].includes(s.auto_send) ? s.auto_send : 'off', paused: s.paused === '1',
+  const requested = ['off', 'shadow', 'live'].includes(s.auto_send) ? s.auto_send : 'off';
+  const mode = requested === 'live' && env.M2_RELEASE_GATE !== 'M2_SEND_APPROVED' ? 'off' : requested;
+  return { mode, paused: s.paused === '1',
     cap: Number(s.auto_daily_cap) || 40, delay: Number(s.auto_delay_min) || 30, approved };
 }
 
