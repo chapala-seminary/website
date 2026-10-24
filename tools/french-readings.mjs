@@ -61,14 +61,18 @@ function loadTextbook(file) {
         ...q,
         answer: keyed[i].answer,
         ...(keyed[i].accept ? { accept: keyed[i].accept } : {}),
+        // a private bank (keys: "private") keeps its question stamps with the keys
+        ...(isPrivateReading(pub) && keyed[i].tr ? { tr: keyed[i].tr } : {}),
       })),
     },
   };
 }
-function publicTextbookQuestions(questions) {
-  return questions.map(({ answer, accept, ...q }) => q);
+function publicTextbookQuestions(questions, isPrivate = false) {
+  return questions.map(({ answer, accept, tr, ...q }) => (isPrivate || !tr ? q : { ...q, tr }));
 }
-function writeTextbookKeys(slug, questions) {
+/* A private bank's keys file keeps each question's chapter and stamp too
+   (tools/build-elective-textbook.mjs writes it so). */
+function writeTextbookKeys(slug, questions, isPrivate = false) {
   const keysRoot = resolveKeysRoot('.');
   if (!keysRoot) throw new Error(`${slug}: cannot write French textbook answers without assessment-keys`);
   const file = path.join(keysRoot, 'textbooks', `${slug}.json`);
@@ -79,6 +83,8 @@ function writeTextbookKeys(slug, questions) {
         prompt: q.prompt,
         answer: q.answer,
         ...(q.accept ? { accept: q.accept } : {}),
+        ...(isPrivate && q.chapter != null ? { chapter: q.chapter } : {}),
+        ...(isPrivate && q.tr ? { tr: q.tr } : {}),
       })),
     },
   });
@@ -392,8 +398,9 @@ export function applyPacket(file) {
       if (text) warnings.push(...answerWarnings(rec.test.questions, text, item.id).map((w) => w + ' (any digest)'));
     }
     if (item.type === 'textbook') {
-      writeTextbookKeys(rec.slug, rec.test.questions);
-      writeJson(item.file, { ...rec, test: { ...rec.test, questions: publicTextbookQuestions(rec.test.questions) } });
+      const priv = isPrivateReading(rec);
+      writeTextbookKeys(rec.slug, rec.test.questions, priv);
+      writeJson(item.file, { ...rec, test: { ...rec.test, questions: publicTextbookQuestions(rec.test.questions, priv) } });
     } else if (isPrivateReading(rec)) {
       writePrivateReading(item.file, rec);
     } else {

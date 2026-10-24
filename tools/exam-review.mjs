@@ -70,8 +70,9 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
   const privateFile = privateSlugs.size ? privateReferenceFile() : null;
   if (privateSlugs.size && !privateFile) throw new Error(`exam-review: ${[...privateSlugs].join(', ')} keep their review references in assessment-keys, which is not checked out`);
   /* refresh: true re-pins every bank (an editorial refresh); 'missing' pins
-     only questions with no pin, or whose prompt or answer changed, and keeps
-     every other pin exactly as it is -- for a new bank. */
+     only questions with no pin, whose prompt or answer changed, or whose
+     pinned passage is no longer on its page, and keeps every other pin
+     exactly as it is -- for a new or revised bank. */
   const references = refresh === true ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')),
     ...(privateFile && fs.existsSync(privateFile) ? JSON.parse(fs.readFileSync(privateFile,'utf8')) : {}) };
   const cache = new Map(), candidateCache = new Map(), report = [], misses = [], repinned = [];
@@ -209,10 +210,12 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
       const referenceKey = `${record.slug}/${lang}/${i+1}`;
       const questionHash = fingerprint(JSON.stringify({prompt:q.prompt[lang] || q.prompt.en, answer:q.answer[lang] || q.answer.en}));
       const pinned = references[referenceKey];
-      const fresh = refresh === true || (refresh === 'missing' && !(pinned && pinned.question === questionHash));
+      let fresh = refresh === true || (refresh === 'missing' && !(pinned && pinned.question === questionHash));
       if(!fresh) {
         if(!pinned || pinned.question !== questionHash) throw new Error(`Review reference needs editorial refresh: ${referenceKey}`);
         best = ranked.find(r => r.p.page.file === pinned.file && fingerprint(r.p.text) === pinned.paragraph);
+        // 'missing' also re-pins a question whose pinned passage is gone (its text was revised); the others stay as they are
+        if(!best && refresh === 'missing') { fresh = true; best = ranked[0]; }
       }
       if (!best) throw new Error(`${record.slug}/${lang}/Q${i+1}: no assigned teaching passage`);
       // Keep the source author's actual explanation intact; never manufacture

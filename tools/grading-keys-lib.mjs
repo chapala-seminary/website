@@ -107,13 +107,14 @@ export const hasAnswers = (qs) => Array.isArray(qs) && qs.length > 0 && qs.every
 export const PRIVATE_READING_FIELDS = ['answer', 'accept', 'tr'];
 export const isPrivateReading = (pub) => pub?.keys === 'private';
 
-/** What a public reading file for a private bank must not carry: a list of
- *  problems, empty when the file is clean. */
+/** What a public reading (or textbook) file for a private bank must not
+ *  carry: a list of problems, empty when the file is clean. A private
+ *  textbook (keys: "private") follows the same rule. */
 export function privateReadingLeaks(pub, where = pub?.slug || 'reading') {
   const out = [];
   if (!isPrivateReading(pub)) out.push(`${where}: a private reading bank must say keys: "private" in its public file`);
   for (const [i, q] of (pub?.test?.questions || []).entries())
-    for (const f of PRIVATE_READING_FIELDS) if (q && q[f] !== undefined) out.push(`${where} #${i + 1}: the public file carries "${f}"; it belongs only in assessment-keys/readings`);
+    for (const f of PRIVATE_READING_FIELDS) if (q && q[f] !== undefined) out.push(`${where} #${i + 1}: the public file carries "${f}"; it belongs only in assessment-keys`);
   return out;
 }
 

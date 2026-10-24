@@ -167,8 +167,13 @@ What the tool does:
    `#cts-required` notice) and `reading-rooms.mjs` (attestation and shelf).
 3. It writes the room's French, `src/data/french-readings/room/<Prefix>Readings.json`.
    Each digest leaf is paired with its French leaf in document order. The
-   card lines, notices and shelf are added. It stops if any English passage
-   of the room would stay English on the French page.
+   card lines, notices and shelf are added, and so is the textbook notice
+   once the course has a textbook. The stored French must carry the English
+   tags. Where the French italicizes more than the English, the extra
+   italics are dropped and reported: first from English words the French
+   cites (« dispositions » (*tempers*)), then the shortest emphasis (*ne* …
+   *pas*). It stops if any other tags differ, or if any English passage of
+   the room would stay English on the French page.
 4. It records the room in `src/lib/partials.ts` (`READING_ROOM`) and
    re-imports the course. A unit gets the course-readings box only once its
    room exists. Then it runs `private-units.mjs` and `gen-worker-catalog.mjs`.
@@ -176,8 +181,10 @@ What the tool does:
    because the map of required tests changed.
 
 Then build. The first build stops at "Review reference needs editorial
-refresh". Run `node tools/exam-review.mjs dist --refresh-missing`: it pins
-only the new bank's questions, and every existing pin stays as it is. The
+refresh". Run `node tools/exam-review.mjs dist --refresh-missing`. It pins
+only questions that have no pin, whose prompt or answer changed, or whose
+pinned passage is gone because its text was revised. Every other pin stays
+as it is. The
 private bank's pins go to `assessment-keys/exam-review-references.json`. Then
 build again. Running the tool twice gives the same files.
 

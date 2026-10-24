@@ -33,7 +33,8 @@
  * In both modes, the public source of every private reading bank (a row
  * with `private: true` in tools/import-readings.mjs, or a file saying
  * keys: "private") is checked too: src/content/readings/<slug>.json must say
- * keys: "private" and carry no answer, accept or tr on any question. Those
+ * keys: "private" and carry no answer, accept or tr on any question; so is
+ * every private textbook (keys: "private"; every "elec" book is one). Those
  * belong only in the assessment-keys checkout (docs/reading-rooms.md).
  */
 import fs from 'node:fs';
@@ -221,7 +222,7 @@ let singlePages = 0;
 }
 
 /* ---- the public source of the private reading banks ---- */
-let privateReadings = 0;
+let privateReadings = 0, privateBooks = 0;
 {
   const rdir = path.join(ROOT, 'src/content/readings');
   const files = fs.existsSync(rdir) ? fs.readdirSync(rdir).filter((f) => f.endsWith('.json')) : [];
@@ -235,6 +236,14 @@ let privateReadings = 0;
     if (!fs.existsSync(f)) { note(`src/content/readings/${slug}.json: a private reading row has no public file; run node tools/import-readings.mjs --write`); continue; }
     privateReadings++;
     for (const m of privateReadingLeaks(JSON.parse(fs.readFileSync(f, 'utf8')), `src/content/readings/${slug}.json`)) note(m);
+  }
+  /* the private textbooks (keys: "private", the electives'; every "elec" book must be one) */
+  const tdir = path.join(ROOT, 'src/content/textbooks');
+  for (const f of fs.existsSync(tdir) ? fs.readdirSync(tdir).filter((x) => x.endsWith('.json')) : []) {
+    const pub = JSON.parse(fs.readFileSync(path.join(tdir, f), 'utf8'));
+    if (pub.keys !== 'private' && !String(pub.slug).startsWith('elec')) continue;
+    privateBooks++;
+    for (const m of privateReadingLeaks(pub, `src/content/textbooks/${f}`)) note(m);
   }
 }
 
@@ -254,4 +263,4 @@ if (problems.length) {
 console.log(expectKeys
   ? `PASS — shadow build: ${unitPages} unit pages and ${testPages} test pages keep their keys (${withKeys} with keys) and post to /api/shadow (${shadowHook} carry the hook); ${singlePages} single-page course pages keep theirs and carry the hook.`
   : `PASS — live build: ${unitPages} unit pages and ${testPages} test pages carry no answer key, accept list, model answer, keyword, rubric, explanation or review passage (${reviewFiles} passage files kept for the Worker); nor do the ${singlePages} single-page course pages (Counseling, Narrative and WiseSpeak Preaching, Ethics) or their fill-in data.`);
-console.log(`PASS — ${privateReadings} private reading bank(s): their public files carry no answer, accept or tr.`);
+console.log(`PASS — ${privateReadings} private reading bank(s) and ${privateBooks} private textbook bank(s): their public files carry no answer, accept or tr.`);

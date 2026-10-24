@@ -30,11 +30,13 @@ const json = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 const records = (dir) => fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => json(path.join(dir, f)));
 const books = records('src/content/textbooks').map((b) => {
   const { questions: keyed } = textbookQuestions('.', b.slug);
-  // Keep public prompt/tr; only answer/accept come from assessment-keys.
+  // Keep public prompt/tr; only answer/accept come from assessment-keys --
+  // and, for a private bank (keys: "private"), the French stamps too.
   const questions = b.test.questions.map((q, i) => ({
     ...q,
     answer: keyed[i]?.answer,
     ...(keyed[i]?.accept ? { accept: keyed[i].accept } : {}),
+    ...(b.keys === 'private' && keyed[i]?.tr ? { tr: keyed[i].tr } : {}),
   }));
   return { ...b, test: { ...b.test, questions } };
 });
@@ -83,7 +85,11 @@ if (!BASE) {
     const pages = new Map();
     for (const r of french) {
       const fields = Object.keys(r.tr || {});
-      if (fields.length) pages.set(`${r.page}.html`, r.body?.fr ? bodyLeaves(r.body.fr).list.filter(translatable).map((l) => l.text.trim()) : []);
+      // a passage the same in both languages ("Introduction.") is not a sample, as for the rooms below
+      // (or in French and Spanish: a signature, "W. J. Seymour.")
+      const enLeaves = r.body?.en ? bodyLeaves(r.body.en).list : [], esLeaves = r.body?.es ? bodyLeaves(r.body.es).list : [];
+      if (fields.length) pages.set(`${r.page}.html`, r.body?.fr ? bodyLeaves(r.body.fr).list.map((l, i) => [l, enLeaves[i], esLeaves[i]])
+        .filter(([l, e, s]) => translatable(l) && l.text.trim() !== e?.text.trim() && l.text.trim() !== s?.text.trim()).map(([l]) => l.text.trim()) : []);
       pages.set(`${r.page}Test.html`, []);
     }
     for (const { data } of files) {

@@ -50,6 +50,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { parse } from 'node-html-parser';
+import { fitFrench } from './french-fit.mjs';
 import { TRADITIONS, prefixOf } from './import-electives.mjs';
 import { resolveKeysRoot } from './grading-keys-lib.mjs';
 import { bodyLeaves, translatable, leafKey, markupSegments, loadStore, storeFile, augmentHtml, frenchSpaces, tagProblem } from './french-readings-lib.mjs';
@@ -96,25 +97,17 @@ const accept = readJson(path.join(CONTENT, 'accept.json'));
 if (!Array.isArray(readings) || readings.length !== 5 || readings.some((r, i) => r.n !== i + 1)) fail('readings.json: five readings, n = 1 to 5, in order');
 const pairs = new Map();          // leafKey(English) -> French innerHTML
 const unwrapped = [];
-/* A stored French passage carries exactly the English tags (tagProblem), so
-   the page can fit it onto the English markup. French that italicizes a word
-   the English leaves plain (the English word cited: « <em>tarry</em> ») loses
-   that italic here, and says so; any other difference stops the run. */
-const fitFrench = (en, fr, where) => {
-  for (const tag of ['em', 'i']) {
-    const open = new RegExp(`<${tag}>`, 'g');
-    if (!(en.match(open) || []).length && (fr.match(open) || []).length) {
-      fr = fr.replace(new RegExp(`</?${tag}>`, 'g'), '');
-      unwrapped.push(`${where}: <${tag}> the English does not have`);
-    }
-  }
-  const problem = tagProblem(en, fr);
-  if (problem) fail(`${where}: the French ${problem}`);
-  return fr;
+/* Stored French carries exactly the English tags; extra French italics are
+   dropped and reported (tools/french-fit.mjs), any other difference stops the run. */
+const fitTagsTo = (en, fr, where) => {
+  const r = fitFrench(en, fr);
+  for (const d of r.dropped) unwrapped.push(`${where}: ${d}`);
+  if (r.problem) fail(`${where}: the French ${r.problem}`);
+  return r.fr;
 };
 const addPair = (en, fr, where) => {
   if (!fr || !String(fr).trim()) { fail(`${where}: no French`); return; }
-  fr = frenchSpaces(fitFrench(en, fr, where));
+  fr = frenchSpaces(fitTagsTo(en, fr, where));
   const k = leafKey(en);
   if (pairs.has(k) && pairs.get(k) !== fr) fail(`${where}: the same English has two different French texts`);
   pairs.set(k, fr);
@@ -261,9 +254,19 @@ const others = new Map();     // French already stored for other pages (the shar
 for (const { file, data } of files) if (path.resolve(file) !== path.resolve(storePath)) for (const [k, e] of Object.entries(data.entries || {})) if (!others.has(k)) others.set(k, { ...e, key: k, file });
 const entries = {};
 const missing = [];
+/* The textbook notice tools/room-test-notices.mjs puts at the top of the room
+   once the course has a textbook (tools/build-elective-textbook.mjs): its
+   French in the wording the other rooms' notices use, with the book's own
+   French title. */
+const tbBook = fs.readdirSync('src/content/textbooks').map((f) => readJson(`src/content/textbooks/${f}`)).find((b) => b.course === prefix);
+const tbNoticeFr = (en) => {
+  if (!tbBook || !/^<strong>The Master's textbook test:<\/strong>/.test(en) || !/fill-in-the-blank questions/.test(en) || !/It is separate from the reading test/.test(en)) return null;
+  return `<strong>Le test du manuel du Master :</strong> lisez <a href="/${tbBook.page}.html">${tbBook.title.fr ?? tbBook.title.en}</a>, puis passez <a href="/${tbBook.page}Test.html">son test</a> : vingt questions à compléter, tirées d’un ensemble de quarante ; dix-huit bonnes réponses suffisent pour réussir. Chaque réponse est immédiatement marquée comme correcte ou incorrecte. Les bonnes réponses et les explications deviennent disponibles après la réussite de la tentative. Il est distinct du test de lecture sur les cinq résumés ci-dessous : réussir l’un ne valide pas l’autre. Dans les parcours M.Div. et Th.M., les deux tests sont en cours de mise en place ; la page de chaque test indique s’il est déjà en vigueur. D’ici là, tout étudiant peut les passer, et une réussite est conservée dans votre dossier.`;
+};
 for (const s of markupSegments(built)) {
   if (others.has(s.key)) continue;
-  const fr = pairs.get(s.key);
+  const notice = tbNoticeFr(s.en);
+  const fr = pairs.get(s.key) ?? (notice && frenchSpaces(notice));
   if (fr == null) { missing.push(`${s.tag}: ${s.en.replace(/<[^>]+>/g, '').slice(0, 90)}`); continue; }
   entries[s.key] = { en: s.en, fr, tr: { fr: { status: 'machine', from: s.key } } };
 }

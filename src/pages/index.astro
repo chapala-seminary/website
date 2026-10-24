@@ -41,6 +41,8 @@ for (const r of readings)
 // "elec…", tools/build-elective-readings.mjs) in a list of their own as each
 // is ready: their test is optional (worker/test-activation.js).
 const coreReadings = readings.filter((r) => !r.slug.startsWith('elec'));
+const coreTextbooks = textbooks.filter((t) => !t.slug.startsWith('elec'));
+const electiveTextbooks = textbooks.filter((t) => t.slug.startsWith('elec'));
 const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
 
 // The count in words, as the lead above it spells its counts.
@@ -110,10 +112,19 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
     <p><span class="en">Each of our 45 core courses has a textbook and a separate required-reading test. Both tests are required for new M.Div. and Th.M. course completions after activation; valid earlier master’s completions remain valid. The books and tests are open to every student and optional for Certificate and Associate students.</span>
     <span class="es">Cada uno de nuestros 45 cursos básicos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
     <div class="tb-grid">
-      {textbooks.map((t) => (
+      {coreTextbooks.map((t) => (
         <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
       ))}
     </div>
+    {electiveTextbooks.length > 0 && (<>
+    <h3 style="margin-top:26px"><span class="en">Elective Textbooks</span><span class="es">Libros de Texto de las Electivas</span></h3>
+    <p><span class="en">Textbooks for the denominational electives, listed as each is ready. Their textbook test is optional on every track.</span><span class="es">Libros de texto de las electivas denominacionales, en la lista a medida que cada uno está listo. Su examen del libro es opcional en todos los trayectos.</span></p>
+    <div class="tb-grid" id="elective-textbooks">
+      {electiveTextbooks.map((t) => (
+        <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
+      ))}
+    </div>
+    </>)}
     <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
     <p><span class="en">All 45 core courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity. Textbooks and assigned readings for the 20 denominational electives are being prepared.</span><span class="es">Los 45 cursos básicos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta. Se están preparando libros de texto y lecturas asignadas para las 20 electivas denominacionales.</span></p>
     <div class="tb-grid" id="required-readings">

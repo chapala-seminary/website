@@ -306,6 +306,11 @@ const textbooks = defineCollection({
     // a further language (fr) is the English markup with its words translated
     body: z.object({ en: bookHtml, es: bookHtml }).catchall(bookHtml),
     tr: fieldTranslations.optional(),
+    /* "private": a new bank (the electives' textbooks, tools/build-elective-textbook.mjs)
+       whose questions' French stamps (tr) are in assessment-keys with the
+       answers, since a stamp hashes the answer. The older textbooks keep
+       their question stamps public. */
+    keys: z.literal('private').optional(),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
@@ -325,6 +330,12 @@ const textbooks = defineCollection({
       if (counts.size * t.perChapter !== t.draw) ctx.addIssue({ code: 'custom', message: 'textbook group count does not match draw' });
       for (const [g, n] of counts) if (n < t.perChapter) ctx.addIssue({ code: 'custom', message: `textbook group ${g} has too few questions` });
     }),
+  }).superRefine((b, ctx) => {
+    if (b.keys !== 'private') return;
+    b.test.questions.forEach((q, i) => {
+      for (const f of ['answer', 'accept', 'tr'] as const) if (q[f] !== undefined) ctx.addIssue({ code: 'custom',
+        message: `question ${i + 1} carries "${f}" in a private textbook bank; it belongs only in assessment-keys/textbooks/${b.slug}.json` });
+    });
   }),
 });
 
