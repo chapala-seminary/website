@@ -288,6 +288,45 @@ function unitFiles(code, prefix, slug, n, courseTitle, unitTitles, U) {
       return Object.values(accept).some((a) => a.length) ? { answer, accept } : { answer };
     }),
   };
+  // A question must not pass as its own answer (test/french-import.test.mjs): where a language's prompt alone
+  // would meet the keyword grader (cts-engine.js keywordPass), drop the keyword forms the prompt already
+  // contains, keeping any group the prompt would otherwise empty.
+  const fold = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/n\u0303/g, '\u00f1')
+    .replace(/(\p{Script=Latin})[\u0300-\u036f]+/gu, '$1').normalize('NFC');
+  const norm = (x) => ' ' + fold(x).normalize('NFC').replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ') + ' ';
+  const inText = (form, text) => { const n = norm(form).trim(); return n && text.includes(n); };
+  const hits = (groups, text) => groups.filter((g) => (Array.isArray(g) ? g : [g]).some((f) => inText(f, text))).length;
+  keys.sa.forEach((k, i) => {
+    for (const l of Object.keys(k.keywords)) {
+      const text = norm(pub.sa[i].prompt[l]), groups = k.keywords[l];
+      if (hits(groups, text) < Math.min(3, groups.length)) continue;
+      k.keywords[l] = groups.map((g) => {
+        const forms = Array.isArray(g) ? g : [g], kept = forms.filter((f) => !inText(f, text));
+        const out = kept.length ? kept : forms;
+        return out.length === 1 ? out[0] : out;
+      });
+    }
+    // Prompts that name the very facts asked for (dates, names) still hit: ask for one keyword more than
+    // the best prompt hits, in every language.
+    const langsK = Object.keys(k.keywords);
+    const most = Math.max(...langsK.map((l) => hits(k.keywords[l], norm(pub.sa[i].prompt[l]))));
+    const fewest = Math.min(...langsK.map((l) => k.keywords[l].length));
+    if (most >= Math.min(k.minHits || 3, fewest)) {
+      if (most + 1 <= fewest) k.minHits = most + 1;
+      else promptPasses.push(`${code} U${n} sa ${i + 1}`);
+    }
+  });
+  // Translation provenance, stamped exactly as tools/translation-plan.mjs does. It hashes the keys too, so it
+  // lives with them in the private repo (a public hash of the answer index would give the answer away).
+  const QF = ['stem', 'prompt', 'options', 'why', 'answer', 'accept', 'keywords', 'model'];
+  for (const sec of ['mc', 'sa', 'fill']) pub[sec].forEach((pq, i) => {
+    const q = { ...pq, ...keys[sec][i] };
+    const original = Object.fromEntries(QF.filter((k) => q[k]?.en != null).map((k) => [k, q[k].en]));
+    const shared = { ...(typeof q.answer === 'number' ? { answerIndex: q.answer } : {}), ...(q.minHits != null ? { minHits: q.minHits } : {}) };
+    const from = hash(JSON.stringify({ ...original, ...shared }));
+    const tr = Object.fromEntries(langs.filter((l) => l !== 'en').map((l) => [l, { status: 'machine', from }]));
+    if (Object.keys(tr).length) keys[sec][i].tr = tr;
+  });
   return { pub, keys };
 }
 
@@ -316,6 +355,7 @@ function certificate(prefix, slug, title, unitTitles) {
 /* ---------------------------------------------------------------- main */
 const codes = rest.length ? rest : fs.readdirSync(SRC).filter((d) => /^[A-D]-C[1-5]$/.test(d)).sort();
 const problems = [];
+const promptPasses = [];
 const ignoreAdd = [];
 for (const code of codes) {
   const prefix = prefixOf(code), slug = slugOf(code), trad = TRADITIONS[code[0]];
@@ -369,3 +409,4 @@ if (WRITE && ignoreAdd.length) {
   if (add.length) fs.writeFileSync('.gitignore', gi.replace(/\n*$/, '\n') + (gi.includes(MARK) ? '' : `\n${MARK}\n`) + add.join('\n') + '\n');
 }
 if (problems.length) { console.log(`\n${problems.length} note(s):`); for (const p of problems) console.log('  - ' + p); }
+if (promptPasses.length) console.log(`\n${promptPasses.length} prompt(s) still pass as their own answer:\n  ` + promptPasses.join('\n  '));

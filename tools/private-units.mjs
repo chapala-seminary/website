@@ -28,7 +28,8 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const PUBLIC = path.join(ROOT, 'src/content/units-public');
 const OUT = path.join(ROOT, 'src/content/units');
-const KEY_FIELDS = ['answer', 'why', 'keywords', 'model', 'accept', 'correct', 'rubric', 'minHits'];
+// 'tr' too: a question's translation stamp hashes its keys, so a public stamp would let the answer be guessed
+const KEY_FIELDS = ['answer', 'why', 'keywords', 'model', 'accept', 'correct', 'rubric', 'minHits', 'tr'];
 const check = process.argv.includes('--check');
 
 function keysRoot() {
