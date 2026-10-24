@@ -9,8 +9,9 @@
  *   POST /console/resume          start again (owner)
  *   POST /console/sync            run the mailbox sync now (reviewer, owner)
  *   GET  /console/auto            automatic replies: mode, templates, what was sent
- *   POST /console/auto            mode off (reviewer, owner); shadow / live, approve,
- *                                 withdraw a template (owner only)
+ *   POST /console/auto            mode off (reviewer, owner); shadow, approve,
+ *                                 withdraw a template (owner only). Live mode
+ *                                 requires the separate M2_SEND_APPROVED release gate.
  *
  *   cron, every 10 minutes: sync every enabled mailbox; 13:00 UTC daily: retention.
  *
@@ -98,6 +99,7 @@ async function autoView(env, user) {
   const a = await autoReport(env);
   const owner = user.role === 'owner';
   const mode = a.settings.mode;
+  const liveEnabled = env.M2_RELEASE_GATE === 'M2_SEND_APPROVED';
   const modeForm = (m, label) => `<form method="post" action="/console/auto"><input type="hidden" name="mode" value="${m}"><button ${m === mode ? '' : 'class="ghost"'}>${label}</button></form>`;
   const c = a.counts;
   const tpl = a.templates.map((t) => {
@@ -117,7 +119,7 @@ ${esc(r.body)}</pre></details>` : ''}</div>`).join('');
   return html(page('Automatic replies', `<p><a class="sub" href="/console">← Console</a></p><h1>Automatic replies</h1>
 <div class="sub">Policy ${esc(POLICY_VERSION)} · up to ${a.settings.cap} a day · sent ${a.settings.delay} minutes after the student's message, unless someone answers first from any mailbox.</div>
 <div class="card">${esc(MODE_TEXT[mode])}</div>
-<div class="bar">${modeForm('off', 'Off')}${owner ? modeForm('shadow', 'Shadow (record only)') + modeForm('live', 'Live (send)') : ''}</div>
+<div class="bar">${modeForm('off', 'Off')}${owner ? modeForm('shadow', 'Shadow (record only)') + (liveEnabled ? modeForm('live', 'Live (send)') : '') : ''}</div>
 ${a.settings.paused ? '<div class="banner">Paused: nothing automatic runs, including these replies.</div>' : ''}
 <h2>Last 24 hours</h2><div class="stats">${['sent', 'shadow', 'blocked', 'superseded', 'unknown', 'failed', 'pending'].map((k) => `<div class="stat"><b>${c[k] || 0}</b><span>${esc(STATUS_TEXT[k])}</span></div>`).join('')}</div>
 <h2>Templates · a template is sent only when approved and all its facts are confirmed</h2>${tpl}
@@ -186,6 +188,7 @@ export async function handle(request, env) {
     if (mode) {
       if (!['off', 'shadow', 'live'].includes(mode)) return txt('Unknown mode', 400);
       if (mode !== 'off' && user.role !== 'owner') return txt('Only the owner can turn automatic replies on.', 403);
+      if (mode === 'live' && env.M2_RELEASE_GATE !== 'M2_SEND_APPROVED') return txt('Live sending is disabled until the separately approved M2 release gate is present.', 409);
       await setSetting(env, 'auto_send', mode, user.email);
       return back('/console/auto');
     }
