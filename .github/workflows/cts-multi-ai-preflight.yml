@@ -1,0 +1,28 @@
+name: CTS Multi-AI Watchdog Preflight
+on:
+  push:
+    branches:
+      - handoff/multi-ai-watchdog-pilot
+    paths:
+      - '_review/multi-ai-watchdog/**'
+      - '.github/workflows/cts-multi-ai-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source, provider requests, recovery and budget controls
+        run: |
+          cd _review/multi-ai-watchdog
+          node --check tests/watchdog.test.cjs
+          node tests/watchdog.test.cjs
+          node tests/transitions.test.cjs
+          node tests/provider.test.cjs
+          node tests/preflight.test.cjs
