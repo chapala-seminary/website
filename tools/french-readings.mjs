@@ -261,7 +261,7 @@ function answerWarnings(questions, text, label) {
 /* ---- apply ----------------------------------------------------------------- */
 
 const machine = (en) => ({ status: 'machine', from: hash(en) });
-function questionStamps(questions) {
+export function questionStamps(questions) {
   const plain = questions.map((q) => ({ prompt: { en: q.prompt.en }, answer: { en: q.answer.en }, ...(q.accept?.en ? { accept: { en: q.accept.en } } : {}) }));
   const { jobs } = translationPlan({ sourceLang: 'en', blocks: [] }, { fill: plain }, 'fr');
   return jobs.map((j) => j.stamp);

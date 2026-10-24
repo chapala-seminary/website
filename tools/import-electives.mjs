@@ -29,7 +29,9 @@ import { hash } from '../src/lib/lesson.ts';
 const argv = process.argv.slice(2);
 const WRITE = argv.includes('--write');
 const [SRC, KEYS, ...rest] = argv.filter((a) => !a.startsWith('--'));
-if (!SRC || !KEYS) { console.error('usage: node tools/import-electives.mjs <sources> <assessment-keys> [CODE ...] [--write]'); process.exit(2); }
+// importable for its names (TRADITIONS, prefixOf: tools/build-elective-readings.mjs); it runs only from the command line
+const isMain = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
+if (isMain && (!SRC || !KEYS)) { console.error('usage: node tools/import-electives.mjs <sources> <assessment-keys> [CODE ...] [--write]'); process.exit(2); }
 
 export const TRADITIONS = {
   A: { id: 'pentecostal-charismatic-electives', tag: 'PC',
@@ -51,6 +53,10 @@ const DESC = {
 export const prefixOf = (code) => `CTSElec${TRADITIONS[code[0]].tag}${code.slice(-1)}`;
 export const slugOf = (code) => prefixOf(code).slice(3).toLowerCase();
 const UNITS = 10;
+/* The course-readings box (src/lib/partials.ts honours) goes on a unit only
+   once the course has its reading room (tools/build-elective-readings.mjs),
+   so no unit links a room that does not exist. */
+const hasRoom = (prefix) => fs.existsSync(`src/body/rooms/${prefix}Readings.html`);
 const LANGS = ['en', 'es', 'fr'];
 
 const INTERIM = {
@@ -256,7 +262,7 @@ ${col(esCol)}
     </div>
 </div>
 </div>
-`;
+${hasRoom(prefix) ? '\n<!--cts-part:honours-->\n' : ''}`;
   return { course: prefix, unit: n, sourceLang: 'en', langs, template, blocks };
 }
 
@@ -353,9 +359,11 @@ function certificate(prefix, slug, title, unitTitles) {
 }
 
 /* ---------------------------------------------------------------- main */
+const promptPasses = [];
+if (isMain) main();
+function main() {
 const codes = rest.length ? rest : fs.readdirSync(SRC).filter((d) => /^[A-D]-C[1-5]$/.test(d)).sort();
 const problems = [];
-const promptPasses = [];
 const ignoreAdd = [];
 for (const code of codes) {
   const prefix = prefixOf(code), slug = slugOf(code), trad = TRADITIONS[code[0]];
@@ -410,3 +418,4 @@ if (WRITE && ignoreAdd.length) {
 }
 if (problems.length) { console.log(`\n${problems.length} note(s):`); for (const p of problems) console.log('  - ' + p); }
 if (promptPasses.length) console.log(`\n${promptPasses.length} prompt(s) still pass as their own answer:\n  ` + promptPasses.join('\n  '));
+}

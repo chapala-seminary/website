@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { createHash } from 'node:crypto';
 import { parse } from 'node-html-parser';
 import { overlayQuestions, resolveKeysRoot, readingQuestions, isPrivateReading } from './grading-keys-lib.mjs';
@@ -68,9 +69,12 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
   const privateSlugs = new Set(all.filter(isPrivateReading).map((r) => r.slug));
   const privateFile = privateSlugs.size ? privateReferenceFile() : null;
   if (privateSlugs.size && !privateFile) throw new Error(`exam-review: ${[...privateSlugs].join(', ')} keep their review references in assessment-keys, which is not checked out`);
-  const references = refresh ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')),
+  /* refresh: true re-pins every bank (an editorial refresh); 'missing' pins
+     only questions with no pin, or whose prompt or answer changed, and keeps
+     every other pin exactly as it is -- for a new bank. */
+  const references = refresh === true ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')),
     ...(privateFile && fs.existsSync(privateFile) ? JSON.parse(fs.readFileSync(privateFile,'utf8')) : {}) };
-  const cache = new Map(), candidateCache = new Map(), report = [], misses = [];
+  const cache = new Map(), candidateCache = new Map(), report = [], misses = [], repinned = [];
   function load(file) {
     if (cache.has(file)) return cache.get(file);
     const filename = path.join(dist, file);
@@ -205,7 +209,8 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
       const referenceKey = `${record.slug}/${lang}/${i+1}`;
       const questionHash = fingerprint(JSON.stringify({prompt:q.prompt[lang] || q.prompt.en, answer:q.answer[lang] || q.answer.en}));
       const pinned = references[referenceKey];
-      if(!refresh) {
+      const fresh = refresh === true || (refresh === 'missing' && !(pinned && pinned.question === questionHash));
+      if(!fresh) {
         if(!pinned || pinned.question !== questionHash) throw new Error(`Review reference needs editorial refresh: ${referenceKey}`);
         best = ranked.find(r => r.p.page.file === pinned.file && fingerprint(r.p.text) === pinned.paragraph);
       }
@@ -215,11 +220,11 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
       const p = best.p;
       if (write) { p.node.setAttribute('id',p.id); p.page.changed=true; }
       let extra = p.text.length < 160 ? pool.find(other => other.page === p.page && other.group === p.group && other.lang === p.lang && other.text.length > 240 && other !== p) : null;
-      if(!refresh && pinned.extra) {
+      if(!fresh && pinned.extra) {
         extra = pool.find(other => other.page.file === pinned.file && fingerprint(other.text) === pinned.extra);
         if(!extra) throw new Error(`Review context changed: ${referenceKey}`);
-      } else if(!refresh) extra = null;
-      if(refresh) references[referenceKey] = {question:questionHash,file:p.page.file,paragraph:fingerprint(p.text),...(extra ? {extra:fingerprint(extra.text)} : {})};
+      } else if(!fresh) extra = null;
+      if(fresh) { repinned.push(referenceKey); references[referenceKey] = {question:questionHash,file:p.page.file,paragraph:fingerprint(p.text),...(extra ? {extra:fingerprint(extra.text)} : {})}; }
       const paragraphs = (extra ? [p.text,extra.text] : [p.text]).map(paragraph=>focusedPassage(paragraph,q.prompt[lang] || q.prompt.en,answers,lang));
       reviews.push({ paragraphs, kind:/Unit\d+/.test(p.page.file) ? 'lesson' : 'reading', heading:p.heading || record.title[lang] || record.title.en, href:p.href, lang:p.lang });
       report.push({slug:record.slug,lang,question:i+1,answer:best.answer,hits:best.hits,score:Math.round(best.score*100)/100,href:p.href,prompt:q.prompt[lang]||q.prompt.en,passage:p.text});
@@ -258,7 +263,7 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
     fs.writeFileSync(REFERENCE_FILE,JSON.stringify(pick((key) => !isPrivate(key)),null,1)+'\n');
     if (privateFile) { fs.mkdirSync(path.dirname(privateFile),{recursive:true}); fs.writeFileSync(privateFile,JSON.stringify(pick(isPrivate),null,1)+'\n'); }
   }
-  return {report,misses};
+  return {report,misses,repinned};
 }
 export default function examReviewIntegration() {
   return {name:'cts-exam-review', hooks:{'astro:build:done':({dir,logger}) => {
@@ -266,8 +271,11 @@ export default function examReviewIntegration() {
     logger.info(`${report.length} pinned, source-linked teaching explanations across all 90 exam banks`);
   }}};
 }
+/*   node tools/exam-review.mjs [dist] [--write] [--refresh | --refresh-missing] */
 if (process.argv[1]?.endsWith('/exam-review.mjs')) {
-  const {report,misses} = makeReview(process.argv[2] || 'dist',{write:process.argv.includes('--write'),refresh:process.argv.includes('--refresh')});
-  fs.writeFileSync('/private/tmp/cts-review-matches.json',JSON.stringify({report,misses},null,2));
-  console.log(`${report.length} explanations; ${misses.length} weak matches. Audit: /private/tmp/cts-review-matches.json`);
+  const refresh = process.argv.includes('--refresh') ? true : process.argv.includes('--refresh-missing') ? 'missing' : false;
+  const {report,misses,repinned} = makeReview(process.argv[2] || 'dist',{write:process.argv.includes('--write'),refresh});
+  const audit = path.join(os.tmpdir(),'cts-review-matches.json');
+  fs.writeFileSync(audit,JSON.stringify({report,misses,repinned},null,2));
+  console.log(`${report.length} explanations; ${misses.length} weak matches; ${repinned.length} pinned now. Audit: ${audit}`);
 }

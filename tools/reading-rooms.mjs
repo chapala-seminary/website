@@ -71,7 +71,7 @@ ${L.block(e.captionEn, e.captionEs, 'p', ' cts-shelf-caption')}
 
 function shelfHtml(room) {
   const n = room.entries.length + (room.panels || []).reduce((s, p) => s + p.entries.length, 0);
-  const WORDS = { 6: ['six', 'seis'], 10: ['ten', 'diez'], 14: ['fourteen', 'catorce'] }[n] || [String(n), String(n)];
+  const WORDS = { 6: ['six', 'seis'], 7: ['seven', 'siete'], 8: ['eight', 'ocho'], 9: ['nine', 'nueve'], 10: ['ten', 'diez'], 12: ['twelve', 'doce'], 14: ['fourteen', 'catorce'] }[n] || [String(n), String(n)];
   const headEn = `Further Study: ${WORDS[0][0].toUpperCase() + WORDS[0].slice(1)} Public-Domain Works`;
   const headEs = `Para Profundizar: ${WORDS[1]} obras de dominio público`;
   let h = `${SHELF[0]}

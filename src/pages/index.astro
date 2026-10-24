@@ -37,6 +37,11 @@ const readings = (await getCollection('readings')).map((e) => e.data)
 for (const r of readings)
   if (!cardOf.has(r.course))
     throw new Error(`required readings ${r.slug} belong to course "${r.course}", which has no catalog card`);
+// The 45 core courses' readings, and the denominational electives' (slug
+// "elec…", tools/build-elective-readings.mjs) in a list of their own as each
+// is ready: their test is optional (worker/test-activation.js).
+const coreReadings = readings.filter((r) => !r.slug.startsWith('elec'));
+const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
 
 // The count in words, as the lead above it spells its counts.
 const WORDS_EN = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
@@ -112,10 +117,19 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
     <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
     <p><span class="en">All 45 core courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity. Textbooks and assigned readings for the 20 denominational electives are being prepared.</span><span class="es">Los 45 cursos básicos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta. Se están preparando libros de texto y lecturas asignadas para las 20 electivas denominacionales.</span></p>
     <div class="tb-grid" id="required-readings">
-      {readings.map((r) => (
+      {coreReadings.map((r) => (
         <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
       ))}
     </div>
+    {electiveReadings.length > 0 && (<>
+    <h3 style="margin-top:26px"><span class="en">Elective Readings</span><span class="es">Lecturas de las Electivas</span></h3>
+    <p><span class="en">Assigned readings for the denominational electives, listed as each is ready. Their reading test is optional on every track.</span><span class="es">Lecturas asignadas de las electivas denominacionales, en la lista a medida que cada una está lista. Su examen de lecturas es opcional en todos los trayectos.</span></p>
+    <div class="tb-grid" id="elective-readings">
+      {electiveReadings.map((r) => (
+        <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
+      ))}
+    </div>
+    </>)}
   </section>
 <script is:inline src="/assets/js/cts-record.js"></script>
 <script is:inline set:html={`window.CTSRecord && window.CTSRecord.backfill(${recordJson});`} />

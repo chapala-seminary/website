@@ -131,6 +131,60 @@ The slug must be letters only and end in `readings`: the browser's records
 activation date never makes one required. Making one required takes its own
 `requiredFrom` date.
 
+## Elective reading rooms (Oct 2026)
+
+Each of the 20 denominational electives gets a reading room and a private
+reading test from one command:
+
+    node tools/build-elective-readings.mjs <CODE> --write
+
+`CODE` is A-C1 … D-C5. The course name comes from
+`tools/import-electives.mjs` (`prefixOf`: A-C1 → `CTSElecPC1`). The test slug
+is `elec<tag><one…five>readings`, e.g. `elecpconereadings`. The room is
+`<Prefix>Readings.html`.
+
+Before you run it:
+
+- `../elective-content/<CODE>/` (or `--content DIR`, or `ELECTIVE_CONTENT`)
+  holds `readings.json`, `bank.json` and `accept.json`. The five digests are
+  in English, Spanish and French, with the same structure in each. The bank
+  has French prompts, answers and alternates.
+- `src/data/reading-shelf.json` has the room's further-study shelf, with
+  `locusFr`, `nameFr` and `captionFr` beside the English and Spanish. Shelf
+  works and links come only from the course's source manifest, or follow its
+  URL pattern.
+- Optionally, `src/data/elective-readings.json` has a `tagline` and an
+  `onsite` notice for the course. Without them the tool writes generic ones.
+
+What the tool does:
+
+1. It copies the bank to `assessment-keys/readings-src/`, adds the row to
+   `src/data/elective-readings.json` (which `tools/import-readings.mjs`
+   reads: private, `requiredFrom: null`), and imports that test only
+   (`--only`).
+2. It writes the room on the Worship room's markup and adds it to
+   `src/data/rooms.json`. Then it runs `room-test-notices.mjs` (the
+   `#cts-required` notice) and `reading-rooms.mjs` (attestation and shelf).
+3. It writes the room's French, `src/data/french-readings/room/<Prefix>Readings.json`.
+   Each digest leaf is paired with its French leaf in document order. The
+   card lines, notices and shelf are added. It stops if any English passage
+   of the room would stay English on the French page.
+4. It records the room in `src/lib/partials.ts` (`READING_ROOM`) and
+   re-imports the course. A unit gets the course-readings box only once its
+   room exists. Then it runs `private-units.mjs` and `gen-worker-catalog.mjs`.
+   Every certificate page's `cts-required-tests.js` fingerprint changes,
+   because the map of required tests changed.
+
+Then build. The first build stops at "Review reference needs editorial
+refresh". Run `node tools/exam-review.mjs dist --refresh-missing`: it pins
+only the new bank's questions, and every existing pin stays as it is. The
+private bank's pins go to `assessment-keys/exam-review-references.json`. Then
+build again. Running the tool twice gives the same files.
+
+The front page lists elective reading tests apart from the 45 core ones
+(`#elective-readings`). Their test is optional on every track
+(`ELECTIVE_TESTS_PENDING`).
+
 ## Known limits
 
 - The shelf links straight to a public-domain copy wherever a stable, legal

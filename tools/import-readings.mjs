@@ -6,6 +6,7 @@
  *
  *   node tools/import-readings.mjs            # report
  *   node tools/import-readings.mjs --write    # write src/content/readings/<slug>.json
+ *   node tools/import-readings.mjs --write --only a,b   # ...only these tests
  *
  * Sources, both under src/data/readings/:
  *   <slug>.bank.json     Dr. Cook's bank, copied verbatim from the delivery
@@ -53,9 +54,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { carryFrench } from './french-readings-lib.mjs';
 import { resolveKeysRoot, privateReadingLeaks, PRIVATE_READING_FIELDS } from './grading-keys-lib.mjs';
+import { questionStamps } from './french-readings.mjs';
 
 const SRC = 'src/data/readings', OUT = 'src/content/readings';
 const WRITE = process.argv.includes('--write');
+/* --only a,b: build every test (so a problem anywhere still stops the run)
+   but write only these. */
+const ONLY = (() => { const i = process.argv.indexOf('--only'); return i > 0 ? new Set(process.argv[i + 1].split(',')) : null; })();
+/* The elective reading tests (tools/build-elective-readings.mjs writes this
+   file): one row each, private, optional. */
+const ELECTIVES = 'src/data/elective-readings.json';
 const NEXT_OUT = (() => { const i = process.argv.indexOf('--next-out'); return i > 0 ? process.argv[i + 1] : null; })();
 
 /* One row per test. `page` names the page the test belongs to -- the room
@@ -172,6 +180,14 @@ export const TESTS = [
   ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
     title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
     room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de ${es}` } })),
+  /* The denominational electives (Oct 2026): rows written by
+     tools/build-elective-readings.mjs. Their keys are private
+     (docs/reading-rooms.md, "Private reading tests"); requiredFrom null and
+     the "elec" slug keep them optional (worker/test-activation.js). Their
+     banks carry French, which is imported with them. */
+  ...(fs.existsSync(ELECTIVES) ? JSON.parse(fs.readFileSync(ELECTIVES, 'utf8')).tests : []).map((r) => ({
+    slug: r.slug, page: r.page, course: r.course, kind: 'reading', requiredFrom: null, alternates: 'optional', private: true,
+    title: r.title, room: r.room })),
 ];
 
 /* The rows whose keys are private: their public files are checked by
@@ -216,15 +232,23 @@ export function buildTest(t, name, { keysRoot = null } = {}) {
       return out;
     };
     const en = list('en', q.answer_en), es = list('es', q.answer_es);
-    for (const [lang, a] of [['en', en], ['es', es]]) {
+    // a bank may carry French (the electives): prompt q.fr, answer_fr, alternates accept[id].fr
+    const fr = q.fr != null || q.answer_fr != null ? list('fr', q.answer_fr ?? '') : null;
+    if (fr && !(q.fr && q.answer_fr)) { console.error(`${t.slug} #${q.id}: French prompt and answer go together`); problems++; }
+    for (const [lang, a] of [['en', en], ['es', es], ...(fr ? [['fr', fr]] : [])]) {
       if (a.length + 1 > 5) { console.error(`${t.slug} #${q.id}: ${a.length + 1} ${lang} answers; Dr. Cook asked for three to five`); problems++; }
       if (!a.length) { if (t.alternates === 'optional') optionalMissing++; else { console.error(`${t.slug} #${q.id}: no accepted ${lang} alternate`); problems++; } }
     }
-    for (const [lang, p] of [['en', q.en], ['es', q.es]])
+    for (const [lang, p] of [['en', q.en], ['es', q.es], ...(fr ? [['fr', q.fr || '']] : [])])
       if (blank(p).split('____').length !== 2) { console.error(`${t.slug} #${q.id}: not one blank in ${lang}: ${p}`); problems++; }
-    return { prompt: { en: blank(q.en), es: blank(q.es) }, answer: { en: q.answer_en, es: q.answer_es }, accept: { en, es },
+    return { prompt: { en: blank(q.en), es: blank(q.es), ...(fr ? { fr: blank(q.fr || '') } : {}) },
+      answer: { en: q.answer_en, es: q.answer_es, ...(fr ? { fr: q.answer_fr } : {}) }, accept: { en, es, ...(fr ? { fr } : {}) },
       ...(perReading !== null ? { reading: q.reading } : {}) };
   });
+  /* French that came with the bank is a draft, stamped as tools/french-readings.mjs
+     stamps it, so its check sees it as current until the English changes. */
+  const stamps = questionStamps(questions);
+  questions.forEach((q, i) => { if (q.prompt.fr != null) q.tr = { fr: { status: 'machine', from: stamps[i] } }; });
   // a test made required by tools/activate-required.mjs takes its moment from
   // src/data/required-from.json; one in force since its install has no requiredFrom
   if ('requiredFrom' in t && SCHEDULED[t.slug]) t.requiredFrom = SCHEDULED[t.slug];
@@ -303,7 +327,8 @@ function main() {
   if (problems) { console.error(`${problems} problem(s); nothing written`); process.exit(1); }
   /* Written only when every test is sound, so a bank with a problem never
      leaves half its tests updated. */
-  if (WRITE) for (const [t, out] of outputs) writeTest(t, out, { keysRoot });
+  if (ONLY) for (const slug of ONLY) if (!outputs.some(([t]) => t.slug === slug)) { console.error(`--only ${slug}: no such test`); process.exit(2); }
+  if (WRITE) for (const [t, out] of outputs) if (!ONLY || ONLY.has(t.slug)) writeTest(t, out, { keysRoot });
 
   if (NEXT_OUT) for (const out of nextOutputs) { fs.mkdirSync(NEXT_OUT, { recursive: true }); fs.writeFileSync(path.join(NEXT_OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + "\n"); }
 }

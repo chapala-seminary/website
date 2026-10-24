@@ -145,7 +145,8 @@ if (DIST) {
   for (const f of fs.readdirSync('src/content/readings').filter((x) => x.endsWith('.json'))) {
     const pub = json(path.join('src/content/readings', f));
     if (!isPrivateReading(pub)) continue;
-    const answers = readingQuestions('.', pub).questions.flatMap((q) => [...Object.values(q.answer), ...Object.values(q.accept || {}).flat()]).filter((a) => a.length >= 4);
+    // an answer as a value in the data (a whole JSON string), not a word inside a title
+    const answers = readingQuestions('.', pub).questions.flatMap((q) => [...Object.values(q.answer), ...Object.values(q.accept || {}).flat()]);
     for (const lang of ['', 'es/', 'fr/']) {
       const file = path.join(DIST, `${lang}${pub.page}Test.html`);
       if (!fs.existsSync(file)) { ok(lang === 'fr/', `${file} was not built`); continue; }
@@ -154,7 +155,8 @@ if (DIST) {
       ok(!!m, `${file}: no test data`);
       const data = JSON.parse(m[1]);
       ok(data.grading === 'live' && Array.isArray(data.questions) && data.questions.length === 0, `${file}: a live page ships no bank`);
-      const hit = answers.find((a) => m[1].includes(JSON.stringify(a).slice(1, -1)));
+      const hit = answers.find((a) => m[1].includes(JSON.stringify(a).replace(/</g, '\\u003c')));
+      ok(!/"(answer|accept)"\s*:/.test(m[1]), `${file}: the page data has an answer or accept field`);
       ok(!hit, `${file}: an answer (${hit}) is in the page data`);
       built++;
     }
