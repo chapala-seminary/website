@@ -1,0 +1,25 @@
+# Beginning of World Wide Revival
+
+> Source: *The Apostolic Faith*, Vol. 1 No. 5  BEGINNING OF WORLD WIDE REVIVAL; public-domain periodical text transcribed at https://azusabooks.org/af/LA05.shtml. Transcription checked against scan: pending. Historical testimony is presented as a primary source, not as independent verification of its claims.
+
+We are expecting wonderful things from the Lord for 1907. The closing up of the old year and beginning of the new found us on our knees at Azusa Mission. And as the New Year was announced, such a wave of glory, and divine love and unity came over us. The meeting went on till morning and all the next day. It is a jubilee year. May we all spend it at His feet, learning of Him.
+
+The Lord did great things in 1906. Pentecost first fell in Los Angeles on April 9th. Since then the good tidings has spread in two hemispheres. Many are rejoicing in pardon, purity, and the power of the Holy Ghost. Wherever the work goes, souls are saved, and not only saved from hell but through and through, and prepared to meet the Lord at His coming. Hundreds have been baptized with the Holy Ghost. Many of them are now out in the field, and some in foreign lands, and God is working with them, granting signs and wonders to follow the preaching of the full Gospel.
+
+People all over the land have heard that the oil of the Spirit is being poured out in Los Angeles, and they are coming for oil—coming thousands of miles. And they are being filled with the holy oil, the baptism with the Holy Ghost, and wherever they go, it is being poured out.
+
+From the little mustard seed faith that was given to a little company of people waiting on God in a cottage prayer meeting, a great tree has grown, so that people from all parts of the country are coming like birds to lodge in the branches thereof. (Matt. 13:31-32.) The faith is still growing, and we are still just in the beginning, earnestly contending for the faith once delivered unto the saints.
+
+It is a continual upper room tarrying at Azusa Street. It is like a continual camp meeting or convention. All classes and nationalities meet on a common level. One who came for the first time said, "The thing that impressed me most was the humility of the people, and I went to my room and got down on my knees and asked God to give me humility."
+
+The altars are filled with seekers. Sometimes the meetings go on all night. People are slain under the power of God and sanctified or rise up speaking in new tongues. In the meetings, you see the holy joy of the Lord in the countenances, and people are melted in the presence of the Lord, filled with His praise.
+
+The Lord is graciously healing many sick bodies. People are healed at the Mission almost every day. Requests come in for prayer from all over. They are presented in the meeting and the Spirit witnesses in many cases that prayer is answered, and when we hear from them they are healed. Handkerchiefs are sent in to be blest, and are returned to the sick and they are healed in many cases. One day nine handkerchiefs were blest, another day sixteen. A man came with a broken arm and was healed. The mission people never take medicine. They do not want it. They have taken Jesus for their healer and He always heals.
+
+There is a very sweet spirit of unity among Pentecostal missions in Los Angeles and workers in suburban towns. Every Monday morning, the ministers and workers from these different points meet together for prayer and counsel. The missions in Los Angeles are at 327 1/2 S. Spring, of which Bro. Fisher is pastor; 8th and Maple Ave., of which Bro. Pendleton is pastor; and 1321 E. 51st St., where Bro. and Sister Kent have charge. Workers from Long Beach, Pasadena, Clearwater, Anaheim, and other nearby places also come in. All are in one accord. In our first meeting several messages were given in tongues through our Bro. Post, and interpreted as follows:
+
+"We acknowledge Christ only, His truth, His Word. We must tarry much before Him. We must acknowledge that He is in our midst, walking among the golden candlesticks, pruning, purging. He who moved among the golden candlesticks, is moving in our midst now. We must recognize Him alone as Head over all, and know no man after the flesh. The Spirit of God will teach us, if we keep low in love and humility before Him. Our Lord says, "I smile upon you, when you are seeking My will, My glory only. There must be no glorying in names or orders or systems, only in Myself alone. All fullness is in me, all power is in My Gospel."
+
+We must give God all the glory in this work. We must keep very humble at His feet. He recognizes no flesh, no color, and no names. We must not glory in Azusa Mission, nor in anything but the Lord Jesus Christ by whom the world is crucified unto us and we unto the world.
+
+We stand as assemblies and missions all in perfect harmony. Azusa Mission stands for the unity of God's people everywhere. God is uniting His people baptizing them by one Spirit into one body.
