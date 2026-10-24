@@ -10,6 +10,10 @@
 | `reading-4.md` | No. 5, “Beginning of World Wide Revival” | Collective report and a lengthy quotation beginning “We acknowledge Christ only…”, expressly introduced as an interpretation of messages delivered through “Bro. Post.” | No article byline found; **the quotation is attributed to an interpreted oral message through Bro. Post**, not an anonymous editorial statement. Verify his identity and reuse status before reproducing or translating it. |
 | `reading-5.md` | No. 6, “Pentecost Both Sides the Ocean” | Collective narrative reports and names of missionaries, pastors, and publications. | No byline found; named subjects are not automatically authors, but inspect embedded reported speech and any quoted letters. |
 
+## Update — 24 October 2026
+
+The table above describes the **previous** five-reading version. Following Wayne's Option 2 decision, `reading-1.md` was replaced by a 1,696-word selection from the unsigned lead editorial and brief unsigned mission reports in No. 2 (October 1906), excluding the unidentified chief's first-person quotation and the separately attributed Bro. Hill first-person testimony. `reading-4.md` now omits the interpreted Bro. Post message at `[…]`. The No. 2 original scan has not been collated, and anonymous editorial attribution remains provisional. Keep the textbook and all readings off student release until source/academic review is complete.
+
 ## What is and is not verified
 
 - Verified directly: the five **staged file contents** were inspected for explicit signatures and names. The original newspaper scans have **not** been compared against these selections.
