@@ -1,5 +1,5 @@
 /**
- * CTS Multi-AI Watchdog — Google Apps Script pilot, version 0.3 (2026-10-24)
+ * CTS Multi-AI Watchdog — Google Apps Script pilot, version 0.4 (2026-10-24)
  *
  * Safe by default: No API requests unless Script Property
  * ENABLE_LIVE_REQUESTS=YES AND each job's Approval cell is APPROVED.
@@ -17,7 +17,8 @@ var CTS = {
   maxOutputCellCharacters: 22000,
   staleRunningMinutes: 15,
   minimumContinuationMinutes: 5,
-  absolutePilotBudgetUsd: 10
+  absolutePilotBudgetUsd: 10,
+  absoluteMaxAttempts: 4
 };
 
 function ctsSpreadsheetId_() {
@@ -92,8 +93,9 @@ function ctsWatchdog() {
       if (state === 'RUNNING') {
         var heartbeat = ctsReadDate_(row[7]);
         if (!heartbeat || now.getTime() - heartbeat.getTime() > CTS.staleRunningMinutes*60000) {
-          // Remote execution may have finished, but response was lost. Bounded retry.
-          row[2] = props.getProperty('ALLOW_UNCERTAIN_RETRY') === 'YES' && ctsPositiveInt_(row[9],0) < ctsPositiveInt_(row[10],4) ? 'CONTINUE' : 'REVIEW_REQUIRED';
+          // The remote response may have been billed, saved, or lost. Never
+          // automatically resend an uncertain HTTP request in the pilot.
+          row[2] = 'REVIEW_REQUIRED';
           row[13] = 'Prior API call may have completed remotely but reply was lost; review before any retry to avoid duplicate billing';
           row[14] = now.toISOString();
           ctsWriteRow_(jobs,i+1,row);
@@ -112,7 +114,7 @@ function ctsWatchdog() {
 
 function ctsExecuteJob_(jobs,log,rowNumber,row,props,now) {
   var jobId = row[0], provider = row[1].toLowerCase().trim();
-  var maxAttempts = ctsPositiveInt_(row[10],4);
+  var maxAttempts = Math.min(CTS.absoluteMaxAttempts, ctsPositiveInt_(row[10],CTS.absoluteMaxAttempts));
   var attempts = ctsPositiveInt_(row[9],0);
   if (attempts >= maxAttempts) {
     row[2] = 'REVIEW_REQUIRED'; row[13] = 'Maximum continuation attempts reached';
@@ -122,6 +124,7 @@ function ctsExecuteJob_(jobs,log,rowNumber,row,props,now) {
   try {
     if (['openai','claude','deepseek'].indexOf(provider) === -1)
       throw new Error('Unsupported provider; use openai, claude or deepseek');
+    ctsAssertProviderReady_(provider,props);
     var text = ctsGetVettedLesson_(row[5],row[6],props);
     var previousOutput = String(row[12] || '');
     var prompt = ctsBuildPrompt_(row[3],row[4],text,attempts>0 ? previousOutput : '');
@@ -230,8 +233,61 @@ function ctsClassifyReply_(txt,attempt,maxAttempts) {
   return attempt>=maxAttempts?'REVIEW_REQUIRED':'CONTINUE';
 }
 
+/** Verify the provider configuration before reserving money or creating an API_STARTED.
+ * Never log credentials; API keys are Script Properties only.
+ */
+function ctsAssertProviderReady_(provider,props) {
+  if (['openai','claude','deepseek'].indexOf(provider)<0) throw new Error('Unknown provider');
+  var prefix=provider.toUpperCase(), model=String(props.getProperty(prefix+'_MODEL')||'').trim();
+  var key=String(props.getProperty(prefix+'_API_KEY')||'').trim();
+  if (!key || !model) throw new Error(prefix+' requires an API key and model ID (stored in Script Properties)');
+  if (provider==='deepseek' && ['deepseek-flash','deepseek-v4-pro'].indexOf(model)<0)
+    throw new Error('Unsupported/retired DeepSeek model. Choose deepseek-flash or deepseek-v4-pro');
+  ctsProviderPrices_(provider,props);
+  return model;
+}
+
+/** Read-only, zero-network-cost Apps Script installation preflight.
+ * Tests spreadsheet schema and all active jobs; does not activate triggers or APIs.
+ * Returns only operational status, never secrets or full lesson contents.
+ */
+function ctsPreflight() {
+  var props=PropertiesService.getScriptProperties();
+  var ss=SpreadsheetApp.openById(ctsSpreadsheetId_());
+  var jobs=ss.getSheetByName(CTS.jobsTab), log=ss.getSheetByName(CTS.logTab);
+  if(!jobs || !log) throw new Error('AI Jobs and AI Run Log tabs must exist');
+  [ [jobs,CTS.jobHeaders], [log,CTS.logHeaders] ].forEach(function(pair){
+    var actual=pair[0].getRange(1,1,1,pair[1].length).getValues()[0];
+    if (JSON.stringify(actual)!==JSON.stringify(pair[1]))
+      throw new Error('Schema mismatch: '+pair[0].getName());
+  });
+  var cap=ctsPilotCapUsd_(props), callsToday=ctsDailyCalls_(log), spent=ctsReservedSpendUsd_(log);
+  var folderId=String(props.getProperty('REPORT_FOLDER_ID')||'').trim();
+  if (!folderId) throw new Error('REPORT_FOLDER_ID missing');
+  DriveApp.getFolderById(folderId).getName(); // Verify folder exists and has access.
+  var values=jobs.getDataRange().getValues(), ready=[];
+  for(var i=1;i<values.length;i++) {
+    var row=values[i].map(function(x){return x===null?'':String(x);});
+    if(String(row[11]).toUpperCase()!=='APPROVED' ||
+      ['READY','CONTINUE'].indexOf(String(row[2]).toUpperCase())<0) continue;
+    var provider=String(row[1]).toLowerCase(), attempts=ctsPositiveInt_(row[9],0);
+    var maxAttempts=Math.min(CTS.absoluteMaxAttempts,ctsPositiveInt_(row[10],CTS.absoluteMaxAttempts));
+    if(attempts>=maxAttempts) throw new Error('Attempt cap reached for '+row[0]);
+    ctsAssertProviderReady_(provider,props);
+    ctsGetVettedLesson_(row[5],row[6],props);
+    ready.push({jobId:row[0],provider:provider,unit:row[6],remainingAttempts:maxAttempts-attempts});
+  }
+  var summary={safeMode:props.getProperty('ENABLE_LIVE_REQUESTS')!=='YES',
+    scheduledTriggers:ScriptApp.getProjectTriggers().filter(function(t){return t.getHandlerFunction()==='ctsWatchdog';}).length,
+    capUsd:cap, reservedUsd:spent, dailyCalls:callsToday,
+    readyJobs:ready, status:ready.length ? 'READY_FOR_OPERATOR_REVIEW' : 'NO_ACTIVE_JOBS'};
+  Logger.log(JSON.stringify(summary));
+  return summary;
+}
+
 function ctsProviderCall_(provider,content,props) {
   var base,body,headers,response,maxTokens=ctsPositiveInt_(props.getProperty('MAX_OUTPUT_TOKENS'),1600);
+  ctsAssertProviderReady_(provider,props);
   if (provider === 'claude') {
     var claudeKey=props.getProperty('CLAUDE_API_KEY'), cm=props.getProperty('CLAUDE_MODEL');
     if (!claudeKey || !cm) throw new Error('Claude API key or model not configured');
@@ -246,7 +302,16 @@ function ctsProviderCall_(provider,content,props) {
     headers={Authorization:'Bearer '+key};
     body={model:model,messages:[{role:'user',content:content}]};
     if (isOpenAI) body.max_completion_tokens=maxTokens;
-    else body.max_tokens=maxTokens;
+    else {
+      body.max_tokens=maxTokens;
+      // DeepSeek defaults to high-effort thinking, which may consume the whole
+      // small pilot output allowance without returning an actual review.
+      // First live continuation test uses non-thinking mode; upgrade deliberately.
+      var effort=String(props.getProperty('DEEPSEEK_REASONING_EFFORT')||'none').trim();
+      if(['none','low','high','max'].indexOf(effort)<0)
+        throw new Error('DEEPSEEK_REASONING_EFFORT must be none, low, high or max');
+      body.reasoning_effort=effort;
+    }
   }
   response=UrlFetchApp.fetch(base,{method:'post',contentType:'application/json',headers:headers,
     payload:JSON.stringify(body),muteHttpExceptions:true});
@@ -336,5 +401,5 @@ function ctsPositiveInt_(val,fallback) {
   var v=Number(val);return isFinite(v)&&v>=0&&Math.floor(v)===v ? v : fallback;
 }
 if (typeof module !== 'undefined' && module.exports) {
- module.exports={ctsClassifyReply_,ctsExtractUnit_,ctsBuildPrompt_,ctsReadDate_,ctsPositiveInt_,ctsSameReply_,ctsReservedSpendUsd_,ctsEstimateReservationUsd_,ctsPilotCapUsd_,ctsEstimateUsageCostUsd_};
+ module.exports={ctsAssertProviderReady_,ctsClassifyReply_,ctsExtractUnit_,ctsBuildPrompt_,ctsReadDate_,ctsPositiveInt_,ctsSameReply_,ctsReservedSpendUsd_,ctsEstimateReservationUsd_,ctsPilotCapUsd_,ctsEstimateUsageCostUsd_};
 }
