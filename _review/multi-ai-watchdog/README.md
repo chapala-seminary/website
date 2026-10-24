@@ -1,6 +1,6 @@
-# CTS Multi-AI Watchdog — owner-built pilot v0.3
+# CTS Multi-AI Watchdog — owner-built pilot v0.4
 
-**Status:** Source code and mock integration tests complete. **Not deployed, not activated, not spending money.** Robert is *not* required during design, coding or offline testing. This pilot does not control consumer ChatGPT, Claude or DeepSeek web sessions: it can resume only API requests the watchdog itself creates.
+**Status:** Four offline test suites completed; source code and mock integration tests complete. The checks have not been run in a live Google Apps Script project. **Not deployed, not activated, not spending money.** Robert is *not* required during design, coding or offline testing. This pilot does not control consumer ChatGPT, Claude or DeepSeek web sessions: it can resume only API requests the watchdog itself creates.
 
 ## What is complete
 
@@ -8,7 +8,7 @@
 - 13-unit student-facing English *Systematic Theology* review packet held privately in Drive as PDF and `.txt`. **The archived packet may differ from the production site**; verify proposed changes against live course material before deployment. The tests in this archive use **synthetic** course text, not real lessons, so public source code contains no curriculum copies.
 - An Apps Script watchdog that runs one approved model call per tick; saves complete responses to a configured Drive folder (append-only), records a compact checkpoint in the sheet, and resends a targeted **Continue from the checkpoint** instruction when no completion marker appears.
 - A global on/off switch, per-job approval, daily API-call cap, **$10 absolute software budget ceiling** and conservative per-call dollar reservations, attempt cap, independent model jobs, no-progress detection, source-file allowlist, lock against concurrent triggers, and stop on `[[CTS_DONE]]`, `[[CTS_BLOCKED]]`, `[[CTS_NEEDS_APPROVAL]]`, or uncertain failure.
-- Node tests of all 13 real source unit boundaries, synthetic fixtures and mocked continuation, approval, completion, logging, full-output storage, daily call cap and $10 spending cap. All tests are offline, with no real model network calls.
+- Node tests of 13 synthetic unit boundaries, synthetic fixtures and mocked continuation, approval, completion, logging, full-output storage, daily call cap and $10 spending cap. All tests are offline, with no real model network calls.
 
 ## Installation boundary
 
@@ -34,22 +34,25 @@ The GitHub branch holds a **tested source-code prototype only**, not an installe
 | `MAX_OUTPUT_TOKENS` | Suggested pilot 1600 |
 | `OPENAI_API_KEY`, `OPENAI_MODEL` | API key and exact model for OpenAI, if enabled |
 | `CLAUDE_API_KEY`, `CLAUDE_MODEL` | API key and exact model for Anthropic, if enabled |
-| `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL` | API key and exact model for DeepSeek, if enabled |
-| `ALLOW_UNCERTAIN_RETRY` | Leave unset; only `YES` would retry if a prior API call's outcome was lost, potentially duplicating charges |
+| `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL` | API key and active model ID (`deepseek-flash` or `deepseek-v4-pro`) |
+| `DEEPSEEK_REASONING_EFFORT` | `none` (pilot default), `low`, `high` or `max`. Start with `none` to avoid exhausting small output limits on hidden reasoning. |
+| `ALLOW_UNCERTAIN_RETRY` | **Ignored in v0.4**: uncertain responses ALWAYS pause for review |
 
-4. In the `AI Jobs` sheet, leave `Approval=HOLD` and `State=HOLD` until separately approved. The model credentials alone cannot start work.
-5. Once costs, data-sharing destination and credentials are explicitly approved, set `ENABLE_LIVE_REQUESTS=YES`, turn on **one** first-unit job (`Approval=APPROVED`, `State=READY`), and run `ctsWatchdog` once manually. Inspect `AI Run Log` and the report folder for a saved response.
-6. After successful verification, run `ctsInstallWatchdogTrigger()` to install a five-minute time trigger. The watchdog automatically continues **only tasks it owns** and only while approvals, limits and conditions permit.
-7. Emergency stop: `ENABLE_LIVE_REQUESTS=NO`, or `ctsRemoveWatchdogTrigger()`. Existing jobs and saved reports remain intact.
+4. Run `ctsPreflight()` while `ENABLE_LIVE_REQUESTS=NO`. It validates headers, report folder, budget, and each currently-approved job **without contacting any AI API**. If there are no approved jobs, it returns `NO_ACTIVE_JOBS`, which is expected.
+5. In the `AI Jobs` sheet, leave `Approval=HOLD` and `State=HOLD` until separately approved. The model credentials alone cannot start work.
+6. Once costs, data-sharing destination and credentials are explicitly approved, set `ENABLE_LIVE_REQUESTS=YES`, turn on **one** first-unit job (`Approval=APPROVED`, `State=READY`), and run `ctsWatchdog` once manually. Inspect `AI Run Log` and the report folder for a saved response.
+7. After successful verification, run `ctsInstallWatchdogTrigger()` to install a five-minute time trigger. The watchdog automatically continues **only tasks it owns** and only while approvals, limits and conditions permit.
+8. Emergency stop: `ENABLE_LIVE_REQUESTS=NO`, or `ctsRemoveWatchdogTrigger()`. Existing jobs and saved reports remain intact.
 
 ## Operational safeguards
 
 - **Zero automatic deployment or communication:** The watchdog reviews lessons; it cannot edit the website or contact students.
 - **No answer keys or personal student information** are included in model prompts. The source allowlist is still a *human review task*; only approved student-edition text may be added.
 - **Costs:** ChatGPT/Claude web subscriptions do not cover these API charges. The watchdog refuses calls once conservative *reserved* spending would breach its $10 ceiling (based on user-entered model prices and bounded tokens). This is not a provider-level guarantee: verify rates, add provider billing/credit caps, use dedicated API keys, and remember charges from other callers do not appear in our sheet. The price settings deliberately do not rely on an AI-guessed model price.
-- **Lost call:** If a model API call times out, the result may exist remotely but be unavailable locally. This is flagged for review; no automatic paid retry occurs unless separately opted in with `ALLOW_UNCERTAIN_RETRY=YES`.
+- **Lost call:** If a model API call times out, the result may exist remotely but be unavailable locally. This is ALWAYS flagged for human review, without automatic retry. The obsolete `ALLOW_UNCERTAIN_RETRY` property is ignored.
 - **No progress:** Two identical successive outputs (aside from whitespace) cause `REVIEW_REQUIRED`, rather than an endless loop.
 - **Output preservation:** Each successful attempt is saved in a private Drive folder before updating its Sheets checkpoint. The full historical transcript can be recovered from those timestamped Drive files.
+- **Strict per-job attempt limit:** v0.4 enforces at most four attempts regardless of spreadsheet entries.
 - **One job per tick:** A five-minute cadence is only an approximate Apps Script scheduling interval, not continuous execution.
 - **App script limitations:** Google Apps Script API permissions and external model connections have not been integration-tested in a live project. Verify provider API compatibility and Google authorization scopes when enabling.
 
@@ -58,6 +61,8 @@ The GitHub branch holds a **tested source-code prototype only**, not an installe
 ```bash
 node tests/watchdog.test.cjs
 node tests/transitions.test.cjs
+node tests/provider.test.cjs
+node tests/preflight.test.cjs
 ```
 
 ## Handoff boundary
@@ -76,3 +81,9 @@ When a reviewer sends `[[CTS_DONE]]`, its full answer is stored in the restricte
 - DeepSeek Chat Completions: https://api-docs.deepseek.com/api/create-chat-completion/
 
 The OpenAI request uses `max_completion_tokens` for current reasoning-model compatibility. Claude and DeepSeek use `max_tokens`. Exact supported models and rates are verified again at activation.
+
+## Preflight findings and remaining owner action (2026-10-24)
+
+Four offline suites pass and model names were checked against current vendor documentation. A mock provider request is **not** a live integration test. GitHub source does not install an Apps Script project; Google Drive connector cannot configure Apps Script or secret properties. No Google browser session is currently authenticated for assisted setup. A Google-account owner must authorize access to the Apps Script project and store the secrets privately. Do not paste API keys into chat, GitHub, or Sheets.
+
+**First safe exercise:** leave all three real course-review jobs HOLD. Once installed, run `ctsPreflight` with global switch NO; then run a single synthetic lesson smoke test with one explicitly approved job and a model whose pricing and account billing limit have been confirmed. Confirm the report artifact, log reservation, and continuation behavior before testing any copyrighted or student-facing course materials.
