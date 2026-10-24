@@ -21,10 +21,22 @@ export async function activationEnvironment(env) {
    to the manifest. */
 export const PENDING_FACULTY_REVIEW = new Set(['otsreadings', 'ntreadings', 'streadings', 'evangelismreadings',
   'pmreadings', 'chreadings', 'wisespeakreadings', 'hermeneuticsreadings']);
-export function activatedTests(env) {
+/* The denominational electives' textbook and reading tests (Oct 2026) are
+   optional when they arrive: the production activation date never makes one
+   of them required on its own. Every test whose slug starts with "elec" is
+   in this set, so a new elective test needs no entry here. Making one
+   required is a decision for Wayne, by an explicit requiredFrom date
+   (tools/activate-required.mjs), not by this default. test/eight-optional.test.mjs
+   checks the rule. */
+export const ELECTIVE_TEST_PREFIX = 'elec';
+export const ELECTIVE_TESTS_PENDING = Object.freeze({
+  has: (slug) => typeof slug === 'string' && slug.startsWith(ELECTIVE_TEST_PREFIX),
+});
+/* `tests` is the catalog's test map; a test passes another to check the rule. */
+export function activatedTests(env, tests = catalog.textbooks) {
   const date = env.MASTER_TESTS_ACTIVE_FROM || env.MASTER_TESTS_ACTIVATION;
   if (!date || Number.isNaN(Date.parse(date)) || Date.parse(date) > Date.now()) return {};
-  return Object.fromEntries(Object.entries(catalog.textbooks)
-    .filter(([slug, t]) => t.requiredFrom === null && !PENDING_FACULTY_REVIEW.has(slug))
+  return Object.fromEntries(Object.entries(tests)
+    .filter(([slug, t]) => t.requiredFrom === null && !PENDING_FACULTY_REVIEW.has(slug) && !ELECTIVE_TESTS_PENDING.has(slug))
     .map(([slug]) => [slug, date]));
 }
