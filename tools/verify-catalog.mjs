@@ -101,8 +101,8 @@ const ADDED = [
 ];
 /* The lead spells the course count out in words; the reference says forty-four. */
 const COUNT = [
-  ["Forty-four courses", "Forty-five courses"],
-  ["Cuarenta y cuatro cursos", "Cuarenta y cinco cursos"],
+  ["Forty-four courses", "Sixty-five courses"],  // 45 on 3 Oct, 65 on 24 Oct 2026
+  ["Cuarenta y cuatro cursos", "Sesenta y cinco cursos"],
   /* 13 Oct 2026: the site is in three languages, so the lead no longer says "bilingual". */
   ["each complete and bilingual.", "each complete, in English, Spanish, and French."],
   ["cada uno completo y bilingüe.", "cada uno completo, en inglés, español y francés."],
@@ -133,6 +133,32 @@ for (const [key, after] of ADDED) {
   }
   b = b.split(card[0]).join('');
   console.log(`added course set aside: ${key}, after ${after}`);
+}
+
+/* Whole catalog groups added since (src/data/catalog-groups.json), each set
+   aside as one block after checking it holds exactly the cards of its courses,
+   in order. 24 Oct 2026: the twenty denominational electives, four groups of
+   five, after the last original group. */
+const ADDED_GROUPS = [
+  'pentecostal-charismatic-electives', 'baptist-electives', 'wesleyan-electives', 'reformed-electives',
+];
+{
+  const groups = JSON.parse(fs.readFileSync('src/data/catalog-groups.json', 'utf8'));
+  const cards = fs.readdirSync('src/content/courses').map(f => JSON.parse(fs.readFileSync(`src/content/courses/${f}`, 'utf8')));
+  for (const id of ADDED_GROUPS) {
+    const g = groups.find(x => x.id === id);
+    if (!g) { console.log(`FAIL — catalog group ${id} is not in src/data/catalog-groups.json`); process.exit(1); }
+    const head = norm(`<div class="catgroup"><h3><span class="en">${g.title.en}</span>`);
+    const at = b.indexOf(head);
+    if (at < 0 || b.indexOf(head, at + 1) >= 0) { console.log(`FAIL — the built catalog does not have exactly one "${g.title.en}" group`); process.exit(1); }
+    const end = b.indexOf('</div></div>', at) + '</div></div>'.length;
+    const block = b.slice(at, end);
+    const want = cards.filter(c => c.group === id).sort((x, y) => x.order - y.order).map(c => c.entry);
+    const got = [...block.matchAll(/<a class="course" href="([^"]+)"/g)].map(m => m[1]);
+    if (want.join() !== got.join()) { console.log(`FAIL — the "${g.title.en}" group shows ${got.join(', ')}; its courses are ${want.join(', ')}`); process.exit(1); }
+    b = b.slice(0, at) + b.slice(end);
+    console.log(`added group set aside: ${g.title.en} (${got.length} courses)`);
+  }
 }
 
 const count = s => (s.match(/<a class="course"/g) || []).length;

@@ -41,6 +41,12 @@ export const TRADITIONS = {
   D: { id: 'reformed-electives', tag: 'Ref',
        title: { en: 'Reformed–Presbyterian Electives', es: 'Electivas reformadas y presbiterianas', fr: 'Cours optionnels réformés et presbytériens' } },
 };
+const DESC = {
+  A: { en: 'Interim elective written from within the Pentecostal and Charismatic tradition.', es: 'Electiva provisional escrita desde la tradición pentecostal y carismática.', fr: 'Cours optionnel provisoire rédigé de l’intérieur de la tradition pentecôtiste et charismatique.' },
+  B: { en: 'Interim elective written from within the Baptist and Congregational tradition.', es: 'Electiva provisional escrita desde la tradición bautista y congregacional.', fr: 'Cours optionnel provisoire rédigé de l’intérieur de la tradition baptiste et congrégationaliste.' },
+  C: { en: 'Interim elective written from within the Methodist, Wesleyan and Nazarene tradition.', es: 'Electiva provisional escrita desde la tradición metodista, wesleyana y nazarena.', fr: 'Cours optionnel provisoire rédigé de l’intérieur de la tradition méthodiste, wesleyenne et nazaréenne.' },
+  D: { en: 'Interim elective written from within the Reformed and Presbyterian tradition.', es: 'Electiva provisional escrita desde la tradición reformada y presbiteriana.', fr: 'Cours optionnel provisoire rédigé de l’intérieur de la tradition réformée et presbytérienne.' },
+};
 /* A-C1 -> CTSElecPC1 / elecpc1 / CTSELECPC1. Names are permanent once live. */
 export const prefixOf = (code) => `CTSElec${TRADITIONS[code[0]].tag}${code.slice(-1)}`;
 export const slugOf = (code) => prefixOf(code).slice(3).toLowerCase();
@@ -121,7 +127,7 @@ export function parseExam(md, where) {
   const mc = [];
   for (const l of A) {
     const u = unesc(l);
-    let m = /^(\d+)\.\s+(.*)$/.exec(u);
+    let m = /^(?:[A-Z]{1,3}\s?)?(\d+)\.\s+(.*)$/.exec(u);
     if (m) { mc.push({ stem: inline(m[2]), options: [] }); continue; }
     m = /^([A-D])\.\s+(.*)$/.exec(u);
     if (m && mc.length) mc[mc.length - 1].options.push(inline(m[2]));
@@ -129,7 +135,7 @@ export function parseExam(md, where) {
   const sa = [];
   for (const l of B) {
     const u = unesc(l);
-    let m = /^\*\*SA\s*(\d+)\.\s*(.*?)\*\*$/.exec(u);
+    let m = /^(?:\*\*)?[A-Z]{1,3}\s?(\d+)\.\s*(.*?)(?:\*\*)?$/.exec(u);
     if (m) { sa.push({ prompt: inline(m[2]), model: '', keywords: [] }); continue; }
     if (!sa.length) continue;
     const cur = sa[sa.length - 1];
@@ -141,8 +147,12 @@ export function parseExam(md, where) {
   const fill = [];
   for (const l of C) {
     const u = unesc(l);
-    let m = /^(\d+)\.\s+(.*)$/.exec(u);
-    if (m) { fill.push({ prompt: inline(m[2]).replace(/_{3,}/g, '____'), acc: [] }); continue; }
+    let m = /^(?:[A-Z]{1,3}\s?)?(\d+)\.\s+(.*)$/.exec(u);
+    if (m) {
+      let n = 0;                                   // a repeated blank (same answer twice) keeps only the first
+      fill.push({ prompt: inline(m[2]).replace(/_{3,}/g, () => (n++ ? '…' : '____')), acc: [] });
+      continue;
+    }
     m = /^[^:]{3,30}:\s+(.*)$/.exec(u);
     if (m && fill.length && !fill[fill.length - 1].acc.length) fill[fill.length - 1].acc = m[1].split(' / ').map((s) => unesc(s).trim()).filter(Boolean);
   }
@@ -178,6 +188,19 @@ function buildUnit(code, n, problems) {
   }
   const langs = LANGS.filter((l) => L[l]);
   for (const l of langs.filter((x) => x !== 'en')) {
+    // A translation that adds a paragraph (a translator's note on terms, say) where English goes on to a
+    // heading: fold the extra paragraph into the one before it, so the blocks still pair one to one.
+    if (L[l].items.length > L.en.items.length) {
+      const out = [];
+      for (const it of L[l].items) {
+        const want = L.en.items[out.length];
+        if (want && it.type === 'prose' && want.type === 'heading' && out.length && out[out.length - 1].type !== 'heading') {
+          out[out.length - 1] = { ...out[out.length - 1], text: out[out.length - 1].text + '<br><br>' + it.text };
+          problems.push(`${code} U${n} ${l}: an extra paragraph was joined to the one before it (block ${out.length})`);
+        } else out.push(it);
+      }
+      L[l].items = out;
+    }
     if (L[l].items.length !== L.en.items.length) { problems.push(`${code} U${n} ${l}: ${L[l].items.length} lesson paragraphs vs ${L.en.items.length} English; ${l} left out`); langs.splice(langs.indexOf(l), 1); continue; }
     const bad = E.en.key.findIndex((k, i) => E[l].key[i] !== k);
     if (bad >= 0) { problems.push(`${code} U${n} ${l}: answer key differs at mc ${bad + 1}; ${l} left out`); langs.splice(langs.indexOf(l), 1); }
@@ -260,8 +283,9 @@ function unitFiles(code, prefix, slug, n, courseTitle, unitTitles, U) {
     })),
     fill: E.en.fill.map((_, i) => {
       const answer = per((l) => E[l].fill[i].acc[0]);
-      const accept = Object.fromEntries(langs.map((l) => [l, E[l].fill[i].acc.slice(1)]).filter(([, a]) => a.length));
-      return Object.keys(accept).length ? { answer, accept } : { answer };
+      const accept = Object.fromEntries(langs.map((l) => [l, E[l].fill[i].acc.slice(1)]));
+      // every language or none: the schema wants prompts and keys translated together
+      return Object.values(accept).some((a) => a.length) ? { answer, accept } : { answer };
     }),
   };
   return { pub, keys };
@@ -298,16 +322,12 @@ for (const code of codes) {
   const units = [];
   for (let n = 1; n <= UNITS; n++) units.push(buildUnit(code, n, problems));
   const langsAll = LANGS.filter((l) => units.every((u) => u.langs.includes(l)));
-  const course = Object.fromEntries(LANGS.map((l) => [l, (units[0].L[l] || units[0].L.en).course.replace(/^[^:]*\d+\s*:\s*/, '').replace(/,.*$/, '')]));
+  const course = Object.fromEntries(LANGS.map((l) => [l, (units[0].L[l] || units[0].L.en).course.replace(/^[^:]*\d+\s*:\s*/, '')]));
   const unitTitles = Object.fromEntries(['en', 'es'].map((l) => [l, units.map((u, i) => `${UNIT_WORD[l]} ${i + 1} - ${(u.L[l] || u.L.en).title}`)]));
   const title = Object.fromEntries(LANGS.map((l) => [l, `${course[l]}`]));
   const card = {
     code: prefix, entry: `${prefix}Unit1.html`, engine: true, group: trad.id, order: +code.slice(-1),
-    title, description: {
-      en: `Interim elective in the ${trad.title.en.replace(/ Electives$/, '')} tradition.`,
-      es: `Electiva provisional de la tradición ${trad.title.es.replace(/^Electivas /, '')}.`,
-      fr: `Cours optionnel provisoire de la tradition ${trad.title.fr.replace(/^Cours optionnels /, '')}.`,
-    },
+    title, description: DESC[code[0]],
   };
   console.log(`${code} -> ${prefix} (${slug}): ${title.en} | langs in every unit: ${langsAll.join(',')}`);
   if (!WRITE) continue;
@@ -321,7 +341,13 @@ for (const code of codes) {
     fs.writeFileSync(`src/content/lessons/${prefix}/${n}.json`, JSON.stringify(lessonFile(prefix, n, uTitle, U), null, 1) + '\n');
     const { pub, keys } = unitFiles(code, prefix, slug, n, title, unitTitles, U);
     fs.writeFileSync(`src/content/units-public/${prefix}/${n}.json`, JSON.stringify(pub, null, 1) + '\n');
-    fs.writeFileSync(path.join(KEYS, 'units', prefix, `${n}.json`), JSON.stringify(keys, null, 1) + '\n');
+    // AI-grading rubrics (docs/ai-grading.md section 3) are written after import and kept across re-imports
+    const kf = path.join(KEYS, 'units', prefix, `${n}.json`);
+    if (fs.existsSync(kf)) {
+      const old = JSON.parse(fs.readFileSync(kf, 'utf8'));
+      keys.sa.forEach((q, i) => { if (old.sa?.[i]?.rubric) q.rubric = old.sa[i].rubric; });
+    }
+    fs.writeFileSync(kf, JSON.stringify(keys, null, 1) + '\n');
   });
   fs.writeFileSync(`public/${prefix}Certificate.html`, certificate(prefix, slug, title, unitTitles));
   ignoreAdd.push(`src/content/units/${prefix}/`);
