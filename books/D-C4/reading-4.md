@@ -1,99 +1,35 @@
-# Reading 4 — Classical and Synodical Assemblies
+# Reading 4 — The Examination and Calling of Ministers
 
-> Exact section selection from the staged textbook. Sections 11–15; no overlap with other readings.
+> Exact contiguous selection from the staged textbook. Section 19, introduction through ordinary rule 4; no overlap with other readings.
 
-## 11. Of the power in common of all these Assemblies.
+## 19. The Directory for the Ordination of Ministers. — Part I
 
-IT is lawful, and agreeable to the word of God, that the several assemblies before mentioned have power to convent, and call before them, any person within their several bounds, whom the ecclesiastical business which is before them doth concern.
+IT being manifest by the word of God, that no man ought to take upon him the office of a minister of the gospel, until he be lawfully called and ordained thereunto; and that the work of ordination is to be performed with all due care, wisdom, gravity, and solemnity, we humbly tender these directions, as requisite to be observed.
 
-They have power to hear and determine such causes and differences as do orderly come before them.
+1. He that is to be ordained, being either nominated by the people, or otherwise commended to the presbytery, for any place, must address himself to the presbytery, and bring with him a testimonial of his taking the covenant of the three kingdoms; of his diligence and proficiency in his studies; what degrees he hath taken in the university, and what hath been the time of his abode there; and withal of his age, which is to be twenty four years; but especially of his life and conversation.
 
-It is lawful, and agreeable to the word of God, that all the said assemblies have some power to dispense church-censures.
+2. Which being considered by the presbytery, they are to proceed to enquire touching the grace of God in him, and whether he be of such holiness of life as is requisite in a minister of the gospel; and to examine him touching his learning and sufficiency, and touching the evidences of his calling to the holy minister; and, in particular, his fair and direct calling to that place.
 
-## 12. Of Congregational Assemblies, that is, the Meeting of the ruling Officers of a particular Congregation, for the Government thereof.
+The Rules for Examination are these:
 
-THE ruling officers of a particular congregation have power, authoritatively, to call before them any member of the congregation, as they shall see just occasion.
+“(1.) That the examined be dealt withal in a brotherly way, with mildness of spirit, and with special respect to the gravity, modesty, and quality of every one.
 
-To enquire into the knowledge and spiritual estate of the several members of the congregation.
+“(2.) He shall be examined touching his skill in the original l tongues, and his trial to be made by reading the Hebrew and Greek Testaments, and rendering some portion of some into Latin; and if he be defective in them, enquiry shall be made more strictly after his other learning, and whether he hath skill in logick and philosophy.
 
-To admonish and rebuke.
+“(3.) What authors in divinity he hath read, and is best acquainted with; and trial shall be made in his knowledge of the grounds of religion, and of his ability to defend the orthodox doctrine contained in them against all unsound and erroneous opinions, especially these of the present age; of his skill in the sense and meaning of such places of scripture as shall be proposed unto him, in cases of conscience, and in the chronology of the scripture, and the ecclesiastical his .
 
-Which three branches are proved by Heb. xiii. 17; 1 Thess. v. 12, 13; Ezek. xxxiv. 4.
+“(4.) If he hath not before preached in publick with approbation of such as are able to judge, he shall, at a competent time assigned him, expound before the presbytery such a place of scripture as shall be given him.
 
-Authoritative suspension from the Lord’s table, of a person not yet cast out of the church, is agreeable to the scripture:
+“(5.) He shall also, within a competent time, frame a discourse in Latin upon such a common-place or controversy in divinity as shall be assigned to him, and exhibit to the presbytery such theses as express the sum thereof, and maintain a dispute upon them.
 
-First, Because the ordinance itself must not be profaned.
+“(6.) He shall preach before the people, – the presbytery, or some of the ministers of the word appointed by them, being present.
 
-Secondly, Because we are charged to withdraw from those that walk disorderly.
+“(7.) The proportion of his gifts in relation to the place unto which he is called shall be considered.
 
-Thirdly, Because of the great sin and danger, both to him that comes unworthily, and also to the whole church. And there was power and authority, under the Old Testament, to keep unclean persons from holy things.
+“(8.) Beside the trial of his gifts in preaching, he shall undergo an examination in the premises two several days, and more, if the presbytery shall judge it necessary.
 
-The like power and authority, by way of analogy, continues under the New Testament.
+“(9.) And as for him that hath formerly been ordained a minister, and is to be removed to another charge, he shall bring a testimonial of his ordination, and of his abilities and conversation, whereupon his fitness for that place shall be tried by his preaching there, and (if it shall be judged necessary) by a further examination of him.”
 
-The ruling officers of a particular congregation have power authoritatively to suspend from the Lord’s table a person not yet cast out of the church:
+3. In all which he being approved, he is to be sent to the church where he is to serve, there to preach three several days and to converse with the people, that they may have trial of his gifts for their edification, and may have time and occasion to enquire into, and the better to know, his life and conversation.
 
-First, Because those who have authority to judge of, and admit, such as are fit to receive the sacrament, have authority to keep back such as shall be found unworthy.
-
-Secondly, Because it is an ecclesiastical business of ordinary practice belonging to that congregation.
-
-When congregations are divided and fixed, they need all mutual help one from another, both in regard of their intrinsical weaknesses and mutual dependence, as also in regard of enemies from without.
-
-## 13. Of Classical Assemblies.
-
-THE scripture doth hold out a presbytery in a church.
-
-A presbytery consisteth of ministers of the word, and such other publick officers as are agreeable to and warranted by the word of God to be church-governors, to join with the ministers in the government of the church.
-
-The scripture doth hold forth, that many particular congregations may be under one presbyterial government.
-
-This proposition is proved by instances:
-
-I. First, Of the church of Jerusalem, which consisted of more congregations than one, and all these congregations were under one presbyterial government.
-
-This appeareth thus:
-
-First, The church of Jerusalem consisted of more congregations than one, as is manifest:
-
-1st, By the multitude of believers mentioned, in divers “places”, both before the dispersion of the believers there, by means of the persecution, and also after the dispersion.
-
-2dly, By the many apostles and other preachers in the church of Jerusalem. And if there were but one congregation there, then each apostle preached but seldom; which will not consist with Acts vi. 2.
-
-3dly, The diversity of languages among the believers, mentioned both in the second and sixth chapters of the Acts, doth argue more congregations than one in that church.
-
-Secondly, All those congregations were under one presbyterial government; because,
-
-1st, They were one church.
-
-2dly, The elders of the church are mentioned.
-
-3dly, The apostles did the ordinary acts of presbyters, as presbyters in that kirk; which proveth a presbyterial church before the dispersion, Acts vi.
-
-4thly, The several congregations in Jerusalem being one church, the elders of that church are mentioned as meeting together for acts of government; which proves that those several congregations were under one presbyterial government.
-
-And whether these congregations were fixed or not fixed, in regard of officers or members, it is all one as to the truth of the proposition.
-
-Nor doth there appear any ma al difference betwixt the several congregations in Jerusalem, and the many congregations now in the ordinary condition of the church, as to the point of fixedness required of officers or members.
-
-Thirdly, Therefore the scripture doth hold forth, that many congregations may be under one presbyterial government.
-
-II. Secondly, By the instance of the church of Ephesus; for,
-
-First, That there were more congregations than one in the church of Ephesus, appears by Acts xx. 31, where is mention of Paul’s continuance at Ephesus in preaching for the space of three years; and Acts xix. 18, 19, 20, where the special effect of the word is mentioned; and ver. 10. and 17. of the same chapter, where is a distinction of Jews and Greeks; and 1 Cor. xvi. 8, 9, where is a reason of Paul’s stay at Ephesus until Pentecost; and ver. 19, where is mention of a particular church in the house of Aquila and Priscilla, then at Ephesus, as appears, Acts xviii. 19, 24, 26. All which laid together, doth prove that the multitude of believers did make more congregations than one in the church of Ephesus.
-
-Secondly, That there were many elders over these many congregations, as one flock, appeareth.
-
-Thirdly, That these many congregations were one church, and that they were under one presbyterial government, appeareth.
-
-## 14. Of Synodical Assemblies.
-
-THE scripture doth hold out another sort of assemblies for the government of the church, beside classical and congregational, all which we call Synodical.
-
-Pastors and teachers, and other church-governors, (as also other fit persons, when it shall be deemed expedient,) are members of those assemblies which we call Synodical, where they have a lawful calling thereunto.
-
-Synodical assemblies may lawfully be of several sorts, as provincial, national, and oecumenical.
-
-It is lawful, and agreeable to the word of God, that there be a subordination of congregational, classical, provincial, and national assemblies, for the government of the church.
-
-## 15. Of Ordination of Ministers.
-
-UNDER the head of Ordination of Ministers is to be considered, either the doctrine of ordination, or the power of it.
+4. In the last of these three days appointed for the trial of his gifts in preaching, there shall be sent from the presbytery to the congregation a publick intimation in writing, which shall be publickly read before the people, and after affixed to the church-door, to signify that such a day a competent number of the members of that congregation, nominated by themselves, shall appear before the presbytery, to give their consent and approbation to such a man to be their minister; or otherwise, to put in, with all Christian discretion and meekness, what exceptions they have against him. And if, upon the day appointed, there be no just exception against him, but the people give their consent, then the presbytery shall proceed to ordination.
