@@ -18,7 +18,7 @@ const jobs = new Sheet('AI Jobs',[HEAD,['J1','deepseek','READY','Review Unit 1',
 const log=new Sheet('AI Run Log',[LOG,['2026-10-24','PILOT','none','SETUP','INACTIVE','ready',0]]);
 const sheets={'AI Jobs':jobs,'AI Run Log':log};
 const ss={getSheetByName:n=>sheets[n],insertSheet:n=>{throw Error('unexpected missing tab '+n)}};
-const props={CTS_SPREADSHEET_ID:'1nZZ57CnQN0waT0ozUfcpegOCafHO_krWsfFyVZ90eLg',ENABLE_LIVE_REQUESTS:'NO',ALLOWLIST_SOURCE_IDS:srcId,DEEPSEEK_API_KEY:'FAKE_ONLY',DEEPSEEK_MODEL:'deepseek-chat',MAX_CALLS_PER_DAY:'12',MAX_OUTPUT_TOKENS:'700',REPORT_FOLDER_ID:'test-report-folder',MAX_PILOT_SPEND_USD:'10',DEEPSEEK_USD_PER_M_INPUT_TOKENS:'0.66',DEEPSEEK_USD_PER_M_OUTPUT_TOKENS:'1.98'};
+const props={CTS_SPREADSHEET_ID:'1nZZ57CnQN0waT0ozUfcpegOCafHO_krWsfFyVZ90eLg',ENABLE_LIVE_REQUESTS:'NO',ALLOWLIST_SOURCE_IDS:srcId,DEEPSEEK_API_KEY:'FAKE_ONLY',DEEPSEEK_MODEL:'deepseek-flash',MAX_CALLS_PER_DAY:'12',MAX_OUTPUT_TOKENS:'700',REPORT_FOLDER_ID:'test-report-folder',MAX_PILOT_SPEND_USD:'10',DEEPSEEK_USD_PER_M_INPUT_TOKENS:'0.66',DEEPSEEK_USD_PER_M_OUTPUT_TOKENS:'1.98'};
 let requestCount=0, savedAttempts=[], responseTexts=['Partial, needs more review; CHECKPOINT: checked exposition','Conclusion [[CTS_DONE]]'];
 const context={
  module:{exports:{}},Date,Number,String,Math,RegExp,Error,JSON,isFinite,parseInt,
@@ -73,5 +73,16 @@ context.ctsWatchdog();assert.equal(requestCount,4);
 log.rows=log.rows.filter(x=>x[3]!=='API_STARTED');
 context.ctsWatchdog();assert.equal(jobs.rows[1][2],'BUDGET_HOLD');assert.equal(requestCount,4);
 assert.throws(()=>context.ctsPilotCapUsd_({getProperty:()=>''}), /no greater than/);
+// A stale RUNNING call is ambiguous (may already have billed) and must never be
+// replayed, even if the obsolete ALLOW_UNCERTAIN_RETRY setting was left YES.
+props.MAX_PILOT_SPEND_USD='10'; props.ALLOW_UNCERTAIN_RETRY='YES';
+jobs.rows[1][2]='RUNNING';jobs.rows[1][11]='APPROVED';jobs.rows[1][7]='2020-01-01T00:00:00Z';
+context.ctsWatchdog();assert.equal(jobs.rows[1][2],'REVIEW_REQUIRED');
+assert.equal(requestCount,4);
+// Bad or retired DeepSeek models are rejected before API dispatch.
+props.DEEPSEEK_MODEL='deepseek-chat';
+assert.throws(()=>context.ctsAssertProviderReady_('deepseek',{getProperty:k=>props[k]}), /Unsupported\/retired/);
+props.DEEPSEEK_MODEL='deepseek-flash';
+assert.equal(context.ctsAssertProviderReady_('deepseek',{getProperty:k=>props[k]}),'deepseek-flash');
 
 console.log('PASS: continuation, append-only output, DONE/HOLD, repeated-output stop, daily and $10 total budget gates');
