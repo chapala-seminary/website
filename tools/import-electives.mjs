@@ -326,6 +326,15 @@ for (const code of codes) {
   fs.writeFileSync(`public/${prefix}Certificate.html`, certificate(prefix, slug, title, unitTitles));
   ignoreAdd.push(`src/content/units/${prefix}/`);
 }
+if (WRITE && codes.length) {
+  const gf = 'src/data/catalog-groups.json';
+  const groups = JSON.parse(fs.readFileSync(gf, 'utf8'));
+  for (const t of [...new Set(codes.map((c) => c[0]))].sort()) {
+    const { id, title } = TRADITIONS[t];
+    if (!groups.some((g) => g.id === id)) groups.push({ id, title: { en: title.en, es: title.es } });
+  }
+  fs.writeFileSync(gf, JSON.stringify(groups, null, 2) + '\n');
+}
 if (WRITE && ignoreAdd.length) {
   const gi = fs.readFileSync('.gitignore', 'utf8');
   const MARK = '# ---- Private-key unit exams (tools/private-units.mjs merges them at build; never commit) ----';
