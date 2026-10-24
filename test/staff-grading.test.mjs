@@ -319,19 +319,29 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   ok(!exp.approved.some((x) => x.qid === q1id && x.lang === 'en'), 'and not the rejected one');
   eq(exp.exportedBy, WAYNE, 'and who exported it');
 
-  // apply-accepts on a temp copy of the content
+  // apply-accepts on a temp copy of the content (and private textbook keys)
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'apply-accepts-'));
+  const keysTmp = fs.mkdtempSync(path.join(os.tmpdir(), 'apply-accepts-keys-'));
   const copy = (rel) => { fs.mkdirSync(path.dirname(path.join(tmp, rel)), { recursive: true }); fs.copyFileSync(path.join('src/content', rel), path.join(tmp, rel)); return path.join(tmp, rel); };
   const unitCopy = copy('units/CTSJohn/6.json');
   const bank = (dir, indent) => fs.readdirSync(`src/content/${dir}`).find((x) => { const t = fs.readFileSync(`src/content/${dir}/${x}`, 'utf8'); return x.endsWith('.json') && t === JSON.stringify(JSON.parse(t), null, indent) + '\n' && JSON.parse(t).test; });
-  const tb2 = bank('textbooks', 2), rd1 = bank('readings', 1);
-  ok(tb2 && rd1, 'there is a textbook written with 2-space indent and a reading bank with 1');
-  const tbCopy = copy('textbooks/' + tb2), rdCopy = copy('readings/' + rd1);
+  const keysRoot = process.env.ASSESSMENT_KEYS || path.resolve('..', 'assessment-keys');
+  const tb2 = fs.existsSync(path.join(keysRoot, 'textbooks'))
+    && fs.readdirSync(path.join(keysRoot, 'textbooks')).find((x) => {
+      const t = fs.readFileSync(path.join(keysRoot, 'textbooks', x), 'utf8');
+      return x.endsWith('.json') && t === JSON.stringify(JSON.parse(t), null, 2) + '\n' && JSON.parse(t).test?.questions?.[0]?.answer;
+    });
+  const rd1 = bank('readings', 1);
+  ok(tb2 && rd1, 'there is a private textbook key file with 2-space indent and a reading bank with 1');
+  fs.mkdirSync(path.join(keysTmp, 'textbooks'), { recursive: true });
+  const tbCopy = path.join(keysTmp, 'textbooks', tb2);
+  fs.copyFileSync(path.join(keysRoot, 'textbooks', tb2), tbCopy);
+  const rdCopy = copy('readings/' + rd1);
   const before = Object.fromEntries([unitCopy, tbCopy, rdCopy].map((p) => [p, fs.readFileSync(p, 'utf8')]));
   const tbSlug = tb2.replace('.json', ''), rdSlug = rd1.replace('.json', '');
   const file = path.join(tmp, 'approved.json');
   fs.writeFileSync(file, JSON.stringify({ version: 1, approved: [...exp.approved.filter((x) => x.qid === q0 && x.text === t0).slice(0, 1), { qid: `tb:${tbSlug}/fill/0`, lang: 'en', text: `bankword${RUN}` }, { qid: `rd:${rdSlug}/fill/0`, lang: 'es', text: `lecturapalabra${RUN}` }] }));
-  const run = (...args) => spawnSync('node', ['tools/apply-accepts.mjs', file, '--content', tmp, ...args], { encoding: 'utf8' });
+  const run = (...args) => spawnSync('node', ['tools/apply-accepts.mjs', file, '--content', tmp, '--keys', keysTmp, ...args], { encoding: 'utf8' });
   const dry = run('--dry-run');
   ok(dry.status === 0 && /would add 3/.test(dry.stdout) && Object.entries(before).every(([p, t]) => fs.readFileSync(p, 'utf8') === t), 'a dry run says what it would add and writes nothing', dry.stdout + dry.stderr);
   const r1 = run();
@@ -350,8 +360,8 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   if (!was) delete stripped.fill[idx(q0)].accept; else stripped.fill[idx(q0)].accept = was;
   eq(JSON.stringify(stripped), JSON.stringify(origUnit), 'and nothing else in the unit changed');
   const tbAfter = fs.readFileSync(tbCopy, 'utf8');
-  eq(tbAfter, JSON.stringify(JSON.parse(tbAfter), null, 2) + '\n', 'a textbook keeps its own 2-space layout');
-  ok(JSON.parse(tbAfter).test.questions[0].accept.en.includes(`bankword${RUN}`), 'with the word added to the question');
+  eq(tbAfter, JSON.stringify(JSON.parse(tbAfter), null, 2) + '\n', 'a private textbook key file keeps its own 2-space layout');
+  ok(JSON.parse(tbAfter).test.questions[0].accept.en.includes(`bankword${RUN}`), 'with the word added to the private key question');
   ok(JSON.parse(fs.readFileSync(rdCopy, 'utf8')).test.questions[0].accept.es.includes(`lecturapalabra${RUN}`), 'and a reading bank likewise, in Spanish');
   const mid = [unitCopy, tbCopy, rdCopy].map((p) => fs.readFileSync(p, 'utf8'));
   // item.accept was removed from the in-memory copy only; the file on disk keeps it
@@ -372,6 +382,7 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   const refused = run();
   ok(refused.status === 1 && /REFUSING/.test(refused.stderr) && fs.readFileSync(odd, 'utf8') === JSON.stringify(oddObj, null, 4), 'a file with other formatting is refused, not rewritten', refused.stderr);
   fs.rmSync(tmp, { recursive: true, force: true });
+  fs.rmSync(keysTmp, { recursive: true, force: true });
 }
 
 /* ---- calibration: blind marks, and the agreement figures ------------------------------------------------------- */

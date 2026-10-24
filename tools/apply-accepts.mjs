@@ -15,7 +15,9 @@
  * ones in docs/ai-grading.md section 2:
  *
  *   u:<Prefix>/<n>/fill/<i>   <content>/units/<Prefix>/<n>.json       fill[i]
- *   tb:<slug>/fill/<i>        <content>/textbooks/<slug>.json         test.questions[i]
+ *   tb:<slug>/fill/<i>        <keys>/textbooks/<slug>.json            test.questions[i]
+ *                             (private assessment-keys; public textbook JSON
+ *                             no longer holds answer/accept)
  *   rd:<slug>/fill/<i>        <content>/readings/<slug>.json          test.questions[i]
  *
  * IDEMPOTENT. An answer the item already accepts, or that is its answer, once
@@ -30,19 +32,23 @@
  * reformat a whole bank to add one word. Units are JSON.stringify(x, null, 1)+"\n".
  *
  * --content DIR   the content root, default src/content (a copy, in the tests)
+ * --keys DIR      private assessment-keys root for textbook accepts
+ *                 (default: ASSESSMENT_KEYS or ../assessment-keys)
  * --dry-run       say what would change, write nothing
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { bare, fillCodes } from '../worker/grading/text.js';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(n);
 const opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : d; };
-const file = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content');
+const file = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content' && argv[i - 1] !== '--keys');
 const CONTENT = opt('--content', 'src/content');
+const KEYS = opt('--keys', resolveKeysRoot('.'));
 const DRY = flag('--dry-run');
-if (!file) { console.error('usage: node tools/apply-accepts.mjs <file> [--content DIR] [--dry-run]'); process.exit(2); }
+if (!file) { console.error('usage: node tools/apply-accepts.mjs <file> [--content DIR] [--keys DIR] [--dry-run]'); process.exit(2); }
 
 const LANGS = ['en', 'es', 'fr'];
 const MAX = 80;                       // the longest fill-in the server takes
@@ -57,8 +63,12 @@ function locate(qid) {
   let m;
   if ((m = /^u:([A-Za-z0-9_]{1,40})\/(\d{1,3})\/fill\/(\d+)$/.exec(qid)))
     return { file: path.join(CONTENT, 'units', m[1], `${m[2]}.json`), items: (o) => o.fill, i: +m[3] };
-  if ((m = /^(tb|rd):([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid)))
-    return { file: path.join(CONTENT, m[1] === 'tb' ? 'textbooks' : 'readings', `${m[2]}.json`), items: (o) => o.test?.questions, i: +m[3] };
+  if ((m = /^tb:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid))) {
+    if (!KEYS) return null;
+    return { file: path.join(KEYS, 'textbooks', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
+  }
+  if ((m = /^rd:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid)))
+    return { file: path.join(CONTENT, 'readings', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
   return null;
 }
 

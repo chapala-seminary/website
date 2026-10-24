@@ -7,13 +7,26 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { parse } from 'node-html-parser';
+import { overlayQuestions, resolveKeysRoot } from './grading-keys-lib.mjs';
 
 export const languages = ['en', 'es', 'fr'];
 const fold = s => String(s).normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 const stop = new Set(('the a an of in on to and or for with is are was were be that this these those it its as by from not at which what who how his her their he she they we you our your according reading chapter excerpt author describes calls says called question blank la el los las un una uno unos unas de del al en y o que es son fue se su sus por para con como esta este estas estos dans le les des du de un une et au aux est sont sur pour par qui que ce cette ces il elle ses son sa').split(' '));
 const tokens = s => [...new Set(fold(s).split(' ').filter(w => w.length > 2 && !stop.has(w)))];
 const text = n => n.text.replace(/\s+/g, ' ').trim();
-const records = () => ['textbooks', 'readings'].flatMap(kind => fs.readdirSync(`src/content/${kind}`).filter(f => f.endsWith('.json')).sort().map(f => ({kind, ...JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`, 'utf8'))})));
+/* Textbook answers live in assessment-keys; readings still hold them publicly. */
+const records = () => {
+  const keysRoot = resolveKeysRoot('.');
+  return ['textbooks', 'readings'].flatMap((kind) => fs.readdirSync(`src/content/${kind}`).filter((f) => f.endsWith('.json')).sort().map((f) => {
+    const rec = { kind, ...JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`, 'utf8')) };
+    if (kind === 'textbooks' && rec.test?.questions) {
+      const overlay = overlayQuestions(keysRoot, 'src/content/textbooks', f, rec.slug, rec.test.questions);
+      if (!overlay) throw new Error(`exam-review: textbook ${rec.slug} needs assessment-keys (public files have no answer/accept)`);
+      rec.test = { ...rec.test, questions: overlay };
+    }
+    return rec;
+  }));
+};
 const prefix = lang => lang === 'en' ? '/' : `/${lang}/`;
 
 // The mode the pages are built in (src/lib/grading-mode.ts): live unless told otherwise.

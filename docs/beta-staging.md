@@ -34,6 +34,25 @@ the deployment guard checks that the tested checkout is clean. The beta job
 allows 75 minutes because the complete browser suite can take over 40 minutes
 before publication begins.
 
+## AI release account (20 October 2026)
+
+For routine repository edits, the connected agent selects `chapalatheological-ai`.
+Verify the authenticated account first (`gh api user --jq .login` in a CLI,
+or the connected GitHub identity operation) and verify write access to
+`chapala-seminary/website`. Do not use `ChapalaTheological1` for agent
+commits or PR authorship; reserve it for Wayne's production approval and merge.
+The connected GitHub integration can handle repository writes without a separate
+personal access token. If a standalone CLI agent needs a token, keep it in its
+credential store and scope it to this repository with Contents and Pull requests
+read/write and Actions read. Do not store tokens in repository files or chat.
+
+Before altering `beta`, check that a prior beta deployment for the current head
+has finished; otherwise a new commit can supersede its exact-commit checks.
+Verify that the full tests and publish checks passed on the resulting beta SHA
+and that the published beta version matches. Only then open a PR to `main`
+under the AI account for Wayne's explicit approval. Do not release an
+unverified beta head or silently change repository security settings.
+
 ## New work
 
 Agents may push content or code to current `beta` directly, or use a PR when
@@ -43,7 +62,7 @@ focused and run `npm run build && npm test`. The push workflow tests again
 before publishing. Check the deployed version, health and affected journeys on
 beta. Language drafts still need qualified faculty acceptance before production.
 
-The beta Actions workflow runs a fresh build and the complete suite on each push, then uses the guarded publication step of `npm run deploy:beta`. A failed build or test prevents publication. The final public health probe runs after publication, so its failure can leave a published Worker while marking the workflow failed. Check the live `/version.txt` and deployment version before retrying; the probe reports its HTTP status and Cloudflare challenge state. It needs the `beta` environment Actions secret `CTS_BETA_CLOUDFLARE_API_TOKEN`, a deployment token limited to the CTS account `119b0919229edb3185b69f1c6bd04b66`, including Workers deployment/routes, account/zone read and D1 access needed by Wrangler. Set it through GitHub environment secret settings; do not put the value in files, PR descriptions or chat.
+The beta Actions workflow runs a fresh build and the complete suite on each push, then uses the guarded publication step of `npm run deploy:beta`. A failed build or test prevents publication. The final public health probe runs after publication, so its failure can leave a published Worker while marking the workflow failed. Check the live `/version.txt` and deployment version before retrying; the probe reports its HTTP status and Cloudflare challenge state. It needs the `beta` environment Actions secret `CTS_BETA_CLOUDFLARE_API_TOKEN`, a deployment token limited to the CTS account `119b0919229edb3185b69f1c6bd04b66`, including Workers deployment/routes, account/zone read and D1 access needed by Wrangler. Set it through GitHub environment secret settings; do not put the value in files, PR descriptions or chat. Before build and test it checks out the private `chapala-seminary/assessment-keys` repo with repository secret `ASSESSMENT_KEYS_TOKEN` (read-only on that repo) and sets `ASSESSMENT_KEYS` when that checkout has `textbooks/`. Public textbook JSON no longer holds `answer`/`accept`, so that checkout is required for the suite and for deploy sync. The checkout step uses `continue-on-error`; a missing token fails later with a clear message. The deploy log should say textbook and reading keys came from the private checkout.
 
 Publication and post-deploy verification now have separate Actions steps. CI uses
 the guarded `deploy:beta:publish` part of `deploy:beta`, then verifies the exact

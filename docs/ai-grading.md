@@ -117,7 +117,34 @@ Every short-answer item gets:
 
   It works by sampling known answer strings from the content and searching
   `dist/` for them. Expected words in lesson prose are allowed by checking
-  only inside the inlined data scripts.
+  only inside the inlined data scripts. A live textbook or reading test page
+  also fails when its `questions` array is not empty: the page ships no bank.
+  The server sends the prompt for each question it drew (`prompts` on the
+  attempt and status replies; section 7).
+
+- **Private textbook and reading banks.** `buildKeyRows` (and therefore
+  `tools/sync-grading-keys.mjs`) reads `prompt`, `answer` and `accept` for
+  `tb:` and `rd:` rows from a private checkout when one is present, and from
+  `src/content` otherwise. The checkout is the `ASSESSMENT_KEYS` directory
+  when that variable is set and the directory exists; otherwise
+  `../assessment-keys` when it contains `textbooks/`. Question order is the
+  question id. Draw, pass mark and course code stay on the public catalog
+  file. A private file whose question count does not match the public bank
+  is ignored while the public bank still has questions, so a short file
+  cannot make sync delete grading keys.
+
+  `node tools/export-assessment-keys.mjs <dir>` writes that checkout from
+  public banks that still hold answers. It refuses to write inside this repo,
+  and refuses when public textbook files already omit `answer`/`accept` (so it
+  cannot wipe the private checkout). Public textbook JSON keeps prompts (and
+  chapter); `answer`/`accept` are only in the private checkout. Reading-test
+  and unit-exam keys remain in this public repo for a later pass. The beta and
+  pull-request Actions workflows check `chapala-seminary/assessment-keys` out
+  with repository secret `ASSESSMENT_KEYS_TOKEN` before build/test/deploy, set
+  `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and use
+  `continue-on-error` on the checkout step so a missing token fails later with
+  a clear message instead of a hard checkout error. Shadow textbook pages load
+  keys from that checkout. The Christian Education bank is authored only there.
 
 ## 5. Grading rules (server, `worker/grading/`)
 
@@ -307,6 +334,13 @@ Notes on the routes (as built):
   multiple choice and short answers bank. `status` is also in the reply
   (`open`, or `pending` when the student comes back to an attempt that is
   waiting). `answered[qid]` is described in section 12.
+- **Drawn prompts.** A textbook or reading attempt (`tb:` / `rd:`) includes
+  `prompts`: `[{ qid, prompt: { en, es, fr } }]`, one entry per drawn
+  fill-in, in the same order as `items.fill` on `POST /api/attempt` and in
+  that draw order on the submit and GET replies. Each prompt is the question
+  text in the languages the key has. The field carries no `answer`, `accept`,
+  or other key. Unit and single-page attempts omit `prompts`. The live test
+  page ships `questions: []` and shows only these.
 - **Locked:** `POST /api/attempt` answers 423 with
   `{error, lock: {until, kind}, track}`; `lock` in a normal reply is null.
 - **`/api/grade`** items are `{qid, gradeId, verdict, feedback, points?}`
@@ -624,11 +658,12 @@ the browser (`cts-grading.js`, `cts-engine.js`, `cts-fill.js`,
 that breaks the agreement fails the suite.
 
 - **Page data (live build).** `window.CTS_UNIT` / `CTS_TEXTBOOK_TEST` carry
-  `grading: "live"`, `scope` (`u:<Prefix>/<n>`, `tb:<slug>`, `rd:<slug>`) and,
-  per item, `qid` plus only what a student reads (`stem`, `prompt`, `options`,
-  and `group` / `chapter` / `reading` on a test bank). A textbook or reading
-  bank ships all forty prompts; the server draws, and `items.fill` of the
-  attempt names the twenty.
+  `grading: "live"` and `scope` (`u:<Prefix>/<n>`, `tb:<slug>`, `rd:<slug>`).
+  A unit item also carries `qid` plus only what a student reads (`stem`,
+  `prompt`, `options`). A textbook or reading test ships `questions: []`.
+  The server draws, `items.fill` names the twenty, and `prompts` (the same
+  order) is the wording the page shows. Shadow pages still embed the full
+  bank, keys included.
 - **`POST /api/attempt`** replies with `attemptId`, `status` (`open` or
   `pending`), `track`, `lang`, `needs`, `totals`, `banked`, `answered`, `lock`
   (null) and `items`. A browser on a new device learns that the latest attempt

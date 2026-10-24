@@ -258,6 +258,10 @@ slug, page name, the course's catalog card, the bank file, the two titles).
   translations of the English (sentences omitted in places) and recommends a
   parity review.
 
+## Where the answer bank lives
+
+A live test page does not include the question bank. The server sends the wording of the twenty questions it drew, and grades them from `grading_keys`. Public textbook JSON keeps prompts (and chapter); `answer` and `accept` live only in the private `chapala-seminary/assessment-keys` checkout that deploy and CI sync from. See `docs/ai-grading.md` section 4. The book text stays on the book page. Reading-test keys remain in this public repo for a later pass. A new bank, including Christian Education, is written only in that private checkout.
+
 ## October beta audit conversion
 
 The 36 later banks now use typed fill-ins, with their chapter draws, answer keys and saved-pass identifiers preserved. Every supplied key and accepted variant is checked. Normalization also accepts changes in capitalization, punctuation, Latin accents and one leading article, preserving ñ. Five questions have explicit English/Spanish paraphrase or number variants added after reviewing their prompts; avoid inventing synonyms solely to reach an arbitrary variant count. Further content alternatives remain faculty-review work. Browser checks cover immediate feedback, reload, 17/20 failure, retake wait, 18/20 pass and preservation of older dated multiple-choice passes.

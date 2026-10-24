@@ -27,6 +27,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { textbookQuestions } from '../../tools/grading-keys-lib.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const CODE = 'STUBCODE1';
@@ -45,11 +46,30 @@ export function bankOf(scope) {
     const u = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/content/units', prefix, n + '.json'), 'utf8'));
     return { kind: 'u', mc: u.mc || [], fill: u.fill || [], sa: u.sa || [], title: u.title };
   }
-  const dir = m[1] === 'tb' ? 'textbooks' : 'readings';
-  const b = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/content', dir, m[2] + '.json'), 'utf8'));
-  return { kind: m[1], mc: [], fill: b.test.questions, sa: [], pass: b.test.pass, draw: b.test.draw };
+  if (m[1] === 'tb') {
+    // Public textbook JSON omits answer/accept; load keys from assessment-keys.
+    const { book, questions } = textbookQuestions(ROOT, m[2]);
+    if (!questions.every((q) => q?.answer?.en)) {
+      throw new Error(`tb:${m[2]} needs assessment-keys (public textbook files have no answer/accept)`);
+    }
+    return { kind: 'tb', mc: [], fill: questions, sa: [], pass: book.test.pass, draw: book.test.draw };
+  }
+  const b = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/content/readings', m[2] + '.json'), 'utf8'));
+  return { kind: 'rd', mc: [], fill: b.test.questions, sa: [], pass: b.test.pass, draw: b.test.draw };
 }
 const qidOf = (scope, kind, i) => `${scope}/${kind}/${i}`;
+function publicPrompt(q) {
+  const p = q && q.prompt;
+  if (!p || typeof p !== 'object') return {};
+  const out = {};
+  for (const l of ['en', 'es', 'fr']) if (typeof p[l] === 'string' && p[l]) out[l] = p[l];
+  return out;
+}
+function promptsFor(a) {
+  if (!a || a.bank.kind === 'u') return undefined;
+  const fillIdx = a.draw || a.bank.fill.map((_, i) => i);
+  return fillIdx.map((i) => ({ qid: qidOf(a.scope, 'fill', i), prompt: publicPrompt(a.bank.fill[i]) }));
+}
 const parseQid = (qid) => { const m = /^(.*)\/(mc|fill|sa)\/(\d+)$/.exec(qid); return m && { scope: m[1], kind: m[2], i: +m[3] }; };
 const lmap = (v) => (v && typeof v === 'object' ? v : { en: v });
 
@@ -124,12 +144,14 @@ export class GradingStub {
     const bank = a.bank, S = a.scope;
     const fillIdx = a.draw || bank.fill.map((_, i) => i);
     const banked = [...(this.bankedSa.get(S) || [])];
+    const prompts = promptsFor(a);
     return { json: {
       attemptId: a.id, track: this.track,
       needs: { mc: bank.mc.length > 0, fill: this.track !== 'cert', sa: /^(thm|mdiv)$/.test(this.track) && bank.sa.length > 0 },
       banked: { mc: this.mcBanked(S), fill: [], sa: banked },
       answered: this.answeredOut(a),
       lock: null,
+      ...(prompts ? { prompts } : {}),
       items: { mc: bank.mc.map((_, i) => ({ qid: qidOf(S, 'mc', i) })), fill: fillIdx.map((i) => qidOf(S, 'fill', i)), sa: bank.sa.map((_, i) => qidOf(S, 'sa', i)) },
     } };
   }
@@ -217,6 +239,7 @@ export class GradingStub {
   report(a) {
     const e = this.evaluate(a);
     const lock = this.locks.get(a.scope);
+    const prompts = promptsFor(a);
     return {
       attemptId: a.id, status: a.status === 'open' ? 'open' : a.status,
       scores: { mc: { right: e.c.mc, total: e.total.mc }, fill: { right: e.c.fill, total: e.total.fill }, sa: { right: e.c.sa, total: e.total.sa } },
@@ -224,6 +247,7 @@ export class GradingStub {
       unitDone: a.status === 'passed', courseDone: a.status === 'passed' && this.courseDone,
       disclosure: a.status === 'passed' ? 'review' : 'verdict',
       answered: this.answeredOut(a),
+      ...(prompts ? { prompts } : {}),
       ...(a.status === 'passed' && a.bank.sa.length && !/^(thm|mdiv)$/.test(this.track)
         ? { models: Object.fromEntries(a.bank.sa.map((q, i) => [qidOf(a.scope, 'sa', i), q.model]).filter(([, m]) => m)) } : {}),
     };

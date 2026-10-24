@@ -34,6 +34,7 @@ import {
 } from './french-readings-lib.mjs';
 import { translationPlan } from './translation-plan.mjs';
 import { readerEditorialNotice } from './editorial-notices.mjs';
+import { resolveKeysRoot, textbookQuestions } from './grading-keys-lib.mjs';
 
 const BLANK = '____';
 const PROTECTED = new Set(['human', 'machine-edited']);
@@ -44,6 +45,44 @@ function writeJson(file, data) {
   const indent = /^\{\n( +)"/.exec(old)?.[1].length || 1;
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(data, null, indent) + '\n');
+}
+/* Public textbook JSON keeps prompt/chapter/tr; answer/accept live in assessment-keys. */
+function loadTextbook(file) {
+  const pub = json(file);
+  const { questions: keyed } = textbookQuestions('.', pub.slug);
+  if (!keyed.every((q) => q?.answer?.en)) {
+    throw new Error(`${pub.slug}: textbook answers are only in the private assessment-keys checkout`);
+  }
+  return {
+    ...pub,
+    test: {
+      ...pub.test,
+      questions: pub.test.questions.map((q, i) => ({
+        ...q,
+        answer: keyed[i].answer,
+        ...(keyed[i].accept ? { accept: keyed[i].accept } : {}),
+      })),
+    },
+  };
+}
+function publicTextbookQuestions(questions) {
+  return questions.map(({ answer, accept, ...q }) => q);
+}
+function writeTextbookKeys(slug, questions) {
+  const keysRoot = resolveKeysRoot('.');
+  if (!keysRoot) throw new Error(`${slug}: cannot write French textbook answers without assessment-keys`);
+  const file = path.join(keysRoot, 'textbooks', `${slug}.json`);
+  writeJson(file, {
+    slug,
+    test: {
+      questions: questions.map((q) => ({
+        prompt: q.prompt,
+        answer: q.answer,
+        ...(q.accept ? { accept: q.accept } : {}),
+      })),
+    },
+  });
+  return file;
 }
 const fold = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
@@ -144,7 +183,7 @@ const questionSegments = (questions, unit) => questions.flatMap((q, i) => {
 export function exportItem(item) {
   const segments = [];
   if (item.type === 'textbook') {
-    const b = json(item.file);
+    const b = loadTextbook(item.file);
     for (const f of ['subtitle', 'credits']) if (b[f]?.en) segments.push({ id: f, context: `the book's ${f}, under its title`, en: b[f].en });
     let heading = '';
     bodyLeaves(b.body.en).list.filter(translatable).forEach((leaf, i) => {
@@ -310,7 +349,7 @@ export function applyPacket(file) {
   const report = [];
   let written;
   if (item.type === 'textbook' || item.type === 'reading') {
-    const rec = json(item.file);
+    const rec = item.type === 'textbook' ? loadTextbook(item.file) : json(item.file);
     if (item.type === 'textbook') {
       for (const f of ['subtitle', 'credits']) if (fr.has(f)) {
         if (PROTECTED.has(rec.tr?.[f]?.fr?.status)) { report.push(`${f}: ${rec.tr[f].fr.status} French kept`); continue; }
@@ -336,7 +375,12 @@ export function applyPacket(file) {
       const text = [...memory.values()].filter((e) => /^src\/data\/french-readings\/(digest|room)\//.test(e.file)).map((e) => e.fr).join(' ');
       if (text) warnings.push(...answerWarnings(rec.test.questions, text, item.id).map((w) => w + ' (any digest)'));
     }
-    writeJson(item.file, rec);
+    if (item.type === 'textbook') {
+      writeTextbookKeys(rec.slug, rec.test.questions);
+      writeJson(item.file, { ...rec, test: { ...rec.test, questions: publicTextbookQuestions(rec.test.questions) } });
+    } else {
+      writeJson(item.file, rec);
+    }
     written = item.file;
   } else if (item.type === 'digest' || item.type === 'room') written = applyMemory(item, packet, frOf, report);
   else written = applyChapter(item, packet, frOf, report);
@@ -353,7 +397,7 @@ export function status() {
     let done = 0, stale = 0;
     const total = packet.segments.length;
     if (item.type === 'textbook' || item.type === 'reading') {
-      const rec = json(item.file);
+      const rec = item.type === 'textbook' ? loadTextbook(item.file) : json(item.file);
       const stamps = questionStamps(rec.test.questions);
       for (const f of ['subtitle', 'credits', 'body']) if (rec[f]?.fr != null) { if (rec.tr?.[f]?.fr?.from !== hash(rec[f].en)) stale++; }
       const segs = (f) => packet.segments.filter((s) => f === 'body' ? s.id.startsWith('body.') : s.id === f).length;

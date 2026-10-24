@@ -12,6 +12,7 @@ import catalog from '../../worker/catalog.json';
 import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
 import { frBookTitle } from '../lib/french-titles.ts';
 import { live, liveBank } from '../lib/grading-mode';
+import { overlayQuestions, resolveKeysRoot } from '../../tools/grading-keys-lib.mjs';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -41,10 +42,21 @@ const tests = testsOfCourseWith(book.slug);
 const completion = unitCourse
   ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) }
   : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) };
-/* Live mode: the bank carries prompts and ids only; the server draws the
-   twenty and grades them (docs/ai-grading.md). */
+/* Live mode: the page ships no question bank. The server sends the prompt
+   for each question it drew (docs/ai-grading.md). Shadow mode still embeds
+   the bank with keys from the private assessment-keys checkout (public
+   textbook JSON no longer holds answer/accept). */
 const shown = live ? liveBank({ slug: book.slug, questions }) : null;
-const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions: shown ? shown.questions : questions, completion,
+const shadowBank = (() => {
+  if (live) return null;
+  const overlay = overlayQuestions(resolveKeysRoot('.'), 'src/content/textbooks', `${book.slug}.json`, book.slug, questions, (m) => console.warn(m));
+  const bank = overlay || questions;
+  if (!bank.every((q) => q?.answer?.en)) {
+    throw new Error(`textbook ${book.slug}: shadow build needs assessment-keys (public textbook files have no answer/accept)`);
+  }
+  return bank;
+})();
+const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions: shown ? [] : shadowBank, completion,
   ...(shown ? { grading: 'live', scope: shown.scope } : {}),
   ...(book.test.perChapter ? { perChapter: book.test.perChapter } : {}),
   ...(book.test.revision ? { revision: book.test.revision } : {}),

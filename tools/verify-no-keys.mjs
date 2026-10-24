@@ -12,6 +12,8 @@
  *     carries any field that is not on the whitelist -- above all `answer`,
  *     `correct`, `accept`, `why`, `model`, `keywords`, `rubric`;
  *   - the page does not say grading: "live", or an item has no qid;
+ *   - a textbook or reading test page still carries its question bank
+ *     (the server sends the drawn prompts; the page ships questions: []);
  *   - a model answer or an explanation from the source content (40 characters
  *     or more, so ordinary words in a lesson cannot trip it) appears anywhere
  *     in the page's data script.
@@ -104,6 +106,7 @@ for (const file of walk(dir)) {
   }
 
   if (U.grading !== 'live') note(`${rel}: the page does not say grading: "live"`);
+  if (!isUnit && (U.questions || []).length) note(`${rel}: a live test page still carries the question bank`);
   for (const [kind, list] of lists) {
     (list || []).forEach((q, i) => {
       for (const k of Object.keys(q)) if (!SHOWN.has(k)) note(`${rel}: ${kind}[${i}] carries "${k}"`);

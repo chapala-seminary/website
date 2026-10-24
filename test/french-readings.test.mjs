@@ -21,13 +21,24 @@ import vm from 'node:vm';
 import { parse } from 'node-html-parser';
 import { bodyLeaves, translatable, tagProblem, loadStore, DIGEST, roomKey, chromeRoomKeys } from '../tools/french-readings-lib.mjs';
 import { status } from '../tools/french-readings.mjs';
+import { textbookQuestions } from '../tools/grading-keys-lib.mjs';
 
 const BASE = process.argv[2];
 let checks = 0;
 const ok = (c, m) => { assert.ok(c, m); checks++; };
 const json = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 const records = (dir) => fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => json(path.join(dir, f)));
-const books = records('src/content/textbooks'), readings = records('src/content/readings');
+const books = records('src/content/textbooks').map((b) => {
+  const { questions: keyed } = textbookQuestions('.', b.slug);
+  // Keep public prompt/tr; only answer/accept come from assessment-keys.
+  const questions = b.test.questions.map((q, i) => ({
+    ...q,
+    answer: keyed[i]?.answer,
+    ...(keyed[i]?.accept ? { accept: keyed[i].accept } : {}),
+  }));
+  return { ...b, test: { ...b.test, questions } };
+});
+const readings = records('src/content/readings');
 const french = [...books, ...readings].filter((r) => r.body?.fr || r.test.questions.some((q) => q.prompt.fr));
 
 if (!BASE) {

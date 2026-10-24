@@ -27,7 +27,30 @@ const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WI
    without the foundation; open for one with it -- and then set aside, so the
    rest of the page is compared with the reference like for like. The recorded
    baseline below keeps the whole page, added courses included. */
-const ADDED = ['Parables of the Bible'];
+const ADDED = [
+  'Parables of the Bible',
+  // 24 Oct 2026: the twenty denominational electives
+  "History and Development of Pentecostalism",
+  "Pentecostal and Charismatic Theology",
+  "The Holy Spirit, Spiritual Gifts, and Discernment",
+  "Pentecostal Worship, Preaching, and Ministry",
+  "Pentecostal Pastoral Leadership and Global Missions",
+  "Baptist History and Denominational Development",
+  "Baptist Theology and Distinctive Doctrines",
+  "Congregational Church Government and Baptist Polity",
+  "Baptist Worship, Ordinances, and Preaching",
+  "Baptist Pastoral Ministry, Missions, and Church Leadership",
+  "John Wesley and the History of Methodism",
+  "Wesleyan Theology and the Doctrine of Salvation",
+  "Holiness, Sanctification, and Christian Perfection",
+  "Methodist and Nazarene Polity, Worship, and Sacraments",
+  "Wesleyan Pastoral Ministry, Evangelism, and Global Missions",
+  "History of the Reformation and Reformed Churches",
+  "Reformed Theology and the Doctrines of Grace",
+  "Covenant Theology, Scripture, and Reformed Confessions",
+  "Presbyterian Polity, Worship, and Sacraments",
+  "Reformed Pastoral Ministry, Preaching, and Missions",
+];
 
 /* Comparing the built page against the reference page is necessary and not
    sufficient. Both are served from the same directory and both load the same

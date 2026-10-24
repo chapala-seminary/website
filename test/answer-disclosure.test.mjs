@@ -238,9 +238,10 @@ const essay = (hint) => `${++salt}. In my own words, this passage shows who Jesu
 
 /* ---- 5. a textbook test: fail, retake, pass with the teaching passages ----------------------------------- */
 {
-  const tb = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8'));
-  const S = secretsOf(tb.test);
-  const ans = (qid) => tb.test.questions[idx(qid)].answer.en;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const tbQs = textbookQuestions('.', 'cults').questions;
+  const S = secretsOf({ questions: tbQs });
+  const ans = (qid) => tbQs[idx(qid)].answer.en;
   const code = await student('thm');
   const a = (await start(code, 'tb:cults')).body;
   none(a, S, '5: a textbook attempt carries no key');
