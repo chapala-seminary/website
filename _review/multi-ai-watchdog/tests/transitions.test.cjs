@@ -18,7 +18,7 @@ const jobs = new Sheet('AI Jobs',[HEAD,['J1','deepseek','READY','Review Unit 1',
 const log=new Sheet('AI Run Log',[LOG,['2026-10-24','PILOT','none','SETUP','INACTIVE','ready',0]]);
 const sheets={'AI Jobs':jobs,'AI Run Log':log};
 const ss={getSheetByName:n=>sheets[n],insertSheet:n=>{throw Error('unexpected missing tab '+n)}};
-const props={CTS_SPREADSHEET_ID:'1nZZ57CnQN0waT0ozUfcpegOCafHO_krWsfFyVZ90eLg',ENABLE_LIVE_REQUESTS:'NO',ALLOWLIST_SOURCE_IDS:srcId,DEEPSEEK_API_KEY:'FAKE_ONLY',DEEPSEEK_MODEL:'deepseek-chat',MAX_CALLS_PER_DAY:'12',MAX_OUTPUT_TOKENS:'700',REPORT_FOLDER_ID:'test-report-folder'};
+const props={CTS_SPREADSHEET_ID:'1nZZ57CnQN0waT0ozUfcpegOCafHO_krWsfFyVZ90eLg',ENABLE_LIVE_REQUESTS:'NO',ALLOWLIST_SOURCE_IDS:srcId,DEEPSEEK_API_KEY:'FAKE_ONLY',DEEPSEEK_MODEL:'deepseek-chat',MAX_CALLS_PER_DAY:'12',MAX_OUTPUT_TOKENS:'700',REPORT_FOLDER_ID:'test-report-folder',MAX_PILOT_SPEND_USD:'10',DEEPSEEK_USD_PER_M_INPUT_TOKENS:'0.66',DEEPSEEK_USD_PER_M_OUTPUT_TOKENS:'1.98'};
 let requestCount=0, savedAttempts=[], responseTexts=['Partial, needs more review; CHECKPOINT: checked exposition','Conclusion [[CTS_DONE]]'];
 const context={
  module:{exports:{}},Date,Number,String,Math,RegExp,Error,JSON,isFinite,parseInt,
@@ -30,7 +30,8 @@ const context={
    getFileById: id => {assert.equal(id,srcId); return {getBlob:()=>({getDataAsString:()=>packet})};},
    getFolderById: id => {assert.equal(id,'test-report-folder'); return {createFile:(name,txt,mime)=>{savedAttempts.push({name,txt,mime});return {getId:()=>String(savedAttempts.length)};}};}
  },
- UrlFetchApp:{fetch:(url,arg)=>{requestCount++; assert.match(url,/chat\/completions/);assert.equal(arg.method,'post');const body=JSON.parse(arg.payload);assert.match(body.messages[0].content,/Doctrine of Revelation/i);return {getResponseCode:()=>200,getContentText:()=>JSON.stringify({choices:[{message:{content:responseTexts.shift()}}],usage:{total_tokens:800}})};}}
+ Utilities:{newBlob:(s)=>({getBytes:()=>Array.from(Buffer.from(s,'utf8'))})},
+ UrlFetchApp:{fetch:(url,arg)=>{requestCount++; assert.match(url,/chat\/completions/);assert.equal(arg.method,'post');const body=JSON.parse(arg.payload);assert.match(body.messages[0].content,/Doctrine of Revelation/i);return {getResponseCode:()=>200,getContentText:()=>JSON.stringify({choices:[{message:{content:responseTexts.shift()}}],usage:{prompt_tokens:680,completion_tokens:120,total_tokens:800}})};}}
 };
 vm.runInNewContext(source,context);
 // Global kill switch prevents ALL provider calls.
@@ -58,5 +59,19 @@ assert.equal(log.rows.filter(x=>x[3]==='NO_PROGRESS').length,1);
 assert.equal(context.ctsDailyCalls_(log),4);
 props.MAX_CALLS_PER_DAY='4';jobs.rows[1][2]='READY';jobs.rows[1][9]=0;
 context.ctsWatchdog();assert.equal(requestCount,4);
+// Total dollar reservations are recorded once per attempted provider call.
+const reserved=context.ctsReservedSpendUsd_(log);
+assert.ok(reserved>0 && reserved<10);
+assert.ok(log.rows.some(x=>String(x[5]).includes('BUDGET_RESERVE_USD=')));
+props.MAX_CALLS_PER_DAY='12';
+assert.throws(()=>{props.MAX_PILOT_SPEND_USD='11';context.ctsWatchdog();}, /no greater than/);
+props.MAX_PILOT_SPEND_USD='0.000001';props.MAX_CALLS_PER_DAY='12';
+jobs.rows[1][2]='READY';jobs.rows[1][11]='APPROVED';jobs.rows[1][9]=0;
+// Already reserved exceeds tighter total budget: absolutely no new call.
+context.ctsWatchdog();assert.equal(requestCount,4);
+// Fresh mock pilot proves BUDGET_HOLD before the first paid request.
+log.rows=log.rows.filter(x=>x[3]!=='API_STARTED');
+context.ctsWatchdog();assert.equal(jobs.rows[1][2],'BUDGET_HOLD');assert.equal(requestCount,4);
+assert.throws(()=>context.ctsPilotCapUsd_({getProperty:()=>''}), /no greater than/);
 
-console.log('PASS: kill switch, checkpoint/resumption, append-only output, DONE, HOLD, no-progress stop, dispatch budget');
+console.log('PASS: continuation, append-only output, DONE/HOLD, repeated-output stop, daily and $10 total budget gates');
