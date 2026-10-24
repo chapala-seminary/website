@@ -1,6 +1,6 @@
 # A-C1 — Pentecostal History and Development
 
-Status: source selection and preliminary rights screen only. Raw source text is **not yet copied** because the modern HTML transcription's reuse terms must be checked against an original scan. This file is not an academic or legal approval.
+Status: source selection, preliminary rights screen, and raw public-domain text handoff complete on `handoff/book-sources`. The transcription source is azusabooks.org; comparison against original issue scans remains pending. This file is not an academic or legal approval.
 
 ## Textbook / documentary reader
 
@@ -18,7 +18,7 @@ Full-text transcriptions of the original issues:
 - No. 8 (May 1907): https://azusabooks.org/af/LA08.shtml
 - No. 9 (June–September 1907): https://azusabooks.org/af/LA09.shtml
 
-Use a 25,000–40,000-word documentary selection across these issues rather than the entire run. Preserve original headings and clearly label testimony, editorial claims, and later CTS historical notes.
+Committed reader: Nos. 1–2 (September–October 1906), 28,181 words including provenance notes and headings. The remaining issues are retained as candidate sources for later expansion. Preserve original headings and clearly label testimony, editorial claims, and later CTS historical notes.
 
 ## Five readings
 
@@ -47,7 +47,7 @@ Use a 25,000–40,000-word documentary selection across these issues rather than
 - United States: every selected issue was published before 1931 and is in the public domain in the United States.
 - Mexico: William J. Seymour died in 1922, so his identified writings passed the current life-plus-100 term at the end of 2022. The selected unsigned/editorial periodical passages were disclosed in 1906–1907, more than 100 years ago. Article 29 of Mexico's current Federal Copyright Law states life plus 100 years and, for the applicable disclosure category, 100 years after disclosure.
 - Official Mexican statute: https://www.diputados.gob.mx/LeyesBiblio/pdf/LFDA.pdf
-- Remaining check: establish whether the azusabooks.org HTML is a purely faithful transcription or carries separately protected editorial additions. Prefer an original issue scan for the committed raw text. Do not copy modern introductions, annotations, formatting, or corrections without permission.
+- Transcription decision: only the issue text extracted from azusabooks.org was committed; modern introductions, annotations, site navigation, and formatting were excluded. Faithful word-for-word transcription of a public-domain source adds no new copyright, but accuracy still requires comparison against original issue scans. Record any later emendations.
 
 ## Content and editorial warnings
 
@@ -56,3 +56,9 @@ Use a 25,000–40,000-word documentary selection across these issues rather than
 - Retain historically important references to race, disability, nationality, and missions, but explain dated or offensive terminology.
 - Distinguish primary-source testimony from later historical conclusions.
 - Correct obvious encoding artifacts only against an original scan and record every emendation.
+
+## Handoff inventory
+
+- `textbook.md` — 28,181-word selection from Nos. 1–2.
+- `reading-1.md` through `reading-5.md` — the five source-bounded readings listed above.
+- All six text files state that scan comparison remains pending.
