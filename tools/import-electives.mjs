@@ -25,6 +25,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { hash } from '../src/lib/lesson.ts';
+import { heldPrefixes } from './elective-held.mjs';
 
 const argv = process.argv.slice(2);
 const WRITE = argv.includes('--write');
@@ -56,7 +57,7 @@ const UNITS = 10;
 /* The course-readings box (src/lib/partials.ts honours) goes on a unit only
    once the course has its reading room (tools/build-elective-readings.mjs),
    so no unit links a room that does not exist. */
-const hasRoom = (prefix) => fs.existsSync(`src/body/rooms/${prefix}Readings.html`);
+const hasRoom = (prefix) => !heldPrefixes().has(prefix) && fs.existsSync(`src/body/rooms/${prefix}Readings.html`);   // never for a held course (src/data/elective-held.json)
 const LANGS = ['en', 'es', 'fr'];
 
 const INTERIM = {

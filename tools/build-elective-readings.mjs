@@ -51,6 +51,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { parse } from 'node-html-parser';
 import { fitFrench } from './french-fit.mjs';
+import { refuseHeld } from './elective-held.mjs';
 import { TRADITIONS, prefixOf } from './import-electives.mjs';
 import { resolveKeysRoot } from './grading-keys-lib.mjs';
 import { bodyLeaves, translatable, leafKey, markupSegments, loadStore, storeFile, augmentHtml, frenchSpaces, tagProblem } from './french-readings-lib.mjs';
@@ -62,6 +63,7 @@ const WRITE = argv.includes('--write');
 const opt = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
 const CODE = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content');
 if (!CODE || !/^[A-D]-C[1-5]$/.test(CODE)) { console.error('usage: node tools/build-elective-readings.mjs <A-C1 … D-C5> [--write] [--content DIR]'); process.exit(2); }
+refuseHeld(CODE, 'reading room and reading test');
 const CONTENT = path.resolve(opt('--content') || process.env.ELECTIVE_CONTENT || path.join(ROOT, '..', 'elective-content'), CODE);
 const LANGS = ['en', 'es', 'fr'];
 const NUM = ['one', 'two', 'three', 'four', 'five'];
@@ -251,7 +253,9 @@ const built = fs.readFileSync(roomFile, 'utf8');
 const storePath = storeFile('room', page);
 const { files } = loadStore();
 const others = new Map();     // French already stored for other pages (the shared interface lines)
-for (const { file, data } of files) if (path.resolve(file) !== path.resolve(storePath)) for (const [k, e] of Object.entries(data.entries || {})) if (!others.has(k)) others.set(k, { ...e, key: k, file });
+// shared only with the core rooms and digests: an elective room's store never leans on
+// another elective's, so holding or removing one course cannot strip another's French
+for (const { file, data } of files) if (path.resolve(file) !== path.resolve(storePath) && !/room[\\/]CTSElec[^\\/]*\.json$/.test(file)) for (const [k, e] of Object.entries(data.entries || {})) if (!others.has(k)) others.set(k, { ...e, key: k, file });
 const entries = {};
 const missing = [];
 /* The textbook notice tools/room-test-notices.mjs puts at the top of the room

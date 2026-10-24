@@ -55,6 +55,7 @@ import path from 'node:path';
 import { carryFrench } from './french-readings-lib.mjs';
 import { resolveKeysRoot, privateReadingLeaks, PRIVATE_READING_FIELDS } from './grading-keys-lib.mjs';
 import { questionStamps } from './french-readings.mjs';
+import { isHeld } from './elective-held.mjs';
 
 const SRC = 'src/data/readings', OUT = 'src/content/readings';
 const WRITE = process.argv.includes('--write');
@@ -185,7 +186,8 @@ export const TESTS = [
      (docs/reading-rooms.md, "Private reading tests"); requiredFrom null and
      the "elec" slug keep them optional (worker/test-activation.js). Their
      banks carry French, which is imported with them. */
-  ...(fs.existsSync(ELECTIVES) ? JSON.parse(fs.readFileSync(ELECTIVES, 'utf8')).tests : []).map((r) => ({
+  // a held course (src/data/elective-held.json) is skipped, so a stale row cannot bring it back
+  ...(fs.existsSync(ELECTIVES) ? JSON.parse(fs.readFileSync(ELECTIVES, 'utf8')).tests : []).filter((r) => !isHeld(r.code)).map((r) => ({
     slug: r.slug, page: r.page, course: r.course, kind: 'reading', requiredFrom: null, alternates: 'optional', private: true,
     title: r.title, room: r.room })),
 ];

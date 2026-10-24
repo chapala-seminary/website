@@ -173,7 +173,10 @@ What the tool does:
    italics are dropped and reported: first from English words the French
    cites (« dispositions » (*tempers*)), then the shortest emphasis (*ne* …
    *pas*). It stops if any other tags differ, or if any English passage of
-   the room would stay English on the French page.
+   the room would stay English on the French page. An elective room's store
+   shares French only with the core rooms and digests, never with another
+   elective's. So holding or removing one course cannot take French away
+   from another.
 4. It records the room in `src/lib/partials.ts` (`READING_ROOM`) and
    re-imports the course. A unit gets the course-readings box only once its
    room exists. Then it runs `private-units.mjs` and `gen-worker-catalog.mjs`.
@@ -187,6 +190,18 @@ pinned passage is gone because its text was revised. Every other pin stays
 as it is. The
 private bank's pins go to `assessment-keys/exam-review-references.json`. Then
 build again. Running the tool twice gives the same files.
+
+**Held courses.** `src/data/elective-held.json` lists electives held back
+from the site, by code, each with its reason. A-C1 is held for a copyright
+decision (24 Oct 2026). A held course keeps its units and nothing else:
+- both generators refuse its code;
+- `import-readings.mjs` skips its row;
+- `import-electives.mjs` gives its units no course-readings box;
+- `gen-worker-catalog.mjs` fails if it has a textbook, a reading test, a
+  room or a `READING_ROOM` entry.
+
+Its private keys may stay in assessment-keys. To lift a hold, remove the
+code, run both generators for it, and build.
 
 The front page lists elective reading tests apart from the 45 core ones
 (`#elective-readings`). Their test is optional on every track

@@ -196,20 +196,6 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
- "CTSELECPC1": [
-  {
-   "slug": "elecpcone",
-   "page": "CTSTextbookElecPCOne",
-   "kind": "textbook",
-   "requiredFrom": null
-  },
-  {
-   "slug": "elecpconereadings",
-   "page": "CTSElecPC1Readings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
  "CTSELECWES3": [
   {
    "slug": "elecwesthree",

@@ -70,7 +70,6 @@ export const READING_ROOM: Record<string, string> = {
   CTSST: "CTSSTReadings.html",
   CTSWR: "CTSWRReadings.html",
   CTSWorship: "CTSWorshipReadings.html",
-  CTSElecPC1: "CTSElecPC1Readings.html",
   CTSElecWes3: "CTSElecWes3Readings.html",
   CTSElecBap2: "CTSElecBap2Readings.html",
 };

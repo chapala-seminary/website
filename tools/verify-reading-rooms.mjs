@@ -41,9 +41,9 @@ async function open(file, seed = {}) {
 }
 
 // 1. the second family: World Religions (data-pick boxes), Counseling (plain boxes), Genesis (minified),
-//    and the first elective room (tools/build-elective-readings.mjs, on the Worship room's markup)
+//    and an elective room (tools/build-elective-readings.mjs, on the Worship room's markup)
 for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religions'], ['CTSCounselingReadings.html', 'Counseling', 'Counseling'], ['CTSGenesisReadings.html', 'Genesis', 'Genesis Intensive'],
-  ['CTSElecPC1Readings.html', 'ElecPC1', 'History and Development of Pentecostalism']]) {
+  ['CTSElecWes3Readings.html', 'ElecWes3', 'Holiness, Sanctification, and Christian Perfection']]) {
   const { ctx, p, errs } = await open(file);
   const key = file.replace(/\.html$/, '');
   const boxes = p.locator('main article input[type=checkbox]');

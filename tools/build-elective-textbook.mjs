@@ -46,6 +46,7 @@ import { resolveKeysRoot, privateReadingLeaks } from './grading-keys-lib.mjs';
 import { hash, frenchSpaces } from './french-readings-lib.mjs';
 import { questionStamps } from './french-readings.mjs';
 import { fitFrench } from './french-fit.mjs';
+import { refuseHeld } from './elective-held.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 process.chdir(ROOT);
@@ -54,6 +55,7 @@ const WRITE = argv.includes('--write');
 const opt = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
 const CODE = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content');
 if (!CODE || !/^[A-D]-C[1-5]$/.test(CODE)) { console.error('usage: node tools/build-elective-textbook.mjs <A-C1 … D-C5> [--write] [--content DIR]'); process.exit(2); }
+refuseHeld(CODE, 'textbook');
 const DIR = path.join(path.resolve(opt('--content') || process.env.ELECTIVE_CONTENT || path.join(ROOT, '..', 'elective-content')), CODE, 'textbook');
 const LANGS = ['en', 'es', 'fr'];
 const NUM = ['one', 'two', 'three', 'four', 'five'];
