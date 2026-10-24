@@ -1,8 +1,11 @@
-# CTS Multi-AI Watchdog — owner-built pilot v0.4
+# CTS Multi-AI Watchdog — owner-built pilot v0.5
 
 **Status:** Four offline test suites completed; source code and mock integration tests complete. The checks have not been run in a live Google Apps Script project. **Not deployed, not activated, not spending money.** Robert is *not* required during design, coding or offline testing. This pilot does not control consumer ChatGPT, Claude or DeepSeek web sessions: it can resume only API requests the watchdog itself creates.
 
 ## What is complete
+
+**v0.5 audit additions:** duplicate Job IDs fail closed; invalid Next Run UTC dates now move jobs to REVIEW_REQUIRED without a network request; forced model-output truncation cannot be counted as DONE merely because a completion tag appears. Added `tests/guardrails.test.cjs`. These safeguards are only mock-tested; no Apps Script deployment or live model call has occurred.
+
 
 - Two existing Google Sheets tabs `AI Jobs` and `AI Run Log` plus a `Multi-AI Pilot` coordination tab.
 - 13-unit student-facing English *Systematic Theology* review packet held privately in Drive as PDF and `.txt`. **The archived packet may differ from the production site**; verify proposed changes against live course material before deployment. The tests in this archive use **synthetic** course text, not real lessons, so public source code contains no curriculum copies.
@@ -61,6 +64,9 @@ The GitHub branch holds a **tested source-code prototype only**, not an installe
 ```bash
 node tests/watchdog.test.cjs
 node tests/transitions.test.cjs
+node tests/provider.test.cjs
+node tests/preflight.test.cjs
+node tests/guardrails.test.cjs
 node tests/provider.test.cjs
 node tests/preflight.test.cjs
 ```
