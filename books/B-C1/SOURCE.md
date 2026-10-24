@@ -7,11 +7,11 @@
 **Original scan/catalog:** https://archive.org/details/ahistorybaptist00armigoog ; https://openlibrary.org/books/OL23378233M/A_history_of_the_Baptists ; https://upload.wikimedia.org/wikipedia/commons/4/4e/A_history_of_the_Baptists_-_traced_by_their_vital_principles_and_practices_-_from_the_time_of_Our_Lord_and_Saviour_Jesus_Christ_to_the_year_1886_%28IA_cu31924029451782%29.pdf
 
 **Five staged nonoverlapping OCR readings (source order):**
-1. **Visible Succession and Baptist Historical Method** — `reading-1.md`, 1 OCR words. 
-2. **The Reformation, Peasants' War, and Münster** — `reading-2.md`, 1 OCR words. 
-3. **John Bunyan and English Baptist Experience** — `reading-3.md`, 2 OCR words. This reading spans more than one Bunyan chapter because OCR has inconsistent intervening headings; the boundary is immediately before the 'Bunyan's Relations to the Baptists' section.
-4. **The Settlement of Rhode Island and Liberty of Conscience** — `reading-4.md`, 1 OCR words. 
-5. **American Baptists and Constitutional Liberty** — `reading-5.md`, 1 OCR words. 
+1. **Visible Succession and Baptist Historical Method** — `reading-1.md`, 6,595 OCR words. 
+2. **The Reformation, Peasants' War, and Münster** — `reading-2.md`, 4,478 OCR words. 
+3. **John Bunyan and English Baptist Experience** — `reading-3.md`, 13,144 OCR words. This reading spans more than one Bunyan chapter because OCR has inconsistent intervening headings; the boundary is immediately before the 'Bunyan's Relations to the Baptists' section.
+4. **The Settlement of Rhode Island and Liberty of Conscience** — `reading-4.md`, 9,697 OCR words. 
+5. **American Baptists and Constitutional Liberty** — `reading-5.md`, 9,310 OCR words. 
 
 **Textbook:** `textbook.md` is a **selected primary-source reader** containing the five passages above, NOT the full Armitage book. Claude must not describe it as complete. The reading files duplicate those same selections by design, not five additional books. If the curriculum requires a complete standalone textbook, the full 1887 original is linked above; full-text conversion and scan collation are pending.
 
