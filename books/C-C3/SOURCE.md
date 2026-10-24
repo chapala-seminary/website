@@ -60,3 +60,14 @@ Status: source selection, preliminary rights screen, and raw public-domain text 
 - `textbook.md` — 33,777-word source text.
 - `reading-1.md` through `reading-5.md` — five non-overlapping substantive reading selections.
 - All six text files state that scan comparison remains pending.
+
+## Further-study shelf (public-domain leads; verified 2026-10-24)
+
+These works are optional background, not substitutes for the assigned textbook/readings. The linked host pages resolved on 2026-10-24. All listed authors died more than 100 years ago; the cited historical editions are pre-1931. This is a preliminary U.S./Mexico rights screen, not legal approval. Recheck any downloaded edition for modern introductions, annotations, translations, or editorial additions before reuse.
+
+1. **John Wesley, _Sermons on Several Occasions_ (first four volumes published by 1771).** Read Sermons 1, 5, 13, 14, 40, 43, and 85. Why: these sermons supply Wesley's broader account of salvation, justification, sanctification, new birth, and working out salvation. Source: https://www.ccel.org/ccel/wesley/sermons.html
+2. **John Wesley, _Journal_ (entries spanning 1735–1790).** Read the 1738 Aldersgate entries, the beginnings of field preaching in 1739, and selected later reflections on Methodist discipline. Why: the journal places Wesley's doctrinal language within his evangelistic and pastoral practice. Source: https://www.ccel.org/ccel/wesley/journal.html
+3. **John Fletcher, _Checks to Antinomianism_, vol. 1 (1829 ed.; original controversy 1771 onward).** Read the first and second checks, noting Fletcher's use of grace, works, and assurance. Why: Fletcher is a key early interpreter and defender of Wesleyan soteriology, while also revealing its polemical setting. Source: https://archive.org/details/checkstoantinomi01fletuoft
+4. **Richard Watson, _Theological Institutes_, vol. 1 (1825 ed.).** Read the sections on revelation, the authority of Scripture, and the attributes of God before consulting later volumes on salvation. Why: Watson offers an early systematic Methodist framework against which Wesley's occasional writings can be read. Source: https://archive.org/details/theologicalinst01wats
+5. **Phoebe Palmer, _The Way of Holiness_ (1845 ed.).** Read the narrative portions explaining consecration, faith, testimony, and the “shorter way.” Why: Palmer documents the nineteenth-century holiness movement's development of Wesleyan sanctification in devotional practice. Source: https://archive.org/details/wayofholinesswit01palm
+6. **Adam Clarke, _Christian Theology: Selected from His Writings_ (1856 ed.).** Read the chapters on redemption, regeneration, sanctification, and Christian obedience. Why: Clarke provides an early Methodist exegetical-theological bridge between Wesley and later holiness teaching. Source: https://archive.org/details/christiantheolog00clar_0
