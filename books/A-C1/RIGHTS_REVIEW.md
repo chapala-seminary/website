@@ -4,7 +4,7 @@
 
 ## Update — Wayne Option 2 and revised readings (24 October 2026)
 
-Wayne authorized omission of all signed/individual first-person material by authors not known to have died before 1926, while allowing Seymour (d. 1922) and unsigned periodical editorials. The raw `textbook.md` has **not** been purged and remains on hold; Claude's filtered version is separate. `reading-1.md` is now a 1,696-word unsigned No. 2 editorial-and-news selection, with the anonymous first-person police quotation and the Bro. Hill personal testimony excluded. `reading-4.md` now omits the interpreted Bro. Post passage at `[…]`. Source scan comparison and individual attribution checks remain pending; neither change authorizes publication. The former 376-word `reading-1.md` described below is superseded.
+Wayne authorized omission of all signed/individual first-person material by authors not known to have died before 1926, while allowing Seymour (d. 1922) and unsigned periodical editorials. The raw `textbook.md` has **not** been purged and remains on hold; Claude's filtered version is separate. `reading-1.md` is now a 1,670-word unsigned No. 2 editorial-and-news selection, with Parham's first-person prayer, the anonymous first-person police quotation, and the Bro. Hill personal testimony excluded. `reading-4.md` now omits the interpreted Bro. Post passage at `[…]`. Source scan comparison and individual attribution checks remain pending; neither change authorizes publication. The former 376-word `reading-1.md` described below is superseded.
 
 ## Verified issue in the current handoff
 
