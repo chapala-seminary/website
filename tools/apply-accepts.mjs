@@ -19,6 +19,8 @@
  *                             (private assessment-keys; public textbook JSON
  *                             no longer holds answer/accept)
  *   rd:<slug>/fill/<i>        <content>/readings/<slug>.json          test.questions[i]
+ *                             (a private reading bank, keys: "private":
+ *                             <keys>/readings/<slug>.json)
  *
  * IDEMPOTENT. An answer the item already accepts, or that is its answer, once
  * both are compared the way the grader compares them (same text rules as
@@ -67,8 +69,15 @@ function locate(qid) {
     if (!KEYS) return null;
     return { file: path.join(KEYS, 'textbooks', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
   }
-  if ((m = /^rd:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid)))
-    return { file: path.join(CONTENT, 'readings', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
+  if ((m = /^rd:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid))) {
+    const pub = path.join(CONTENT, 'readings', `${m[1]}.json`);
+    // a private reading bank keeps its answers and accepts in assessment-keys
+    if (fs.existsSync(pub) && JSON.parse(fs.readFileSync(pub, 'utf8')).keys === 'private') {
+      if (!KEYS) return null;
+      return { file: path.join(KEYS, 'readings', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
+    }
+    return { file: pub, items: (o) => o.test?.questions, i: +m[2] };
+  }
   return null;
 }
 

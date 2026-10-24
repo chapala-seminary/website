@@ -51,6 +51,9 @@ mkdir -p "$STATE"
 # served by test/shadow-server.mjs beside the Worker), where that engine still
 # is. SKIP_SHADOW_BUILD=1 reuses an existing dist-shadow/.
 node tools/verify-no-keys.mjs dist
+# Private reading banks (docs/reading-rooms.md): a throwaway bank in temporary
+# folders, then the built test pages of any private bank installed.
+node test/private-readings.test.mjs dist
 if [ -z "${SKIP_SHADOW_BUILD:-}" ] || [ ! -d dist-shadow ]; then
   # the shadow build rewrites .astro/language-base, which the prose and render
   # checks read as the live build's: put it back

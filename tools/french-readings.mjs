@@ -34,7 +34,7 @@ import {
 } from './french-readings-lib.mjs';
 import { translationPlan } from './translation-plan.mjs';
 import { readerEditorialNotice } from './editorial-notices.mjs';
-import { resolveKeysRoot, textbookQuestions } from './grading-keys-lib.mjs';
+import { resolveKeysRoot, textbookQuestions, readingQuestions, isPrivateReading, PRIVATE_READING_FIELDS } from './grading-keys-lib.mjs';
 
 const BLANK = '____';
 const PROTECTED = new Set(['human', 'machine-edited']);
@@ -83,6 +83,22 @@ function writeTextbookKeys(slug, questions) {
     },
   });
   return file;
+}
+/* A reading test with its keys: a private bank (keys: "private") joined with
+   assessment-keys/readings/<slug>.json, where its answer, accept and French
+   stamps (tr, which hash the answer) live; a public one as it is. */
+function loadReading(file) {
+  const pub = json(file);
+  return { ...pub, test: { ...pub.test, questions: readingQuestions('.', pub).questions } };
+}
+/* ...and written back: the keys and stamps to the private file, the prompts
+   (with their French) to the public one -- as tools/import-readings.mjs does. */
+function writePrivateReading(file, rec) {
+  const keysRoot = resolveKeysRoot('.');
+  if (!keysRoot) throw new Error(`${rec.slug}: cannot write French reading answers without assessment-keys`);
+  const keep = ['prompt', 'answer', 'accept', 'reading', 'group', 'tr'];
+  writeJson(path.join(keysRoot, 'readings', `${rec.slug}.json`), { slug: rec.slug, test: { questions: rec.test.questions.map((q) => Object.fromEntries(keep.filter((k) => q[k] !== undefined).map((k) => [k, q[k]]))) } });
+  writeJson(file, { ...rec, test: { ...rec.test, questions: rec.test.questions.map((q) => Object.fromEntries(Object.entries(q).filter(([k]) => !PRIVATE_READING_FIELDS.includes(k)))) } });
 }
 const fold = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
@@ -192,7 +208,7 @@ export function exportItem(item) {
     });
     segments.push(...questionSegments(b.test.questions, 'textbook test'));
   } else if (item.type === 'reading') {
-    segments.push(...questionSegments(json(item.file).test.questions, 'required-reading test'));
+    segments.push(...questionSegments(loadReading(item.file).test.questions, 'required-reading test'));
   } else if (item.type === 'digest' || item.type === 'room') {
     const html = fs.readFileSync(item.file, 'utf8');
     const skip = item.type === 'room' ? digestKeys() : new Set();
@@ -349,7 +365,7 @@ export function applyPacket(file) {
   const report = [];
   let written;
   if (item.type === 'textbook' || item.type === 'reading') {
-    const rec = item.type === 'textbook' ? loadTextbook(item.file) : json(item.file);
+    const rec = item.type === 'textbook' ? loadTextbook(item.file) : loadReading(item.file);
     if (item.type === 'textbook') {
       for (const f of ['subtitle', 'credits']) if (fr.has(f)) {
         if (PROTECTED.has(rec.tr?.[f]?.fr?.status)) { report.push(`${f}: ${rec.tr[f].fr.status} French kept`); continue; }
@@ -378,6 +394,8 @@ export function applyPacket(file) {
     if (item.type === 'textbook') {
       writeTextbookKeys(rec.slug, rec.test.questions);
       writeJson(item.file, { ...rec, test: { ...rec.test, questions: publicTextbookQuestions(rec.test.questions) } });
+    } else if (isPrivateReading(rec)) {
+      writePrivateReading(item.file, rec);
     } else {
       writeJson(item.file, rec);
     }
@@ -397,7 +415,7 @@ export function status() {
     let done = 0, stale = 0;
     const total = packet.segments.length;
     if (item.type === 'textbook' || item.type === 'reading') {
-      const rec = item.type === 'textbook' ? loadTextbook(item.file) : json(item.file);
+      const rec = item.type === 'textbook' ? loadTextbook(item.file) : loadReading(item.file);
       const stamps = questionStamps(rec.test.questions);
       for (const f of ['subtitle', 'credits', 'body']) if (rec[f]?.fr != null) { if (rec.tr?.[f]?.fr?.from !== hash(rec[f].en)) stale++; }
       const segs = (f) => packet.segments.filter((s) => f === 'body' ? s.id.startsWith('body.') : s.id === f).length;

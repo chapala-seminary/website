@@ -25,7 +25,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { textbookQuestions } from './grading-keys-lib.mjs';
+import { textbookQuestions, readingQuestions } from './grading-keys-lib.mjs';
 
 const DIST = process.argv[2] || 'dist';
 const fails = [];
@@ -127,8 +127,11 @@ for (const b of books) {
 /* The required-reading tests (src/content/readings; Dr. Cook's Add-ons, 4 Oct
    2026): the same checks as a textbook's, on the readings' page instead of a
    book -- and the page the student reads must stand apart from the test. */
+/* A private reading bank (keys: "private") is checked with its keys from the
+   assessment-keys checkout; a public one as it is (readingQuestions). */
 const readings = fs.existsSync('src/content/readings') ? fs.readdirSync('src/content/readings').filter((f) => f.endsWith('.json'))
-  .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8'))) : [];
+  .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8')))
+  .map((r) => (r.test ? { ...r, test: { ...r.test, questions: readingQuestions('.', r).questions } } : r)) : [];
 // Genesis Intensive and World Religions (4 Oct 2026), and the Master's
 // five-reading pilot on Pentecostalism (9 Oct 2026); more join it course by course.
 for (const want of ['genesisreadings', 'wrreadings', 'pentecostalreadings'])

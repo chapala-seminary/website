@@ -21,7 +21,7 @@ import vm from 'node:vm';
 import { parse } from 'node-html-parser';
 import { bodyLeaves, translatable, tagProblem, loadStore, DIGEST, roomKey, chromeRoomKeys } from '../tools/french-readings-lib.mjs';
 import { status } from '../tools/french-readings.mjs';
-import { textbookQuestions } from '../tools/grading-keys-lib.mjs';
+import { textbookQuestions, readingQuestions } from '../tools/grading-keys-lib.mjs';
 
 const BASE = process.argv[2];
 let checks = 0;
@@ -38,7 +38,8 @@ const books = records('src/content/textbooks').map((b) => {
   }));
   return { ...b, test: { ...b.test, questions } };
 });
-const readings = records('src/content/readings');
+// a private reading bank (keys: "private") is checked with its keys from assessment-keys
+const readings = records('src/content/readings').map((r) => ({ ...r, test: { ...r.test, questions: readingQuestions('.', r).questions } }));
 const french = [...books, ...readings].filter((r) => r.body?.fr || r.test.questions.some((q) => q.prompt.fr));
 
 if (!BASE) {

@@ -7,14 +7,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { parse } from 'node-html-parser';
-import { overlayQuestions, resolveKeysRoot } from './grading-keys-lib.mjs';
+import { overlayQuestions, resolveKeysRoot, readingQuestions, isPrivateReading } from './grading-keys-lib.mjs';
 
 export const languages = ['en', 'es', 'fr'];
 const fold = s => String(s).normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 const stop = new Set(('the a an of in on to and or for with is are was were be that this these those it its as by from not at which what who how his her their he she they we you our your according reading chapter excerpt author describes calls says called question blank la el los las un una uno unos unas de del al en y o que es son fue se su sus por para con como esta este estas estos dans le les des du de un une et au aux est sont sur pour par qui que ce cette ces il elle ses son sa').split(' '));
 const tokens = s => [...new Set(fold(s).split(' ').filter(w => w.length > 2 && !stop.has(w)))];
 const text = n => n.text.replace(/\s+/g, ' ').trim();
-/* Textbook answers live in assessment-keys; readings still hold them publicly. */
+/* Textbook answers live in assessment-keys; the 45 older reading tests hold
+   theirs publicly, and a private reading bank (keys: "private") in
+   assessment-keys/readings, joined by readingQuestions. */
 const records = () => {
   const keysRoot = resolveKeysRoot('.');
   return ['textbooks', 'readings'].flatMap((kind) => fs.readdirSync(`src/content/${kind}`).filter((f) => f.endsWith('.json')).sort().map((f) => {
@@ -24,9 +26,15 @@ const records = () => {
       if (!overlay) throw new Error(`exam-review: textbook ${rec.slug} needs assessment-keys (public files have no answer/accept)`);
       rec.test = { ...rec.test, questions: overlay };
     }
+    if (kind === 'readings' && rec.test?.questions) rec.test = { ...rec.test, questions: readingQuestions('.', rec).questions };
     return rec;
   }));
 };
+/* A pinned reference fingerprints the prompt WITH its answer, so a private
+   bank's references are kept in the private checkout
+   (assessment-keys/exam-review-references.json), never in the
+   public REFERENCE_FILE. */
+const privateReferenceFile = () => { const k = resolveKeysRoot('.'); return k ? path.join(k, 'exam-review-references.json') : null; };
 const prefix = lang => lang === 'en' ? '/' : `/${lang}/`;
 
 // The mode the pages are built in (src/lib/grading-mode.ts): live unless told otherwise.
@@ -56,7 +64,12 @@ function focusedPassage(paragraph, prompt, answers, lang) {
   return best?.passage || paragraph;
 }
 export function makeReview(dist, { write = true, refresh = false } = {}) {
-  const references = refresh ? {} : JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8'));
+  const all = records();
+  const privateSlugs = new Set(all.filter(isPrivateReading).map((r) => r.slug));
+  const privateFile = privateSlugs.size ? privateReferenceFile() : null;
+  if (privateSlugs.size && !privateFile) throw new Error(`exam-review: ${[...privateSlugs].join(', ')} keep their review references in assessment-keys, which is not checked out`);
+  const references = refresh ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')),
+    ...(privateFile && fs.existsSync(privateFile) ? JSON.parse(fs.readFileSync(privateFile,'utf8')) : {}) };
   const cache = new Map(), candidateCache = new Map(), report = [], misses = [];
   function load(file) {
     if (cache.has(file)) return cache.get(file);
@@ -154,7 +167,7 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
     for (const file of extra) list.push(...candidates(file, lang, null));
     return [...new Map(list.map(p => [p.href,p])).values()];
   }
-  for (const record of records()) for (const lang of languages) {
+  for (const record of all) for (const lang of languages) {
     const poolCache = new Map(), reviews = [];
     for (const [i,q] of record.test.questions.entries()) {
       const group = q.reading || q.group || q.chapter || null;
@@ -239,7 +252,12 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
     }
   }
   if (write) for (const p of cache.values()) if(p.changed) fs.writeFileSync(path.join(dist,p.file),p.root.toString());
-  if(refresh) fs.writeFileSync(REFERENCE_FILE,JSON.stringify(references,null,1)+'\n');
+  if(refresh) {
+    const isPrivate = (key) => privateSlugs.has(key.split('/')[0]);
+    const pick = (keep) => Object.fromEntries(Object.entries(references).filter(([key]) => keep(key)));
+    fs.writeFileSync(REFERENCE_FILE,JSON.stringify(pick((key) => !isPrivate(key)),null,1)+'\n');
+    if (privateFile) { fs.mkdirSync(path.dirname(privateFile),{recursive:true}); fs.writeFileSync(privateFile,JSON.stringify(pick(isPrivate),null,1)+'\n'); }
+  }
   return {report,misses};
 }
 export default function examReviewIntegration() {

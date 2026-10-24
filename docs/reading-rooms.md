@@ -88,6 +88,49 @@ questions. Their typed answers belong to the old questions, so they are not
 carried over. Passes already recorded, in the browser and on the server,
 stand.
 
+## Private reading tests (electives, Oct 2026)
+
+A new reading test can keep its answers out of this repository, the way the
+textbook tests do. The 45 reading tests made before Oct 2026 keep their
+answers public; nothing about them changes.
+
+| Path | What |
+|---|---|
+| `tools/import-readings.mjs` | The test's row says `private: true`. |
+| `assessment-keys/readings-src/<slug>.bank.json`, `.accept.json` | The bank and its accepted alternates, in the same format as `src/data/readings/`. They are in the private checkout, never in this repo. |
+| `src/content/readings/<slug>.json` | Written by `--write`. It has the prompts, reading numbers, titles, draw and pass, and `keys: "private"`. It has no `answer`, `accept` or `tr`, because the French stamps (`tr`) hash the answer. |
+| `assessment-keys/readings/<slug>.json` | Written by `--write`: `{ slug, test: { questions: [{ prompt, answer, accept, reading, tr }] } }`, in the public order. Grading sync, the shadow page and every checking tool join it to the public file (`readingQuestions` in `tools/grading-keys-lib.mjs`). |
+| `assessment-keys/exam-review-references.json` | The pinned review passages of private banks. Each one fingerprints the prompt with its answer, so they are not kept in `src/data/exam-review-references.json`. |
+
+The private checkout is `ASSESSMENT_KEYS`, or `../assessment-keys` beside this
+repo. Without it the importer, the build and grading sync stop rather than go
+on with an answerless bank. The content schema, `tools/verify-no-keys.mjs` and
+`test/private-readings.test.mjs` fail if the public file of a private bank
+carries an answer, an accepted answer or a stamp.
+
+To add one:
+
+1. Put the bank and accept files in `assessment-keys/readings-src/`.
+2. Add the row (`private: true`, `requiredFrom: null`) and run
+   `node tools/import-readings.mjs --write`.
+3. Run `node tools/gen-worker-catalog.mjs`, then build. The build stops at
+   "Review reference needs editorial refresh" until
+   `node tools/exam-review.mjs dist --refresh` pins the new bank's passages.
+   That command re-pins every bank, so review the diff of the public file.
+4. Commit the website files. Commit the keys in the assessment-keys repo.
+
+Faculty-approved alternates go in the `.accept.json` in `readings-src/`, so
+that the next import keeps them. `tools/french-readings.mjs apply` writes a
+private bank's French answers and stamps to the private file, and its French
+prompts to the public one.
+
+The slug must be letters only and end in `readings`: the browser's records
+(`cts-sync.js`) accept no digits. An elective's slug starts with `elec`
+(e.g. `elecbaponereadings`). `worker/test-activation.js`
+(`ELECTIVE_TESTS_PENDING`) keeps every `elec…` test optional: the production
+activation date never makes one required. Making one required takes its own
+`requiredFrom` date.
+
 ## Known limits
 
 - The shelf links straight to a public-domain copy wherever a stable, legal

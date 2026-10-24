@@ -44,6 +44,8 @@ function writeKind(kind) {
   for (const file of fs.readdirSync(src).filter((f) => f.endsWith('.json')).sort()) {
     const b = JSON.parse(fs.readFileSync(path.join(src, file), 'utf8'));
     if (!b.test?.questions) continue;
+    // a private reading bank is authored in the checkout; its public file has no answers to export
+    if (kind === 'readings' && b.keys === 'private') { console.log(`${file}: private reading bank; its keys stay as they are in the checkout`); continue; }
     if (kind === 'textbooks' && b.test.questions.some((q) => !q?.answer?.en)) {
       console.error(`${file}: public textbook banks no longer hold answers; refusing to export an answerless bank over the private checkout`);
       process.exit(2);
