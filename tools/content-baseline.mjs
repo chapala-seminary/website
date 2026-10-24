@@ -49,7 +49,21 @@ function norm(v) {
 const digest = (...parts) =>
   crypto.createHash('sha256').update(parts.map(norm).join('\u0001')).digest('hex').slice(0, 16);
 
-function unitFingerprint(U) {
+/* Courses whose unit keys are private (tools/private-units.mjs): their
+   fingerprint must not record answers, because this baseline is committed
+   to the public repository. Only the public question text is fingerprinted. */
+const PRIVATE_KEYS = new Set(fs.existsSync(path.join(ROOT, 'src', 'content', 'units-public'))
+  ? fs.readdirSync(path.join(ROOT, 'src', 'content', 'units-public')) : []);
+
+function unitFingerprint(U, course) {
+  if (PRIVATE_KEYS.has(course)) {
+    return {
+      private: true,
+      mc: U.mc.map(q => ({ h: digest(q.stem.en, ...(q.options.en || [])), hEs: digest(q.stem.es, ...(q.options.es || [])) })),
+      sa: U.sa.map(q => ({ h: digest(q.prompt.en) })),
+      fill: (U.fill || []).map(q => ({ h: digest(q.prompt.en), hEs: digest(q.prompt.es) })),
+    };
+  }
   return {
     mc: U.mc.map(q => ({
       a: q.answer,
@@ -123,7 +137,7 @@ function loadAll() {
       if (!fs.statSync(dir).isDirectory()) continue;
       for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.json'))) {
         const U = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
-        out[`${course}/${U.unit}`] = unitFingerprint(U);
+        out[`${course}/${U.unit}`] = unitFingerprint(U, course);
       }
     }
     return out;
