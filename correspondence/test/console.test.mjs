@@ -101,6 +101,8 @@ test('automatic replies page: only the owner turns them on or approves a text; a
   assert.match(body, /not yet approved by Dr\. Cook/);
   const setting = async (k) => (await e.DB.prepare('SELECT value FROM settings WHERE key = ?').bind(k).first()).value;
   assert.equal((await handle(req('/console/auto', 'rev@example.org', form({ mode: 'live' })), e)).status, 403);
+  assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ mode: 'live' })), e)).status, 409, 'M0/M1 cannot activate sending without the separate M2 release gate');
+  assert.equal(await setting('auto_send'), 'off');
   assert.equal((await handle(req('/console/auto', 'rev@example.org', form({ approve: 'lost_code', version: templateVersion('lost_code') })), e)).status, 403);
   assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ mode: 'shadow' })), e)).status, 303);
   assert.equal(await setting('auto_send'), 'shadow');
