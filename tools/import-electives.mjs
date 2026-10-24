@@ -80,7 +80,7 @@ const unesc = (s) => s.replace(/\\([\\`*_{}\[\]()#+\-.!|=<>~"'&$%^])/g, '$1');
 function inline(s) {
   let t = unesc(s.trim());
   t = t.replace(/&(?![a-zA-Z]+;|#\d+;)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>');
+  t = t.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*\w])\*(?!\s)(.+?)\*(?!\w)/g, '$1<em>$2</em>');
   return t.replace(/\s+/g, ' ');
 }
 const lines = (md) => md.replace(/\r/g, '').split('\n').map((l) => l.replace(/\s+$/, ''));
