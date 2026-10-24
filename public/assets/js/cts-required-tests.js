@@ -182,6 +182,48 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSELECBAP2": [
+  {
+   "slug": "elecbaptwo",
+   "page": "CTSTextbookElecBapTwo",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbaptworeadings",
+   "page": "CTSElecBap2Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC1": [
+  {
+   "slug": "elecpcone",
+   "page": "CTSTextbookElecPCOne",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpconereadings",
+   "page": "CTSElecPC1Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES3": [
+  {
+   "slug": "elecwesthree",
+   "page": "CTSTextbookElecWesThree",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwesthreereadings",
+   "page": "CTSElecWes3Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSEVANGELISM": [
   {
    "slug": "evangelismtorrey",
@@ -620,14 +662,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "worshipreadings",
    "page": "CTSWorshipReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSELECPC1": [
-  {
-   "slug": "elecpconereadings",
-   "page": "CTSElecPC1Readings",
    "kind": "reading",
    "requiredFrom": null
   }
