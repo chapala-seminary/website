@@ -22,13 +22,13 @@
 
 | Reading | Sections | Topic | Words including reading header |
 |---|---:|---|---:|
-| `reading-1.md` | 1–3 | Christ’s headship, the church, and its officers | 373 |
-| `reading-2.md` | 4–6 | Pastors, teachers, elders, and deacons | 729 |
-| `reading-3.md` | 7–10 | Congregations and ecclesiastical assemblies | 517 |
-| `reading-4.md` | 11–15 | Classical and synodical assemblies | 1,050 |
-| `reading-5.md` | 16–19 | Ordination and installation of ministers | 2,765 |
+| `reading-1.md` | 1–6 | The church and its ordinary officers | 1,079 |
+| `reading-2.md` | 7–13 | Congregations, assemblies, and classical government | 1,419 |
+| `reading-3.md` | 14–18 | Synods and the doctrine and power of ordination | 808 |
+| `reading-4.md` | 19, intro–ordinary rule 4 | Examination and calling of ministers | 834 |
+| `reading-5.md` | 19, ordinary rules 5–13 plus extraordinary rules 1–4 | Act, records, and extraordinary circumstances of ordination | 1,326 |
 
-The readings cover all 19 staged sections exactly once, in order, with no overlap.
+The readings cover all 19 staged sections exactly once, in order, with no overlap. Section 19 is split at the start of ordinary rule 5 to keep all five readings substantial.
 
 ## Rights and reuse screen
 
