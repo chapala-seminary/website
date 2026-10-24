@@ -41,3 +41,14 @@ John Leadley Dagg (1794–1884), *Manual of Theology: A Treatise on Christian Do
 - `reading-5.md`: 4734 words, Justification and Adoption.
 - All text is EN transcription; no ES/FR historical edition or translation cleared here.
 - **Pending:** scan collation, textual corrections, academic review, translation and assessment bank generation by Claude. This package must not be treated as a completed CTS course.
+
+## Further-study shelf (public-domain leads; verified 2026-10-24)
+
+These works are optional background, not substitutes for the assigned textbook/readings. The linked host pages resolved on 2026-10-24. All listed authors died more than 100 years ago; the cited historical editions are pre-1931. This is a preliminary U.S./Mexico rights screen, not legal approval. Recheck any downloaded edition for modern introductions, annotations, translations, or editorial additions before reuse.
+
+1. **James P. Boyce, _Abstract of Systematic Theology_ (1887).** Read the opening chapters on theological method and Scripture, then the sections on salvation. Why: a later nineteenth-century Baptist system gives a direct point of comparison with Dagg's organization and emphases. Source: https://www.ccel.org/ccel/boyce/theology.html
+2. **John Gill, _A Body of Doctrinal Divinity_ (1767–1770).** Read Book I on God and Book VI on salvation. Why: this earlier Particular Baptist synthesis helps students trace the Reformed Baptist tradition that precedes Dagg. Source: https://www.ccel.org/ccel/gill/doctrinal.html
+3. **A. H. Strong, _Systematic Theology: The Doctrine of Man_, vol. 2 (1907).** Read the sections on human nature, sin, Christ's work, and salvation. Why: Strong shows how a later Baptist theologian develops themes central to Dagg's Books IV and VI. Source: https://www.ccel.org/ccel/strong/theology2.html
+4. **Andrew Fuller, _The Gospel Worthy of All Acceptation_ (1805 ed.; work first issued 1785).** Read Part I and the concluding practical applications. Why: Fuller's argument on faith, responsibility, and gospel invitation illuminates a major Baptist debate behind nineteenth-century missions and soteriology. Source: https://archive.org/details/gospelworthyall00fullgoog
+5. **John Bunyan, _Grace Abounding to the Chief of Sinners_ (1666).** Read the autobiographical account through Bunyan's call to preach. Why: this experiential Baptist narrative complements formal doctrine with lived accounts of conviction, grace, assurance, and ministry. Source: https://www.gutenberg.org/ebooks/654
+6. **Edward T. Hiscox, _The New Directory for Baptist Churches_ (1894; scan of 1902 ed.).** Read the sections on church constitution, officers, ordinances, discipline, and interchurch relations. Why: it extends Dagg's doctrinal theology into historically influential Baptist polity and congregational practice. Source: https://archive.org/details/newdirectoryforb00hiscrich
