@@ -24,6 +24,10 @@
 
 **Total source corpus:** 138,451 whitespace tokens. Each file was re-fetched from `handoff/book-sources` and compared exactly with the extracted reproduction-PDF text. Files are `azusa-issue-NN-source.txt` in `books/A-C3/`. These are **not** final student readings.
 
+## Provisional article-location index (25 October 2026; NOT readings)
+
+A [five-candidate heading/offset index](./FIVE-CANDIDATE-SOURCE-INDEX-2026-10-25.md) now maps actual staged issues 3–7 to five course themes, records tentative signature evidence and separate contributor/rights holds. **It does not supply five final readings or clear any text for reproduction.** Original issue facsimiles, article/page boundaries, authorship, Mexico rights and academic approval remain open.
+
 ## Five proposed reading themes — NOT YET EXTRACTED
 
 1. Early teaching on baptism with the Holy Spirit.
