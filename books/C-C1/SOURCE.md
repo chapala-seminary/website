@@ -1,4 +1,6 @@
 # C-C1 — John Wesley and the History of Methodism
+> **25 October 2026 editorial update:** Five **provisional, uncollated OCR reading groups** are now staged; this does NOT supersede the full textbook/translation/rights/assessment release gates below. Read the [exact source-boundary ledger](PROVISIONAL-READING-LEDGER-2026-10-25.md) before using the old five-reading plan. R2 currently contains two noncontiguous windows with a 17-month omitted interval, and R3 includes an OCR-corrupt date. No student-facing material or private banks are ready.
+
 
 ## Handoff status
 
