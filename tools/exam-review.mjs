@@ -73,8 +73,11 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
      only questions with no pin, whose prompt or answer changed, or whose
      pinned passage is no longer on its page, and keeps every other pin
      exactly as it is -- for a new or revised bank. */
-  const references = refresh === true ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')),
-    ...(privateFile && fs.existsSync(privateFile) ? JSON.parse(fs.readFileSync(privateFile,'utf8')) : {}) };
+  const privateStored = privateFile && fs.existsSync(privateFile) ? JSON.parse(fs.readFileSync(privateFile,'utf8')) : {};
+  /* A bank whose pins are already private stays private, even while its course
+     is held off the site (src/data/elective-held.json) and has no public record. */
+  const privateStoredSlugs = new Set(Object.keys(privateStored).map((key) => key.split('/')[0]));
+  const references = refresh === true ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')), ...privateStored };
   const cache = new Map(), candidateCache = new Map(), report = [], misses = [], repinned = [];
   function load(file) {
     if (cache.has(file)) return cache.get(file);
@@ -261,7 +264,7 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
   }
   if (write) for (const p of cache.values()) if(p.changed) fs.writeFileSync(path.join(dist,p.file),p.root.toString());
   if(refresh) {
-    const isPrivate = (key) => privateSlugs.has(key.split('/')[0]);
+    const isPrivate = (key) => privateSlugs.has(key.split('/')[0]) || privateStoredSlugs.has(key.split('/')[0]);
     const pick = (keep) => Object.fromEntries(Object.entries(references).filter(([key]) => keep(key)));
     fs.writeFileSync(REFERENCE_FILE,JSON.stringify(pick((key) => !isPrivate(key)),null,1)+'\n');
     if (privateFile) { fs.mkdirSync(path.dirname(privateFile),{recursive:true}); fs.writeFileSync(privateFile,JSON.stringify(pick(isPrivate),null,1)+'\n'); }

@@ -38,6 +38,28 @@ export function fitFrench(en, fr) {
       fr = fr.slice(0, short.index) + short[1] + fr.slice(short.index + short[0].length);
       dropped.push(`emphasis on "${short[1]}" (the French stresses more words than the English)`);
     }
+    // 3. French word order often joins two phrases the English italicizes
+    //    apart. Split the longest French span at the space nearest its middle:
+    //    <em>a b</em> becomes <em>a</em> <em>b</em>, which looks the same on the page.
+    while (count(fr) < count(en)) {
+      const all = [...fr.matchAll(new RegExp(`<${tag}>([^<]+)</${tag}>`, 'g'))].filter((m) => /\S\s+\S/.test(m[1]));
+      if (!all.length) break;
+      const long = all.reduce((a, b) => (b[1].length > a[1].length ? b : a));
+      const inner = long[1], mid = inner.length / 2;
+      const spaces = [...inner.matchAll(/\s+/g)].filter((s) => s.index > 0 && s.index + s[0].length < inner.length);
+      const at = spaces.reduce((a, b) => (Math.abs(b.index - mid) < Math.abs(a.index - mid) ? b : a));
+      const split = `<${tag}>${inner.slice(0, at.index)}</${tag}>${at[0]}<${tag}>${inner.slice(at.index + at[0].length)}</${tag}>`;
+      fr = fr.slice(0, long.index) + split + fr.slice(long.index + long[0].length);
+      dropped.push(`<${tag}>${inner.length > 60 ? inner.slice(0, 60) + '…' : inner}</${tag}> split in two at a space (the English italicizes two phrases; the page looks the same)`);
+    }
+    // 4. Still more French italics: drop those inside a parenthetical aside
+    //    the translator added, e.g. (ou : par <em>la rémission des</em>).
+    while (count(fr) > count(en)) {
+      const m = fr.match(new RegExp(`\\(([^()<]*)<${tag}>([^<]+)</${tag}>([^()<]*)\\)`));
+      if (!m || plainEn.includes(m[2].toLowerCase().trim())) break;
+      fr = fr.slice(0, m.index) + `(${m[1]}${m[2]}${m[3]})` + fr.slice(m.index + m[0].length);
+      dropped.push(`<${tag}>${m[2]}</${tag}> (in a parenthetical aside the French adds)`);
+    }
   }
   return { fr, dropped, problem: tagProblem(en, fr) };
 }

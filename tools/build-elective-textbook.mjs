@@ -95,6 +95,9 @@ for (const c of chapters || []) {
   if (c.note && LANGS.some((l) => typeof c.note[l] !== 'string' || !c.note[l].trim())) fail(`chapter ${c.n}: the note is not in all three languages`);
   const n = LANGS.map((l) => c.paragraphs?.[l]?.length ?? 0);
   if (!n[0] || new Set(n).size !== 1) fail(`chapter ${c.n}: ${n.join(' / ')} paragraphs in en / es / fr`);
+  // The text is HTML: a bare ampersand (old printing's "&c.") is written &amp;.
+  // Anything that is a character reference (&mdash;, &#8212;) stays, and the check below refuses it.
+  for (const l of LANGS) if (Array.isArray(c.paragraphs?.[l])) c.paragraphs[l] = c.paragraphs[l].map((p) => (typeof p === 'string' ? p.replace(/&(?![a-zA-Z][a-zA-Z0-9]*;|#[0-9]+;|#x[0-9a-fA-F]+;)/g, '&amp;') : p));
   for (const l of LANGS) for (const [i, p] of (c.paragraphs?.[l] || []).entries()) {
     if (typeof p !== 'string' || !p.trim()) fail(`chapter ${c.n} ${l} ¶${i + 1}: empty`);
     else if (INLINE.test(p)) fail(`chapter ${c.n} ${l} ¶${i + 1}: markup other than <em> and <strong>`);

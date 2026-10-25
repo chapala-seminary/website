@@ -182,6 +182,48 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSELECBAP5": [
+  {
+   "slug": "elecbapfive",
+   "page": "CTSTextbookElecBapFive",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbapfivereadings",
+   "page": "CTSElecBap5Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP1": [
+  {
+   "slug": "elecbapone",
+   "page": "CTSTextbookElecBapOne",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbaponereadings",
+   "page": "CTSElecBap1Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP3": [
+  {
+   "slug": "elecbapthree",
+   "page": "CTSTextbookElecBapThree",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbapthreereadings",
+   "page": "CTSElecBap3Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSELECBAP2": [
   {
    "slug": "elecbaptwo",
@@ -196,6 +238,76 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSELECREF5": [
+  {
+   "slug": "elecreffive",
+   "page": "CTSTextbookElecRefFive",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecreffivereadings",
+   "page": "CTSElecRef5Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF4": [
+  {
+   "slug": "elecreffour",
+   "page": "CTSTextbookElecRefFour",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecreffourreadings",
+   "page": "CTSElecRef4Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF1": [
+  {
+   "slug": "elecrefone",
+   "page": "CTSTextbookElecRefOne",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecrefonereadings",
+   "page": "CTSElecRef1Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF3": [
+  {
+   "slug": "elecrefthree",
+   "page": "CTSTextbookElecRefThree",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecrefthreereadings",
+   "page": "CTSElecRef3Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES4": [
+  {
+   "slug": "elecwesfour",
+   "page": "CTSTextbookElecWesFour",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwesfourreadings",
+   "page": "CTSElecWes4Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSELECWES3": [
   {
    "slug": "elecwesthree",
@@ -206,6 +318,20 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "elecwesthreereadings",
    "page": "CTSElecWes3Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES2": [
+  {
+   "slug": "elecwestwo",
+   "page": "CTSTextbookElecWesTwo",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwestworeadings",
+   "page": "CTSElecWes2Readings",
    "kind": "reading",
    "requiredFrom": null
   }

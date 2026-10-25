@@ -172,7 +172,10 @@ What the tool does:
    tags. Where the French italicizes more than the English, the extra
    italics are dropped and reported: first from English words the French
    cites (« dispositions » (*tempers*)), then the shortest emphasis (*ne* …
-   *pas*). It stops if any other tags differ, or if any English passage of
+   *pas*). Where the French joins two phrases the English italicizes
+   apart, its longest italic span is split at a space (the page looks the
+   same); italics in a parenthetical aside the French adds are dropped.
+   Each change is reported. It stops if any other tags differ, or if any English passage of
    the room would stay English on the French page. An elective room's store
    shares French only with the core rooms and digests, never with another
    elective's. So holding or removing one course cannot take French away
@@ -188,7 +191,8 @@ refresh". Run `node tools/exam-review.mjs dist --refresh-missing`. It pins
 only questions that have no pin, whose prompt or answer changed, or whose
 pinned passage is gone because its text was revised. Every other pin stays
 as it is. The
-private bank's pins go to `assessment-keys/exam-review-references.json`. Then
+private bank's pins go to `assessment-keys/exam-review-references.json`;
+pins already kept there stay there, including a held course's. Then
 build again. Running the tool twice gives the same files.
 
 **Held courses.** `src/data/elective-held.json` lists electives held back

@@ -210,7 +210,7 @@ if (!shelf) fail(`src/data/reading-shelf.json has no shelf for ${page}: write it
 else {
   for (const e of shelf.entries) for (const [en, fr] of [['locusEn', 'locusFr'], ['nameEn', 'nameFr'], ['captionEn', 'captionFr']]) addPair(e[en], e[fr], `shelf ${e.id} ${en}`);
   const n = shelf.entries.length;
-  const W = { 6: ['six', 'six'], 7: ['seven', 'sept'], 8: ['eight', 'huit'], 9: ['nine', 'neuf'], 10: ['ten', 'dix'], 12: ['twelve', 'douze'], 14: ['fourteen', 'quatorze'] }[n] || [String(n), String(n)];
+  const W = { 3: ['three', 'trois'], 4: ['four', 'quatre'], 5: ['five', 'cinq'], 6: ['six', 'six'], 7: ['seven', 'sept'], 8: ['eight', 'huit'], 9: ['nine', 'neuf'], 10: ['ten', 'dix'], 12: ['twelve', 'douze'], 14: ['fourteen', 'quatorze'] }[n] || [String(n), String(n)];
   const cap = (s) => s[0].toUpperCase() + s.slice(1);
   addPair(`Further Study: ${cap(W[0])} Public-Domain Works`, `Pour aller plus loin : ${W[1]} œuvres du domaine public`, 'shelf heading');
   addPair(`These ${W[0]} works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ${W[0]} are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).`,

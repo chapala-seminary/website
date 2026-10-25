@@ -292,6 +292,8 @@ Each denominational elective's textbook and test come from one command:
   answer or a stamp. `tools/french-readings.mjs apply` keeps them private.
 - A book keeps its number once it has one. A new book takes the next free
   number.
+- The paragraphs are HTML. A bare ampersand, as in the old printers'
+  "&c.", is written `&amp;`; any other character reference is refused.
 
 The tool then runs `gen-worker-catalog.mjs`. The textbook comes before the
 reading test in the course's `tests`. It is optional on every track

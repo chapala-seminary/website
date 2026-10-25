@@ -89,7 +89,14 @@ if (!BASE) {
       // (or in French and Spanish: a signature, "W. J. Seymour.")
       const enLeaves = r.body?.en ? bodyLeaves(r.body.en).list : [], esLeaves = r.body?.es ? bodyLeaves(r.body.es).list : [];
       if (fields.length) pages.set(`${r.page}.html`, r.body?.fr ? bodyLeaves(r.body.fr).list.map((l, i) => [l, enLeaves[i], esLeaves[i]])
-        .filter(([l, e, s]) => translatable(l) && l.text.trim() !== e?.text.trim() && l.text.trim() !== s?.text.trim()).map(([l]) => l.text.trim()) : []);
+        .filter(([l, e, s]) => translatable(l) && l.text.trim() !== e?.text.trim() && l.text.trim() !== s?.text.trim())
+        // sample the French at its first 60 characters that are not also in the English or
+        // Spanish passage: a source line may open with the book's English title, the same
+        // on every edition ("The Doctrines and Discipline…, de Thomas Coke"). Usually that is the start.
+        .map(([l, e, s]) => { const t = l.text.trim(), en = e?.text.trim() || '', es = s?.text.trim() || '';
+          for (let i = 0; i < t.length; i = t.indexOf(' ', i) < 0 ? t.length : t.indexOf(' ', i) + 1) {
+            const w = t.slice(i, i + 60); if (w.length < 20) break; if (!en.includes(w) && !es.includes(w)) return t.slice(i); }
+          return ''; }).filter(Boolean) : []);
       pages.set(`${r.page}Test.html`, []);
     }
     for (const { data } of files) {
