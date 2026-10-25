@@ -1,6 +1,6 @@
 # C-C5 — Wesleyan Ministry and Missions: historical source handoff
 
-**STATUS: FIVE PRIMARY-SOURCE OCR TRANSCRIPTS VERIFIED; COURSE READING SELECTION, SCAN COLLATION, TRANSLATIONS, PRIVATE BANKS AND ACADEMIC RELEASE PENDING.**
+**STATUS: FIVE PRIMARY-SOURCE OCR TRANSCRIPTS AND FIVE PROVISIONAL SOURCE-BOUNDED EXCERPTS VERIFIED; FACSIMILE COLLATION, EDITORIAL/RIGHTS APPROVAL, TRANSLATIONS, PRIVATE BANKS AND STUDENT RELEASE PENDING.**
 
 ## Text and edition provenance
 
@@ -23,15 +23,17 @@
 
 **OCR total:** 218,856 whitespace-delimited tokens across five source scans; this is not a finished textbook or verified prose count. Vol. II has a preceding 1743–1746 scan, deliberately not copied here to avoid overlap with C-C1 (1735–1745). The 1746–1749 scan may include a small 1746 boundary overlap; date boundaries require verification.
 
-## Five proposed non-overlapping reading windows (selection NOT YET MADE)
+## Five exact provisional reading windows (staged 25 October 2026; NOT approved)
 
-1. **1746–1749:** itinerant preaching, organization and pastoral visits. Select a source-bounded dated passage from `journal-1746-1749-ocr.txt`.
-2. **1749–1751:** local society ministry and challenges of Methodist expansion. Select from `journal-1749-1751-ocr.txt`.
-3. **1751–1754:** travel, congregational care and mission among communities. Select from `journal-1751-1754-ocr.txt`.
-4. **1755–1758:** discipline, ministerial labor and oversight. Select from `journal-1755-1758-ocr.txt`.
-5. **1758–1760:** itinerancy, preaching and leadership reflection. Select from `journal-1758-1760-ocr.txt`.
+Five exact OCR excerpts have been staged on the nonproduction handoff branch and independently checked against the source blobs. Their total is **17,744 OCR whitespace tokens**, not a finished word count or a student reading assignment. See the [five-reading provenance and boundary ledger](./PROVISIONAL-READING-LEDGER-2026-10-25.md), which records each source blob, start/end character offset, reading blob, OCR word count, historical warnings, and release gates. These are five excerpts of Wesley's **one journal**, not five independent source works.
 
-These are **historical selection themes**, not verified section titles or completed readings. Claude should read the dated entries before fixing each range, retain Wesley's historical context, record exact printed pages and dates, and check that the final five readings do not overlap. The five readings are from **one journal work**, not five independent authors; if the academic requirement is five separate supplemental works, additional independent rights-cleared readings must be selected.
+- [R1 — 1747 itinerancy and societies](./reading-1-ocr-provisional.md)
+- [R2 — September–October 1749 pastoral visits](./reading-2-ocr-provisional.md)
+- [R3 — 1752 field preaching and opposition](./reading-3-ocr-provisional.md)
+- [R4 — 1755 society oversight and travel](./reading-4-ocr-provisional.md)
+- [R5 — 1758 Irish conference and itinerancy](./reading-5-ocr-provisional.md)
+
+**Date discrepancy:** the 1749–1751 OCR source title reads “1761,” but its internal heading reads “1751”; the scan's printed title must settle this before release. Excerpts omit substantial intervening history, and the textbook/reading overlap and same-work five-reading policy require Wayne's academic decision. **Do not publish raw OCR or generate exams from unassigned passages.**
 
 ## Mandatory QA before any course release
 
