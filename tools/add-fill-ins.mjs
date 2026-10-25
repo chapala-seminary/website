@@ -34,6 +34,10 @@
 // further course is drafted.
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
+/* Review packets quote answers, so they are private (docs/answer-exposure-audit.md):
+   assessment-keys/review/. */
+const REVIEW = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review');
 
 const args = process.argv.slice(2);
 const opt = (name) => { const i = args.indexOf(name); return i === -1 ? null : (args[i + 1] ?? ''); };
@@ -44,8 +48,8 @@ if (!course || !/^[A-Za-z0-9]+$/.test(course)) {
 }
 const UNITS = `src/content/units/${course}`;
 const LESSONS = `src/content/lessons/${course}`;
-const DRAFTS = `_review/fill-ins/drafts/${course}`;
-const SHEET = `_review/fill-ins/${course}.md`;
+const DRAFTS = path.join(REVIEW, 'fill-ins', 'drafts', course);
+const SHEET = path.join(REVIEW, 'fill-ins', `${course}.md`);
 if (!fs.existsSync(UNITS)) { console.error(`no unit files at ${UNITS}`); process.exit(2); }
 
 // ---- the engine's grader, taken from the engine ---------------------------

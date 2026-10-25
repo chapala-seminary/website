@@ -324,19 +324,23 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   const keysTmp = fs.mkdtempSync(path.join(os.tmpdir(), 'apply-accepts-keys-'));
   const copy = (rel) => { fs.mkdirSync(path.dirname(path.join(tmp, rel)), { recursive: true }); fs.copyFileSync(path.join('src/content', rel), path.join(tmp, rel)); return path.join(tmp, rel); };
   const unitCopy = copy('units/CTSJohn/6.json');
-  const bank = (dir, indent) => fs.readdirSync(`src/content/${dir}`).find((x) => { const t = fs.readFileSync(`src/content/${dir}/${x}`, 'utf8'); return x.endsWith('.json') && t === JSON.stringify(JSON.parse(t), null, indent) + '\n' && JSON.parse(t).test; });
   const keysRoot = process.env.ASSESSMENT_KEYS || path.resolve('..', 'assessment-keys');
   const tb2 = fs.existsSync(path.join(keysRoot, 'textbooks'))
     && fs.readdirSync(path.join(keysRoot, 'textbooks')).find((x) => {
       const t = fs.readFileSync(path.join(keysRoot, 'textbooks', x), 'utf8');
       return x.endsWith('.json') && t === JSON.stringify(JSON.parse(t), null, 2) + '\n' && JSON.parse(t).test?.questions?.[0]?.answer;
     });
-  const rd1 = bank('readings', 1);
+  const rd1 = fs.readdirSync(path.join(keysRoot, 'readings')).find((x) => { const t = fs.readFileSync(path.join(keysRoot, 'readings', x), 'utf8'); return x.endsWith('.json') && !x.startsWith('elec') && t === JSON.stringify(JSON.parse(t), null, 1) + '\n' && JSON.parse(t).test?.questions?.[0]?.accept?.es; });
   ok(tb2 && rd1, 'there is a private textbook key file with 2-space indent and a reading bank with 1');
   fs.mkdirSync(path.join(keysTmp, 'textbooks'), { recursive: true });
   const tbCopy = path.join(keysTmp, 'textbooks', tb2);
   fs.copyFileSync(path.join(keysRoot, 'textbooks', tb2), tbCopy);
-  const rdCopy = copy('readings/' + rd1);
+  // every reading bank's keys are private (docs/answer-exposure-audit.md): the public
+  // file says keys: "private", and the accept list is added to the keys file
+  copy('readings/' + rd1);
+  fs.mkdirSync(path.join(keysTmp, 'readings'), { recursive: true });
+  const rdCopy = path.join(keysTmp, 'readings', rd1);
+  fs.copyFileSync(path.join(keysRoot, 'readings', rd1), rdCopy);
   const before = Object.fromEntries([unitCopy, tbCopy, rdCopy].map((p) => [p, fs.readFileSync(p, 'utf8')]));
   const tbSlug = tb2.replace('.json', ''), rdSlug = rd1.replace('.json', '');
   const file = path.join(tmp, 'approved.json');

@@ -19,12 +19,16 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
+/* Review packets quote answers, so they are private (docs/answer-exposure-audit.md):
+   assessment-keys/review/. */
+const REVIEW = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review');
 
 function normalise(s) { return ' ' + String(s || '').toLowerCase().replace(/[^a-z0-9áéíóúñü\s]/g, ' ').replace(/\s+/g, ' ') + ' '; }
 function fold(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/ñ/g, 'ñ').replace(/[̀-ͯ]/g, ''); }
 const bare = (s) => normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, '');
 
-const UNITS = 'src/content/units', DRAFTS = '_review/fill-ins/drafts';
+const UNITS = 'src/content/units', DRAFTS = path.join(REVIEW, 'fill-ins', 'drafts');
 const PAGE = ['counseling', 'narrative', 'wisespeak', 'ethics'];
 const MIN = 3, MAX = 5;
 

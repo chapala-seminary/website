@@ -15,6 +15,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { translationPlan } from '../tools/translation-plan.mjs';
+import { resolveKeysRoot } from '../tools/grading-keys-lib.mjs';
 
 const dry = execFileSync('node', ['tools/import-french-drafts.mjs'], { encoding: 'utf8' });
 assert.match(dry, /^0 French units validated/m, 'every delivered packet unit is already imported');
@@ -46,7 +47,8 @@ const KNOWN_PROMPT_PASSES = new Set([
   'CTSST/7 SA 3',
   'CTSST/9 SA 5',
 ]);
-const root = '_review/french', failures = [], units = [];
+// the unit courses' packets are private (docs/answer-exposure-audit.md)
+const root = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review', 'french'), failures = [], units = [];
 const packetCourses = fs.readdirSync(root).filter(c => c.startsWith('CTS') && fs.statSync(path.join(root, c)).isDirectory());
 for (const course of packetCourses) {
   for (const name of fs.readdirSync(path.join(root, course)).filter(n => n.endsWith('-source.json'))) {

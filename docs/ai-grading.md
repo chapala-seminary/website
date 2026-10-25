@@ -137,8 +137,8 @@ Every short-answer item gets:
   public banks that still hold answers. It refuses to write inside this repo,
   and refuses when public textbook files already omit `answer`/`accept` (so it
   cannot wipe the private checkout). Public textbook JSON keeps prompts (and
-  chapter); `answer`/`accept` are only in the private checkout. Reading-test
-  and unit-exam keys remain in this public repo for a later pass. The beta and
+  chapter); `answer`/`accept` are only in the private checkout. Since 25 Oct 2026
+  reading-test and unit-exam keys are private too (`docs/answer-exposure-audit.md`). The beta and
   pull-request Actions workflows check `chapala-seminary/assessment-keys` out
   with repository secret `ASSESSMENT_KEYS_TOKEN` before build/test/deploy, set
   `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and use

@@ -77,7 +77,9 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
   /* A bank whose pins are already private stays private, even while its course
      is held off the site (src/data/elective-held.json) and has no public record. */
   const privateStoredSlugs = new Set(Object.keys(privateStored).map((key) => key.split('/')[0]));
-  const references = refresh === true ? {} : { ...JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')), ...privateStored };
+  // every bank's pins are private now (docs/answer-exposure-audit.md); a public file is read only if one is present
+  const publicStored = fs.existsSync(REFERENCE_FILE) ? JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')) : {};
+  const references = refresh === true ? {} : { ...publicStored, ...privateStored };
   const cache = new Map(), candidateCache = new Map(), report = [], misses = [], repinned = [];
   function load(file) {
     if (cache.has(file)) return cache.get(file);
@@ -266,7 +268,9 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
   if(refresh) {
     const isPrivate = (key) => privateSlugs.has(key.split('/')[0]) || privateStoredSlugs.has(key.split('/')[0]);
     const pick = (keep) => Object.fromEntries(Object.entries(references).filter(([key]) => keep(key)));
-    fs.writeFileSync(REFERENCE_FILE,JSON.stringify(pick((key) => !isPrivate(key)),null,1)+'\n');
+    const publicPins = pick((key) => !isPrivate(key));
+    if (Object.keys(publicPins).length) fs.writeFileSync(REFERENCE_FILE,JSON.stringify(publicPins,null,1)+'\n');
+    else if (fs.existsSync(REFERENCE_FILE)) fs.rmSync(REFERENCE_FILE);
     if (privateFile) { fs.mkdirSync(path.dirname(privateFile),{recursive:true}); fs.writeFileSync(privateFile,JSON.stringify(pick(isPrivate),null,1)+'\n'); }
   }
   return {report,misses,repinned};

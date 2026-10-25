@@ -63,8 +63,15 @@ if (!Array.isArray(approved)) { console.error('the file has no "approved" list')
 /** The content file and the path to the item for a qid, or null. */
 function locate(qid) {
   let m;
-  if ((m = /^u:([A-Za-z0-9_]{1,40})\/(\d{1,3})\/fill\/(\d+)$/.exec(qid)))
+  if ((m = /^u:([A-Za-z0-9_]{1,40})\/(\d{1,3})\/fill\/(\d+)$/.exec(qid))) {
+    // a course whose unit keys are private (tools/private-units.mjs; every course since
+    // 25 Oct 2026): src/content/units is rebuilt from assessment-keys, so the accept goes there
+    if (fs.existsSync(path.join(CONTENT, 'units-public', m[1]))) {
+      if (!KEYS) return null;
+      return { file: path.join(KEYS, 'units', m[1], `${m[2]}.json`), items: (o) => o.fill, i: +m[3] };
+    }
     return { file: path.join(CONTENT, 'units', m[1], `${m[2]}.json`), items: (o) => o.fill, i: +m[3] };
+  }
   if ((m = /^tb:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid))) {
     if (!KEYS) return null;
     return { file: path.join(KEYS, 'textbooks', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };

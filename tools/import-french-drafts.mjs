@@ -8,10 +8,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { translationPlan } from './translation-plan.mjs';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 // Static-page courses (Narrative Preaching, Counseling, Ethics) have their own builder.
 import { COURSES as STATIC_COURSES } from './french-static-courses.mjs';
 const staticFolders=new Set(Object.values(STATIC_COURSES).map(c=>c.folder));
-const root='_review/french', write=process.argv.includes('--write');
+// the unit courses' packets quote answers: assessment-keys/review/french (docs/answer-exposure-audit.md)
+const root=path.join(resolveKeysRoot('.')||'../assessment-keys','review','french'), write=process.argv.includes('--write');
 const only=process.argv.find(a=>a.startsWith('--course='))?.slice(9).split(',');
 const corrections={};
 for(const file of fs.readdirSync('tools/data').filter(f=>/^french-.*-corrections\.json$/.test(f)).sort())

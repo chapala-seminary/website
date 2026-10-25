@@ -192,6 +192,11 @@ export const TESTS = [
     title: r.title, room: r.room })),
 ];
 
+/* Every reading test's keys are private (the electives' since Oct 2026, the
+   45 core tests' since 25 Oct 2026; docs/answer-exposure-audit.md): its bank
+   and accept file are in <keys>/readings-src (a staged bank in
+   readings-src/staged), and its public file has no answer, accept or tr. */
+for (const t of TESTS) t.private = true;
 /* The rows whose keys are private: their public files are checked by
    tools/verify-no-keys.mjs as well as by the content schema. */
 export const PRIVATE_READINGS = TESTS.filter((t) => t.private).map((t) => t.slug);
@@ -200,13 +205,12 @@ const SCHEDULED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.r
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
 let problems = 0, optionalMissing = 0;
 /* Where a private row's bank is read from: <keys>/readings-src. */
-const privateSource = (keysRoot) => path.join(keysRoot, 'readings-src');
+const privateSource = (keysRoot, t = {}) => path.join(keysRoot, 'readings-src', t.dir ? path.relative(SRC, t.dir) : '');
 /** Merge a reading row's bank and accept file into the test, as written to
  *  src/content (with its answers: a private row is split by writeTest). */
 export function buildTest(t, name, { keysRoot = null } = {}) {
   if (t.private && !keysRoot) { console.error(`${t.slug}: a private reading bank needs the assessment-keys checkout (ASSESSMENT_KEYS or ../assessment-keys); nothing written`); process.exit(2); }
-  if (t.private && t.next) { console.error(`${t.slug}: a private reading bank cannot have a next bank yet`); process.exit(2); }
-  const dir = t.private ? privateSource(keysRoot) : (t.dir || SRC);
+  const dir = t.private ? privateSource(keysRoot, t) : (t.dir || SRC);
   const bank = JSON.parse(fs.readFileSync(path.join(dir, `${name}.bank.json`), 'utf8'));
   const accept = JSON.parse(fs.readFileSync(path.join(dir, `${name}.accept.json`), 'utf8'));
   const f = bank.format || {};
@@ -257,7 +261,7 @@ export function buildTest(t, name, { keysRoot = null } = {}) {
   const out = { slug: t.slug, page: t.page, course: t.course, kind: t.kind, title: t.title, room: t.room,
     ...('requiredFrom' in t ? { requiredFrom: t.requiredFrom } : {}),
     // a private bank names where it lives without the machine's own path
-    source: { file: t.private ? `assessment-keys/readings-src/${t.slug}.bank.json` : `${dir}/${t.slug}.bank.json`, course: bank.course },
+    source: { file: t.private ? `assessment-keys/${path.relative(keysRoot, dir) || 'readings-src'}/${t.slug}.bank.json` : `${dir}/${t.slug}.bank.json`, course: bank.course },
     test: { draw: f.questions_per_attempt, pass: f.passing_score, ...(perReading !== null ? { perReading } : {}), questions } };
   if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`${t.slug}: requiredFrom is not a date and time: ${t.requiredFrom}`); process.exit(2); }
   const counts = questions.map((q) => 1 + q.accept.en.length);
@@ -272,7 +276,7 @@ export function buildTest(t, name, { keysRoot = null } = {}) {
     for (let g = 1; g <= k; g++) if ((sizes[g] || 0) < per) problems++;
     if (per * k !== out.test.draw || !f.revision) problems++;
     out.test.perGroup = per;
-    out.source.file = `${dir}/${name}.bank.json`;
+    out.source.file = t.private ? `assessment-keys/readings-src/${name}.bank.json` : `${dir}/${name}.bank.json`;
   }
   if (f.revision) out.test.revision = String(f.revision);
   if (f.reset_wait_on_revision === true) out.test.resetWaitOnRevision = true;

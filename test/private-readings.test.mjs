@@ -155,7 +155,12 @@ if (DIST) {
       ok(!!m, `${file}: no test data`);
       const data = JSON.parse(m[1]);
       ok(data.grading === 'live' && Array.isArray(data.questions) && data.questions.length === 0, `${file}: a live page ships no bank`);
-      const hit = answers.find((a) => m[1].includes(JSON.stringify(a).replace(/</g, '\\u003c')));
+      // an answer as a value in the question data; the page's own labels (slug, title,
+      // grading: "live", the completion record) are left out, since a one-word answer
+      // such as "live" or "completion" can be one of them
+      const { slug: _s, page: _p, kind: _k, title: _t, completion: _c, grading: _g, scope: _sc, ...rest } = data;
+      const values = new Set(); const walk = (v) => { if (typeof v === 'string') values.add(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); }; walk(rest);
+      const hit = answers.find((a) => values.has(a));
       ok(!/"(answer|accept)"\s*:/.test(m[1]), `${file}: the page data has an answer or accept field`);
       ok(!hit, `${file}: an answer (${hit}) is in the page data`);
       built++;

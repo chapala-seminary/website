@@ -88,7 +88,9 @@ questions. Their typed answers belong to the old questions, so they are not
 carried over. Passes already recorded, in the browser and on the server,
 stand.
 
-## Private reading tests (electives, Oct 2026)
+## Private reading tests (all tests since 25 Oct 2026)
+
+Every reading test now works this way, the 45 core tests included; their banks are in `assessment-keys/readings-src` (`docs/answer-exposure-audit.md`). The paragraph below was written for the electives.
 
 A new reading test can keep its answers out of this repository, the way the
 textbook tests do. The 45 reading tests made before Oct 2026 keep their

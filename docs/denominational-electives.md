@@ -15,6 +15,8 @@ Each course has 10 units in English, Spanish and French. The Spanish and French 
 
 ## Where the answer keys are
 
+Since 25 Oct 2026 every course's unit keys work this way, not only these twenty (`docs/answer-exposure-audit.md`).
+
 The keys for these exams are **not** in this repository.
 
 - `src/content/units-public/<Prefix>/<n>.json` holds the questions without keys.

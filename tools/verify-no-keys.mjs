@@ -229,7 +229,7 @@ let privateReadings = 0, privateBooks = 0;
   const flagged = new Set(PRIVATE_READINGS);
   for (const f of files) {
     const pub = JSON.parse(fs.readFileSync(path.join(rdir, f), 'utf8'));
-    if (pub.keys === 'private') flagged.add(pub.slug);
+    flagged.add(pub.slug); // every reading bank is private since 25 Oct 2026 (docs/answer-exposure-audit.md)
   }
   for (const slug of flagged) {
     const f = path.join(rdir, `${slug}.json`);
@@ -241,10 +241,21 @@ let privateReadings = 0, privateBooks = 0;
   const tdir = path.join(ROOT, 'src/content/textbooks');
   for (const f of fs.existsSync(tdir) ? fs.readdirSync(tdir).filter((x) => x.endsWith('.json')) : []) {
     const pub = JSON.parse(fs.readFileSync(path.join(tdir, f), 'utf8'));
-    if (pub.keys !== 'private' && !String(pub.slug).startsWith('elec')) continue;
+    // every textbook is private since 25 Oct 2026 (docs/answer-exposure-audit.md)
     privateBooks++;
     for (const m of privateReadingLeaks(pub, `src/content/textbooks/${f}`)) note(m);
   }
+}
+
+/* Every course's unit keys are private (tools/private-units.mjs), so every
+   folder of src/content/units has its keyless public twin in units-public, and
+   no review pin (it fingerprints a prompt with its answer) is kept here. */
+{
+  const udir = path.join(ROOT, 'src/content/units'), pdir = path.join(ROOT, 'src/content/units-public');
+  for (const d of fs.existsSync(udir) ? fs.readdirSync(udir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name) : [])
+    if (!fs.existsSync(path.join(pdir, d))) note(`src/content/units/${d}: its keys are not private; split it into src/content/units-public/${d} and assessment-keys/units/${d}`);
+  const pins = path.join(ROOT, 'src/data/exam-review-references.json');
+  if (fs.existsSync(pins) && Object.keys(JSON.parse(fs.readFileSync(pins, 'utf8'))).length) note('src/data/exam-review-references.json: review pins belong in assessment-keys/exam-review-references.json');
 }
 
 if (!unitPages && !testPages) problems.push(`no page with question data found under ${dir}: is it built?`);

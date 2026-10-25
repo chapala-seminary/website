@@ -62,14 +62,14 @@ export function loadUnit(course, n, root = ROOT) {
   if (!unitCache.has(p)) unitCache.set(p, JSON.parse(fs.readFileSync(p, 'utf8')));
   return unitCache.get(p);
 }
-/* Courses whose keys live only in the private assessment-keys repo
-   (tools/private-units.mjs) are left out: the eval set is committed here, and
-   it quotes keys. */
+/* The denominational electives (CTSElec*), whose keys were private from the
+   start, are left out: the eval set is committed here, and it quotes keys.
+   Every course's unit keys are private since 25 Oct 2026, but the committed
+   set already quotes the core courses' keys; moving the set to
+   assessment-keys is a follow-up (docs/answer-exposure-audit.md). */
 export function listCourses(root = ROOT) {
-  const pub = path.join(root, 'src', 'content', 'units-public');
-  const priv = new Set(fs.existsSync(pub) ? fs.readdirSync(pub) : []);
   return fs.readdirSync(path.join(root, 'src', 'content', 'units'), { withFileTypes: true })
-    .filter(d => d.isDirectory() && !priv.has(d.name)).map(d => d.name).sort();
+    .filter(d => d.isDirectory() && !d.name.startsWith('CTSElec')).map(d => d.name).sort();
 }
 export function listUnits(course, root = ROOT) {
   return fs.readdirSync(path.join(root, 'src', 'content', 'units', course))

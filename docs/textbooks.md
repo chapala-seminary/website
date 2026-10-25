@@ -260,7 +260,7 @@ slug, page name, the course's catalog card, the bank file, the two titles).
 
 ## Where the answer bank lives
 
-A live test page does not include the question bank. The server sends the wording of the twenty questions it drew, and grades them from `grading_keys`. Public textbook JSON keeps prompts (and chapter); `answer` and `accept` live only in the private `chapala-seminary/assessment-keys` checkout that deploy and CI sync from. See `docs/ai-grading.md` section 4. The book text stays on the book page. Reading-test keys remain in this public repo for a later pass. A new bank, including Christian Education, is written only in that private checkout.
+A live test page does not include the question bank. The server sends the wording of the twenty questions it drew, and grades them from `grading_keys`. Public textbook JSON keeps prompts (and chapter); `answer` and `accept` live only in the private `chapala-seminary/assessment-keys` checkout that deploy and CI sync from. See `docs/ai-grading.md` section 4. The book text stays on the book page. Since 25 Oct 2026 reading-test and unit-exam keys are private too (`docs/answer-exposure-audit.md`). A new bank, including Christian Education, is written only in that private checkout.
 
 ## October beta audit conversion
 
@@ -286,8 +286,8 @@ Each denominational elective's textbook and test come from one command:
   `requiredFrom` is null and `keys` is `"private"`.
 - **The keys** are in `assessment-keys/textbooks/<slug>.json`: prompt,
   answer, accept, chapter and each question's French stamp. The stamps hash
-  the answers, so for these banks they are kept private. Older textbooks
-  keep their stamps public. The content schema and `tools/verify-no-keys.mjs`
+  the answers, so they are kept private. Since 25 Oct 2026 the 45 older
+  textbooks are `keys: "private"` too, and their stamps are there as well. The content schema and `tools/verify-no-keys.mjs`
   fail if a private textbook's public file carries an answer, an accepted
   answer or a stamp. `tools/french-readings.mjs apply` keeps them private.
 - A book keeps its number once it has one. A new book takes the next free
