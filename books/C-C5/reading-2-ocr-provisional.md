@@ -4,7 +4,7 @@
 
 **Source:** John Wesley, *Journal*, Thomas Jackson edition, original WHDL PDF OCR; source file [books/C-C5/journal-1749-1751-ocr.txt](./journal-1749-1751-ocr.txt), original blob `71d31aa4e101e4f7e9965af86674fa5a7c8cd483`.
 
-**Exact extraction:** zero-based JavaScript UTF-16 character offsets `[10440, 32530)` in the above source file, 4,035 OCR whitespace tokens. The end boundary is exclusive and intentionally stops immediately before the next dated entry. Extracted text below is UNCORRECTED, including broken words, running heads and page numbers; it is not a critical transcription. No separate works or full source translations are implied.
+**Exact extraction:** zero-based JavaScript UTF-16 character offsets `[10440, 33835)` in the above source file, 4,273 OCR whitespace tokens. The end boundary is exclusive and intentionally stops immediately before the next dated entry. Extracted text below is UNCORRECTED, including broken words, running heads and page numbers; it is not a critical transcription. No separate works or full source translations are implied.
 
 **Academic caution:** Wesley's assessments of spiritual experience and dissenting groups are historically situated; quoted Scripture and remarks about other traditions need source checks.
 
@@ -417,4 +417,29 @@ At one I  preached at Shackerley, four miles from Bolton,
 and thence rode on to Davy-Hulme. Here I  received a letter 
 from Richard Cawley, of Alpraham, with an invitation from 
 the Minister of Acton. After preaching in the morning at 
-Davy-Hulme, and about ten at Boothbank, in the afternoon,
+Davy-Hulme, and about ten at Boothbank, in the afternoon, 
+Friday.  20, I  rode on, and, between four and five, came to 
+Alpraham. A large congregation was waiting for me, whom 
+I immediately called to seek God “ while he may be found.” 
+Many ,came again at five in the morning, and seemed just 
+ready not only to “ repent,” but also “ believe the Gospel.”
+Sat. 21.—By conversing with several here, I  found we were 
+not now among publicans and sinners, but among those who, a 
+while ago, supposed they needed no repentance. Many of them 
+hadbeen long “ exercising themselves unto godliness,” inmuch 
+the same manner as we did at Oxford; but they were now 
+thoroughly willing to renounce their own, and accept “ the 
+righteousness which is of God by faith.”
+
+JOURNAL. 165Oct. 1749.]
+A gentleman, who had several years before heard me preach 
+at Bath, sending to invite me to dinner, I  had three or four 
+hours’ serious conversation with him. O, who maketh me to 
+differ? Every objection he made to the Christian System 
+has passed through my mind also: But God did not suffer 
+them to rest there, or to remove me from the hope of the 
+Gospel.
+I  was not surprised when word was brought, that the Vicar 
+of Acton had not the courage to stand to his word : Neither 
+was I troubled. I  love indeed to preach in a church : But 
+God can work wherever it pleaseth him.
