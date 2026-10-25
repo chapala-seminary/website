@@ -35,6 +35,12 @@ Five exact OCR excerpts have been staged on the nonproduction handoff branch and
 
 **Date discrepancy:** the 1749–1751 OCR source title reads “1761,” but its internal heading reads “1751”; the scan's printed title must settle this before release. Excerpts omit substantial intervening history, and the textbook/reading overlap and same-work five-reading policy require Wayne's academic decision. **Do not publish raw OCR or generate exams from unassigned passages.**
 
+## Editorial handoff updates (25 October 2026; not approved)
+
+- [Five source-aligned study digests in EN/ES/FR](./STUDY-DIGESTS-EN-ES-FR.md): **15 original summaries**, not full corrected readings or translations; source-specific discussion prompts only, no examination keys.
+- [Embedded-contributor and Mexico-rights gate](./EMBEDDED-CONTRIBUTOR-GATE-2026-10-25.md): R2 includes a separately signed **John Martin Bolzius** letter and an unresolved Moravian public communication; author-by-author verification and page collation remain mandatory. The companion memo also identifies a historical slavery-context omission requiring careful academic framing.
+- These files are nonproduction editorial handoffs; all academic, rights, scan, translation and private-assessment release gates below remain OPEN.
+
 ## Mandatory QA before any course release
 
 1. Verify exact edition/imprint and editor in the scanned title/front matter; confirm each PDF actually belongs to Vol. II.
