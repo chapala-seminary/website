@@ -28,6 +28,10 @@
 
 A [five-candidate heading/offset index](./FIVE-CANDIDATE-SOURCE-INDEX-2026-10-25.md) now maps actual staged issues 3–7 to five course themes, records tentative signature evidence and separate contributor/rights holds. **It does not supply five final readings or clear any text for reproduction.** Original issue facsimiles, article/page boundaries, authorship, Mexico rights and academic approval remain open.
 
+## Article-boundary correction (25 October 2026)
+
+A [verified article-only boundary and contributor audit](./ARTICLE-BOUNDARY-AUDIT-2026-10-25.md) corrects the provisional candidate index: the gifts and discernment windows included adjacent articles, and the visitor report included multiple other voices. The five article-only spans total **3,407 OCR tokens**, not the candidate-index 6,272; **R1–R4 have Seymour signatures in the reproduction, while R5's visitor remains anonymous**. None are facsimile-collated, cleared, substantial five-reading packages, translated, or approved. Treat the older candidate index as a search aid only.
+
 ## Five proposed reading themes — NOT YET EXTRACTED
 
 1. Early teaching on baptism with the Holy Spirit.
