@@ -116,8 +116,9 @@ it is needed in a browser. All of it is build or review data.
 6. **The content baseline** (`tools/content-baseline.json`). It recorded
    every MC answer index and a hash of every fill-in answer, so that a changed
    answer would be noticed. It now records only question text, as it already
-   did for the electives. The guard against an answer changing by accident is
-   therefore weaker; see the recommendations.
+   did for the electives. The answers are fingerprinted in a private baseline,
+   `assessment-keys/content-baseline.json`, which `--write` records and
+   `--check` compares whenever the keys are checked out.
 7. **Textbook test corrections and drafts.** These are now in
    `assessment-keys/textbooks-src/`:
    - `src/data/textbooks/corrections.json` set textbook answers;
@@ -204,18 +205,20 @@ also protect the existing keys:
 4. **Single-page courses.** Converting the four single-page courses to unit
    files is the one design change needed to take their keys out of this
    repository.
-5. **Tools that write unit keys.** `src/content/units` is now rebuilt from
-   `assessment-keys` before every build, so a change written there is lost.
-   `tools/apply-accepts.mjs` (approved synonyms from the staff grading page)
-   now writes accepted answers to `assessment-keys/units`. Older tools that
-   still write `src/content/units` directly must have their result copied to
-   `assessment-keys/units` until they are changed the same way:
-   `tools/add-fill-ins.mjs`, `tools/fill-variants.mjs --apply`,
-   `tools/import-french-drafts.mjs --write` and `tools/translate-lesson.mjs`.
-   The electives already had this limit.
-6. **A private answer baseline.** The public content baseline no longer
-   notices a changed answer. A copy that records answers could live in
-   `assessment-keys` and be checked when it is present.
+5. **Tools that write unit keys.** Done (25 Oct 2026). `src/content/units` is
+   rebuilt from `assessment-keys` before every build, so nothing may write
+   only there. `tools/apply-accepts.mjs` writes accepted answers to
+   `assessment-keys/units`. `tools/add-fill-ins.mjs`,
+   `tools/fill-variants.mjs --apply`, `tools/import-french-drafts.mjs --write`
+   and `tools/translate-lesson.mjs` now write through `writeUnit` /
+   `unitWrites` in `tools/private-units.mjs`: question and lesson wording to
+   `units-public`, the key fields (`KEY_FIELDS`, including `tr` stamps) to
+   `assessment-keys/units`, and the merged file to match.
+6. **A private answer baseline.** Done (25 Oct 2026).
+   `tools/content-baseline.mjs --write` also records every private-key unit's
+   answers (MC index, short-answer keyword digest, fill-in answers and
+   accepted variants) in `assessment-keys/content-baseline.json`; `--check`
+   compares them when the keys are checked out and says so when they are not.
 7. **Do not re-run `tools/import-readings.mjs --write` without reading its
    diff.** Its banks now carry a `revision` for 32 tests whose published
    files have none. Writing would add one, and a new revision restarts a

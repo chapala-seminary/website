@@ -32,7 +32,7 @@ const OUT = path.join(ROOT, 'src/content/units');
 const KEY_FIELDS = ['answer', 'why', 'keywords', 'model', 'accept', 'correct', 'rubric', 'minHits', 'tr'];
 const check = process.argv.includes('--check');
 
-function keysRoot() {
+export function keysRoot() {
   const env = process.env.ASSESSMENT_KEYS;
   if (env && env.trim() && fs.existsSync(path.join(env, 'units'))) return path.resolve(env);
   const sib = path.resolve(ROOT, '..', 'assessment-keys');
@@ -55,6 +55,47 @@ export function mergeUnit(pub, keys, where = '') {
     });
   }
   return out;
+}
+
+/** The reverse of mergeUnit: a merged unit -> { pub, keys }. Non-question
+ *  fields (e.g. the keys file's "source") are kept from the previous files;
+ *  a kind the public file never had is not added to it. */
+export function splitUnit(merged, prevPub = {}, prevKeys = {}) {
+  const pub = { ...merged };
+  const keys = { ...prevKeys };
+  for (const kind of ['mc', 'sa', 'fill']) {
+    const qs = merged[kind] || [];
+    if (qs.length || prevPub[kind] !== undefined) pub[kind] = qs.map((q) => Object.fromEntries(Object.entries(q).filter(([f]) => !KEY_FIELDS.includes(f))));
+    else delete pub[kind];
+    if (qs.length || prevKeys[kind] !== undefined) keys[kind] = qs.map((q) => Object.fromEntries(Object.entries(q).filter(([f]) => KEY_FIELDS.includes(f) && q[f] !== undefined)));
+  }
+  return { pub, keys };
+}
+
+/** The files a tool must write to change the merged unit `file`
+ *  (src/content/units/<Prefix>/<n>.json) to `data`, as [[path, text], ...]:
+ *  the keyless twin in units-public, its keys in assessment-keys/units, and
+ *  the merged file itself so later reads in the same run agree. A course
+ *  without a public twin is written as before. Throws without the keys. */
+export function unitWrites(file, data) {
+  const abs = path.resolve(file);
+  const rel = path.relative(OUT, abs);
+  const text = (o) => JSON.stringify(o, null, 1) + '\n';
+  const [p, f] = rel.split(path.sep);
+  if (rel.startsWith('..') || !f || !fs.existsSync(path.join(PUBLIC, p))) return [[abs, text(data)]];
+  const keys = keysRoot();
+  if (!keys) throw new Error(`${p} keeps its unit keys in assessment-keys; set ASSESSMENT_KEYS or check it out at ../assessment-keys`);
+  const pubFile = path.join(PUBLIC, p, f), keyFile = path.join(keys, 'units', p, f);
+  const prev = (x) => (fs.existsSync(x) ? readJson(x) : {});
+  const { pub, keys: k } = splitUnit(data, prev(pubFile), prev(keyFile));
+  return [[pubFile, text(pub)], [keyFile, text(k)], [abs, text(mergeUnit(pub, k, `${p}/${f}`))]];
+}
+
+/** Write a merged unit through unitWrites. Returns the paths written. */
+export function writeUnit(file, data) {
+  const w = unitWrites(file, data);
+  for (const [f, t] of w) { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, t); }
+  return w.map(([f]) => f);
 }
 
 function main() {

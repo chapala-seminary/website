@@ -20,6 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { resolveKeysRoot } from './grading-keys-lib.mjs';
+import { writeUnit } from './private-units.mjs';
 /* Review packets quote answers, so they are private (docs/answer-exposure-audit.md):
    assessment-keys/review/. */
 const REVIEW = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review');
@@ -72,6 +73,8 @@ if (cmd === '--list') {
   }
   for (const f of touched) {
     const e = [...byGroup.values()].flat().find((x) => x.file === f);
+    // a unit exam: accepts go to assessment-keys/units, the rest to units-public (tools/private-units.mjs)
+    if (!PAGE.includes(path.relative(DRAFTS, f).split(path.sep)[0])) { writeUnit(f, e.data); continue; }
     const raw = fs.readFileSync(f, 'utf8');
     fs.writeFileSync(f, JSON.stringify(e.data, null, raw.match(/^[[{]\n( +)/)?.[1].length ?? 2) + (raw.endsWith('\n') ? '\n' : ''));
   }

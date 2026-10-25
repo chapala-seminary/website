@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { translationPlan } from './translation-plan.mjs';
 import { resolveKeysRoot } from './grading-keys-lib.mjs';
+import { unitWrites } from './private-units.mjs';
 // Static-page courses (Narrative Preaching, Counseling, Ethics) have their own builder.
 import { COURSES as STATIC_COURSES } from './french-static-courses.mjs';
 const staticFolders=new Set(Object.values(STATIC_COURSES).map(c=>c.folder));
@@ -80,5 +81,7 @@ for(const course of fs.readdirSync(root).filter(c=>fs.statSync(path.join(root,c)
 // A correction for a unit being imported that was never applied is a stale or mistyped key.
 const unused=Object.keys(corrections).filter(k=>!used.has(k)&&writes.some(([p])=>p.startsWith(`src/content/lessons/${k.split('/').slice(0,2).join('/')}.json`)));
 if(unused.length)throw Error(`unused corrections:\n${unused.join('\n')}`);
-if(write)for(const [p,data] of writes)fs.writeFileSync(p,JSON.stringify(data,null,1)+'\n');
+// a unit file is split: question wording to units-public, keys and tr stamps to assessment-keys (tools/private-units.mjs)
+const out=writes.flatMap(([p,data])=>p.startsWith('src/content/units/')?unitWrites(p,data):[[p,JSON.stringify(data,null,1)+'\n']]);
+if(write)for(const [p,text] of out)fs.writeFileSync(p,text);
 console.log(`${count} French units ${write?'imported':'validated; nothing written'}; ${skipped} already published units skipped.`);

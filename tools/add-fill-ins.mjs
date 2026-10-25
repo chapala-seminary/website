@@ -35,6 +35,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { resolveKeysRoot } from './grading-keys-lib.mjs';
+import { writeUnit } from './private-units.mjs';
 /* Review packets quote answers, so they are private (docs/answer-exposure-audit.md):
    assessment-keys/review/. */
 const REVIEW = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review');
@@ -210,7 +211,8 @@ for (const r of rows) {
   // only the three known fields, in a fixed order, so the files diff cleanly
   u.fill = r.fill.map((q) => ({ prompt: { en: q.prompt.en, es: q.prompt.es },
     answer: { en: q.answer.en, es: q.answer.es }, ...(q.accept ? { accept: q.accept } : {}) }));
-  fs.writeFileSync(file, JSON.stringify(u, null, 1));
+  // a private-key course: prompts to units-public, answers to assessment-keys (tools/private-units.mjs)
+  writeUnit(file, u);
 }
-console.log(`wrote ${rows.length * 10} fill-in questions into ${UNITS}`);
+console.log(`wrote ${rows.length * 10} fill-in questions into ${UNITS} (prompts to units-public, answers to assessment-keys)`);
 writeSheet(rows);
