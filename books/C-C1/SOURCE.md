@@ -2,9 +2,9 @@
 
 ## Handoff status
 
-**STATUS: SOURCE VERIFIED; TEXT EXTRACTION / FINAL RANGE COLLATION PENDING.**
+**STATUS: SIX SOURCE OCR TRANSCRIPTS STAGED AND BYTE-VERIFIED; PAGE-IMAGE COLLATION / FIVE-READING SELECTION PENDING.**
 
-This manifest establishes the primary public-domain edition and a five-reading extraction plan. It does **not** certify a final 30,000-word coursebook, translations, digests, or assessment bank. No student-facing or answer-key material is included.
+This manifest establishes the primary public-domain edition, **six staged OCR transcripts**, and a five-reading extraction plan. It does **not** certify a final 30,000-word coursebook, translations, digests, or assessment bank. No student-facing or answer-key material is included.
 
 ## Primary textbook source
 
@@ -25,19 +25,19 @@ This manifest establishes the primary public-domain edition and a five-reading e
 1. Oct. 1735–Feb. 1738  
    https://www.whdl.org/sites/default/files/resource/book/1.1.1%2520Journal%2520Extract%2520%2528Oct.%25201735%2520-%2520Feb.%25201738%2529.pdf?language=en
 2. Feb. 1738–Aug. 1738  
-   https://www.whdl.org/sites/default/files/resource/book/1.1.2%2520Journal%2520Extract%2520%2528Feb.%25201738%2520-%2520Aug.%25201738%2529.pdf?language=en
+   https://www.whdl.org/sites/default/files/resource/book/1.2.1%2520Journal%2520Extract%2520%2528Feb.%25201738%2520-%2520Aug.%25201738%2529.pdf?language=en
 3. Aug. 1738–Nov. 1739  
-   https://www.whdl.org/sites/default/files/resource/book/1.1.3%2520Journal%2520Extract%2520%2528Aug.%25201738%2520-%2520Nov.%25201739%2529.pdf?language=en
+   https://www.whdl.org/sites/default/files/resource/book/1.3.1%2520Journal%2520Extract%2520%2528Aug.%25201738%2520-%2520Nov.%25201739%2529.pdf?language=en
 4. Nov. 1739–Sept. 1741  
-   https://www.whdl.org/sites/default/files/resource/book/1.1.4%2520Journal%2520Extract%2520%2528Nov.%25201739%2520-%2520Sept.%25201741%2529.pdf?language=en
+   https://www.whdl.org/sites/default/files/resource/book/1.4.1%2520Journal%2520Extract%2520%2528Nov.%25201739%2520-%2520Sept.%25201741%2529.pdf?language=en
 5. Sept. 1741–Oct. 1743  
-   https://www.whdl.org/sites/default/files/resource/book/1.1.5%2520Journal%2520Extract%2520%2528Sept.%25201741%2520-%2520Oct.%25201743%2529.pdf?language=en
+   https://www.whdl.org/sites/default/files/resource/book/1.5.1%2520Journal%2520Extract%2520%2528Sept.%25201741%2520-%2520Oct.%25201743%2529.pdf?language=en
 6. Sept. 1743–Nov. 1746  
-   https://www.whdl.org/sites/default/files/resource/book/1.1.6%2520Journal%2520Extract%2520%2528Sept.%25201743%2520-%2520Nov.%25201746%2529.pdf?language=en
+   https://www.whdl.org/sites/default/files/resource/book/1.6.1%2520Journal%2520Extract%2520%2528Sept.%25201743%2520-%2520Nov.%25201746%2529.pdf?language=en
 
 The last file extends beyond the catalog volume's stated end date; any extraction from it must stop at 29 November 1745 for this edition.
 
-## Five substantive readings — extraction plan
+\n## Verified staged OCR source files — 24 October 2026\n\nEach file is the unmodified text extraction of the corresponding WHDL-linked scanned journal extract. Exact content was re-fetched from GitHub and matched against the extracted text. **The word counts are OCR token counts, not corrected prose counts.**\n\n| File | OCR characters | OCR whitespace words | GitHub blob SHA-1 |\n|---|---:|---:|---|\n| journal-extract-1-ocr.txt | 175,182 | 32,718 | `957a507d9ba1f0f1eba72330f865be5d1ec9ee80` |\n| journal-extract-2-ocr.txt | 164,495 | 30,484 | `b80bc00b8e386890d942e3fc0cf3cbb9c3bbedaa` |\n| journal-extract-3-ocr.txt | 222,019 | 41,357 | `5e964602bfba9662dd5b101f88483f16b24f1335` |\n| journal-extract-4-ocr.txt | 221,765 | 41,291 | `db37dc8b142b926ea004cd6e3a31ebd2b682094a` |\n| journal-extract-5-ocr.txt | 257,170 | 48,185 | `c2f0f1d55686838ed120cf58347b7841c3485fe4` |\n| journal-extract-6-ocr.txt | 212,935 | 39,659 | `4ba757b2414a83406ac87c3e0f03f62bcd473ab3` |\n\nAll six files are on `handoff/book-sources` in `books/C-C1/`. The final scan extends to November 1746 and MUST be cut off at 29 November 1745 for this course edition. Preserve source footnotes and edition labels, but strip running heads and correct OCR artifacts only in derivative, separately identified course selections.\n\n## Five substantive readings — extraction plan
 
 The five readings below are course-aligned date windows in Wesley's journal. Exact page/line boundaries and word counts must be recorded against the 1872 Jackson scan before the package is marked ready.
 
@@ -51,7 +51,7 @@ The five readings below are course-aligned date windows in Wesley's journal. Exa
 
 ### Required completion work
 
-- Extract/OCR only from the Jackson 1872 scan or WHDL Jackson-derived files.
+- DONE: Extract/OCR only from the Jackson 1872 scan or WHDL Jackson-derived files. Six raw OCR files now available on the handoff branch; still uncollated.
 - Collate each start/end boundary against the scan and record printed page numbers.
 - Remove duplicated prefaces, running heads, footers, and OCR artifacts.
 - Produce one approximately 30,000-word continuous textbook selection plus five non-overlapping readings.
@@ -73,7 +73,7 @@ These are supplementary sources for historical context and cross-checking, not s
 
 ## Risks and blockers
 
-- The current automation environment timed out while extracting the SABDA PDF and could not directly download WHDL PDFs, so no raw transcript is committed here.
+- RESOLVED 24 October 2026: all six WHDL linked PDF scans were extracted through the supported public-source fetcher and committed as separate OCR transcripts on handoff/book-sources. Exact text was re-fetched from GitHub and compared byte-for-byte. OCR remains uncollated, with visible errors in dates, spelling, headings and page furniture; e.g. extract 4 opening heading misreads 1739 as 1789. Do not quote or assess without collation.
 - WHDL URL numbering and date labels are recorded from the catalog's linked resources; extraction must verify each file opens and matches the stated chronology.
 - The Parker 1903 abridgment is a useful navigation aid only. Its editorial selection and unlicensed repository copy are not approved inputs.
 - This manifest is ready for Claude to fetch the primary PDFs and build the raw Jackson-only corpus, but it is **not** a completed encrypted handoff.
