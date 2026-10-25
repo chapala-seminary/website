@@ -175,7 +175,8 @@ What the tool does:
    *pas*). Where the French joins two phrases the English italicizes
    apart, its longest italic span is split at a space (the page looks the
    same); italics in a parenthetical aside the French adds are dropped.
-   Each change is reported. It stops if any other tags differ, or if any English passage of
+   A French ordinal set as a superscript the English lacks (XIX<sup>e</sup>)
+   is written on the line (XIXe). Each change is reported. It stops if any other tags differ, or if any English passage of
    the room would stay English on the French page. An elective room's store
    shares French only with the core rooms and digests, never with another
    elective's. So holding or removing one course cannot take French away
@@ -197,7 +198,8 @@ build again. Running the tool twice gives the same files.
 
 **Held courses.** `src/data/elective-held.json` lists electives held back
 from the site, by code, each with its reason. A-C1 is held for a copyright
-decision (24 Oct 2026). A held course keeps its units and nothing else:
+decision (24 Oct 2026), and so are A-C3 and A-C5, which draw on the same
+newspaper, *The Apostolic Faith*. A held course keeps its units and nothing else:
 - both generators refuse its code;
 - `import-readings.mjs` skips its row;
 - `import-electives.mjs` gives its units no course-readings box;
@@ -206,6 +208,13 @@ decision (24 Oct 2026). A held course keeps its units and nothing else:
 
 Its private keys may stay in assessment-keys. To lift a hold, remove the
 code, run both generators for it, and build.
+
+A-C3 and A-C5 were generated once before their hold, so their textbook keys
+and reading banks are in assessment-keys; everything public was then
+removed, their shelves included, as for A-C1. They have no exam-review pins
+yet. To lift their hold, write the shelf again (book-sources
+`books/A-C3/SOURCE.md`, `books/A-C5/SOURCE.md`) before running the
+generators.
 
 The front page lists elective reading tests apart from the 45 core ones
 (`#elective-readings`). Their test is optional on every track

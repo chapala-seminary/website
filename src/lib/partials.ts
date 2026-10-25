@@ -81,6 +81,11 @@ export const READING_ROOM: Record<string, string> = {
   CTSElecBap1: "CTSElecBap1Readings.html",
   CTSElecBap3: "CTSElecBap3Readings.html",
   CTSElecBap5: "CTSElecBap5Readings.html",
+  CTSElecBap4: "CTSElecBap4Readings.html",
+  CTSElecRef2: "CTSElecRef2Readings.html",
+  CTSElecWes1: "CTSElecWes1Readings.html",
+  CTSElecWes5: "CTSElecWes5Readings.html",
+  CTSElecPC4: "CTSElecPC4Readings.html",
 };
 
 /* The honours-readings box. It showed English and Spanish together, English

@@ -10,6 +10,8 @@
  * italics are dropped, and each drop is reported:
  *   1. first from words the English text itself contains;
  *   2. then the shortest extra italics (12 characters or fewer: emphasis, never a title).
+ * French ordinal superscripts the English lacks (XIX<sup>e</sup>) are first
+ * written on the line (XIXe), and reported.
  * Any other difference is returned as a problem for the caller to refuse.
  */
 import { tagProblem } from './french-readings-lib.mjs';
@@ -20,6 +22,18 @@ const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 export function fitFrench(en, fr) {
   const dropped = [];
   const plainEn = ` ${String(en).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').toLowerCase()} `;
+  // 0. French ordinals set as superscripts (XIX<sup>e</sup> siècle, 1<sup>er</sup>)
+  //    where the English has fewer <sup>: written on the line (XIXe, 1er).
+  {
+    const sups = (s) => (s.match(/<sup>/g) || []).length;
+    const ORD = /([0-9IVXLCDM])<sup>(e|er|re|ers|res|es|ème|èmes|nd|nde|nds|ndes)<\/sup>/;
+    while (sups(fr) > sups(en)) {
+      const m = fr.match(ORD);
+      if (!m) break;
+      fr = fr.slice(0, m.index) + m[1] + m[2] + fr.slice(m.index + m[0].length);
+      dropped.push(`<sup>${m[2]}</sup> after "${m[1]}" (a French ordinal, written on the line)`);
+    }
+  }
   for (const tag of ['em', 'i']) {
     const count = (s) => (s.match(new RegExp(`<${tag}>`, 'g')) || []).length;
     while (count(fr) > count(en)) {

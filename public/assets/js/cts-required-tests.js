@@ -196,6 +196,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSELECBAP4": [
+  {
+   "slug": "elecbapfour",
+   "page": "CTSTextbookElecBapFour",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbapfourreadings",
+   "page": "CTSElecBap4Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSELECBAP1": [
   {
    "slug": "elecbapone",
@@ -234,6 +248,20 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "elecbaptworeadings",
    "page": "CTSElecBap2Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC4": [
+  {
+   "slug": "elecpcfour",
+   "page": "CTSTextbookElecPCFour",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpcfourreadings",
+   "page": "CTSElecPC4Readings",
    "kind": "reading",
    "requiredFrom": null
   }
@@ -294,6 +322,34 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSELECREF2": [
+  {
+   "slug": "elecreftwo",
+   "page": "CTSTextbookElecRefTwo",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecreftworeadings",
+   "page": "CTSElecRef2Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES5": [
+  {
+   "slug": "elecwesfive",
+   "page": "CTSTextbookElecWesFive",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwesfivereadings",
+   "page": "CTSElecWes5Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSELECWES4": [
   {
    "slug": "elecwesfour",
@@ -304,6 +360,20 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "elecwesfourreadings",
    "page": "CTSElecWes4Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES1": [
+  {
+   "slug": "elecwesone",
+   "page": "CTSTextbookElecWesOne",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwesonereadings",
+   "page": "CTSElecWes1Readings",
    "kind": "reading",
    "requiredFrom": null
   }
