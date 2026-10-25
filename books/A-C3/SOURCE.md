@@ -32,6 +32,10 @@ A [five-candidate heading/offset index](./FIVE-CANDIDATE-SOURCE-INDEX-2026-10-25
 
 A [verified article-only boundary and contributor audit](./ARTICLE-BOUNDARY-AUDIT-2026-10-25.md) corrects the provisional candidate index: the gifts and discernment windows included adjacent articles, and the visitor report included multiple other voices. The five article-only spans total **3,407 OCR tokens**, not the candidate-index 6,272; **R1–R4 have Seymour signatures in the reproduction, while R5's visitor remains anonymous**. None are facsimile-collated, cleared, substantial five-reading packages, translated, or approved. Treat the older candidate index as a search aid only.
 
+## Trilingual original editorial digests (25 October 2026)
+
+[Five EN/ES/FR critical-study digests](./STUDY-DIGESTS-EN-ES-FR-EDITORIAL-2026-10-25.md) now align to the corrected article-only spans. These are **original summaries and study prompts**, NOT source-text translations, approved readings, student-facing course material or assessment banks. They require source collation, bilingual review, rights/academic clearance and an academically sufficient reading plan.
+
 ## Five proposed reading themes — NOT YET EXTRACTED
 
 1. Early teaching on baptism with the Holy Spirit.
