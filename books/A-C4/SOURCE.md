@@ -44,3 +44,7 @@ Claude must select five substantial **author-authored, source-collated, nonoverl
 4. Provide historical theological context, including debates over women in ministry and contested miracle/healing claims. Do not present historical assertions as independently verified facts.
 5. Put textbook and reading-set 40-question banks **only** in the private assessment-keys repository. No keys or student data in this public handoff.
 6. Obtain Wayne's academic and final copyright/rights approval before any production publication. No merge or deployment.
+
+## Five source-bounded chapter candidates and discovered contributor hold (25 October 2026)
+
+The [five-chapter location and embedded-contributor audit](./FIVE-CHAPTER-CANDIDATE-AND-CONTRIBUTOR-GATE-2026-10-25.md) identifies **five nonoverlapping chapter windows** (13,414 OCR words) from the 1912 source and independently flags **Chapter LXXXV's Carrie Judd Montgomery contribution (died 1946)** as **not presumptively cleared in Mexico**. The chapter locations are not facsimile-collated, proofread, translated, or student-ready; they are **not five independent works**. Wayne retains academic and rights approval. Do not include Chapter LXXXV or unverified embedded authors' text in any release.
