@@ -1,13 +1,27 @@
 # D-C1 — Reformed Foundations: Calvin source handoff (FAST LANE)
 
-**Status: SOURCE-ROUTE READY; original English text not yet committed locally.** Claude explicitly approved a Gutenberg/GITenberg ID + bounded ranges + shelf handoff when raw text transport is unavailable. This is a historical source selection, **not** an approved textbook, verified five-reading extraction, translation, examination bank, or publication clearance.
+**Status: FIVE ENGLISH SOURCE READINGS STAGED AND HASHED; textbook, translations, digests, private banks, collation, and academic release remain pending.** This is a historical source handoff, **not** an approved textbook, translated course, examination bank, or publication clearance.
 
 ## Source and provenance
 
 - John Calvin (1509–1564), *Institutes of the Christian Religion* (final authorial edition 1559), translated by **John Allen (1771–1839)**. Source identifies a sixth American edition, Philadelphia: Presbyterian Board of Publication; the title leaf shows **1813** (edition/title chronology requires bibliographic collation).
 - **Primary volume I: Project Gutenberg #45001**, https://www.gutenberg.org/ebooks/45001 ; verified UTF-8 full text https://www.gutenberg.org/cache/epub/45001/pg45001.txt . The Gutenberg page names Calvin, Allen, and a public-domain-in-USA designation. It contains Book I (chapters I–XVIII), Book II (chapters I–XVII), and Book III (chapters I–XIII). Its 2022 transcription update is not a modern academic edition.
 - **Companion volume II: Project Gutenberg #64392**, https://www.gutenberg.org/ebooks/64392 ; verified catalog lists Calvin and Allen and continues at Book III, chapter XIV, through Book IV. Use as a **shelf/comparison**, not silently as part of the volume-I textbook.
-- Claude-tested GITenberg mirror for vol. I: https://github.com/GITenberg/Institutes-of-the-Christian-Religion--Vol.-1-of-2-_45001 ; direct raw candidate https://raw.githubusercontent.com/GITenberg/Institutes-of-the-Christian-Religion--Vol.-1-of-2-_45001/master/45001.txt . **Caution:** the GitHub contents API returned an empty 45001.txt blob when ChatGPT attempted to fetch it; do not treat that particular raw path as a verified nonempty text. Use the verified Gutenberg UTF-8 URL, or inspect the GITenberg repository for the actual nonempty text filename. PG 45001 and 64392 IDs are independently verified.
+- Verified GITenberg mirror for vol. I: https://github.com/GITenberg/Institutes-of-the-Christian-Religion--Vol.-1-of-2-_45001 . The correct nonempty UTF-8 source is `45001-0.txt` (source blob `d0079ee389219ba0093f298ac1a4d60b2c56fb7b`, 1,926,337 bytes): https://raw.githubusercontent.com/GITenberg/Institutes-of-the-Christian-Religion--Vol.-1-of-2-_45001/master/45001-0.txt . The similarly named `45001.txt` is an empty blob and must not be used. PG 45001 and 64392 IDs are independently verified.
+
+## Verified staged readings
+
+Extracted from the nonempty GITenberg `45001-0.txt` source by exact chapter boundaries. Word counts use whitespace tokenization; SHA-256 values are of the committed UTF-8 files before GitHub transport.
+
+| File | Scope | Words | SHA-256 |
+|---|---|---:|---|
+| `reading-1.md` | Book I, chapters I–V | 11,116 | `8475d20a2b7653d502024a6fb1292ec293bf71f86b9b8b593e8401885bdd3a68` |
+| `reading-2.md` | Book I, chapters VI–X | 11,877 | `f9db4173a3695359ec9c7cca7f8f88cc471f3ea9dbaf08ad2ff260d7c1a18da7` |
+| `reading-3.md` | Book I, chapters XIII–XVIII | 48,959 | `d0d6dbb4ac7974b3795b93ff9fbadbdfe2491dd63440384bd12e33e39a719619` |
+| `reading-4.md` | Book II, chapters I–V | 40,479 | `617c54fecd3040e1aafddc25269242a94be21963fe152bec70fc2e90131b3e05` |
+| `reading-5.md` | Book III, chapters XI–XIII | 18,128 | `15e623294a07ecbac1940b1cdd5ae18341c3d68c5b260793e9f4ade8b808d145` |
+
+Total staged reading corpus: **130,559 words**. These are substantial chapter-range sources, not digests. The unusually long readings 3 and 4 should be reviewed for student workload before academic release; shortening them requires an explicit documented curriculum decision, not silent truncation.
 
 ## Five proposed substantial readings (one contiguous range per file)
 
