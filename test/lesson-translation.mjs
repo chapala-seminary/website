@@ -19,7 +19,7 @@ const dir = path.join(root, 'src/content/lessons/CTSTest');
 fs.mkdirSync(dir, { recursive: true });
 fs.cpSync('src/lib', path.join(root, 'src/lib'), { recursive: true });
 fs.mkdirSync(path.join(root, 'tools'), { recursive: true });
-for (const tool of ['translate-lesson.mjs', 'translation-plan.mjs']) fs.cpSync('tools/' + tool, path.join(root, 'tools', tool));
+for (const tool of ['translate-lesson.mjs', 'translation-plan.mjs', 'private-units.mjs']) fs.cpSync('tools/' + tool, path.join(root, 'tools', tool));
 const unitDir = path.join(root, 'src/content/units/CTSTest');
 fs.mkdirSync(unitDir, { recursive: true });
 const exam = () => ({unit:1, mc:[{stem:{en:'Who?',es:'¿Quién?'}, options:{en:['Adam','Noah'],es:['Adán','Noé']}, answer:0,why:{en:'First man',es:'Primer hombre'}}], fill:[{prompt:{en:'The first man was ____.',es:'El primer hombre fue ____.'},answer:{en:'Adam',es:'Adán'},accept:{en:['the man'],es:['el hombre']}}], sa:[{prompt:{en:'Explain.',es:'Explique.'},keywords:{en:[['creation','created'],'God'],es:[['creación','creado'],'Dios']},model:{en:'God created.',es:'Dios creó.'}}]});
