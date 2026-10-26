@@ -2,7 +2,7 @@
 **Research handoff | 2026-10-26 | NONPRODUCTION / NOT A SYLLABUS OR RIGHTS APPROVAL**
 
 ## Why this course needs a replacement plan
-The staged B-C1 `SOURCE.md` (GitHub blob `89f725e8457ad81534d25618558c0b8db4fcb781`) explicitly says its five `reading-*.md` files are passages from Thomas Armitage's *A History of the Baptists* (1887) and that `textbook.md` combines those same passages. They are **not independent companion readings**, despite being distinct chapters. Unlike B-C3, an exact shingle percentage for B-C1 has **not** yet been computed. Preserve existing valid student records. Retain Armitage as the provisional historical textbook until Wayne approves a revised academic syllabus.
+The staged B-C1 `SOURCE.md` (GitHub blob `89f725e8457ad81534d25618558c0b8db4fcb781`) explicitly says its five `reading-*.md` files are passages from Thomas Armitage's *A History of the Baptists* (1887) and that `textbook.md` combines those same passages. They are **not independent companion readings**, despite being distinct chapters. A fresh **12-word exact-shingle audit** of these six staged blobs measured **98.41%–99.44%** of each reading's shingles contained in the textbook (details in `../INDEPENDENCE_AUDIT_20_ELECTIVES.md`). Preserve existing valid student records. Retain Armitage as the provisional historical textbook until Wayne approves a revised academic syllabus.
 
 ## Five distinct-author original-edition leads
 All five candidates are **different authors from Armitage** and from one another. An institutional record or digitized listing verifies the stated historical title/edition, NOT the exact excerpt, scan rights, academic suitability, or modern reproduction terms.
@@ -32,4 +32,4 @@ Original historical authors died well before 1926, so the **original authorial t
 4. Flag contested Baptist succession theories, the historiography of religious liberty, race, and the political context; do not treat historical narratives as CTS policy.
 5. Obtain Wayne's **exact-source, rights and academic approval** before EN/ES/FR full selections, digests used as course materials, or private 40-question banks. Any answer keys belong **only** in private `assessment-keys`, never this public handoff. No production deployment, exam changes, or credit revisions.
 
-**Verified here:** five distinct original historical titles/edition catalog leads; source-stage B-C1 textbook/reading relationship; original trilingual editorial comparison. **Not done:** facsimile collation, selected excerpts, word counts, overlap measurements for new candidates, final rights review, translations, private banks or release.
+**Verified here:** five distinct original historical titles/edition catalog leads; measured staged B-C1 textbook/reading duplication; original trilingual editorial comparison. **Not done:** facsimile collation, selected excerpts, word counts or overlap measurements for the *new* candidates, final rights review, translations, private banks or release.
