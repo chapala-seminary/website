@@ -25,6 +25,20 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      # The answer keys live in the private assessment-keys repo (docs/answer-exposure-audit.md).
+      # Unlike beta, production does not continue without them: the build needs them.
+      - name: Checkout private assessment keys
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys
+        run: |
+          test -d .assessment-keys/units || { echo "The private assessment-keys checkout is missing; set ASSESSMENT_KEYS_TOKEN for the production environment."; exit 1; }
+          echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
       - run: npm run build
       - name: Run the full test suite
         run: npm test
