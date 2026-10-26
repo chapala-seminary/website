@@ -33,6 +33,10 @@
 
 Claude must locate relevant paragraphs and bylines within the issues, verify exact issue/page/date against the **original** facsimile, establish author and Mexico rights for each selection, then prepare five nonoverlapping substantial rights-cleared readings. If clearance fails, use links and write original historical CTS analysis instead of copying an unverified contributor's words.
 
+## Five candidate source map and workload gate (26 October 2026)
+
+A [five-candidate source and rights gate](./FIVE_CANDIDATE_SOURCE_AND_RIGHTS_GATE_2026-10-26.md) now maps exact staged-blob windows for cross-cultural mission reports, local mission leadership, missionary correspondence, publishing/financial practice, and travel/church planting. The five windows total **3,411 normalized words** and share **zero exact unique 12-word sequences** across all ten pairs. They remain one-periodical, mixed-contributor material; two windows are anonymous/institutional and three are composite multi-voice reports. No A-C5 textbook is staged, and no facsimile collation, contributor rights clearance, academic approval, translation authorization, or assessment bank is claimed.
+
 ## Mandatory completion gates
 
 1. Identify individual bylines, contributors, editors and any later annotations; research death dates/permissions. Seymour's death alone does NOT clear all newspaper content.
