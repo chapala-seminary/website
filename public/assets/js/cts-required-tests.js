@@ -72,7 +72,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "wisespeakreadings",
    "page": "CTSPreachingReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "ETHICS": [
@@ -100,7 +100,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "chreadings",
    "page": "CTSCHReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSWR": [
@@ -179,7 +179,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "streadings",
    "page": "CTSSTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSELECBAP5": [
@@ -417,7 +417,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "evangelismreadings",
    "page": "CTSEvangelismReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTS1PETER": [
@@ -610,7 +610,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "ntreadings",
    "page": "CTSNTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSOTS": [
@@ -624,7 +624,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "otsreadings",
    "page": "CTSOTSReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSPARABLES": [
@@ -652,7 +652,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSAL": [
@@ -790,7 +790,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "hermeneuticsreadings",
    "page": "CTSHermeneuticsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSCE": [

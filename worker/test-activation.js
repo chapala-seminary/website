@@ -18,7 +18,10 @@ export async function activationEnvironment(env) {
    The activation date of every other test is unchanged. Nothing earned is
    taken away: an optional test holds no completion. Remove a slug here once
    faculty approve its bank; test/eight-optional.test.mjs keeps this list equal
-   to the manifest. */
+   to the manifest.
+   Wayne, 26 Oct 2026: their banks have long been reviewed; all eight now carry
+   an explicit requiredFrom (2026-10-28T06:00:00Z, src/data/required-from.json),
+   which this default never overrides. */
 export const PENDING_FACULTY_REVIEW = new Set(['otsreadings', 'ntreadings', 'streadings', 'evangelismreadings',
   'pmreadings', 'chreadings', 'wisespeakreadings', 'hermeneuticsreadings']);
 /* The denominational electives' textbook and reading tests (Oct 2026) are
