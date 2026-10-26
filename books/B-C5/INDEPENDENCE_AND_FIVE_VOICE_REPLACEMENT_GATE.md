@@ -1,0 +1,67 @@
+# B-C5 Baptist Ministry and Missions — measured reading independence and five-voice replacement gate
+Research-only working document · 2026-10-26 · no academic, legal, translation, or publication approval
+
+## What the staged files actually contain
+
+The staged `SOURCE.md` correctly says that the full William Carey *Enquiry* (1792) is the textbook and that readings R1–R5 reproduce its Sections I–V. I independently fetched the six exact files from `handoff/book-sources` and measured their overlap, rather than treating that manifest statement as a substitute for verification.
+
+**Reproducible comparison method.** Lowercase; Unicode NFKC normalization; split into letter/number tokens (retaining internal apostrophes); compare each distinct consecutive 12-token sequence in each reading with the set of 12-token sequences in the textbook. The longest run is the longest chain of consecutive identical 12-token windows aligned to consecutive textbook positions. Heading and introductory CTS boilerplate were deliberately *not* stripped, so reported percentages are conservative for the historical body. This is a source-stage measurement, not a measurement of the deployed site or the private question banks.
+
+| File | Git blob SHA | Normalized tokens | Unique 12-token sequences found in textbook | Reading containment | Longest exact run |
+|---|---|---:|---:|---:|---:|
+| textbook.md | 7593654189a5bdef6ebbedd33324230cac45d6bd | 15,155 | baseline | — | — |
+| reading-1.md | ea265b5d9296969daa846590ae071ff53d4a5725 | 1,522 | 1,478 / 1,511 | **97.82%** | 1,489 words |
+| reading-2.md | 41e82f67f0abfa1a5e913b77e16fe5620b502816 | 5,185 | 5,141 / 5,174 | **99.36%** | 5,152 words |
+| reading-3.md | 794cb68351d10540161de73590df1602332e26aa | 3,221 | 3,177 / 3,210 | **98.97%** | 3,188 words |
+| reading-4.md | a2e3facf2fc93b6b54d817dbe5d60c9128742d83 | 2,184 | 2,140 / 2,173 | **98.48%** | 2,151 words |
+| reading-5.md | 8f08f935be648c20a216f2684bc626724f46dc4c | 2,346 | 2,302 / 2,335 | **98.59%** | 2,313 words |
+
+**Important trap for CI:** every pair of different reading files has only **14** common 12-token sequences (shared framing/boilerplate), less than 1% of the smaller reading. A reading-vs-reading duplicate detector would therefore falsely PASS this package. The actual textbook-vs-reading comparison reveals near-total containment. Test both axes and compare manifests against files; report-only first, with no automatic student-record changes.
+
+**Academic status:** these are five nonoverlapping *sections* of Carey, but not five independent reading voices or five independent sources. A textbook exam and a second bank drawn solely from the same five sections should not be described as two independent content assessments. This is an assessment-design issue, not proof that any existing student grade was invalid or that production contains these exact blobs. Preserve earlier valid completions and never silently replace the historical files or their keys.
+
+## Replacement-source shortlist — FIVE different historical authors, NOT approved reading excerpts
+
+The historical Carey textbook remains the primary reference. The proposed second assessment would draw from five separate historical authors with contrasting perspectives. Catalog/scan identification below is real; exact 3,000–6,000-word contiguous excerpts, printed-page anchors, OCR collation, translation, and rights clearance are still OPEN. A catalog record is not permission to copy a modern edited/translated version.
+
+**R1 — Andrew Fuller (1754–1815): theological basis of proclamation.** *The Gospel of Christ Worthy of All Acceptation* (Northampton, 1785), a different author's argument about faith and the responsibility to respond to the gospel. Verify a coherent section from the original 1785 printing, not an annotated modern critical edition or a later collected-works transcription. 1785 original catalog: https://catalog.folger.edu/record/855626 ; 1785 original bibliographic witness: https://content.www.wellcomecollection.org/works/ev8wpye6 . **Gate:** original-page access may require institutional licensing; modern scholarly notes remain excluded. Proposed analytic question: how does Fuller's account of duty relate to Carey's argument for missionary means, and where do they differ?
+
+**R2 — John Ryland Jr. (1753–1825): society organization, support and accountability.** *The Work of Faith, the Labour of Love, and the Patience of Hope* (1816 original; 1818 Charlestown printing separately digitized), a biography of Andrew Fuller and his Baptist Missionary Society service. 1816 bibliographic record: https://openlibrary.org/works/OL10520697W/The_work_of_faith_the_labour_of_love_and_the_patience_of_hope ; original 1818 scan: https://commons.wikimedia.org/wiki/File:California_Digital_Library_(IA_workoffaithlabou00rylarich).pdf ; 1818 chapter anchors: https://books.google.com/books?id=pF1CAAAAIAAJ . **Gate:** distinguish Ryland's own narrative from quoted letters by Fuller; do not mistake the 2021 modern critical edition for public domain. Proposed question: what practices make a mission accountable to donors, churches and those it serves?
+
+**R3 — Ann Hasseltine Judson (1789–1826): first-person cross-cultural missionary testimony.** *An Account of the American Baptist Mission to the Burman Empire* (London, 1823), in letters. Princeton Theological Seminary original-scan/catalog: https://commons.ptsem.edu/id/accountofamerica00juds ; Commons facsimile metadata: https://commons.wikimedia.org/wiki/File:An_account_of_the_American_Baptist_mission_to_the_Burman_empire_-_in_a_series_of_letters,_addressed_to_a_gentleman_in_London._(IA_accountofamerica00juds).pdf . **Gate:** select one continuous first-person narrative on language learning and local encounter from the original; mark dated colonial terms and distinguish Ann's voice from her husband's or later editorial commentary. Proposed question: what do her experiences reveal about language learning, women in mission, and unequal power?
+
+**R4 — Eustace Carey (1791–1855): sustained ministry and historical interpretation.** *Memoir of William Carey, D.D.* (London, Jackson and Walford, 1836; 630-page catalog record), by Carey's nephew and a missionary, not the 1792 textbook author. Catalog: https://books.google.com.mt/books?id=_73iSb36t9IC ; 1836 facsimile metadata: https://commons.wikimedia.org/wiki/File:Memoir_of_William_Carey,_D.D_(IA_dli.csl.5094).pdf . **Gate:** the work incorporates quoted letters/journals, so choose a passage where Eustace's own narrative is substantive; explicitly label embedded quotations and measure overlap with Carey and other CTS sources. Proposed question: how can biography illuminate perseverance while also requiring critical source evaluation?
+
+**R5 — William Ward (1769–1823): printing, local cultural knowledge and the limits of missionary observation.** *A View of the History, Literature, and Mythology of the Hindoos*, specifically the Serampore 1815–1818 **second, abridged edition**, not an unlabelled 1822 three-volume reworking or a modern reprint. Wellcome original edition and public-domain-mark record: https://wellcomecollection.org/works/dfcpnjf3 ; original 1818 scan metadata: https://commons.wikimedia.org/wiki/File:A_view_of_the_history,_literature,_and_mythology_of_the_Hindoos_(Vol._I).djvu . **Gate:** this source contains colonial-era stereotypes and assertions about Indian religions; select an appropriate continuous passage for *critical historiography*, never as an authoritative description of Hindu communities or modern India. Compare with responsible contemporary Indian scholarship during lesson review. Proposed question: what does Ward's printing/translation work teach about communicating across languages, and which assumptions must today's ministers reject?
+
+**Five-author design principle:** Fuller, Ryland, Judson, Eustace Carey and Ward each contribute a distinct primary perspective; the historical Carey textbook remains separate. Authorship diversity alone does not guarantee passage independence: check direct quotation and 10-/12-token containment against the textbook and all other CTS readings before approval.
+
+## Original editorial teaching frame, ready for Claude's EN/ES/FR planning (NOT source translation)
+
+**EN.** This course distinguishes the theology of mission, organizational stewardship, the lived experiences of missionaries, retrospective historical accounts, and the responsibilities of cross-cultural interpretation. William Carey's 1792 work is a primary document from its time, not a current demographic survey. Students should compare authors, examine whose voices are absent, and test every historical claim against its setting.
+
+**ES.** Este curso distingue la teología de la misión, la administración responsable, las experiencias vividas por los misioneros, los relatos históricos posteriores y la interpretación intercultural. La obra de William Carey de 1792 es una fuente histórica de su época, no un estudio demográfico actual. El alumnado debe comparar autores, considerar las voces ausentes y examinar cada afirmación en su contexto.
+
+**FR.** Ce cours distingue la théologie de la mission, la gestion responsable, l'expérience vécue des missionnaires, les récits historiques rétrospectifs et l'interprétation interculturelle. Le texte de William Carey publié en 1792 est une source historique de son époque, non une enquête démographique actuelle. Les étudiants doivent comparer les auteurs, relever les voix absentes et replacer chaque affirmation dans son contexte.
+
+**Five trilingual original prompts (not graded questions):**
+1. EN: Where do theological obligation and practical responsibility meet? / ES: ¿Dónde se encuentran la obligación teológica y la responsabilidad práctica? / FR: Où se rencontrent l'obligation théologique et la responsabilité pratique ?
+2. EN: How should a mission organization document stewardship and accountability? / ES: ¿Cómo debe documentar una organización misionera su administración y rendición de cuentas? / FR: Comment une organisation missionnaire doit-elle documenter sa gestion et sa responsabilité ?
+3. EN: What can a first-person account reveal that an institutional report omits? / ES: ¿Qué puede revelar un testimonio personal que omite un informe institucional? / FR: Que peut révéler un témoignage personnel qu'un rapport institutionnel omet ?
+4. EN: How do quotations and later biography change the interpretation of a missionary's work? / ES: ¿Cómo cambian las citas y una biografía posterior la interpretación de una obra misionera? / FR: Comment les citations et une biographie postérieure modifient-elles l'interprétation d'une œuvre missionnaire ?
+5. EN: How can Christians learn from historical missions without repeating colonial stereotypes? / ES: ¿Cómo pueden los cristianos aprender de las misiones históricas sin repetir estereotipos coloniales? / FR: Comment les chrétiens peuvent-ils apprendre des missions historiques sans répéter les stéréotypes coloniaux ?
+
+## Mexico/source/translation rights status
+
+All five **original historical authorial works** are preliminary public-domain candidates under the Mexico life-plus-100 approach (author death dates no later than 1855), but the precise source witnesses, digitizer terms, embedded later material, and Mexican legal application require Wayne's authorization/review before reuse. No copyright clearance is being issued here. The original 1792 Carey textbook is separately screened in SOURCE.md. **Do not reuse modern Spanish/French translations, critical-edition commentary, scans subject to restrictive provider terms, or later introductions simply because an original author died long ago.** Draft fresh ES/FR renderings only from a verified and authorized English witness; maintain translator attribution and passage IDs.
+
+## Claude handoff and release gates
+
+1. Confirm which of these five voices fits Wayne's Baptist Ministry/Missions syllabus; identify any overlap with B-C1/B-C2/B-C3 and obtain Wayne's academic decision.
+2. Retrieve an original, page-addressable witness for each; log exact edition, imprint, repository URL, file checksum, printed page start/end, first/last words, and contiguous 3,000–6,000-word count. A short book/section needs an explicit exception, not fabricated length.
+3. Collate the actual facsimile against transcription (especially dates, statistics, quotations); flag archaic/colonial language and any embedded non-author material. Store text/source manifest securely.
+4. Run textbook-vs-each-reading AND reading-vs-reading 10-/12-token overlap tests. The current R1–R5 package is **not** an independent second-source set.
+5. Only after rights and syllabus approval, create original EN/ES/FR full reading texts/digests and independently audit translations; write one 40-item **textbook** bank and one 40-item **reading-set** bank with answer keys exclusively in private assessment-keys. Encrypt any external handoff; never place keys in this public branch.
+6. Preserve existing valid attempts, completion dates and certificates; beta-test any replacement and make no production merge or policy change without Wayne.
+
+**Status:** source-stage overlap quantified and five independently catalogued historical *candidates* identified; original trilingual editorial teaching frame prepared. **Not done:** source facsimile collation, approved excerpt selection, full EN/ES/FR readings, legal/academic signoff, private banks, secure handoff, beta release or production deployment.
