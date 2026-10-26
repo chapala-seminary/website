@@ -143,10 +143,11 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
   st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' } });
   ok(lv(st) === 'mdiv', `a master's-level report raises it (${lv(st)})`);
   const cert = await jpost('/api/register', { name: 'Cert Twentyfive', email: 'cert-twentyfive@example.org', track: 'cert' });
-  const codes = Object.keys((await jget('/api/catalog')).body.completions).slice(0, 44);
+  // every course (65 since the electives of 24 Oct 2026; a fixed slice could miss a foundation course)
+  const codes = Object.keys((await jget('/api/catalog')).body.completions);
   const all = await jpost('/api/sync', { code: cert.body.code, progress: [], doneCodes: codes, completionTracks: {} });
   ok(all.body.degrees.certificate === true && all.body.degrees.associate === false,
-    `44 Certificate-level courses make a Certificate of Ministry, not an Associate (${JSON.stringify(all.body.degrees)})`);
+    `${codes.length} Certificate-level courses make a Certificate of Ministry, not an Associate (${JSON.stringify(all.body.degrees)})`);
 }
 
 // One course, one completion (Dr. Cook, 5 Oct 2026): a returning browser

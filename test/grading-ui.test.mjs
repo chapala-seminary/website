@@ -75,7 +75,7 @@ async function mcAll(p, rightCount = bank.mc.length) {
   for (let i = 0; i < bank.mc.length; i++) {
     const j = i < rightCount ? bank.mc[i].answer : (bank.mc[i].answer + 1) % bank.mc[i].options.en.length;
     await mcAnswer(p, i, j);
-    await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text`);
+    await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text.correct, .question[data-mc="${i}"] .feedback-text.incorrect`);
   }
 }
 async function fillAll(p, rightCount = bank.fill.length, check = true) {

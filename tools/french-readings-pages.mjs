@@ -16,6 +16,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { DIGEST, loadStore, augmentHtml } from './french-readings-lib.mjs';
+import { isPrivateReading, readingQuestions } from './grading-keys-lib.mjs';
 
 const drafts = new Set();
 const reviewed = new Set();
@@ -34,7 +35,13 @@ function recordPages() {
     for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.json'))) {
       const r = json(path.join(dir, f));
       const fields = Object.values(r.tr || {});
-      const questions = (r.test?.questions || []).map((q) => q.tr).filter((t) => t?.fr);
+      /* A private reading bank keeps its French stamps in assessment-keys
+         (they hash the answer); read them there, or, without the checkout,
+         count any French prompt as a machine draft so the notice is kept. */
+      const qs = !test && isPrivateReading(r)
+        ? (() => { try { return readingQuestions('.', r).questions; } catch { return (r.test?.questions || []).map((q) => (q.prompt?.fr ? { ...q, tr: { fr: { status: 'machine' } } } : q)); } })()
+        : (r.test?.questions || []);
+      const questions = qs.map((q) => q.tr).filter((t) => t?.fr);
       const any = fields.some((t) => t?.fr) || questions.length;
       if (!any) continue;
       const draft = fields.some(machine) || questions.some(machine);

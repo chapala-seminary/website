@@ -34,6 +34,7 @@ import {
 } from './french-readings-lib.mjs';
 import { translationPlan } from './translation-plan.mjs';
 import { readerEditorialNotice } from './editorial-notices.mjs';
+import { resolveKeysRoot, textbookQuestions, readingQuestions, isPrivateReading, PRIVATE_READING_FIELDS } from './grading-keys-lib.mjs';
 
 const BLANK = '____';
 const PROTECTED = new Set(['human', 'machine-edited']);
@@ -44,6 +45,66 @@ function writeJson(file, data) {
   const indent = /^\{\n( +)"/.exec(old)?.[1].length || 1;
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(data, null, indent) + '\n');
+}
+/* Public textbook JSON keeps prompt/chapter/tr; answer/accept live in assessment-keys. */
+function loadTextbook(file) {
+  const pub = json(file);
+  const { questions: keyed } = textbookQuestions('.', pub.slug);
+  if (!keyed.every((q) => q?.answer?.en)) {
+    throw new Error(`${pub.slug}: textbook answers are only in the private assessment-keys checkout`);
+  }
+  return {
+    ...pub,
+    test: {
+      ...pub.test,
+      questions: pub.test.questions.map((q, i) => ({
+        ...q,
+        answer: keyed[i].answer,
+        ...(keyed[i].accept ? { accept: keyed[i].accept } : {}),
+        // a private bank (keys: "private") keeps its question stamps with the keys
+        ...(isPrivateReading(pub) && keyed[i].tr ? { tr: keyed[i].tr } : {}),
+      })),
+    },
+  };
+}
+function publicTextbookQuestions(questions, isPrivate = false) {
+  return questions.map(({ answer, accept, tr, ...q }) => (isPrivate || !tr ? q : { ...q, tr }));
+}
+/* A private bank's keys file keeps each question's chapter and stamp too
+   (tools/build-elective-textbook.mjs writes it so). */
+function writeTextbookKeys(slug, questions, isPrivate = false) {
+  const keysRoot = resolveKeysRoot('.');
+  if (!keysRoot) throw new Error(`${slug}: cannot write French textbook answers without assessment-keys`);
+  const file = path.join(keysRoot, 'textbooks', `${slug}.json`);
+  writeJson(file, {
+    slug,
+    test: {
+      questions: questions.map((q) => ({
+        prompt: q.prompt,
+        answer: q.answer,
+        ...(q.accept ? { accept: q.accept } : {}),
+        ...(isPrivate && q.chapter != null ? { chapter: q.chapter } : {}),
+        ...(isPrivate && q.tr ? { tr: q.tr } : {}),
+      })),
+    },
+  });
+  return file;
+}
+/* A reading test with its keys: a private bank (keys: "private") joined with
+   assessment-keys/readings/<slug>.json, where its answer, accept and French
+   stamps (tr, which hash the answer) live; a public one as it is. */
+function loadReading(file) {
+  const pub = json(file);
+  return { ...pub, test: { ...pub.test, questions: readingQuestions('.', pub).questions } };
+}
+/* ...and written back: the keys and stamps to the private file, the prompts
+   (with their French) to the public one -- as tools/import-readings.mjs does. */
+function writePrivateReading(file, rec) {
+  const keysRoot = resolveKeysRoot('.');
+  if (!keysRoot) throw new Error(`${rec.slug}: cannot write French reading answers without assessment-keys`);
+  const keep = ['prompt', 'answer', 'accept', 'reading', 'group', 'tr'];
+  writeJson(path.join(keysRoot, 'readings', `${rec.slug}.json`), { slug: rec.slug, test: { questions: rec.test.questions.map((q) => Object.fromEntries(keep.filter((k) => q[k] !== undefined).map((k) => [k, q[k]]))) } });
+  writeJson(file, { ...rec, test: { ...rec.test, questions: rec.test.questions.map((q) => Object.fromEntries(Object.entries(q).filter(([k]) => !PRIVATE_READING_FIELDS.includes(k)))) } });
 }
 const fold = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
@@ -144,7 +205,7 @@ const questionSegments = (questions, unit) => questions.flatMap((q, i) => {
 export function exportItem(item) {
   const segments = [];
   if (item.type === 'textbook') {
-    const b = json(item.file);
+    const b = loadTextbook(item.file);
     for (const f of ['subtitle', 'credits']) if (b[f]?.en) segments.push({ id: f, context: `the book's ${f}, under its title`, en: b[f].en });
     let heading = '';
     bodyLeaves(b.body.en).list.filter(translatable).forEach((leaf, i) => {
@@ -153,7 +214,7 @@ export function exportItem(item) {
     });
     segments.push(...questionSegments(b.test.questions, 'textbook test'));
   } else if (item.type === 'reading') {
-    segments.push(...questionSegments(json(item.file).test.questions, 'required-reading test'));
+    segments.push(...questionSegments(loadReading(item.file).test.questions, 'required-reading test'));
   } else if (item.type === 'digest' || item.type === 'room') {
     const html = fs.readFileSync(item.file, 'utf8');
     const skip = item.type === 'room' ? digestKeys() : new Set();
@@ -206,7 +267,7 @@ function answerWarnings(questions, text, label) {
 /* ---- apply ----------------------------------------------------------------- */
 
 const machine = (en) => ({ status: 'machine', from: hash(en) });
-function questionStamps(questions) {
+export function questionStamps(questions) {
   const plain = questions.map((q) => ({ prompt: { en: q.prompt.en }, answer: { en: q.answer.en }, ...(q.accept?.en ? { accept: { en: q.accept.en } } : {}) }));
   const { jobs } = translationPlan({ sourceLang: 'en', blocks: [] }, { fill: plain }, 'fr');
   return jobs.map((j) => j.stamp);
@@ -310,7 +371,7 @@ export function applyPacket(file) {
   const report = [];
   let written;
   if (item.type === 'textbook' || item.type === 'reading') {
-    const rec = json(item.file);
+    const rec = item.type === 'textbook' ? loadTextbook(item.file) : loadReading(item.file);
     if (item.type === 'textbook') {
       for (const f of ['subtitle', 'credits']) if (fr.has(f)) {
         if (PROTECTED.has(rec.tr?.[f]?.fr?.status)) { report.push(`${f}: ${rec.tr[f].fr.status} French kept`); continue; }
@@ -336,7 +397,15 @@ export function applyPacket(file) {
       const text = [...memory.values()].filter((e) => /^src\/data\/french-readings\/(digest|room)\//.test(e.file)).map((e) => e.fr).join(' ');
       if (text) warnings.push(...answerWarnings(rec.test.questions, text, item.id).map((w) => w + ' (any digest)'));
     }
-    writeJson(item.file, rec);
+    if (item.type === 'textbook') {
+      const priv = isPrivateReading(rec);
+      writeTextbookKeys(rec.slug, rec.test.questions, priv);
+      writeJson(item.file, { ...rec, test: { ...rec.test, questions: publicTextbookQuestions(rec.test.questions, priv) } });
+    } else if (isPrivateReading(rec)) {
+      writePrivateReading(item.file, rec);
+    } else {
+      writeJson(item.file, rec);
+    }
     written = item.file;
   } else if (item.type === 'digest' || item.type === 'room') written = applyMemory(item, packet, frOf, report);
   else written = applyChapter(item, packet, frOf, report);
@@ -353,7 +422,7 @@ export function status() {
     let done = 0, stale = 0;
     const total = packet.segments.length;
     if (item.type === 'textbook' || item.type === 'reading') {
-      const rec = json(item.file);
+      const rec = item.type === 'textbook' ? loadTextbook(item.file) : loadReading(item.file);
       const stamps = questionStamps(rec.test.questions);
       for (const f of ['subtitle', 'credits', 'body']) if (rec[f]?.fr != null) { if (rec.tr?.[f]?.fr?.from !== hash(rec[f].en)) stale++; }
       const segs = (f) => packet.segments.filter((s) => f === 'body' ? s.id.startsWith('body.') : s.id === f).length;

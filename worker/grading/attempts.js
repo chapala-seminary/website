@@ -518,6 +518,21 @@ async function reviewPassagesOf(env, attempt, scope, st) {
   return Object.keys(out).length ? out : undefined;
 }
 
+/* The wording of the questions a textbook or reading attempt actually drew.
+   The live page ships an empty bank, so this is the only prompt text it gets.
+   Language strings only: never answer, accept, or any other key field. */
+function promptLanguages(prompt) {
+  if (!prompt || typeof prompt !== 'object' || Array.isArray(prompt)) return {};
+  const out = {};
+  for (const l of ['en', 'es', 'fr']) if (typeof prompt[l] === 'string' && prompt[l]) out[l] = prompt[l];
+  return out;
+}
+export async function promptsFor(env, scope, qids) {
+  if (!scope || (scope.type !== 'tb' && scope.type !== 'rd') || !qids?.length) return undefined;
+  const keys = await loadKeys(env, qids);
+  return qids.map((qid) => ({ qid, prompt: promptLanguages(keys.get(qid)?.key?.prompt) }));
+}
+
 export async function resultOf(env, attempt, scope, st) {
   st = st || await standing(env, attempt, scope);
   const disclosure = disclosureOf(attempt);
@@ -528,11 +543,13 @@ export async function resultOf(env, attempt, scope, st) {
   if (code) courseDone = !!(await env.DB.prepare('SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(attempt.student_id, code).first());
   const models = await modelAnswersOf(env, attempt, scope, st);
   const reviews = await reviewPassagesOf(env, attempt, scope, st);
+  const prompts = await promptsFor(env, scope, st.items.fill);
   return {
     attemptId: attempt.id, scope: attempt.scope, status: attempt.status, disclosure,
     scores: { mc: { ...part('mc', st.state.mcRight), banked: st.banked.mc }, fill: part('fill', st.state.fillRight), sa: part('sa', st.state.saMet) },
     lock: lockOf(attempt), unitDone, courseDone,
     answered: await answeredOf(env, st.rows, st.banked, attempt.lang, disclosure),
+    ...(prompts ? { prompts } : {}),
     ...(models ? { models } : {}),
     ...(reviews ? { reviews } : {}),
   };
@@ -547,6 +564,7 @@ export async function attemptView(env, attempt, scope, keys) {
   const whys = new Map();
   for (const q of mcAsked) if (answered[q] && answered[q].why) whys.set(q, answered[q].why);
   const models = await modelAnswersOf(env, attempt, scope, st);
+  const prompts = await promptsFor(env, scope, st.items.fill);
   return {
     attemptId: attempt.id, scope: attempt.scope, status: attempt.status, track: attempt.track, lang: attempt.lang, disclosure,
     needs: { mc: st.req.mc.need, fill: st.req.fill.need, sa: st.req.sa.need },
@@ -554,6 +572,7 @@ export async function attemptView(env, attempt, scope, keys) {
     banked: { mc: st.banked.mc, fill: [], sa: st.banked.sa },
     answered,
     lock: lockOf(attempt),
+    ...(prompts ? { prompts } : {}),
     ...(models ? { models } : {}),
     items: {
       mc: mcAsked.map((q) => (whys.get(q) ? { qid: q, why: whys.get(q) } : { qid: q })),

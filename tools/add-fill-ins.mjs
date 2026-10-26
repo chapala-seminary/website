@@ -34,6 +34,11 @@
 // further course is drafted.
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
+import { writeUnit } from './private-units.mjs';
+/* Review packets quote answers, so they are private (docs/answer-exposure-audit.md):
+   assessment-keys/review/. */
+const REVIEW = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review');
 
 const args = process.argv.slice(2);
 const opt = (name) => { const i = args.indexOf(name); return i === -1 ? null : (args[i + 1] ?? ''); };
@@ -44,8 +49,8 @@ if (!course || !/^[A-Za-z0-9]+$/.test(course)) {
 }
 const UNITS = `src/content/units/${course}`;
 const LESSONS = `src/content/lessons/${course}`;
-const DRAFTS = `_review/fill-ins/drafts/${course}`;
-const SHEET = `_review/fill-ins/${course}.md`;
+const DRAFTS = path.join(REVIEW, 'fill-ins', 'drafts', course);
+const SHEET = path.join(REVIEW, 'fill-ins', `${course}.md`);
 if (!fs.existsSync(UNITS)) { console.error(`no unit files at ${UNITS}`); process.exit(2); }
 
 // ---- the engine's grader, taken from the engine ---------------------------
@@ -206,7 +211,8 @@ for (const r of rows) {
   // only the three known fields, in a fixed order, so the files diff cleanly
   u.fill = r.fill.map((q) => ({ prompt: { en: q.prompt.en, es: q.prompt.es },
     answer: { en: q.answer.en, es: q.answer.es }, ...(q.accept ? { accept: q.accept } : {}) }));
-  fs.writeFileSync(file, JSON.stringify(u, null, 1));
+  // a private-key course: prompts to units-public, answers to assessment-keys (tools/private-units.mjs)
+  writeUnit(file, u);
 }
-console.log(`wrote ${rows.length * 10} fill-in questions into ${UNITS}`);
+console.log(`wrote ${rows.length * 10} fill-in questions into ${UNITS} (prompts to units-public, answers to assessment-keys)`);
 writeSheet(rows);

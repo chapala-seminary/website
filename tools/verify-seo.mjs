@@ -46,7 +46,7 @@ ok(!/student code|\/verify\//i.test(sitemap), 'sitemap has no student-record URL
 
 const llms = read('llms.txt') + '\n' + read('llms-full.txt');
 for (const fact of [
-  'not accredited', 'no está acreditado', '45', 'Certificate of Ministry',
+  'not accredited', 'no está acreditado', '65', 'Certificate of Ministry',
   '15', 'info@chapalaseminary.org', 'Common Ground Fellowship',
 ]) ok(llms.toLowerCase().includes(fact.toLowerCase()), `llms files mention “${fact}”`);
 ok(!/\bis accredited\b/i.test(llms) && !/\bestá acreditado\b/i.test(llms.replace(/no está acreditado/gi, '')),

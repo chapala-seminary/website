@@ -28,20 +28,45 @@ const dropLangs = (model, langs) => (model && langs.size
   ? Object.fromEntries(Object.entries(model).filter(([l]) => !langs.has(l))) : model);
 const keepOnly = (obj, fields) => Object.fromEntries(fields.filter((f) => obj[f] !== undefined).map((f) => [f, obj[f]]));
 
+/* A private checkout of the textbook and reading banks, when one is present.
+ * ASSESSMENT_KEYS wins. Otherwise a sibling ../assessment-keys that already
+ * has textbooks/. Absent means the public content files, so a deploy that
+ * does not have the private repo yet keeps grading the banks it has. */
+export function resolveKeysRoot(root = '.') {
+  const fromEnv = process.env.ASSESSMENT_KEYS;
+  if (typeof fromEnv === 'string' && fromEnv.trim() && fs.existsSync(fromEnv)) return path.resolve(fromEnv);
+  const sibling = path.resolve(root, '..', 'assessment-keys');
+  if (fs.existsSync(path.join(sibling, 'textbooks'))) return sibling;
+  return null;
+}
+
 /** Every question that is graded, as Map qid -> { qid, kind, source, data (JSON string), rubricVersion }.
- *  `root` is the repo root. `units: false` skips the unit banks (the eval only needs units, but
- *  the sync tool wants everything). `warn` receives notes about skipped files. */
-export function buildKeyRows({ root = '.', warn = () => {} } = {}) {
+ *  `root` is the repo root. `keysRoot` is the private textbook/reading checkout
+ *  (resolveKeysRoot when omitted). Pass null to read the public files only.
+ *  `warn` receives notes about skipped files. */
+export function buildKeyRows({ root = '.', warn = () => {}, keysRoot } = {}) {
   const rows = new Map();
   const add = (qid, kind, source, data, rubricVersion = null) => {
     if (rows.has(qid)) throw new Error(`duplicate question id ${qid}`);
     rows.set(qid, { qid, kind, source, data: JSON.stringify(data), rubricVersion });
   };
+  const keys = keysRoot === undefined ? resolveKeysRoot(root) : keysRoot;
   addUnitRows(root, add);
   const catalog = readJson(path.join(root, 'worker/catalog.json'));
-  addTestRows(root, catalog, 'src/content/textbooks', 'tb', 'textbook', add, warn);
-  addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', add, warn);
+  addTestRows(root, catalog, 'src/content/textbooks', 'tb', 'textbook', add, warn, keys);
+  addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', add, warn, keys);
   addSingleRows(root, add);
+  return rows;
+}
+
+/** Only the reading-test rows (rd:<slug>/...), from `root`'s src/content/readings
+ *  and the catalog given (worker/catalog.json shape). For the tests. */
+export function readingKeyRows({ root = '.', catalog, keysRoot = null, warn = () => {} }) {
+  const rows = new Map();
+  addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', (qid, kind, source, data, rubricVersion = null) => {
+    if (rows.has(qid)) throw new Error(`duplicate question id ${qid}`);
+    rows.set(qid, { qid, kind, source, data: JSON.stringify(data), rubricVersion });
+  }, warn, keysRoot);
   return rows;
 }
 
@@ -72,14 +97,99 @@ function addUnitRows(root, add) {
   }
 }
 
-function addTestRows(root, catalog, rel, tag, source, add, warn) {
+export const hasAnswers = (qs) => Array.isArray(qs) && qs.length > 0 && qs.every((q) => q?.answer && typeof q.answer === 'object' && q.answer.en);
+
+/* Private reading banks (docs/reading-rooms.md, "Private reading tests"). A
+ * public src/content/readings/<slug>.json that says `keys: "private"` holds
+ * prompts, reading numbers and titles only; answer, accept and the French
+ * stamps (tr, which hash the answer) are in <keys>/readings/<slug>.json.
+ * The 45 reading tests made before Oct 2026 keep their answers public. */
+export const PRIVATE_READING_FIELDS = ['answer', 'accept', 'tr'];
+export const isPrivateReading = (pub) => pub?.keys === 'private';
+
+/** What a public reading (or textbook) file for a private bank must not
+ *  carry: a list of problems, empty when the file is clean. A private
+ *  textbook (keys: "private") follows the same rule. */
+export function privateReadingLeaks(pub, where = pub?.slug || 'reading') {
+  const out = [];
+  if (!isPrivateReading(pub)) out.push(`${where}: a private reading bank must say keys: "private" in its public file`);
+  for (const [i, q] of (pub?.test?.questions || []).entries())
+    for (const f of PRIVATE_READING_FIELDS) if (q && q[f] !== undefined) out.push(`${where} #${i + 1}: the public file carries "${f}"; it belongs only in assessment-keys`);
+  return out;
+}
+
+/** A reading test's questions with their keys. A public bank that holds its
+ *  answers (the 45 existing tests) is returned as it is. A private one is
+ *  joined, question by question, with the private checkout; without it, or
+ *  with a private file that does not match, this throws rather than hand on
+ *  an answerless bank. `pubOrSlug` is the parsed public file or its slug. */
+export function readingQuestions(root, pubOrSlug, warn = () => {}, keysRoot) {
+  const pub = typeof pubOrSlug === 'string' ? readJson(path.join(root, 'src/content/readings', `${pubOrSlug}.json`)) : pubOrSlug;
+  const publicQs = pub.test?.questions || [];
+  if (!isPrivateReading(pub) && hasAnswers(publicQs)) return { reading: pub, questions: publicQs, fromPrivate: false };
+  const keys = keysRoot === undefined ? resolveKeysRoot(root) : keysRoot;
+  const overlay = overlayQuestions(keys, 'src/content/readings', `${pub.slug}.json`, pub.slug, publicQs, warn);
+  if (!overlay || overlay.length !== publicQs.length || !hasAnswers(overlay)) {
+    throw new Error(`${pub.slug}.json: reading answers are only in the private assessment-keys checkout (readings/${pub.slug}.json, ${publicQs.length} questions); set ASSESSMENT_KEYS or place ../assessment-keys beside this repo`);
+  }
+  const questions = publicQs.map((q, i) => ({ ...q, ...keepOnly(overlay[i], ['prompt', 'answer', 'accept', 'reading', 'group', 'tr']) }));
+  return { reading: pub, questions, fromPrivate: true };
+}
+
+/* textbooks/<file> or readings/<file> in the private checkout. The public
+ * file still supplies draw, pass and the catalog code. Question order is the
+ * id, so a private file with a different length is ignored while the public
+ * bank still has questions: sync deletes a grading_keys row whose qid is
+ * gone, and a short file would drop answers students are still graded on.
+ * Public textbook banks may omit answer/accept; then the private overlay is
+ * required and an answerless public fallback is refused. */
+export function overlayQuestions(keysRoot, rel, file, slug, publicQs, warn = () => {}) {
+  if (!keysRoot) return null;
+  const kind = rel.endsWith('readings') ? 'readings' : 'textbooks';
+  const p = path.join(keysRoot, kind, file);
+  if (!fs.existsSync(p)) return null;
+  let o;
+  try { o = readJson(p); } catch (e) { warn(`  ${file}: assessment-keys file does not parse (${e.message}); using the public bank`); return null; }
+  if (o.slug && o.slug !== slug) { warn(`  ${file}: assessment-keys slug "${o.slug}" does not match "${slug}"; using the public bank`); return null; }
+  const qs = o.test?.questions || o.questions;
+  if (!Array.isArray(qs)) { warn(`  ${file}: assessment-keys file has no questions; using the public bank`); return null; }
+  if (publicQs.length && qs.length !== publicQs.length) {
+    if (!hasAnswers(publicQs)) {
+      warn(`  ${file}: assessment-keys has ${qs.length} questions and the public bank has ${publicQs.length}; refusing an answerless public fallback`);
+      return null;
+    }
+    warn(`  ${file}: assessment-keys has ${qs.length} questions and the public bank has ${publicQs.length}; using the public bank so a short file cannot delete grading keys`);
+    return null;
+  }
+  return qs;
+}
+
+/** Public textbook file plus private answers when the checkout is present. */
+export function textbookQuestions(root, slug, warn = () => {}) {
+  const file = `${slug}.json`;
+  const pub = readJson(path.join(root, 'src/content/textbooks', file));
+  const publicQs = pub.test?.questions || [];
+  const overlay = overlayQuestions(resolveKeysRoot(root), 'src/content/textbooks', file, slug, publicQs, warn);
+  return { book: pub, questions: overlay || publicQs, fromPrivate: !!overlay };
+}
+
+function addTestRows(root, catalog, rel, tag, source, add, warn, keysRoot) {
   const dir = path.join(root, rel);
   for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
     const b = readJson(path.join(dir, f));
     const t = catalog.textbooks[b.slug];
     if (!t || !b.test) { warn(`  skipped ${f}: not a test in worker/catalog.json`); continue; }
     const base = `${tag}:${b.slug}`;
-    const qs = b.test.questions || [];
+    const publicQs = b.test.questions || [];
+    const overlay = overlayQuestions(keysRoot, rel, f, b.slug, publicQs, warn);
+    const qs = overlay || publicQs;
+    if (tag === 'tb' && !hasAnswers(qs)) {
+      throw new Error(`${f}: textbook answers are only in the private assessment-keys checkout; set ASSESSMENT_KEYS or place ../assessment-keys beside this repo`);
+    }
+    // a private reading bank (keys: "private") the same way: never graded from an answerless public file
+    if (tag === 'rd' && !hasAnswers(qs)) {
+      throw new Error(`${f}: reading answers are only in the private assessment-keys checkout; set ASSESSMENT_KEYS or place ../assessment-keys beside this repo`);
+    }
     add(`${base}/meta/0`, 'meta', source, {
       draw: b.test.draw ?? null, pass: b.test.pass ?? null, perReading: b.test.perReading ?? null, perChapter: b.test.perChapter ?? null,
       n: qs.length, code: t.code, kind: t.kind, page: t.page,
@@ -88,7 +198,6 @@ function addTestRows(root, catalog, rel, tag, source, add, warn) {
       { ...keepOnly(q, ['prompt', 'answer', 'accept']), group: q.reading ?? q.chapter ?? null }));
   }
 }
-
 /* The single-page courses (Counseling, Narrative and WiseSpeak Preaching,
  * Ethics): `sp:<page>/<kind>/<i>`, one scope per graded section, and a meta row
  * `sp:<page>/meta/0` with what a pass records. The questions are read from the

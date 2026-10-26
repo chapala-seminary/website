@@ -35,6 +35,8 @@ wrangler.toml.local
 !.env.example
 *.pem
 *.key
+# Private answer-bank checkout used by the beta Actions deploy (not committed).
+.assessment-keys/
 
 # ---- Migration scratch ----
 tools/_work/
@@ -45,3 +47,67 @@ tools/_reports/
 # ---- Mutation harness (tools/mutation-suite.mjs) ----
 # Backups of files it deliberately breaks, so an interrupted run can be undone.
 .mutation-backup/
+
+# ---- Private-key unit exams (tools/private-units.mjs merges them at build; never commit) ----
+src/content/units/CTSElecPC1/
+src/content/units/CTSElecPC2/
+src/content/units/CTSElecPC3/
+src/content/units/CTSElecPC4/
+src/content/units/CTSElecPC5/
+src/content/units/CTSElecBap1/
+src/content/units/CTSElecBap2/
+src/content/units/CTSElecBap3/
+src/content/units/CTSElecBap4/
+src/content/units/CTSElecBap5/
+src/content/units/CTSElecWes1/
+src/content/units/CTSElecWes2/
+src/content/units/CTSElecWes3/
+src/content/units/CTSElecWes4/
+src/content/units/CTSElecWes5/
+src/content/units/CTSElecRef1/
+src/content/units/CTSElecRef2/
+src/content/units/CTSElecRef3/
+src/content/units/CTSElecRef4/
+src/content/units/CTSElecRef5/
+# The 41 core courses (Oct 2026; docs/answer-exposure-audit.md): same rule
+src/content/units/CTS/
+src/content/units/CTS1Peter/
+src/content/units/CTSAL/
+src/content/units/CTSActs/
+src/content/units/CTSApol/
+src/content/units/CTSBible/
+src/content/units/CTSBibleCharacters/
+src/content/units/CTSBibleCharacters2/
+src/content/units/CTSCE/
+src/content/units/CTSCG/
+src/content/units/CTSCH/
+src/content/units/CTSCS/
+src/content/units/CTSCults/
+src/content/units/CTSDP/
+src/content/units/CTSDeaconFamilyMinistry/
+src/content/units/CTSEvanPreach/
+src/content/units/CTSEvangelism/
+src/content/units/CTSGalatians/
+src/content/units/CTSGenesis/
+src/content/units/CTSHS/
+src/content/units/CTSHermeneutics/
+src/content/units/CTSJohn/
+src/content/units/CTSJosh/
+src/content/units/CTSLA/
+src/content/units/CTSLOC/
+src/content/units/CTSMatt/
+src/content/units/CTSMissions/
+src/content/units/CTSNT/
+src/content/units/CTSPM/
+src/content/units/CTSPT/
+src/content/units/CTSParables/
+src/content/units/CTSPent/
+src/content/units/CTSPentecostal/
+src/content/units/CTSPsalms/
+src/content/units/CTSRE/
+src/content/units/CTSRadical/
+src/content/units/CTSRev/
+src/content/units/CTSRomans/
+src/content/units/CTSST/
+src/content/units/CTSWR/
+src/content/units/CTSWorship/

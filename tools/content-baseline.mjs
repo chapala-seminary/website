@@ -21,15 +21,25 @@
  *   - a unit that has fill-ins has exactly ten;
  *   - every unit has multiple-choice questions, twenty of them unless the
  *     course is on the short list below of courses written with fewer.
+ *
+ * Courses whose keys are private are fingerprinted twice. The public baseline
+ * (this repo) holds only question text. A private baseline holds the answers
+ * -- MC answer index, a digest of each short answer's keywords, each fill-in's
+ * answer and accepted variants -- in assessment-keys/content-baseline.json.
+ * --write records it when the keys are checked out; --check compares it when
+ * both the keys and that file are present, and says so when they are not.
  */
 import fs from 'fs';
 import path from 'path';
 import vm from 'vm';
 import crypto from 'crypto';
+import { keysRoot } from './private-units.mjs';
 
 const ROOT = path.join(path.dirname(new URL(import.meta.url).pathname), '..');
 const SITE = path.join(ROOT, 'site');
 const OUT = path.join(ROOT, 'tools', 'content-baseline.json');
+const KEYS = keysRoot();
+const PRIVATE_OUT = KEYS && path.join(KEYS, 'content-baseline.json');
 
 const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', rsquo: "'",
   lsquo: "'", ldquo: '"', rdquo: '"', mdash: '-', ndash: '-', hellip: '...',
@@ -49,7 +59,34 @@ function norm(v) {
 const digest = (...parts) =>
   crypto.createHash('sha256').update(parts.map(norm).join('\u0001')).digest('hex').slice(0, 16);
 
-function unitFingerprint(U) {
+/* Courses whose unit keys are private (tools/private-units.mjs): their
+   fingerprint must not record answers, because this baseline is committed
+   to the public repository. Only the public question text is fingerprinted. */
+const PRIVATE_KEYS = new Set(fs.existsSync(path.join(ROOT, 'src', 'content', 'units-public'))
+  ? fs.readdirSync(path.join(ROOT, 'src', 'content', 'units-public')) : []);
+
+/* The answers of a private-key unit, for the private baseline only. */
+const raw = (v) => crypto.createHash('sha256').update(JSON.stringify(v ?? null)).digest('hex').slice(0, 16);
+function answerFingerprint(U) {
+  return {
+    mc: U.mc.map(q => ({ a: q.answer })),
+    sa: U.sa.map(q => ({ k: raw(q.keywords && { en: q.keywords.en, es: q.keywords.es }) })),
+    fill: (U.fill || []).map(q => ({
+      h: digest(q.answer?.en), hEs: digest(q.answer?.es),
+      acc: raw(Object.fromEntries(Object.entries(q.accept || {}).filter(([lang]) => lang === 'en' || lang === 'es'))),
+    })),
+  };
+}
+
+function unitFingerprint(U, course) {
+  if (PRIVATE_KEYS.has(course)) {
+    return {
+      private: true,
+      mc: U.mc.map(q => ({ h: digest(q.stem.en, ...(q.options.en || [])), hEs: digest(q.stem.es, ...(q.options.es || [])) })),
+      sa: U.sa.map(q => ({ h: digest(q.prompt.en) })),
+      fill: (U.fill || []).map(q => ({ h: digest(q.prompt.en), hEs: digest(q.prompt.es) })),
+    };
+  }
   return {
     mc: U.mc.map(q => ({
       a: q.answer,
@@ -113,6 +150,7 @@ function countProblems(all) {
    format-neutral baseline is that the gate survives the migration that changes
    the format, so it prefers the Astro collection and falls back to the older
    per-unit scripts. */
+const ANSWERS = {};
 function loadAll() {
   const COLL = path.join(ROOT, 'src', 'content', 'units');
   const out = {};
@@ -123,7 +161,8 @@ function loadAll() {
       if (!fs.statSync(dir).isDirectory()) continue;
       for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.json'))) {
         const U = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
-        out[`${course}/${U.unit}`] = unitFingerprint(U);
+        out[`${course}/${U.unit}`] = unitFingerprint(U, course);
+        if (PRIVATE_KEYS.has(course)) ANSWERS[`${course}/${U.unit}`] = answerFingerprint(U);
       }
     }
     return out;
@@ -153,10 +192,29 @@ const totals = Object.values(now).reduce((a, u) => ({ mc: a.mc + u.mc.length, sa
 if (mode === '--write') {
   fs.writeFileSync(OUT, JSON.stringify({ units: Object.keys(now).length, ...totals, data: now }, null, 0));
   console.log(`recorded ${Object.keys(now).length} units, ${totals.mc} MC, ${totals.sa} SA, ${totals.fill} fill-in -> tools/content-baseline.json`);
+  if (KEYS && Object.keys(ANSWERS).length) {
+    fs.writeFileSync(PRIVATE_OUT, JSON.stringify({ units: Object.keys(ANSWERS).length, data: ANSWERS }, null, 0) + '\n');
+    console.log(`recorded the answers of ${Object.keys(ANSWERS).length} private-key units -> ${PRIVATE_OUT}`);
+  } else if (Object.keys(ANSWERS).length) console.log('assessment-keys is not checked out; the private answer baseline was not written');
 } else {
   if (!fs.existsSync(OUT)) { console.error('no baseline recorded; run with --write'); process.exit(2); }
   const base = JSON.parse(fs.readFileSync(OUT, 'utf8'));
   const problems = [...countProblems(now), ...graderProblems()];
+  let answerChecks = 0;
+  if (KEYS && fs.existsSync(PRIVATE_OUT)) {
+    const pb = JSON.parse(fs.readFileSync(PRIVATE_OUT, 'utf8')).data;
+    for (const k of new Set([...Object.keys(pb), ...Object.keys(ANSWERS)])) {
+      const b = pb[k], a = ANSWERS[k];
+      if (!b) { problems.push(`${k}: unit is new to the private answer baseline`); continue; }
+      if (!a) { problems.push(`${k}: unit has disappeared from the private answers`); continue; }
+      for (const kind of ['mc', 'sa', 'fill']) {
+        if (b[kind].length !== a[kind].length) { problems.push(`${k}: ${kind} key count ${b[kind].length} -> ${a[kind].length}`); continue; }
+        b[kind].forEach((x, i) => { for (const [f, v] of Object.entries(x)) { answerChecks++;
+          if (a[kind][i][f] !== v) problems.push(`${k}: ${kind}${i + 1} private ${f === 'a' ? `ANSWER ${v} -> ${a[kind][i][f]}` : f === 'acc' ? 'accepted answers changed' : f === 'k' ? 'keywords changed' : `${f === 'hEs' ? 'Spanish' : 'English'} answer changed`}`); } });
+      }
+    }
+  } else if (Object.keys(ANSWERS).length) console.log(`answers of ${Object.keys(ANSWERS).length} private-key units not compared: ${KEYS ? `no ${PRIVATE_OUT}; run with --write` : 'assessment-keys is not checked out'}`);
+  if (answerChecks) console.log(`${answerChecks} answer comparisons against the private baseline in assessment-keys`);
   const keys = new Set([...Object.keys(base.data), ...Object.keys(now)]);
   let compared = 0;
   for (const k of keys) {

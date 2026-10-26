@@ -14,7 +14,7 @@ These are eight bilingual five-reading banks prepared by ChatGPT on 10 Oct 2026,
 | Hermeneutics | `CTSHermeneutics` | `CTSHERMENEUTICS` | `CTSHermeneuticsReadingsTest.html` | `hermeneuticsreadings` |
 
 - `academic_manifest.json`: status `DRAFT_NEEDS_FACULTY_REVIEW`, `requiredFrom: null`, and the SHA-256 of each delivered file.
-- Faculty notes and answer ledgers are in `docs/readings-staged/`.
+- The banks, accept files, faculty notes and answer ledgers are in the private `assessment-keys` checkout, under `readings-src/staged/` (faculty notes in `readings-src/staged/faculty/`). This folder keeps only the manifest and this note.
 - To check: run `node tools/verify-staged-readings.mjs`. It is read-only. It checks shape, inactive status and the hashes, and confirms that every primary answer appears in the reading room in both languages.
 - 299 of the 320 questions still need faculty-approved accepted answers. Do not invent synonyms.
 - **Do not** add these banks to `tools/import-readings.mjs` or run its `--write` until faculty approve, course by course.

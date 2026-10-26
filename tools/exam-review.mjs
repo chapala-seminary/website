@@ -5,15 +5,37 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { createHash } from 'node:crypto';
 import { parse } from 'node-html-parser';
+import { overlayQuestions, resolveKeysRoot, readingQuestions, isPrivateReading } from './grading-keys-lib.mjs';
 
 export const languages = ['en', 'es', 'fr'];
 const fold = s => String(s).normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 const stop = new Set(('the a an of in on to and or for with is are was were be that this these those it its as by from not at which what who how his her their he she they we you our your according reading chapter excerpt author describes calls says called question blank la el los las un una uno unos unas de del al en y o que es son fue se su sus por para con como esta este estas estos dans le les des du de un une et au aux est sont sur pour par qui que ce cette ces il elle ses son sa').split(' '));
 const tokens = s => [...new Set(fold(s).split(' ').filter(w => w.length > 2 && !stop.has(w)))];
 const text = n => n.text.replace(/\s+/g, ' ').trim();
-const records = () => ['textbooks', 'readings'].flatMap(kind => fs.readdirSync(`src/content/${kind}`).filter(f => f.endsWith('.json')).sort().map(f => ({kind, ...JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`, 'utf8'))})));
+/* Textbook answers live in assessment-keys; the 45 older reading tests hold
+   theirs publicly, and a private reading bank (keys: "private") in
+   assessment-keys/readings, joined by readingQuestions. */
+const records = () => {
+  const keysRoot = resolveKeysRoot('.');
+  return ['textbooks', 'readings'].flatMap((kind) => fs.readdirSync(`src/content/${kind}`).filter((f) => f.endsWith('.json')).sort().map((f) => {
+    const rec = { kind, ...JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`, 'utf8')) };
+    if (kind === 'textbooks' && rec.test?.questions) {
+      const overlay = overlayQuestions(keysRoot, 'src/content/textbooks', f, rec.slug, rec.test.questions);
+      if (!overlay) throw new Error(`exam-review: textbook ${rec.slug} needs assessment-keys (public files have no answer/accept)`);
+      rec.test = { ...rec.test, questions: overlay };
+    }
+    if (kind === 'readings' && rec.test?.questions) rec.test = { ...rec.test, questions: readingQuestions('.', rec).questions };
+    return rec;
+  }));
+};
+/* A pinned reference fingerprints the prompt WITH its answer, so a private
+   bank's references are kept in the private checkout
+   (assessment-keys/exam-review-references.json), never in the
+   public REFERENCE_FILE. */
+const privateReferenceFile = () => { const k = resolveKeysRoot('.'); return k ? path.join(k, 'exam-review-references.json') : null; };
 const prefix = lang => lang === 'en' ? '/' : `/${lang}/`;
 
 // The mode the pages are built in (src/lib/grading-mode.ts): live unless told otherwise.
@@ -43,8 +65,22 @@ function focusedPassage(paragraph, prompt, answers, lang) {
   return best?.passage || paragraph;
 }
 export function makeReview(dist, { write = true, refresh = false } = {}) {
-  const references = refresh ? {} : JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8'));
-  const cache = new Map(), candidateCache = new Map(), report = [], misses = [];
+  const all = records();
+  const privateSlugs = new Set(all.filter(isPrivateReading).map((r) => r.slug));
+  const privateFile = privateSlugs.size ? privateReferenceFile() : null;
+  if (privateSlugs.size && !privateFile) throw new Error(`exam-review: ${[...privateSlugs].join(', ')} keep their review references in assessment-keys, which is not checked out`);
+  /* refresh: true re-pins every bank (an editorial refresh); 'missing' pins
+     only questions with no pin, whose prompt or answer changed, or whose
+     pinned passage is no longer on its page, and keeps every other pin
+     exactly as it is -- for a new or revised bank. */
+  const privateStored = privateFile && fs.existsSync(privateFile) ? JSON.parse(fs.readFileSync(privateFile,'utf8')) : {};
+  /* A bank whose pins are already private stays private, even while its course
+     is held off the site (src/data/elective-held.json) and has no public record. */
+  const privateStoredSlugs = new Set(Object.keys(privateStored).map((key) => key.split('/')[0]));
+  // every bank's pins are private now (docs/answer-exposure-audit.md); a public file is read only if one is present
+  const publicStored = fs.existsSync(REFERENCE_FILE) ? JSON.parse(fs.readFileSync(REFERENCE_FILE,'utf8')) : {};
+  const references = refresh === true ? {} : { ...publicStored, ...privateStored };
+  const cache = new Map(), candidateCache = new Map(), report = [], misses = [], repinned = [];
   function load(file) {
     if (cache.has(file)) return cache.get(file);
     const filename = path.join(dist, file);
@@ -141,7 +177,7 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
     for (const file of extra) list.push(...candidates(file, lang, null));
     return [...new Map(list.map(p => [p.href,p])).values()];
   }
-  for (const record of records()) for (const lang of languages) {
+  for (const record of all) for (const lang of languages) {
     const poolCache = new Map(), reviews = [];
     for (const [i,q] of record.test.questions.entries()) {
       const group = q.reading || q.group || q.chapter || null;
@@ -179,9 +215,12 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
       const referenceKey = `${record.slug}/${lang}/${i+1}`;
       const questionHash = fingerprint(JSON.stringify({prompt:q.prompt[lang] || q.prompt.en, answer:q.answer[lang] || q.answer.en}));
       const pinned = references[referenceKey];
-      if(!refresh) {
+      let fresh = refresh === true || (refresh === 'missing' && !(pinned && pinned.question === questionHash));
+      if(!fresh) {
         if(!pinned || pinned.question !== questionHash) throw new Error(`Review reference needs editorial refresh: ${referenceKey}`);
         best = ranked.find(r => r.p.page.file === pinned.file && fingerprint(r.p.text) === pinned.paragraph);
+        // 'missing' also re-pins a question whose pinned passage is gone (its text was revised); the others stay as they are
+        if(!best && refresh === 'missing') { fresh = true; best = ranked[0]; }
       }
       if (!best) throw new Error(`${record.slug}/${lang}/Q${i+1}: no assigned teaching passage`);
       // Keep the source author's actual explanation intact; never manufacture
@@ -189,11 +228,11 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
       const p = best.p;
       if (write) { p.node.setAttribute('id',p.id); p.page.changed=true; }
       let extra = p.text.length < 160 ? pool.find(other => other.page === p.page && other.group === p.group && other.lang === p.lang && other.text.length > 240 && other !== p) : null;
-      if(!refresh && pinned.extra) {
+      if(!fresh && pinned.extra) {
         extra = pool.find(other => other.page.file === pinned.file && fingerprint(other.text) === pinned.extra);
         if(!extra) throw new Error(`Review context changed: ${referenceKey}`);
-      } else if(!refresh) extra = null;
-      if(refresh) references[referenceKey] = {question:questionHash,file:p.page.file,paragraph:fingerprint(p.text),...(extra ? {extra:fingerprint(extra.text)} : {})};
+      } else if(!fresh) extra = null;
+      if(fresh) { repinned.push(referenceKey); references[referenceKey] = {question:questionHash,file:p.page.file,paragraph:fingerprint(p.text),...(extra ? {extra:fingerprint(extra.text)} : {})}; }
       const paragraphs = (extra ? [p.text,extra.text] : [p.text]).map(paragraph=>focusedPassage(paragraph,q.prompt[lang] || q.prompt.en,answers,lang));
       reviews.push({ paragraphs, kind:/Unit\d+/.test(p.page.file) ? 'lesson' : 'reading', heading:p.heading || record.title[lang] || record.title.en, href:p.href, lang:p.lang });
       report.push({slug:record.slug,lang,question:i+1,answer:best.answer,hits:best.hits,score:Math.round(best.score*100)/100,href:p.href,prompt:q.prompt[lang]||q.prompt.en,passage:p.text});
@@ -226,8 +265,15 @@ export function makeReview(dist, { write = true, refresh = false } = {}) {
     }
   }
   if (write) for (const p of cache.values()) if(p.changed) fs.writeFileSync(path.join(dist,p.file),p.root.toString());
-  if(refresh) fs.writeFileSync(REFERENCE_FILE,JSON.stringify(references,null,1)+'\n');
-  return {report,misses};
+  if(refresh) {
+    const isPrivate = (key) => privateSlugs.has(key.split('/')[0]) || privateStoredSlugs.has(key.split('/')[0]);
+    const pick = (keep) => Object.fromEntries(Object.entries(references).filter(([key]) => keep(key)));
+    const publicPins = pick((key) => !isPrivate(key));
+    if (Object.keys(publicPins).length) fs.writeFileSync(REFERENCE_FILE,JSON.stringify(publicPins,null,1)+'\n');
+    else if (fs.existsSync(REFERENCE_FILE)) fs.rmSync(REFERENCE_FILE);
+    if (privateFile) { fs.mkdirSync(path.dirname(privateFile),{recursive:true}); fs.writeFileSync(privateFile,JSON.stringify(pick(isPrivate),null,1)+'\n'); }
+  }
+  return {report,misses,repinned};
 }
 export default function examReviewIntegration() {
   return {name:'cts-exam-review', hooks:{'astro:build:done':({dir,logger}) => {
@@ -235,8 +281,11 @@ export default function examReviewIntegration() {
     logger.info(`${report.length} pinned, source-linked teaching explanations across all 90 exam banks`);
   }}};
 }
+/*   node tools/exam-review.mjs [dist] [--write] [--refresh | --refresh-missing] */
 if (process.argv[1]?.endsWith('/exam-review.mjs')) {
-  const {report,misses} = makeReview(process.argv[2] || 'dist',{write:process.argv.includes('--write'),refresh:process.argv.includes('--refresh')});
-  fs.writeFileSync('/private/tmp/cts-review-matches.json',JSON.stringify({report,misses},null,2));
-  console.log(`${report.length} explanations; ${misses.length} weak matches. Audit: /private/tmp/cts-review-matches.json`);
+  const refresh = process.argv.includes('--refresh') ? true : process.argv.includes('--refresh-missing') ? 'missing' : false;
+  const {report,misses,repinned} = makeReview(process.argv[2] || 'dist',{write:process.argv.includes('--write'),refresh});
+  const audit = path.join(os.tmpdir(),'cts-review-matches.json');
+  fs.writeFileSync(audit,JSON.stringify({report,misses,repinned},null,2));
+  console.log(`${report.length} explanations; ${misses.length} weak matches; ${repinned.length} pinned now. Audit: ${audit}`);
 }

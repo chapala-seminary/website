@@ -5,7 +5,10 @@
  *        [--state DIR] [--dry-run] [--apply-migration]
  *
  * Reads every question that is graded -- the units, the textbook banks and the
- * reading banks -- and makes the `grading_keys` table in D1 match. Only rows
+ * reading banks -- and makes the `grading_keys` table in D1 match. Textbook
+ * and reading question rows come from a private assessment-keys checkout when
+ * one is present (ASSESSMENT_KEYS, or ../assessment-keys); otherwise from the
+ * public content files. Only rows
  * whose content_hash differs are written, so a deploy that changed nothing in
  * the questions writes nothing. Rows for questions that no longer exist are
  * deleted (only among the sources this tool manages).
@@ -33,7 +36,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { spawnSync } from 'node:child_process';
-import { buildKeyRows } from './grading-keys-lib.mjs';
+import { buildKeyRows, resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const ACCOUNT = '119b0919229edb3185b69f1c6bd04b66';          // the Chapala account (wrangler.jsonc)
 const argv = process.argv.slice(2);
@@ -51,7 +54,11 @@ const sql = (v) => (v == null ? 'NULL' : typeof v === 'number' ? String(v) : `'$
 
 /* ---- the questions -------------------------------------------------------- */
 
-const rows = buildKeyRows({ root: '.', warn: (m) => console.warn(m) });   // tools/grading-keys-lib.mjs, shared with the grader eval
+const keysRoot = resolveKeysRoot('.');
+console.log(keysRoot
+  ? `textbook and reading keys from ${keysRoot}`
+  : 'textbook and reading keys from the public content files (no private assessment-keys checkout)');
+const rows = buildKeyRows({ root: '.', keysRoot, warn: (m) => console.warn(m) });   // tools/grading-keys-lib.mjs, shared with the grader eval
 console.log(`${rows.size} questions in the content`);
 
 /* ---- the database --------------------------------------------------------- */

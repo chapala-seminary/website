@@ -21,13 +21,27 @@ import vm from 'node:vm';
 import { parse } from 'node-html-parser';
 import { bodyLeaves, translatable, tagProblem, loadStore, DIGEST, roomKey, chromeRoomKeys } from '../tools/french-readings-lib.mjs';
 import { status } from '../tools/french-readings.mjs';
+import { textbookQuestions, readingQuestions } from '../tools/grading-keys-lib.mjs';
 
 const BASE = process.argv[2];
 let checks = 0;
 const ok = (c, m) => { assert.ok(c, m); checks++; };
 const json = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 const records = (dir) => fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => json(path.join(dir, f)));
-const books = records('src/content/textbooks'), readings = records('src/content/readings');
+const books = records('src/content/textbooks').map((b) => {
+  const { questions: keyed } = textbookQuestions('.', b.slug);
+  // Keep public prompt/tr; only answer/accept come from assessment-keys --
+  // and, for a private bank (keys: "private"), the French stamps too.
+  const questions = b.test.questions.map((q, i) => ({
+    ...q,
+    answer: keyed[i]?.answer,
+    ...(keyed[i]?.accept ? { accept: keyed[i].accept } : {}),
+    ...(b.keys === 'private' && keyed[i]?.tr ? { tr: keyed[i].tr } : {}),
+  }));
+  return { ...b, test: { ...b.test, questions } };
+});
+// a private reading bank (keys: "private") is checked with its keys from assessment-keys
+const readings = records('src/content/readings').map((r) => ({ ...r, test: { ...r.test, questions: readingQuestions('.', r).questions } }));
 const french = [...books, ...readings].filter((r) => r.body?.fr || r.test.questions.some((q) => q.prompt.fr));
 
 if (!BASE) {
@@ -71,7 +85,18 @@ if (!BASE) {
     const pages = new Map();
     for (const r of french) {
       const fields = Object.keys(r.tr || {});
-      if (fields.length) pages.set(`${r.page}.html`, r.body?.fr ? bodyLeaves(r.body.fr).list.filter(translatable).map((l) => l.text.trim()) : []);
+      // a passage the same in both languages ("Introduction.") is not a sample, as for the rooms below
+      // (or in French and Spanish: a signature, "W. J. Seymour.")
+      const enLeaves = r.body?.en ? bodyLeaves(r.body.en).list : [], esLeaves = r.body?.es ? bodyLeaves(r.body.es).list : [];
+      if (fields.length) pages.set(`${r.page}.html`, r.body?.fr ? bodyLeaves(r.body.fr).list.map((l, i) => [l, enLeaves[i], esLeaves[i]])
+        .filter(([l, e, s]) => translatable(l) && l.text.trim() !== e?.text.trim() && l.text.trim() !== s?.text.trim())
+        // sample the French at its first 60 characters that are not also in the English or
+        // Spanish passage: a source line may open with the book's English title, the same
+        // on every edition ("The Doctrines and Discipline…, de Thomas Coke"). Usually that is the start.
+        .map(([l, e, s]) => { const t = l.text.trim(), en = e?.text.trim() || '', es = s?.text.trim() || '';
+          for (let i = 0; i < t.length; i = t.indexOf(' ', i) < 0 ? t.length : t.indexOf(' ', i) + 1) {
+            const w = t.slice(i, i + 60); if (w.length < 20) break; if (!en.includes(w) && !es.includes(w)) return t.slice(i); }
+          return ''; }).filter(Boolean) : []);
       pages.set(`${r.page}Test.html`, []);
     }
     for (const { data } of files) {

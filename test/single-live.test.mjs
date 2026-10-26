@@ -152,7 +152,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   const code = await codeOf(p);
   const html = await (await freshFetch(`${BASE}/CTSGenesisUnit2.html`)).text();
   ok(html.includes('"grading":"live"') && !/"(answer|accept|keywords|rubric|model)"/.test(html.slice(html.indexOf('window.CTS_UNIT'), html.indexOf('window.CTS_UNIT') + 60000)), 'a Genesis unit page is a live unit page with no key');
-  for (let i = 0; i < g2.mc.length; i++) { await p.locator(`button.option[data-mc="${i}"][data-opt="${g2.mc[i].answer}"]`).click(); await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text`, { timeout: 15000 }); }
+  for (let i = 0; i < g2.mc.length; i++) { await p.locator(`button.option[data-mc="${i}"][data-opt="${g2.mc[i].answer}"]`).click(); await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text.correct, .question[data-mc="${i}"] .feedback-text.incorrect`, { timeout: 30000 }); }
   for (let i = 0; i < g2.fill.length; i++) {
     // Resolve the Check button after any live-engine redraw; grading-ui covers Enter.
     await p.locator(`input[data-fill="${i}"]`).fill(g2.fill[i].answer.en);
@@ -258,10 +258,11 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   ok(await waitText(m.p, 'Passed. This unit is recorded.'), 'Counseling unit 0, master\'s track (with the ten written answers): passed');
   ok(q1(`SELECT COUNT(*) AS n FROM course_completions WHERE student_id = '${mcode}'`)[0].n === 0, 'every unit is on record, but the course waits for its textbook test on the master\'s tracks');
   // pass the textbook test through the API, the way the test page does
-  const tb = JSON.parse(fs.readFileSync('src/content/textbooks/counseling.json', 'utf8'));
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const tbQs = textbookQuestions('.', 'counseling').questions;
   const post = async (path, body) => (await freshFetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ code: mcode, ...body }) })).json();
   const att = await post('/api/attempt', { scope: 'tb:counseling', lang: 'en' });
-  const items = att.items.fill.map((qid) => ({ qid, answer: tb.test.questions[Number(qid.split('/').pop())].answer.en }));
+  const items = att.items.fill.map((qid) => ({ qid, answer: tbQs[Number(qid.split('/').pop())].answer.en }));
   for (let i = 0; i < items.length; i += 10) await post('/api/grade', { attemptId: att.attemptId, items: items.slice(i, i + 10) });
   const res = await post(`/api/attempt/${att.attemptId}/submit`, {});
   ok(res.status === 'passed' && res.courseDone === true, 'passing the textbook test completes the course', res);

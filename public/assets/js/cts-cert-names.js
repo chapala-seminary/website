@@ -171,6 +171,166 @@ window.CTS_CERT_NAMES = {
    "cook"
   ]
  },
+ "ctselecbap1certificate.html": {
+  "en": "Baptist History and Denominational Development",
+  "es": "Historia y desarrollo denominacional de los bautistas",
+  "fr": "Histoire des baptistes et développement de la dénomination",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecbap2certificate.html": {
+  "en": "Baptist Theology and Distinctive Doctrines",
+  "es": "Teología bautista y doctrinas distintivas",
+  "fr": "Théologie baptiste et doctrines distinctives",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecbap3certificate.html": {
+  "en": "Congregational Church Government and Baptist Polity",
+  "es": "Gobierno congregacional de la iglesia y política bautista",
+  "fr": "Le gouvernement congrégationaliste de l'Église et l'ordre baptiste",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecbap4certificate.html": {
+  "en": "Baptist Worship, Ordinances, and Preaching",
+  "es": "Culto, ordenanzas y predicación bautistas",
+  "fr": "Culte, ordonnances et prédication chez les baptistes",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecbap5certificate.html": {
+  "en": "Baptist Pastoral Ministry, Missions, and Church Leadership",
+  "es": "Ministerio pastoral, misiones y liderazgo de la iglesia bautista",
+  "fr": "Le ministère pastoral baptiste, les missions et la conduite de l'Église",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecpc1certificate.html": {
+  "en": "History and Development of Pentecostalism",
+  "es": "Historia y desarrollo del pentecostalismo",
+  "fr": "Histoire et développement du pentecôtisme",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecpc2certificate.html": {
+  "en": "Pentecostal and Charismatic Theology",
+  "es": "Teología pentecostal y carismática",
+  "fr": "Théologie pentecôtiste et charismatique",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecpc3certificate.html": {
+  "en": "The Holy Spirit, Spiritual Gifts, and Discernment",
+  "es": "El Espíritu Santo, los dones espirituales y el discernimiento",
+  "fr": "Le Saint-Esprit, les dons spirituels et le discernement",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecpc4certificate.html": {
+  "en": "Pentecostal Worship, Preaching, and Ministry",
+  "es": "Adoración, predicación y ministerio pentecostal",
+  "fr": "Adoration, prédication et ministère pentecôtistes",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecpc5certificate.html": {
+  "en": "Pentecostal Pastoral Leadership and Global Missions",
+  "es": "Liderazgo pastoral pentecostal y misiones globales",
+  "fr": "Leadership pastoral pentecôtiste et missions mondiales",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecref1certificate.html": {
+  "en": "History of the Reformation and Reformed Churches",
+  "es": "Historia de la Reforma y de las iglesias reformadas",
+  "fr": "Histoire de la Réforme et des Églises réformées",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecref2certificate.html": {
+  "en": "Reformed Theology and the Doctrines of Grace",
+  "es": "Teología reformada y las doctrinas de la gracia",
+  "fr": "Théologie réformée et doctrines de la grâce",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecref3certificate.html": {
+  "en": "Covenant Theology, Scripture, and Reformed Confessions",
+  "es": "Teología del pacto, la Escritura y las confesiones reformadas",
+  "fr": "Théologie de l'alliance, Écriture et confessions de foi réformées",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecref4certificate.html": {
+  "en": "Presbyterian Polity, Worship, and Sacraments",
+  "es": "Gobierno, culto y sacramentos presbiterianos",
+  "fr": "Gouvernement d'Église, culte et sacrements presbytériens",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecref5certificate.html": {
+  "en": "Reformed Pastoral Ministry, Preaching, and Missions",
+  "es": "Ministerio pastoral, predicación y misiones reformados",
+  "fr": "Le ministère pastoral réformé, la prédication et les missions",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecwes1certificate.html": {
+  "en": "John Wesley and the History of Methodism",
+  "es": "John Wesley y la historia del metodismo",
+  "fr": "John Wesley et l'histoire du méthodisme",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecwes2certificate.html": {
+  "en": "Wesleyan Theology and the Doctrine of Salvation",
+  "es": "Teología wesleyana y la doctrina de la salvación",
+  "fr": "Théologie wesleyenne et doctrine du salut",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecwes3certificate.html": {
+  "en": "Holiness, Sanctification, and Christian Perfection",
+  "es": "Santidad, santificación y perfección cristiana",
+  "fr": "Sainteté, sanctification et perfection chrétienne",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecwes4certificate.html": {
+  "en": "Methodist and Nazarene Polity, Worship, and Sacraments",
+  "es": "Gobierno, culto y sacramentos metodistas y nazarenos",
+  "fr": "Gouvernement, culte et sacrements méthodistes et nazaréens",
+  "authors": [
+   "cook"
+  ]
+ },
+ "ctselecwes5certificate.html": {
+  "en": "Wesleyan Pastoral Ministry, Evangelism, and Global Missions",
+  "es": "Ministerio pastoral wesleyano, evangelización y misiones mundiales",
+  "fr": "Le ministère pastoral wesleyen, l'évangélisation et les missions mondiales",
+  "authors": [
+   "cook"
+  ]
+ },
  "ctsevanpreachcertificate.html": {
   "en": "Evangelistic Preaching",
   "es": "Predicación Evangelística",
@@ -650,6 +810,106 @@ window.CTS_COURSE_NAMES = {
   "en": "Deacon Family Ministry Plan",
   "es": "Plan de Ministerio Familiar de Diáconos",
   "fr": "Plan de ministère familial des diacres"
+ },
+ "CTSELECBAP1": {
+  "en": "Baptist History and Denominational Development",
+  "es": "Historia y desarrollo denominacional de los bautistas",
+  "fr": "Histoire des baptistes et développement de la dénomination"
+ },
+ "CTSELECBAP2": {
+  "en": "Baptist Theology and Distinctive Doctrines",
+  "es": "Teología bautista y doctrinas distintivas",
+  "fr": "Théologie baptiste et doctrines distinctives"
+ },
+ "CTSELECBAP3": {
+  "en": "Congregational Church Government and Baptist Polity",
+  "es": "Gobierno congregacional de la iglesia y política bautista",
+  "fr": "Le gouvernement congrégationaliste de l'Église et l'ordre baptiste"
+ },
+ "CTSELECBAP4": {
+  "en": "Baptist Worship, Ordinances, and Preaching",
+  "es": "Culto, ordenanzas y predicación bautistas",
+  "fr": "Culte, ordonnances et prédication chez les baptistes"
+ },
+ "CTSELECBAP5": {
+  "en": "Baptist Pastoral Ministry, Missions, and Church Leadership",
+  "es": "Ministerio pastoral, misiones y liderazgo de la iglesia bautista",
+  "fr": "Le ministère pastoral baptiste, les missions et la conduite de l'Église"
+ },
+ "CTSELECPC1": {
+  "en": "History and Development of Pentecostalism",
+  "es": "Historia y desarrollo del pentecostalismo",
+  "fr": "Histoire et développement du pentecôtisme"
+ },
+ "CTSELECPC2": {
+  "en": "Pentecostal and Charismatic Theology",
+  "es": "Teología pentecostal y carismática",
+  "fr": "Théologie pentecôtiste et charismatique"
+ },
+ "CTSELECPC3": {
+  "en": "The Holy Spirit, Spiritual Gifts, and Discernment",
+  "es": "El Espíritu Santo, los dones espirituales y el discernimiento",
+  "fr": "Le Saint-Esprit, les dons spirituels et le discernement"
+ },
+ "CTSELECPC4": {
+  "en": "Pentecostal Worship, Preaching, and Ministry",
+  "es": "Adoración, predicación y ministerio pentecostal",
+  "fr": "Adoration, prédication et ministère pentecôtistes"
+ },
+ "CTSELECPC5": {
+  "en": "Pentecostal Pastoral Leadership and Global Missions",
+  "es": "Liderazgo pastoral pentecostal y misiones globales",
+  "fr": "Leadership pastoral pentecôtiste et missions mondiales"
+ },
+ "CTSELECREF1": {
+  "en": "History of the Reformation and Reformed Churches",
+  "es": "Historia de la Reforma y de las iglesias reformadas",
+  "fr": "Histoire de la Réforme et des Églises réformées"
+ },
+ "CTSELECREF2": {
+  "en": "Reformed Theology and the Doctrines of Grace",
+  "es": "Teología reformada y las doctrinas de la gracia",
+  "fr": "Théologie réformée et doctrines de la grâce"
+ },
+ "CTSELECREF3": {
+  "en": "Covenant Theology, Scripture, and Reformed Confessions",
+  "es": "Teología del pacto, la Escritura y las confesiones reformadas",
+  "fr": "Théologie de l'alliance, Écriture et confessions de foi réformées"
+ },
+ "CTSELECREF4": {
+  "en": "Presbyterian Polity, Worship, and Sacraments",
+  "es": "Gobierno, culto y sacramentos presbiterianos",
+  "fr": "Gouvernement d'Église, culte et sacrements presbytériens"
+ },
+ "CTSELECREF5": {
+  "en": "Reformed Pastoral Ministry, Preaching, and Missions",
+  "es": "Ministerio pastoral, predicación y misiones reformados",
+  "fr": "Le ministère pastoral réformé, la prédication et les missions"
+ },
+ "CTSELECWES1": {
+  "en": "John Wesley and the History of Methodism",
+  "es": "John Wesley y la historia del metodismo",
+  "fr": "John Wesley et l'histoire du méthodisme"
+ },
+ "CTSELECWES2": {
+  "en": "Wesleyan Theology and the Doctrine of Salvation",
+  "es": "Teología wesleyana y la doctrina de la salvación",
+  "fr": "Théologie wesleyenne et doctrine du salut"
+ },
+ "CTSELECWES3": {
+  "en": "Holiness, Sanctification, and Christian Perfection",
+  "es": "Santidad, santificación y perfección cristiana",
+  "fr": "Sainteté, sanctification et perfection chrétienne"
+ },
+ "CTSELECWES4": {
+  "en": "Methodist and Nazarene Polity, Worship, and Sacraments",
+  "es": "Gobierno, culto y sacramentos metodistas y nazarenos",
+  "fr": "Gouvernement, culte et sacrements méthodistes et nazaréens"
+ },
+ "CTSELECWES5": {
+  "en": "Wesleyan Pastoral Ministry, Evangelism, and Global Missions",
+  "es": "Ministerio pastoral wesleyano, evangelización y misiones mundiales",
+  "fr": "Le ministère pastoral wesleyen, l'évangélisation et les missions mondiales"
  },
  "CTSEVANPREACH": {
   "en": "Evangelistic Preaching",

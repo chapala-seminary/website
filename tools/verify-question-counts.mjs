@@ -24,6 +24,6 @@ for(const course of fs.readdirSync('src/content/units')) {
   }
  }
 }
-assert.equal(units,466,'all standard units checked');
+assert.equal(units,666,'all standard units checked');  // 466 + the 200 denominational elective units (24 Oct 2026)
 assert.deepEqual(failures,[]);
 console.log(`PASS — ${units} unit banks in three languages; ${headings} explicit MC headings match actual question counts.`);

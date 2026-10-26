@@ -248,7 +248,10 @@ const textbookFillFields = {
   prompt: bilingual.refine((p) => Object.values(p).every(oneBlank), {
     message: `a textbook question must contain exactly one blank, written ${BLANK}, in each language`,
   }),
-  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
+  // Textbook answers live in the private assessment-keys checkout. Public
+  // textbook JSON keeps prompt (and chapter); answer/accept are optional so
+  // the public files can omit them. Reading banks still require answers here.
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)).optional(),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
   // the reading the question is on, in a bank drawn by reading (tools/import-readings.mjs)
@@ -259,10 +262,16 @@ const textbookFillFields = {
 const textbookFill = z.object({ ...textbookFillFields, chapter: z.number().int().min(1).optional() }).strict()
   .superRefine(completeQuestionLanguages);
 /* A required-reading question may name the reading (1 to 5) it is on, so that
-   every attempt draws the same number from each reading (test.perReading). */
-const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() }).strict()
-  .superRefine(completeQuestionLanguages);
-const bookHtml = z.string().min(1).superRefine((v, ctx) => {
+   every attempt draws the same number from each reading (test.perReading).
+   `answer` is optional here, as for textbooks: a private bank (the file says
+   keys: "private", tools/import-readings.mjs) keeps answer, accept and tr in
+   the assessment-keys checkout. The readings collection below still requires
+   an answer on every question of a bank that is not private. */
+const readingFill = z.object({
+  ...textbookFillFields,
+  reading: z.number().int().min(1).optional(),
+}).strict()
+  .superRefine(completeQuestionLanguages);const bookHtml = z.string().min(1).superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
   if (found.length) ctx.addIssue({ code: 'custom', message: `HTML entities in a UTF-8 textbook: ${found.join(' ')}` });
   if (/<(script|style|iframe|img)\b/i.test(v)) ctx.addIssue({ code: 'custom', message: 'a textbook body carries text only: no scripts, styles, frames or images' });
@@ -297,6 +306,11 @@ const textbooks = defineCollection({
     // a further language (fr) is the English markup with its words translated
     body: z.object({ en: bookHtml, es: bookHtml }).catchall(bookHtml),
     tr: fieldTranslations.optional(),
+    /* "private": a new bank (the electives' textbooks, tools/build-elective-textbook.mjs)
+       whose questions' French stamps (tr) are in assessment-keys with the
+       answers, since a stamp hashes the answer. The older textbooks keep
+       their question stamps public. */
+    keys: z.literal('private').optional(),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
@@ -316,6 +330,12 @@ const textbooks = defineCollection({
       if (counts.size * t.perChapter !== t.draw) ctx.addIssue({ code: 'custom', message: 'textbook group count does not match draw' });
       for (const [g, n] of counts) if (n < t.perChapter) ctx.addIssue({ code: 'custom', message: `textbook group ${g} has too few questions` });
     }),
+  }).superRefine((b, ctx) => {
+    if (b.keys !== 'private') return;
+    b.test.questions.forEach((q, i) => {
+      for (const f of ['answer', 'accept', 'tr'] as const) if (q[f] !== undefined) ctx.addIssue({ code: 'custom',
+        message: `question ${i + 1} carries "${f}" in a private textbook bank; it belongs only in assessment-keys/textbooks/${b.slug}.json` });
+    });
   }),
 });
 
@@ -347,6 +367,8 @@ const readings = defineCollection({
     requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
       { message: 'requiredFrom is an ISO date and time, e.g. 2026-11-01T00:00:00Z' }).nullable().optional(),
     source: z.object({ file: z.string(), course: z.string() }),
+    // "private": the answers are in the assessment-keys checkout (tools/import-readings.mjs)
+    keys: z.literal('private').optional(),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
@@ -377,6 +399,16 @@ const readings = defineCollection({
       if (counts.size * t.perReading !== t.draw) ctx.addIssue({ code: 'custom', message: `${counts.size} readings x ${t.perReading} is not the draw of ${t.draw}` });
       for (const [r, c] of counts) if (c < t.perReading) ctx.addIssue({ code: 'custom', message: `reading ${r} has ${c} questions, fewer than the ${t.perReading} drawn from it` });
     }),
+  }).superRefine((r, ctx) => {
+    /* A public bank holds every answer; a private one (keys: "private")
+       holds none of answer, accept or tr -- those are in the private
+       assessment-keys checkout, joined at build time. */
+    r.test.questions.forEach((q, i) => {
+      if (r.keys === 'private') {
+        for (const f of ['answer', 'accept', 'tr'] as const) if (q[f] !== undefined) ctx.addIssue({ code: 'custom',
+          message: `question ${i + 1} carries "${f}" in a private reading bank; it belongs only in assessment-keys/readings/${r.slug}.json` });
+      } else if (!q.answer) ctx.addIssue({ code: 'custom', message: `question ${i + 1} has no answer; a bank whose keys are private says keys: "private"` });
+    });
   }),
 });
 

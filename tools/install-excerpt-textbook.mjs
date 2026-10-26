@@ -21,6 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { carryFrench } from './french-readings-lib.mjs';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const [cfgPath, flag] = process.argv.slice(2);
 if (!cfgPath) { console.error('usage: install-excerpt-textbook.mjs <config.json> [--write]'); process.exit(2); }
@@ -103,11 +104,11 @@ const files = new Map();
 // French added since (tools/french-readings.mjs) is kept wherever its English is unchanged.
 const installed = `src/content/textbooks/${cfg.slug}.json`;
 files.set(installed, JSON.stringify(carryFrench(fs.existsSync(installed) ? JSON.parse(fs.readFileSync(installed, 'utf8')) : null, out), null, 2) + '\n');
-files.set(`src/data/textbooks/staged/${path.basename(cfg.bank)}`, rd(cfg.bank));
+// the staged bank holds answers: it is kept in assessment-keys/textbooks-src/staged, not here (docs/answer-exposure-audit.md)
 cfg.en.forEach((p, i) => files.set(`docs/readers/textbooks/${cfg.slug}/excerpts/en/${i + 1}.md`, rd(p)));
 cfg.es.forEach((p, i) => files.set(`docs/readers/textbooks/${cfg.slug}/excerpts/es/${i + 1}.md`, rd(p)));
 
-if (warnings.length) files.set(`docs/textbooks-staged/${cfg.slug}-excerpts-review.md`,
+if (warnings.length) files.set(path.join(resolveKeysRoot('.') || '../assessment-keys', 'textbooks-src', 'faculty', `${cfg.slug}-excerpts-review.md`),
   `# ${cfg.title.en}: answers that appear in another question's prompt\n\nFor the faculty reviewers (made by tools/install-excerpt-textbook.mjs). Not refused: decide whether each is a real clue.\n\n${warnings.map((w) => `- ${w}`).join('\n')}\n`);
 
 const marker = `<!-- ${cfg.slug} textbook exam: optional, assigned excerpts -->`;

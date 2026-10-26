@@ -23,5 +23,26 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      # Public textbook JSON omits answer/accept; tests and the shadow build
+      # read them from chapala-seminary/assessment-keys.
+      - name: Checkout private assessment keys
+        id: assessment_keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+            echo "Private assessment-keys checkout ready at .assessment-keys"
+          else
+            echo "No private assessment-keys checkout; textbook tests need ASSESSMENT_KEYS_TOKEN."
+            exit 1
+          fi
       - run: npm run build
       - run: npm test

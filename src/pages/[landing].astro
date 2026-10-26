@@ -8,7 +8,7 @@ import {
   OPEN_BEFORE_FOUNDATION, courseLandingMeta, courseJsonLd, breadcrumbJsonLd,
   localeUrl, SITE, SITE_NAME, statusLabel,
 } from '../lib/seo';
-import { frBookTitle, frReadingsTitle } from '../lib/french-titles';
+import { frTextbookTitle, frReadingsTitle } from '../lib/french-titles';
 
 export async function getStaticPaths() {
   const courses = (await getCollection('courses')).map((e) => e.data);
@@ -78,7 +78,7 @@ const jsonLd = [
     { name: course.title.en, url: localeUrl(file, 'en') },
   ]),
 ];
-const bookTitle = book ? { en: book.title.en, es: book.title.es, fr: frBookTitle(book.title.en) } : null;
+const bookTitle = book ? { en: book.title.en, es: book.title.es, fr: frTextbookTitle(book) } : null;
 const readingTitle = reading ? { en: reading.title.en, es: reading.title.es, fr: frReadingsTitle(course.code) } : null;
 ---
 <!doctype html>

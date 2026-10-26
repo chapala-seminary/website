@@ -10,8 +10,9 @@ import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
 import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
-import { frBookTitle } from '../lib/french-titles.ts';
+import { frTextbookTitle } from '../lib/french-titles.ts';
 import { live, liveBank } from '../lib/grading-mode';
+import { overlayQuestions, resolveKeysRoot } from '../../tools/grading-keys-lib.mjs';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -41,23 +42,34 @@ const tests = testsOfCourseWith(book.slug);
 const completion = unitCourse
   ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) }
   : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) };
-/* Live mode: the bank carries prompts and ids only; the server draws the
-   twenty and grades them (docs/ai-grading.md). */
+/* Live mode: the page ships no question bank. The server sends the prompt
+   for each question it drew (docs/ai-grading.md). Shadow mode still embeds
+   the bank with keys from the private assessment-keys checkout (public
+   textbook JSON no longer holds answer/accept). */
 const shown = live ? liveBank({ slug: book.slug, questions }) : null;
-const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions: shown ? shown.questions : questions, completion,
+const shadowBank = (() => {
+  if (live) return null;
+  const overlay = overlayQuestions(resolveKeysRoot('.'), 'src/content/textbooks', `${book.slug}.json`, book.slug, questions, (m) => console.warn(m));
+  const bank = overlay || questions;
+  if (!bank.every((q) => q?.answer?.en)) {
+    throw new Error(`textbook ${book.slug}: shadow build needs assessment-keys (public textbook files have no answer/accept)`);
+  }
+  return bank;
+})();
+const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions: shown ? [] : shadowBank, completion,
   ...(shown ? { grading: 'live', scope: shown.scope } : {}),
   ...(book.test.perChapter ? { perChapter: book.test.perChapter } : {}),
   ...(book.test.revision ? { revision: book.test.revision } : {}),
   ...(book.test.resetWaitOnRevision ? { resetWaitOnRevision: true } : {}),
   ...('requiredFrom' in book ? { requiredFrom: book.requiredFrom } : {}) }).replace(/</g, '\\u003c');
 ---
-<Textbook kind="test" book={{ ...book, title: { ...book.title, fr: frBookTitle(book.title.en) } }} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
+<Textbook kind="test" book={{ ...book, title: { ...book.title, fr: frTextbookTitle(book) } }} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about" data-cts-chrome>
     <h2><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro de texto</span><span class="lang-fr">Examen du manuel</span></h2>
     <p>
       <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty, on <em>{book.title.en}</em>. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, review the book and try again after a short wait; the next attempt draws a fresh twenty.</span>
       <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta, sobre <em>{book.title.es}</em>. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, repase el libro e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
-      <span class="lang-fr">Vingt questions à compléter, tirées au hasard parmi quarante, sur <em>{frBookTitle(book.title.en)}</em>. Il faut {pass} bonnes réponses sur {draw} pour réussir. Saisissez le mot ou l’expression qui manque, puis appuyez sur Vérifier (ou Entrée) : chaque réponse est corrigée aussitôt. Les majuscules, les accents et la ponctuation ne comptent pas. Vous pouvez répondre en français lorsque la question existe en français ; une question encore en anglais attend une réponse en anglais. Si vous n’atteignez pas le score requis, relisez le manuel et réessayez après une courte attente ; la tentative suivante tire vingt nouvelles questions.</span>
+      <span class="lang-fr">Vingt questions à compléter, tirées au hasard parmi quarante, sur <em>{frTextbookTitle(book)}</em>. Il faut {pass} bonnes réponses sur {draw} pour réussir. Saisissez le mot ou l’expression qui manque, puis appuyez sur Vérifier (ou Entrée) : chaque réponse est corrigée aussitôt. Les majuscules, les accents et la ponctuation ne comptent pas. Vous pouvez répondre en français lorsque la question existe en français ; une question encore en anglais attend une réponse en anglais. Si vous n’atteignez pas le score requis, relisez le manuel et réessayez après une courte attente ; la tentative suivante tire vingt nouvelles questions.</span>
     </p>
     <p class="small muted">
       <span class="lang-en">The book is not on this page: <a href={`/${book.page}.html`}>read it first</a>, then come back.</span>

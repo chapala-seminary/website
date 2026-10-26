@@ -12,6 +12,8 @@
  *     carries any field that is not on the whitelist -- above all `answer`,
  *     `correct`, `accept`, `why`, `model`, `keywords`, `rubric`;
  *   - the page does not say grading: "live", or an item has no qid;
+ *   - a textbook or reading test page still carries its question bank
+ *     (the server sends the drawn prompts; the page ships questions: []);
  *   - a model answer or an explanation from the source content (40 characters
  *     or more, so ordinary words in a lesson cannot trip it) appears anywhere
  *     in the page's data script.
@@ -27,10 +29,19 @@
  * the keys are there and the page loads the shadow hook.
  * Left on the page on purpose: the practice exercises of WiseSpeak (the
  * U1_ANSWERS and U7_FILL words), which are never counted for credit.
+ *
+ * In both modes, the public source of every private reading bank (a row
+ * with `private: true` in tools/import-readings.mjs, or a file saying
+ * keys: "private") is checked too: src/content/readings/<slug>.json must say
+ * keys: "private" and carry no answer, accept or tr on any question; so is
+ * every private textbook (keys: "private"; every "elec" book is one). Those
+ * belong only in the assessment-keys checkout (docs/reading-rooms.md).
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { COURSES, singleSections } from './single-pages-lib.mjs';
+import { PRIVATE_READINGS } from './import-readings.mjs';
+import { privateReadingLeaks } from './grading-keys-lib.mjs';
 
 const args = process.argv.slice(2);
 /* A deploy builds in the mode CTS_GRADING_MODE names; this checks the build for
@@ -104,6 +115,7 @@ for (const file of walk(dir)) {
   }
 
   if (U.grading !== 'live') note(`${rel}: the page does not say grading: "live"`);
+  if (!isUnit && (U.questions || []).length) note(`${rel}: a live test page still carries the question bank`);
   for (const [kind, list] of lists) {
     (list || []).forEach((q, i) => {
       for (const k of Object.keys(q)) if (!SHOWN.has(k)) note(`${rel}: ${kind}[${i}] carries "${k}"`);
@@ -209,6 +221,43 @@ let singlePages = 0;
   }
 }
 
+/* ---- the public source of the private reading banks ---- */
+let privateReadings = 0, privateBooks = 0;
+{
+  const rdir = path.join(ROOT, 'src/content/readings');
+  const files = fs.existsSync(rdir) ? fs.readdirSync(rdir).filter((f) => f.endsWith('.json')) : [];
+  const flagged = new Set(PRIVATE_READINGS);
+  for (const f of files) {
+    const pub = JSON.parse(fs.readFileSync(path.join(rdir, f), 'utf8'));
+    flagged.add(pub.slug); // every reading bank is private since 25 Oct 2026 (docs/answer-exposure-audit.md)
+  }
+  for (const slug of flagged) {
+    const f = path.join(rdir, `${slug}.json`);
+    if (!fs.existsSync(f)) { note(`src/content/readings/${slug}.json: a private reading row has no public file; run node tools/import-readings.mjs --write`); continue; }
+    privateReadings++;
+    for (const m of privateReadingLeaks(JSON.parse(fs.readFileSync(f, 'utf8')), `src/content/readings/${slug}.json`)) note(m);
+  }
+  /* the private textbooks (keys: "private", the electives'; every "elec" book must be one) */
+  const tdir = path.join(ROOT, 'src/content/textbooks');
+  for (const f of fs.existsSync(tdir) ? fs.readdirSync(tdir).filter((x) => x.endsWith('.json')) : []) {
+    const pub = JSON.parse(fs.readFileSync(path.join(tdir, f), 'utf8'));
+    // every textbook is private since 25 Oct 2026 (docs/answer-exposure-audit.md)
+    privateBooks++;
+    for (const m of privateReadingLeaks(pub, `src/content/textbooks/${f}`)) note(m);
+  }
+}
+
+/* Every course's unit keys are private (tools/private-units.mjs), so every
+   folder of src/content/units has its keyless public twin in units-public, and
+   no review pin (it fingerprints a prompt with its answer) is kept here. */
+{
+  const udir = path.join(ROOT, 'src/content/units'), pdir = path.join(ROOT, 'src/content/units-public');
+  for (const d of fs.existsSync(udir) ? fs.readdirSync(udir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name) : [])
+    if (!fs.existsSync(path.join(pdir, d))) note(`src/content/units/${d}: its keys are not private; split it into src/content/units-public/${d} and assessment-keys/units/${d}`);
+  const pins = path.join(ROOT, 'src/data/exam-review-references.json');
+  if (fs.existsSync(pins) && Object.keys(JSON.parse(fs.readFileSync(pins, 'utf8'))).length) note('src/data/exam-review-references.json: review pins belong in assessment-keys/exam-review-references.json');
+}
+
 if (!unitPages && !testPages) problems.push(`no page with question data found under ${dir}: is it built?`);
 if (!singlePages) problems.push(`no single-page course found under ${dir}: is it built?`);
 if (expectKeys) {
@@ -225,3 +274,4 @@ if (problems.length) {
 console.log(expectKeys
   ? `PASS — shadow build: ${unitPages} unit pages and ${testPages} test pages keep their keys (${withKeys} with keys) and post to /api/shadow (${shadowHook} carry the hook); ${singlePages} single-page course pages keep theirs and carry the hook.`
   : `PASS — live build: ${unitPages} unit pages and ${testPages} test pages carry no answer key, accept list, model answer, keyword, rubric, explanation or review passage (${reviewFiles} passage files kept for the Worker); nor do the ${singlePages} single-page course pages (Counseling, Narrative and WiseSpeak Preaching, Ethics) or their fill-in data.`);
+console.log(`PASS — ${privateReadings} private reading bank(s) and ${privateBooks} private textbook bank(s): their public files carry no answer, accept or tr.`);

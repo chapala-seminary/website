@@ -25,6 +25,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { textbookQuestions, readingQuestions } from './grading-keys-lib.mjs';
 
 const DIST = process.argv[2] || 'dist';
 const fails = [];
@@ -58,9 +59,12 @@ for (const b of books) {
   ok(draw === 20 && pass === 18, `${b.slug}: the test draws ${draw} and asks for ${pass}; Dr. Cook's rule is 20 and 18`);
   ok(Math.ceil(draw * 0.9) === pass, `${b.slug}: CTSFill's 90% rule gives ${Math.ceil(draw * 0.9)} of ${draw}, the file says ${pass}`);
   ok(questions.length >= draw, `${b.slug}: ${questions.length} questions, fewer than the draw of ${draw}`);
-  questions.forEach((q, i) => {
+  // Answers are in the private assessment-keys checkout; prompts stay public.
+  const keyed = textbookQuestions('.', b.slug, (m) => fails.push(m)).questions;
+  ok(keyed.length === questions.length && keyed.every((q) => q?.answer?.en), `${b.slug}: assessment-keys must supply answers for every public prompt`);
+  keyed.forEach((q, i) => {
     for (const lang of ['en', 'es']) {
-      ok((q.prompt[lang].match(/____/g) || []).length === 1, `${b.slug} #${i + 1}: not one blank in ${lang}`);
+      ok((questions[i].prompt[lang].match(/____/g) || []).length === 1, `${b.slug} #${i + 1}: not one blank in ${lang}`);
       ok(fillRight(q, q.answer[lang]), `${b.slug} #${i + 1}: the ${lang} answer "${q.answer[lang]}" is not marked right`);
       for (const a of (q.accept && q.accept[lang]) || []) ok(fillRight(q, a), `${b.slug} #${i + 1}: accepted ${lang} answer "${a}" is not marked right`);
     }
@@ -123,8 +127,11 @@ for (const b of books) {
 /* The required-reading tests (src/content/readings; Dr. Cook's Add-ons, 4 Oct
    2026): the same checks as a textbook's, on the readings' page instead of a
    book -- and the page the student reads must stand apart from the test. */
+/* A private reading bank (keys: "private") is checked with its keys from the
+   assessment-keys checkout; a public one as it is (readingQuestions). */
 const readings = fs.existsSync('src/content/readings') ? fs.readdirSync('src/content/readings').filter((f) => f.endsWith('.json'))
-  .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8'))) : [];
+  .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8')))
+  .map((r) => (r.test ? { ...r, test: { ...r.test, questions: readingQuestions('.', r).questions } } : r)) : [];
 // Genesis Intensive and World Religions (4 Oct 2026), and the Master's
 // five-reading pilot on Pentecostalism (9 Oct 2026); more join it course by course.
 for (const want of ['genesisreadings', 'wrreadings', 'pentecostalreadings'])

@@ -77,14 +77,15 @@ const AI_GRADED = `g.kind = 'sa' AND a.shadow = 0 AND g.verdict != 'pending' AND
 
 /** The grade ids for a week, in a fixed order. Chosen by a hash of the week and
  *  the id, so the same week gives the same twenty. The pool is what was graded
- *  before the week began (so it stops moving), or, while that is fewer than
- *  twenty, everything so far; answers already marked this week always stay. */
+ *  before the week began (so it stops moving). If that pool has fewer than
+ *  twenty, fill it with the earliest AI grades: later grades cannot displace
+ *  answers a faculty member has already seen; marked answers always stay. */
 export async function calibrationSample(env, week, date = new Date()) {
   const marked = new Set(((await env.DB.prepare('SELECT DISTINCT grade_id FROM calibration WHERE week = ?').bind(week).all()).results ?? []).map((r) => r.grade_id));
   const startOf = weekStart(date).toISOString();
   let pool = ((await env.DB.prepare(`SELECT g.id FROM answer_grades g JOIN attempts a ON a.id = g.attempt_id WHERE ${AI_GRADED} AND g.created_at < ?`).bind(startOf).all()).results ?? []).map((r) => r.id);
   if (pool.length + marked.size < SAMPLE_SIZE)
-    pool = ((await env.DB.prepare(`SELECT g.id FROM answer_grades g JOIN attempts a ON a.id = g.attempt_id WHERE ${AI_GRADED}`).all()).results ?? []).map((r) => r.id);
+    pool = ((await env.DB.prepare(`SELECT g.id FROM answer_grades g JOIN attempts a ON a.id = g.attempt_id WHERE ${AI_GRADED} ORDER BY g.created_at, g.id LIMIT ?`).bind(SAMPLE_SIZE).all()).results ?? []).map((r) => r.id);
   const score = (id) => fnv(`${week}:${id}`);
   const rest = pool.filter((id) => !marked.has(id)).sort((x, y) => score(x) - score(y) || x - y).slice(0, Math.max(0, SAMPLE_SIZE - marked.size));
   return [...marked, ...rest].sort((x, y) => score(x) - score(y) || x - y);

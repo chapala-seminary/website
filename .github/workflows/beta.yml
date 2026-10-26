@@ -25,6 +25,27 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      # Private answer banks must be present before build/test: public textbook
+      # JSON no longer holds answer/accept. continue-on-error: a missing token
+      # must not fail the job at checkout; later steps fail clearly if keys are absent.
+      - name: Checkout private assessment keys
+        id: assessment_keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+            echo "Private assessment-keys checkout ready at .assessment-keys"
+          else
+            echo "No private assessment-keys checkout; textbook grading needs ASSESSMENT_KEYS_TOKEN."
+          fi
       - run: npm run build
       - run: npm test
       - name: Deploy the tested beta commit
@@ -33,6 +54,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: '119b0919229edb3185b69f1c6bd04b66'
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "Set CTS_BETA_CLOUDFLARE_API_TOKEN in repository Actions secrets."; exit 1; }
+          test -n "${ASSESSMENT_KEYS:-}" || { echo "ASSESSMENT_KEYS is unset; textbook sync needs the private checkout."; exit 1; }
+          echo "Deploy sync will read textbook and reading keys from ASSESSMENT_KEYS=$ASSESSMENT_KEYS"
           npm run deploy:beta:publish
       - name: Verify published beta release and activation
         run: node tools/check-beta-activation.mjs

@@ -258,6 +258,50 @@ slug, page name, the course's catalog card, the bank file, the two titles).
   translations of the English (sentences omitted in places) and recommends a
   parity review.
 
+## Where the answer bank lives
+
+A live test page does not include the question bank. The server sends the wording of the twenty questions it drew, and grades them from `grading_keys`. Public textbook JSON keeps prompts (and chapter); `answer` and `accept` live only in the private `chapala-seminary/assessment-keys` checkout that deploy and CI sync from. See `docs/ai-grading.md` section 4. The book text stays on the book page. Since 25 Oct 2026 reading-test and unit-exam keys are private too (`docs/answer-exposure-audit.md`). A new bank, including Christian Education, is written only in that private checkout.
+
 ## October beta audit conversion
 
 The 36 later banks now use typed fill-ins, with their chapter draws, answer keys and saved-pass identifiers preserved. Every supplied key and accepted variant is checked. Normalization also accepts changes in capitalization, punctuation, Latin accents and one leading article, preserving ñ. Five questions have explicit English/Spanish paraphrase or number variants added after reviewing their prompts; avoid inventing synonyms solely to reach an arbitrary variant count. Further content alternatives remain faculty-review work. Browser checks cover immediate feedback, reload, 17/20 failure, retake wait, 18/20 pass and preservation of older dated multiple-choice passes.
+
+## Elective textbooks (Oct 2026)
+
+Each denominational elective's textbook and test come from one command:
+
+    node tools/build-elective-textbook.mjs <CODE> --write
+
+`CODE` is A-C1 … D-C5. The input is `../elective-content/<CODE>/textbook/`
+(or `--content DIR`): `chapters.json`, `bank.json`, `accept.json` and
+`meta.json`. The book's slug and page are letters only: A-C1 gives
+`elecpcone` and `CTSTextbookElecPCOne`.
+
+- **The public file** is `src/content/textbooks/<slug>.json`. It has the
+  book in English, Spanish and French, a French title (`title.fr`, used by
+  `frTextbookTitle`) and `files: { excerpts: true }`. Each chapter is an
+  `<h2 id="en-N">` (the French keeps the English ids), a muted source line,
+  the CTS note (`p.cts-note`) and the paragraphs. It also has the test: 40
+  prompts with their chapters, draw 20, pass 18, four per chapter.
+  `requiredFrom` is null and `keys` is `"private"`.
+- **The keys** are in `assessment-keys/textbooks/<slug>.json`: prompt,
+  answer, accept, chapter and each question's French stamp. The stamps hash
+  the answers, so they are kept private. Since 25 Oct 2026 the 45 older
+  textbooks are `keys: "private"` too, and their stamps are there as well. The content schema and `tools/verify-no-keys.mjs`
+  fail if a private textbook's public file carries an answer, an accepted
+  answer or a stamp. `tools/french-readings.mjs apply` keeps them private.
+- A book keeps its number once it has one. A new book takes the next free
+  number.
+- The paragraphs are HTML. A bare ampersand, as in the old printers'
+  "&c.", is written `&amp;`; any other character reference is refused.
+
+The tool then runs `gen-worker-catalog.mjs`. The textbook comes before the
+reading test in the course's `tests`. It is optional on every track
+(`ELECTIVE_TESTS_PENDING`). The units link the book through the unit
+layout. The front page lists it under `#elective-textbooks`.
+
+If the course has a reading room, the tool also re-runs
+`tools/build-elective-readings.mjs <CODE> --write`. That adds the room's
+textbook notice and its French. Then build, run
+`node tools/exam-review.mjs dist --refresh-missing`, and build again. The
+review pins of private banks go to `assessment-keys/exam-review-references.json`.

@@ -88,6 +88,140 @@ questions. Their typed answers belong to the old questions, so they are not
 carried over. Passes already recorded, in the browser and on the server,
 stand.
 
+## Private reading tests (all tests since 25 Oct 2026)
+
+Every reading test now works this way, the 45 core tests included; their banks are in `assessment-keys/readings-src` (`docs/answer-exposure-audit.md`). The paragraph below was written for the electives.
+
+A new reading test can keep its answers out of this repository, the way the
+textbook tests do. The 45 reading tests made before Oct 2026 keep their
+answers public; nothing about them changes.
+
+| Path | What |
+|---|---|
+| `tools/import-readings.mjs` | The test's row says `private: true`. |
+| `assessment-keys/readings-src/<slug>.bank.json`, `.accept.json` | The bank and its accepted alternates, in the same format as `src/data/readings/`. They are in the private checkout, never in this repo. |
+| `src/content/readings/<slug>.json` | Written by `--write`. It has the prompts, reading numbers, titles, draw and pass, and `keys: "private"`. It has no `answer`, `accept` or `tr`, because the French stamps (`tr`) hash the answer. |
+| `assessment-keys/readings/<slug>.json` | Written by `--write`: `{ slug, test: { questions: [{ prompt, answer, accept, reading, tr }] } }`, in the public order. Grading sync, the shadow page and every checking tool join it to the public file (`readingQuestions` in `tools/grading-keys-lib.mjs`). |
+| `assessment-keys/exam-review-references.json` | The pinned review passages of private banks. Each one fingerprints the prompt with its answer, so they are not kept in `src/data/exam-review-references.json`. |
+
+The private checkout is `ASSESSMENT_KEYS`, or `../assessment-keys` beside this
+repo. Without it the importer, the build and grading sync stop rather than go
+on with an answerless bank. The content schema, `tools/verify-no-keys.mjs` and
+`test/private-readings.test.mjs` fail if the public file of a private bank
+carries an answer, an accepted answer or a stamp.
+
+To add one:
+
+1. Put the bank and accept files in `assessment-keys/readings-src/`.
+2. Add the row (`private: true`, `requiredFrom: null`) and run
+   `node tools/import-readings.mjs --write`.
+3. Run `node tools/gen-worker-catalog.mjs`, then build. The build stops at
+   "Review reference needs editorial refresh" until
+   `node tools/exam-review.mjs dist --refresh` pins the new bank's passages.
+   That command re-pins every bank, so review the diff of the public file.
+4. Commit the website files. Commit the keys in the assessment-keys repo.
+
+Faculty-approved alternates go in the `.accept.json` in `readings-src/`, so
+that the next import keeps them. `tools/french-readings.mjs apply` writes a
+private bank's French answers and stamps to the private file, and its French
+prompts to the public one.
+
+The slug must be letters only and end in `readings`: the browser's records
+(`cts-sync.js`) accept no digits. An elective's slug starts with `elec`
+(e.g. `elecbaponereadings`). `worker/test-activation.js`
+(`ELECTIVE_TESTS_PENDING`) keeps every `elec…` test optional: the production
+activation date never makes one required. Making one required takes its own
+`requiredFrom` date.
+
+## Elective reading rooms (Oct 2026)
+
+Each of the 20 denominational electives gets a reading room and a private
+reading test from one command:
+
+    node tools/build-elective-readings.mjs <CODE> --write
+
+`CODE` is A-C1 … D-C5. The course name comes from
+`tools/import-electives.mjs` (`prefixOf`: A-C1 → `CTSElecPC1`). The test slug
+is `elec<tag><one…five>readings`, e.g. `elecpconereadings`. The room is
+`<Prefix>Readings.html`.
+
+Before you run it:
+
+- `../elective-content/<CODE>/` (or `--content DIR`, or `ELECTIVE_CONTENT`)
+  holds `readings.json`, `bank.json` and `accept.json`. The five digests are
+  in English, Spanish and French, with the same structure in each. The bank
+  has French prompts, answers and alternates.
+- `src/data/reading-shelf.json` has the room's further-study shelf, with
+  `locusFr`, `nameFr` and `captionFr` beside the English and Spanish. Shelf
+  works and links come only from the course's source manifest, or follow its
+  URL pattern.
+- Optionally, `src/data/elective-readings.json` has a `tagline` and an
+  `onsite` notice for the course. Without them the tool writes generic ones.
+
+What the tool does:
+
+1. It copies the bank to `assessment-keys/readings-src/`, adds the row to
+   `src/data/elective-readings.json` (which `tools/import-readings.mjs`
+   reads: private, `requiredFrom: null`), and imports that test only
+   (`--only`).
+2. It writes the room on the Worship room's markup and adds it to
+   `src/data/rooms.json`. Then it runs `room-test-notices.mjs` (the
+   `#cts-required` notice) and `reading-rooms.mjs` (attestation and shelf).
+3. It writes the room's French, `src/data/french-readings/room/<Prefix>Readings.json`.
+   Each digest leaf is paired with its French leaf in document order. The
+   card lines, notices and shelf are added, and so is the textbook notice
+   once the course has a textbook. The stored French must carry the English
+   tags. Where the French italicizes more than the English, the extra
+   italics are dropped and reported: first from English words the French
+   cites (« dispositions » (*tempers*)), then the shortest emphasis (*ne* …
+   *pas*). Where the French joins two phrases the English italicizes
+   apart, its longest italic span is split at a space (the page looks the
+   same); italics in a parenthetical aside the French adds are dropped.
+   A French ordinal set as a superscript the English lacks (XIX<sup>e</sup>)
+   is written on the line (XIXe). Each change is reported. It stops if any other tags differ, or if any English passage of
+   the room would stay English on the French page. An elective room's store
+   shares French only with the core rooms and digests, never with another
+   elective's. So holding or removing one course cannot take French away
+   from another.
+4. It records the room in `src/lib/partials.ts` (`READING_ROOM`) and
+   re-imports the course. A unit gets the course-readings box only once its
+   room exists. Then it runs `private-units.mjs` and `gen-worker-catalog.mjs`.
+   Every certificate page's `cts-required-tests.js` fingerprint changes,
+   because the map of required tests changed.
+
+Then build. The first build stops at "Review reference needs editorial
+refresh". Run `node tools/exam-review.mjs dist --refresh-missing`. It pins
+only questions that have no pin, whose prompt or answer changed, or whose
+pinned passage is gone because its text was revised. Every other pin stays
+as it is. The
+private bank's pins go to `assessment-keys/exam-review-references.json`;
+pins already kept there stay there, including a held course's. Then
+build again. Running the tool twice gives the same files.
+
+**Held courses.** `src/data/elective-held.json` lists electives held back
+from the site, by code, each with its reason. A-C1 is held for a copyright
+decision (24 Oct 2026), and so are A-C3 and A-C5, which draw on the same
+newspaper, *The Apostolic Faith*. A held course keeps its units and nothing else:
+- both generators refuse its code;
+- `import-readings.mjs` skips its row;
+- `import-electives.mjs` gives its units no course-readings box;
+- `gen-worker-catalog.mjs` fails if it has a textbook, a reading test, a
+  room or a `READING_ROOM` entry.
+
+Its private keys may stay in assessment-keys. To lift a hold, remove the
+code, run both generators for it, and build.
+
+A-C3 and A-C5 were generated once before their hold, so their textbook keys
+and reading banks are in assessment-keys; everything public was then
+removed, their shelves included, as for A-C1. They have no exam-review pins
+yet. To lift their hold, write the shelf again (book-sources
+`books/A-C3/SOURCE.md`, `books/A-C5/SOURCE.md`) before running the
+generators.
+
+The front page lists elective reading tests apart from the 45 core ones
+(`#elective-readings`). Their test is optional on every track
+(`ELECTIVE_TESTS_PENDING`).
+
 ## Known limits
 
 - The shelf links straight to a public-domain copy wherever a stable, legal

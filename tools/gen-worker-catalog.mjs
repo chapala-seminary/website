@@ -10,6 +10,7 @@
 // --check runs in the test suite so a new course cannot ship without it.
 import fs from 'node:fs';
 import path from 'node:path';
+import { HELD, heldPrefixes } from './elective-held.mjs';
 
 const UNITS = 'src/content/units';
 const OUT = 'worker/catalog.json';
@@ -218,6 +219,20 @@ const REQUIRED_REF = /assets\/js\/cts-required-tests\.js(\?v=[0-9a-f]+)?/g;
 const requiredPages = fs.readdirSync('public').filter((f) => f.endsWith('.html') && fs.readFileSync(path.join('public', f), 'utf8').includes('assets/js/cts-required-tests.js'));
 const versioned = (h) => h.replace(REQUIRED_REF, `assets/js/cts-required-tests.js?v=${requiredVersion}`);
 
+/* A held elective (src/data/elective-held.json) keeps its units and nothing
+   else: no textbook, reading test, room or course-readings box. */
+{
+  const held = heldPrefixes(), found = [];
+  for (const [slug, t] of Object.entries(textbooks)) {
+    const c = Object.entries(courses).find(([, x]) => x.code === t.code)?.[1];
+    if (c && held.has(c.pages)) found.push(`${t.kind} ${slug}`);
+  }
+  for (const p of held) {
+    if (fs.existsSync(`src/body/rooms/${p}Readings.html`)) found.push(`room src/body/rooms/${p}Readings.html`);
+    if (fs.existsSync('src/lib/partials.ts') && new RegExp(`\\n  ${p}: "`).test(fs.readFileSync('src/lib/partials.ts', 'utf8'))) found.push(`READING_ROOM.${p} in src/lib/partials.ts`);
+  }
+  if (found.length) { console.error(`held electives (${Object.keys(HELD).join(', ')}) must have no public footprint:\n  ${found.join('\n  ')}`); process.exit(2); }
+}
 const text = JSON.stringify({ generated: 'tools/gen-worker-catalog.mjs -- do not edit', courses, completions, textbooks }, null, 2) + '\n';
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

@@ -15,8 +15,12 @@
  * ones in docs/ai-grading.md section 2:
  *
  *   u:<Prefix>/<n>/fill/<i>   <content>/units/<Prefix>/<n>.json       fill[i]
- *   tb:<slug>/fill/<i>        <content>/textbooks/<slug>.json         test.questions[i]
+ *   tb:<slug>/fill/<i>        <keys>/textbooks/<slug>.json            test.questions[i]
+ *                             (private assessment-keys; public textbook JSON
+ *                             no longer holds answer/accept)
  *   rd:<slug>/fill/<i>        <content>/readings/<slug>.json          test.questions[i]
+ *                             (a private reading bank, keys: "private":
+ *                             <keys>/readings/<slug>.json)
  *
  * IDEMPOTENT. An answer the item already accepts, or that is its answer, once
  * both are compared the way the grader compares them (same text rules as
@@ -30,19 +34,23 @@
  * reformat a whole bank to add one word. Units are JSON.stringify(x, null, 1)+"\n".
  *
  * --content DIR   the content root, default src/content (a copy, in the tests)
+ * --keys DIR      private assessment-keys root for textbook accepts
+ *                 (default: ASSESSMENT_KEYS or ../assessment-keys)
  * --dry-run       say what would change, write nothing
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { bare, fillCodes } from '../worker/grading/text.js';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(n);
 const opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : d; };
-const file = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content');
+const file = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content' && argv[i - 1] !== '--keys');
 const CONTENT = opt('--content', 'src/content');
+const KEYS = opt('--keys', resolveKeysRoot('.'));
 const DRY = flag('--dry-run');
-if (!file) { console.error('usage: node tools/apply-accepts.mjs <file> [--content DIR] [--dry-run]'); process.exit(2); }
+if (!file) { console.error('usage: node tools/apply-accepts.mjs <file> [--content DIR] [--keys DIR] [--dry-run]'); process.exit(2); }
 
 const LANGS = ['en', 'es', 'fr'];
 const MAX = 80;                       // the longest fill-in the server takes
@@ -55,10 +63,28 @@ if (!Array.isArray(approved)) { console.error('the file has no "approved" list')
 /** The content file and the path to the item for a qid, or null. */
 function locate(qid) {
   let m;
-  if ((m = /^u:([A-Za-z0-9_]{1,40})\/(\d{1,3})\/fill\/(\d+)$/.exec(qid)))
+  if ((m = /^u:([A-Za-z0-9_]{1,40})\/(\d{1,3})\/fill\/(\d+)$/.exec(qid))) {
+    // a course whose unit keys are private (tools/private-units.mjs; every course since
+    // 25 Oct 2026): src/content/units is rebuilt from assessment-keys, so the accept goes there
+    if (fs.existsSync(path.join(CONTENT, 'units-public', m[1]))) {
+      if (!KEYS) return null;
+      return { file: path.join(KEYS, 'units', m[1], `${m[2]}.json`), items: (o) => o.fill, i: +m[3] };
+    }
     return { file: path.join(CONTENT, 'units', m[1], `${m[2]}.json`), items: (o) => o.fill, i: +m[3] };
-  if ((m = /^(tb|rd):([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid)))
-    return { file: path.join(CONTENT, m[1] === 'tb' ? 'textbooks' : 'readings', `${m[2]}.json`), items: (o) => o.test?.questions, i: +m[3] };
+  }
+  if ((m = /^tb:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid))) {
+    if (!KEYS) return null;
+    return { file: path.join(KEYS, 'textbooks', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
+  }
+  if ((m = /^rd:([a-z0-9]{2,60})\/fill\/(\d+)$/.exec(qid))) {
+    const pub = path.join(CONTENT, 'readings', `${m[1]}.json`);
+    // a private reading bank keeps its answers and accepts in assessment-keys
+    if (fs.existsSync(pub) && JSON.parse(fs.readFileSync(pub, 'utf8')).keys === 'private') {
+      if (!KEYS) return null;
+      return { file: path.join(KEYS, 'readings', `${m[1]}.json`), items: (o) => o.test?.questions, i: +m[2] };
+    }
+    return { file: pub, items: (o) => o.test?.questions, i: +m[2] };
+  }
   return null;
 }
 
