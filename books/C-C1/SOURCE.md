@@ -83,3 +83,7 @@ These are supplementary sources for historical context and cross-checking, not s
 ## Provenance note
 
 Prepared as a rights-first fast-lane source manifest. Verification performed against the WHDL catalog record, WHDL linked journal-extract inventory, SABDA scan metadata, and Project Gutenberg catalog records on 24 October 2026.
+
+## Seven-segment verification and trilingual context bridge (26 October 2026)
+
+The [independent source-boundary/workload audit](./SEVEN_SEGMENT_BOUNDARY_AND_TRILINGUAL_BRIDGE_2026-10-26.md) verified all seven provisional reading source blocks against their exact OCR offset windows (six byte-exact; R1 differs only by one trailing newline). It found an R3a dangling terminal “On ”, an R3b start at dependent numbered paragraph 13, and R2's 34.9% share of total assigned tokens with an approximately 17-month omission. Nine of ten reading pairs have no shared unique 12-token shingles; R3/R4 share eleven overlapping shingles from a biblical quotation (John 5:25), not duplicate journal narrative. The audit supplies original EN/ES/FR contextual bridge notes for academic/native review. **No 1872 printed-page collation, final textbook, full source translation, private 40Q bank, rights or academic approval is claimed.**
