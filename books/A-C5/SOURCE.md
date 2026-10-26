@@ -45,3 +45,7 @@ A [five-candidate source and rights gate](./FIVE_CANDIDATE_SOURCE_AND_RIGHTS_GAT
 4. Prepare EN/ES/FR original student materials and digests only from approved passages. Contextualize racial history, women in ministry, interdenominational disputes, miracle claims and changing Pentecostal doctrine fairly.
 5. Put 40-question textbook and reading banks exclusively in private `assessment-keys`. No keys, student records or grade decisions in this public handoff.
 6. Wayne retains academic, legal/rights and production release approval. No automatic merge or deployment.
+
+## Abrams R4 article-boundary and embedded-work gate (26 October 2026)
+
+The [facsimile boundary and EN/ES/FR mission-ethics QA report](./ABRAMS_FACSIMILE_BOUNDARY_AND_MISSION_ETHICS_QA_2026-10-26.md) independently confirms that the Abrams article begins **mid-page on printed p. 13** after a separate article and poem, continues through printed p. 18, and is followed by Daniel Awrey's separately authored article on p. 19. The original p. 13–14 images were inspected; pp. 15–18 still require image-by-image proofreading. An embedded hymn stanza within Abrams's article requires its own contributor/rights screen. **Do not extract whole pages, reproduce raw OCR, or publish until the source, rights, academic and private-bank gates are cleared.**
