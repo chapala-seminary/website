@@ -26,6 +26,10 @@ Committed reader: Nos. 1–2 (September–October 1906), 28,181 words including 
 
 Wayne approved using verified Seymour-authored writings (Seymour d. 1922) and unsigned 1906–08 editorial articles, while excluding signed or individual first-person works by authors whose death before 1926 is not established. The raw textbook remains **on hold** because it still includes signed Garr and other contributions; Claude's separately filtered reader must be reviewed independently. The revised reading 1 selects unsigned No. 2 editorial and short mission reports (1,670 words), excluding Parham's first-person prayer, an unidentified first-person quotation and Bro. Hill's first-person testimony. Revised reading 4 omits the interpreted message through Bro. Post at a visible ellipsis. These are source-file revisions, **not academic/legal publication approval**; attribution and original scan checks remain pending.
 
+## Embedded-quotation scrub map (26 October 2026)
+
+The approved fail-closed rule requires additional source-level omissions before rebuilding EN/ES/FR derivatives: the Parham dialogue in reading 1; two separate unnamed-speaker quotations in reading 2; the unnamed visitor quotation in reading 4; and B. H. Irwin’s signed report in reading 5. The unattributed closing verse in reading 3 remains held pending writer verification. Exact boundaries and continuity checks are recorded in `EXACT_EMBEDDED_QUOTATION_SCRUB_MAP_2026-10-26.md`. No source file, translation, assessment, or release status is changed by that audit artifact.
+
 ## Five readings
 
 1. **“The Pentecostal Baptism Restored” — unsigned editorial and adjacent mission reports** — No. 2 (October 1906). Begin “All along the ages men have been preaching a partial Gospel”; end after the third-person paragraph on Rev. Adolph Rosa. Omit Parham's first-person prayer and an unidentified chief-of-police quotation at two marked `[…]` omissions; stop before Bro. Hill's first-person testimony. Body: **1,670 words**. Attribution and scan collation pending.
