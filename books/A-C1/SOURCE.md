@@ -72,3 +72,7 @@ The approved fail-closed rule requires additional source-level omissions before 
 - `textbook.md` — 28,181-word selection from Nos. 1–2.
 - `reading-1.md` through `reading-5.md` — the five source-bounded readings listed above; reading 1 was replaced and reading 4 was redacted on 2026-10-24.
 - All six text files state that scan comparison remains pending.
+
+## 26 October 2026 source-selection decision versus Mexican rights clearance
+
+NEW tracker row 226 supersedes the earlier contributor-death *selection policy* but is not a legal finding that pre-1931 U.S. public-domain text is automatically reusable or translatable in Mexico. Preserve this SOURCE.md rights hold and per-contributor checks until documented qualified clearance. See [Mexico pre-1931 rights gate and five original EN/ES/FR reading notes](MEXICO_PRE1931_RIGHTS_GATE_AND_TRILINGUAL_READING_NOTES_2026-10-26.md). The new note does not alter raw readings, private keys, course holds or release authorization.
