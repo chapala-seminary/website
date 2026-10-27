@@ -35,3 +35,8 @@ No EN/ES/FR student text, 40-question private banks, academic endorsement, copyr
 ## 27 October 2026 staged-candidate reconciliation
 
 The staged Durham reader must also satisfy the source-integrity reconciliation in [PENTECOSTAL_A_C2_STAGED_SOURCE_INTEGRITY_CONTRADICTION_2026-10-27.md](../PENTECOSTAL_A_C2_STAGED_SOURCE_INTEGRITY_CONTRADICTION_2026-10-27.md). In particular, hold “A Word to Ministers” and dependent bank questions 33 and 35 until its damaged heading, byline, two-column order, and ending are verified from the page images; then regenerate all three languages and privately revalidate the answers.
+
+
+## 27 October 2026 original CTS editorial fallback (not approved)
+
+To avoid publishing or examining students on the uncollated March 1909 “A Word to Ministers” segment, a fully original **EN/ES/FR** chapter-5 editorial note and two **proposed** replacement public prompts (positions 33 and 35) are prepared in [PROPOSED_ORIGINAL_CTS_CH5_REPLACEMENT_EN_ES_FR_AND_BANK_REPAIR_2026-10-27.md](PROPOSED_ORIGINAL_CTS_CH5_REPLACEMENT_EN_ES_FR_AND_BANK_REPAIR_2026-10-27.md). This is a source-safe **draft**, not an academic approval or legal clearance. Claude must not apply it without Wayne/faculty approval and language review, and must independently align the private answer maps before any beta release. The original historical article remains on facsimile/source-rights hold.
