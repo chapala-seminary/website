@@ -20,3 +20,5 @@ All eight issues received. August 1911 (Vol. I, No. 8) holds "The Great Revival 
 ## Source-integrity audit
 
 See `EIGHT_ISSUE_SOURCE_INTEGRITY_AUDIT_2026-10-26.md` before extracting readings or generating assessment evidence. Material findings: the March 1909 artifact is an eight-page fragment beginning at printed p. 5; August 1912 substantially reprints May 1912; “The Church” repeats from February 1911 in January 1912; several page images have absent or degraded OCR. Use canonical article IDs, image-collated boundaries, and overlap checks.
+
+Additional source-only correction (26 Oct): `JAN1912_MAY1912_TITLE_MISASSIGNMENT_AND_MANIFEST_DRIFT_QA_2026-10-26.md` documents that the article headed “The Finished Work of Calvary—It Makes Plain the Great Work of Redemption” is attested as a heading in **May 1912** OCR, not as a verified January 1912 heading; January p.1 is unreadable in OCR. It also flags the old Seymour-centered `SOURCE.md` as stale relative to the active Durham build. See the report before assigning source citations or questions; no legal-rights conclusion follows from this source inventory.
