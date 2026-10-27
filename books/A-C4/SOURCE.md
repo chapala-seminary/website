@@ -52,3 +52,8 @@ The [five-chapter location and embedded-contributor audit](./FIVE-CHAPTER-CANDID
 ## New 26 October 2026 trilingual editorial and embedded-poem rights hold
 
 The [five-chapter EN/ES/FR original editorial guide and poem-source investigation](./FIVE_CHAPTER_TRILINGUAL_EDITORIAL_GUIDE_AND_POEM_RIGHTS_HOLD_2026-10-26.md) is based on direct inspection of the exact five provisional OCR windows. It identifies an inset **“The Starless Crown”** poem in candidate R4 (chapter LXXI), independently attested in 1863 and 1871, so it must **not** be assumed to be Woodworth-Etter's own writing or automatically rights-cleared by her death. Original author and Mexico rights are unresolved; exclude or separately clear embedded verse before release. Five original EN/ES/FR historical-critical digests and study tasks are research aids only, not approved readings or translations. Facsimile collation, full contributor screening, academic decision, rights approval, private banks and production release remain blocked.
+
+
+## 27 October 2026 staged-candidate reconciliation
+
+The staged textbook and public bank must also satisfy [PENTECOSTAL_A_C4_STAGED_SOURCE_AND_ASSESSMENT_CONTRADICTION_2026-10-27.md](../PENTECOSTAL_A_C4_STAGED_SOURCE_AND_ASSESSMENT_CONTRADICTION_2026-10-27.md). It documents the full trilingual text built from uncollated OCR, twelve precision-fact prompts requiring facsimile-backed evidence, and retained third-party hymn material lacking a complete item-level contributor record. Facsimile collation, contributor disposition, EN/ES/FR regeneration, and private-answer revalidation remain required before promotion.
