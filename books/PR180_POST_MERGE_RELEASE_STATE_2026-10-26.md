@@ -1,47 +1,58 @@
-# PR #180 post-merge release-state audit — 26 October 2026
+# PR #180 post-merge production verification — 26 October 2026
 
-**Status:** merge verified; production deployment **not yet verified**  
-**Scope:** read-only release observation. This report does not merge, deploy, approve, or change production.
+**Status:** exact merged release deployed and verified on the direct Worker hostname; custom-domain browser acceptance remains pending  
+**Scope:** post-release evidence only. ChatGPT did not merge, deploy, approve, or change production.
 
-## Verified merge facts
+## Exact release identity
 
 - Pull request: [#180](https://github.com/chapala-seminary/website/pull/180), authored by `chapalatheological-ai`.
-- Approved by `ChapalaTheological1` at 2026-10-27 00:28:40 UTC.
 - Merged externally by `ChapalaTheological1` at **2026-10-27 02:33:10 UTC** (26 October, Mexico City).
 - Approved PR head: `c6110458213ee676833149a8f30c8b121572ec89`.
-- Previous main base: `53e348cdccb7fba0e5346621d0bc3d6c4bc2aecd`.
 - Resulting main merge commit: `a5d7b380361e4db1a54b88bf7113f3eaed83ab81`.
-- GitHub reports 139 changed files in the merge commit.
-- The commit message is `Merge pull request #180 from chapala-seminary/beta` and identifies the approved `c6110458` release candidate.
+- Production workflow: [run 40439092559](https://github.com/chapala-seminary/website/actions/runs/40439092559), job `121974811164`.
+- Deployed Worker version: `17bbcbbf-09a6-45ef-8380-c56f724a528c`.
+- Workflow verification marker: `Production verified: 2026-10-27 a5d7b380`.
 
-This confirms that the owner merged the exact PR head that had passed the documented exact-head tests and approval gate. ChatGPT did not perform the merge.
+## Workflow result
 
-## Production workflow consequence
+The `production` job completed **successfully**. GitHub reports success for every required step:
 
-At merge commit `a5d7b380...`, `.github/workflows/production.yml`:
+1. checkout and runtime setup;
+2. dependency installation and Playwright dependencies;
+3. private assessment-key checkout;
+4. build with private keys;
+5. full test suite;
+6. clean/current production-checkout guard;
+7. deploy of tested `main`; and
+8. published-production release verification.
 
-- triggers on pushes to `main`;
-- runs the production job only when `CTS_PRODUCTION_AUTODEPLOY_ENABLED == 'true'`;
-- checks out the private assessment-key repository and fails if it is unavailable;
-- runs `npm run build` and the full `npm test` suite;
-- refuses an outdated or dirty checkout;
-- deploys only after those gates; and
-- calls `tools/check-production-release.mjs` after deployment.
+Deployment synchronized **33,241 questions**; the deployment pass found zero remaining writes and 33,241 unchanged questions. It uploaded **1,433** new or modified static assets, reused **3,006**, and reported **4,463** files in `dist`. The Worker was deployed with `GRADING_MODE="live"`.
 
-## Evidence still missing at this snapshot
+## Answer-key integrity evidence
 
-GitHub's combined-status query for merge commit `a5d7b380...` returned no commit statuses. The available commit-workflow wrapper, which exposes pull-request-triggered runs, returned no run for the new merge commit; that result does **not** establish whether a push-triggered production run is queued, running, skipped by the repository variable, or complete. The connected CTS Gmail account has the merge notice but no production-workflow success/failure notice yet.
+The successful release gates reported:
 
-Therefore:
+- **1,998** unit pages and **366** test pages with no answer key, accepted answer, model answer, keyword, rubric, explanation, or review passage exposed;
+- all **39** single-page course pages and fill data clean;
+- **61** private reading banks and **61** private textbook banks checked against public files, with no answer, accept, or `tr` field exposed;
+- **765** private reading-bank checks passed;
+- **183** built pages with installed private banks checked; and
+- **39,960** answer comparisons against the private baseline completed.
 
-1. Do **not** call production deployed, healthy, or failed from the merge alone.
-2. Obtain the push-triggered `Test and deploy production` run ID for `a5d7b380...`.
-3. Verify private-key checkout, build, full tests, branch guard, deploy, and published-release check all completed successfully.
-4. Query the custom-domain health endpoint for the exact deployed release.
-5. Repeat the public/private key-exposure audit for this release before declaring the gate complete.
+These are workflow assertions for the exact merge commit above. No private answer content or credentials are reproduced here.
+
+## Remaining acceptance limitation
+
+The workflow's custom-domain probe to `https://chapalaseminary.org/api/health?release=2026-10-27%20a5d7b380` received **HTTP 403** from a Cloudflare challenge. The workflow then verified the exact release and health successfully on the existing direct Worker hostname.
+
+Accordingly:
+
+- the exact merged release is verified as deployed and healthy on the direct Worker endpoint;
+- the release's build, private-key, test, branch, deploy, and published-release gates passed;
+- **custom-domain browser acceptance is still required**; do not represent the challenged custom-domain probe as a successful verification.
 
 ## Scope warning
 
-PR #180 promotes fixed head `c6110458`. Claude's later A-C2/A-C5 source and course work was not part of that approved head unless separately committed before the merge (the PR metadata reviewed here shows the same fixed head as approved). Do not attribute later handoff reports or active elective reconstruction to this release.
+PR #180 promotes fixed head `c6110458`. Later A-C2/A-C5 source and course work is not included unless it existed in that fixed head. Do not attribute later handoff reports or active elective reconstruction to this release.
 
-PR #164 remains a separate draft, unmerged change; its correspondence sending must remain off.
+PR #164 remains a separate draft and unmerged change. Its correspondence sending must remain off.
