@@ -61,16 +61,16 @@ The following text is **new CTS commentary** based on the unsigned issue narrati
 - EN: According to the November 1906 editorial, the Azusa meetings did not take ____.
 - ES: Según el editorial de noviembre de 1906, en las reuniones de Azusa no se hacían ____.
 - FR: Selon l'éditorial de novembre 1906, on ne faisait pas de ____ pendant les réunions d'Azusa.
-- **PRIVATE handoff only — intended answer concepts:** EN `collections`; ES `colectas`; FR `collectes`. These are suggestions, not published answer keys. Verify acceptable variants, accents, inflections, and the exact public wording privately in `assessment-keys`. The unsigned opening editorial explicitly supplies this fact; the revised Reading 2 digest must also retain it.
+- **Answer-key security:** do not publish answer concepts, accepted variants, or rationales in this public handoff. Authorize and verify the three-language answer mapping only in the private assessment-keys repository after faculty approval. The revised Reading 2 digest must explicitly teach the question's underlying fact.
 
 **Q28 (Reading 4; replaces question dependent on unidentified first-time visitor):**
 
 - EN: The January 1907 editorial says that some meetings continued through the ____.
 - ES: El editorial de enero de 1907 dice que algunas reuniones continuaban durante la ____.
 - FR: L'éditorial de janvier 1907 indique que certaines réunions se poursuivaient pendant la ____.
-- **PRIVATE handoff only — intended answer concepts:** EN `night`; ES `noche`; FR `nuit`. These are suggestions, not published answer keys. Verify grammar and private accepted variants. The unsigned editorial immediately following the held visitor quotation provides this detail, and the replacement Reading 4 paragraph explicitly teaches it.
+- **Answer-key security:** do not publish answer concepts, accepted variants, or rationales in this public handoff. Authorize and verify the three-language answer mapping only in the private assessment-keys repository after faculty approval. The revised Reading 4 digest must explicitly teach the question's underlying fact.
 
-**Note:** The intended answer concepts above are only in this nonproduction, editorial-review file; do not copy them into any public student assessment manifest, lesson, release branch or generated output. Actual private answer maps must be updated by an authorized owner after academic approval. Public-bank positions must remain exactly 40 with eight questions per reading; do not change test distribution or required-from scheduling without the release owner.
+**Note:** This public source-only document intentionally omits answer keys. Actual private answer maps must be updated by an authorized owner after academic approval. Public-bank positions must remain exactly 40 with eight questions per reading; do not change test distribution or required-from scheduling without the release owner.
 
 ## Implementation / QA acceptance gates for Claude
 
