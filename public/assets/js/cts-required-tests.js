@@ -257,13 +257,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "elecpcfive",
    "page": "CTSTextbookElecPCFive",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   },
   {
    "slug": "elecpcfivereadings",
    "page": "CTSElecPC5Readings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   }
  ],
  "CTSELECPC4": [
@@ -285,13 +285,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "elecpcone",
    "page": "CTSTextbookElecPCOne",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   },
   {
    "slug": "elecpconereadings",
    "page": "CTSElecPC1Readings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   }
  ],
  "CTSELECPC3": [
@@ -299,13 +299,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "elecpcthree",
    "page": "CTSTextbookElecPCThree",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   },
   {
    "slug": "elecpcthreereadings",
    "page": "CTSElecPC3Readings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   }
  ],
  "CTSELECPC2": [
@@ -313,13 +313,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "elecpctwo",
    "page": "CTSTextbookElecPCTwo",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   },
   {
    "slug": "elecpctworeadings",
    "page": "CTSElecPC2Readings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-29T06:00:00Z"
   }
  ],
  "CTSELECREF5": [
