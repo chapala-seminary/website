@@ -49,3 +49,8 @@ A [five-candidate source and rights gate](./FIVE_CANDIDATE_SOURCE_AND_RIGHTS_GAT
 ## Abrams R4 article-boundary and embedded-work gate (26 October 2026)
 
 The [first boundary and EN/ES/FR mission-ethics QA report](./ABRAMS_FACSIMILE_BOUNDARY_AND_MISSION_ETHICS_QA_2026-10-26.md) established that the Abrams article begins **mid-page on printed p. 13** after a separate article and poem. The [pp. 15–18 image-collation report](./ABRAMS_PAGES_15_18_COLLATION_AND_EMBEDDED_SOURCES_2026-10-26.md) now closes the remaining image-coverage gap and corrects the article end: Abrams concludes in the **upper right-column portion of printed p. 18**, and Daniel Awrey's separately authored “Life Sketches” begins **later on that same printed page**, not only on p. 19. It also logs Habakkuk, Ramabai speech, an unnamed Parsi woman's testimony, Isaac Watts's hymn, Revelation quotations, and an unresolved song line as embedded sources or voices. **Do not extract whole pages, reproduce raw OCR, translate embedded works, or publish until source, rights, academic and private-bank gates are cleared.**
+
+
+## 27 October 2026 staged reading-set reconciliation
+
+The staged PC5 digests and reading bank must also satisfy [PENTECOSTAL_PC5_STAGED_READING_SET_SOURCE_RIGHTS_CONTRADICTION_2026-10-27.md](../PENTECOSTAL_PC5_STAGED_READING_SET_SOURCE_RIGHTS_CONTRADICTION_2026-10-27.md). The room's blanket pre-1931 reuse statement conflicts with this manifest's contributor-specific fail-closed gate; original-facsimile evidence, an item-level contributor register, academic approval of the one-periodical five-reading design, and private answer revalidation remain required before activation or promotion.
