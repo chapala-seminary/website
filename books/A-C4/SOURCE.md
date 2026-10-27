@@ -57,3 +57,7 @@ The [five-chapter EN/ES/FR original editorial guide and poem-source investigatio
 ## 27 October 2026 staged-candidate reconciliation
 
 The staged textbook and public bank must also satisfy [PENTECOSTAL_A_C4_STAGED_SOURCE_AND_ASSESSMENT_CONTRADICTION_2026-10-27.md](../PENTECOSTAL_A_C4_STAGED_SOURCE_AND_ASSESSMENT_CONTRADICTION_2026-10-27.md). It documents the full trilingual text built from uncollated OCR, twelve precision-fact prompts requiring facsimile-backed evidence, and retained third-party hymn material lacking a complete item-level contributor record. Facsimile collation, contributor disposition, EN/ES/FR regeneration, and private-answer revalidation remain required before promotion.
+
+## 27 October 2026 retained-hymn contributor research (identity only; no clearance)
+
+The [three-hymn attribution and Mexico-rights triage report](./THREE_RETAINED_HYMNS_CONTRIBUTOR_IDENTIFICATION_AND_RIGHTS_TRIAGE_2026-10-27.md) independently identifies likely historical authors of the staged “I can but perish if I go” (Edmund Jones, died 1765), “I am coming, Lord” (Lewis Hartsough, died 1919; **refrain-only match requires fuller verification**), and “A Child of the King” (Hattie E. Buell, died 1910). This narrows **identity** research only; exact 1912 image/variant collation, all other contributor identities, edition/translation rights, 12 precise examination evidence items, and Wayne's academic/legal release decisions remain **ON HOLD**. Do not interpret a favorable preliminary author-term screen as textbook clearance.
