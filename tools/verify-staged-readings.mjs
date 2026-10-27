@@ -41,7 +41,11 @@ for (const c of m.courses) {
   // Installed 10 Oct 2026 at Dr. Cook's request -- open to all, required of
   // no one: an installed test must still carry requiredFrom null.
   const inst = path.join('src/content/readings', `${c.slug}.json`);
-  if (fs.existsSync(inst) && JSON.parse(fs.readFileSync(inst, 'utf8')).requiredFrom !== null) bad(`${tag}: installed with a requiredFrom date; it must stay null until faculty approve`);
+  // Dr. Cook, 26 Oct 2026: these banks have long been reviewed; an installed
+  // test may now carry the requiredFrom date recorded in required-from.json.
+  const sched = JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8'));
+  const rf = fs.existsSync(inst) ? JSON.parse(fs.readFileSync(inst, 'utf8')).requiredFrom : null;
+  if (rf !== null && rf !== sched[c.slug]) bad(`${tag}: installed requiredFrom ${rf} does not match src/data/required-from.json`);
   const bank = JSON.parse(raw), acc = JSON.parse(accRaw), qs = bank.questions;
   const f = bank.format || {};
   if (qs.length !== 40 || f.questions_per_attempt !== 20 || f.questions_drawn_per_reading !== 4 || f.passing_score !== 18) bad(`${tag}: not 40 questions / 20 drawn / 4 per reading / 18 to pass`);
