@@ -40,3 +40,8 @@ The staged Durham reader must also satisfy the source-integrity reconciliation i
 ## 27 October 2026 original CTS editorial fallback (not approved)
 
 To avoid publishing or examining students on the uncollated March 1909 “A Word to Ministers” segment, a fully original **EN/ES/FR** chapter-5 editorial note and two **proposed** replacement public prompts (positions 33 and 35) are prepared in [PROPOSED_ORIGINAL_CTS_CH5_REPLACEMENT_EN_ES_FR_AND_BANK_REPAIR_2026-10-27.md](PROPOSED_ORIGINAL_CTS_CH5_REPLACEMENT_EN_ES_FR_AND_BANK_REPAIR_2026-10-27.md). This is a source-safe **draft**, not an academic approval or legal clearance. Claude must not apply it without Wayne/faculty approval and language review, and must independently align the private answer maps before any beta release. The original historical article remains on facsimile/source-rights hold.
+
+
+## 27 October 2026 staged five-reading-set reconciliation
+
+The five CTS digests and their 40-prompt EN/ES/FR reading bank are separately gated by [PENTECOSTAL_PC2_STAGED_READING_SET_SOURCE_INTEGRITY_CONTRADICTION_2026-10-27.md](../PENTECOSTAL_PC2_STAGED_READING_SET_SOURCE_INTEGRITY_CONTRADICTION_2026-10-27.md). Four digests cross already-documented mixed article boundaries or interleaved OCR, and the fifth blends an August witness with a January continuation whose title/byline/opening are unavailable in OCR. Hold reading-test activation or promotion until every passage is facsimile-collated and attributed, all three languages are regenerated/reviewed, and the private answers are independently revalidated.
