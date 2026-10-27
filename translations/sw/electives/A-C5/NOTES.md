@@ -1,0 +1,12 @@
+# A-C5 (elecpcfive / CTSElecPC5) - Notes
+- Word counts (EN source / SW): textbook 34,516 / 28,783; readings about 10,300 / 9,216 (SW file also holds intro and card blurbs); tests 40+40 items, about 1,250 SW words.
+- SW word counts are lower than EN because Swahili uses more agglutination; nothing was cut. Omission marks [...] kept; hymn-line stubs kept as given.
+- Terms: ubatizo katika Roho Mtakatifu; kunena kwa lugha; wamisionari; misheni za imani (faith missions / njia ya imani); uongozi wa kichungaji; karama za Roho; utakaso (kazi ya pili ya neema); kuhesabiwa haki; kuoshana miguu; Meza ya Bwana; ubatizo wa maji kwa kuzamishwa; askofu / mwenyekiti / wazee.
+- complementarian / egalitarian / team-ministry: kept the English terms with a short Swahili gloss at first use in each note; the notes stay neutral as in source.
+- Bible quotes: SUV-style wording from memory; where the paper's KJV wording differs from SUV I followed the paper's sense, so a reviewer should check the verse texts against SUV.
+- Source citation slips kept as given (e.g. Matt. 16:16, Acts 2:28, Mt. 3:11).
+- Uncertain: "Union Rescue Mission", "Church of Angels", "Pentecost Gospel Union Mission" kept in English as proper names; "Kru" -> Kikru; "colored" rendered "watu weusi / watu wa rangi" per context.
+- Dated words in sources ("heathen") rendered "wapagani" as in the source; CTS notes already flag them.
+- Divorce, medicine and healing passages translated faithfully; CTS rejections of medical advice kept.
+- Test blanks written to fit Swahili grammar; check-leaks.py reports OK. Keys only in private/keys.sw.json.
+- Working extracts are in work/ (EN text; can be deleted).

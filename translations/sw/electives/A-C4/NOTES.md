@@ -1,0 +1,12 @@
+# NOTES A-C4 (elecpcfour, CTSElecPC4), Pentecostal; Woodworth-Etter, Acts of the Holy Ghost (1912)
+- Words: textbook EN 30,697 / SW 24,418; readings EN 9,566 / SW 8,736 (Swahili runs shorter in word count; nothing omitted). Tests 539 and 595 SW words.
+- Terms: ubatizo katika Roho Mtakatifu; karama za Roho; uponyaji wa kiungu; mikutano ya uamsho (revival meetings); huduma ya wanawake; kunena kwa lugha; nguvu ya Mungu ya kuangusha / kuanguka chini ya nguvu (slain/falling under the power); trance = hali ya kuzimia rohoni (kept "trance" in brackets at first use); mourners' bench = benchi la waombolezaji; altar = madhabahu; Disciples = Wanafunzi (Disciples), United Brethren = Ndugu Wanaoungana, Friends = Marafiki (Waquaker); Sabbath = Sabato / Shule ya Jumapili.
+- Healing claims kept as testimony; CTS notes and the Reading 4 advice (keep seeing doctors, do not announce healings early) translated faithfully, nothing softened or added.
+- Women in ministry: source and CTS neutral notes (complementarian / egalitarian / team ministry) translated as given, no commentary.
+- Bible quotations: SUV wording where I was confident, otherwise faithful rendering with reference kept. Isaya 38:1 uses SUV "Uweke nyumba yako katika taratibu" in textbook, reading and test.
+- Hymn verses and the "[…]" omission marks kept as in source. "[illegible]" kept.
+- Textbook CTS note on ch. 4 says translations follow Reina-Valera/Louis Segond; adapted to say SUV for the Swahili (a necessary adjustment).
+- Uncertain: textbook test item 27 blank covers the whole phrase "Patakatifu pa Patakatifu" (answer_en recorded as "Most Holy Place", key has "Holy") to avoid a give-away. Test item 8 (textbook) blank is the whole name "Pango la Ibilisi".
+- Reading test item 20 uses "mesmerism" (loanword); item 32 "xenolalia" kept as in source. Item 10 uses "wakiri" for "professors".
+- Please have a native reviewer check older-era idioms (e.g. "kuangushwa katika Roho", "mizimu" avoided deliberately) and trance wording.
+- check-leaks.py A-C4: OK.

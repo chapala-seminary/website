@@ -1,0 +1,306 @@
+# Masomo Matano — Mafundisho ya Kibaptisti
+
+_Muhtasari tano za CTS kuhusu John L. Dagg, *Manual of Theology* (1857)._
+
+**Chaguo la heshima (honors):** Kamilisha masomo yoyote matatu kati ya matano yafuatayo. Masomo haya yanaongezea kozi na hayabadilishi vitengo vyake wala mitihani yake.
+
+**Katika tovuti hii:** Kila somo kati ya masomo matano ni muhtasari wa Seminari ya Kitheolojia ya Chapala, ulioandikwa na CTS, unaopatikana kwa Kiingereza, Kihispania na Kifaransa hapa katika tovuti, na kila moja hufunguka moja kwa moja kutoka ukurasa huu bila kupakua chochote. Kila kadi inataja kazi ambayo muhtasari wake umetengenezwa kutoka kwake.
+
+**Mtihani wa masomo wa Uzamili:** Ni tofauti na mwaliko wa heshima. Heshima inakuomba usome masomo yoyote matatu; mtihani wa Uzamili unahusu yote matano. Una maswali ishirini ya kujaza mapengo, manne kutoka kwa kila somo, yaliyochaguliwa kutoka arobaini; kupata kumi na manane sahihi kunakufaulisha.
+
+**Uthibitisho wa heshima:** Kwa kuchagua masomo matatu, unathibitisha kwamba umesoma muhtasari huo matatu kwa ukamilifu. Muhtasari huo ni maandishi yaliyoandikwa na CTS, yanayoweza kujumuisha vifungu vifupi au marekebisho ya kazi zilizo katika umma (public domain).
+
+---
+
+## Somo la 1: Yuko Mungu
+
+*Somo la 1 · Kuwepo kwa Mungu*
+
+*Muhtasari wa CTS wa John L. Dagg, Manual of Theology (1857), Kitabu cha II, sura ya 1, “Kuwepo kwa Mungu”*
+
+Dagg, mwanateolojia wa kwanza wa kimfumo wa Kibaptisti wa Kusini, anakusanya mashahidi wanne kwamba Mungu yuko: asili yetu ya kimaadili, inayolilia mtawala kamilifu wa kimaadili; ulimwengu kama matokeo ya Sababu Kuu ya Kwanza, uliojaa alama za mpango; kukubaliana kwa wanadamu wote; na Maandiko, yanayoondoa shaka yote. Dawa pekee ya kweli ya kutokuamini kuwepo kwa Mungu, anasema, ni “moyo mpya.”
+
+### Yuko Mungu: Mashahidi Wanne wa Dagg
+
+Somo la Seminari ya Kitheolojia ya Chapala — sura ya ufunguzi ya fundisho la Dagg kuhusu Mungu, ambapo dhamiri, uumbaji, sauti ya pamoja ya wanadamu na Biblia vyote vinashuhudia kwamba Mungu yuko
+
+Muhtasari wa CTS wa John L. Dagg, *Manual of Theology* (1857), Kitabu cha II, sura ya 1, “Kuwepo kwa Mungu.” Matini asilia iko katika umma; nukuu fupi zifuatazo zimetoka humo.
+
+- Manual of Theology, Kitabu cha II, sura ya 1
+- Chanzo cha msingi
+- 1857
+- John L. Dagg
+
+**Neno kabla ya kusoma.** John Leadley Dagg (1794–1884) aliandika mfumo kamili wa kwanza wa mafundisho uliotungwa na Mbaptisti wa Kusini. Sura hii haijaribu kumshawishi asiyeamini kuamini kuanzia hakuna. Dagg anaandika kwa waamini, ili “kuthibitisha” imani waliyo nayo tayari, kwa kukusanya aina nne za ushahidi mahali pamoja. Isome kama muhtasari wa mchungaji wa sababu ambazo Wakristo wamezitoa kwa muda mrefu, si kama neno la mwisho la falsafa. Dagg ni sauti moja ya kihistoria ya Kibaptisti; CTS inawasilisha mitazamo yake kama yake mwenyewe, si kama msimamo uliokubaliwa na kila Mbaptisti.
+
+#### 1. Mchungaji-Mwanateolojia wa Kizazi cha Waanzilishi
+
+Dagg alizaliwa Middleburg, Virginia, mwaka 1794. Aliongoka akiwa kijana, akaanza kuhubiri Virginia, na mwaka 1825 akawa mchungaji wa Kanisa la Kibaptisti la Tano huko Philadelphia, mji ambao Wabaptisti wa Marekani waliunda ushirika wao wa kwanza (association) mwaka 1707. Macho dhaifu na mapungufu mengine ya kimwili yalimbana maisha yake yote, na sauti yake hatimaye ikashindwa kuhubiri mara kwa mara. Aligeukia ufundishaji, kwanza katika shule ya wasichana huko Tuscaloosa, Alabama, kisha, kuanzia 1844, kama rais wa Chuo Kikuu cha Mercer huko Penfield, Georgia, ambako pia alifundisha teolojia. Mercer lilichukua jina la Jesse Mercer, kiongozi mkuu wa Kibaptisti wa Georgia. Mwaka mmoja baada ya Dagg kufika, mwaka 1845, Wabaptisti wa majimbo ya kusini walikutana Augusta, Georgia, na kuunda Mkutano Mkuu wa Wabaptisti wa Kusini (Southern Baptist Convention). Dagg alikuwa wa kizazi hicho cha waanzilishi. *Manual of Theology* yake (1857) na mwenzake, *A Treatise on Church Order* (1858), vilipa makanisa yake kitabu cha kwanza kamili cha kiada cha mafundisho. Teolojia yake inasimama katika mstari wa Maungamo ya Philadelphia ya 1742, umbo la Kibaptisti la maungamo makuu ya Wapuritani, na ni ya Kikalvini kwa uchangamfu, lakini ya wazi na ya ibada kwa sauti. Dagg anaufungua mwanzo wa kazi nzima kwa kusisitiza kwamba ukweli wa kidini lazima ujifunzwe “kwa lengo la kuiboresha mioyo.” Lengo hilo linaiumba sura hii pia.
+
+#### 2. Si Kweli Mpya
+
+Dagg anaanza kwa kukiri jambo la kushangaza. Kuwepo kwa Mungu, anasema, “hakupaswi kuthibitishwa sasa kama kweli mpya.” Kila ukurasa kabla ya huu umekudhania. Anakusanya uthibitisho hapa tu “kwa ajili ya mpangilio wa kimfumo,” na kwa sababu maelezo yaliyo wazi zaidi ya uthibitisho huo huimarisha imani. Hili linatuambia kitu kuhusu teolojia ya Kibaptisti ya siku zake. Haikuwa mfumo wa kubuni uliojengwa na mwanafalsafa chumbani; ilikuwa mpangilio wa mchungaji wa yale ambayo kanisa tayari liliyaamini kutoka Maandiko. Kichwa cha sura ya Dagg ni rahisi tu “Yuko Mungu,” kikifuatwa na maandiko kutoka Mwanzo, Zaburi, Marko, 1 Wakorintho na Waebrania. Biblia ndiyo fremu; hoja zinazofuata zinaitumikia. Dagg kisha anaorodhesha mashahidi wanne: asili yetu ya kimaadili, kuwepo na mpango wa ulimwengu, kukubaliana kwa wanadamu wote, na ufunuo wa kimungu. Kila mmoja huongeza sauti yake, na pamoja wanajenga hoja yenye nguvu.
+
+#### 3. Ushahidi wa Asili Yetu ya Kimaadili
+
+Dagg haanzi na nyota bali na dhamiri. Tumeumbwa kwa ajili ya “utawala wa kimaadili.” Dhamiri hututawala kutoka ndani, na hukumu za kimaadili za wengine hutushinikiza kutoka nje. Pia sisi ni viumbe vya kijamii, kama ndege katika makundi au nyuki katika makundi ya nyuki, na jamii ya wanadamu haiwezi kuishi bila kizuizi cha kimaadili. Kiondoe, Dagg anaonya, na dunia ingekuwa “Jehanamu,” inayotawaliwa na nguvu za kinyama na ujanja. Kwa sababu hiyo hata serikali mbaya kabisa ya kiraia imependelewa kuliko “machafuko ya mwituni.” Hata hivyo hakuna serikali ya kibinadamu inayotutosheleza. Dhamiri inauma, maoni ya umma yanaaibisha, na mtawala “anapunga upanga wake,” lakini watu wanabaki waovu, mara nyingi bila adhabu. Asili yetu inalilia mtawala kamilifu: anayejua kila uhalifu, mwenye nguvu ya kuuhukumu ipasavyo, na aliye karibu vya kutosha hata “ndani yake tunaishi, tunakwenda, na kuwa na uhai wetu.” Wazo hilo, Dagg anasema, ndilo hasa linalotolewa na maneno “Yuko Mungu.” Bila hilo hisia yetu ya kimaadili haina maana. Kwa hiyo anahitimisha kwamba dini ni “ukamilifu wa maadili,” na fundisho lake la kwanza ni kwamba Mungu yuko.
+
+#### 4. Sababu ya Kwanza na Alama za Mpango
+
+Kisha Dagg anageuka kutoka dhamiri hadi akili. Akili hufuatilia mnyororo wa sababu na matokeo kiungo kwa kiungo na kuuliza mnyororo mzima unaning’inia kwenye nini. Haipati pumziko hadi ikubali kiumbe cha milele, kinachojitegemea kuwepo, “Sababu Kuu ya Kwanza.” Kisha Dagg anatoa nafasi kubwa zaidi kwa hoja ya mpango, iliyofanywa maarufu kwa Kiingereza na *Natural Theology* ya William Paley (1802). “Ustadi unamaanisha mwenye ustadi,” anaandika. Mifano inamiminika: nuru ya jua inayopasha joto na kuangaza ulimwengu; jicho, lililojengwa kulingana na sheria za optiki kama darubini; mvua, mbegu, jani na nafaka inayoiva; kuku akiwatunza vifaranga wake; mifupa, misuli, moyo, damu na mapafu. Hapa Dagg msomi anakuwa Dagg mwabudu. Kwa moyo unaomcha Mungu, anasema, ulimwengu unakuwa “hekalu kuu,” na kila mahali pakawa madhabahu ya dhabihu ya sifa. Wengi leo wangejadili mpango kwa zana za sayansi ya kisasa, na wanafikra wengine Wakristo wanatilia shaka ni kiasi gani hoja kama hizo zaweza kuthibitisha. Lakini hoja ya Dagg ni ya vitendo: ushahidi unatukuta “kila siku, na kila saa,” katika mambo ya kawaida.
+
+#### 5. Kukubaliana kwa Wanadamu Wote
+
+Shahidi wa tatu ni ule ambao waandishi wa zamani, wakimfuata Cicero, walimwita ridhaa ya mataifa. Dagg anabainisha kwamba watu wameishi bila vitabu, sayansi wala sanaa, lakini karibu kamwe bila wazo la nguvu isiyoonekana na namna fulani ya ibada. Hili linamtofautisha mwanadamu na kila kiumbe kingine. Kisha anatoa hoja nadhifu. Imani hii ya wote ilitokeaje vyovyote, inaelekeza kwa Mungu. Ikiwa inatoka kwa ufunuo wa kale uliorithishwa kwa mapokeo, ufunuo huo ulitoka kwa Mungu. Ikiwa inatokea kwa asili katika akili ya mwanadamu, basi kile ambacho maumbile hufundisha kwa wote kinaweza kupokelewa kuwa kweli. Wamisionari waliopeleka injili Afrika Magharibi na Amerika ya Kilatini katika kizazi baada ya Dagg mara nyingi walikuta hasa hili: watu waliokuwa tayari wanajua kuna Mungu Mkuu, hata wasipojua jina lake wala Mwana wake. Paulo alitoa hoja hiyo hiyo huko Athene katika Matendo 17.
+
+#### 6. Ufunuo Huondoa Shaka Yote
+
+Shahidi wa mwisho ndiye wa kuamua. Biblia, Dagg anabainisha, haisimami kamwe kuthibitisha Mungu; inaanza, “Hapo mwanzo Mungu.” Waebrania 11:6 inafanya kuamini Mungu kuwa hatua ya kwanza ya kumjia, na Zaburi 14:1 inaita kumkana Mungu upumbavu. Maandiko ni nuru kutoka kwa “Baba wa nuru,” na katika nuru yake tunaona nuru. Dagg anasisitiza “upatano kamili” kati ya dini ya asili na ya kufunuliwa. Zaburi 19 na Warumi 1:20 zinaonyesha kwamba uumbaji unasema juu ya Mungu, na Ayubu 12:7 hata inatuambia tuwaulize wanyama. Kujifunza kazi za Mungu hakuondoi chochote kutoka mamlaka ya neno lake, kwa sababu Mungu yule yule anasema katika vyote viwili. Hapa Dagg anasimama pamoja na maungamo ya kihistoria ya Kibaptisti. Maungamo ya Pili ya London (1689) na Maungamo ya Philadelphia (1742) yanafunguka kwa kusema kwamba nuru ya maumbile huwaacha watu bila udhuru, lakini Maandiko pekee ndiyo “kanuni pekee ya kutosha, ya hakika, na isiyokosea” ya ujuzi wa kuokoa. Maungamo ya New Hampshire (1833) yanasema Biblia ina “Mungu kuwa mwandishi wake” na ukweli “bila mchanganyiko wowote wa kosa” kuwa maudhui yake. Mamlaka ya Maandiko ndiyo msingi ambao kila upekee mwingine wa Kibaptisti unasimama juu yake.
+
+#### 7. Kile Mchungaji Mbaptisti Anachochukua Kutoka Humo Leo
+
+Dagg anamalizia kwa maelezo mawili ya kichungaji yanayohusu huduma leo. Kwanza, anaita kumkana Mungu “ushahidi wa kusikitisha wa upotovu wa binadamu.” Watu wanasema, “Ondoka kwetu.” Tatizo si kichwani tu bali katika utashi, na kwa hiyo, anasema, dawa pekee ya kweli ya kutokuamini huko ni “moyo mpya.” Hapa tunakutana na usadikisho mkuu wa Kibaptisti. Imani haiwezi kurithiwa, kulazimishwa na dola wala kuzalishwa kwa hoja peke yake. Huzaliwa Roho anapotoa uzima mpya. Ndiyo sababu Wabaptisti kuanzia Roger Williams na Isaac Backus hadi John Leland walitetea uhuru wa dhamiri, na ndiyo sababu makanisa ya Kibaptisti hupokea washiriki kwa ungamo la kibinafsi la imani. Pili, Dagg anawasaidia kwa upole waamini wanaosumbuliwa na shaka. Dawa yao ni kujifunza kwa bidii neno la Mungu na kazi zake, kuuzingatia mkono wake katika majaliwa, na sala. “Tukienenda na Mungu kila mara,” anasema, “hatutashuku kuwepo kwake.” Mwishowe, anajibu tatizo kwamba Mungu haonekani. Hatuioni kamwe akili ya mtu mwingine, lakini tunaijua kwa maneno na matendo, na tunaipenda au kuidharau. Kwa nini, basi, hatuwezi kumjua Mungu asiyeonekana kwa kazi zake? Warithi wa Kibaptisti wa mafundisho haya sasa wanakusanyika katika Mkutano wa Wabaptisti wa Nigeria, katika Mkutano wa Wabaptisti wa Brazili, Kuba na Meksiko, wengi wao katika tamaduni ambazo imani ya Mungu inachukuliwa kuwa ya kawaida lakini shaka ya kidunia inakua miongoni mwa vijana. Mchanganyiko wa Dagg wa kufikiri na ibada bado unawatumikia. Wakristo wengine wanapima hoja hizi kwa njia tofauti. Wanafikra wengine wa Matengenezo wanapendelea kuanza na Maandiko peke yake, wakati teolojia ya Kikatoliki, ikimfuata Thomas Aquinas, inatoa nafasi kubwa zaidi kwa akili ya asili. Dagg anashikilia vyote viwili pamoja, huku ufunuo ukiwa neno la mwisho.
+
+#### 8. Kuuchukua Moyoni
+
+**Kwa tafakari.** Dagg anasema dawa ya kutokuamini kwa vitendo ni “moyo mpya.” Unapozungumza na mtu anayetilia shaka Mungu, unasawazishaje kati ya sababu na kuomba kwa ajili ya kuzaliwa kwake upya? Ni shahidi yupi kati ya wanne anayesema kwa nguvu zaidi kwa watu unaowahudumia? Na katika nyakati zako mwenyewe za shaka, kwa uaminifu kiasi gani unatekeleza dawa ya Dagg ya kuenenda na Mungu kupitia neno lake, kazi zake na sala?
+
+**Chanzo.** Muhtasari wa Seminari ya Kitheolojia ya Chapala wa John L. Dagg, *Manual of Theology: A Treatise on Christian Doctrine* (1857), Kitabu cha II, sura ya 1, “Kuwepo kwa Mungu.” Matini iko katika umma. Hiki ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo juu ya maisha ya Dagg, Chuo Kikuu cha Mercer, kuanzishwa kwa Mkutano Mkuu wa Wabaptisti wa Kusini na maungamo ya Kibaptisti yametokana na historia za kawaida za Kibaptisti.
+
+**Kusoma madai kwa uangalifu.** Dagg anaandika kama mwanateolojia Mbaptisti wa karne ya kumi na tisa kwa ajili ya waamini, si kama utafiti usioegemea upande wowote wa falsafa. Matini ya kazi ya CTS inafuata unukuzi wa umma wa Grace Gems; kulinganisha na nakala iliyochanganuliwa ya toleo lililochapishwa bado kunasubiriwa.
+
+---
+
+## Somo la 2: Kutoka Hakuna
+
+*Somo la 2 · Uumbaji*
+
+*Muhtasari wa CTS wa John L. Dagg, Manual of Theology (1857), Kitabu cha III, sura ya 2, “Kazi za Mungu – Uumbaji”*
+
+Dagg anafundisha kwamba Mungu aliumba vitu vyote kutoka hakuna, kweli inayopokelewa kwa imani badala ya kuthibitishwa kwa falsafa. Akiandika miaka miwili kabla ya Darwin, anaeleza mitazamo ya siku-enzi na ya pengo kuhusu Mwanzo, anasisitiza kwamba “hakuna msingi wa haki wa kuogopa sayansi,” na anaonyesha kwa baba mwenye hekima na tembo kwamba sayansi yaweza kusahihisha hitimisho zetu lakini kamwe Biblia.
+
+### Kutoka Hakuna: Dagg Kuhusu Uumbaji, Maandiko na Sayansi
+
+Somo la Seminari ya Kitheolojia ya Chapala — sura ya Dagg kuhusu uumbaji, ambapo anafundisha kwamba Mungu alifanya vitu vyote kutoka hakuna na kwa utulivu anakaribisha sayansi changa ya jiolojia mezani
+
+Muhtasari wa CTS wa John L. Dagg, *Manual of Theology* (1857), Kitabu cha III, sura ya 2, “Kazi za Mungu – Uumbaji.” Matini asilia iko katika umma; nukuu fupi zifuatazo zimetoka humo.
+
+- Manual of Theology, Kitabu cha III, sura ya 2
+- Chanzo cha msingi
+- 1857
+- John L. Dagg
+
+**Neno kabla ya kusoma.** Dagg aliandika sura hii miaka miwili kabla Charles Darwin kuchapisha *On the Origin of Species* (1859). Mjadala wa kisayansi aliokuwa anaujua ulihusu jiolojia na umri wa dunia, si mageuzi. Baadhi ya maelezo yake ya kisayansi yamepitwa na wakati, na Wabaptisti leo wanashikilia mitazamo kadhaa juu ya jinsi ya kusoma Mwanzo 1. CTS inawasilisha mtazamo wa Dagg kama wake mwenyewe. Kinachobaki chenye thamani ni ujasiri wake kwamba neno la Mungu na ulimwengu wa Mungu haviwezi hatimaye kupingana.
+
+#### 1. Hakuna Ila Mungu
+
+Hoja ya Dagg ni fupi na yenye nguvu: “Mungu aliumba vitu vyote kutoka hakuna.” Anaiunga mkono kwa orodha ndefu ya maandiko, kutoka Mwanzo 1 na Nehemia 9:6 hadi Wakolosai 1:16, Waebrania 11:3 na Ufunuo 4:11. Kisha anasema fundisho hilo kwa sentensi moja: “Hapo mwanzo, hakuna kilichokuwepo ila Mungu.” Hakukuwa na maada ya milele iliyongojea kuumbwa, wala dutu ya kiroho ambayo malaika na nafsi za wanadamu zilikatwa kutoka kwake. Mungu alivipa vitu vyote “kuwepo kwao kamili.” Hili ni fundisho la kawaida la Kikristo, ambalo mara nyingi huitwa kwa jina lake la Kilatini, *creatio ex nihilo*. Linatenganisha imani ya Biblia na mitazamo ya kale ambayo mungu alipanga tu maada iliyokuwepo tayari. Pia linatawala teolojia yote ya Dagg iliyobaki. Kama kila kitu kinadaiwa na Mungu kuwepo kwake kote, basi kila kitu pia ni mali yake. Maungamo ya Philadelphia, ambayo Wabaptisti wa Marekani waliyakubali mwaka 1742, yanafundisha vilevile katika sura yake ya uumbaji: Mungu alipendezwa “kuumba au kufanya ulimwengu, na vitu vyote vilivyomo,” kwa ajili ya kudhihirisha utukufu wake.
+
+#### 2. Kweli ya Imani Badala ya Akili
+
+Cha kushangaza ni jinsi Dagg anavyohoji. Wengine walidai kwamba maada haiwezi kuwa ya milele kwa sababu kujitegemea kuwepo ni “kuu mno” kwa asili ya chini. Dagg anakataa hili. Kwa nini kitu kidogo kisiweze kuwepo bila sababu kwa urahisi kama kikubwa? Katika hoja kama hizo “tunaweza kujidanganya,” anaonya, na pengine zaidi hoja inapoonekana ya kina zaidi. Kadiri falsafa inavyoweza kusema, atomu inaweza kudumu milele na inaweza kuwa imekuwepo daima. Kwa hiyo Dagg anageukia, kama daima, Maandiko. Mara tunapojua kwamba yuko Mungu atendaye miujiza, inakuwa kuna uwezekano maada ni zao lake. Lakini “kwa uthibitisho wa kuamua” tunapokea uumbaji kutoka hakuna “kama kweli ya imani, badala ya ya akili.” Waebrania 11:3 ni andiko lake kuu: kwa imani tunafahamu kwamba ulimwengu unaoonekana haukufanywa kwa vitu vinavyoonekana. Dagg anaeleza kwa picha ya kawaida. Tunapoona sanamu, tunaona marumaru yake; tunapoona nyumba, tunaona vifaa vyake. Ulimwengu ni tofauti. Vifaa vyake vyenyewe vililetwa kuwepo wakati ulimwengu ulipofanywa. Hapa kuna tabia ya kimya ya akili ya Kibaptisti: Maandiko, si makisio, ndiyo yanayotatua swali.
+
+#### 3. Bila Juhudi, na Siku kwa Ajili ya Mwanadamu
+
+Uumbaji, Dagg anasema, ulifanyika “bila juhudi.” Mungu alisema, na ikawa: “Iwe nuru,” kukawa nuru. Baada ya siku sita Mungu alipumzika siku ya saba, si kwa sababu alikuwa amechoka, bali ili siku ya saba iwekwe kando kuwa siku ya pumziko kwa wanadamu. Dagg anataja maneno ya Yesu katika Marko 2:27, kwamba Sabato ilifanywa kwa ajili ya mwanadamu. Wabaptisti wengi wa siku za Dagg waliishika siku ya kwanza ya juma, Siku ya Bwana, kama Sabato ya Kikristo. Maungamo ya New Hampshire ya 1833 yanaipa kifungu kizima. Kwa mchungaji leo, hoja bado ni ya vitendo. Pumziko ni zawadi iliyojengwa katika uumbaji wenyewe, si thawabu kwa wenye nguvu. Katika miji yenye shughuli nyingi kutoka Guadalajara hadi Lagos, waamini wanaofanya kazi saa nyingi wanahitaji kusikia kwamba Mungu ambaye hachoki kamwe alifanya siku kwa faida yao.
+
+#### 4. Jiolojia na Siku za Mwanzo
+
+Dagg kisha anakabili swali gumu zaidi la zama zake. Wanajiolojia, wakichunguza ukoko wa dunia, waliamini kwamba mimea na wanyama waliishi muda mrefu kabla ya tarehe ya uumbaji ambayo wasomaji waliipata kutoka Mwanzo. Dagg anaeleza njia mbili ambazo Wakristo walijaribu kupatanisha mambo hayo mawili. Wengine walichukua kila siku ya uumbaji kuwa kipindi kirefu cha wakati; kwa kuwa siku ya saba ya pumziko ya Mungu bado inaendelea, walidhani, siku nyingine pia zinaweza kuwa ndefu. Leo hii inaitwa mtazamo wa siku-enzi (day-age). Wengine waliweka pengo refu kati ya “mwanzo” wa Mwanzo 1:1 na dunia isiyo na umbo ya aya ya 2, kama Yohana 1 inavyohama kutoka “Hapo mwanzo kulikuwako Neno” hadi “Neno alifanyika mwili.” Huu ni mtazamo wa pengo (gap). Dagg hachagui kati yake. Badala yake, anakemea hofu ya sayansi. Wahudumu wengi, anakiri, walitazama jiolojia “kwa shaka.” Lakini “hakuna msingi wa haki wa kuogopa sayansi,” anasema, mradi inafanya kazi kihalali na kutoa hitimisho zake “kwa unyenyekevu unaofaa.” Sababu ni rahisi: Mwandishi wa Biblia ndiye Muumbaji wa ulimwengu, na ukweli daima unapatana.
+
+#### 5. Kungoja Wingu Lipite
+
+Dagg analinganisha migongano inayoonekana kati ya sayansi na Maandiko na migongano inayoonekana ndani ya Biblia yenyewe. Uchunguzi wa makini mara nyingi umeonyesha kwamba vifungu viwili vinapatana hata hivyo, na “mapatano yasiyokusudiwa” kama hayo yanaimarisha imani yetu kwamba kumbukumbu ni za kweli. Ugumu unapobaki, tunangoja kwa subira. Asiyeamini hushangilia na “watu wa imani dhaifu hupepesuka,” lakini kuishuku Biblia kwa sababu ya ugumu mmoja ni kama kulishuku jua kwa sababu wingu limepita mbele yake. Jiolojia, anabainisha, “bado ni sayansi changa.” Hata anapata upatano kati yake na Musa, kwa kuwa wanajiolojia waliweka mabaki ya wanadamu katika matabaka ya hivi karibuni tu. Hapa Dagg anaonyesha mipaka ya wakati wake. Alikuwa na hakika kwamba sayansi haingeweka kamwe asili ya wanadamu mapema zaidi kuliko historia ya Biblia inavyopendekeza. Wakristo sasa wanajadili maswali hayo wakiwa na data nyingi zaidi kuliko alizokuwa nazo. Lakini roho yake ni kielelezo kizuri: sikiliza hoja, zipime vizuri, na amini kwamba “sanduku la Mungu” litabebwa salama.
+
+#### 6. Baba Mwenye Hekima na Tembo
+
+Sehemu ya kukumbukwa zaidi ya sura ni kielelezo. Tukiwa watu wazima, tunakumbuka mafunzo ambayo baba mwenye hekima alitufundisha utotoni. Hakutufundisha sayansi, lakini hakutufundisha chochote kinyume nazo, na sasa tunaweza kuona kwamba alizielewa zote tangu mwanzo. Ndivyo ilivyo kwa Biblia. Vitabu vitakatifu vya uongo vya mataifa vinapingana hata na “masomo ya kwanza kabisa ya jiografia.” Maandiko hayasemi kamwe kwamba dunia inakaa juu ya tembo anayesimama juu ya kobe; badala yake Ayubu 26:7 inasema Mungu “anaitundika nchi pasipo kitu.” Dagg pia anakumbuka dai la zamani kwamba amri ya Yoshua kwa jua ilikanusha mfumo wa Copernicus. Hiyo ilikuwa “hitimisho la kitoto,” anasema, kwa kuwa wanaastronomia wanaojua dunia inazunguka bado husema juu ya macheo na machweo. Sayansi yaweza kusahihisha “hitimisho zenye makosa” ambazo watu wanazitoa kutoka Maandiko, na inapofanya hivyo, “tunapaswa kuridhika kujifunza.” Tofauti hii kati ya Biblia na tafsiri zetu za Biblia ni zana ya thamani kwa mhubiri yeyote.
+
+#### 7. Kile Mchungaji Mbaptisti Anachochukua Kutoka Humo Leo
+
+Dagg anahitimisha kwa ibada na wajibu. Tunapokumbuka kwamba Mungu alituumba, “wala si sisi wenyewe,” lazima tukiri haki yake juu ya utumishi wetu, sifa na utukufu. Yeye ndiye mfinyanzi wa miili yetu na Baba wa roho zetu. Ukombozi unampa dai lenye nguvu zaidi hata, Dagg anakiri, lakini uumbaji peke yake unatosha kutufunga. Hapa ndipo mchungaji Mbaptisti anapoanzia. Kila mtu katika kusanyiko, tajiri au maskini, mwenye elimu au la, ni wa Muumbaji kwanza. Warithi wa Kibaptisti wa Dagg wanashikilia mitazamo tofauti juu ya umri wa dunia. Wengi nchini Marekani, Amerika ya Kilatini na Afrika wanashikilia usomaji wa dunia changa wa Mwanzo; wengine wanashikilia mitazamo ya siku-enzi, pengo au ya kifasihi ya siku sita. Imani na Ujumbe wa Kibaptisti (2000) unathibitisha kwamba Mungu aliumba ulimwengu lakini hauamui umri wake. Walimu Wakatoliki wa Roma, Waorthodoksi na Waprotestanti wengi vilevile wanashikilia uumbaji kutoka hakuna huku wakitofautiana kuhusu sayansi. Uzingatiaji wa Kibaptisti wa uhuru wa dhamiri, chini ya mamlaka ya Maandiko, unawaruhusu waamini kuchunguza maswali haya kwa unyenyekevu bila kuvunja ushirika kwa ajili yake. Utulivu wa Dagg ni mwongozo bora kuliko hofu ya sayansi au kuiabudu.
+
+#### 8. Kuuchukua Moyoni
+
+**Kwa tafakari.** Dagg anasema “hakuna msingi wa haki wa kuogopa sayansi” inapofanya kazi kwa unyenyekevu. Ungemsaidiaje mwanafunzi anayehisi kwamba imani na sayansi zinapigana vita? Kanisa lako linaweza kuhitaji kutofautisha wapi kati ya yale Biblia inayosema na yale watu waliyoyahitimisha kutoka kwayo? Na ukweli kwamba Mungu alikuumba, “wala si sisi wenyewe,” unabadilishaje jinsi unavyotumia mwili wako, wakati wako na siku yako ya pumziko?
+
+**Chanzo.** Muhtasari wa Seminari ya Kitheolojia ya Chapala wa John L. Dagg, *Manual of Theology: A Treatise on Christian Doctrine* (1857), Kitabu cha III, sura ya 2, “Kazi za Mungu – Uumbaji.” Matini iko katika umma. Hiki ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo juu ya maungamo ya Philadelphia na New Hampshire, Imani na Ujumbe wa Kibaptisti na mijadala ya baadaye yametokana na vyanzo vya kawaida.
+
+**Kusoma madai kwa uangalifu.** Mpangilio wa wakati wa kijiolojia wa Dagg na madai yake kuhusu sayansi ni hoja za karne ya kumi na tisa zinazoakisi jiolojia ya miaka ya 1850, si matokeo ya kisasa ya jiolojia. CTS haiungi mkono mtazamo wowote mmoja wa umri wa dunia. Matini ya kazi ya CTS inafuata unukuzi wa umma wa Grace Gems, wenye makosa madogo (kwa mfano “undersigned” badala ya “undesigned”); kulinganisha na nakala iliyochanganuliwa ya toleo lililochapishwa bado kunasubiriwa.
+
+---
+
+## Somo la 3: Kutoka Utukufu hadi Utukufu
+
+*Somo la 3 · Hali za Kristo*
+
+*Muhtasari wa CTS wa John L. Dagg, Manual of Theology (1857), Kitabu cha V, sura ya 2, “Hali za Kristo”*
+
+Dagg anamfuata Mwana wa milele kupitia hali tatu: utukufu wa awali pamoja na Baba, kujinyenyekeza hadi msalabani na kaburini, na kuinuliwa hadi mamlaka kuu. Anatofautisha “Kristo” kama cheo cha huduma na “Mwana wa Mungu” kama cheo cha asili, anasisitiza kwamba asili ya kimungu haikubadilika kamwe, na anakataa kushuka kuzimu, mtazamo unaojadiliwa ambao muhtasari huu unauweka kando ya mingine.
+
+### Kutoka Utukufu hadi Utukufu: Dagg Kuhusu Hali za Kristo
+
+Somo la Seminari ya Kitheolojia ya Chapala — sura ya Dagg kuhusu utukufu wa awali wa Kristo, kujinyenyekeza kwake hadi msalabani na kaburini, na kuinuliwa kwake hadi mamlaka kuu
+
+Muhtasari wa CTS wa John L. Dagg, *Manual of Theology* (1857), Kitabu cha V, sura ya 2, “Hali za Kristo.” Matini asilia iko katika umma; nukuu fupi zifuatazo zimetoka humo.
+
+- Manual of Theology, Kitabu cha V, sura ya 2
+- Chanzo cha msingi
+- 1857
+- John L. Dagg
+
+**Neno kabla ya kusoma.** Wanateolojia wa zamani walizungumza juu ya “hali” za Kristo: hali mbalimbali ambazo Mwana mmoja wa milele alipitia kwa ajili ya wokovu wetu. Dagg anataja tatu: utukufu wa awali, kujinyenyekeza na kuinuliwa. Umbo hilo linatoka moja kwa moja kwenye Wafilipi 2:5–11 na 2 Wakorintho 8:9. Angalia mambo mawili unaposoma: uangalifu wa Dagg kusema kwamba asili ya kimungu ya Kristo haikubadilika kamwe, na mtazamo wake thabiti, ingawa unajadiliwa, juu ya “kushuka kuzimu” kwa Kristo.
+
+#### 1. Kristo Mmoja, Hali Tatu
+
+Sura ya Dagg imejengwa juu ya muhtasari rahisi ambao kila mhubiri anaweza kuutumia. Kwanza, kabla ya kupata mwili, Mwana aliishi katika “ushirika wa karibu wa utukufu na baraka pamoja na Baba.” Pili, alichukua asili ya kibinadamu na ndani yake aliishi “maisha ya taabu na huzuni,” na akafa “kifo cha aibu na cha maumivu.” Tatu, katika asili hiyo hiyo ya kibinadamu alifufuliwa, akapaa mbinguni na kuvikwa “mamlaka kuu juu ya viumbe vyote.” Kila hali inafunguka kwa kauli thabiti kwa herufi kubwa, ikifuatwa na orodha ya maandiko, kama maungamo ya kale ya Kibaptisti yanavyofanya. Hii ilikuwa imani ya Maungamo ya Philadelphia (1742), ambayo sura yake ya “Kristo Mpatanishi” inafuata njia ileile kutoka Mwana wa milele hadi kiti cha enzi. Andiko pendwa la muhtasari la Dagg ni 2 Wakorintho 8:9: ingawa alikuwa tajiri, kwa ajili yetu alikuwa maskini, ili sisi kwa umaskini wake tupate kuwa matajiri.
+
+#### 2. Kabla Ulimwengu Haujakuwapo
+
+Dagg kwanza anaonyesha kwamba Kristo alikuwepo kabla ya kuzaliwa kwake. Maandiko mengi yanasema hivyo hata bila kutangaza uungu wake: “alishuka kutoka mbinguni” (Yohana 3:13), na “kabla Abrahamu hajakuwapo, mimi ndiye” (Yohana 8:58). Yakichukuliwa peke yake, maandiko kama hayo yangeweza kupendekeza roho iliyoumbwa yenye utukufu. Lakini ushuhuda mpana zaidi wa Maandiko, Dagg anasema, unaonyesha kwamba huyu aliyekuwepo kabla “alikuwa Mungu, na si kiumbe.” Maandiko yanampa majina kadhaa kabla ya kuja kwake. Yohana anamwita “Neno,” labda kwa sababu kupitia yeye nia ya Mungu hufanywa kujulikana. Anaitwa Mwana wa Mungu, Malaika wa Bwana, Malaika wa Agano na Mkuu wa jeshi la Bwana. Wengi pia wamemwona katika “Hekima” katika Mithali 8. Dagg kisha anakusanya maandiko juu ya utukufu wake wa milele: utukufu aliokuwa nao pamoja na Baba “kabla ya kuwako ulimwengu” (Yohana 17:5), kuwa kwake “mwenye namna ya Mungu” (Wafilipi 2:6), na mahali pake “kifuani mwa Baba” (Yohana 1:18). Kutoka haya tunajifunza “ushirika kamili” wa Mwana na Baba katika baraka zote za Mungu.
+
+#### 3. “Kristo” na “Mwana wa Mungu”
+
+Dagg anafanya tofauti ya uangalifu inayosaidia katika kusoma Agano Jipya. “Kristo,” au Masihi, ni “cheo cha huduma.” Paulo na Apolo walipowathibitishia Wayahudi kwamba Yesu ni Kristo (Mdo 9:22; 18:28), walikuwa wanaonyesha kwamba alikuwa Masihi aliyeahidiwa. Lakini “Mwana wa Mungu” linasema zaidi: linataja “asili tukufu iliyomfaa kwa hilo.” Dagg anaelekeza Matendo 8:37, ambapo towashi Mwethiopia anakiri, “Naamini kwamba Yesu Kristo ni Mwana wa Mungu,” kabla Filipo hajambatiza. Wabaptisti daima wamependa kisa hiki kama picha ya ubatizo wa waumini: kwanza ungamo la imani, kisha kuzamishwa. Biblia za kisasa zinabainisha kwamba aya ya 37 haimo katika hati za zamani zaidi, lakini mtindo wa imani kabla ya ubatizo unapita katika Matendo yote. Kuhusu maneno “alizaliwa” na “pekee aliyezaliwa,” Dagg ni mwangalifu sana. Yanazungumzia mapenzi, heshima na urithi, lakini lazima tuyaondoe “mawazo yote ya kikatili” yanayopendekeza kwamba Mwana alipokea kuwepo kwake. Wanateolojia wengi, wakifuata Kanuni ya Imani ya Nikea, wanazungumza kwa uhakika zaidi juu ya “kuzaliwa kwa milele” kwa Mwana kutoka kwa Baba. Dagg hakatai, lakini anapendelea kukiri fumbo.
+
+#### 4. Mungu Alidhihirishwa Katika Mwili
+
+Hali ya pili ni kujinyenyekeza. Injili nne zinasimulia historia yake. Lakini Dagg anaonya mara moja kwamba hatupaswi kudhani asili ya kimungu ilibadilika. “Mungu hawezi kuacha kuwa Mungu.” Badiliko lilikuwa “katika udhihirisho, si katika asili.” Hii inalinda dhidi ya mafundisho yanayosema Mwana aliacha sifa zake za kimungu alipokuwa mwanadamu. Dagg kisha anaongeza tafakari nzuri juu ya malaika. Mtoto mchanga wa Bethlehemu alikuwa mnyenyekevu hivyo hata malaika walihitaji amri kutoka kiti cha enzi kumwabudu (Waebrania 1:6). Je, huu ulikuwa ufichaji badala ya ufunuo? Kwa sehemu, Dagg anakiri. Lakini ni kama Mungu alivyomficha Musa katika ufa wa mwamba, akifunika mng’ao wake usiovumilika ili mtumishi wake apate kuona utukufu wake na kuishi. Vivyo hivyo malaika, wakimtazama Mungu aliyefunikwa katika asili ya kibinadamu, wanaona wasichoweza kuona vinginevyo. Haya ni mambo “ambayo malaika wanatamani kuyachungulia” (1 Petro 1:12). Kupitia kanisa lililokombolewa, Waefeso 3:10 inasema, hekima ya Mungu yenye namna nyingi hufanywa kujulikana kwa wenye mamlaka wa mbinguni.
+
+#### 5. Kiwango cha Chini Kabisa: Msalaba na Kaburi
+
+Kiwango cha chini kabisa cha kujinyenyekeza kwa Kristo kilikuwa kifo chake kwa kusulubiwa na kushikiliwa kwake kwa muda “chini ya nguvu ya mauti, kama mfungwa kaburini.” Hapa Dagg anachukua msimamo dhahiri. Wengine wanadhani Kristo alishuka kuzimu, kama mstari mmoja wa Kanuni ya Imani ya Mitume mara nyingi unavyosomwa. Dagg anaamini hii inatokana na kusoma vibaya Zaburi 16:10, ambapo “kuzimu” maana yake “ulimwengu usioonekana,” hali ya waliofariki. Na 1 Petro 3:19, juu ya kuhubiri “kwa roho zilizo kifungoni,” inamaanisha kwamba Kristo, kwa Roho wake, alihubiri kupitia Nuhu kwa watu waliomkataa na sasa wako kifungoni. Huu ulikuwa usomaji wa Augustino, na walimu wengi wa Matengenezo na Wabaptisti wanaufuata. Wakristo wengine wanatofautiana. Wakatoliki wa Roma wanafundisha kwamba Kristo alikwenda mahali pa wafu kuwakomboa wenye haki waliokufa kabla yake. Walutheri wanazungumza juu ya kushuka kwake kama tangazo la ushindi. Calvin alisoma msemo huo kama kuteswa kwa Kristo hukumu ya Mungu msalabani, na Katekisimu Kubwa ya Westminster inaueleza kama kubaki kwake chini ya nguvu ya mauti. Maungamo ya Kibaptisti kwa kawaida hayatumii kabisa msemo wa kanuni hiyo ya imani. Wanafunzi wa CTS wanapaswa kujua machaguo haya na kulishughulikia andiko hili kwa unyenyekevu.
+
+#### 6. Alifufuliwa na Kuinuliwa
+
+Hali ya tatu ni kuinuliwa: ufufuo, kupaa na mamlaka kuu. Tena Dagg anasisitiza kwamba asili ya kimungu haikubadilika. Kilichobadilika ni udhihirisho wa utukufu wake, na hali halisi ya asili yake ya kibinadamu. Asili hiyo, ambayo hapo awali ilikuwa na huzuni, “sasa ina furaha kamili.” Yesu amepokea furaha iliyowekwa mbele yake (Waebrania 12:2), na watakatifu wake siku moja “wataingia katika furaha ya Bwana wao.” Juu ya ubinadamu wake uliotukuzwa sasa unakaa “utukufu wa Mungu katika uso wa Yesu Kristo” (2 Wakorintho 4:6). Kupitia yeye mafunuo angavu zaidi ya Mungu yanafikia kila kiumbe, na kupitia yeye kila amri ya mamlaka kuu hutoka. Ameketi juu sana kuliko kila enzi na mamlaka na kila jina litajwalo (Waefeso 1:20–21). Dagg anamaliza kwa mwelekeo wa kichungaji. Utukufu huu “si somo la kutafakari bure tu.” Yesu alisema, “Utukufu ulionipa mimi nimewapa wao” (Yohana 17:22). Kwa hiyo tunapoteseka pamoja na Kristo na kwa ajili ya Kristo katika ulimwengu huu, twaweza kufurahi katika tumaini la kutukuzwa pamoja naye.
+
+#### 7. Kile Mchungaji Mbaptisti Anachochukua Kutoka Humo Leo
+
+Kwa Wabaptisti, hali za Kristo zinahubiriwa kila mwamini anapobatizwa. Kuzamishwa kunaonyesha kwa picha hasa njia ambayo Dagg anaifuatilia: kifo, mazishi na kufufuka tena (Warumi 6:4; Wakolosai 2:12). Maungamo ya New Hampshire (1833) yanaita ubatizo “ishara ya dhati na nzuri” ya imani kwa Mwokozi aliyesulubiwa, kuzikwa na kufufuka. Ndiyo sababu Wabaptisti wanashikilia ubatizo kwa kuzamishwa na ubatizo wa waumini peke yao: ishara inakusudiwa kuonyesha imani ambayo mgombea anayo tayari. Kuinuliwa kwa Kristo pia kunasimama nyuma ya uhuru wa dhamiri. Kama Kristo peke yake ana “mamlaka kuu juu ya viumbe vyote,” basi hakuna mfalme, dola wala baraza la kanisa aliye bwana wa dhamiri. Mwishowe, uhusiano wa Dagg kati ya mateso sasa na utukufu baadaye unasema kwa nguvu kwa waamini wa Kibaptisti ambao wamelipa gharama kwa imani yao, kutoka kwa wachungaji wa Kuba walio chini ya shinikizo hadi makanisa yanayokabiliwa na jeuri kaskazini mwa Nigeria. Na 2 Wakorintho 8:9 inasahihisha kila ujumbe wa “ufanisi”: Kristo alikuwa maskini ili sisi tuwe matajiri ndani yake, si ili kanisa lipime imani kwa pesa.
+
+#### 8. Kuuchukua Moyoni
+
+**Kwa tafakari.** Dagg anasema utukufu wa Kristo “si somo la kutafakari bure tu.” Tumaini la kushiriki utukufu wake linakusaidiaje katika mateso? Wakati ujao utakapomweleza mwamini mpya juu ya ubatizo, ungewezaje kutumia hali tatu za Kristo kuonyesha kuzamishwa kunamaanisha nini? Na ungefundishaje vifungu vya “kushuka kuzimu” kwa haki kwa kanisa lenye watu wa asili za Kikatoliki, Kilutheri na za Matengenezo?
+
+**Chanzo.** Muhtasari wa Seminari ya Kitheolojia ya Chapala wa John L. Dagg, *Manual of Theology: A Treatise on Christian Doctrine* (1857), Kitabu cha V, sura ya 2, “Hali za Kristo.” Matini iko katika umma. Hiki ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo juu ya kanuni za imani, maungamo na mitazamo ya mapokeo mengine juu ya kushuka yametokana na vyanzo vya kawaida.
+
+**Kusoma madai kwa uangalifu.** Usomaji wa Dagg wa 1 Petro 3:19 ni mmoja kati ya kadhaa unaoshikiliwa na Wakristo waaminifu. Matini ya kazi ya CTS inafuata unukuzi wa umma wa Grace Gems; kulinganisha na nakala iliyochanganuliwa ya toleo lililochapishwa bado kunasubiriwa.
+
+---
+
+## Somo la 4: Kusudi la Mungu Mmoja
+
+*Somo la 4 · Agano la Neema*
+
+*Muhtasari wa CTS wa John L. Dagg, Manual of Theology (1857), Kitabu cha VII, sura ya 2, “Agano la Neema”*
+
+Dagg anawasilisha wokovu kama kazi ya Baba, Mwana na Roho kulingana na agano la milele: “kusudi la Mungu mmoja.” Anaeleza huduma zao, kujiweka chini kwa hiari kwa huduma bila kupungua kwa asili, na mpangilio wa baraka na wa sala. Kisha anatofautisha agano hili na agano jipya la Waebrania 8, jambo lililo kwenye mzizi wa ushiriki wa kanisa wa Kibaptisti.
+
+### Kusudi la Mungu Mmoja: Dagg Kuhusu Agano la Neema
+
+Somo la Seminari ya Kitheolojia ya Chapala — sura ya Dagg kuhusu makubaliano ya milele ya Baba, Mwana na Roho Mtakatifu kuokoa, mpangilio ambao neema inatufikia na sala zetu zinapanda kwa Mungu, na jinsi agano hili linavyohusiana na agano jipya
+
+Muhtasari wa CTS wa John L. Dagg, *Manual of Theology* (1857), Kitabu cha VII, sura ya 2, “Agano la Neema.” Matini asilia iko katika umma; nukuu fupi zifuatazo zimetoka humo.
+
+- Manual of Theology, Kitabu cha VII, sura ya 2
+- Chanzo cha msingi
+- 1857
+- John L. Dagg
+
+**Neno kabla ya kusoma.** Katika sura hii “agano la neema” linamaanisha kile ambacho wanateolojia wengi wanaita “agano la ukombozi”: makubaliano ya milele ndani ya Utatu kuokoa watu. Si, Dagg anasema, sawa na agano jipya lililofanywa na waamini. Tofauti hiyo ni muhimu sana kwa mafundisho ya Kibaptisti juu ya kanisa na ubatizo. Katika sentensi moja ya sehemu ya 4 kiambishi cha rejeo hakieleweki wazi katika matini ya Dagg mwenyewe; dokezo hapo linaeleza.
+
+#### 1. Watu Watatu, Kazi Moja ya Kuokoa
+
+Hoja ya Dagg inasomeka: “Watu watatu wa kimungu hushirikiana katika wokovu wa mwanadamu kulingana na agano la milele.” Maandiko yake ni pamoja na Zaburi 2:8, Zaburi 40:6–8, Isaya 49, Yohana 17:6, Waebrania 13:20 na Tito 1:2. Ameshaonyesha, hapo awali katika *Manual*, kwamba Maandiko hutumia neno “agano” kwa “upana mkubwa wa maana.” Kwa hiyo inafaa kulitumia hapa. Wako watu watatu wa kimungu, na kama umoja wa Mungu ungezuia agano lolote kati yao, ungezuia pia tofauti yoyote ya kweli ya watu. Kwa hiyo Dagg anatumia wazo la agano kulinda fundisho la Utatu. Wokovu si kazi ya Baba mwenye hasira aliyeshawishiwa na Mwana mwema, wala mradi wa faragha wa mtu mmoja. Ni kazi ya pamoja ya Mungu mmoja, ambamo Baba, Mwana na Roho kila mmoja ana sehemu.
+
+#### 2. Si Biashara Kati ya Walio Sawa
+
+Dagg anaondoa kwa uangalifu kutoelewana. Watu wanapofanya maagano, upande mmoja hupendekeza masharti na mwingine hutafakari, kisha hukubali au kukataa. Hilo hutokea “kwa sababu ya upungufu wa pande hizo.” Hakuna kitu kama hicho kinachotokea kwa Mungu. Maandiko huzungumza “kwa kujishusha kwa udhaifu wetu,” kwa kutumia lugha iliyochukuliwa kutoka mambo ya kibinadamu. Mwanzo 1:26, “Na tumfanye mtu,” inasikika kama mashauriano, lakini inafundisha makubaliano na ushirikiano wa watu wa kimungu. Makubaliano hayo yanapita katika kazi zote za Mungu, kwa maana anatenda mambo yote “kama shauri la mapenzi yake” (Waefeso 1:11). Kwa kuwa watu wote watatu wana hekima isiyo na kikomo, kutokubaliana kati yao hakuwezekani. Wokovu hutekelezwa kulingana na kusudi la milele, na watu hao wanakubaliana katika kusudi hilo kama katika kazi. Kisha inakuja sentensi bora kabisa ya sura: “Kusudi la Mungu mmoja, ndilo agano la Utatu.” Hapa Dagg anashikilia pamoja yale ambayo wengi hukosea, umoja wa Mungu na tofauti ya watu.
+
+#### 3. Agano la Milele
+
+Kwa nini kuliita la milele? Kwa sababu pande ni za milele, zisizobadilika na zinazojua yote, na kwa sababu Maandiko yanasema hivyo. Waebrania 13:20 inasema juu ya “damu ya agano la milele,” Waefeso 3:11 juu ya kusudi la milele la Mungu katika Kristo, na Tito 1:2 na 2 Timotheo 1:9 juu ya uzima ulioahidiwa na neema iliyotolewa “tangu zamani za milele.” Kusudi la Mungu ni moja, lakini lazima tulisemee kwa sehemu. Sehemu ambayo Maandiko huiweka mbele ni makubaliano kati ya Baba na Mwana. Yesu anaomba, “Walikuwa wako, ukanipa mimi” (Yohana 17:6). Baba anamwambia Mwana, “Niulize, nami nitakupa mataifa kuwa urithi wako” (Zaburi 2:8). Mwana anajibu, “Tazama, nimekuja… nimependa kufanya mapenzi yako” (Zaburi 40:7–8). Katika Isaya 49, Dagg anasema, masharti kati ya Baba na Mwana yanawasilishwa “karibu kana kwamba yamenakiliwa kutoka kumbukumbu ya asili.” Zaburi 2:8, pamoja na ahadi yake ya mataifa, ikawa andiko pendwa la harakati ya kimisionari ya Kibaptisti, iliyotuma wafanyakazi Burma, Liberia, Nigeria, Brazili na Meksiko katika karne ya Dagg.
+
+#### 4. Huduma Tofauti, Uungu Mmoja
+
+Chini ya mpangilio huu Mwana alichukua asili ya kibinadamu “katika namna ya mtumwa,” alitii hadi kufa, na akainuliwa na Baba hadi mamlaka kuu. Baba anaonekana kama “mwakilishi wa Uungu” katika mamlaka na enzi yake: akimtuma Mwana, akimpa watu, akiagiza masharti, akikubali utumishi wake na akimtuma Roho. (Kama ilivyo, sentensi ya Dagg yaweza kusomeka kana kwamba Roho Mtakatifu ndiye alifanya mambo haya yote. Maneno ni ya Dagg mwenyewe, si kosa la unukuzi: kiambishi cha rejeo cha sentensi hakieleweki wazi katika matini ya Dagg, na aya inayofuata inaonyesha anamaanisha Baba akitenda kwa niaba ya Uungu.) Mwana ni “mwakilishi na mdhamini wa watu wake,” na ahadi ya uzima wa milele ilitolewa kwao ndani yake. Roho anakamilisha mpango, na ahadi za Baba kwa Mwana ni pamoja na zawadi ya Roho, ndiyo sababu Yohana 16:7 inasema Mwana humtuma na Yohana 14:16 inasema Baba humtuma kwa ombi la Mwana. Dagg kisha anaongeza ulinzi muhimu: Mwana na Roho wanakubali “kujiweka chini kwa huduma” kwa hiari, na hili halimaanishi “kupungua kwa asili.” Utimilifu wote wa Uungu hukaa ndani ya kila mtu. Wainjilisti katika miaka ya karibuni wamejadiliana kama kujiweka chini huko ni kwa milele; pande zote zinakubaliana na Dagg kwamba watu ni sawa katika asili.
+
+#### 5. Mpangilio wa Baraka na Mpangilio wa Sala
+
+Dagg kisha anaonyesha jinsi mpangilio huu unavyoumba uzoefu wa Kikristo. Baraka hushuka kutoka kwa Baba, “ambaye vitu vyote vyatoka kwake,” kupitia Mwana, “ambaye vitu vyote ni kwa yeye,” kwa Roho, anayezitoa moja kwa moja na ndiye “wa mwisho katika mpangilio wa utendaji.” Ibada yetu hupanda kwa “mpangilio kinyume.” Roho hutusukuma kuomba na hutusaidia tusipojua tuombe nini. Sala zetu hupanda kupitia Kristo, na Baba ndiye lengo la mwisho la ibada. Waefeso 2:18 inasema kwa mstari mmoja: kupitia yeye sote tuna njia kwa Roho mmoja kwa Baba. Hata hivyo katika kila hatua Mungu mzima yupo. Roho anapotuvuta, ni Baba anayevuta (Yohana 6:44). Tunapomjia Yesu, “Mungu alikuwa ndani ya Kristo, akiupatanisha ulimwengu naye” (2 Wakorintho 5:19). Tunapomwomba Baba, Uungu wote hupokea ibada yetu. Kwa hiyo mwamini, Dagg anasema, anaweza kuabudu “bila kuvurugwa kwa fikira.” Iwe tunamfikiria Mungu katika chumba cha faragha, katika ulimwengu wenye shughuli au kwenye kiti chake cha enzi mbinguni, tunamwomba Yule Yule aliye kila mahali. Tunamwabudu Mungu peke yake, tukimwomba Baba, Mwana au Roho Mtakatifu.
+
+#### 6. Si Sawa na Agano Jipya
+
+Mwishoni Dagg anaongeza onyo “kujilinda na kosa.” Agano la milele si sawa na agano jipya la Waebrania 8. Agano jipya, likinukuu Yeremia 31, linafanywa “na nyumba ya Israeli na nyumba ya Yuda,” yaani, na watu; agano la milele “halifanywi na mwanadamu.” Hata hivyo hayo mawili yameunganika kwa karibu. Katika agano la milele, ahadi zinafanywa kwa Mwana kama mwakilishi wa watu wake. Katika agano jipya ahadi zilezile zinafanywa kwa watu wenyewe na kwa sehemu tayari zimetimizwa: “Nitakuwa Mungu kwao,” na “Nitatia sheria zangu ndani ya nia zao, na kuziandika katika mioyo yao.” Hili ni muhimu zaidi kuliko linavyoonekana. Wanateolojia wa Kipresbiteri na wengine wanaobatiza watoto wachanga wanaona agano moja la neema likipita kupitia Abrahamu hadi kanisani, watoto wa waamini wakijumuishwa ndani yake na kutiwa alama kwa ubatizo, kama tohara ilivyowatia alama wana wa Israeli hapo zamani. Wabaptisti, tangu Maungamo ya Pili ya London ya 1689, husoma agano jipya kuwa jipya kwa aina: washiriki wake ni wale walio na sheria imeandikwa mioyoni mwao na ambao wote “wanamjua Bwana” (Waebrania 8:11).
+
+#### 7. Kile Mchungaji Mbaptisti Anachochukua Kutoka Humo Leo
+
+Kutokana na usomaji huo wa agano jipya hutoka fundisho la Kibaptisti la ushiriki wa kanisa wa waliozaliwa upya. Ikiwa jumuiya ya agano jipya inaundwa na wale ambao Mungu amewafundisha kumjua, basi kanisa linaloonekana linapaswa, kadiri wanadamu wanavyoweza kuhukumu, kupokea tu wale wanaoungama imani ya kuokoa, na kubatiza hao peke yao. Dagg alihoji hasa hili katika *Treatise on Church Order* yake mwaka uliofuata. Mchungaji leo anachukua mambo matatu kutoka sura hii. Kwanza, wokovu ni kazi ya Mungu kabisa, iliyopangwa tangu milele, kwa hiyo injili yaweza kuhubiriwa kwa ujasiri: Baba amemwahidi Mwana mataifa. Pili, sala ina umbo: kwa Roho, kupitia Mwana, kwa Baba. Kufundisha mpangilio huu rahisi huwasaidia waamini wapya kuomba kwa uhakika. Tatu, kanisa ni watu wa agano wenye mioyo iliyobadilishwa, si klabu ya kijamii wala urithi wa familia. Katika Amerika ya Kilatini, ambako watu wengi walibatizwa wakiwa watoto wachanga katika kanisa linalohusiana na dola, usadikisho huu uko nyuma ya wito wa Kibaptisti wa imani ya kibinafsi ikifuatwa na ubatizo wa waumini. Unapaswa kusemwa kwa heshima kwa Wakristo wengine wanaosoma maagano kwa njia tofauti.
+
+#### 8. Kuuchukua Moyoni
+
+**Kwa tafakari.** Dagg anaandika kwamba “kusudi la Mungu mmoja, ndilo agano la Utatu.” Kujua kwamba watu wote watatu wanakubaliana katika wokovu wako kunaimarishaje uhakika wako? Jaribu kuomba leo kwa mpangilio ambao Dagg anaueleza: kwa Roho, kupitia Mwana, kwa Baba. Na ungemweleza vipi, kwa wema na kwa uwazi, rafiki Mpresbiteri kwa nini Wabaptisti wanaunganisha agano jipya na ubatizo wa waumini?
+
+**Chanzo.** Muhtasari wa Seminari ya Kitheolojia ya Chapala wa John L. Dagg, *Manual of Theology: A Treatise on Christian Doctrine* (1857), Kitabu cha VII, sura ya 2, “Agano la Neema.” Matini iko katika umma. Hiki ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo juu ya teolojia ya agano ya Kibaptisti na ya wanaobatiza watoto wachanga, Maungamo ya 1689 na mijadala ya baadaye yametokana na vyanzo vya kawaida.
+
+**Kusoma madai kwa uangalifu.** Matini ya kazi ya CTS inafuata unukuzi wa umma wa Grace Gems. Katika sentensi kuhusu jukumu la Baba kama mwakilishi, kiambishi cha rejeo hakieleweki wazi katika matini ya Dagg; aya inayofuata inaonyesha anamaanisha Baba akitenda kwa niaba ya Uungu. Kulinganisha na nakala iliyochanganuliwa ya toleo lililochapishwa bado kunasubiriwa. Dagg ni sauti moja ya Kibaptisti juu ya maagano; Wabaptisti wenyewe wanashikilia zaidi ya mfumo mmoja wa agano.
+
+---
+
+## Somo la 5: Kutangazwa Mwenye Haki, Kukaribishwa Nyumbani
+
+*Somo la 5 · Kuhesabiwa Haki na Kufanywa Wana*
+
+*Muhtasari wa CTS wa John L. Dagg, Manual of Theology (1857), Kitabu cha VII, sura ya 3, §§2–3, “Kuhesabiwa Haki” na “Kufanywa Wana”*
+
+Dagg anafundisha kwamba waamini wanahesabiwa haki kwa haki ya Kristo wanayohesabiwa nayo: wanaachiliwa huru, si kusamehewa tu, kwa msingi wa damu yake na utii wake, kwa imani inayokataa kila stahili. Anaeleza muungano wa pande tatu na Kristo, anapatanisha Paulo na Yakobo, na anakataa kuhesabiwa haki kwa milele. Kufanywa wana kunapanda juu zaidi, kukileta upendo wa Baba, nidhamu na urithi.
+
+### Kutangazwa Mwenye Haki, Kukaribishwa Nyumbani: Dagg Kuhusu Kuhesabiwa Haki na Kufanywa Wana
+
+Somo la Seminari ya Kitheolojia ya Chapala — sehemu za Dagg kuhusu jinsi mwenye dhambi mwenye hatia anavyotangazwa mwenye haki kwa imani katika Kristo, na jinsi Mungu kisha anavyompokea mwamini huyo kama mwana na mrithi
+
+Muhtasari wa CTS wa John L. Dagg, *Manual of Theology* (1857), Kitabu cha VII, sura ya 3, sehemu ya 2–3, “Kuhesabiwa Haki” na “Kufanywa Wana.” Matini asilia iko katika umma; nukuu fupi zifuatazo zimetoka humo.
+
+- Manual of Theology, Kitabu cha VII, sura ya 3, §§2–3
+- Chanzo cha msingi
+- 1857
+- John L. Dagg
+
+**Neno kabla ya kusoma.** Hili ndilo somo refu zaidi katika kozi, na moyo wa injili kama Matengenezo ya Kanisa yalivyoifundisha. Dagg anatumia maneno ya mahakamani (hakimu, kuachilia, kuhesabia) na maneno ya familia (baba, mwana, mrithi). Weka picha zote mbili akilini. “Kuhesabia” (impute) maana yake kuhesabu au kuweka kitu kwenye akaunti ya mtu. Dagg anaandika kama Mbaptisti wa Kikalvini; pale Wakristo wengine wanapotofautiana, muhtasari huu unasema hivyo.
+
+#### 1. Kuachiliwa Huru, Si Kusamehewa Tu
+
+Hoja ya Dagg ni: “Wote wanaomwamini Kristo, wanahesabiwa haki kwa haki yake wanayohesabiwa nayo.” Anaanza kwa ufafanuzi. Kuhesabiwa haki ni “tendo la hakimu kumwachilia huru aliyeshtakiwa kwa uhalifu,” kinyume cha hukumu ya adhabu. Kumbukumbu la Torati 25:1 iliwaamuru waamuzi wa Israeli kumhesabia haki mwenye haki na kumhukumu mwovu. Kisha Dagg anafanya tofauti nzuri. Kuhesabiwa haki ni “baraka ya juu zaidi ya neema, kuliko msamaha.” Mhalifu aliyesamehewa anaachiliwa kutoka adhabu, lakini hasimami mahali asimamapo mtu asiye na hatia. Ayubu 27:5 inaonyesha tofauti: tukiweka “msamaha” mahali pa “kuhesabia haki” huko, maana inabadilika. Kupitia Kristo mwenye dhambi anayerudi anatendewa “kana kwamba hakutenda dhambi kamwe.” Hata hivyo hizi si zawadi mbili tofauti zinazotolewa kwa aina mbili za watu. Kila mwamini mwenye toba hupokea zote mbili. Kama toba na imani zinavyodokezana, ndivyo msamaha na kuhesabiwa haki ni “baraka pacha za neema,” zinazotolewa pamoja kupitia Yesu Kristo.
+
+#### 2. Damu Yake na Utii Wake
+
+Kwa msingi gani mwenye dhambi anahesabiwa haki? Maandiko yanataja damu na utii wa Kristo: “tumehesabiwa haki kwa damu yake” (Warumi 5:9) na “kwa kutii kwake yeye mmoja, wengi watafanywa kuwa waadilifu” (Warumi 5:19). Vyote viwili vilihitajika ili kuiheshimu sheria ya Mungu. Damu yake inamaanisha kwamba alivumilia adhabu ya sheria; utii wake unamaanisha kwamba alitimiza maagizo yake. Ukombozi wetu kutoka ghadhabu unategemea cha kwanza, na kukubaliwa kwetu kikamilifu kunategemea cha pili. Dagg pia anaonyesha jinsi hivi viwili vinavyoshikamana. Kama Kristo angetii kikamilifu lakini asife, adhabu ingebaki. Kama angekufa bila kumpenda Mungu kwa moyo wake wote, dhabihu yake “ingekuwa imechafuliwa.” Mwana-kondoo “asiye na ila” alihitajika. Wanateolojia wa baadaye wanaviita utii wake wa “kutenda” na wa “kuteseka,” na Dagg anasema vyote viwili vinahitajika kwa wokovu kamili. Anatumia pia lugha ya ununuzi: tulikombolewa “kwa damu ya thamani ya Kristo” (1 Petro 1:19), tumenunuliwa kwa bei. Stahili zake, na zake peke yake, ndizo msingi ambao kuhesabiwa haki kunaweza kudaiwa juu yake.
+
+#### 3. Imani Inayokataa Stahili
+
+“Kuhesabiwa haki ni kwa imani,” Dagg anaandika, na Warumi 5:1 na Matendo 13:39 ni wazi. Lakini kwa nini imani, badala ya upendo, ambao ni “utimilifu wa sheria”? Paulo anatoa sababu: “Kwa hiyo ni kwa imani, ili iwe kwa neema” (Warumi 4:16). Katika tendo lenyewe la kuamini, stahili inakataliwa na mwenye dhambi anamtegemea Kristo peke yake. Imani hakika ni kazi ya akili, na huzaa matendo, kwa maana imani “hutenda kazi kwa upendo” (Wagalatia 5:6). Lakini haihesabii haki “kama kazi.” Inahesabia haki kama mkono mtupu unaopokea wokovu “kama zawadi ya neema ya bure.” Imani si hata kwa sehemu sababu ya kuhesabiwa kwetu haki. Kama ingekuwa, ingehitaji stahili ya kutosha kutimiza sheria yote, na kifo cha Kristo kisingehitajika. Badala yake, imani “hutofautisha” wale ambao haki inahesabiwa kwao. Ni “kiini cha kugeuka,” Dagg anasema, ambapo hali ya mwenye dhambi huamuliwa. Ndiyo sababu Warumi 4:5 yaweza kusema kwamba Mungu “humhesabia haki asiye mcha Mungu.” Mwenye dhambi anakuja bila ombi lolote lake mwenyewe, ila Kristo tu.
+
+#### 4. Kuhesabiwa na Muungano wa Pande Tatu
+
+Katikati kunasimama 2 Wakorintho 5:21: Yeye asiyejua dhambi alifanywa kuwa dhambi kwa ajili yetu, ili sisi tuwe haki ya Mungu ndani yake. Dhambi zetu zilihesabiwa kwa Kristo; haki yake inahesabiwa kwetu. Wengine wanapinga kwamba hii si ya haki, kwa kuwa haki humpa kila mtu stahili yake. Dagg anajibu kwamba wazo la mbadala hupita katika dhabihu zote, lina mamlaka kamili ya neno la Mungu, na kwamba “hakuna kanuni ya juu ya haki kuliko Mungu mwenyewe.” Hata hivyo, anaonyesha kwa nini inafaa. Kama alivyoeleza hapo awali muungano wa pande tatu kati ya Adamu na wanadamu, ndivyo kuna muungano wa pande tatu kati ya Kristo na watu wake. Kwanza, *muungano wa ridhaa*: Kristo alikubali kuwa mbadala wao, na waamini, baada ya kuacha matumaini ya kujiokoa wenyewe, wanamkubali kwa furaha. Pili, *muungano wa kiroho*: kama kichwa na mwili, au mzabibu na matawi, waamini wanashiriki Roho mmoja wa Kristo (Warumi 8:9; 1 Wakorintho 12:13). Tatu, *muungano wa kiagano*: kama Adamu alivyowawakilisha wazao wake, Kristo alisimama kama “kichwa cha kiagano na mwakilishi” wa wote ambao Baba alimpa. Hata hivyo kuna tofauti kuu. Dhambi ya Adamu inahesabiwa kwa haki; haki ya Kristo inahesabiwa kwa neema, ambayo inapita haki. Ni pale tu tunapohisi kwamba tumehukumiwa kwa haki ndipo tunaweza kupokea wokovu kama “zawadi isiyoelezeka” ya neema.
+
+#### 5. Paulo, Yakobo na Tarehe ya Kuhesabiwa Haki
+
+Dagg kisha anachukua Yakobo 2:24: “Mwanadamu huhesabiwa haki kwa matendo, wala si kwa imani peke yake.” Je, hii inapingana na Paulo katika Warumi 3:28? Hapana. Yakobo mwenyewe anatoa ufunguo: “imani pasipo matendo imekufa.” Imani iliyokufa haihesabii haki, na Paulo hasemi kamwe kwamba inahesabia; imani ya Paulo ni imani hai “itendayo kazi kwa upendo.” Paulo anaondoa matendo ya sheria, yaliyotolewa kama sababu ya kuhesabiwa haki. Yakobo anadai matendo kama “ushahidi” wa imani. Kisha Dagg anauliza kuhesabiwa haki hutokea lini. Wengine wanaliweka tu kwenye hukumu ya mwisho. Dagg anakubali kwamba Mungu atatangaza hukumu yake hadharani wakati huo, lakini Maandiko yanasema waamini wanahesabiwa haki sasa (1 Wakorintho 6:11), kama vile wasioamini “wamekwisha kuhukumiwa” (Yohana 3:18). Wengine wanaweka tarehe ya kuhesabiwa haki “katika umilele uliopita.” Dagg anakataa hili pia, kwa kuwa kuhesabiwa haki ni tangazo, si kusudi la siri. Kusudi la Mungu la kuhesabia haki ni la milele, lakini waamini hawahesabiwi haki tangu milele kuliko wanavyotukuzwa tangu milele. Wazo la kuhesabiwa haki kwa milele lilishikiliwa na Mbaptisti wa Kiingereza John Gill na baadhi ya Wabaptisti wa Kikalvini wa kupindukia (hyper-Calvinist). Dagg, rais wa chuo katika mapokeo ya Kibaptisti ya Georgia yanayounga mkono misheni ya Jesse Mercer, anasisitiza kwamba wenye dhambi wanavuka kutoka hukumu hadi kuhesabiwa haki wanapoamini, ndiyo sababu injili lazima ihubiriwe kwao.
+
+#### 6. Kufanywa Wana Katika Familia ya Mungu
+
+Katika Sehemu ya III Dagg anageukia kufanywa wana: “Mungu huwafanya wana wote wanaomwamini Yesu Kristo.” Kati ya watu, kufanywa mwana ni kumpokea mtoto wa mwingine katika familia na haki zote za mwana. Baraka hii “inapanda juu zaidi kuliko kuhesabiwa haki.” Hakimu anaweza kumwachilia mfungwa, lakini hamchukui nyumbani. Mwamini anaweza kumjua Mungu si tu kama “Hakimu anayehesabia haki” bali kama “Baba aliyepatanishwa na mwenye upendo.” Dagg anaorodhesha haki tatu. Kwanza, *upendo wa Baba*: kama baba awahurumiavyo watoto wake, ndivyo Bwana anavyowahurumia wamchao (Zaburi 103:13), na Roho wa Mwana analia “Aba, Baba” mioyoni mwetu. Yesu alitufundisha kuomba “Baba yetu.” Pili, *nidhamu ya Baba*: “Yule ampendaye Bwana humrudi” (Waebrania 12:6). Dagg anaiita “yenye utajiri usiopimika,” kwa kuwa hali yetu inachaguliwa na Baba anayejua lililo bora. Tatu, *urithi*: ikiwa watoto, basi warithi wa Mungu na warithi pamoja na Kristo (Warumi 8:17). Kufanywa wana kamili kunangojea ukombozi wa mwili, lakini cheo ni salama, na hata sasa mambo yote hufanya kazi pamoja kwa kuwapatia mema wampendao Mungu.
+
+#### 7. Kile Mchungaji Mbaptisti Anachochukua Kutoka Humo Leo
+
+Mafundisho haya yanawaunganisha Wabaptisti na Waprotestanti wengine. Maungamo ya Philadelphia yanafuata kwa karibu mapokeo ya Westminster juu ya kuhesabiwa haki na kufanywa wana, na Maungamo ya New Hampshire yanafundisha kwamba kuhesabiwa haki kunatolewa “kwa imani peke yake” katika damu ya Mkombozi. Wakristo wengine wanaona tofauti. Baraza la Trento (1547) lilifundisha kwamba kuhesabiwa haki kunajumuisha kufanywa upya kwa ndani na kunaweza kuongezeka; Tamko la Pamoja la Walutheri na Wakatoliki la 1999 lilipunguza lakini halikumaliza kutokubaliana. Makanisa ya Kiorthodoksi yanazungumza zaidi juu ya muungano na Mungu kuliko hukumu ya kisheria, na walimu wengine wa Kiwesley na Waprotestanti wengine wanatilia shaka kuhesabiwa kwa utii wa kutenda wa Kristo. Hata hivyo kwa Wabaptisti fundisho hili lina makali ya pekee. Hukumu iliyopokelewa “kwa imani” haiwezi kutolewa kwa wakala, na wazazi wala kanisa la dola. Hiyo ni mzizi mmoja wa ushiriki wa kanisa wa waliozaliwa upya na ubatizo wa waumini. Mchungaji anapata zana tatu hapa: uhakika kwa waamini wanaosumbuliwa, wanaosimama juu ya stahili za Kristo, si zao wenyewe; wito wa kuishi kitakatifu, kwa kuwa imani ya kweli hutenda kazi; na picha ya familia ya kanisa. Waamini wa Amerika ya Kilatini wanapoitana *hermano* na *hermana*, au makanisa ya Afrika yanapoamkiana kama familia, wanarudia hoja ya Dagg: walioachiliwa huru pia wamefanywa wana.
+
+#### 8. Kuuchukua Moyoni
+
+**Kwa tafakari.** Dagg anasema kuhesabiwa haki ni juu kuliko msamaha, na kufanywa wana ni juu kuliko kuhesabiwa haki. Ni ipi kati ya kweli hizi unayohitaji kuisikia zaidi leo? Ungemtumiaje Paulo na Yakobo pamoja kumjibu mtu anayesema kwamba imani peke yake inafanya maisha matakatifu yasiwe ya lazima? Na dhiki inapokuja, unaweza kuipokea, kama Dagg anavyohimiza, kama nidhamu ya “Baba mwema na mwenye hekima”?
+
+**Chanzo.** Muhtasari wa Seminari ya Kitheolojia ya Chapala wa John L. Dagg, *Manual of Theology: A Treatise on Christian Doctrine* (1857), Kitabu cha VII, sura ya 3, sehemu ya 2–3. Matini iko katika umma. Hiki ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo juu ya John Gill, Jesse Mercer, maungamo, Trento na Tamko la Pamoja la 1999 yametokana na vyanzo vya kawaida.
+
+**Kusoma madai kwa uangalifu.** Marejeo mengine ya Maandiko katika unukuzi yanahitaji kukaguliwa: andiko la “Aba, Baba” analolinukuu Dagg ni Wagalatia 4:6, ingawa unukuzi unataja Warumi 8:15. Matini ya kazi ya CTS inafuata unukuzi wa umma wa Grace Gems; kulinganisha na nakala iliyochanganuliwa ya toleo lililochapishwa bado kunasubiriwa.

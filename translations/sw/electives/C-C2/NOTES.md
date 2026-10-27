@@ -1,0 +1,11 @@
+# C-C2 Notes (Wesley, Mahubiri I–X, Kiswahili)
+- Words: textbook EN 50,117 / SW 42,148; readings EN about 10,800 / SW 9,487; each test has 40 items.
+- Terms: neema itanguliayo (prevenient grace); kuhesabiwa haki; utakaso (kamili); kuzaliwa mara ya pili; ushuhuda wa Roho; Roho wa kufanywa wana; karibu Mkristo / Mkristo kabisa; mtu wa asili, chini ya sheria, chini ya neema; Washabiki (Enthusiasts).
+- Also: agano la matendo / agano la neema; dhambi za udhaifu / za kushtukiza; Meza ya Bwana; Mahubiri Sanifu; Wamethodisti; Wakristo wa Matengenezo (Reformed).
+- Bible quotes inside Wesley's English were translated from his KJV wording; SUV wording used only where sure. Please check against SUV.
+- Greek and Latin words and Wesley's own footnotes are kept, with bracketed Swahili explanations.
+- Duplicate answers across tests (shetani, nia, asili, furaha) are deliberate; they mirror the English banks.
+- Proper-name alternates (Aldersgeti, Zakeo, Abbah) are phonetic guesses.
+- Textbook Q13: "sparing hand" rendered "mkono wa kubana"; check wording.
+- Textbook Q35 uses "wanyofu / wasio wa unyofu" to avoid giving away Q8 (unyofu).
+- Intermediate files are in parts/ and work/ (can be deleted).

@@ -1,0 +1,11 @@
+# NOTES D-C2 (elecreftwo, CTSElecRef2) Calvin on Grace
+- Words EN source: textbook 33,417; readings about 9,950 (five digests); total about 43,400.
+- Words SW: textbook 28,078; readings 9,577; total about 37,650 (Swahili runs shorter in word count because of agglutination).
+- Tests: 40 + 40 items, blanks `______`; keys only in private/keys.sw.json. check-leaks.py reports OK.
+- Key terms: mafundisho ya neema; kuhesabiwa haki kwa imani; uteule (election); kuchaguliwa tangu awali (predestination); kukataliwa (reprobation); toba; utakaso; kuzaliwa upya (regeneration); enzi kuu ya Mungu (sovereign rule, used in textbook ch. 4 and 5).
+- Other terms: kuua dhambi (mortification), kuhuishwa (vivification), muungano na Kristo, stahili (merit), wito wenye nguvu (effectual calling), kudumu (perseverance), toba ya kanisa (penance), toharani, msamaha wa adhabu (indulgence), Wapapisti (Papists), wanascholastiki (schoolmen).
+- Bible quotes: SUV wording used where I recalled it; Calvin's quoted verses are otherwise translated from Allen's English with references kept. Reviewer should check these against SUV.
+- Uncertain: "labyrinth" rendered as "mzunguko/mizunguko" (test item 25 textbook, 25 readings); "hinge" as "kiini" (accept bawaba); "indulgence" in "paternal benignity and indulgence" as "huruma" (reading item 23).
+- Textbook test item 14 answer "Kufa" (Cyprian's treatise On Mortality); accepted variants Kifo, Mauti.
+- Readings: only the five digests (title, source line, summary, body, CTS notes) translated; honors/UI text and the six further-study links were skipped.
+- Source chapter intro notes and "Reading claims carefully" lines translated faithfully; Trent/Arminian/Lutheran/Wesleyan notes kept as given.

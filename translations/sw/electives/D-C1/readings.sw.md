@@ -1,0 +1,354 @@
+# Masomo Matano — Taasisi za Dini ya Kikristo (Mateuzi) — John Calvin
+
+## Somo la 1: Aina Mbili za Kujua
+
+*Somo la 1 · Kumjua Mungu na Kujijua Sisi Wenyewe*
+
+Muhtasari wa CTS wa John Calvin, *Taasisi za Dini ya Kikristo* (1559), Kitabu cha I, sura za I–V; tafsiri ya John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001)
+
+Calvin anaanza *Taasisi* kwa dai lake maarufu zaidi: hekima ya kweli ina sehemu mbili, kumjua Mungu na kujijua sisi wenyewe. Anahoji kwamba kila moyo una hisia ya Mungu, kwamba kiburi na ushirikina huiharibu hadi ibada ya sanamu, na kwamba uumbaji ni jukwaa linalometameta la utukufu wa Mungu, lakini peke yake hautoshi kutufikisha nyumbani.
+
+Muhtasari wa Seminari ya Kitheolojia ya Chapala — muhtasari asilia ulioandikwa na CTS, unaopatikana kwa Kiingereza, Kihispania na Kifaransa, na unaoweza kusomwa bila mtandao. Huu ni muhtasari wa CTS, si matini kamili ya asili.
+
+### Aina Mbili za Kujua: Mungu na Sisi Wenyewe
+
+Somo la Seminari ya Kitheolojia ya Chapala — sura za mwanzo za *Taasisi*, ambamo Calvin anaunganisha kumjua Mungu na kujijua sisi wenyewe na kuona utukufu wa Mungu ukiwa umeandikwa katika uumbaji wote
+
+Muhtasari wa CTS wa Kitabu cha I, sura za I–V, cha John Calvin, *Taasisi za Dini ya Kikristo* (toleo la mwisho la Kilatini, 1559), katika tafsiri ya Kiingereza ya John Allen (Project Gutenberg #45001). Kazi hiyo na tafsiri hiyo ni mali ya umma; nukuu fupi zilizo hapa chini ni kutoka kwa Allen.
+
+- Taasisi I.i–v
+- Chanzo cha msingi
+- Geneva, 1536–1559
+- John Calvin
+
+> Neno kabla ya kusoma. John Calvin (1509–1564) alikuwa msomi Mfaransa aliyesomea sheria, aliyekuwa mchungaji mkuu wa Geneva na mwalimu mwenye ushawishi mkubwa zaidi wa makanisa ya Kireformed. *Taasisi* ilikuwa kazi ya maisha yake. Sura hizi za kwanza zinauliza swali rahisi: mtu yeyote anakujaje kumjua Mungu? Maelezo juu ya lugha: Allen aliandika Kiingereza cha mwaka 1813. “The vulgar” humaanisha watu wa kawaida, “stupid” mara nyingi humaanisha butu, na “religion” mara nyingi humaanisha ibada.
+
+#### 1. Kutoka Kitabu cha Mwongozo hadi Toleo la Mwisho: 1536 na 1559
+
+Mnamo Machi 1536, mkimbizi Mfaransa wa miaka ishirini na sita alichapisha huko Basel kitabu kidogo cha Kilatini chenye sura sita: juu ya sheria, imani ya mitume, Sala ya Bwana, sakramenti, sakramenti za uongo, na uhuru wa Mkristo. Calvin alikuwa ameondoka Ufaransa kadiri mateso dhidi ya waumini wa kiinjili yalipozidi kuwa makali, naye aliandika dibaji yake kwa Mfalme Francis wa Kwanza, akiwatetea watu ambao maafisa wa mfalme waliwaita waasi. Majira hayo ya joto, alipokuwa akipita Geneva, Calvin alisimamishwa na mhubiri William Farel, aliyemwonya kwamba Mungu angeyalaani masomo yake ya utulivu kama angekataa kusaidia kulifanyia mji huo matengenezo. Calvin alibaki, akafukuzwa mwaka 1538, akachunga wakimbizi Wafaransa huko Strasbourg pamoja na Martin Bucer, na akarudi Geneva mwaka 1541 kwa maisha yake yaliyobaki. Muda wote huo *Taasisi* ilikua. Toleo la mwisho la Kilatini la 1559 lilikuwa na vitabu vinne na sura themanini, zilizopangwa kwa kufuata mtindo wa Imani ya Mitume: Mungu Muumba, Mungu Mkombozi katika Kristo, njia tunayopokea neema ya Kristo, na kanisa. Calvin alisema hakuridhika hadi kazi hiyo ilipofikia mpangilio huu. Hata hivyo mada ya mwanzo ya 1536 ilibaki katika marekebisho yote, na somo letu linaanzia hapo.
+
+#### 2. Aina Mbili za Kujua (Sura ya I)
+
+Sentensi ya kwanza ya Calvin ni mojawapo ya zinazonukuliwa zaidi katika theolojia ya Kikristo: “Hekima ya kweli na thabiti hasa ina sehemu mbili, kumjua Mungu, na kujijua sisi wenyewe.” Mambo hayo mawili yameshikamana kiasi kwamba ni vigumu kusema lipi huja kwanza. Hakuna awezaye kujitazama kwa unyofu bila kusukumwa kwa Mungu, kwa kuwa vipawa vyetu si vyetu wenyewe, na “kuwapo kwetu kwenyewe si chochote ila kutegemea Mungu peke yake.” Hata hivyo hakuna anayejijua kweli mpaka amemtazama Mungu. Tukijilinganisha na wenye dhambi wengine, tunajiona wema kiasi, kama jicho lililozoea weusi linavyochukua kitu cha kahawia kuwa cheupe. Mfano wa Calvin hautasahaulika. Adhuhuri macho yetu huonekana makali tukiwa tunatazama ardhini, lakini tunapotazama jua moja kwa moja, kuona kwetu “ni giza lenyewe.” Ndivyo ilivyo tunapoinua mawazo yetu kwa utakatifu wa Mungu. Ndiyo maana Abrahamu alijiita “mavumbi na majivu,” na Eliya alifunika uso wake. Calvin haanzi kwa uthibitisho wa kidhahania. Anaanza na moyo wa mwanadamu mbele ya Mungu, ulionyenyekea na unaotafuta.
+
+#### 3. Utauwa Hutangulia Uvumi (Sura ya II)
+
+Kwa kumjua Mungu, Calvin hamaanishi kujua tu kwamba Mungu yuko. Hakuna maarifa ya kweli ya Mungu, anasisitiza, “mahali ambapo hakuna dini wala utauwa.” Kisha inakuja ufafanuzi ambao ukawa kauli mbiu ya mapokeo ya Kireformed: “Kwa utauwa, namaanisha heshima na upendo kwa Mungu, vinavyotokana na kujua fadhili zake.” Lazima tumjue Mungu kuwa “chemchemi ya kila jema,” na tusitafute kitu chochote pasipo yeye. Calvin pia analeta tofauti inayounda *Taasisi* nzima: Mungu anajulikana kwanza kama Muumba, kisha kama Mkombozi katika Kristo Mpatanishi. Kitabu cha I kinashughulikia la kwanza; Kitabu cha II la pili. Hana subira na uvumi “baridi na wa kipuuzi,” kama mungu wa Epikuro anayekaa bure mbinguni. Kuna faida gani ya Mungu “ambaye hatuhusiani naye”? Mtu mcha Mungu humtumaini Mungu kama Mlinzi, humwogopa kama Hakimu na kumpenda kama Baba. Mtu kama huyo, “hata kama hapangekuwa na jehanamu, angetetemeka kwa wazo la kumkosea.” Dini ya kweli ni imani iliyoungana na hofu ya heshima, inayozaa ibada inayofuata sheria ya Mungu, si taratibu zisizo na moyo.
+
+#### 4. Hisia ya Mungu Katika Kila Moyo (Sura ya III)
+
+Calvin anaweka kisha msingi “usiopingika”: akili ya mwanadamu ina, “kwa silika ya asili,” hisia fulani ya Mungu. Msemo wake wa Kilatini, *divinitatis sensus*, hisia ya Uungu, bado unajadiliwa na wanafalsafa wa dini. Anamnukuu msemaji Mrumi Cicero: hakuna taifa lililo la kishenzi kiasi cha kutokuwa na imani ya mungu. Hata ibada ya sanamu inathibitisha jambo hilo, kwa sababu watu wangependelea kuinama kwa mti na jiwe kuliko kukosa mungu kabisa. Calvin anakataa dai kwamba dini ilibuniwa na watawala wajanja kuwaweka watu wengi watiifu; watawala wangeweza kuitumia dini kwa sababu mbegu ilikuwapo tayari. Hata wanaodhihaki hukiri kwa vitendo. Mfalme Caligula alidharau miungu lakini alitetemeka kwa ishara za ghadhabu ya Mungu, na wadhihaki wajasiri zaidi “wanashtuka, hata kwa sauti ya jani linaloanguka.” Wazo la Mungu “halipotei kamwe katika akili ya mwanadamu.” Halijifunzwi kwanza shuleni; “kila mtu tangu kuzaliwa kwake amejifundisha mwenyewe.” Na kwa kuwa tuliumbwa kumjua Mungu, wote wasioishi kwa kusudi hilo wameanguka kutoka katika “sheria ya uumbaji wao.”
+
+#### 5. Mbegu Zisizoiva (Sura ya IV)
+
+Ikiwa mbegu ya dini iko kila mahali, kwa nini dini ya kweli ni nadra hivyo? Calvin anajibu waziwazi: “hatumpati mmoja kati ya mia” anayethamini kile Mungu alichopanda. Wengine huanguka katika ushirikina kwa ujinga, wengine hugeuka kwa makusudi, lakini ujinga si kisingizio, kwa sababu daima unaambatana na kiburi. Badala ya kumpokea Mungu kama anavyojifunua, watu humuumba kwa mawazo yao wenyewe na kuabudu “kubuni kwa akili zao wenyewe.” Calvin anataja makosa manne. Wengine humkana Mungu kwa vitendo, wakimtendea kama “mvivu mbinguni” asiyehukumu kamwe. Wengine hukubali ibada yoyote inayoonekana ya unyofu, ingawa Mungu si “mzimu wala kivuli” cha kubadilishwa na mawazo ya kila mtu. Wengine humkaribia Mungu kwa “hofu ya kitumwa na ya kulazimishwa” tu, wakimchukia Hakimu wanayemwogopa. Na wanafiki hujaribu kumtuliza “kwa sadaka chache duni” huku wakiishi wapendavyo. Hata hivyo mbegu inabaki: wakati wa hofu, wadhihaki ghafla huomba. Hapa ndipo mzizi wa msimamo wa kudumu wa Kireformed: Mungu lazima aabudiwe kama alivyoamuru, si kama tunavyobuni.
+
+#### 6. Jukwaa la Utukufu wa Mungu (Sura ya V)
+
+Calvin sasa anaelekea kutoka moyoni hadi ulimwenguni. Mungu amejionyesha wazi hivyo katika kazi zake hata watu “hawawezi kufumbua macho yao bila kulazimika kumtazama.” Nafsi yake iko juu ya uwezo wetu, lakini “hakuna chembe ya ulimwengu ambamo huwezi kutazama angalau cheche zinazong’aa za utukufu wake.” Mwanadamu ni “ulimwengu mdogo,” dunia katika umbo dogo. Calvin anasifu elimu ya nyota na tiba, lakini anasisitiza kwamba mtu rahisi kabisa, kwa macho yake tu, huona vya kutosha kustaajabia “Mbunifu wa Kimungu.” Mungu anaonekana katika historia pia, anapowanyenyekeza wenye kiburi na kuwaokoa wanyonge. Kisha inakuja taswira maarufu: ulimwengu ni “jukwaa lililojengwa ili kuonyesha utukufu wa Mungu.” Lakini hapa hoja inageuka. Ingawa nuru inaangaza pande zote, kila akili ni “kama labirinti,” nasi tunageuza ushahidi kuwa sanamu. Hata Plato “hupotea.” Ushuhuda wa uumbaji ni halisi, lakini mwishowe unatuacha “bila udhuru wowote.” Tunahitaji nuru iliyo wazi zaidi, na somo linalofuata linaanzia hapo.
+
+> Maelezo ya CTS juu ya lugha ya Calvin. Katika sura ya V Calvin anawaita wafuasi wa Epikuro “zizi la nguruwe” na anazungumza juu ya “Lukrasi mchafu,” mshairi Mrumi wa umaada. Waandishi wa karne ya kumi na sita, Wakristo na wanahumanisti, walibishana kwa mtindo mkali waliojifunza kutoka usemaji wa kale. CTS inaripoti maneno yake kama ushahidi wa kihistoria, bila kukubali matusi wala kuyaondoa. Wakristo leo wanapaswa kujibu kutoamini kwa hoja za Calvin na kwa “upole na hofu” ya 1 Petro 3:15.
+
+#### 7. Kutoka Geneva hadi Mataifa
+
+Sura hizi zikawa urithi wa pamoja wa makanisa ya Kireformed kila mahali. Mwaka 1559 Geneva ilifungua Chuo chake chini ya Theodore Beza, na wanafunzi kutoka Ulaya yote walirudi makwao kuhubiri. John Knox, aliyechunga wakimbizi Waingereza huko Geneva, aliuita “shule kamilifu zaidi ya Kristo iliyopata kuwapo duniani tangu siku za Mitume,” na akapeleka mafundisho yake Scotland. Kanuni ya Imani ya Wabelgiji ya 1561, iliyoandikwa na Guido de Brès kwa makanisa yaliyoteswa ya Uholanzi, inaitikia somo hili: tunamjua Mungu kwanza kwa uumbaji, ulio mbele ya macho yetu “kama kitabu maridadi kuliko vyote.” Baraza la Westminster la wanateolojia Wapuritani liliandika mwaka 1646 kwamba uumbaji na majaliwa huwaacha watu bila udhuru, lakini “havitoshi kutoa maarifa ya Mungu… yanayohitajika kwa wokovu.” Katekisimu yake Fupi inaanza mahali alipoanzia Calvin: kusudi letu kuu ni “kumtukuza Mungu, na kumfurahia milele.” Mwaka 1557 Geneva ilituma hata wachungaji wawili kwenye koloni la Kifaransa kwenye Ghuba ya Guanabara huko Brazil, ambako ibada za kwanza za Kiprotestanti katika Amerika zilifanyika. Leo makanisa ya Kipresbiteri na ya Kireformed kutoka Mexico, Cuba na Brazil hadi Ghana, Cameroon na Malawi bado huwafundisha watoto kwamba Mungu aliwaumba wamjue.
+
+#### 8. Mchungaji wa Kireformed Anachukua Nini Leo
+
+Kwanza, theolojia huanzia katika ibada na unyenyekevu; mahubiri yanayowaacha watu na ukweli juu ya Mungu bila heshima yamekosa hoja ya Calvin. Pili, kila msikilizaji tayari ana hisia fulani ya Mungu, hata kama imezikwa. Mwinjilisti katika soko la Guadalajara au kijiji huko Malawi anazungumza na dhamiri ambazo Mungu amekwisha kuzigusa. Tatu, ibada ya sanamu si ya kale tu. Bado tunatengeneza miungu ya kutufaa, na mchungaji hana budi kuitaja kwa upole na wazi. Nne, uumbaji ni zawadi ya kufurahia, na sayansi makini inaweza kuwa sifa. Wengine wanatofautiana mahali fulani. Walutheri kwa kiasi kikubwa wanashiriki mtazamo wa Calvin. Mafundisho ya Kikatoliki cha Roma, kufuatia Thomas Aquinas na Mtaguso wa Kwanza wa Vatikani (1870), yana uhakika zaidi juu ya yale ambayo akili peke yake inaweza kujua kuhusu Mungu. Wakristo wa Kiwesley na Kiarminiani wanakubali kwamba wenye dhambi hawana udhuru, lakini wanazungumza juu ya “neema itangulizayo,” neema ya Mungu inayofanya kazi tayari katika kila dhamiri. Wabaptisti na Wapentekoste kwa jumla wanakubali mistari mikuu ya Calvin hapa. Hata ndani ya familia ya Kireformed, Karl Barth na Emil Brunner walibishana vikali mwaka 1934 juu ya kama theolojia yoyote ya asili inawezekana.
+
+#### 9. Kuliweka Moyoni
+
+*Kwa tafakari.* Calvin anasema hatujijui kamwe mpaka tumemtazama Mungu. Ni lini mara ya mwisho kuona utakatifu wa Mungu kulikunyenyekeza? Unaona wapi cheche za utukufu wake katika mji wako mwenyewe na kazi yako? Ni picha gani ya uongo ya Mungu ambayo watu wanaokuzunguka wanajaribiwa kuiabudu, na ungewezaje kuwaongoza kwa Mungu anayejifunua? Je, ujuzi wako wa Mungu umewekwa alama na utauwa, heshima na upendo vinavyokua kutokana na kujua fadhili zake?
+
+*Chanzo.* Muhtasari wa Seminari ya Kitheolojia ya Chapala wa Kitabu cha I, sura za I–V, cha John Calvin, *Taasisi za Dini ya Kikristo* (1559), kilichotafsiriwa na John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001). Calvin alikufa mwaka 1564 na Allen mwaka 1839; kazi hiyo na tafsiri hiyo ni mali ya umma na zinanukuliwa hapa kwa ufupi kwa ajili ya kujifunza. Haya ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo ya kihistoria yanatoka katika historia za kawaida za Matengenezo ya Kanisa.
+
+*Kudai kwa uangalifu.* Mistari ya Knox, Kanuni ya Imani ya Wabelgiji na Viwango vya Westminster inafuata tafsiri za zamani za Kiingereza zinazojulikana, ambazo pia ni mali ya umma. Ulinganisho wa matini ya kufanyia kazi ya CTS na Kilatini cha 1559 bado unasubiriwa.
+
+## Somo la 2: Miwani kwa Macho Hafifu
+
+*Somo la 2 · Maandiko na Mamlaka Yake*
+
+Muhtasari wa CTS wa John Calvin, *Taasisi za Dini ya Kikristo* (1559), Kitabu cha I, sura za VI–X; tafsiri ya John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001)
+
+Calvin anaeleza kwa nini Mungu alitoa Neno lake lililoandikwa, kama miwani kwa macho hafifu. Mamlaka ya Maandiko, anahoji, hayasimami juu ya kura ya kanisa bali juu ya Mungu anayesema ndani yake, aliyetiwa muhuri mioyoni mwetu kwa ushuhuda wa ndani wa Roho Mtakatifu. Pia anaonya dhidi ya wenye ushupavu wanaoliacha Neno nyuma, akisisitiza kwamba Roho na Neno vinakwenda pamoja.
+
+Muhtasari wa Seminari ya Kitheolojia ya Chapala — muhtasari asilia ulioandikwa na CTS, unaopatikana kwa Kiingereza, Kihispania na Kifaransa, na unaoweza kusomwa bila mtandao. Huu ni muhtasari wa CTS, si matini kamili ya asili.
+
+### Miwani kwa Macho Hafifu: Maandiko na Roho
+
+Somo la Seminari ya Kitheolojia ya Chapala — Calvin juu ya kwa nini Mungu alitoa Neno lake lililoandikwa, kwa nini mamlaka yake yanasimama juu ya Mungu na si juu ya kura ya kanisa, na kwa nini Roho na Neno havipaswi kutenganishwa kamwe
+
+Muhtasari wa CTS wa Kitabu cha I, sura za VI–X, cha John Calvin, *Taasisi za Dini ya Kikristo* (toleo la mwisho la Kilatini, 1559), katika tafsiri ya Kiingereza ya John Allen (Project Gutenberg #45001). Kazi hiyo na tafsiri hiyo ni mali ya umma; nukuu fupi zilizo hapa chini ni kutoka kwa Allen.
+
+- Taasisi I.vi–x
+- Chanzo cha msingi
+- Maandiko na Roho
+- John Calvin
+
+> Neno kabla ya kusoma. Somo la kwanza lilimalizika kwa tatizo: uumbaji unaonyesha utukufu wa Mungu pande zote, lakini akili za wenye dhambi hugeuza nuru hiyo kuwa sanamu. Sura hizi zinatoa jibu la Mungu, Neno lililoandikwa. Hapa Calvin anaweka fundisho ambalo makanisa ya Kireformed yanajulikana nalo zaidi baada ya neema yenyewe: Maandiko kama mamlaka kuu, yanayopokelewa kwa uhakika kupitia ushuhuda wa ndani wa Roho Mtakatifu.
+
+#### 1. Mji Uliojengwa Kuzunguka Neno
+
+Katika Geneva ya Calvin Biblia haikutetewa tu; ilihubiriwa, iliimbwa na kusomwa kila juma. Calvin alihubiri vitabu vizima vya Maandiko aya kwa aya, mara nyingi siku za kazi pamoja na Jumapili, na siku za Ijumaa wachungaji walikutana katika “Kusanyiko” kusoma kifungu pamoja. Geneva ikawa karakana ya Biblia. Wachungaji wa Geneva waliendelea kurekebisha Biblia ya Kifaransa ya binamu yake Calvin, Olivétan (1535), na wahamiaji Waingereza walitoa Biblia ya Geneva ya 1560, Biblia ya Wapuritani. Wahamiaji Waprotestanti wa Kihispania waliopita Geneva, Casiodoro de Reina na Cipriano de Valera, waliupa ulimwengu unaozungumza Kihispania Biblia ya 1569, iliyorekebishwa mwaka 1602, babu wa Reina-Valera ambayo makanisa mengi ya Amerika ya Kilatini bado huisoma. Sura hizi zinaeleza kwa nini.
+
+#### 2. Miwani kwa Macho Hafifu (Sura ya VI)
+
+Uumbaji “unatosha kabisa” kutuacha bila udhuru, asema Calvin, lakini tunahitaji “msaada mwingine, ulio bora zaidi” kutufikisha kwa Mungu. Kwa hiyo Mungu aliongeza nuru ya Neno lake. Mfano wa Calvin ni wa kawaida na wa kukumbukwa. Mzee mwenye macho hafifu hawezi kusoma hata maneno mawili ya kitabu kizuri, lakini “kwa msaada wa miwani, ataanza kusoma kwa wazi.” Vivyo hivyo, Maandiko hukusanya mawazo yetu yaliyochanganyikana juu ya Mungu, hutawanya giza na hutuonyesha Mungu wa kweli kwa uwazi. Katika Maandiko Mungu “hufungua kinywa chake kitakatifu mwenyewe.” Mungu aliifanya Torati na Manabii kuandikwa ili kweli isipotee wala kuharibiwa. Hitimisho lake ni kanuni ya Matengenezo ya Kanisa yote: hakuna awezaye kuwa na maarifa hata kidogo ya mafundisho yenye afya “bila kuwa mwanafunzi wa Maandiko.” Bila Neno, nuru ya Mungu ni “kama labirinti isiyoweza kufafanuliwa,” na ni afadhali kuchechemea katika njia sahihi kuliko kukimbia kwa kasi nje yake.
+
+#### 3. Kutotegemea Kura ya Kanisa (Sura ya VII, 1–3)
+
+Calvin sasa anakabili mabishano makubwa ya siku zake. Wengine walifundisha kwamba Maandiko yana uzito kiasi tu kinachopewa na kanisa, hata kanisa ndilo huamua vitabu gani vinaingia katika kanuni na heshima gani vinastahili. Calvin anaita hili “kosa baya kabisa.” Kama lingekuwa kweli, dhamiri zenye shida zingewezaje kupata “uhakika thabiti wa uzima wa milele”? Jibu lake linatoka Waefeso 2:20: kanisa limejengwa “juu ya msingi wa mitume na manabii.” Msingi hutangulia jengo. Kanisa linapoyapokea Maandiko, haliifanyi kweli ya mashaka kuwa ya uhakika; linaitambua kweli ya Mungu wake na kuinama mbele yake. Tunajuaje, basi, kwamba Maandiko yanatoka kwa Mungu? Ni kama kuuliza tunavyotofautisha nuru na giza au tamu na chungu. Calvin pia anajibu usemi maarufu wa Augustino, kwamba asingeiamini Injili bila mamlaka ya kanisa. Augustino alimaanisha, Calvin anahoji, kwamba ushuhuda wa kanisa unaweza kumwongoza asiyeamini kuelekea Injili, “utangulizi,” si msingi wa imani.
+
+> Maelezo ya CTS juu ya mabishano na Roma. Calvin anawaita wapinzani wake “watu wakufuru” wanaotafuta “udhalimu usio na kikomo, kwa jina la Kanisa.” Aliandika katika miaka ambayo waumini wa kiinjili huko Ufaransa walikuwa wakichomwa moto. CTS inaandika maneno yake kama historia, bila kuyakubali wala kuyafuta. Mafundisho ya Kikatoliki yana maelezo yake makini: Mtaguso wa Pili wa Vatikani (1965) unasema kwamba mamlaka ya kufundisha ya kanisa “haliko juu ya neno la Mungu, bali linalitumikia.” Wakristo wa Kireformed na Wakatoliki bado wanatofautiana jinsi Maandiko, mapokeo na kanisa vinavyohusiana.
+
+#### 4. Ushuhuda wa Ndani wa Roho (Sura ya VII, 4–5)
+
+Kiini cha somo hili kiko hapa. Uthibitisho mkuu wa Maandiko, asema Calvin, ni “tabia ya Msemaji wa Kimungu.” Manabii na mitume hawakutegemea kipaji chao wenyewe bali jina la Mungu. Hoja zinaweza kunyamazisha wakosoaji, lakini haziwezi kutoa uhakika ambao utauwa unauhitaji. Uhakika huo unatoka “kwa ushuhuda wa siri wa Roho.” Kama vile Mungu peke yake ni shahidi anayefaa wa nafsi yake, ndivyo “ushuhuda wa Roho ni mkuu kuliko akili yote.” Roho yule yule aliyesema kwa manabii lazima aingie mioyoni mwetu kutushawishi kwamba walisema kwa uaminifu. Wale waliofundishwa ndani na Roho hutulia katika Maandiko kama yanayojithibitisha yenyewe, “yakibeba ushahidi wake yenyewe.” Hii si kuamini kipofu. Waumini wanayanyenyekea Maandiko kwa sababu wanahisi “nguvu zisizo na shaka za uwezo wa Mungu” zikiwavuta kwenye utii wa hiari. Ni ushawishi “usiohitaji sababu,” lakini unaopatana na akili ya juu kabisa. Calvin anadai kueleza tu “kile ambacho kila mwamini hukipata moyoni mwake.” Imani ya kweli, mwishowe, ni ile ambayo “Roho wa Mungu huitia muhuri mioyoni mwetu.”
+
+#### 5. Misaada kwa Imani Dhaifu (Sura ya VIII)
+
+Msingi ukishawekwa, Calvin anatoa ushahidi wa kuunga mkono, anaouita “misaada ya pili kwa udhaifu wetu.” Maandiko hutugusa kwa hadhi ya mada zake kuliko kwa uzuri wa lugha. Ukisoma Cicero au Plato utafurahishwa, lakini ukigeukia Maandiko yatakuwa “yanapenya moyo wako” kama kitabu cha kibinadamu hakiwezi. Anaonyesha ukale wa Musa, aliyeandika kwa unyofu aibu ya kabila lake mwenyewe; miujiza iliyofanywa mbele ya watu wote; unabii uliotimizwa, kama Isaya akimtaja Koreshi; na kuhifadhiwa kwa vitabu hivyo katika mateso. Katika Agano Jipya, wavuvi walisema juu ya siri za mbinguni walizojifunza katika shule isiyo ya kibinadamu. Maandiko daima, “kama mtende, yameinuka juu ya upinzani wote,” na wafia dini wameyatia muhuri kwa damu yao. Wasomi wa kisasa wanabishana juu ya baadhi ya hoja hizi, lakini Calvin hakuwahi kutegemeza imani juu yake; ni upumbavu, anaonya, kuthibitisha Maandiko kwa wasioamini kwa hoja peke yake.
+
+#### 6. Roho na Neno Pamoja (Sura ya IX)
+
+Calvin sasa anageukia hatari iliyo kinyume. Baadhi ya “watu wasio thabiti,” wakidai kufundishwa moja kwa moja na Roho, walidharau kusoma Maandiko kama “herufi iliyokufa na iuayo.” Calvin anajibu kwamba mitume walikuwa na Roho yule yule, naye aliwafanya kulistahi Neno zaidi, si kidogo. Isaya 59:21 inaunganisha “Roho yangu” na “maneno yangu” katika ahadi moja. Paulo, hata baada ya mbingu ya tatu, alimwambia Timotheo ajishughulishe na kusoma. Kazi ya Roho aliyeahidiwa, asema Calvin, “si kubuni ufunuo mpya ambao haujasikika,” bali “kutia muhuri akilini mwetu mafundisho yale yale ambayo Injili inatoa.” Kwa kuwa Shetani anaweza kujitokeza kama malaika wa nuru, tunamtambua Roho wa kweli kwa sura yake katika Maandiko aliyoyavuvia. Calvin anaita hili “aina ya uhusiano wa pande zote kati ya uhakika wa neno lake na wa Roho wake.” Tunalistahi Neno Roho anaporuhusu tuone uso wa Mungu ndani yake, nasi tunamkaribisha Roho tunapomtambua ndani ya Neno. Hivyo Kristo aliyefufuka aliwafungua wanafunzi wake akili, si kuchukua nafasi ya Maandiko, bali ili wayaelewe.
+
+> Maelezo ya CTS juu ya vifungu viwili vikali. Katika sura ya IX Calvin anawaita wapinzani wake “wenye ushupavu wenye kiburi” wenye wazimu “wa kishetani.” Alikuwa na akilini wanaroho wa siasa kali wa wakati wake, kama kikundi alichokiita Walibertini, si Wanaanabaptisti wengi waliopenda Biblia. Katika sura ya VIII pia anawaita Wayahudi “adui wake wa kale zaidi” wa Mungu, huku akiwaheshimu, pamoja na Augustino, kama walinzi waaminifu wa Agano la Kale. CTS inaripoti lugha hii kama sehemu ya kumbukumbu ya kihistoria. Inakataa dharau yote kwa watu wa Kiyahudi, ambao Kristo, kama asemavyo Paulo, alitoka kwao kwa jinsi ya mwili (Warumi 9:5).
+
+#### 7. Mungu Anayeonyeshwa na Biblia (Sura ya X)
+
+Mwishowe Calvin anauliza kama Mungu wa Maandiko analingana na Mungu anayeonekana katika uumbaji. Analingana. Maelezo makuu ya Musa katika Kutoka 34:6–7, “mwenye huruma, mwenye neema, mwenye uvumilivu, mwingi wa fadhili na kweli,” yanafupisha karibu yote tunayoweza kujua juu yake. Calvin anaona kwamba yanamweleza Mungu “si kama alivyo ndani yake mwenyewe, bali kama alivyo kwetu,” ili ujuzi wetu uwe “ufahamu hai” badala ya uvumi wa hewani. Yeremia 9:24 inataja mambo matatu tunayohitaji kuyajua zaidi: huruma, “ambayo ndani yake peke yake unakaa wokovu wetu wote”; hukumu juu ya waovu; na haki, ambayo kwayo waaminifu hulindwa. Kumjua Mungu katika Maandiko kuna lengo lile lile na kumjua kwa uumbaji: kutufundisha kwanza kumwogopa Mungu kisha kumtumaini. Na Maandiko, ili kutuongoza kwa Mungu wa kweli, yanakataa miungu yote ya mataifa.
+
+#### 8. Neno Katika Ulimwengu wa Kireformed
+
+Sura hizi ziliunda kanuni zote za imani za Kireformed. Kanuni ya Imani ya Scotland ya 1560 inatangaza kwamba mamlaka ya Maandiko yanatoka kwa Mungu na hayategemei wanadamu. Kanuni ya Imani ya Wabelgiji ya 1561 inaongeza kwamba tunavyoamini vitabu vyake hasa kwa sababu Roho Mtakatifu anashuhudia mioyoni mwetu kwamba vinatoka kwa Mungu. Kanuni ya Imani ya Westminster ya 1646 inazungumza juu ya “kazi ya ndani ya Roho Mtakatifu, akishuhudia kwa neno na pamoja na neno mioyoni mwetu.” Misheni za Kireformed zilibeba imani hiyo hiyo: Biblia kwanza. Wamisionari wa Basel huko Ghana waliwapa watu wa Twi Biblia katika lugha yao mwaka 1871. Katika Amerika ya Kilatini, wauzaji wa Biblia mara nyingi walitangulia wachungaji wa kwanza wa Kipresbiteri, na Reina-Valera ikawa kitabu cha kila nyumba.
+
+#### 9. Mchungaji wa Kireformed Anachukua Nini Leo
+
+Ujasiri wa mchungaji mimbarani haumo katika utetezi wa werevu wala idhini ya kanisa, bali katika Mungu anayesema katika Neno lake na kulitia muhuri kwa Roho wake. Hilo hutuweka huru kuhubiri waziwazi, kuomba Roho kabla ya kufungua matini, na kuwapeleka watu wasome Maandiko wenyewe. Wengine wanatofautiana mahali fulani. Walutheri wanashiriki imani kwamba Maandiko ni kipimo kikuu. Wakatoliki wa Roma wanashikilia Maandiko na mapokeo pamoja chini ya mamlaka ya kufundisha ya kanisa. Waweslesi wengi husema Maandiko ni ya kwanza, yakisomwa pamoja na mapokeo, akili na uzoefu. Wabaptisti wanashikilia Maandiko kuwa mamlaka pekee ya mwisho. Wapentekoste wanaamini Roho bado hutoa karama za unabii na uponyaji, ambapo walimu wengi wa Kireformed wamekuwa waangalifu; hata hivyo Wapentekoste wa kawaida pia hujaribu kila neno kwa Maandiko. Kanuni ya Calvin ya Roho na Neno pamoja ni msingi wa pamoja.
+
+#### 10. Kuliweka Moyoni
+
+*Kwa tafakari.* Calvin analinganisha Maandiko na miwani kwa macho hafifu. Biblia imesahihisha wapi picha iliyofifia ya Mungu katika maisha yako? Uhakika wako mwenyewe kwamba Biblia ni Neno la Mungu hatimaye unategemea nini? Mtu akidai neno jipya kutoka kwa Roho, ungelijaribuje kwa Neno kwa upendo? Na kanisa lako lingewezaje kusaidia watu zaidi kuwa, kwa maneno ya Calvin, wanafunzi wa Maandiko?
+
+*Chanzo.* Muhtasari wa Seminari ya Kitheolojia ya Chapala wa Kitabu cha I, sura za VI–X, cha John Calvin, *Taasisi za Dini ya Kikristo* (1559), kilichotafsiriwa na John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001). Calvin alikufa mwaka 1564 na Allen mwaka 1839; kazi hiyo na tafsiri hiyo ni mali ya umma na zinanukuliwa hapa kwa ufupi kwa ajili ya kujifunza. Haya ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo ya kihistoria yanatoka katika historia za kawaida.
+
+*Kudai kwa uangalifu.* Mistari ya Kanuni ya Imani ya Westminster na Mtaguso wa Pili wa Vatikani inafuata tafsiri za kawaida za Kiingereza. Ulinganisho wa matini ya kufanyia kazi ya CTS na Kilatini cha 1559 bado unasubiriwa.
+
+## Somo la 3: Mkono Kwenye Usukani
+
+*Somo la 3 · Utatu, Uumbaji na Majaliwa*
+
+Muhtasari wa CTS wa John Calvin, *Taasisi za Dini ya Kikristo* (1559), Kitabu cha I, sura za XIII–XVIII; tafsiri ya John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001)
+
+Calvin anakiri Mungu mmoja katika Nafsi tatu dhidi ya makosa ya kale na mapya, kisha anageukia uumbaji: malaika kama roho watumishi, mashetani wanaoshikwa kwenye kamba ya Mungu, na wanadamu walioumbwa kwa sura ya Mungu. Anamalizia kwa majaliwa, mkono wa Mungu kwenye usukani wa vitu vyote, na anaonyesha jinsi yanavyowaweka huru waumini kutokana na hofu na kuwafundisha subira, shukrani na busara.
+
+Muhtasari wa Seminari ya Kitheolojia ya Chapala — muhtasari asilia ulioandikwa na CTS, unaopatikana kwa Kiingereza, Kihispania na Kifaransa, na unaoweza kusomwa bila mtandao. Huu ni muhtasari wa CTS, si matini kamili ya asili.
+
+### Mkono Kwenye Usukani: Utatu, Uumbaji na Majaliwa
+
+Somo la Seminari ya Kitheolojia ya Chapala — Calvin juu ya Mungu mmoja katika Nafsi tatu, juu ya malaika, mashetani na sura ya Mungu ndani ya wanadamu, na juu ya majaliwa yanayotawala vitu vyote kwa faida ya watu wa Mungu
+
+Muhtasari wa CTS wa Kitabu cha I, sura za XIII–XVIII, cha John Calvin, *Taasisi za Dini ya Kikristo* (toleo la mwisho la Kilatini, 1559), katika tafsiri ya Kiingereza ya John Allen (Project Gutenberg #45001). Kazi hiyo na tafsiri hiyo ni mali ya umma; nukuu fupi zilizo hapa chini ni kutoka kwa Allen.
+
+- Taasisi I.xiii–xviii
+- Chanzo cha msingi
+- Utatu na majaliwa
+- John Calvin
+
+> Neno kabla ya kusoma. Hili ndilo somo refu zaidi katika kozi, nalo linahusu mada tatu kubwa: Mungu ni nani (Utatu), Mungu aliumba nini (malaika, ulimwengu na wanadamu), na Mungu anatawalaje (majaliwa). Lisome kwa sehemu. Sura mbili juu ya picha na ibada ya uongo (XI–XII) zimeachwa katika kozi hii; zinastahili kusomwa baadaye.
+
+#### 1. Fundisho Lililojaribiwa Geneva
+
+Utatu haukuwa mada ya utulivu katika maisha ya Calvin. Mwaka 1537 mhubiri mpinzani, Pierre Caroli, alimshtaki Calvin na Farel kwa uzushi wa kale wa Arius kwa sababu walikataa kutia saini Imani ya Athanasio kwa amri; mtaguso wa Lausanne uliwaondolea lawama. Calvin alijifunza kwamba imani sahihi na kupenda kanuni za imani si mara zote jambo moja. Katika miaka ya 1550 changamoto mpya ilitoka kwa wapinga-Utatu, miongoni mwao daktari Mhispania Michael Servetus na baadaye kikundi cha wakimbizi Waitaliano huko Geneva. Jibu la Calvin linajaza sehemu kubwa ya sura ya XIII, ambayo ilikua katika kila toleo. Historia hii inaeleza sifa mbili za sura hii: uthabiti wa Calvin juu ya kiini cha fundisho, na subira yake ya kushangaza juu ya maneno.
+
+> Maelezo ya CTS juu ya Servetus. Calvin anawaita Servetus na wafuasi wake “wazimu.” Historia iliyo nyuma ya hili ni ya uchungu. Servetus, ambaye tayari alikuwa amehukumiwa na Mahakama ya Imani ya Kikatoliki huko Ufaransa, alikuja Geneva mwaka 1553. Calvin alisukuma mashtaka, baraza la mji likashauriana na makanisa mengine ya Uswisi, na Servetus akachomwa moto tarehe 27 Oktoba 1553; Calvin alikuwa ameomba kifo kisicho cha ukatili sana. Baadhi ya Waprotestanti, kama Sebastian Castellio, walipinga wakati huo. Mwaka 1903 Wakristo wa Kireformed walisimamisha mnara huko Geneva mahali pa kunyongwa, wakihukumu, kwa maneno yake, “kosa lililokuwa la karne yake.” CTS inaandika historia hii kwa unyofu. Kosa lazima lijibiwe kwa Maandiko na hoja, kamwe si kwa upanga.
+
+#### 2. Mungu Aliye Hai katika Nafsi Tatu (Sura ya XIII)
+
+Calvin anaanza kwa unyenyekevu. Maandiko yanaposema juu ya kinywa cha Mungu, macho na mikono, “Mungu hunena nasi kama kwa kigugumizi, kama vile yaya wanavyozoea kusema na watoto wachanga.” Wanateolojia huita hili kujishusha: Mungu hushusha usemi wake hadi uwezo wetu mdogo. Hata hivyo Mungu pia anafunua kwamba yeye ni Mmoja katika Nafsi Tatu, na bila hili tunakuwa na “jina tupu la Mungu linaloelea akilini mwetu.” Nafsi, asema Calvin, ni “ukaaji katika kiini cha Uungu, unaohusiana na wengine, na bado unatofautishwa nao kwa sifa isiyoshirikishwa.” Angependa kuzika maneno kama *Utatu* na *nafsi*, kama wote wangekiri Mungu mmoja ambaye Baba, Mwana na Roho ni tofauti ndani yake. “Mimi si mkali kiasi cha kupenda kubishana kuhusu maneno matupu.” Lakini maneno kama hayo huvua kinyago cha kosa. Arius alimwita Kristo Mungu lakini aliyeumbwa; “sema kwamba ni wa dutu moja, unamvua mnafiki kinyago.” Calvin anathibitisha uungu wa Mwana na wa Roho kutoka Agano zote mbili. Anaeleza mpangilio wao: kwa Baba huhusika “chanzo cha kitendo,” kwa Mwana “hekima, shauri,” kwa Roho “uwezo na ufanisi.” Mpangilio si cheo. Akizingatiwa yeye mwenyewe, Mwana “anajitegemea mwenyewe,” Mungu kamili, si kiumbe duni.
+
+#### 3. Jukwaa Zuri na Watumishi Wake Wasioonekana (Sura ya XIV)
+
+Uumbaji, asema Calvin, unamtenga Mungu wa kweli na sanamu zote. Aliumba ulimwengu kwa siku sita, si kwa sababu alihitaji wakati, bali kutufundisha kutafakari utunzaji wake wa kibaba, akiandaa makao kabla ya kumuumba mkaaji wake. Calvin anahimiza “furaha ya kimungu” katika “jukwaa hili zuri sana la ulimwengu,” ambalo Mungu alilipamba “kama jumba kubwa la fahari.” Sehemu kubwa ya sura inahusu malaika na mashetani, kwa kukataa kwa uthabiti uvumi. Malaika ni “roho watumishi” ambao Mungu huwatumia kwa ulinzi wetu, si kwa sababu anawahitaji, bali kufariji udhaifu wetu, kama pale mtumishi wa Elisha alipoona milima imejaa magari ya moto. Je, kila mwamini ana malaika mlinzi? “Siwezi kuthubutu kuthibitisha kwa hakika.” Mashetani ni maadui halisi, na Maandiko yanaonya juu yao ili tuwe macho. Hata hivyo uovu wao “hautokani na uumbaji, bali na uharibifu,” na Shetani “hawezi kufanya chochote bila mapenzi na ruhusa ya Mungu.” Anapigana na waaminifu lakini hawezi kamwe kuwashinda.
+
+#### 4. Tulioumbwa kwa Sura ya Mungu (Sura ya XV)
+
+Kabla ya kueleza anguko, Calvin anaeleza wanadamu kama Mungu alivyowaumba. Sisi ni roho na mwili, na nafsi ni kiini kisichokufa lakini kilichoumbwa, si kipande cha Mungu. Ingawa utukufu wa Mungu humeremeta hata katika mwili wa mwanadamu, “kiti halisi cha sura yake kiko katika nafsi.” Tunajifunza sura ilikuwa nini kutokana na kile Kristo anachokirejesha: maarifa, haki na utakatifu. Kwa hiyo mwanzoni sura hiyo iling’aa “katika nuru ya akili, katika unyofu wa moyo, na katika afya ya sehemu zote za asili yetu.” Adamu alikuwa na uhuru wa kweli wa utashi: “Adamu, kwa hiyo, angeweza kusimama kama angetaka, kwa kuwa alianguka kwa utashi wake mwenyewe tu.” Kwa nini Mungu hakumpa kipawa cha kudumu bado kimefichwa katika shauri la Mungu. Calvin anaona kwamba wanafalsafa wapagani, wasiojua anguko, “walitafuta jengo kamili katikati ya magofu.” Wakristo hawapaswi kurudia kosa lao.
+
+#### 5. Mungu Kwenye Usukani (Sura ya XVI)
+
+Kumfikiria Mungu kama Muumba “kwa muda mfupi tu,” kisha kutokuwapo, “ni kufikiri kwa baridi na kwa ukavu.” Imani huenda mbali zaidi: Mungu anahifadhi na kutawala yote aliyoyaumba. Majaliwa hayamweleze Mungu “kama anayetazama bila kazi kutoka mbinguni,” bali “kama anayeshika usukani wa ulimwengu, na kudhibiti matukio yote.” Ni kazi “ya mikono yake si pungufu ya macho yake”; si kujua kabla tu. Calvin anakataa majaliwa ya jumla yanayoweka mashine ikiendelea tu. Hakuna shomoro anayeanguka bila Baba. Pia anakataa shutuma kwamba huu ni hatima ya kipagani. Wastoiki walibuni mnyororo wa visababishi vya asili; Wakristo wanakiri Baba mwenye hekima aliyeamua atakalofanya na sasa analitekeleza. Pamoja na Basil, anaita bahati na ajali “maneno ya wapagani.” Hata hivyo kwetu, matukio mara nyingi yanaonekana ya ajali, kwa sababu sababu za Mungu zimefichwa. Mfanyabiashara aliyeuawa na wanyang’anyi msituni alikufa kwa ajali kwa kadiri tunavyoona, lakini si nje ya uteuzi wa Mungu.
+
+#### 6. Faraja ya Majaliwa (Sura ya XVII)
+
+Sura hii ni utunzaji wa kichungaji tupu. Majaliwa si kwa udadisi wa bure bali kwa kumtumaini kwa unyenyekevu. Calvin anachora picha hai ya maisha bila hayo: katika meli kuna “hatua moja tu kati yako na mauti,” na katika mji unakabili “hatari nyingi kama vigae vilivyo juu ya paa.” Lakini nuru ya majaliwa inapomwangazia mwamini, anaokolewa “kutoka kila wasiwasi,” akijua kwamba Baba yake wa mbinguni anatawala vitu vyote na ameweka mipaka kwa kila adui. Yusufu aliweza kuwasamehe ndugu zake kwa sababu aliona mkono wa Mungu: “Mungu aliyakusudia kuwa mema.” Ayubu alimbariki Bwana atoaye na atwaaye. Hata hivyo majaliwa hayatufanyi wazembe kamwe. Mungu aliyeweka mipaka ya maisha yetu alitukabidhi pia utunzaji wake, kwa hiyo lazima tutumie dawa, tuepuke hatari na tupange kwa busara. “Mtu mcha Mungu hatapuuza visababishi vya chini,” naye anawashukuru watu ambao kupitia kwao Mungu humsaidia. Hukumu ya Calvin: “kutojua majaliwa ndiyo taabu kuu kuliko zote.”
+
+#### 7. Waovu Wanapotumikia Kusudi la Mungu (Sura ya XVIII)
+
+Swali gumu zaidi linakuja mwishoni. Maandiko yanasema Mungu hutumia hata Shetani na waovu kutimiza hukumu zake. Wengi wameulainisha hili kwa wazo la kuruhusu tu; kwa hiyo, asema Calvin, “ilibuniwa tofauti kati ya kutenda na kuruhusu.” Kwake, Mungu hatazami tu uovu ukitokea; hakuna kinachotokea pasipo kusudi lake. Hata hivyo Mungu hachafuliwi kamwe na dhambi ya mwanadamu. Mapenzi yake ya siri hayapaswi “kuchanganywa na agizo lake”: waovu huvunja amri zake, ingawa yeye hutumia matendo yao kwa malengo yake matakatifu. Mfano mkuu wa Calvin ni msalaba. Mungu alimtoa Kristo, Kristo alijitoa mwenyewe, na Yuda alimsaliti. Akimnukuu Augustino, anaeleza kwamba katika tendo moja “hawakutenda kwa sababu ile ile.” Mungu alilenga ukombozi; Yuda alilenga tamaa ya mali. Calvin anamalizia kwa wito wa unyenyekevu: hekima yetu ni kupokea “kwa unyenyekevu wa upole” yote ambayo Maandiko yanafundisha, hata yale yanayopita uwezo wetu.
+
+#### 8. Majaliwa Katika Maisha ya Makanisa ya Kireformed
+
+Sura hizi zikawa faraja ya makanisa yanayoteseka. Katekisimu ya Heidelberg ya 1563 inaanza kwa kuuliza “faraja yetu pekee katika uzima na katika kifo,” na inafafanua majaliwa kama “uweza wa Mungu wenye nguvu zote na uliopo kila mahali.” Kanuni ya Imani ya Wabelgiji inasema fundisho hili huwapa waumini “faraja isiyoelezeka.” Wahuguenoti wa Kifaransa, waliopigwa marufuku baada ya 1685, waliendelea kuabudu katika mahali pa siri walipopaita “Jangwa,” wakiutumainia mkono wa Mungu. Mpuritani John Flavel aliandika *Siri ya Majaliwa* (1678) kufundisha waumini kufuatilia utunzaji wa Mungu katika maisha yao wenyewe. Waumini wa Kireformed katika Afrika na Amerika ya Kilatini mara nyingi wameishi katikati ya vita, maafa na mateso, na wengi wamepata nguvu katika ungamo hilo hilo.
+
+#### 9. Mchungaji wa Kireformed Anachukua Nini Leo
+
+Mchungaji kando ya kitanda cha hospitali au mazikoni anaweza kusema pamoja na Calvin kwamba hakuna tukio linalotoka nje ya mkono wa Baba yetu, bila kujifanya kujua sababu zake. Fundisho la Utatu si fumbo bali moyo wa ibada na ubatizo. Malaika na pepo wanapaswa kuchukuliwa kwa uzito, lakini kamwe wasifanywe kitovu cha mahubiri. Na kumtumaini Mungu katika majaliwa kunapaswa kutufanya tuwe na bidii zaidi, si kidogo, katika maombi, tiba na kupanga. Wengine wanatofautiana mahali fulani. Walutheri, Waweslesi, Wabaptisti na Wapentekoste wengi wanashiriki imani ya Nikea, ingawa Wapentekoste wa “Umoja” (Oneness) wanakataa fundisho la Nafsi tatu. Walutheri wanathibitisha majaliwa lakini wana kusita zaidi kuzungumza juu ya mapenzi ya Mungu katika matendo maovu. Wakristo wa Kiweslesi na Kiarminiani wanasisitiza mapenzi ya Mungu ya kuruhusu na uhuru wa mwanadamu. Wapentekoste wana matarajio makubwa ya miujiza; Calvin pia anasema Mungu hufanya kazi wakati mwingine “bila njia.”
+
+#### 10. Kuliweka Moyoni
+
+*Kwa tafakari.* Fundisho la Utatu linaumbaje maombi yako na ibada yako, si imani yako tu? Calvin anasema nuru ya majaliwa inamwokoa mwamini kutoka “kila wasiwasi.” Hofu gani katika maisha yako inahitaji nuru hiyo leo? Kama Yusufu, je, kuna mtu ambaye ungeweza kumsamehe kwa sababu unaona mkono wa Mungu ukifanya kazi? Na unawezaje kutumaini majaliwa ya Mungu huku ukitumia kila njia aliyokupa?
+
+*Chanzo.* Muhtasari wa Seminari ya Kitheolojia ya Chapala wa Kitabu cha I, sura za XIII–XVIII, cha John Calvin, *Taasisi za Dini ya Kikristo* (1559), kilichotafsiriwa na John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001). Calvin alikufa mwaka 1564 na Allen mwaka 1839; kazi hiyo na tafsiri hiyo ni mali ya umma na zinanukuliwa hapa kwa ufupi kwa ajili ya kujifunza. Haya ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo ya kihistoria yanatoka katika historia za kawaida.
+
+*Kudai kwa uangalifu.* Mistari ya Katekisimu ya Heidelberg, Kanuni ya Imani ya Wabelgiji na mnara wa Geneva wa 1903 inafuata tafsiri za kawaida za Kiingereza. Ulinganisho wa matini ya kufanyia kazi ya CTS na Kilatini cha 1559 bado unasubiriwa.
+
+## Somo la 4: Uharibifu na Dawa
+
+*Somo la 4 · Anguko, Dhambi na Utashi wa Mwanadamu*
+
+Muhtasari wa CTS wa John Calvin, *Taasisi za Dini ya Kikristo* (1559), Kitabu cha II, sura za I–V; tafsiri ya John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001)
+
+Calvin anafuatilia anguko la Adamu hadi kutokuamini na kiburi, anafafanua dhambi ya asili kama uharibifu wa kurithi wa mtu mzima, na anahoji kwamba utashi ulioanguka hutenda dhambi kwa hiari, bila kulazimishwa, lakini hauwezi kumgeukia Mungu mpaka neema iufanye mpya. Anaheshimu vipawa ambavyo Mungu bado huwapa wasioamini na anajibu pingamizi zinazotokana na amri na ahadi za Mungu.
+
+Muhtasari wa Seminari ya Kitheolojia ya Chapala — muhtasari asilia ulioandikwa na CTS, unaopatikana kwa Kiingereza, Kihispania na Kifaransa, na unaoweza kusomwa bila mtandao. Huu ni muhtasari wa CTS, si matini kamili ya asili.
+
+### Uharibifu na Dawa: Anguko, Dhambi na Utashi Uliofungwa
+
+Somo la Seminari ya Kitheolojia ya Chapala — Calvin juu ya anguko la Adamu, juu ya dhambi ya asili kama uharibifu wa mtu mzima, na juu ya utashi unaotenda dhambi kwa hiari lakini hauwezi kumgeukia Mungu mpaka neema iufanye mpya
+
+Muhtasari wa CTS wa Kitabu cha II, sura za I–V, cha John Calvin, *Taasisi za Dini ya Kikristo* (toleo la mwisho la Kilatini, 1559), katika tafsiri ya Kiingereza ya John Allen (Project Gutenberg #45001). Kazi hiyo na tafsiri hiyo ni mali ya umma; nukuu fupi zilizo hapa chini ni kutoka kwa Allen.
+
+- Taasisi II.i–v
+- Chanzo cha msingi
+- Dhambi na neema
+- John Calvin
+
+> Neno kabla ya kusoma. Kitabu cha I kilimweleza Mungu Muumba. Kitabu cha II kinageukia Mungu Mkombozi katika Kristo, nacho lazima kianze na ugonjwa kabla ya tiba. Sura hizi zinaweza kusikika nzito, lakini kusudi la Calvin ni la kichungaji: kuondoa kujiamini kwa uongo ili tumkimbilie Kristo. Maneno mawili yanahitaji uangalifu. “Pravity” humaanisha upotovu au uharibifu. “Necessity” (ulazima) haimaanishi kulazimishwa; Calvin mwenyewe anaeleza tofauti hiyo.
+
+#### 1. Mjadala wa Kale Waibuka Upya
+
+Swali la utashi lilikuwa mojawapo ya yaliyo makali zaidi ya Matengenezo ya Kanisa. Mwaka 1524 mwanahumanisti mkuu Erasmus alitetea utashi huru, na mwaka 1525 Martin Luther alijibu kwa *Utumwa wa Utashi*. Calvin alisimama pamoja na Luther na, nyuma yake, pamoja na Augustino wa Hippo, ambaye vita vyake vya karne ya tano dhidi ya mtawa Pelagio anavinukuu daima. Mwaka 1543 Calvin aliandika tasnifu nzima juu ya utumwa na ukombozi wa utashi dhidi ya mwanateolojia Mkatoliki Mholanzi Albert Pighius. Huko Paris, wanateolojia wa Sorbonne walifuata walimu wa zama za kati kama Petro Lombardo, aliyeshikilia kwamba watu walioanguka wanabaki na uwezo halisi, ingawa umedhoofika, wa kuchagua jema. Katika sura hizi Calvin anasisitiza kwamba hafundishi jambo jipya, bali yale tu aliyofundisha Augustino.
+
+#### 2. Kujijua Ipasavyo (Sura ya I, 1–4)
+
+Calvin anarudi kwenye mada ya Kitabu cha I: lazima tujijue wenyewe. Lakini wanafalsafa walihimiza kujijua ili tu watu wajivunie heshima yao. Kujijua kwa kweli kuna pande mbili. Lazima tuone Mungu alitupa nini wakati wa uumbaji, kisha “hali yetu ya kusikitisha tangu anguko la Adamu,” ambayo inapaswa “kuharibu majivuno yote na kujiamini” na kutujaza “unyenyekevu wa kweli.” Dhambi ya Adamu ilikuwa nini? Wazo la kawaida la ulafi tu juu ya tunda ni “la kitoto kabisa.” Mti uliokatazwa ulikuwa jaribio la utii, na anguko lilianza Hawa na Adamu walipolitilia shaka neno la Mungu na kumwamini nyoka. “Kutokuamini, kwa hiyo, ndiko kulikokuwa mzizi wa uasi huo.” Kutoka kutokuamini yalizuka tamaa ya cheo, kiburi na kutoshukuru. Ilikuwa ya kutisha kwamba “mwana wa udongo” hakuridhika kuumbwa kama Mungu, “isipokuwa pia aweze kuwa sawa naye.” Pamoja na Bernardo, anaona kwamba mauti iliingia kwa sikio lililomsikiliza Shetani, na wokovu huingia kwa sikio linalosikia Injili.
+
+#### 3. Dhambi ya Asili Imefafanuliwa (Sura ya I, 5–11)
+
+Uzima wa Adamu ulikuwa katika kuungana na Mungu, kwa hiyo kutengwa na Mungu kulikuwa mauti ya roho yake, naye “aliwahusisha wazao wake wote pamoja naye.” Pelagio alidai kwamba Adamu alijidhuru yeye mwenyewe tu na kwamba wengine hutenda dhambi kwa kumwiga tu. Calvin, akimfuata Augustino, anajibu kutoka Maandiko kwamba tunarithi asili iliyoharibika tangu kuzaliwa. Anatoa ufafanuzi makini: dhambi ya asili ni “upotovu na uharibifu wa kurithi wa asili yetu, ulioenea katika sehemu zote za roho.” Inatufanya wenye hatia mbele za Mungu, na inaendelea kuzaa matendo ya mwili, “kama utoaji wa mwali na cheche kutoka tanuru iliyopashwa moto.” Si ukosefu wa jema tu bali ni mwelekeo hai wa uovu. Inafikia akili na utashi, si tamaa za chini tu. Hata hivyo Calvin analinda wema wa Mungu. Upotovu huu ni “wa asili” kwa sababu wote huzaliwa nao, lakini “haukuanzia katika asili,” kama Mungu alivyoiumba. Dhambi ni uharibifu ulioingia, si sehemu ya uumbaji wa Mungu, dhidi ya Wamani waliofanya uovu kuwa dutu.
+
+#### 4. Kati ya Miamba Miwili (Sura ya II, 1–11)
+
+Kabla ya kuuliza uhuru kiasi gani umebaki, Calvin anaweka mwelekeo kati ya hatari mbili. Watu wakisikia hawana nguvu kwa jema, wanaweza kuwa wavivu. Wakidai nguvu yoyote yao wenyewe, Mungu anapokonywa heshima yake nao wanaanguka katika kiburi. “Ili kuepuka kugonga mojawapo ya miamba hii,” asema, lazima tuwafundishe watu kwamba hawana kitu chema cha kwao wenyewe, na wakati huo huo tuwahimize kutafuta wema wanaoukosa. Kutegemea nguvu zetu ni “kuinuliwa hewani juu ya unyasi.” Hapendi msemo “utashi huru.” Ikiwa humaanisha tu kwamba tunatenda dhambi kwa hiari, bila kulazimishwa, basi “uhuru wa ajabu kweli,” asema kwa kejeli, kwa kuwa utashi bado unashikwa “na minyororo ya dhambi.” Anapenda jibu la Augustino: kanuni ya kwanza, ya pili na ya tatu ya dini ya Kikristo ni unyenyekevu.
+
+#### 5. Vipawa Vinavyobaki (Sura ya II, 12–27)
+
+Hapa Calvin ni mkarimu zaidi kuliko wengi wanavyotarajia. Anakubali msemo wa kale wa Augustino: vipawa vyetu vya asili viliharibiwa na dhambi, lakini vipawa vyetu vya juu ya asili, kama imani, upendo kwa Mungu na utakatifu, vilichukuliwa. Akili, kipawa cha asili, iliharibiwa lakini haikufutwa. Kwa hiyo “nuru” bado “yang’aa gizani.” Katika mambo ya duniani, kama sheria, serikali, falsafa, mantiki, tiba na hisabati, wasioamini wameonyesha ustadi mkubwa. “Roho wa Mungu ndiye chemchemi pekee ya kweli,” kwa hiyo hatupaswi kuidharau kweli popote inapoonekana, la sivyo tunamtukana Roho aliyeitoa. Roho yule yule alimjaza Bezaleli ustadi wa kujenga hema ya kukutania. Lakini katika mambo ya mbinguni, katika kumjua Mungu, fadhili zake za kibaba na kanuni sahihi ya maisha, hata “wenye busara zaidi miongoni mwa wanadamu ni vipofu kuliko fuko.” Dhamiri hujua sheria ya Mungu vya kutosha kutuacha bila udhuru, lakini si vya kutosha kuokoa.
+
+#### 6. Wenye Kutaka, Lakini Wamefungwa (Sura ya III, 1–5)
+
+Maandiko yanamhukumu mtu mzima: moyo “ni mdanganyifu kuliko vitu vyote, una ugonjwa wa kufisha.” Je, vipi kuhusu wapagani wema, kama shujaa Mrumi Camillus? Calvin anajibu kwamba Mungu huzuia uharibifu wa watu wengi, “si kuutakasa, bali kuzuia ndani utendaji wake,” kwa faida ya jamii. Fadhila kama hizo ni vipawa vya Mungu, lakini mahali pasipo lengo la utukufu wa Mungu, hazipati stahili mbele zake. Kisha inakuja tofauti kuu ya Calvin, kati ya ulazima na kulazimishwa. Mungu ni mwema kwa ulazima, lakini mwema kwa uhuru; ibilisi hutenda uovu kwa ulazima, lakini kwa hiari. Kwa hiyo mtu aliyeanguka hutenda dhambi “kwa hiari, si kwa kusita wala kulazimishwa,” lakini hawezi kutaka kilicho chema kweli. Anamnukuu Bernardo: “kutaka tu ni la mwanadamu; kutaka uovu, ni la asili iliyoharibika; kutaka jema, ni la neema.” Utashi unabaki; kilichopotea ni afya yake.
+
+#### 7. Neema Inayoufanya Moyo Kuwa Mpya (Sura ya III, 6–14, na IV)
+
+Ikiwa ugonjwa ni wa kina hivyo, dawa lazima iwe ya Mungu peke yake. Paulo anasema Mungu “alianza kazi njema” kwa waumini, na mwanzo huo ni kugeuzwa kwa utashi. Mungu anaahidi katika Ezekieli kuondoa moyo wa jiwe na kutupa moyo wa nyama. Mungu hasaidii tu utashi dhaifu. Anafanya kazi kwa “kuinamisha, kuumba, na kuelekeza mioyo yetu kwenye haki,” naye anamaliza kazi kwa kutupa uvumilivu. Neema haiharibu utashi; pamoja na Augustino, Calvin anasema unabadilishwa “kutoka mbaya kuwa mwema.” Kwa hiyo waumini hutii kutoka moyoni, si kwa nguvu ya nje. Sura ya IV inatumia mfano wa Augustino wa utashi kama farasi mwenye mpanda: Mungu anapompanda, humwongoza kwa ustadi; ibilisi anapompanda, humkimbiza kwenye miamba. Mungu anapomtumia Shetani na watu waovu, kama katika mateso ya Ayubu, tendo hilo hilo lina makusudi tofauti, na hatia ni ya utashi wa mwanadamu.
+
+> Maelezo ya CTS juu ya ubishi wa Calvin. Calvin anawaita wanateolojia wa Sorbonne “wasofisti” na “Wapelagio wa kizazi hiki.” Hii ilikuwa lugha kali ya mjadala ambamo kitivo cha Paris kilikuwa kimehukumu vitabu vya kiinjili na kuunga mkono mateso ya marafiki wa Calvin. CTS inahifadhi maneno yake kama kumbukumbu ya kihistoria, bila kuyaunga mkono wala kuyafuta. Kwa haki, Mtaguso wa Trento (1547) pia ulihukumu Upelagio na kufundisha kwamba hakuna awezaye kuanza kumgeukia Mungu bila neema, ingawa ulishikilia kwamba utashi ulioanguka unaweza kushirikiana na neema.
+
+#### 8. Kwa Nini Amri na Mawaidha? (Sura ya V)
+
+Wapinzani wa Calvin waliuliza: ikiwa hatuwezi kutii kwa nguvu zetu wenyewe, kwa nini Mungu anaamuru, anaahidi na kukemea? Calvin anajibu kwa subira. Kwa wakaidi, amri za Mungu ni ushahidi unaowaacha bila udhuru. Kwa waumini, ndizo njia zenyewe ambazo Roho hufanya kazi kupitia kwazo, kwa kuwa Mungu “hapuuzi njia ya neno lake.” Ikiwa Mungu anachagua kutuandaa kwa mawaidha ili tupokee neema inayotufanya tutii, “una nini cha kulaumu katika utaratibu huu?” Amri za Mungu zinaonyesha tunachopaswa kufanya, si tunachoweza kufanya wenyewe. Ahadi zake zinatualika kutafuta kwake kile tunachokikosa. Maneno maarufu ya Warumi 9:16, “basi hiyo si ya mtu ayatakaye, wala ya mtu aendaye mbio,” yanaonyesha kwamba kila kitu hatimaye kinategemea rehema ya Mungu.
+
+#### 9. Kutoka Dort hadi Uwanja wa Misheni
+
+Sura hizi ziliunda baraza kubwa la Kireformed. Baada ya profesa Mholanzi Jacobus Arminius (alikufa 1609) na wafuasi wake, Waremonstranti, kufundisha kwamba neema inaweza kupingwa, Sinodi ya Dort (1618–1619) ilikusanya wajumbe kutoka Ulaya yote ya Kireformed. Kanuni zake zilikiri uharibifu mkubwa wa watu walioanguka na nguvu ya neema ifanyayo upya, huku zikisisitiza kwamba neema haiwatendei watu kama “magogo na mawe yasiyo na hisia.” Katika New England mrithi wa Wapuritani Jonathan Edwards aliandika *Uhuru wa Utashi* (1754), akirudia hoja ya Calvin kwamba siku zote tunachagua kile tunachokitamani zaidi. Baadaye, mwanateolojia Mholanzi Abraham Kuyper alijenga juu ya heshima ya Calvin kwa vipawa vya wasioamini kwa mafundisho yake ya “neema ya jumla,” na misheni za Kireformed zilianzisha shule kutoka Lovedale huko Afrika Kusini (1841) hadi Mackenzie huko São Paulo, Brazil (1870).
+
+#### 10. Mchungaji wa Kireformed Anachukua Nini Leo
+
+Mchungaji anayeamini sura hizi hatawabembeleza watu, lakini pia hatamkatia tamaa mtu yeyote, kwa kuwa dawa ni neema ya Mungu, si nguvu za wanadamu. Atahubiri amri za Mungu kwa ujasiri, kwa sababu Roho huzitumia. Ataheshimu ustadi wa madaktari na walimu wa imani yoyote kama vipawa vya Roho. Wengine wanatofautiana mahali fulani. Walutheri wanasimama pamoja na Calvin juu ya utumwa wa utashi. Wakatoliki wa Roma, wakifuata Trento, wanashikilia kwamba utashi ulijeruhiwa lakini haukuharibiwa na unashirikiana na neema. Wakristo wa Kiweslesi na Kiarminiani wanakubali kwamba watu walioanguka wameharibika sana, lakini wanaamini “neema itangulizayo” ya Mungu humrudishia kila mtu uwezo wa kuikubali au kuikataa Injili; Wapentekoste wengi wanashikilia mtazamo huu. Wabaptisti wamegawanyika: Wabaptisti Maalum (Particular) wanasimama pamoja na Calvin, huku Wabaptisti wa Jumla (General) na Wabaptisti wa Utashi Huru (Free Will) wakimfuata Arminius.
+
+#### 11. Kuliweka Moyoni
+
+*Kwa tafakari.* Calvin anafuatilia anguko la Adamu hadi kutokuamini neno la Mungu. Unajaribiwa wapi kutilia shaka yale Mungu aliyosema? Fundisho kwamba utashi “umefungwa” lakini hutenda dhambi “kwa hiari” linakusaidiaje kuelewa mapambano yako mwenyewe? Vipawa vya nani nje ya kanisa unahitaji kuviheshimu kama vipawa vya Roho? Na mahubiri yako yanawezaje kuwanyenyekeza watu bila kuwaponda, yakiwapeleka daima kwa Kristo?
+
+*Chanzo.* Muhtasari wa Seminari ya Kitheolojia ya Chapala wa Kitabu cha II, sura za I–V, cha John Calvin, *Taasisi za Dini ya Kikristo* (1559), kilichotafsiriwa na John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001). Calvin alikufa mwaka 1564 na Allen mwaka 1839; kazi hiyo na tafsiri hiyo ni mali ya umma na zinanukuliwa hapa kwa ufupi kwa ajili ya kujifunza. Haya ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo ya kihistoria yanatoka katika historia za kawaida.
+
+*Kudai kwa uangalifu.* Maneno kutoka Kanuni za Dort yanafuata tafsiri ya kawaida ya Kiingereza. Ulinganisho wa matini ya kufanyia kazi ya CTS na Kilatini cha 1559 bado unasubiriwa.
+
+## Somo la 5: Kuvikwa Haki ya Mwingine
+
+*Somo la 5 · Kuhesabiwa Haki kwa Imani*
+
+Muhtasari wa CTS wa John Calvin, *Taasisi za Dini ya Kikristo* (1559), Kitabu cha III, sura za XI–XIII; tafsiri ya John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001)
+
+Calvin anaita kuhesabiwa haki “bawaba kuu” ya dini. Anaufafanua kama kukubaliwa kwa wenye dhambi na Mungu, kunakojumuisha msamaha na haki ya Kristo inayohesabiwa, kunakopokelewa kwa imani peke yake kama kwa chombo tupu. Anamjibu Osiander, anatuweka mbele ya kiti cha hukumu cha mbinguni cha Mungu, na anaonyesha kwamba kuhesabiwa haki kwa bure peke yake humpa Mungu utukufu wote na dhamiri amani.
+
+Muhtasari wa Seminari ya Kitheolojia ya Chapala — muhtasari asilia ulioandikwa na CTS, unaopatikana kwa Kiingereza, Kihispania na Kifaransa, na unaoweza kusomwa bila mtandao. Huu ni muhtasari wa CTS, si matini kamili ya asili.
+
+### Kuvikwa Haki ya Mwingine: Kuhesabiwa Haki kwa Imani
+
+Somo la Seminari ya Kitheolojia ya Chapala — Calvin juu ya “bawaba kuu” ya dini: kukubaliwa kwa bure kwa wenye dhambi na Mungu, haki ya Kristo inayopokelewa kwa imani peke yake, na amani ambayo zawadi hii peke yake inaweza kutoa
+
+Muhtasari wa CTS wa Kitabu cha III, sura za XI–XIII, cha John Calvin, *Taasisi za Dini ya Kikristo* (toleo la mwisho la Kilatini, 1559), katika tafsiri ya Kiingereza ya John Allen (Project Gutenberg #45001). Kazi hiyo na tafsiri hiyo ni mali ya umma; nukuu fupi zilizo hapa chini ni kutoka kwa Allen.
+
+- Taasisi III.xi–xiii
+- Chanzo cha msingi
+- Kuhesabiwa haki
+- John Calvin
+
+> Neno kabla ya kusoma. Hii ni utangulizi, si maelezo kamili. Mjadala wa Calvin juu ya kuhesabiwa haki unaendelea katika Kitabu cha III, sura za XIV–XVIII, katika juzuu ya pili ya tafsiri ya Allen. Maneno mawili yatasaidia. “Kuhesabu haki” (*to justify*) ni neno la mahakamani: kumtangaza mtu kuwa mwenye haki, si kumfanya mwema ndani. “Kuhesabu” (*to impute*) ni kuhesabu au kuweka kitu kwenye akaunti ya mtu.
+
+#### 1. Fundisho Ambalo Matengenezo ya Kanisa Yalizunguka Juu Yake
+
+Ugunduzi wa Martin Luther kwamba “mwenye haki ataishi kwa imani” uliwasha Matengenezo ya Kanisa huko Ujerumani, na kila kanisa la Kiprotestanti lilirithi huo. Kufikia miaka ya 1540 swali lilikuwa la dharura. Mwaka 1541 Calvin, wakati huo mchungaji huko Strasbourg, alihudhuria Mkutano wa Regensburg, ambapo wanateolojia wa Kiprotestanti na Kikatoliki walijaribu na kushindwa kukubaliana juu ya tamko la pamoja. Mwaka 1547 Mtaguso wa Trento ulitoa azimio lake juu ya kuhesabiwa haki, ukifundisha kwamba kuhesabiwa haki kunajumuisha kufanywa upya kwa ndani kwa mtu. Calvin alijibu mwaka huo huo kwa “dawa ya kukinga” dhidi ya mtaguso. Katika miaka ya 1550 ugomvi mpya ulizuka miongoni mwa Walutheri juu ya mafundisho ya Andreas Osiander. Yote haya yako nyuma ya sura hizi. Angalia mahali Calvin anapoziweka: baada ya mjadala mrefu wa toba na maisha ya Kikristo. Hakutaka mtu yeyote adhani kwamba kuhesabiwa haki kwa bure kunafanya utakatifu usiwe wa lazima.
+
+#### 2. Bawaba Kuu (Sura ya XI, 1)
+
+Calvin anaanza kwa kukumbuka alichokwisha kufundisha. Kristo anapewa sisi kwa wema wa Mungu na kupokelewa kwa imani, na katika kuungana naye tunapokea “hasa faida mbili.” Kwanza, tukipatanishwa kwa kutokuwa na hatia kwake, tunakuwa na “baba mwenye fadhili mbinguni badala ya hakimu.” Pili, tukitakaswa na Roho wake, tunajitoa kwa maisha matakatifu. Zawadi hizi mbili, ambazo mara nyingi huitwa “neema maradufu,” daima huja pamoja, lakini hazipaswi kuchanganywa. Calvin ameshughulikia kuzaliwa upya kwanza; sasa anageukia kuhesabiwa haki, anakoliita “bawaba kuu ambayo kwayo dini inategemezwa.” Isipokuwa tujue tunasimama wapi mbele za Mungu na hukumu yake juu yetu ni nini, hatuna msingi wa uhakika wa wokovu wala wa utauwa wa kweli kwa Mungu.
+
+#### 3. Maana ya Kuhesabiwa Haki (Sura ya XI, 2–4)
+
+Calvin anafafanua maneno kwa uangalifu wa mwanasheria. Mtu anahesabiwa haki mbele za Mungu anapohesabiwa, katika hukumu ya Mungu, kuwa mwenye haki na kukubaliwa. Mtu asiye na hatia aliyeachiliwa na hakimu mwenye haki ni “amehesabiwa haki.” Kuhesabiwa haki kwa matendo kungehitaji maisha safi ya kutosha kuridhisha kiti cha hukumu cha Mungu; hakuna mwenye dhambi mwenye maisha kama hayo. Kuhesabiwa haki kwa imani ni kutengwa na haki ya matendo na kuishika kwa imani haki ya Kristo, “akiwa amevikwa hiyo,” mwamini anaonekana mbele za Mungu kuwa mwenye haki. Muhtasari wa Calvin ni mojawapo ya fasili za kawaida za Matengenezo ya Kanisa: kuhesabiwa haki ni “kukubaliwa, ambako kwako Mungu hutupokea katika kibali chake, na kutuhesabu kuwa watu wenye haki,” nako “kunajumuisha msamaha wa dhambi na kuhesabiwa kwa haki ya Kristo.” Anaonyesha kutoka Maandiko kwamba “kuhesabu haki” humaanisha kutangaza kuwa mwenye haki: watu “walimhesabia Mungu haki” walipoikiri haki yake, ambayo hawakuweza kuiongeza.
+
+#### 4. Kuungana na Kristo, Si Mchanganyiko wa Dutu (Sura ya XI, 5–12)
+
+Osiander alifundisha kwamba sisi ni wenye haki kwa sababu kiini cha kimungu cha Kristo kinamiminwa ndani yetu. Calvin anaita hili “wazo la kutisha” linalotia giza neema. Hakika sisi tu mmoja na Kristo, anakubali, lakini tumeunganishwa kwa “nguvu ya siri ya Roho wake,” si kwa kuchanganywa kwa kiini cha Kristo na chetu. Hapa Calvin anasema jambo la thamani. Anahusisha “umuhimu mkubwa kuliko yote” na “muungano wa siri” ambao kwao Kristo anakuwa wetu. “Basi hatumtazami kwa mbali nje yetu,” kana kwamba haki yake inahesabiwa kwa wageni. Kwa sababu tumemvaa na kupandikizwa katika mwili wake, tunashiriki haki yake. Imani ni nini, basi? “Tunailinganisha imani na chombo.” Lazima tuje “tukiwa watupu na kinywa cha roho zetu wazi” kumpokea Kristo. Chombo hakina thamani yake; hazina ni Kristo. Imani ni “chombo” ambacho kwacho haki hupokelewa.
+
+> Maelezo ya CTS juu ya mjadala wa Osiander. Calvin anaita maoni ya Osiander “ya kutisha” na “ya ushupavu,” na anamwita “msofisti.” Andreas Osiander (alikufa 1552) alikuwa mwanamatengenezo Mlutheri huko Nuremberg na baadaye Königsberg. Ukali wa Calvin unaonyesha joto la mabishano ambayo pia yaliwagawanya Walutheri, ambao Kanuni yao ya Muafaka (1577) vilevile ilikataa mafundisho ya Osiander. CTS inaandika lugha hiyo kama historia, bila kuiunga mkono wala kuiondoa.
+
+#### 5. Imani Peke Yake, Si Imani Pamoja na Matendo (Sura ya XI, 13–20)
+
+Wengi hufikiri haki imetengenezwa kwa imani na matendo pamoja. Calvin anajibu kwamba hivyo viwili ni vinyume: moja ikisimama, nyingine huanguka. Paulo alihesabu haki yake mwenyewe kuwa hasara ili aonekane ndani ya Kristo akiwa na “haki itokayo kwa Mungu kwa imani.” Kama Abrahamu angehesabiwa haki kwa matendo, angekuwa na cha kujisifia, lakini kujisifu kumeondolewa. “Kwaheri, basi, wazo la kubuni la wale wanaofikiri haki iliyochanganywa ya imani na matendo.” Wapinzani wa Calvin walipinga kwamba Maandiko hayasemi kamwe “imani peke yake.” Anajibu: “Je, yule anayekana kila kitu kwa matendo hahusishi kila kitu kwa imani peke yake kabisa?” Wengine, wakimfuata Origeni, walisema Paulo alitenga matendo ya kiibada ya sheria tu. Calvin anaonyesha kwamba Paulo anasema juu ya sheria nzima na kila tendo. Imani haihesabu haki kwa sababu ni tendo jema, bali kwa sababu inampokea Kristo.
+
+#### 6. Yakobo Katika Vazi la Ndugu Yake (Sura ya XI, 21–23)
+
+Kuhesabiwa haki, asema Calvin, ni upatanisho na Mungu, nako kunajumuisha msamaha wa dhambi. Dhambi hututenga na Mungu; Mungu hampokei mtu yeyote katika ushirika bila kumfanya mwenye dhambi kuwa mwenye haki, naye hufanya hivyo kwa kutotuhesabia dhambi. Paulo anasema Mungu “alimfanya kuwa dhambi kwa ajili yetu yeye asiyejua dhambi; ili sisi tuwe haki ya Mungu ndani yake.” Kwa hiyo mtu ni mwenye haki “si ndani yake mwenyewe, bali kwa sababu haki ya Kristo inashirikishwa kwake kwa kuhesabiwa.” Calvin anakopa taswira nzuri kutoka kwa Ambrosi. Yakobo, ambaye hakuwa na haki ya baraka, alivaa mavazi ya ndugu yake mkubwa na akapokea baraka ya baba yake. Vivyo hivyo “tunajificha chini ya usafi wa thamani wa Kristo ndugu yetu mkubwa.” Ili kuonekana mbele ya Mungu, lazima “tutiwe manukato ya harufu yake,” upotovu wetu ukifunikwa na ukamilifu wake.
+
+#### 7. Mbele ya Kiti cha Hukumu cha Mbinguni (Sura ya XII)
+
+Kwa nini watu hufikiri kwa wepesi hivyo juu ya haki yao wenyewe? Kwa sababu wanasahau wanasimama katika mahakama ya nani. Hatushughulikii “mahakama ya kibinadamu, bali” “kiti cha hukumu cha mbinguni.” Ni rahisi, asema Calvin, kwa wasomi “katika makao ya shule” kuwaza juu ya stahili ya matendo; mbele za Mungu michezo hiyo huisha. Mchore Hakimu kama Maandiko yanavyomchora: mng’ao wake hufifisha nyota na usafi wake hufanya vitu vyote vionekane najisi. “Ee Bwana, ukihesabu maovu, Ee Bwana, ni nani atakayesimama?” Calvin anamnukuu Augustino na Bernardo, waliojifunza kutegemea rehema ya Mungu peke yake. Unyenyekevu wa kweli si unyonge wa adabu unaobaki na stahili kidogo, bali ni “kunyenyekea kwa dhati” kwa moyo unaojua umaskini wake. Yesu aliuchora katika mfano wa Mfarisayo na mtoza ushuru. Mfarisayo alimshukuru Mungu kwa fadhila zake na akaenda nyumbani bila kukubaliwa; mtoza ushuru alipiga kelele, “Ee Mungu, unirehemu mimi mwenye dhambi,” na akaenda nyumbani amehesabiwa haki.
+
+#### 8. Utukufu wa Mungu na Amani ya Dhamiri (Sura ya XIII)
+
+Calvin anamalizia kwa makusudi mawili ambayo hatuna budi kuyatunza daima: “kuhifadhi utukufu wa Bwana bila kuharibika wala kupunguzwa,” na kuipa dhamiri yetu amani mbele ya hukumu ya Mungu. Yote mawili hupotea ikiwa kuhesabiwa haki kunatutegemea sisi. Hatuwezi kujisifu kwa Mungu kweli “mpaka tuwe tumeacha kabisa utukufu wetu wote.” Na dhamiri inaweza kupata raha katika zawadi tu. Mtu yeyote mwema akijichunguza kwa unyofu, hupata sababu ya kuhukumiwa; ikiwa wokovu ungetegemea matendo yake, ahadi ingeshindwa. Lakini imani hutulia juu ya ahadi ya bure ya Mungu na hulia “Aba, Baba.” Calvin anaongeza mstari wa kushangaza: katika kuhesabiwa haki, “imani ni jambo la kupokea tu, si la kutenda,” halileti chochote chake na hupokea kila kitu kutoka kwa Kristo. Mpaka tufike bandari hiyo, tunatetemeka kwa kila upepo. Mungu anapojionyesha kuwa Mchungaji wetu, hatuogopi mabaya hata katika bonde la uvuli wa mauti.
+
+> Maelezo ya CTS juu ya ubishi wa Calvin. Calvin anawadhihaki “wasofisti” na “wanashule” wa vyuo vikuu vya Kikatoliki, na anasema wale wanaotegemea kufanywa kwao upya wenyewe wanaomba vizuri si zaidi ya “Waturuki,” neno lake kwa Waislamu. Hili linaonyesha mabishano makali na vita vya Ottoman vya karne yake. CTS inaliripoti bila kulikubali. Mazungumzo pia yamesonga tangu hapo: mwaka 1999 Walutheri na Wakatoliki walitia saini Tamko la Pamoja juu ya kuhesabiwa haki, na Ushirika wa Dunia wa Makanisa ya Kireformed uliungana nalo mwaka 2017, huku tofauti halisi zikibaki.
+
+#### 9. Kuhesabiwa Haki Katika Kanuni za Imani za Kireformed
+
+Kila kanuni ya imani ya Kireformed inajengwa juu ya sura hizi. Katekisimu ya Heidelberg (1563) inauliza tunakuwaje sawa na Mungu na kujibu: kwa imani ya kweli katika Yesu Kristo peke yake. Kanuni ya Imani ya Westminster (1646) inafundisha kwamba Mungu anahesabu haki, “si kwa kuwamiminia haki, bali kwa kusamehe dhambi zao,” na kuwakubali kuwa wenye haki kwa ajili ya Kristo. Mpuritani John Owen alitetea fundisho hilo kwa urefu mwaka 1677. Katika Amerika ya Kilatini yote na Afrika, wahubiri wa Kipresbiteri na wa Kireformed wametangaza neema ile ile ya bure kwa watu waliolemewa na wajibu wa kidini, hofu ya pepo au juhudi isiyoisha ya kujipatia kibali cha Mungu.
+
+#### 10. Mchungaji wa Kireformed Anachukua Nini Leo
+
+Mhubiri Kristo kama haki yote ya mwamini, na usimwache mtu yeyote aondoke kanisani akidhani lazima ajipatie kibali cha Mungu. Wafariji wenye wasiwasi kwa “baba mwenye fadhili badala ya hakimu,” na wito wenye raha wasimame mbele ya kiti cha hukumu cha mbinguni. Weka kuhesabiwa haki na utakatifu pamoja, kama Calvin alivyofanya. Wengine wanatofautiana mahali fulani. Walutheri wako karibu zaidi na Calvin juu ya imani peke yake. Wakatoliki wa Roma, wakifuata Trento, wanafundisha kwamba kuhesabiwa haki kunajumuisha kufanywa upya kwa ndani kwa neema. Waweslesi wanatangaza kuhesabiwa haki kwa imani lakini wanasisitiza uhakika na utakatifu, na wengi wanashikilia kwamba mwamini anaweza kuanguka. Wabaptisti kwa jumla wanashiriki mtazamo wa Calvin juu ya kuhesabiwa haki. Wapentekoste wanathibitisha kuhesabiwa haki kwa imani na kuongeza msisitizo juu ya kujazwa na Roho baadaye.
+
+#### 11. Kuliweka Moyoni
+
+*Kwa tafakari.* Calvin anaita kuhesabiwa haki “bawaba kuu” ya dini. Je, unaishi kana kwamba Mungu ni hakimu wa kutuliza au Baba aliyekukubali ndani ya Kristo? Ni haki gani yako mwenyewe unayojaribiwa kuileta kwa Mungu? Taswira ya Yakobo katika vazi la ndugu yake inakusaidiaje kuwaelezea wengine Injili? Na ungewafarijije mwamini ambaye dhamiri yake haimpi raha?
+
+*Chanzo.* Muhtasari wa Seminari ya Kitheolojia ya Chapala wa Kitabu cha III, sura za XI–XIII, cha John Calvin, *Taasisi za Dini ya Kikristo* (1559), kilichotafsiriwa na John Allen (1813), toleo la Presbyterian Board of Publication, Philadelphia (Project Gutenberg #45001). Calvin alikufa mwaka 1564 na Allen mwaka 1839; kazi hiyo na tafsiri hiyo ni mali ya umma na zinanukuliwa hapa kwa ufupi kwa ajili ya kujifunza. Haya ni mafundisho yaliyoandikwa na CTS, si nakala; maelezo ya kihistoria yanatoka katika historia za kawaida.
+
+*Kudai kwa uangalifu.* Mstari wa Kanuni ya Imani ya Westminster unafuata maandishi ya kawaida ya Kiingereza. Ulinganisho wa matini ya kufanyia kazi ya CTS na Kilatini cha 1559 bado unasubiriwa.
