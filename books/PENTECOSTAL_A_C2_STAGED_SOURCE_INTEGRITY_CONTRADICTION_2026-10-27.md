@@ -4,7 +4,7 @@
 
 ## Exact repository witnesses
 
-- Staged textbook: `src/content/textbooks/elecpctwo.json` on `claude/pentecostal-required`, blob `f0c9a08d4e8de3d04056846320102a5ce97a07a7` as fetched 27 October 2026.
+- Staged textbook: `src/content/textbooks/elecpctwo.json` on `claude/pentecostal-required`, blob `83a1eb5aadcfab14c7aaa5458e1860ec754eb2cd` as fetched 27 October 2026.
 - Source manifest: `books/A-C2/SOURCE.md` on `handoff/book-sources`.
 - Governing source QA: `books/A-C2/CONSOLIDATED_REMAINING_ISSUES_SOURCE_QA_2026-10-26.md`.
 
