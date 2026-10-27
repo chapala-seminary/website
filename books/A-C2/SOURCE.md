@@ -30,3 +30,8 @@
 If the original 1915 book remains inaccessible, Claude may prepare an **original CTS-authored historical theological reader** synthesizing Seymour's verified, rights-cleared writings with critical context and accurate citations. This must be transparently titled as an original CTS textbook, not falsely attributed to Seymour or presented as a complete edition of his 1915 manual. Consider verified early writings of E. N. Bell (d. 1923) and William H. Durham (d. 1912) as contrasting doctrinal voices, but locate ORIGINAL primary sources and verify all guest contributions before copying.
 
 No EN/ES/FR student text, 40-question private banks, academic endorsement, copyright release, or production deployment is authorized by this manifest. Claude should ask Wayne to approve a change in primary textbook if required.
+
+
+## 27 October 2026 staged-candidate reconciliation
+
+The staged Durham reader must also satisfy the source-integrity reconciliation in [PENTECOSTAL_A_C2_STAGED_SOURCE_INTEGRITY_CONTRADICTION_2026-10-27.md](../PENTECOSTAL_A_C2_STAGED_SOURCE_INTEGRITY_CONTRADICTION_2026-10-27.md). In particular, hold “A Word to Ministers” and dependent bank questions 33 and 35 until its damaged heading, byline, two-column order, and ending are verified from the page images; then regenerate all three languages and privately revalidate the answers.
