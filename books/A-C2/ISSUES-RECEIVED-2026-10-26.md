@@ -16,3 +16,7 @@ Rights: Dr. Cook's rule of 26 Oct 2026 (tracker row 226): material published bef
 | 1912-08 | pentecostal-testimony-1912-08-source.txt | 16 | 4320913 | `721c0de52844358ba7ddf6b1f2afa766582fa558786d02fd6f31f90232a4c302` |
 
 All eight issues received. August 1911 (Vol. I, No. 8) holds "The Great Revival at Azusa Street Mission — How It Began and How It Ended" (p. 3), "The Two Great Experiences or Gifts" (p. 5), "Sanctification" (p. 1), "The Second Work of Grace People Answered" (p. 7) and "An Open Letter to My Brother Ministers" (p. 12).
+
+## Source-integrity audit
+
+See `EIGHT_ISSUE_SOURCE_INTEGRITY_AUDIT_2026-10-26.md` before extracting readings or generating assessment evidence. Material findings: the March 1909 artifact is an eight-page fragment beginning at printed p. 5; August 1912 substantially reprints May 1912; “The Church” repeats from February 1911 in January 1912; several page images have absent or degraded OCR. Use canonical article IDs, image-collated boundaries, and overlap checks.
