@@ -199,9 +199,11 @@ pins already kept there stay there, including a held course's. Then
 build again. Running the tool twice gives the same files.
 
 **Held courses.** `src/data/elective-held.json` lists electives held back
-from the site, by code, each with its reason. A-C1 is held for a copyright
-decision (24 Oct 2026), and so are A-C3 and A-C5, which draw on the same
-newspaper, *The Apostolic Faith*. A held course keeps its units and nothing else:
+from the site, by code, each with its reason. None is held now: A-C1, A-C3
+and A-C5 were held for a copyright decision on *The Apostolic Faith*
+(24 Oct 2026) and released on 26 Oct 2026, when Wayne allowed material
+published before 1931 (tracker row 226). A held course keeps its units and
+nothing else:
 - both generators refuse its code;
 - `import-readings.mjs` skips its row;
 - `import-electives.mjs` gives its units no course-readings box;
@@ -210,13 +212,6 @@ newspaper, *The Apostolic Faith*. A held course keeps its units and nothing else
 
 Its private keys may stay in assessment-keys. To lift a hold, remove the
 code, run both generators for it, and build.
-
-A-C3 and A-C5 were generated once before their hold, so their textbook keys
-and reading banks are in assessment-keys; everything public was then
-removed, their shelves included, as for A-C1. They have no exam-review pins
-yet. To lift their hold, write the shelf again (book-sources
-`books/A-C3/SOURCE.md`, `books/A-C5/SOURCE.md`) before running the
-generators.
 
 The front page lists elective reading tests apart from the 45 core ones
 (`#elective-readings`). Their test is optional on every track
