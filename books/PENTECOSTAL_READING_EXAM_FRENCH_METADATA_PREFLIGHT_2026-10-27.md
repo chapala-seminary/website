@@ -31,3 +31,14 @@ Minor English data error in `elecpcthreereadings.json`: `room.en` currently says
 4. The release remains blocked: at the 27 Oct 01:xx Mexico City check, `beta` was identical to `c6110458213ee676833149a8f30c8b121572ec89`; `claude/pentecostal-required` was two commits ahead and zero behind. No exact-head beta CI has run for the new release branch. Do not open beta→main PR until beta moves and its exact-head workflow succeeds.
 
 **Strategic improvement:** introduce a pre-release EN/ES/FR metadata completeness assertion for *each new required test* (including title/room) plus a private-bank slug/answer-variant reconciliation report that emits counts only. This catches translation regressions without exposing answers. Any acceptance changes remain with Claude/Robert; academic, timing and legal decisions remain with Wayne.
+
+
+## Verified renderer trace — 27 October 2026
+
+A source-path trace on `claude/pentecostal-required` resolves the French metadata question:
+
+- `src/pages/[readingtest].astro` supplies the French page title through `frReadingsTitle(reading.course)` and the French introduction/room phrase through `frReadingsRoom(reading.course, reading.page)`.
+- `src/lib/french-titles.ts` builds both values from the canonical French course title and also supplies the French exam browser title.
+- `public/assets/js/cts-textbook.js` does not consume the manifest's top-level `title` or `room` fields for the question interface; the question prompts use their language-specific prompt data.
+
+Therefore, the missing manifest-level `title.fr` and `room.fr` entries are not a verified French user-interface defect in this renderer. Treat adding them as optional data completeness, not a release blocker. The independent English `elecpcthreereadings.json` `room.en` phrase with doubled “the” remains a confirmed generator/data typo and should be corrected before beta if that metadata is retained.
