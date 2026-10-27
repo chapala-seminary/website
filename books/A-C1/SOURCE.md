@@ -76,3 +76,7 @@ The approved fail-closed rule requires additional source-level omissions before 
 ## 26 October 2026 source-selection decision versus Mexican rights clearance
 
 NEW tracker row 226 supersedes the earlier contributor-death *selection policy* but is not a legal finding that pre-1931 U.S. public-domain text is automatically reusable or translatable in Mexico. Preserve this SOURCE.md rights hold and per-contributor checks until documented qualified clearance. See [Mexico pre-1931 rights gate and five original EN/ES/FR reading notes](MEXICO_PRE1931_RIGHTS_GATE_AND_TRILINGUAL_READING_NOTES_2026-10-26.md). The new note does not alter raw readings, private keys, course holds or release authorization.
+
+## 27 October 2026 staged-release article-boundary audit
+
+The staged A-C1 reader on `claude/pentecostal-required` contains two independently identified first-person testimonies by Adolph Rosa and Bro. Wm. Pendleton, although its chapter notes say uncleared named contributions were excluded. The original October 1906 issue has separate headings that the staged reader omits. Their Mexican rights have not been established; this remains a **release hold**, not an infringement finding. See [A-C1 staged article-boundary and Mexico-rights hold](../PENTECOSTAL_A_C1_STAGED_ARTICLE_BOUNDARY_AND_MEXICO_RIGHTS_HOLD_2026-10-27.md). Keep EN/ES/FR derivatives and assessment answerability synchronized after any approved changes.
