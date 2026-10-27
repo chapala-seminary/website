@@ -1,0 +1,202 @@
+---
+/* The Study Library (issue #186, Oct 2026): the textbook and required-reading
+ * directories that used to make up most of the front page's length, moved
+ * here verbatim with the Reading With Honors note and the Study Resources
+ * link. The front page links here from its top bar, its Study Library section
+ * and its footer; index.html#textbooks (and the lists inside it) redirects
+ * here, so old links keep working. Every book and test keeps its own URL.
+ */
+import { getCollection } from 'astro:content';
+
+const courses = (await getCollection('courses')).map((e) => e.data);
+const cardOf = new Map(courses.map((c) => [c.code, c]));
+
+// The Master's textbooks (src/content/textbooks). Each must belong to a course
+// in the catalog, or its card has nowhere to point.
+// Resource availability is independent of activation; test pages explain the current rule.
+const textbooks = (await getCollection('textbooks')).map((e) => e.data)
+  .sort((a, b) => a.number - b.number);
+for (const t of textbooks)
+  if (!cardOf.has(t.course))
+    throw new Error(`textbook ${t.slug} belongs to course "${t.course}", which has no catalog card`);
+// The required readings (src/content/readings), listed with the textbooks:
+// the same rule on the master's tracks, open to every student.
+// Include staged tests too: students need the assigned readings before activation.
+const readings = (await getCollection('readings')).map((e) => e.data)
+  .sort((a, b) => a.title.en.localeCompare(b.title.en));
+for (const r of readings)
+  if (!cardOf.has(r.course))
+    throw new Error(`required readings ${r.slug} belong to course "${r.course}", which has no catalog card`);
+// The 45 core courses' readings, and the denominational electives' (slug
+// "elec…", tools/build-elective-readings.mjs) in a list of their own.
+const coreReadings = readings.filter((r) => !r.slug.startsWith('elec'));
+const coreTextbooks = textbooks.filter((t) => !t.slug.startsWith('elec'));
+const electiveTextbooks = textbooks.filter((t) => t.slug.startsWith('elec'));
+const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Library — Textbooks and Required Readings | Chapala Theological Seminary</title>
+<meta name="description" content="The free Study Library of Chapala Theological Seminary: every course textbook and required reading, each with its test, in English, Spanish and French.">
+<link rel="canonical" href="https://chapalaseminary.org/CTSStudyLibrary.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chapala Theological Seminary">
+<meta property="og:url" content="https://chapalaseminary.org/CTSStudyLibrary.html">
+<meta property="og:title" content="Study Library · Chapala Theological Seminary">
+<meta property="og:description" content="The free Study Library of Chapala Theological Seminary: every course textbook and required reading, each with its test, in English, Spanish and French.">
+<meta property="og:image" content="https://chapalaseminary.org/cts-share.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style is:inline>
+  /* The front page's design language (src/body/index/head.html). */
+  :root{--paper:#f4ecda;--paper-2:#efe5cf;--ink:#2a241d;--muted:#6f6556;--oxblood:#6d2233;--oxblood-2:#83303f;--gold:#a9842c;--line:#d8c8a8;--shadow:rgba(60,40,20,.16)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(circle at 20% -10%,#fbf5e7 0%,rgba(251,245,231,0) 55%),var(--paper);color:var(--ink);font-family:"EB Garamond",Georgia,"Times New Roman",serif;font-size:19px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  body.lang-en .es{display:none}
+  body.lang-es .en{display:none}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 26px}
+  .topbar{position:sticky;top:0;z-index:20;background:rgba(244,236,218,.86);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:12px;padding-bottom:12px}
+  .mark{font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:.04em;color:var(--oxblood);font-size:1.15rem;text-decoration:none}
+  .navlinks{display:flex;flex-wrap:wrap;align-items:center;gap:2px 18px;margin-left:auto}
+  .navlinks a{color:var(--oxblood);font-size:1rem;text-underline-offset:3px;white-space:nowrap;padding:6px 0}
+  a:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+  header.lib{padding:40px 0 10px}
+  header.lib h1{font-family:"Cormorant Garamond",serif;font-weight:600;color:var(--oxblood);font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.05;margin:.1em 0 .2em}
+  .kicker{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .lead{font-size:1.1rem;max-width:760px}
+  .jump{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+  .jump a{display:inline-block;padding:7px 14px;border:1px solid var(--oxblood);border-radius:20px;color:var(--oxblood);text-decoration:none;font-size:.95rem;line-height:1.3}
+  .jump a:hover{background:var(--oxblood);color:var(--paper)}
+  section{padding:34px 0;scroll-margin-top:90px}
+  h2.section{font-family:"Cormorant Garamond",serif;color:var(--oxblood);font-weight:600;font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 6px;letter-spacing:.01em}
+  h3{font-family:"Cormorant Garamond",serif;color:var(--ink);font-size:1.5rem;scroll-margin-top:90px}
+  p{margin:.7em 0}
+  footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 60px;color:var(--muted);font-size:.95rem}
+  footer a{color:var(--oxblood);font-weight:700}
+  @media(max-width:760px){
+    body{font-size:18px}
+    .wrap{padding:0 16px}
+    .topbar{position:static}
+    .topbar .mark{flex-basis:100%}
+    .navlinks{margin-left:0;gap:2px 16px}
+    header.lib{padding:24px 0 4px}
+    section{padding:26px 0}
+    #honors-note>div{padding:22px 18px!important}
+  }
+</style>
+</head>
+<body class="lang-en">
+<script is:inline src="/cts-lang.js"></script>
+<div class="topbar"><div class="wrap">
+  <a class="mark" href="index.html">Chapala Theological Seminary</a>
+  <nav class="navlinks">
+    <a href="index.html"><span class="en">Home</span><span class="es">Inicio</span></a>
+    <a href="index.html#catalog"><span class="en">Course Catalog</span><span class="es">Catálogo de cursos</span></a>
+    <a href="index.html#register"><span class="en">Register Free</span><span class="es">Registro gratuito</span></a>
+  </nav>
+</div></div>
+<main class="wrap">
+  <header class="lib">
+    <div class="kicker"><span class="en">Textbooks, Readings and Resources</span><span class="es">Libros, Lecturas y Recursos</span></div>
+    <h1><span class="en">Study Library</span><span class="es">Biblioteca de Estudio</span></h1>
+    <p class="lead"><span class="en">The textbook and required readings for each course, in one place. Open a book or a set of readings to study it; its test is linked just below it.</span><span class="es">El libro de texto y las lecturas requeridas de cada curso, en un solo lugar. Abra un libro o un conjunto de lecturas para estudiarlo; su examen está enlazado justo debajo.</span></p>
+    <ul class="jump">
+      <li><a href="#textbooks"><span class="en">Master's Textbooks</span><span class="es">Libros de Texto de Maestría</span></a></li>
+      {electiveTextbooks.length > 0 && <li><a href="#elective-textbooks"><span class="en">Elective Textbooks</span><span class="es">Libros de Texto de las Electivas</span></a></li>}
+      <li><a href="#required-readings"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></a></li>
+      {electiveReadings.length > 0 && <li><a href="#elective-readings"><span class="en">Elective Readings</span><span class="es">Lecturas de las Electivas</span></a></li>}
+      <li><a href="#honors-note"><span class="en">Reading With Honors</span><span class="es">Lectura Con Honores</span></a></li>
+      <li><a href="#resources"><span class="en">Study Resources</span><span class="es">Recursos de Estudio</span></a></li>
+    </ul>
+  </header>
+<section id="textbooks">
+    <style is:inline>
+      #textbooks .tb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px;margin-top:14px}
+      #textbooks a.textbook{display:block;min-width:0;background:#fffdf9;border:1px solid var(--line,#e2d6c9);border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit}
+      #textbooks a.textbook:hover{border-color:var(--gold,#b08324)}
+      #textbooks .tb-title{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--oxblood,#6d2233);line-height:1.12}
+      #textbooks .tb-for{font-size:.88rem;color:var(--muted,#6b5b4d);margin-top:5px;line-height:1.45}
+      #textbooks .tb-resource{display:flex;flex-direction:column}
+      #textbooks .tb-resource>a.textbook{flex:1}
+      #textbooks .tb-test-link{padding:10px 16px;color:var(--oxblood,#5a1f1f);font-weight:bold}
+      #textbooks .tb-go{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#6b5b4d);margin-top:11px;display:inline-block}
+    </style>
+    <div class="kicker"><span class="en">Required Reading</span><span class="es">Lecturas Obligatorias</span></div>
+    <h2 class="section"><span class="en">Master's Textbooks</span><span class="es">Libros de Texto de Maestría</span></h2>
+    <p><span class="en">Each of our 45 core courses has a textbook and a separate required-reading test. Both tests are required for new M.Div. and Th.M. course completions after activation; valid earlier master’s completions remain valid. The books and tests are open to every student and optional for Certificate and Associate students.</span>
+    <span class="es">Cada uno de nuestros 45 cursos básicos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
+    <div class="tb-grid">
+      {coreTextbooks.map((t) => (
+        <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
+      ))}
+    </div>
+    {electiveTextbooks.length > 0 && (<>
+    <h3 style="margin-top:26px"><span class="en">Elective Textbooks</span><span class="es">Libros de Texto de las Electivas</span></h3>
+    <p><span class="en">Textbooks for the denominational electives, listed as each is ready. Their textbook test is optional on every track.</span><span class="es">Libros de texto de las electivas denominacionales, en la lista a medida que cada uno está listo. Su examen del libro es opcional en todos los trayectos.</span></p>
+    <div class="tb-grid" id="elective-textbooks">
+      {electiveTextbooks.map((t) => (
+        <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
+      ))}
+    </div>
+    </>)}
+    <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
+    <p><span class="en">All 45 core courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity. Textbooks and assigned readings for the 20 denominational electives are being prepared.</span><span class="es">Los 45 cursos básicos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta. Se están preparando libros de texto y lecturas asignadas para las 20 electivas denominacionales.</span></p>
+    <div class="tb-grid" id="required-readings">
+      {coreReadings.map((r) => (
+        <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
+      ))}
+    </div>
+    {electiveReadings.length > 0 && (<>
+    <h3 style="margin-top:26px"><span class="en">Elective Readings</span><span class="es">Lecturas de las Electivas</span></h3>
+    <p><span class="en">Assigned readings for the denominational electives, listed as each is ready. Their reading test is optional on every track.</span><span class="es">Lecturas asignadas de las electivas denominacionales, en la lista a medida que cada una está lista. Su examen de lecturas es opcional en todos los trayectos.</span></p>
+    <div class="tb-grid" id="elective-readings">
+      {electiveReadings.map((r) => (
+        <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
+      ))}
+    </div>
+    </>)}
+  </section>
+  <section id="honors-note">
+    <div style="background:linear-gradient(180deg,#fbf3e0,#f6ead0);border:2px solid #d4af37;border-radius:6px;padding:28px 32px;text-align:center;box-shadow:0 2px 10px rgba(74,30,58,.06);">
+      <div style="font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:#b0891f;font-weight:bold;margin-bottom:10px;">
+        <span class="en">&#10022; Important Note &#10022;</span><span class="es">&#10022; Nota Importante &#10022;</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.95rem;color:#4A1E3A;margin:0 0 14px;font-weight:600;">
+        <span class="en">Earn Certificate and Associate Awards <em>With Honors</em></span><span class="es">Obtenga Certificados y el Asociado <em>Con Honores</em></span>
+      </h2>
+      <p style="font-size:1.12rem;line-height:1.65;color:#3a2130;max-width:700px;margin:0 auto 20px;">
+        <span class="en">Alongside the degrees above, every course has a <b>Supplemental Reading Room</b> &mdash; a curated shelf of works. Read any three in full and record it on your honor, and that class counts toward your degree being awarded <b>with honors</b>. Complete enough classes and you earn the <b>With Honors</b> distinction on the Certificate and Associate awards. Master’s students complete the required readings and their separate exams instead.</span>
+        <span class="es">Junto a los t&iacute;tulos anteriores, cada curso tiene una <b>Sala de Lecturas Complementarias</b> &mdash; una selecci&oacute;n de obras. Lea tres cualesquiera por completo y reg&iacute;strelo bajo su honor, y esa clase cuenta para que su t&iacute;tulo sea otorgado <b>con honores</b>. Complete suficientes clases y obtendr&aacute; la distinci&oacute;n <b>Con Honores</b> en los t&iacute;tulos de Certificado y Asociado. Los estudiantes de maestr&iacute;a completan las lecturas requeridas y sus ex&aacute;menes separados.</span>
+      </p>
+      <a href="cts-honors.html" style="display:inline-block;background:#4A1E3A;color:#fff;text-decoration:none;padding:14px 34px;border-radius:30px;font-weight:bold;letter-spacing:.3px;font-size:1.08rem;">
+        <span class="en">Open the Reading With Honors Page &rarr;</span><span class="es">Abrir la P&aacute;gina de Lectura Con Honores &rarr;</span>
+      </a>
+    </div>
+  </section>
+  <section id="resources">
+        <div class="kicker"><span class="en">For All Your Study</span><span class="es">Para Todo Su Estudio</span></div>
+        <h2 class="section"><span class="en">Study Resources</span><span class="es">Recursos de Estudio</span></h2>
+        <p style="font-size:1.06rem;line-height:1.65;max-width:760px;margin:6px 0 20px;">
+          <span class="en">Beyond each course&rsquo;s reading room, we&rsquo;ve gathered the best free resources for study and preaching &mdash; Strong&rsquo;s concordances and Bible translations, apps that work offline with no internet, free video seminaries, sermon illustrations, and the Christian classics &mdash; all in one place, in English and Spanish.</span>
+          <span class="es">M&aacute;s all&aacute; de la sala de lecturas de cada curso, hemos reunido los mejores recursos gratuitos para el estudio y la predicaci&oacute;n &mdash; concordancias Strong y traducciones de la Biblia, aplicaciones que funcionan sin conexi&oacute;n a internet, seminarios en video gratuitos, ilustraciones para sermones y los cl&aacute;sicos cristianos &mdash; todo en un solo lugar, en ingl&eacute;s y espa&ntilde;ol.</span>
+        </p>
+        <a href="CTSResources.html" style="display:inline-block;background:#4A1E3A;color:#fff;text-decoration:none;padding:14px 34px;border-radius:30px;font-weight:bold;letter-spacing:.3px;font-size:1.08rem;">
+          <span class="en">Explore Study Resources &rarr;</span><span class="es">Explorar Recursos de Estudio &rarr;</span>
+        </a>
+      </section>
+</main>
+<footer><div class="wrap">
+  <div><a href="index.html"><span class="en">Home</span><span class="es">Inicio</span></a> &middot; <a href="index.html#catalog"><span class="en">Course Catalog</span><span class="es">Catálogo de cursos</span></a> &middot; <a href="CTSBeforeYouBegin.html"><span class="en">Program Requirements</span><span class="es">Requisitos del Programa</span></a></div>
+  <div><span class="en">Questions, a certificate not working, or a comment? Email <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>.</span>
+  <span class="es">¿Preguntas, un certificado que no funciona, o un comentario? Escriba a <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>.</span></div>
+  <div><span class="en">© Chapala Theological Seminary &middot; Chapala, Jalisco, México</span>
+  <span class="es">© Seminario Teológico de Chapala &middot; Chapala, Jalisco, México</span></div>
+</div></footer>
+</body>
+</html>
