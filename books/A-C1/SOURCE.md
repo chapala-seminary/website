@@ -80,3 +80,5 @@ NEW tracker row 226 supersedes the earlier contributor-death *selection policy* 
 ## 27 October 2026 staged-release article-boundary audit
 
 The staged A-C1 reader on `claude/pentecostal-required` contains two independently identified first-person testimonies by Adolph Rosa and Bro. Wm. Pendleton, although its chapter notes say uncleared named contributions were excluded. The original October 1906 issue has separate headings that the staged reader omits. Their Mexican rights have not been established; this remains a **release hold**, not an infringement finding. See [A-C1 staged article-boundary and Mexico-rights hold](../PENTECOSTAL_A_C1_STAGED_ARTICLE_BOUNDARY_AND_MEXICO_RIGHTS_HOLD_2026-10-27.md). Keep EN/ES/FR derivatives and assessment answerability synchronized after any approved changes.
+
+Original CTS-authored replacement commentary for Rosa and Pendleton is drafted in [EN/ES/FR](RIGHTS_SAFE_REPLACEMENT_COMMENTARY_EN_ES_FR_2026-10-27.md), **pending Wayne/faculty approval and language review**. It is not a legal clearance, a translation of the held testimony, or a release-ready source.
