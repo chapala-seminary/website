@@ -54,7 +54,9 @@ The following text is **new CTS commentary** based on the unsigned issue narrati
 
 **FR.** L'éditorial de janvier 1907 décrit une assemblée où des personnes de milieux sociaux et de nationalités différents participaient au culte. Il indique également que des personnes en recherche s'approchaient de l'autel et que certaines réunions se poursuivaient pendant la nuit. Il s'agit de descriptions faites par la mission elle-même, et non de mesures indépendantes de la participation ou de l'expérience spirituelle. Une citation distincte d'un visiteur non identifié est omise dans l'attente d'une vérification de son attribution. Les étudiants doivent examiner à la fois les aspirations inclusives du mouvement et les preuves historiques de leur mise en pratique.
 
-## Proposed public question replacements (do not touch private keys)
+## Illustrative public question alternatives — NOT secure release items (do not touch private keys)
+
+**Security note:** A prior nonproduction draft revision of this public handoff contained suggested answer concepts for the two illustrative stems, subsequently redacted. These were **not existing private assessment keys**, but Git history is durable. Therefore **do not activate these two illustrative stems verbatim**. Claude must author fresh, distinct release questions and answer variants inside the authorized private workflow after academic approval; this section serves only to identify safe source facts and the two bank positions needing replacement.
 
 **Q12 (Reading 2; replaces question dependent on unidentified Methodist layman):**
 
@@ -77,7 +79,7 @@ The following text is **new CTS commentary** based on the unsigned issue narrati
 1. Treat the current source scrub as authoritative for *held* material; do not infer that all paraphrase of historical facts is unlawful. Verify each candidate source passage against original print facsimiles and contributor records. Do not represent a legal opinion as fact.
 2. After Wayne/faculty review, update the **canonical** English digest source, its Spanish version, the French translation map, the card summaries and any generated/duplicated language pages. Do not patch only one rendered HTML copy. Preserve the paper's attribution distinctions.
 3. Remove all dependent direct quotations and observer-only narrative: Methodist layman section; anonymous furniture detail; unidentified closing verse; visitor anecdote. Search across EN/ES/FR generated pages for source-language equivalents, not English strings alone.
-4. Replace public Q12 and Q28 only after the new digest material is in place. In the **private** repository, adjust and verify answer variants for all three languages; test 20-of-40 sampling, 4 per reading, 18/20 pass and language-specific grading without exposing keys.
+4. Replace public Q12 and Q28 with **new questions not identical to the illustrative stems above** only after the new digest material is in place. In the **private** repository, create and verify answer variants for all three languages; test 20-of-40 sampling, 4 per reading, 18/20 pass and language-specific grading without exposing keys.
 5. Add a report-only provenance dependency matrix: `issue/page/column → passage/contributor → digest section (EN/ES/FR) → public Q# → private answer map`. Any held passage must fail the release gate if a descendant still relies on it.
 6. Verify browser-rendered English, Spanish and French Reading 2/3/4 and exam pages. Confirm no old quotation is served by cached French translation or static build. Keep the A-C1 Mexico rights/source hold in place until Wayne approves a documented contributor-by-contributor decision.
 7. No beta merge, main merge, student notification, grade edit or public deployment is authorized by this handoff.
