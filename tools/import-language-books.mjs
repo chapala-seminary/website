@@ -23,8 +23,10 @@
  *   <keys>/textbooks/<slug>.json, <keys>/readings/<slug>readings.json
  *                                        prompt, answer, accept and the stamp
  *                                        tr.<lang> of each question (private)
- * Nothing is written when a count differs, a question has no blank, or the
- * key file's English answer is not the site's: the error says where.
+ * Each part is checked on its own. A part whose counts differ from the
+ * English stays in English; a question whose English answer in the key file
+ * is not the site's stays in English; a digest whose paragraphs do not pair
+ * stays in English. Everything left out is listed.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -65,86 +67,84 @@ function numbered(text, where) {
 }
 const stamps = (questions) => translationPlan({ sourceLang: 'en', blocks: [] },
   { fill: questions.map((q) => ({ prompt: { en: q.prompt.en }, answer: { en: q.answer.en }, ...(q.accept?.en ? { accept: { en: q.accept.en } } : {}) })) }, LANG).jobs.map((j) => j.stamp);
-const sameAnswer = (a, b) => String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
 
 const keyFile = readJson(KEYFILE);
-const writes = [];
+const writes = [], notes = [], done = [];
+/* Each part (the book, its test, the reading test, the room) is imported on
+   its own: a part with a problem is left in English and listed; the others
+   are still written. */
+function part(name, fn) {
+  const before = errors.length;
+  const apply = fn();
+  if (errors.length > before) { notes.push(`${name}: left in English (${errors.length - before} problem(s))`); return; }
+  apply(); done.push(name);
+}
+const norm = (a) => String(a ?? '').normalize('NFC').replace(/[‘’ʼ`]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase();
+const sameAnswer = (a, b) => norm(a) === norm(b);
 
-/* ---------------- the textbook */
-const bookFile = `src/content/textbooks/${slug}.json`, bookKeys = path.join(KEYS, 'textbooks', `${slug}.json`);
-const book = readJson(bookFile), bookPriv = readJson(bookKeys);
-{
-  const en = parse(book.body.en).childNodes.filter((n) => n.tagName);
-  const sw = paragraphs(md(`textbook.${LANG}.md`));
-  const start = sw.findIndex((p) => /^##\s/.test(p));
-  const body = start < 0 ? [] : sw.slice(start);
-  if (body.length !== en.length) errors.push(`textbook: ${body.length} ${LANG} paragraphs from the first "## " on, ${en.length} in the English`);
-  else {
-    const out = en.map((node, i) => {
-      let text = body[i];
-      const heading = /^##\s+(.*)$/.exec(text);
-      if ((node.tagName === 'H2') !== !!heading) { errors.push(`textbook paragraph ${i + 1}: a heading in one language only`); return ''; }
-      if (heading) text = heading[1];
-      const cls = node.getAttribute('class') || '';
-      if (cls.includes('muted')) text = text.replace(/^_(.*)_$/s, '$1');                  // the source line, italic in Markdown
-      if (cls.includes('cts-note')) text = text.replace(/^\*\*([^*]+:)\*\*\s*/, '$1 ');    // "CTS note:" is plain in the English
-      const copy = parse(node.toString()).firstChild;
-      copy.set_content(inline(text));
-      return copy.toString();
-    });
-    book.body[LANG] = out.join('');
-  }
-  const prompts = numbered(md(`textbook-test.${LANG}.md`), 'textbook test');
-  const keys = keyFile.textbook || [];
-  const qs = book.test.questions, priv = bookPriv.test.questions;
-  if (prompts.length !== qs.length || keys.length !== qs.length || priv.length !== qs.length) errors.push(`textbook test: ${prompts.length} ${LANG} questions, ${keys.length} keys, ${qs.length} on the site`);
-  else {
-    const st = stamps(priv);
-    priv.forEach((q, i) => {
-      const k = keys[i];
-      if (k.chapter != null && k.chapter !== q.chapter) errors.push(`textbook test ${i + 1}: chapter ${k.chapter} in the keys, ${q.chapter} on the site`);
-      if (!sameAnswer(k.answer_en, q.answer.en)) errors.push(`textbook test ${i + 1}: the key file's English answer "${k.answer_en}" is not the site's "${q.answer.en}"`);
-      if (!k.answer_sw) errors.push(`textbook test ${i + 1}: no ${LANG} answer`);
+/* The test questions: a question whose English answer in the key file is not
+   the site's (the English was revised after translation) stays in English. */
+function questions(label, prompts, keys, qs, priv) {
+  if (prompts.length !== qs.length || keys.length !== qs.length || priv.length !== qs.length) { errors.push(`${label}: ${prompts.length} ${LANG} questions, ${keys.length} keys, ${qs.length} on the site`); return () => {}; }
+  const st = stamps(priv);
+  const plan = [];
+  priv.forEach((q, i) => {
+    const k = keys[i];
+    if (!sameAnswer(k.answer_en, q.answer.en)) { notes.push(`${label} ${i + 1}: the key file's English answer "${k.answer_en}" is not the site's "${q.answer.en}"; this question stays in English`); return; }
+    if (!k[`answer_${LANG}`]) { notes.push(`${label} ${i + 1}: no ${LANG} answer; stays in English`); return; }
+    plan.push(() => {
       q.prompt[LANG] = qs[i].prompt[LANG] = prompts[i];
       q.answer[LANG] = k[`answer_${LANG}`];
       if (q.accept) q.accept[LANG] = (k[`accept_${LANG}`] || []).filter((a) => !sameAnswer(a, k[`answer_${LANG}`]));
       q.tr = { ...(q.tr || {}), [LANG]: { status: 'machine', from: st[i] } };
     });
-  }
-  writes.push([bookFile, book], [bookKeys, bookPriv]);
+  });
+  return () => plan.forEach((f) => f());
 }
+
+/* ---------------- the textbook */
+const bookFile = `src/content/textbooks/${slug}.json`, bookKeys = path.join(KEYS, 'textbooks', `${slug}.json`);
+const book = readJson(bookFile), bookPriv = readJson(bookKeys);
+part('textbook', () => {
+  const en = parse(book.body.en).childNodes.filter((n) => n.tagName);
+  const sw = paragraphs(md(`textbook.${LANG}.md`));
+  const start = sw.findIndex((p) => /^##\s/.test(p));
+  const body = start < 0 ? [] : sw.slice(start);
+  if (body.length !== en.length) { errors.push(`textbook: ${body.length} ${LANG} paragraphs from the first "## " on, ${en.length} in the English`); return () => {}; }
+  const out = en.map((node, i) => {
+    let text = body[i];
+    const heading = /^##\s+(.*)$/.exec(text);
+    if ((node.tagName === 'H2') !== !!heading) { errors.push(`textbook paragraph ${i + 1}: a heading in one language only`); return ''; }
+    if (heading) text = heading[1];
+    const cls = node.getAttribute('class') || '';
+    if (cls.includes('muted')) text = text.replace(/^_(.*)_$/s, '$1');                  // the source line, italic in Markdown
+    if (cls.includes('cts-note')) text = text.replace(/^\*\*([^*]+:)\*\*\s*/, '$1 ');    // "CTS note:" is plain in the English
+    const copy = parse(node.toString()).firstChild;
+    copy.set_content(inline(text));
+    return copy.toString();
+  });
+  return () => { book.body[LANG] = out.join(''); };
+});
+part('textbook test', () => questions('textbook test', numbered(md(`textbook-test.${LANG}.md`), 'textbook test'), keyFile.textbook || [], book.test.questions, bookPriv.test.questions));
+writes.push([bookFile, book], [bookKeys, bookPriv]);
 
 /* ---------------- the required-reading test */
 const rSlug = `${slug}readings`;
 const readFile = `src/content/readings/${rSlug}.json`, readKeys = path.join(KEYS, 'readings', `${rSlug}.json`);
 if (fs.existsSync(readFile) && fs.existsSync(readKeys)) {
   const reading = readJson(readFile), readPriv = readJson(readKeys);
-  const prompts = numbered(md(`readings-test.${LANG}.md`), 'reading test');
-  const keys = keyFile.readings || [];
-  const qs = reading.test.questions, priv = readPriv.test.questions;
-  if (prompts.length !== qs.length || keys.length !== qs.length || priv.length !== qs.length) errors.push(`reading test: ${prompts.length} ${LANG} questions, ${keys.length} keys, ${qs.length} on the site`);
-  else {
-    const st = stamps(priv);
-    priv.forEach((q, i) => {
-      const k = keys[i];
-      if (!sameAnswer(k.answer_en, q.answer.en)) errors.push(`reading test ${i + 1}: the key file's English answer "${k.answer_en}" is not the site's "${q.answer.en}"`);
-      if (!k[`answer_${LANG}`]) errors.push(`reading test ${i + 1}: no ${LANG} answer`);
-      q.prompt[LANG] = qs[i].prompt[LANG] = prompts[i];
-      q.answer[LANG] = k[`answer_${LANG}`];
-      if (q.accept) q.accept[LANG] = (k[`accept_${LANG}`] || []).filter((a) => !sameAnswer(a, k[`answer_${LANG}`]));
-      q.tr = { ...(q.tr || {}), [LANG]: { status: 'machine', from: st[i] } };
-    });
-  }
+  part('reading test', () => questions('reading test', numbered(md(`readings-test.${LANG}.md`), 'reading test'), keyFile.readings || [], reading.test.questions, readPriv.test.questions));
   writes.push([readFile, reading], [readKeys, readPriv]);
-} else errors.push(`no reading test for ${prefixOf(CODE)} (${readFile})`);
+} else notes.push(`no reading test for ${prefixOf(CODE)} (${readFile})`);
 
 /* ---------------- the reading room's five digests
    Kept beside the page, not in it (the room page is generated by
    tools/build-elective-readings.mjs): src/data/interface/rooms/<lang>/<Page>.json
    holds each digest as the English digest's markup with its words in <lang>.
-   tools/language-pages.mjs puts them in on that language's page only. */
+   tools/language-pages.mjs puts them in on that language's page only. A digest
+   whose paragraphs do not pair one to one with the English stays English. */
 const roomPage = `${prefixOf(CODE)}Readings`, roomSrc = `src/body/rooms/${roomPage}.html`;
-if (fs.existsSync(roomSrc) && fs.existsSync(path.join(FROM, `readings.${LANG}.md`))) {
+if (fs.existsSync(roomSrc) && fs.existsSync(path.join(FROM, `readings.${LANG}.md`))) part('reading room', () => {
   const room = parse(fs.readFileSync(roomSrc, 'utf8'), { comment: true });
   const digests = room.querySelectorAll('.lang-en.dg-block');
   // the digests in the Markdown: from each "### " to the next "---" or "## "
@@ -156,29 +156,30 @@ if (fs.existsSync(roomSrc) && fs.existsSync(path.join(FROM, `readings.${LANG}.md
     if (/^---+$/.test(l) || /^##\s/.test(l)) { cur = null; continue; }
     if (cur && l) cur.push(l);
   }
-  // a Markdown paragraph is one line here (the handoff writes no wrapped lines)
-  if (parts.length !== digests.length) errors.push(`reading room: ${parts.length} ${LANG} digests, ${digests.length} English`);
-  else {
-    const out = digests.map((d, k) => {
-      const leaves = d.querySelectorAll('h1,h2,h3,p,li,div.dg-note,div.dg-reflect').filter((n) => !n.querySelector('p,li,h1,h2,h3'));
-      const blocks = parts[k];
-      if (blocks.length !== leaves.length) { errors.push(`reading room digest ${k + 1}: ${blocks.length} ${LANG} paragraphs, ${leaves.length} English`); return null; }
-      const copy = parse(d.toString(), { comment: true }).firstChild;
-      const copyLeaves = copy.querySelectorAll('h1,h2,h3,p,li,div.dg-note,div.dg-reflect').filter((n) => !n.querySelector('p,li,h1,h2,h3'));
-      copyLeaves.forEach((n, i) => {
-        let t = blocks[i].replace(/^#{3,4}\s+/, '').replace(/^[-*]\s+/, '');
-        const num = n.querySelector('.dg-n');
-        if (num) { const m = /^(\d+\.)\s*(.*)$/.exec(t); if (!m) errors.push(`reading room digest ${k + 1} heading ${i + 1}: no number`); else { n.set_content(`<span class="dg-n">${m[1]}</span>${inline(m[2]).replace(/<strong>/g, '<b>').replace(/<\/strong>/g, '</b>')}`); return; } }
-        n.set_content(inline(t).replace(/<strong>/g, '<b>').replace(/<\/strong>/g, '</b>'));
-      });
-      copy.setAttribute('class', (copy.getAttribute('class') || '').replace(/\blang-en\b/, `lang-${LANG}`));
-      copy.setAttribute('lang', LANG);
-      return copy.toString();
+  if (parts.length !== digests.length) { errors.push(`reading room: ${parts.length} ${LANG} digests, ${digests.length} English`); return () => {}; }
+  const leavesOf = (d) => d.querySelectorAll('h1,h2,h3,p,li,div.dg-note,div.dg-reflect').filter((n) => !n.querySelector('p,li,h1,h2,h3'));
+  const out = digests.map((d, k) => {
+    const blocks = parts[k];
+    if (blocks.length !== leavesOf(d).length) { notes.push(`reading room digest ${k + 1}: ${blocks.length} ${LANG} paragraphs, ${leavesOf(d).length} English; stays in English`); return null; }
+    const copy = parse(d.toString(), { comment: true }).firstChild;
+    let bad = false;
+    leavesOf(copy).forEach((n, i) => {
+      const t = blocks[i].replace(/^#{3,4}\s+/, '').replace(/^[-*]\s+/, '');
+      const b = (h) => h.replace(/<strong>/g, '<b>').replace(/<\/strong>/g, '</b>');
+      if (n.querySelector('.dg-n')) { const m = /^(\d+\.)\s*(.*)$/.exec(t); if (!m) { bad = true; return; } n.set_content(`<span class="dg-n">${m[1]}</span>${b(inline(m[2]))}`); return; }
+      n.set_content(b(inline(t)));
     });
-    if (out.every(Boolean)) writes.push([`src/data/interface/rooms/${LANG}/${roomPage}.json`, { page: `${roomPage}.html`, lang: LANG, after: '.lang-en.dg-block', blocks: out }]);
-  }
-}
+    if (bad) { notes.push(`reading room digest ${k + 1}: its headings do not pair with the English; stays in English`); return null; }
+    copy.setAttribute('class', (copy.getAttribute('class') || '').replace(/\blang-en\b/, `lang-${LANG}`));
+    copy.setAttribute('lang', LANG);
+    return copy.toString();
+  });
+  if (!out.some(Boolean)) { errors.push('reading room: no digest pairs with the English'); return () => {}; }
+  // an English digest without its pair gets an empty block: language-pages then shows the English there
+  return () => writes.push([`src/data/interface/rooms/${LANG}/${roomPage}.json`, { page: `${roomPage}.html`, lang: LANG, after: '.lang-en.dg-block', blocks: out.map((x) => x ?? '') }]);
+});
 
-if (errors.length) { console.error(`${errors.length} problem(s); nothing written:`); errors.slice(0, 40).forEach((e) => console.error('  - ' + e)); process.exit(1); }
-if (WRITE) for (const [f, d] of writes) { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, JSON.stringify(d, null, 1) + '\n'); }
-console.log(`${CODE} (${slug}): textbook, its test, the reading test and the room's digests in ${LANG} ${WRITE ? 'written' : 'checked; nothing written (add --write)'}.`);
+for (const e of errors) console.log('  - ' + e);
+for (const n of notes) console.log('  * ' + n);
+if (WRITE && done.length) for (const [f, d] of writes) { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, JSON.stringify(d, null, 1) + '\n'); }
+console.log(`${CODE} (${slug}): ${done.length ? done.join(', ') : 'nothing'} in ${LANG}${WRITE ? ' written' : ' checked (add --write)'}.`);
