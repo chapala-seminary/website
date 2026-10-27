@@ -61,3 +61,8 @@ The staged textbook and public bank must also satisfy [PENTECOSTAL_A_C4_STAGED_S
 ## 27 October 2026 retained-hymn contributor research (identity only; no clearance)
 
 The [three-hymn attribution and Mexico-rights triage report](./THREE_RETAINED_HYMNS_CONTRIBUTOR_IDENTIFICATION_AND_RIGHTS_TRIAGE_2026-10-27.md) independently identifies likely historical authors of the staged “I can but perish if I go” (Edmund Jones, died 1765), “I am coming, Lord” (Lewis Hartsough, died 1919; **refrain-only match requires fuller verification**), and “A Child of the King” (Hattie E. Buell, died 1910). This narrows **identity** research only; exact 1912 image/variant collation, all other contributor identities, edition/translation rights, 12 precise examination evidence items, and Wayne's academic/legal release decisions remain **ON HOLD**. Do not interpret a favorable preliminary author-term screen as textbook clearance.
+
+
+## 27 October 2026 staged five-reading source-selection drift
+
+The staged PC4 reading room and its 40-prompt EN/ES/FR bank are separately gated by [PENTECOSTAL_PC4_STAGED_READING_SET_SOURCE_SELECTION_DRIFT_2026-10-27.md](../PENTECOSTAL_PC4_STAGED_READING_SET_SOURCE_SELECTION_DRIFT_2026-10-27.md). The staged plan (chapters I–III, XXII, VII, XXXIV–XXXV, and LXXI) materially differs from the previously reviewed provisional plan (III, XXIII, XLV, LXXI, and LXXIV). Four reading units are expanded or substituted without a new facsimile/source receipt, and chapter LXXI carries the unresolved embedded-poem/provenance hold. Hold reading-test activation/promotion until the exact staged windows are image-collated, contributor-screened, academically approved, regenerated in EN/ES/FR, and privately revalidated.
