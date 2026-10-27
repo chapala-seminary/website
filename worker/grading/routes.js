@@ -17,8 +17,9 @@ import { loadScope, loadKeys, loadStudent, loadAttempt, trackOf, nowIso, itemsOf
 import { MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP, OPEN_APPEALS_MAX, MIN_SA_WORDS } from './rules.js';
 
 import { wordCount } from './text.js';
+import { SITE_LANGUAGES } from '../../src/lib/languages.mjs';
 
-const LANGS = ['en', 'es', 'fr'];
+const LANGS = SITE_LANGUAGES;
 const pick = (obj, lang) => (obj && (obj[lang] ?? obj.en ?? Object.values(obj)[0])) ?? '';
 const MAX_ITEMS = 10;
 const MAX_SHADOW = 80;

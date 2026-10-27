@@ -182,7 +182,7 @@
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
       // the language the student reads in, for notes the seminary sends them
-      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' ? l : null; })(get('cts_lang')),
+      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
     };

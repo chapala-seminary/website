@@ -260,7 +260,7 @@
   // need another yes/no branch in the grader. "both" remains a legacy mode.
   function sourceLang() { return U.sourceLang || "en"; }
   function languages() {
-    return Array.from(new Set(["en", "es", "fr", sourceLang()].concat(U.langs || [])));
+    return Array.from(new Set(["en", "es", "fr", "sw", sourceLang()].concat(U.langs || [])));
   }
   function readerLang() {
     var b = document.body, codes = languages();
@@ -272,15 +272,22 @@
     return l.toLowerCase().split("-")[0];
   }
   function isLanguageMap(o) { return o && typeof o === "object" && !Array.isArray(o); }
+  /* A language added after French (src/lib/languages.mjs) has its interface
+     words in a dictionary keyed by the English (window.CTSUI, written by
+     tools/language-pages.mjs). Course text is never looked up there. */
+  function uiText(o, lang) {
+    return window.CTSUI && o && o.en != null ? window.CTSUI.t(o.en, lang) : null;
+  }
   function pick(o) {
     if (o === null || o === undefined) return "";
-    return isLanguageMap(o) ? (o[readerLang()] || o[sourceLang()] || o.en || "") : o;
+    return isLanguageMap(o) ? (o[readerLang()] || uiText(o, readerLang()) || o[sourceLang()] || o.en || "") : o;
   }
   function bi(o) {
     if (o === null || o === undefined) return "";
     if (!isLanguageMap(o)) return String(o);
     if (document.body && document.body.dataset.pageLang) {
       var reader = readerLang(), source = sourceLang(), target = o[reader];
+      if (target == null || target === "") target = uiText(o, reader);
       var actual = target == null || target === "" ? source : reader;
       var main = target || o[source] || o.en || "";
       return '<span class="cts-text-pair"><span class="cts-reading" lang="' + actual + '">' + main + '</span>' +
@@ -785,13 +792,15 @@
     return " " + String(s || "").toLowerCase().normalize("NFC")
       .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
   }
-  function keywordPass(ks, answer, minHits) {
+  function keywordPass(ks, answer, minHits, lang) {
     if (!usableKeywords(ks)) return false;
-    var a = normalise(fold(answer)), hits = 0;
+    // Swahili: an apostrophe inside a word may be left out (ng'ombe, ngombe).
+    var squeeze = lang === "sw" ? function (t) { return String(t || "").replace(/(\p{L})['\u2019\u02bc\u2018`](?=\p{L})/gu, "$1"); } : function (t) { return t; };
+    var a = normalise(fold(squeeze(answer))), hits = 0;
     ks.forEach(function (k) {
       var forms = Array.isArray(k) ? k : [k];
       if (forms.some(function (form) {
-        var needle = normalise(fold(form)).trim();
+        var needle = normalise(fold(squeeze(form))).trim();
         // Existing keywords include stems ("apôtr" matches "apôtres").
         return needle && a.indexOf(needle) !== -1;
       })) hits++;
@@ -801,11 +810,11 @@
   function shortAnswerRight(q, answer) {
     var ks = q.keywords;
     if (!ks || Array.isArray(ks)) return keywordPass(ks || [], answer, q.minHits);
-    var lists = Array.from(new Set([readerLang(), sourceLang()]))
-      .map(function (lang) { return ks[lang]; }).filter(Array.isArray);
+    var codes = Array.from(new Set([readerLang(), sourceLang()]))
+      .filter(function (lang) { return Array.isArray(ks[lang]); });
     // Missing translation keys must not make a required answer a free pass.
-    return lists.length > 0 && lists.some(function (list) {
-      return keywordPass(list, answer, q.minHits);
+    return codes.length > 0 && codes.some(function (lang) {
+      return keywordPass(ks[lang], answer, q.minHits, lang);
     });
   }
   function usableKeywords(ks) {
@@ -849,6 +858,15 @@
     });
     for (var f = 0; f < forms.length; f++) {
       if (forms[f] && bare(forms[f]) === a) return true;
+    }
+    // Swahili only: an apostrophe inside a word (ng'ombe) may be left out or
+    // typed as another mark; "ngombe" is "ng'ombe" (worker/grading/text.js).
+    if (codes.indexOf("sw") !== -1) {
+      var squeeze = function (s) { return String(s || "").replace(/(\p{L})['\u2019\u02bc\u2018`](?=\p{L})/gu, "$1"); };
+      var s = bare(squeeze(given));
+      for (var g = 0; g < forms.length; g++) {
+        if (forms[g] && bare(squeeze(forms[g])) === s) return true;
+      }
     }
     return false;
   }
@@ -1047,7 +1065,7 @@
   var savedAttempt = saved.attemptId || null;
 
   var C_GOOD = "#1f6b3b", C_BAD = "#8a1f1f", C_WARN = "#8a5a00", C_GREY = "#555";
-  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" ? l : "en"; }
+  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" || l === "sw" ? l : "en"; }
   function idxOf(a) {
     if (typeof a === "number") return a;
     if (typeof a === "string" && /^\d+$/.test(a)) return +a;

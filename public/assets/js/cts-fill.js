@@ -64,6 +64,15 @@
     for (var f = 0; f < forms.length; f++) {
       if (forms[f] && bare(forms[f]) === a) return true;
     }
+    // Swahili only: an apostrophe inside a word (ng'ombe) may be left out or
+    // typed as another mark; "ngombe" is "ng'ombe" (worker/grading/text.js).
+    if (codes.indexOf("sw") !== -1) {
+      var squeeze = function (s) { return String(s || "").replace(/(\p{L})['\u2019\u02bc\u2018`](?=\p{L})/gu, "$1"); };
+      var s = bare(squeeze(given));
+      for (var g = 0; g < forms.length; g++) {
+        if (forms[g] && bare(squeeze(forms[g])) === s) return true;
+      }
+    }
     return false;
   }
   /* The words compared, less one leading article on either side: a student

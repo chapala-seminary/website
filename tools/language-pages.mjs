@@ -15,6 +15,12 @@ import { frenchInterface } from '../src/lib/french-interface.ts';
 import { frenchPage, frenchRoom, checkRoomDictionary, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
 import { frenchTitle, frCompletionNames, frBookTitle } from '../src/lib/french-titles.ts';
 import roomsData from '../src/data/rooms.json' with { type: 'json' };
+import { DICTIONARY_LANGUAGES } from '../src/lib/languages.mjs';
+import { applyDictionary, writeBrowserScript, notice as dictNotice, showSourceLabel, languageGroupLabel, reportMisses } from './language-dictionary.mjs';
+
+/* Swahili and any later language: interface words from a dictionary
+   (tools/language-dictionary.mjs), not from the layouts. */
+const fromDictionary = (lang) => DICTIONARY_LANGUAGES.includes(lang);
 
 const SITE = 'https://chapalaseminary.org';
 export const REFERENCE = '.astro/language-base';
@@ -31,15 +37,26 @@ function rewriteLinks(root, file, lang, files) {
     }
   }
 }
+/* src/data/interface/rooms/<lang>/<Page>.json: { after, blocks } -- each block
+   goes right after the matching English element, where localizeMarkup pairs it. */
+function addLanguageBlocks(root, file, lang) {
+  const data = `src/data/interface/rooms/${lang}/${file.replace(/\.html$/, '')}.json`;
+  if (!fs.existsSync(data)) return;
+  const { after, blocks } = JSON.parse(fs.readFileSync(data, 'utf8'));
+  const anchors = root.querySelectorAll(after);
+  if (anchors.length !== blocks.length) throw new Error(`${data}: ${blocks.length} blocks, but ${file} has ${anchors.length} "${after}"`);
+  anchors.forEach((node, i) => node.insertAdjacentHTML('afterend', blocks[i]));
+}
 function control(file, lang, sourceLang, translated) {
   const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" translate="no" lang="${l}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
-  const label = lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${sourceLang === 'en' ? 'l’anglais' : NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
-  return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="${lang === 'fr' ? 'Langue' : lang === 'es' ? 'Idioma' : 'Language'}">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
+  const label = fromDictionary(lang) ? showSourceLabel(lang) : lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${sourceLang === 'en' ? 'l’anglais' : NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
+  return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="${fromDictionary(lang) ? languageGroupLabel(lang) : lang === 'fr' ? 'Langue' : lang === 'es' ? 'Idioma' : 'Language'}">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
 }
 export function buildLanguagePages(dir) {
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.html') && !f.startsWith('_'));
   const fileSet = new Set(files);
   fs.rmSync(REFERENCE, { recursive: true, force: true });
+  const uiScripts = Object.fromEntries(DICTIONARY_LANGUAGES.map((l) => [l, writeBrowserScript(dir, l)]));
   fs.mkdirSync(REFERENCE, { recursive: true });
   for (const file of files) fs.copyFileSync(path.join(dir, file), path.join(REFERENCE, file));
   for (const file of files) {
@@ -84,6 +101,8 @@ export function buildLanguagePages(dir) {
       const frenchStatic = lang === 'fr' && !lesson && frenchPage(root, file);
       const room = roomsData.rooms[file.replace(/\.html$/, '')];
       if (lang === 'fr' && room && room.kind !== 'honors') frenchRoom(root, frBookTitle);
+      // A later language's reading-room digests, kept beside the page (tools/import-language-books.mjs).
+      if (fromDictionary(lang)) addLanguageBlocks(root, file, lang);
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       // Translated registration labels do not mean the course lesson is translated.
@@ -104,7 +123,7 @@ export function buildLanguagePages(dir) {
       b.setAttribute('data-page-lang', lang); b.setAttribute('data-source-lang', sourceLang);
       b.setAttribute('data-language-page', file);
       b.setAttribute('data-lang', lang);
-      b.setAttribute('class', (b.getAttribute('class') || '').replace(/\b(?:lang-(?:en|es|both|fr)|show-(?:en|es)|spanish)\b/g, '').trim() + ` lang-${lang}`);
+      b.setAttribute('class', (b.getAttribute('class') || '').replace(new RegExp(`\\b(?:lang-(?:en|es|both|${LANGUAGES.slice(1).join('|')})|show-(?:en|es)|spanish)\\b`, 'g'), '').trim() + ` lang-${lang}`);
       // Metadata is independent of localStorage and available before rendering.
       for (const script of root.querySelectorAll('script')) {
         script.set_content(script.innerHTML.replace(/localStorage\.(getItem|setItem|removeItem)\(location\.pathname/g, 'localStorage.$1(window.CTSLanguage.storagePath'));
@@ -112,15 +131,23 @@ export function buildLanguagePages(dir) {
           script.set_content(script.innerHTML + `\nObject.assign(window.CTS_UNIT, ${JSON.stringify({ sourceLang, langs: LANGUAGES, pageLang: lang })});`);
         }
       }
+      // Before the links are rewritten, so the dictionary's own links go to this language too.
+      if (fromDictionary(lang)) applyDictionary(root, lang, file);
       rewriteLinks(root, file, lang, fileSet);
       if (lang === 'fr') { frenchInterface(root, file); frenchTitle(root, file, lesson, translated); }
       for (const node of h.querySelectorAll('link[rel="alternate"][hreflang], link[rel="canonical"]')) node.remove();
       h.insertAdjacentHTML('beforeend', LANGUAGES.map(l => `<link rel="alternate" hreflang="${l}" href="${SITE}${localeHref(file, l)}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE}${localeHref(file, 'en')}">` + `<link rel="canonical" href="${SITE}${localeHref(file, lang)}"><link rel="stylesheet" href="/assets/css/cts-languages.css">`);
       if (lang === 'fr' && (!translated || !complete)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
+      // A dictionary language is new and in review: none of its pages are indexed yet.
+      if (fromDictionary(lang)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
       // Said in the reader's language. Where the page asks questions, a French
       // reader is told which language the answers are marked in.
       const asks = !!root.querySelector('#questionsContainer, #tb-questions, script[src*="cts-fill.js"], script[src*="cts-engine.js"]');
-      const notice = lang !== sourceLang && !translated ? fallbackNotice(lang, sourceLang, asks) : '';
+      // A dictionary language also says when only part of a lesson is translated.
+      const notice = lang === sourceLang ? ''
+        : fromDictionary(lang) ? (!translated ? dictNotice(lang, asks ? 'untranslatedAnswers' : 'untranslated')
+          : !complete && lesson ? dictNotice(lang, 'partlyTranslated') : '')
+        : !translated ? fallbackNotice(lang, sourceLang, asks) : '';
       const controls = control(file, lang, sourceLang, translated);
       const brandRow = root.querySelector('.topbar .wrap');
       const nav = root.querySelector('.cts-nav .wrap');
@@ -129,6 +156,8 @@ export function buildLanguagePages(dir) {
         brandRow.insertAdjacentHTML('beforeend', controls);
       } else if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
       const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || staticDraft || frenchStatic || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
+      const draftDictionary = fromDictionary(lang) && translated && !!lesson?.blocks.some(block => block.tr?.[lang]?.status === 'machine');
+      if (draftDictionary) b.insertAdjacentHTML('afterbegin', `<aside class="cts-translation-pending" lang="${lang}">${dictNotice(lang, asks ? 'draftAnswers' : 'draft')}</aside>`);
       if (draftFrench) {
         if (!h.querySelector('meta[name="robots"]')) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
         b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; cochez « Afficher l’anglais » pour voir le texte de référence.' + (asks ? ' Vos réponses sont acceptées en français ou en anglais.' : '') + '</aside>');
@@ -137,6 +166,8 @@ export function buildLanguagePages(dir) {
       // Language script must run before any legacy page initialization.
       for (const script of root.querySelectorAll('script[src]')) if (/\/cts-lang\.js(?:\?|$)|^cts-lang\.js(?:\?|$)/.test(script.getAttribute('src'))) script.remove();
       b.insertAdjacentHTML('afterbegin', '<script src="/cts-lang.js"></script>');
+      // Before cts-lang.js and the engines: their messages look words up in it.
+      if (fromDictionary(lang)) b.insertAdjacentHTML('afterbegin', `<script src="${uiScripts[lang]}"></script>`);
       // The degree pages list courses by completion code; give them French names.
       if (lang === 'fr' && root.querySelector('script[src*="cts-cert-names"]'))
         b.insertAdjacentHTML('afterbegin', `<script>window.CTS_COURSE_NAMES_FR=${JSON.stringify(frCompletionNames()).replace(/</g, '\\u003c')};</script>`);
@@ -147,6 +178,10 @@ export function buildLanguagePages(dir) {
     }
   }
   checkRoomDictionary();
+  for (const l of DICTIONARY_LANGUAGES) {
+    const n = reportMisses(l);
+    if (n) console.log(`[cts-language-pages] ${l}: ${n} interface text(s) still English; see .astro/interface-missing-${l}.json`);
+  }
   // Spanish aliases follow the existing inclusion policy. Untranslated and
   // draft French pages are not indexed; only the French home page is listed.
   const map = path.join(dir, 'sitemap.xml');

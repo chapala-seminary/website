@@ -1,4 +1,5 @@
 import { loadThmStudyPlan } from './study-plans.js';
+import { SITE_LANGUAGES } from '../src/lib/languages.mjs';
 import { canonicalCountry } from '../src/lib/countries.mjs';
 /* Chapala Theological Seminary — student records API.
  *
@@ -44,7 +45,7 @@ const TRACK_ALIAS = { ad: 'associate', assoc: 'associate', mth: 'thm' };
 const trackName = (t) => TRACK_ALIAS[t] || t;
 // The language a student reads in, from the language switch (cts_lang). Anything
 // else is dropped rather than refused: it is a preference, not a record.
-const lang = (v) => (['en', 'es', 'fr'].includes(v) ? v : null);
+const lang = (v) => (SITE_LANGUAGES.includes(v) ? v : null);
 const LEVELS = new Set(['course', 'certificate', 'associate', 'thm', 'mdiv']);
 
 /* Crockford base32 without I, L, O and U: no character can be confused with
