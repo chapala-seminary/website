@@ -29,3 +29,17 @@ For each `elecpc{one,two,three,five}.json`, read `body.en`, `body.es`, `body.fr`
 
 ## Governance
 This is a **French reading-navigation pre-release QA defect**, not a rights clearance, doctrinal ruling, or evidence of key leakage. The branch `beta` has not advanced past `c6110458` as of this check, so the row-242 beta-success gate for opening a release PR is still closed. Keep PR #164 draft and email sending OFF. Wayne retains all release, academic and rights decisions.
+
+
+## Post-build transform trace — supersedes the runtime-defect conclusion
+
+A second trace through the exact build integrations shows that the duplicate IDs in the canonical Astro source do **not** survive into the built French page as duplicate DOM IDs.
+
+- `astro.config.mjs` runs `tools/language-pages.mjs` after Astro builds the canonical page.
+- For each `/fr/` page, `buildLanguagePages()` calls `localizeMarkup(..., 'fr', 'en')`.
+- In `src/lib/language-content.ts`, `localizeMarkup()` pairs the English source `ol`/`article` with the French target, keeps the source element and its attributes, inserts the French wording as the reader text, and removes the separate French language node.
+- Consequently the built French textbook page has one TOC link namespace (`#en-1` … `#en-5`) and one corresponding heading namespace. The visible heading wording is French; the optional English source wording is nested as source text. There are no EN/FR duplicate IDs in the final DOM from this source pattern.
+
+Therefore the 20 source-level EN/FR ID repetitions remain a verified canonical-data observation, but they are **not a verified French runtime navigation defect and should not block release or trigger a generator rewrite**. Rewriting only the French source IDs to `fr-*` would be discarded by the current pairing transform because source attributes intentionally win.
+
+Safe follow-up: add a built-output assertion after `language-pages.mjs` that each emitted page has unique IDs and every TOC fragment resolves exactly once. An exact-head browser/build check is still useful, but the prior request to rewrite the four French source ID sets is withdrawn unless built output contradicts this transform trace.
