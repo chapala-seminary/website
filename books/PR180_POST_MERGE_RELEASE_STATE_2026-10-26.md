@@ -56,3 +56,7 @@ Accordingly:
 PR #180 promotes fixed head `c6110458`. Later A-C2/A-C5 source and course work is not included unless it existed in that fixed head. Do not attribute later handoff reports or active elective reconstruction to this release.
 
 PR #164 remains a separate draft and unmerged change. Its correspondence sending must remain off.
+
+## Independent custom-domain health update — 26 Oct late evening
+
+See [`PR180_CUSTOM_DOMAIN_HEALTH_NEGATIVE_CONTROL_2026-10-26.md`](PR180_CUSTOM_DOMAIN_HEALTH_NEGATIVE_CONTROL_2026-10-26.md). A browser-capable fresh public fetch now returned `ok:true` on the custom-domain `/api/health` endpoint, closing the **reachability/health** portion of the earlier HTTP-403 browser-acceptance gap. **Exact release identity remains unverified at the custom domain:** the health JSON does not include a release marker, and a deliberately nonexistent `release=` parameter returned an identical body. Do not infer that a successful query parameter validates a Git SHA; use the already-verified workflow/direct-Worker evidence for the deployed commit until a server-generated release marker is added.
