@@ -54,3 +54,8 @@ Claude must locate relevant paragraphs and bylines within the issues, verify exa
 4. Prepare EN/ES/FR original student materials and digests only from approved passages. Contextualize racial history, women in ministry, interdenominational disputes, miracle claims and changing Pentecostal doctrine fairly.
 5. Put 40-question textbook and reading banks exclusively in private `assessment-keys`. No keys, student records or grade decisions in this public handoff.
 6. Wayne retains academic, legal/rights and production release approval. No automatic merge or deployment.
+
+
+## Staged-release reconciliation (27 October 2026)
+
+A [staged A-C3 contributor-rights reconciliation](../PENTECOSTAL_A_C3_STAGED_RIGHTS_CONTRADICTION_2026-10-27.md) verifies that the release candidate labels the large trilingual compilation “Public-domain original” while retaining separately signed Cashwell, Durham, Worrell and Norton material plus the anonymous visitor report already on hold. This does not clear or determine copyright; it preserves the contributor-by-contributor, original-facsimile and owner/legal gates above and blocks promotion until Wayne decides.
