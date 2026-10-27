@@ -59,3 +59,7 @@ Claude must locate relevant paragraphs and bylines within the issues, verify exa
 ## Staged-release reconciliation (27 October 2026)
 
 A [staged A-C3 contributor-rights reconciliation](../PENTECOSTAL_A_C3_STAGED_RIGHTS_CONTRADICTION_2026-10-27.md) verifies that the release candidate labels the large trilingual compilation “Public-domain original” while retaining separately signed Cashwell, Durham, Worrell and Norton material plus the anonymous visitor report already on hold. This does not clear or determine copyright; it preserves the contributor-by-contributor, original-facsimile and owner/legal gates above and blocks promotion until Wayne decides.
+
+## PC3 staged five-reading and public-bank dependency hold (27 October 2026)
+
+[Verified PC3 reading-room/40-question dependency audit](./PC3_STAGED_FIVE_READING_AND_PUBLIC_BANK_DEPENDENCY_AUDIT_2026-10-27.md) maps all five staged EN/ES/FR digests to exact issue/article attributions and public question ranges. It identifies unsigned editorial dependencies, a provisional-index-to-staged-reading change, and pending facsimile, Mexico contributor-rights, academic five-reading and private-key gates. The report contains **no answers or keys**. Beta advanced to da97604, but that does not clear source/rights or establish a successful exact-head build. Do not promote until the owner/faculty decisions and tests are verified.
