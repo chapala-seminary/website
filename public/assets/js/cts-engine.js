@@ -534,10 +534,11 @@
     var names = pick({
       en: { cert: "Certificate of Ministry", ad: "Associate of Divinity", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." },
       es: { cert: "Certificado de Ministerio", ad: "Asociado en Divinidad", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." },
-      fr: { cert: "Certificat de ministère", ad: "Diplôme associé en théologie", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
+      fr: { cert: "Certificat de ministère", ad: "Diplôme associé en théologie", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." },
+      sw: { cert: "Cheti", ad: "Shahada ya Mshiriki", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
     });
     var label = names[track()] || names.cert;
-    g.textContent = pick({ en: "Welcome, ", es: "Bienvenido, ", fr: "Bienvenue, " }) + s.name + " — " + label;
+    g.textContent = pick({ en: "Welcome, ", es: "Bienvenido, ", fr: "Bienvenue, ", sw: "Karibu, " }) + s.name + " — " + label;
   }
 
   function renderQuestions() {
