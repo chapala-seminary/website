@@ -93,17 +93,20 @@ try {
   eq(await choice.textContent(), 'Kiswahili', 'the toggle says Kiswahili');
   eq(await page.locator('.cts-language-choices a').count(), 4, 'four languages');
   // the redesigned home page and the Study Library offer Kiswahili too
+  // (in a browser of their own: the home page leaves state behind that the lesson checks must not see)
+  const homeCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
+  const home = await homeCtx.newPage();
   for (const file of ['index.html', 'CTSStudyLibrary.html']) {
-    await page.goto(`${BASE}/${file}?cts_lang=en`);
-    const sw = page.locator('.cts-language-choices a[data-cts-lang="sw"]');
+    await home.goto(`${BASE}/${file}?cts_lang=en`);
+    const sw = home.locator('.cts-language-choices a[data-cts-lang="sw"]');
     eq(await sw.count(), 1, `${file} offers Kiswahili`);
     eq((await sw.textContent()).trim(), 'Kiswahili', `${file}: the choice says Kiswahili`);
     ok(await sw.isVisible(), `${file}: Kiswahili is visible at 390px`);
-    eq(await page.locator('.cts-language-choices a').count(), 4, `${file}: four languages`);
-    const res = await page.goto(`${BASE}/sw/${file}`);
+    eq(await home.locator('.cts-language-choices a').count(), 4, `${file}: four languages`);
+    const res = await home.goto(`${BASE}/sw/${file}`);
     eq(res.status(), 200, `/sw/${file}`);
   }
-  await page.goto(`${BASE}/CTSActsUnit1.html?cts_lang=en`);
+  await homeCtx.close();
   await choice.click();
   await page.waitForURL('**/sw/CTSActsUnit1.html');
   eq(await page.evaluate(() => localStorage.getItem('cts_lang')), 'sw', 'the choice is remembered');
