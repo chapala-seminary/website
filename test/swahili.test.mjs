@@ -92,6 +92,18 @@ try {
   const choice = page.locator('.cts-language-choices a[data-cts-lang="sw"]');
   eq(await choice.textContent(), 'Kiswahili', 'the toggle says Kiswahili');
   eq(await page.locator('.cts-language-choices a').count(), 4, 'four languages');
+  // the redesigned home page and the Study Library offer Kiswahili too
+  for (const file of ['index.html', 'CTSStudyLibrary.html']) {
+    await page.goto(`${BASE}/${file}?cts_lang=en`);
+    const sw = page.locator('.cts-language-choices a[data-cts-lang="sw"]');
+    eq(await sw.count(), 1, `${file} offers Kiswahili`);
+    eq((await sw.textContent()).trim(), 'Kiswahili', `${file}: the choice says Kiswahili`);
+    ok(await sw.isVisible(), `${file}: Kiswahili is visible at 390px`);
+    eq(await page.locator('.cts-language-choices a').count(), 4, `${file}: four languages`);
+    const res = await page.goto(`${BASE}/sw/${file}`);
+    eq(res.status(), 200, `/sw/${file}`);
+  }
+  await page.goto(`${BASE}/CTSActsUnit1.html?cts_lang=en`);
   await choice.click();
   await page.waitForURL('**/sw/CTSActsUnit1.html');
   eq(await page.evaluate(() => localStorage.getItem('cts_lang')), 'sw', 'the choice is remembered');
