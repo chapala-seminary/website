@@ -9,7 +9,39 @@ import { loadStore, augmentHtml } from '../tools/french-readings-lib.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(ROOT);
-const { memory } = loadStore();
+const { files } = loadStore();
+// Scope the translation memory to the target room plus shared digest/chrome
+// stores. A global memory can borrow an identical key from a different room,
+// allowing a deleted translation in the target room to pass unnoticed.
+const roomPrefix = 'src/data/french-readings/room/';
+function roomMemory(allFiles, targetStore) {
+  const memory = new Map();
+  for (const { file, data } of allFiles) {
+    if (file.startsWith(roomPrefix) && file !== targetStore) continue;
+    for (const [key, entry] of Object.entries(data.entries || {})) {
+      if (!memory.has(key)) memory.set(key, { ...entry, key, file });
+    }
+  }
+  return memory;
+}
+// Mutation fixture: deleting a target-room entry must not silently fall back
+// to the same key supplied by another room. Shared non-room stores remain usable.
+{
+  const target = roomPrefix + 'CTSElecPC1Readings.json';
+  const other = roomPrefix + 'CTSElecPC2Readings.json';
+  const shared = 'src/data/french-readings/digest/example.json';
+  const fixture = [
+    { file: target, data: { entries: { own: { fr: 'cible' } } } },
+    { file: other, data: { entries: { own: { fr: 'autre' }, foreign: { fr: 'étranger' } } } },
+    { file: shared, data: { entries: { common: { fr: 'commun' } } } },
+  ];
+  const before = roomMemory(fixture, target);
+  if (before.get('own')?.fr !== 'cible' || before.has('foreign') || before.get('common')?.fr !== 'commun')
+    throw new Error('room-scoped translation memory fixture failed');
+  delete fixture[0].data.entries.own;
+  if (roomMemory(fixture, target).has('own'))
+    throw new Error('missing target-room translation was borrowed from another room');
+}
 const failures = [];
 let entriesChecked = 0;
 let machine = 0;
@@ -49,7 +81,7 @@ for (const tradition of ['PC', 'Bap', 'Wes', 'Ref']) {
     // separately translated shared chrome, rather than requiring lang-fr in
     // the EN/ES intermediate source. Any uncovered EN passage is a failure.
     try {
-      const result = augmentHtml(html, memory);
+      const result = augmentHtml(html, roomMemory(files, store));
       if (result.missing !== 0) fail(page, `${result.missing} English blocks lack French`);
       if (result.inserted < 5) fail(page, `only ${result.inserted} French blocks inserted`);
     } catch (err) { fail(page, `French build check threw: ${err.message}`); }
