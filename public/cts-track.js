@@ -53,6 +53,7 @@
   var LABELS = {
     es: { tg: "Cambiar plan", cert: "Certificado de Ministerio", assoc: "Asociado en Divinidad", mdiv: "Maestr\u00eda en Divinidad", thm: "Maestr\u00eda en Teolog\u00eda" },
     fr: { tg: "Changer de parcours", cert: "Certificat de minist\u00e8re", assoc: "Dipl\u00f4me associ\u00e9 en th\u00e9ologie", mdiv: "Master en th\u00e9ologie pastorale (M.Div.)", thm: "Master en th\u00e9ologie (Th.M.)" },
+    sw: { tg: "Badilisha programu", cert: "Cheti", assoc: "Shahada ya Mshiriki", mdiv: "Shahada ya Uzamili ya Huduma ya Kiungu (M.Div.)", thm: "Shahada ya Uzamili ya Teolojia (Th.M.)" },
     en: { tg: "Change track", cert: "Certificate of Ministry", assoc: "Associate of Divinity", mdiv: "Master of Divinity", thm: "Master of Theology" }
   };
   function labels() { return LABELS[pageLang()] || LABELS.en; }

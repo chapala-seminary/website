@@ -127,6 +127,22 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(m.COUNSELING?.[0]?.slug === 'counseling' && m.STORYTEL?.[0]?.slug === 'narrative', 'the single-page courses keep their textbooks');
 }
 
+/* The suite's Worker must not change when a dated activation passes: every test
+   with a date in src/data/required-from.json is held at "not yet required" in
+   test/wrangler.local.jsonc (TEST_REQUIRED_FROM), and the rule itself is tested
+   on pentecostalreadings, held as active since 2001. On 28 Oct 2026, 06:00 UTC,
+   the eight core reading tests' date passed and the suite went red without it. */
+{
+  const fs = await import('node:fs');
+  const dated = JSON.parse(fs.readFileSync(new URL('../src/data/required-from.json', import.meta.url), 'utf8'));
+  const line = fs.readFileSync(new URL('./wrangler.local.jsonc', import.meta.url), 'utf8').split('\n').find((l) => /^\s*"TEST_REQUIRED_FROM":/.test(l));
+  let held = {};
+  try { held = JSON.parse(JSON.parse(line.trim().replace(/^"TEST_REQUIRED_FROM":\s*/, '').replace(/,$/, ''))); } catch (e) {}
+  const missing = Object.keys(dated).filter((slug) => !(slug in held) || Date.parse(held[slug]) <= Date.now());
+  ok(!missing.length, 'every dated test is held at "not yet required" in the suite\'s Worker', missing);
+  ok(held.pentecostalreadings === '2001-01-01T00:00:00Z', 'and the rule is still tested on pentecostalreadings, active since 2001');
+}
+
 if (fails.length) {
   console.log(`FAIL — ${fails.length} of ${checks} required-test checks:`);
   for (const f of fails) console.log('  - ' + f);

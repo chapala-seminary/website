@@ -175,7 +175,8 @@
     expansion: {
       en: "Your answer is too short to evaluate. Please expand your response to explain your understanding of the question.",
       es: "Su respuesta es demasiado corta para evaluarla. Amplíe su respuesta para explicar su comprensión de la pregunta.",
-      fr: "Votre réponse est trop courte pour être évaluée. Veuillez la développer pour expliquer votre compréhension de la question."
+      fr: "Votre réponse est trop courte pour être évaluée. Veuillez la développer pour expliquer votre compréhension de la question.",
+      sw: "Jibu lako ni fupi mno kuweza kutathminiwa. Tafadhali liongeze ili ueleze unavyolielewa swali."
     },
     connecting: { en: "Connecting to the seminary…", es: "Conectando con el seminario…", fr: "Connexion au séminaire…" },
     checking: { en: "Checking…", es: "Comprobando…", fr: "Vérification…" },

@@ -4,6 +4,7 @@
 // Used by tools/sync-grading-keys.mjs (writes them to D1) and by the grader
 // eval (tools/eval-lib.mjs keyFor), so the eval hands the model exactly the
 // data_json the server reads. Pure file reading: no network, no database.
+import { SITE_LANGUAGES } from '../src/lib/languages.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { singleSections, singleRubrics } from './single-pages-lib.mjs';
@@ -17,7 +18,7 @@ const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
  * language with a real model answer (worker/grading/prompt.js pickText). */
 function placeholderModels(sa) {
   const generic = new Set();
-  for (const l of ['en', 'es', 'fr']) {
+  for (const l of SITE_LANGUAGES) {
     const counts = new Map();
     for (const q of sa) { const t = (q.model?.[l] || '').trim(); if (t) counts.set(t, (counts.get(t) || 0) + 1); }
     if ([...counts.values()].some((n) => n >= 3)) generic.add(l);

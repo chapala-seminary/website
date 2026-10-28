@@ -22,6 +22,7 @@
  * and nothing here writes an answer to a log. A student is shown as "student
  * n" (the row number the roster uses) and a name, never as a student code.
  */
+import { SITE_LANGUAGES } from '../src/lib/languages.mjs';
 import { loadKeys, loadAttempt, loadStudent, settle, nowIso } from './grading/attempts.js';
 import { rubricOf, pickText } from './grading/prompt.js';
 import { normAnswer } from './grading/text.js';
@@ -410,7 +411,7 @@ async function rulingDecide(env, kit, user, request) {
   const form = await request.formData().catch(() => null);
   if (!form) return refuse(kit, 400, 'The form could not be read.');
   const qid = text(form, 'qid', 200), lang = text(form, 'lang', 3), norm = String(form.get('norm') ?? '').slice(0, 300), decision = text(form, 'decision', 10);
-  if (!['keep', 'reject'].includes(decision) || !['en', 'es', 'fr'].includes(lang) || !qid || !norm) return refuse(kit, 400, 'Choose keep or reject.');
+  if (!['keep', 'reject'].includes(decision) || !SITE_LANGUAGES.includes(lang) || !qid || !norm) return refuse(kit, 400, 'Choose keep or reject.');
   const c = await one(env, `SELECT 1 AS x FROM grade_cache WHERE qid = ? AND lang = ? AND norm_answer = ? AND verdict = 'right'`, qid, lang, norm);
   if (!c) return refuse(kit, 404, 'The AI has not accepted that answer.');
   await env.DB.prepare(
