@@ -10,14 +10,16 @@ import { loadStore, augmentHtml } from '../tools/french-readings-lib.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(ROOT);
 const { files } = loadStore();
-// Scope the translation memory to the target room plus shared digest/chrome
-// stores. A global memory can borrow an identical key from a different room,
-// allowing a deleted translation in the target room to pass unnoticed.
+// Scope only *elective* room stores to the target. Ordinary reading-room
+// stores supply shared notice/chrome translations required by the build;
+// excluding all room stores produced six false failures per elective room.
+// Another elective must never mask a deleted target-room translation.
 const roomPrefix = 'src/data/french-readings/room/';
+const electivePrefix = roomPrefix + 'CTSElec';
 function roomMemory(allFiles, targetStore) {
   const memory = new Map();
   for (const { file, data } of allFiles) {
-    if (file.startsWith(roomPrefix) && file !== targetStore) continue;
+    if (file.startsWith(electivePrefix) && file !== targetStore) continue;
     for (const [key, entry] of Object.entries(data.entries || {})) {
       if (!memory.has(key)) memory.set(key, { ...entry, key, file });
     }
@@ -29,7 +31,7 @@ function roomMemory(allFiles, targetStore) {
 {
   const target = roomPrefix + 'CTSElecPC1Readings.json';
   const other = roomPrefix + 'CTSElecPC2Readings.json';
-  const shared = 'src/data/french-readings/digest/example.json';
+  const shared = 'src/data/french-readings/room/CTSSharedReadings.json';
   const fixture = [
     { file: target, data: { entries: { own: { fr: 'cible' } } } },
     { file: other, data: { entries: { own: { fr: 'autre' }, foreign: { fr: 'étranger' } } } },
