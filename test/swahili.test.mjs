@@ -176,7 +176,11 @@ try {
   const lp = await locked.newPage();
   await lp.goto(`${BASE}/sw/CTSActsUnit1.html`, { waitUntil: 'load' });
   ok(await lp.waitForFunction(() => document.body.innerText.includes('Kozi hii imefungwa'), null, { timeout: 10000 }).then(() => true, () => false), 'a locked course says so in Swahili');
-  ok(!(await lp.locator('body').innerText()).includes('This course is locked'), 'and not in English');
+  const lockedText = await lp.locator('body').innerText();
+  ok(!lockedText.includes('This course is locked'), 'and not in English');
+  // the track control and the email box are in Swahili too
+  ok(lockedText.includes('Badilisha programu') && !lockedText.includes('Change track'), 'the track control is in Swahili');
+  ok(lockedText.includes('Thibitisha barua pepe') && !lockedText.includes('Confirm your email'), 'the email box is in Swahili');
   await locked.close();
 } finally { await browser.close(); }
 console.log(`PASS — Swahili: ${checks} checks.`);

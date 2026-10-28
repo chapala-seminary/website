@@ -427,18 +427,18 @@
     // or for an address that was typed but is not usable.
     var malformed = !!(student && student.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email);
     var words = malformed
-      ? { en: 'That email address is not valid. Correct it, or clear it and enroll without one. Your work in this browser is still saved.', es: 'Ese correo no es válido. Corríjalo, o bórrelo e inscríbase sin él. Su trabajo en este navegador sigue guardado.', fr: 'Cette adresse e-mail n’est pas valide. Corrigez-la, ou effacez-la et inscrivez-vous sans elle. Votre travail dans ce navigateur reste enregistré.' }
-      : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
+      ? { en: 'That email address is not valid. Correct it, or clear it and enroll without one. Your work in this browser is still saved.', es: 'Ese correo no es válido. Corríjalo, o bórrelo e inscríbase sin él. Su trabajo en este navegador sigue guardado.', fr: 'Cette adresse e-mail n’est pas valide. Corrigez-la, ou effacez-la et inscrivez-vous sans elle. Votre travail dans ce navigateur reste enregistré.', sw: 'Anwani hiyo ya barua pepe si sahihi. Isahihishe, au ifute ujisajili bila barua pepe. Kazi yako kwenye kivinjari hiki bado imehifadhiwa.' }
+      : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.', sw: 'Hatukuweza kuhifadhi usajili wako kwa seminari. Kazi yako imehifadhiwa kwenye kivinjari hiki. Tafadhali jaribu tena.' };
     var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     note.innerHTML = '<p>' + text + '</p>';
     if (malformed) {
       var input = document.createElement('input');
       input.type = 'email'; input.autocomplete = 'email'; input.value = student.email;
-      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
+      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'sw' ? 'Barua pepe' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
       note.appendChild(input);
     }
     var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
-    var labels = { en: malformed ? 'Save and try again' : 'Try again', es: malformed ? 'Guardar y reintentar' : 'Reintentar', fr: malformed ? 'Enregistrer et réessayer' : 'Réessayer' };
+    var labels = { en: malformed ? 'Save and try again' : 'Try again', es: malformed ? 'Guardar y reintentar' : 'Reintentar', fr: malformed ? 'Enregistrer et réessayer' : 'Réessayer', sw: malformed ? 'Hifadhi na ujaribu tena' : 'Jaribu tena' };
     retry.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(labels) : labels.en;
     retry.addEventListener('click', function () {
       var input = note.querySelector('input');
@@ -505,7 +505,7 @@
     p.textContent = words({
       en: 'Email is optional. Add one so we can return your student code, send reminders, and deliver a certificate. You can enroll and keep studying without it.',
       es: 'El correo es opcional. Añádalo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede inscribirse y seguir estudiando sin él.',
-      fr: 'L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle.'
+      fr: 'L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle.', sw: 'Barua pepe si lazima. Iongeze ili tuweze kukurudishia msimbo wako wa mwanafunzi, kukutumia vikumbusho na kukupa cheti. Unaweza kujisajili na kuendelea kusoma bila barua pepe.'
     });
     var status = document.createElement('p');
     status.className = 'cts-email-status';
@@ -513,22 +513,22 @@
     var input = document.createElement('input');
     input.type = 'email'; input.autocomplete = 'email'; input.maxLength = 160;
     input.style.cssText = 'width:16em;max-width:100%;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
-    input.setAttribute('aria-label', words({ en: 'Email', es: 'Correo electrónico', fr: 'Adresse e-mail' }));
+    input.setAttribute('aria-label', words({ en: 'Email', es: 'Correo electrónico', fr: 'Adresse e-mail', sw: 'Barua pepe' }));
     function button(label, primary) {
       var b = document.createElement('button');
       b.type = 'button'; b.textContent = label;
       b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
       return b;
     }
-    var save = button(words({ en: 'Save email', es: 'Guardar correo', fr: 'Enregistrer l’e-mail' }), true);
-    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    var save = button(words({ en: 'Save email', es: 'Guardar correo', fr: 'Enregistrer l’e-mail', sw: 'Hifadhi barua pepe' }), true);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier', sw: 'Endelea kusoma' }), false);
     save.addEventListener('click', function () {
       var value = input.value.trim();
       if (!validEmail(value)) {
         status.textContent = words({
           en: 'Enter a valid email address, or choose Keep studying.',
           es: 'Escriba un correo válido, o elija Seguir estudiando.',
-          fr: 'Saisissez une adresse e-mail valide, ou choisissez Continuer à étudier.'
+          fr: 'Saisissez une adresse e-mail valide, ou choisissez Continuer à étudier.', sw: 'Andika anwani sahihi ya barua pepe, au chagua Endelea kusoma.'
         });
         return;
       }
@@ -552,7 +552,7 @@
     p.textContent = words({
       en: 'Confirm your email so we can return your student code, send reminders, and deliver a certificate. You can keep studying if the message is slow to arrive.',
       es: 'Confirme su correo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede seguir estudiando si el mensaje tarda en llegar.',
-      fr: 'Confirmez votre adresse e-mail afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez continuer à étudier si le message tarde à arriver.'
+      fr: 'Confirmez votre adresse e-mail afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez continuer à étudier si le message tarde à arriver.', sw: 'Thibitisha barua pepe yako ili tuweze kukurudishia msimbo wako wa mwanafunzi, kukutumia vikumbusho na kukupa cheti. Unaweza kuendelea kusoma hata ujumbe ukichelewa kufika.'
     });
     var status = document.createElement('p');
     status.className = 'cts-email-status';
@@ -563,7 +563,7 @@
     input.autocomplete = 'one-time-code';
     input.maxLength = 6;
     input.style.cssText = 'width:8em;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
-    input.setAttribute('aria-label', words({ en: 'Six-digit code', es: 'Código de seis dígitos', fr: 'Code à six chiffres' }));
+    input.setAttribute('aria-label', words({ en: 'Six-digit code', es: 'Código de seis dígitos', fr: 'Code à six chiffres', sw: 'Msimbo wa tarakimu sita' }));
     function button(label, primary) {
       var b = document.createElement('button');
       b.type = 'button';
@@ -571,13 +571,13 @@
       b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
       return b;
     }
-    var sendBtn = button(words({ en: 'Send confirmation', es: 'Enviar confirmación', fr: 'Envoyer la confirmation' }), true);
-    var confirmBtn = button(words({ en: 'Enter code', es: 'Introducir código', fr: 'Saisir le code' }), false);
-    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    var sendBtn = button(words({ en: 'Send confirmation', es: 'Enviar confirmación', fr: 'Envoyer la confirmation', sw: 'Tuma uthibitisho' }), true);
+    var confirmBtn = button(words({ en: 'Enter code', es: 'Introducir código', fr: 'Saisir le code', sw: 'Andika msimbo' }), false);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier', sw: 'Endelea kusoma' }), false);
     var link = document.createElement('a');
     link.href = '/cts-confirm-email.html';
     link.style.color = '#6d2233';
-    link.textContent = words({ en: 'Open the confirmation page', es: 'Abrir la página de confirmación', fr: 'Ouvrir la page de confirmation' });
+    link.textContent = words({ en: 'Open the confirmation page', es: 'Abrir la página de confirmación', fr: 'Ouvrir la page de confirmation', sw: 'Fungua ukurasa wa uthibitisho' });
     sendBtn.addEventListener('click', function () {
       var local = parse(get('cts_student'), {}) || {};
       sendConfirmation(code, local.email || '', note);
@@ -588,7 +588,7 @@
         status.textContent = words({
           en: 'Enter the six-digit code from the email.',
           es: 'Escriba el código de seis dígitos del correo.',
-          fr: 'Saisissez le code à six chiffres reçu par e-mail.'
+          fr: 'Saisissez le code à six chiffres reçu par e-mail.', sw: 'Andika msimbo wa tarakimu sita uliokuja kwenye barua pepe.'
         });
         return;
       }
@@ -604,7 +604,7 @@
         status.textContent = words({
           en: 'That code was not accepted. You can ask for another, or keep studying and try later.',
           es: 'Ese código no fue aceptado. Puede pedir otro, o seguir estudiando e intentarlo más tarde.',
-          fr: 'Ce code n’a pas été accepté. Vous pouvez en demander un autre, ou continuer à étudier et réessayer plus tard.'
+          fr: 'Ce code n’a pas été accepté. Vous pouvez en demander un autre, ou continuer à étudier et réessayer plus tard.', sw: 'Msimbo huo haukukubaliwa. Unaweza kuomba mwingine, au kuendelea kusoma na kujaribu baadaye.'
         });
       });
     });
@@ -625,22 +625,22 @@
       status.textContent = words({
         en: 'Add a valid email address on your registration, then send the confirmation. Your study in this browser is saved.',
         es: 'Añada un correo válido en su registro y luego envíe la confirmación. Su estudio en este navegador está guardado.',
-        fr: 'Ajoutez une adresse e-mail valide à votre inscription, puis envoyez la confirmation. Votre étude dans ce navigateur est enregistrée.'
+        fr: 'Ajoutez une adresse e-mail valide à votre inscription, puis envoyez la confirmation. Votre étude dans ce navigateur est enregistrée.', sw: 'Ongeza anwani sahihi ya barua pepe kwenye usajili wako, kisha tuma uthibitisho. Masomo yako kwenye kivinjari hiki yamehifadhiwa.'
       });
       return Promise.resolve();
     }
-    status.textContent = words({ en: 'Sending the confirmation…', es: 'Enviando la confirmación…', fr: 'Envoi de la confirmation…' });
+    status.textContent = words({ en: 'Sending the confirmation…', es: 'Enviando la confirmación…', fr: 'Envoi de la confirmation…', sw: 'Tunatuma uthibitisho…' });
     return postJson('/email/start', { code: code, email: email, lang: get('cts_lang') }).then(function (r) {
       status.textContent = r.ok
         ? words({
           en: 'We sent a six-digit code. Enter it here. Check the spam folder if it is not in your inbox. You can keep studying while you wait.',
           es: 'Enviamos un código de seis dígitos. Escríbalo aquí. Revise la carpeta de correo no deseado si no está en su bandeja. Puede seguir estudiando mientras espera.',
-          fr: 'Nous avons envoyé un code à six chiffres. Saisissez-le ici. Vérifiez le dossier des indésirables s’il n’est pas dans votre boîte. Vous pouvez continuer à étudier en attendant.'
+          fr: 'Nous avons envoyé un code à six chiffres. Saisissez-le ici. Vérifiez le dossier des indésirables s’il n’est pas dans votre boîte. Vous pouvez continuer à étudier en attendant.', sw: 'Tumetuma msimbo wa tarakimu sita. Uandike hapa. Kama haumo kwenye kikasha chako, angalia folda ya barua taka (spam). Unaweza kuendelea kusoma ukisubiri.'
         })
         : words({
           en: 'We could not send the confirmation just now. You can keep studying and confirm later from the confirmation page.',
           es: 'No pudimos enviar la confirmación en este momento. Puede seguir estudiando y confirmar más tarde en la página de confirmación.',
-          fr: 'Nous n’avons pas pu envoyer la confirmation pour le moment. Vous pouvez continuer à étudier et confirmer plus tard sur la page de confirmation.'
+          fr: 'Nous n’avons pas pu envoyer la confirmation pour le moment. Vous pouvez continuer à étudier et confirmer plus tard sur la page de confirmation.', sw: 'Hatukuweza kutuma uthibitisho sasa hivi. Unaweza kuendelea kusoma na kuthibitisha baadaye kwenye ukurasa wa uthibitisho.'
         });
     });
   }
@@ -741,7 +741,8 @@
     var words = {
       en: 'You already have a student record under this name and email. ' + link('Continue with it') + ' so this progress is kept with it.',
       es: 'Ya tiene un registro de estudiante con este nombre y correo. ' + link('Contin\u00fae con \u00e9l') + ' para que este progreso se guarde en \u00e9l.',
-      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse e-mail. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.'
+      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse e-mail. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.',
+      sw: 'Tayari una kumbukumbu ya mwanafunzi kwa jina hili na barua pepe hii. ' + link('Endelea nayo') + ' ili maendeleo haya yahifadhiwe pamoja nayo.'
     };
     d.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words)
       : '<span class="lang-en en en-only">' + words.en + '</span><span class="lang-es es es-only">' + words.es + '</span>';
