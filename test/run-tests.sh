@@ -293,6 +293,7 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/earn
 API_BASE="http://127.0.0.1:$PORT" node test/staff.test.mjs
 # A failed note is retried; a sent note is not repeated (worker/outreach.js).
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/outreach-retry.test.mjs
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/confirm-invite.test.mjs
 # Coordinator-led paper study: groups, enrollment without email, paper sheets (worker/coord.js).
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/coord.test.mjs
 
