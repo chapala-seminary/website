@@ -1,0 +1,50 @@
+# PC4 five-reading provenance and trilingual correction handoff — draft v0.1
+**Prepared:** 2026-10-28 (Mexico City) · **Owner:** CTS academic faculty / Claude editor · **Status:** SOURCE-REVIEW DRAFT, NOT FACULTY APPROVED, NOT RIGHTS CLEARED
+
+## Exact repository witnesses (read-only)
+- EN/ES reading-room source: `src/body/rooms/CTSElecPC4Readings.html`, main blob `59725b9886633d111fc9289de36a9f59c42e7605`.
+- French translation store: `src/data/french-readings/room/CTSElecPC4Readings.json`, main blob `5a64d5afaefec96e8ab2ff5cb92db581c235a002`; 146 entries; relevant R5 English leaf key `c49d9f19e679`, status `machine`.
+- Public reading-exam prompts: `src/content/readings/elecpcfourreadings.json`, main blob `bcd7af1b9bfcf08e036170c2d8dc2dee8ebc49d1`; 40 trilingual prompts, eight per reading, private answer source declared separately. No private answers were inspected.
+- Textbook: `src/content/textbooks/elecpcfour.json`, main blob `1907e49761435e108b7da224c2571a975d40a89e`; 1912 Internet Archive OCR remains explicitly uncollated.
+- Earlier selection-drift report: `books/PENTECOSTAL_PC4_STAGED_READING_SET_SOURCE_SELECTION_DRIFT_2026-10-27.md` on `handoff/book-sources`.
+- Scheduled activation is intentionally authorized by Wayne: PC4 textbook and reading tests `2026-10-28T06:00:00Z`. **This receipt does not propose or enact a schedule change.** Existing completed awards must be preserved.
+
+## Five-reading manifest: source identity versus verification
+All five are **CTS digests of different portions of one work**, Maria B. Woodworth-Etter, *Acts of the Holy Ghost* (Dallas: John F. Worley, 1912), Internet Archive identifier `actsofholyghosto0000ette`. They are not five independently authored books. All cited page windows below are *provisional OCR-derived references*, not page-image collation.
+
+| Reading / public question range | Current assigned primary chapters (approx. pages) | Verified attribution / additional witnesses | Still missing before faculty/source signoff |
+| --- | --- | --- | --- |
+| R1 / Q1–8 | I–III (23–39) | Woodworth-Etter autobiographical testimony; Quaker/Disciples/Holiness context presented as CTS commentary. | Exact 1912 facsimile pages and wording; named histories for Stone–Campbell, Holiness, COGIC/Azusa; question-by-question source support and private answer variants. |
+| R2 / Q9–16 | XXII (132–139) | Woodworth-Etter's Anderson narrative; USGS supports the 31 Aug 1886 **Charleston** earthquake and regional Indiana shaking, not a proven prayer cause or an independently verified Anderson observation. The source's “Charlestown” should be retained as a textual witness pending collation. | Exact 1912 pages; contemporary Anderson newspaper or USGS locality evidence; named 1880s denominational/press histories; private Q13 city answer check. |
+| R3 / Q17–24 | VII (58–64) | Woodworth-Etter Monroeville narrative. Omitted song stanza cross-links to *The Lifeboat* / *Let Me in the Life-boat* (1883 print attributed to J. Courtney; authorship/tune disputed); do not duplicate receipt or reproduce lyric. | Exact 1912 scan; reliable Finney/mourners' bench and mesmerism secondary references; private question/source checks. |
+| R4 / Q25–32 | XXXIV–XXXV (187–203) | Woodworth-Etter testimony. Azusa missionary-language claim: *The Apostolic Faith*, Sept. 1906; the later scholarly term **xenolalia**: Harold D. Hunter, *JETS* 23.2 (1980), p. 135; Allan Anderson, *Transformation* 23.2 (2006), 107–118 (context). Q32 uses later historiographic terminology, not Woodworth-Etter's own 1912 wording. | Exact 1912 scan; original Oakland newspaper sources for prediction controversy; named history sources; private answer acceptance checks. Modern scholarly articles are for citation/paraphrase, not republication. |
+| R5 / Q33–40 | LXXI (478–486) | Woodworth-Etter sermon; Phoebe Palmer's *The Promise of the Father* (1859); Catherine Booth's *Female Teaching* (1859), revised as *Female Ministry* by 1870. The digest omits separately attributed poem *The Starless Crown*; verify omission boundaries. | Exact 1912 pages; secondary bibliographies and attribution for omitted poem/anecdote; faculty approval of correction below and private bank validation. Public Q33–40 do not ask the disputed Booth title/date. |
+
+## R5 historical-bibliography correction — exact trilingual review package
+**Existing EN/ES source and FR store all carry the same historical mistake:** they place Catherine Booth “of the Salvation Army” and *Female Ministry* in 1859. The organization took the Salvation Army name in 1878; the more precise 1859 pamphlet title was *Female Teaching*, later revised under *Female Ministry*.
+
+**Proposed replacement for the affected sentence only (preserve surrounding narrative, mark translation as not human-reviewed):**
+
+**EN:** “In 1859 the Methodist Holiness teacher Phoebe Palmer published *The Promise of the Father*, and Catherine Booth—later co-founder of the Salvation Army—published *Female Teaching*, a defense of women’s preaching later revised as *Female Ministry* (1870); both appealed to Scripture in support of women preaching.”
+
+**ES:** “En 1859, la maestra metodista de santidad Phoebe Palmer publicó *The Promise of the Father* (La promesa del Padre), y Catherine Booth —quien más tarde cofundaría el Ejército de Salvación— publicó *Female Teaching*, una defensa de la predicación de las mujeres que revisó después como *Female Ministry* (1870); ambas recurrieron a las Escrituras para defender la predicación femenina.”
+
+**FR:** “En 1859, l’enseignante méthodiste du mouvement de sainteté Phoebe Palmer publia *The Promise of the Father* (La promesse du Père), et Catherine Booth — future cofondatrice de l’Armée du Salut — publia *Female Teaching*, un plaidoyer pour la prédication des femmes qu’elle remania ensuite sous le titre *Female Ministry* (1870) ; toutes deux s’appuyèrent sur les Écritures pour défendre la prédication féminine.”
+
+**Editorial caution:** These are replacement *sentences*, not replacements for the entire current R5 paragraph. The French store entry `c49d9f19e679` contains the **whole paragraph**, not just this sentence. Updating EN changes the translation leaf hash; do not edit the EN/ES room alone or silently leave a stale French entry. Use the CTS French-reading import/rekey pipeline, preserve the paragraph's inline `<em>` tag structure, retain machine-draft provenance, and run `test/elective-french-room-parity.test.mjs` plus the full exact-head beta build/tests. Do not label the translation faculty-reviewed.
+
+### Primary/official witnesses and a source disagreement
+1. Salvation Army International Heritage Centre, *Women in Ministry* archival subject guide: lists *Female Teaching* (1861 second edition; no known surviving 1859 first edition) and *Female Ministry* [1870], identifying the latter as a revision. https://www.salvationarmy.org.uk/sites/default/files/resources/2020-10/6.%20Women%20in%20Ministry_0.pdf
+2. *Christian Mission Magazine* (1870) contemporary advertisement calls *Female Ministry* a new and thoroughly revised edition of *Female Teaching*. Verify the precise issue/page before adding a page number to the student text. https://www.salvationarmy.org.uk/sites/default/files/resources/2020-06/CMM%2C%20No.1%2C%20January%201870%2C%20pp1-16.pdf
+3. Salvation Army historical chronology: Christian Mission formed 1865; name “The Salvation Army” from 1878. https://www.salvationarmy.org/history
+4. **Conflicting institutional summary:** a Salvation Army school fact sheet labels the 1859 pamphlet *Female Ministry*, whereas the same institution's specialist archival guide and the contemporary revised-edition notice distinguish the titles. Prefer the bibliographic primary/archival evidence and note the disagreement, rather than claiming all official sources agree. https://www.salvationarmy.org.uk/sites/default/files/resources/2019-11/catherine_fact_file.pdf
+
+### Mexico copyright screen — not legal clearance
+Mexican *Ley Federal del Derecho de Autor*, Article 29(I), generally protects economic rights for the author's life plus 100 years (official Cámara de Diputados text: https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_del_Derecho_de_Autor.pdf). Woodworth-Etter died 1924; Booth died 1890; the original nineteenth-/early-twentieth-century author texts are ordinarily beyond this term in 2026. **Do not extend that conclusion to** a modern transcription, protected editorial additions, third-party poems/hymns, photographs, modern scholarship, or independently authored ES/FR translations. CTS machine-assisted translation provenance is recorded but not yet independently verified. Faculty/authorized rights review remains pending.
+
+## Handoff and acceptance gates
+1. **Claude/editor:** make one beta-only, reviewed EN/ES/FR correction with synchronized French key and provenance; run source/parity tests. No automatic production merge.
+2. **Source reviewer:** complete original-1912 scan collation for R1–R5; add exact printed page and line/paragraph references and full named secondary bibliography to the private faculty source receipts. Never store private answer mappings in this public file.
+3. **Assessment reviewer:** validate the 40 reading questions and accepted answer variants **inside private assessment-keys**, mapping each to exact checked source. AI GitHub account currently receives 404 for that repository; no answer verification is claimed.
+4. **Academic owner:** decide whether five digests from one book adequately meet the independent-reading expectations, and separately approve historical/translation/rights signoffs. An intentionally active required exam is not proof of completed content review.
+5. **Release:** do not merge/deploy, alter examination dates, or change student records or grades on the strength of this draft.
