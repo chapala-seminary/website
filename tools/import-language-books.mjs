@@ -110,19 +110,29 @@ part('textbook', () => {
   const sw = paragraphs(md(`textbook.${LANG}.md`));
   const start = sw.findIndex((p) => /^##\s/.test(p));
   const body = start < 0 ? [] : sw.slice(start);
-  if (body.length !== en.length) { errors.push(`textbook: ${body.length} ${LANG} paragraphs from the first "## " on, ${en.length} in the English`); return () => {}; }
-  const out = en.map((node, i) => {
-    let text = body[i];
-    const heading = /^##\s+(.*)$/.exec(text);
-    if ((node.tagName === 'H2') !== !!heading) { errors.push(`textbook paragraph ${i + 1}: a heading in one language only`); return ''; }
-    if (heading) text = heading[1];
-    const cls = node.getAttribute('class') || '';
-    if (cls.includes('muted')) text = text.replace(/^_(.*)_$/s, '$1');                  // the source line, italic in Markdown
-    if (cls.includes('cts-note')) text = text.replace(/^\*\*([^*]+:)\*\*\s*/, '$1 ');    // "CTS note:" is plain in the English
-    const copy = parse(node.toString()).firstChild;
-    copy.set_content(inline(text));
-    return copy.toString();
+  // chapter by chapter (each from its h2 / "## "): a chapter whose paragraphs
+  // do not pair one to one keeps its English, marked lang="en"
+  const chapters = (list, isHead) => list.reduce((acc, x) => { if (isHead(x) || !acc.length) acc.push([]); acc.at(-1).push(x); return acc; }, []);
+  const enCh = chapters(en, (n) => n.tagName === 'H2'), swCh = chapters(body, (t) => /^##\s/.test(t));
+  if (enCh.length !== swCh.length) { errors.push(`textbook: ${swCh.length} ${LANG} chapters, ${enCh.length} in the English`); return () => {}; }
+  let kept = 0;
+  const out = enCh.map((nodes, c) => {
+    if (nodes.length !== swCh[c].length) { notes.push(`textbook chapter ${c + 1}: ${swCh[c].length} ${LANG} paragraphs, ${nodes.length} English; this chapter stays in English`); return nodes.map((n) => { const copy = parse(n.toString()).firstChild; copy.setAttribute('lang', 'en'); return copy.toString(); }).join(''); }
+    kept++;
+    return nodes.map((node, i) => {
+      let text = swCh[c][i];
+      const heading = /^##\s+(.*)$/.exec(text);
+      if ((node.tagName === 'H2') !== !!heading) { errors.push(`textbook chapter ${c + 1} paragraph ${i + 1}: a heading in one language only`); return ''; }
+      if (heading) text = heading[1];
+      const cls = node.getAttribute('class') || '';
+      if (cls.includes('muted')) text = text.replace(/^_(.*)_$/s, '$1');                  // the source line, italic in Markdown
+      if (cls.includes('cts-note')) text = text.replace(/^\*\*([^*]+:)\*\*\s*/, '$1 ');    // "CTS note:" is plain in the English
+      const copy = parse(node.toString()).firstChild;
+      copy.set_content(inline(text));
+      return copy.toString();
+    }).join('');
   });
+  if (!kept) { errors.push('textbook: no chapter pairs with the English'); return () => {}; }
   return () => { book.body[LANG] = out.join(''); };
 });
 part('textbook test', () => questions('textbook test', numbered(md(`textbook-test.${LANG}.md`), 'textbook test'), keyFile.textbook || [], book.test.questions, bookPriv.test.questions));
@@ -147,26 +157,70 @@ const roomPage = `${prefixOf(CODE)}Readings`, roomSrc = `src/body/rooms/${roomPa
 if (fs.existsSync(roomSrc) && fs.existsSync(path.join(FROM, `readings.${LANG}.md`))) part('reading room', () => {
   const room = parse(fs.readFileSync(roomSrc, 'utf8'), { comment: true });
   const digests = room.querySelectorAll('.lang-en.dg-block');
-  // the digests in the Markdown: from each "### " to the next "---" or "## "
-  const lines = md(`readings.${LANG}.md`).replace(/\r/g, '').split('\n');
-  const parts = []; let cur = null;
-  for (const raw of lines) {
-    const l = raw.trim();
-    if (/^###\s/.test(l) && !/^####/.test(l)) { cur = [l]; parts.push(cur); continue; }
-    if (/^---+$/.test(l) || /^##\s/.test(l)) { cur = null; continue; }
+  // The digests in the Markdown: each from its "## Somo la N" heading (or, in
+  // older files, its "### " title) to the next digest or "---". Headings of
+  // any level inside a digest are its section headings.
+  const lines = md(`readings.${LANG}.md`).replace(/\r/g, '').split('\n').map((l) => l.trim());
+  const isDigest = (l) => /^##\s+\S+(\s+\S+)?\s+\d+\s*:/.test(l) && !/^##\s+\d/.test(l);
+  let parts = [], cur = null;
+  for (const l of lines) {
+    if (isDigest(l)) { cur = [l]; parts.push(cur); continue; }
+    if (/^---+$/.test(l)) { cur = null; continue; }
     if (cur && l) cur.push(l);
   }
+  if (!parts.length) {            // no "## Somo" headings: one digest per "### " title
+    for (const l of lines) {
+      if (/^###\s/.test(l) && !/^####/.test(l) && !/^###\s+\d/.test(l)) { cur = [l]; parts.push(cur); continue; }
+      if (/^---+$/.test(l) || /^##\s/.test(l)) { cur = null; continue; }
+      if (cur && l) cur.push(l);
+    }
+  }
   if (parts.length !== digests.length) { errors.push(`reading room: ${parts.length} ${LANG} digests, ${digests.length} English`); return () => {}; }
+  // Within a digest, the English begins at its title (h1): start the Swahili at
+  // its "### " title when it has one, else at the "## Somo" line itself.
+  const candidates = (blocks) => {
+    const out = [];
+    const t3 = blocks.findIndex((b, i) => i > 0 && /^###\s/.test(b) && !/^#{3,4}\s+\d/.test(b));
+    if (t3 > 0) out.push(blocks.slice(t3));
+    out.push([blocks[0].replace(/^##\s+[^:]*:\s*/, '### '), ...blocks.slice(1)]);
+    out.push(blocks);
+    return out;
+  };
+  // Otherwise pair by structure: the head (title, subtitle, source line,
+  // tags) and, from the "word before you read" note on, the body one to one.
+  // Tags that do not pair keep their English wording.
+  const structural = (blocks, leaves) => {
+    const noteEn = leaves.findIndex((n) => n.tagName === 'DIV' && /dg-note/.test(n.getAttribute('class') || ''));
+    let noteSw = blocks.findIndex((b) => /neno kabla ya kusoma/i.test(b));
+    if (noteSw < 0) noteSw = blocks.findIndex((b, i) => i > 0 && /^(\*\*|\*|_)[^*_]{2,60}[.:](\*\*|\*|_)/.test(b));
+    if (noteEn < 0 || noteSw < 0) return null;
+    const tail = blocks.slice(noteSw);
+    if (tail.length !== leaves.length - noteEn) return null;
+    // Walking back from the note: the tags (a run of "- " lines, or one line of
+    // tags joined by " · "), then the source line, the subtitle and the title.
+    const enHead = leaves.slice(0, noteEn), tags = enHead.filter((n) => n.tagName === 'LI');
+    let i = noteSw - 1, tagText = null;
+    if (/^[-*]\s+/.test(blocks[i])) { const run = []; while (i >= 0 && /^[-*]\s+/.test(blocks[i])) run.unshift(blocks[i--].replace(/^[-*]\s+/, '')); tagText = run; }
+    else if (/ · /.test(blocks[i]) && !/neno/i.test(blocks[i])) { tagText = blocks[i--].replace(/^[^:·]{1,30}:\S*\s*/, '').replace(/^[*_]+|[*_]+$/g, '').split(' · '); }
+    if (!tagText || tagText.length !== tags.length) tagText = tags.map((n) => n.innerHTML);
+    const nonTags = enHead.length - tags.length;          // the title, subtitle and source line
+    if (i + 1 < nonTags) return null;
+    const head = blocks.slice(i + 1 - nonTags, i + 1).map((b, j) => (j === 0
+      ? '### ' + b.replace(/^#{2,6}\s+(?:[^:]*\d\s*:\s*)?/, '').replace(/^\*\*(.*)\*\*$/s, '$1')
+      : b.replace(/^[*_](.*)[*_]$/s, '$1')));
+    return [...head, ...tagText, ...tail];
+  };
   const leavesOf = (d) => d.querySelectorAll('h1,h2,h3,p,li,div.dg-note,div.dg-reflect').filter((n) => !n.querySelector('p,li,h1,h2,h3'));
   const out = digests.map((d, k) => {
-    const blocks = parts[k];
-    if (blocks.length !== leavesOf(d).length) { notes.push(`reading room digest ${k + 1}: ${blocks.length} ${LANG} paragraphs, ${leavesOf(d).length} English; stays in English`); return null; }
+    const blocks = structural(parts[k], leavesOf(d)) || candidates(parts[k]).find((c) => c.length === leavesOf(d).length);
+    if (!blocks) { notes.push(`reading room digest ${k + 1}: ${parts[k].length} ${LANG} paragraphs, ${leavesOf(d).length} English; stays in English`); return null; }
     const copy = parse(d.toString(), { comment: true }).firstChild;
     let bad = false;
     leavesOf(copy).forEach((n, i) => {
-      const t = blocks[i].replace(/^#{3,4}\s+/, '').replace(/^[-*]\s+/, '');
+      const t = blocks[i].replace(/^#{2,6}\s+/, '').replace(/^[-*]\s+/, '');
       const b = (h) => h.replace(/<strong>/g, '<b>').replace(/<\/strong>/g, '</b>');
-      if (n.querySelector('.dg-n')) { const m = /^(\d+\.)\s*(.*)$/.exec(t); if (!m) { bad = true; return; } n.set_content(`<span class="dg-n">${m[1]}</span>${b(inline(m[2]))}`); return; }
+      const num = n.querySelector('.dg-n');
+      if (num) { const bold = /^\*\*\d+\..*\*\*$/.test(t); const m = /^(\d+\.)\s*(.*)$/.exec(bold ? t.slice(2, -2) : t); if (!/^#{2,6}\s/.test(blocks[i]) && !bold) { bad = true; return; } n.set_content(`<span class="dg-n">${m ? m[1] : num.innerHTML}</span>${b(inline(m ? m[2] : t))}`); return; }
       n.set_content(b(inline(t)));
     });
     if (bad) { notes.push(`reading room digest ${k + 1}: its headings do not pair with the English; stays in English`); return null; }
