@@ -8,6 +8,7 @@ import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import { frTextbookTitle } from '../lib/french-titles.ts';
 import EditorialNotice from '../components/EditorialNotice.astro';
+import { DICTIONARY_LANGUAGES } from '../lib/languages.mjs';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -30,6 +31,8 @@ const toc = (html: string) =>
   [...html.matchAll(/<(h2|h3) id="([^"]+)">([\s\S]*?)<\/\1>/g)]
     .map((m) => ({ level: m[1], id: m[2], text: m[3].replace(/<[^>]+>/g, '') }));
 const contents = { en: toc(book.body.en), es: toc(book.body.es), fr: book.body.fr ? toc(book.body.fr) : null };
+// a later language's book (Swahili first): its own article and contents, shown only on its pages
+const later = DICTIONARY_LANGUAGES.filter((l) => book.body[l]).map((l) => ({ lang: l, body: book.body[l], contents: toc(book.body[l]) }));
 const web = ('html' in book.files ? book.files.html : undefined);
 const pdf = ('pdf' in book.files ? book.files.pdf : undefined);
 // assigned readings (excerpts or whole chapters): the body of this page, in both languages
@@ -84,11 +87,13 @@ const excerpts = ('excerpts' in book.files);
       {contents.es.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
     </ol>{contents.fr && <ol class="lang-fr">
       {contents.fr.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
-    </ol>}
+    </ol>}{later.map((x) => <ol class={`lang-${x.lang}`}>
+      {x.contents.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
+    </ol>)}
   </nav>
 
   <article class="card tb-book lang-en" lang="en" set:html={book.body.en} />
-  <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />{book.body.fr && <article class="card tb-book lang-fr" lang="fr" set:html={book.body.fr} />}
+  <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />{book.body.fr && <article class="card tb-book lang-fr" lang="fr" set:html={book.body.fr} />}{later.map((x) => <article class={`card tb-book lang-${x.lang}`} lang={x.lang} set:html={x.body} />)}
 
   <p class="small muted tb-edition" data-cts-chrome>
       {excerpts ? <><span class="lang-en">Assigned readings from a historical public-domain edition ({book.edition}); the Spanish is a CTS translation.</span><span class="lang-es">Lecturas asignadas de una edición histórica de dominio público ({book.edition}); el español es una traducción del STC.</span><span class="lang-fr">Lectures assignées tirées d’une édition historique du domaine public ({book.edition}) ; {book.body.fr ? 'l’espagnol et le français sont des traductions du STC.' : 'l’espagnol est une traduction du STC.'}</span></> : web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por el STC.</span><span class="lang-fr">{web.fr ? 'Édition historique du domaine public ; les chapitres assignés traduits par le STC en espagnol et en français sont indiqués ci-dessus.' : 'Édition historique du domaine public ; les chapitres assignés traduits en espagnol par le STC sont indiqués ci-dessus.'}</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span><span class="lang-fr">Édition STC du manuel {book.edition}. Le fichier Word fait foi ; cette page a été produite à partir de lui.</span></>}

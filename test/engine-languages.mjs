@@ -9,7 +9,7 @@ let checks = 0;
 try {
   const page = await browser.newPage();
   await page.setContent('<html lang="fr"><body data-lang="fr" class="lang-fr"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>');
-  await page.evaluate(() => { Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' }); window.CTS_UNIT = { course: 'language-test', unit: 1, totalUnits: 1, sourceLang: 'en', langs: ['en', 'es', 'fr', 'uk'], mc: [], sa: [], fill: [] }; });
+  await page.evaluate(() => { Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' }); window.CTS_UNIT = { course: 'language-test', unit: 1, totalUnits: 1, sourceLang: 'en', langs: ['en', 'es', 'fr', 'uk', 'sw'], mc: [], sa: [], fill: [] }; });
   await page.addScriptTag({ path: path.resolve('public/assets/js/cts-engine.js') });
   await page.evaluate(() => document.dispatchEvent(new Event('DOMContentLoaded')));
   const cases = await page.evaluate(() => {
@@ -52,8 +52,27 @@ try {
     const spanish = { answer: { en: 'year', es: 'año' } };
     check('Spanish ñ is kept', e.fillRight(spanish, 'ano'), false);
     check('Spanish ñ decomposed', e.fillRight(spanish, 'an\u0303o'), true);
+    // Swahili (Kiswahili). Noun-class prefixes are part of the word (m-tume,
+    // mi-tume), there are no accents to fold, and the apostrophe in ng'ombe is
+    // part of the spelling: typed straight, curly or left out, it is the same word.
+    document.body.className = 'lang-sw'; document.body.dataset.lang = 'sw';
+    const swq = { answer: { en: 'apostle', sw: 'mtume' }, accept: { sw: ['mjumbe'] } };
+    for (const answer of ['mtume', 'MTUME', ' Mtume. ', 'mjumbe', 'apostle'])
+      check(`Swahili fill: ${answer}`, e.fillRight(swq, answer), true);
+    for (const answer of ['mitume', 'tume', 'wajumbe', 'apóstol', 'apôtre', ''])
+      check(`Swahili wrong fill (noun class or other language): ${answer}`, e.fillRight(swq, answer), false);
+    const cattle = { answer: { en: 'cattle', sw: "ng'ombe" } };
+    for (const answer of ["ng'ombe", 'ng’ombe', 'ngʼombe', 'ngombe', "NG'OMBE", 'cattle'])
+      check(`Swahili apostrophe: ${answer}`, e.fillRight(cattle, answer), true);
+    check('Swahili: no accent folding adds a match', e.fillRight({ answer: { en: 'pray', sw: 'omba' } }, 'ómba'), true);
+    const swsa = { keywords: { en: ['apost', 'church', 'faith'], sw: ['mtume', 'kanisa', ['imani', 'kuamini']] } };
+    check('Swahili keywords', e.shortAnswerRight(swsa, 'Mtume alilijenga kanisa kwa imani.'), true);
+    check('Swahili keywords with English source', e.shortAnswerRight(swsa, 'The apostle built the church by faith.'), true);
+    check('Swahili keywords: two concepts are not three', e.shortAnswerRight(swsa, 'mtume kanisa'), false);
+    check("Swahili keyword apostrophe", e.shortAnswerRight({ keywords: { sw: ["ng'ombe", 'shamba', 'maji'] } }, 'ngombe shambani maji'), true);
     document.body.className = 'lang-en'; document.body.dataset.lang = 'en';
     check('Declared English page accepts its language only', e.fillRight(q, 'apóstol'), false);
+    check('English page: Swahili answer not accepted', e.fillRight(swq, 'mtume'), false);
     delete window.CTS_UNIT.sourceLang;
     check('Legacy English page still accepts Spanish fill', e.fillRight(q, 'apóstol'), true);
     document.body.className = 'lang-fr'; document.body.dataset.lang = 'fr';

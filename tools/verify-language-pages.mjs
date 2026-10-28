@@ -4,7 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'node-html-parser';
 import { shell } from '../src/lib/shell.ts';
+import { SITE_LANGUAGES, DICTIONARY_LANGUAGES } from '../src/lib/languages.mjs';
 const dir = process.argv[2] || 'dist';
+// The full checks cover the three layout languages; a dictionary language
+// (Swahili) gets the shared checks below: its language, its choices, its links.
 const languages = ['en', 'es', 'fr'];
 // Pages with no <body> (Google's site-verification file) get no language
 // versions (tools/language-pages.mjs), so there is nothing to check.
@@ -46,9 +49,9 @@ for (const file of files) {
     if (!body) continue;
     ok(root.querySelector('html').getAttribute('lang') === lang, `${route}: html language`);
     ok(body.getAttribute('data-page-lang') === lang, `${route}: page language`);
-    ok(root.querySelectorAll('[data-cts-lang]').length === 3, `${route}: three language choices`);
+    ok(root.querySelectorAll('[data-cts-lang]').length === SITE_LANGUAGES.length, `${route}: ${SITE_LANGUAGES.length} language choices`);
     ok(!root.querySelector('button[data-cts-lang="both"]'), `${route}: obsolete Both control`);
-    for (const code of languages) {
+    for (const code of SITE_LANGUAGES) {
       const expected = `https://chapalaseminary.org/${code === 'en' ? '' : code + '/'}${file}`;
       ok(root.querySelector(`link[hreflang="${code}"]`)?.getAttribute('href') === expected, `${route}: ${code} alternate`);
     }
@@ -98,7 +101,18 @@ for (const file of files) {
       ok(!!root.querySelector('meta[name="robots"][content="noindex,follow"]'), `${route}: untranslated fallback indexable`);
     }
   }
+  for (const lang of DICTIONARY_LANGUAGES) {
+    const route = `${lang}/${file}`;
+    const root = parse(fs.readFileSync(path.join(dir, route), 'utf8'), {parseNoneClosedTags: true});
+    const body = root.querySelector('body');
+    if (!body) continue;
+    ok(root.querySelector('html').getAttribute('lang') === lang, `${route}: html language`);
+    ok(body.getAttribute('data-page-lang') === lang, `${route}: page language`);
+    ok(root.querySelectorAll('[data-cts-lang]').length === SITE_LANGUAGES.length, `${route}: ${SITE_LANGUAGES.length} language choices`);
+    for (const code of SITE_LANGUAGES)
+      ok(root.querySelector(`link[hreflang="${code}"]`)?.getAttribute('href') === `https://chapalaseminary.org/${code === 'en' ? '' : code + '/'}${file}`, `${route}: ${code} alternate`);
+  }
 }
-console.log(`${files.length} pages × ${languages.length} languages; ${checks} checks`);
+console.log(`${files.length} pages × ${languages.length + DICTIONARY_LANGUAGES.length} languages; ${checks} checks`);
 if (fails.length) { console.error(`FAIL — ${fails.length}:\n` + fails.slice(0, 40).join('\n')); process.exitCode = 1; }
 else console.log('PASS — metadata, links and every retained lesson block match their source files.');

@@ -2,6 +2,7 @@
  * Source visibility, preference migration and progress are checked separately. */
 import fs from 'node:fs';
 import { chromium } from 'playwright';
+import { SITE_LANGUAGES } from '../src/lib/languages.mjs';
 const BASE = process.argv[2] || 'http://127.0.0.1:8897';
 // Pages with no <body> (Google's site-verification file) get no language
 // versions (tools/language-pages.mjs), so there is nothing to check.
@@ -58,7 +59,7 @@ async function worker() {
           wrong:[...document.querySelectorAll('.cts-reading')].filter(e=>visible(e)&&![document.body.dataset.sourceLang,document.body.dataset.pageLang].includes(e.getAttribute('lang'))).length};
       });
       if (!state.bodyVisible) fails.push(`${label}: page body is hidden or empty`);
-      if (state.lang !== lang || state.controls !== 3) fails.push(`${label}: language or controls ${JSON.stringify(state)}`);
+      if (state.lang !== lang || state.controls !== SITE_LANGUAGES.length) fails.push(`${label}: language or controls ${JSON.stringify(state)}`);
       if (state.wide > 1) fails.push(`${label}: sideways scroll ${state.wide}px`);
       // Fallback pages can have translated dynamic controls but a disabled
       // source switch. Hidden source nodes have zero rectangles; only check

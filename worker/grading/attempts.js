@@ -11,6 +11,7 @@ import { courseShortfall, textbookShortfall, resolveCourse, studentLevel } from 
 import { testContext } from '../test-context.js';
 import { notifyBatch } from '../notify.js';
 import { exactFill, normAnswer, wordCount, copiedOnly } from './text.js';
+import { SITE_LANGUAGES } from '../../src/lib/languages.mjs';
 import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeInstruction,
   MIN_SA_WORDS, MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP } from './rules.js';
 import { gradeBatch, modelsOf, GRADING_BUDGET_MS } from './model.js';
@@ -524,7 +525,7 @@ async function reviewPassagesOf(env, attempt, scope, st) {
 function promptLanguages(prompt) {
   if (!prompt || typeof prompt !== 'object' || Array.isArray(prompt)) return {};
   const out = {};
-  for (const l of ['en', 'es', 'fr']) if (typeof prompt[l] === 'string' && prompt[l]) out[l] = prompt[l];
+  for (const l of SITE_LANGUAGES) if (typeof prompt[l] === 'string' && prompt[l]) out[l] = prompt[l];
   return out;
 }
 export async function promptsFor(env, scope, qids) {

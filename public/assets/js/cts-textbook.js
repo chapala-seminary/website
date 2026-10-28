@@ -60,6 +60,12 @@
   function jget(k, d) { try { return JSON.parse(lsGet(k)) || d; } catch (e) { return d; } }
   function el(id) { return document.getElementById(id); }
   function isEs() { return !!(document.body && document.body.classList.contains("lang-es")); }
+  /* The languages a fill-in answer is accepted in: French and later languages
+     take the reader's and English; old pages keep English and Spanish. */
+  function readerCodes() {
+    var l = window.CTSLanguage && window.CTSLanguage.lang;
+    return l === "fr" || l === "sw" ? [l, "en"] : ["en", "es"];
+  }
   function bi(o) { if (window.CTSLanguage) return window.CTSLanguage.bi(o); return '<span class="lang-en">' + o.en + '</span><span class="lang-es">' + o.es + "</span>"; }
   function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
 
@@ -282,7 +288,7 @@
       reviewHost.innerHTML = "";
       if (!snapshot || !Array.isArray(snapshot.draw) || (!Array.isArray(snapshot.answers) && !Array.isArray(snapshot.missed))) return;
       if (LIVE && !snapshot.missed) return;
-      var codes = snapshot.codes || (window.CTSLanguage && window.CTSLanguage.lang === "fr" ? ["fr", "en"] : ["en", "es"]);
+      var codes = snapshot.codes || readerCodes();
       var items = "";
       snapshot.draw.forEach(function (index, position) {
         var q = T.questions[index];
@@ -291,7 +297,7 @@
         // server sends them with an attempt that passed (snapshot.passages, by qid).
         // A failed attempt lists what was missed, with the way back to the book.
         var passage = LIVE ? (snapshot.passages && snapshot.passages[q.qid]) || null : bank && bank.slug === slug && bank.questions[index];
-        items += '<article class="tb-review-item"><h3>' + bi({en:"Question " + (position+1),es:"Pregunta " + (position+1),fr:"Question " + (position+1)}) + '</h3><p>' + bi({en:esc(q.prompt.en),es:esc(q.prompt.es),fr:q.prompt.fr ? esc(q.prompt.fr) : undefined}) + '</p>';
+        items += '<article class="tb-review-item"><h3>' + bi({en:"Question " + (position+1),es:"Pregunta " + (position+1),fr:"Question " + (position+1)}) + '</h3><p>' + bi({en:esc(q.prompt.en),es:esc(q.prompt.es),fr:q.prompt.fr ? esc(q.prompt.fr) : undefined,sw:q.prompt.sw ? esc(q.prompt.sw) : undefined}) + '</p>';
         if (passage) {
           items += '<p>' + bi(passage.kind === 'lesson' ? {en:"The course lesson explains this question’s principle or context:",es:"La lección del curso explica el principio o contexto de esta pregunta:",fr:"La leçon du cours explique le principe ou le contexte de cette question :"} : {en:"The assigned reading explains this question’s principle or context:",es:"La lectura asignada explica el principio o contexto de esta pregunta:",fr:"La lecture assignée explique le principe ou le contexte de cette question :"}) + '</p><blockquote lang="' + esc(passage.lang) + '">';
           passage.paragraphs.forEach(function (paragraph) { items += '<p>' + esc(paragraph) + '</p>'; });
@@ -318,7 +324,7 @@
         .filter(function (a) { return String(a.answer || "").trim(); });
       var submittedAnswers = state.fillAnswers.slice();
       var r = fill.submit();
-      var reviewCodes = window.CTSLanguage && window.CTSLanguage.lang === "fr" ? ["fr", "en"] : ["en", "es"];
+      var reviewCodes = readerCodes();
       state.review = { draw: state.draw.slice(), answers: submittedAnswers, codes: reviewCodes,
         missed: state.draw.map(function (index,position) { return !window.CTSFill.fillRight(T.questions[index],submittedAnswers[position],reviewCodes); }) };
       save();
@@ -397,7 +403,9 @@
         if (typeof src.en === "string" && src.en) prompt.en = src.en;
         if (typeof src.es === "string" && src.es) prompt.es = src.es;
         if (typeof src.fr === "string" && src.fr) prompt.fr = src.fr;
-        if (!prompt.en && !prompt.es && !prompt.fr) continue;
+        // a later language (Swahili first, src/lib/languages.mjs)
+        if (typeof src.sw === "string" && src.sw) prompt.sw = src.sw;
+        if (!prompt.en && !prompt.es && !prompt.fr && !prompt.sw) continue;
         T.questions[i] = { qid: item.qid, prompt: prompt };
         if (i + 1 > max) max = i + 1;
         kept.push({ qid: item.qid, prompt: prompt });
@@ -533,7 +541,7 @@
         });
       });
     }
-    function serverLang() { var l = document.documentElement.lang; return l === "es" || l === "fr" ? l : (document.body.classList.contains("lang-es") ? "es" : window.CTSLanguage && window.CTSLanguage.lang === "fr" ? "fr" : "en"); }
+    function serverLang() { var l = document.documentElement.lang; return l === "es" || l === "fr" || l === "sw" ? l : (document.body.classList.contains("lang-es") ? "es" : window.CTSLanguage && (window.CTSLanguage.lang === "fr" || window.CTSLanguage.lang === "sw") ? window.CTSLanguage.lang : "en"); }
 
     function liveSubmit() {
       if (lockRemaining()) { renderStatus(); return; }

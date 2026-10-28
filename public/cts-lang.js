@@ -4,7 +4,7 @@
   "use strict";
   var body = document.body;
   if (!body || !body.dataset.pageLang) return;
-  var codes = ["en", "es", "fr"], current = body.dataset.pageLang;
+  var codes = ["en", "es", "fr", "sw"], current = body.dataset.pageLang;
   var source = body.dataset.sourceLang || "en", file = body.dataset.languagePage;
   var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
   var set = function (k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
@@ -35,7 +35,10 @@
     location.assign(href(lang));
   }
   function bi(text) {
-    var target = text[current], actual = target == null || target === "" ? source : current;
+    var target = text[current];
+    // Interface words of a later language come from its dictionary (window.CTSUI).
+    if ((target == null || target === "") && window.CTSUI && text.en != null) target = window.CTSUI.t(text.en, current);
+    var actual = target == null || target === "" ? source : current;
     return '<span class="cts-text-pair"><span class="cts-reading" lang="' + actual + '">' +
       (target || text[source] || "") + '</span>' +
       (current !== source && target && text[source] ? '<span class="cts-source" lang="' + source + '">' + text[source] + '</span>' : '') + '</span>';
@@ -131,7 +134,7 @@
 
   function resolve() {
     var s = lsGet(KEY);
-    if (s === 'es' || s === 'en' || s === 'fr') return s; // an explicit prior choice wins (French is kept, not reset)
+    if (s === 'es' || s === 'en' || s === 'fr' || s === 'sw') return s; // an explicit prior choice wins (French is kept, not reset)
     var n = (navigator.language || navigator.userLanguage || '').toLowerCase();
     return n.indexOf('es') === 0 ? 'es' : 'en';          // else default by browser language
   }

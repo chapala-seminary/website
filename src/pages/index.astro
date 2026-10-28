@@ -6,12 +6,20 @@
  * is half a megabyte of hand-written markup, inline styles and base64 images;
  * rewriting it was not the job. Replacing the 44 hand-maintained course cards
  * with generated ones was.
+ *
+ * Issue #186 (Oct 2026) made the page shorter and mobile-first: the Register
+ * button on the first screen, programs as short cards with the requirements
+ * verbatim in a fold, the seven foundation courses first and the subject
+ * groups folded (<details>, so the cards stay in the page for search engines,
+ * screen readers and the gating script), and the textbook and reading
+ * directories moved to CTSStudyLibrary.html.
  */
 import { getCollection } from 'astro:content';
 import groups from '../data/catalog-groups.json';
 import intro from '../data/catalog-intro.json';
 import catalog from '../../worker/catalog.json';
 import { requiredTests } from '../lib/required-tests.ts';
+import { FOUNDATION, completionCode } from '../lib/seo';
 
 const head = (await import('../body/index/head.html?raw')).default;
 const tail = (await import('../body/index/tail.html?raw')).default;
@@ -20,35 +28,9 @@ const courses = (await getCollection('courses'))
   .map((e) => e.data)
   .sort((a, b) => a.order - b.order);
 
-// The Master's textbooks (src/content/textbooks), listed after the courses.
-// Each must belong to a course on this page, or its card has nowhere to point.
-// Resource availability is independent of activation; test pages explain the current rule.
-const textbooks = (await getCollection('textbooks')).map((e) => e.data)
-  .sort((a, b) => a.number - b.number);
-const cardOf = new Map(courses.map((c) => [c.code, c]));
-for (const t of textbooks)
-  if (!cardOf.has(t.course))
-    throw new Error(`textbook ${t.slug} belongs to course "${t.course}", which has no catalog card`);
-// The required readings (src/content/readings), listed with the textbooks:
-// the same rule on the master's tracks, open to every student.
-// Include staged tests too: students need the assigned readings before activation.
-const readings = (await getCollection('readings')).map((e) => e.data)
-  .sort((a, b) => a.title.en.localeCompare(b.title.en));
-for (const r of readings)
-  if (!cardOf.has(r.course))
-    throw new Error(`required readings ${r.slug} belong to course "${r.course}", which has no catalog card`);
-// The 45 core courses' readings, and the denominational electives' (slug
-// "elec…", tools/build-elective-readings.mjs) in a list of their own as each
-// is ready: their test is optional (worker/test-activation.js).
-const coreReadings = readings.filter((r) => !r.slug.startsWith('elec'));
-const coreTextbooks = textbooks.filter((t) => !t.slug.startsWith('elec'));
-const electiveTextbooks = textbooks.filter((t) => t.slug.startsWith('elec'));
-const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
-
-// The count in words, as the lead above it spells its counts.
-const WORDS_EN = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
-const WORDS_ES = ['Ningún', 'Un', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'];
-const readingCount = { en: WORDS_EN[readings.length] ?? String(readings.length), es: WORDS_ES[readings.length] ?? String(readings.length) };
+// The textbook and reading directories are on the Study Library page
+// (src/pages/CTSStudyLibrary.astro; issue #186), which checks that each
+// belongs to a course on this page.
 
 // Invariants the hand-written catalog had no way to enforce.
 if (courses.length !== intro.statedCount)
@@ -62,7 +44,15 @@ for (const c of courses)
   if (!known.has(c.group))
     throw new Error(`${c.code} is in group "${c.group}", which has no heading in catalog-groups.json`);
 
+// The seven foundation courses, shown first in the order the welcome names
+// them (issue #186). Their cards stay in their subject groups too; these are
+// a.fcard, not a.course, so the gating script and its checks count each
+// course once.
+const foundation = FOUNDATION.map((code) => courses.find((c) => completionCode(c) === code));
+if (foundation.some((c) => !c))
+  throw new Error(`a foundation course has no catalog card: ${FOUNDATION.filter((_, i) => !foundation[i]).join(', ')}`);
 const byGroup = groups.map((g) => ({ ...g, courses: courses.filter((c) => c.group === g.id) }));
+const firstElective = groups.find((g) => g.id.endsWith('-electives'))?.id;
 const empty = byGroup.filter((g) => !g.courses.length);
 if (empty.length)
   throw new Error(`group(s) with a heading but no courses: ${empty.map((g) => g.id).join(', ')}`);
@@ -84,63 +74,45 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
     <h2 class="section"><span class="en">{intro.heading.en}</span><span class="es">{intro.heading.es}</span></h2>
     <p><span class="en">{intro.lead.en}</span>
     <span class="es">{intro.lead.es}</span></p>
-{byGroup.map((g) => (
-    <div class="catgroup">
-      <h3><span class="en">{g.title.en}</span><span class="es">{g.title.es}</span></h3>
+    <div class="foundation-first">
+      <h3><span class="en">Start Here: The Seven Foundation Courses</span><span class="es">Comience Aquí: los Siete Cursos de Fundamento</span></h3>
+      <p><span class="en">Every student begins with these seven, in any order. The rest of the catalog opens once they are complete.</span><span class="es">Todo estudiante comienza con estos siete, en cualquier orden. El resto del catálogo se abre al completarlos.</span></p>
+      <div class="grid">
+        {foundation.map((c) => (
+        <a class="fcard" href={c!.entry}><div class="c-title"><span class="en">{c!.title.en}</span><span class="es">{c!.title.es}</span></div><div class="c-desc"><span class="en">{c!.description.en}</span><span class="es">{c!.description.es}</span></div></a>
+        ))}
+      </div>
+    </div>
+    <div class="catsub">
+      <h3><span class="en">All Courses by Subject</span><span class="es">Todos los Cursos por Materia</span></h3>
+      <p><span class="en">Open a group to see its courses.</span><span class="es">Abra un grupo para ver sus cursos.</span></p>
+    </div>
+{byGroup.map((g) => (<>
+    {g.id === firstElective && (
+    <div class="catsub">
+      <h3><span class="en">Denominational Electives</span><span class="es">Electivas Denominacionales</span></h3>
+      <p><span class="en">Twenty electives in four traditions, five courses in each.</span><span class="es">Veinte electivas en cuatro tradiciones, cinco cursos en cada una.</span></p>
+    </div>
+    )}
+    <div class="catgroup"><details class="catfold" id={`group-${g.id}`}>
+      <summary><h3><span class="en">{g.title.en}</span><span class="es">{g.title.es}</span></h3><span class="catcount">{g.courses.length}</span></summary>
       <div class="grid">
         {g.courses.map((c) => (
         <a class="course" href={c.entry}><div class="c-title"><span class="en">{c.title.en}</span><span class="es">{c.title.es}</span></div><div class="c-desc"><span class="en">{c.description.en}</span><span class="es">{c.description.es}</span></div><span class="c-go"><span class="en">Begin →</span><span class="es">Comenzar →</span></span></a>
         ))}
       </div>
-    </div>
-))}
+    </details></div>
+</>))}
   </section>
-<section id="textbooks">
-    <style is:inline>
-      #textbooks .tb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px;margin-top:14px}
-      #textbooks a.textbook{display:block;min-width:0;background:#fffdf9;border:1px solid var(--line,#e2d6c9);border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit}
-      #textbooks a.textbook:hover{border-color:var(--gold,#b08324)}
-      #textbooks .tb-title{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--oxblood,#6d2233);line-height:1.12}
-      #textbooks .tb-for{font-size:.88rem;color:var(--muted,#6b5b4d);margin-top:5px;line-height:1.45}
-      #textbooks .tb-resource{display:flex;flex-direction:column}
-      #textbooks .tb-resource>a.textbook{flex:1}
-      #textbooks .tb-test-link{padding:10px 16px;color:var(--oxblood,#5a1f1f);font-weight:bold}
-      #textbooks .tb-go{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#6b5b4d);margin-top:11px;display:inline-block}
-    </style>
-    <div class="kicker"><span class="en">Required Reading</span><span class="es">Lecturas Obligatorias</span></div>
-    <h2 class="section"><span class="en">Master's Textbooks</span><span class="es">Libros de Texto de Maestría</span></h2>
-    <p><span class="en">Each of our 45 core courses has a textbook and a separate required-reading test. Both tests are required for new M.Div. and Th.M. course completions after activation; valid earlier master’s completions remain valid. The books and tests are open to every student and optional for Certificate and Associate students.</span>
-    <span class="es">Cada uno de nuestros 45 cursos básicos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
-    <div class="tb-grid">
-      {coreTextbooks.map((t) => (
-        <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
-      ))}
+<section id="library">
+    <div class="kicker"><span class="en">Textbooks, Readings and Resources</span><span class="es">Libros, Lecturas y Recursos</span></div>
+    <h2 class="section"><span class="en">Study Library</span><span class="es">Biblioteca de Estudio</span></h2>
+    <p><span class="en">The textbook and required readings for each course, each with a link to its test, are listed in the Study Library, together with Reading With Honors and our free study resources.</span><span class="es">El libro de texto y las lecturas requeridas de cada curso, cada uno con un enlace a su examen, están en la Biblioteca de Estudio, junto con la Lectura Con Honores y nuestros recursos de estudio gratuitos.</span></p>
+    <div class="lib-links">
+      <a class="cta" href="CTSStudyLibrary.html"><span class="en">Open the Study Library →</span><span class="es">Abrir la Biblioteca de Estudio →</span></a>
+      <a href="CTSStudyLibrary.html#honors-note"><span class="en">Reading With Honors</span><span class="es">Lectura Con Honores</span></a>
+      <a href="CTSResources.html"><span class="en">Study Resources</span><span class="es">Recursos de Estudio</span></a>
     </div>
-    {electiveTextbooks.length > 0 && (<>
-    <h3 style="margin-top:26px"><span class="en">Elective Textbooks</span><span class="es">Libros de Texto de las Electivas</span></h3>
-    <p><span class="en">Textbooks for the denominational electives, listed as each is ready. Their textbook test is optional on every track.</span><span class="es">Libros de texto de las electivas denominacionales, en la lista a medida que cada uno está listo. Su examen del libro es opcional en todos los trayectos.</span></p>
-    <div class="tb-grid" id="elective-textbooks">
-      {electiveTextbooks.map((t) => (
-        <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
-      ))}
-    </div>
-    </>)}
-    <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
-    <p><span class="en">All 45 core courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity. Textbooks and assigned readings for the 20 denominational electives are being prepared.</span><span class="es">Los 45 cursos básicos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta. Se están preparando libros de texto y lecturas asignadas para las 20 electivas denominacionales.</span></p>
-    <div class="tb-grid" id="required-readings">
-      {coreReadings.map((r) => (
-        <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
-      ))}
-    </div>
-    {electiveReadings.length > 0 && (<>
-    <h3 style="margin-top:26px"><span class="en">Elective Readings</span><span class="es">Lecturas de las Electivas</span></h3>
-    <p><span class="en">Assigned readings for the denominational electives, listed as each is ready. Their reading test is optional on every track.</span><span class="es">Lecturas asignadas de las electivas denominacionales, en la lista a medida que cada una está lista. Su examen de lecturas es opcional en todos los trayectos.</span></p>
-    <div class="tb-grid" id="elective-readings">
-      {electiveReadings.map((r) => (
-        <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
-      ))}
-    </div>
-    </>)}
   </section>
 <script is:inline src="/assets/js/cts-record.js"></script>
 <script is:inline set:html={`window.CTSRecord && window.CTSRecord.backfill(${recordJson});`} />

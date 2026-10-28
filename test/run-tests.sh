@@ -462,6 +462,9 @@ node test/published-models.test.mjs
   node test/french-exam-fallback.test.mjs "$SHADOW"
   # French links stay French, and the pages French emails open are French.
   node test/french-routing.test.mjs "http://127.0.0.1:$PORT"
+  # Swahili, the fourth language: routes, toggle, the translation-pending
+  # note, a Swahili lesson and exam, and Swahili grading on the server.
+  API_BASE="http://127.0.0.1:$PORT" node test/swahili.test.mjs
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose

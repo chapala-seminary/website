@@ -314,16 +314,18 @@
   }
 
   var T = {
-    badge:  { en: "Locked", es: "Bloqueado", fr: "Verrouillé" },
+    badge:  { en: "Locked", es: "Bloqueado", fr: "Verrouillé", sw: "Imefungwa" },
     legend: { en: "\uD83D\uDD12 Locked courses open once you complete the seven required foundation courses listed above.",
               es: "\uD83D\uDD12 Los cursos bloqueados se abren al completar los siete cursos de fundamento indicados arriba.",
-              fr: "\uD83D\uDD12 Les cours verrouillés s\u2019ouvrent lorsque vous avez terminé les sept cours fondamentaux indiqués ci-dessus." },
-    lockTitle: { en: "This course is locked", es: "Este curso está bloqueado", fr: "Ce cours est verrouillé" },
+              fr: "\uD83D\uDD12 Les cours verrouillés s\u2019ouvrent lorsque vous avez terminé les sept cours fondamentaux indiqués ci-dessus.",
+              sw: "\uD83D\uDD12 Kozi zilizofungwa hufunguka ukishamaliza kozi saba za msingi zilizoorodheshwa hapo juu." },
+    lockTitle: { en: "This course is locked", es: "Este curso está bloqueado", fr: "Ce cours est verrouillé", sw: "Kozi hii imefungwa" },
     lockBody:  { en: "Complete the seven foundation courses first — Old Testament Survey, New Testament Survey, Systematic Theology, Evangelism, Pastoral Ministries, Church History, and Preaching. Once those are done, the whole catalog opens.",
                  es: "Complete primero los siete cursos de fundamento — Panorama del Antiguo Testamento, Panorama del Nuevo Testamento, Teología Sistemática, Evangelismo, Ministerios Pastorales, Historia de la Iglesia y Predicación. Una vez completados, todo el catálogo se abre.",
-                 fr: "Terminez d\u2019abord les sept cours fondamentaux\u00a0: Survol de l\u2019Ancien Testament, Survol du Nouveau Testament, Théologie systématique, Évangélisation, Ministères pastoraux, Histoire de l\u2019Église et Prédication. Ensuite, tout le catalogue s\u2019ouvre." },
-    toCat:   { en: "Go to the course catalog", es: "Ir al catálogo de cursos", fr: "Aller au catalogue des cours" },
-    toGuide: { en: "Read \u201CBefore You Begin\u201D", es: "Leer \u00ABAntes de Comenzar\u00BB", fr: "Lire \u00AB\u00a0Avant de commencer\u00a0\u00BB" }
+                 fr: "Terminez d\u2019abord les sept cours fondamentaux\u00a0: Survol de l\u2019Ancien Testament, Survol du Nouveau Testament, Théologie systématique, Évangélisation, Ministères pastoraux, Histoire de l\u2019Église et Prédication. Ensuite, tout le catalogue s\u2019ouvre.",
+                 sw: "Maliza kwanza kozi saba za msingi: Utangulizi wa Agano la Kale, Utangulizi wa Agano Jipya, Teolojia ya Kimfumo, Uinjilisti, Huduma za Kichungaji, Historia ya Kanisa, na Uhubiri. Ukishazimaliza, orodha yote ya kozi inafunguka." },
+    toCat:   { en: "Go to the course catalog", es: "Ir al catálogo de cursos", fr: "Aller au catalogue des cours", sw: "Nenda kwenye orodha ya kozi" },
+    toGuide: { en: "Read \u201CBefore You Begin\u201D", es: "Leer \u00ABAntes de Comenzar\u00BB", fr: "Lire \u00AB\u00a0Avant de commencer\u00a0\u00BB", sw: "Soma \u201CKabla Hujaanza\u201D" }
   };
   function t(o) { return o[pageLang()] || o.en; }
 

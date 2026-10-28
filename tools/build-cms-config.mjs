@@ -30,7 +30,7 @@ const BRANCH = 'main';
 
 /* A language's English name, for the editor's field labels. Unknown codes fall
    back to the code itself rather than guessing. */
-const LANG_NAME = { en: 'English', es: 'Spanish', fr: 'French', pt: 'Portuguese' };
+const LANG_NAME = { en: 'English', es: 'Spanish', fr: 'French', pt: 'Portuguese', sw: 'Swahili' };
 const langLabel = (l) => LANG_NAME[l] ?? l;
 
 const yaml = (v, indent = 0) => {

@@ -33,10 +33,20 @@ fill-in functions, held equal by `verify-fill-single.mjs`. Its old pages keep
 English/Spanish grading. The pure `fillRight(q, answer, languages)` helper lets
 answer-key checks name the language they are checking without a browser.
 
+## Swahili
+
+Swahili (`sw`, 27 Oct 2026) reads like French: the reader's answers plus the
+English source. Swahili has no accents to fold, and noun-class prefixes stay
+part of the word (`mitume` is not `mtume`). An apostrophe between letters
+(`ng'ombe`) may be straight, curly or left out; that rule is Swahili's only,
+in the engine, in `cts-fill.js` and on the server (`worker/grading/text.js`).
+Interface messages the engine builds in Swahili come from
+`window.CTSUI` (see `docs/swahili.md`).
+
 ## Validation
 
 `npm run build` then `npm test` is required. `test/engine-languages.mjs` runs
-49 browser assertions against the shipped engine, including French accents,
+browser assertions (76 with Swahili) against the shipped engine, including French accents,
 elision, keyword stems, Cyrillic, non-English source language, Spanish `ñ`,
 and multiple-choice position. The existing full built-site tests still cover
 English/Spanish pages, progress, lockouts and track requirements.

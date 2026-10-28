@@ -29,7 +29,18 @@ export function bare(s) {
 
 /** The languages a fill-in answer is accepted in: the reader's and the source. */
 export function fillCodes(lang) {
-  return lang === 'fr' ? ['fr', 'en'] : ['en', 'es'];
+  if (lang === 'fr') return ['fr', 'en'];
+  // Languages added after French (src/lib/languages.mjs): the reader's and the source.
+  if (lang === 'sw') return ['sw', 'en'];
+  return ['en', 'es'];
+}
+
+/* Swahili writes an apostrophe inside some words (ng'ombe, ng'ambo). On a
+   phone it is often left out or typed as another mark, so a Swahili answer is
+   also compared with the apostrophe between letters removed: "ngombe" is
+   "ng'ombe". Only for Swahili; other languages compare exactly as before. */
+export function squeezeApostrophes(s) {
+  return String(s || '').replace(/(\p{L})['\u2019\u02bc\u2018`](?=\p{L})/gu, '$1');
 }
 
 /** A fill-in is right when the student's words, normalised, are exactly the
@@ -42,6 +53,10 @@ export function exactFill(key, given, lang) {
   let forms = [];
   for (const code of fillCodes(lang)) forms = forms.concat(key && key.answer && key.answer[code], acc[code] || []);
   for (const f of forms) if (f && bare(f) === a) return true;
+  if (lang === 'sw') {
+    const s = bare(squeezeApostrophes(given));
+    for (const f of forms) if (f && bare(squeezeApostrophes(f)) === s) return true;
+  }
   return false;
 }
 

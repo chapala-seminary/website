@@ -59,6 +59,9 @@ export const GET: APIRoute = async () => {
   const add = (path: string, priority: number) => urls.set(path, priority);
 
   add('', 1.0);                                        // the front page
+  // The Study Library (src/pages/CTSStudyLibrary.astro, issue #186): the
+  // textbook and reading directories that used to be on the front page.
+  add('CTSStudyLibrary.html', 0.8);
 
   // Generated course units, straight from the collection that builds them.
   for (const entry of await getCollection('units'))
