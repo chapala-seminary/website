@@ -73,6 +73,11 @@ const RUN = Date.now().toString(36);
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
+  // Acts opens after the seven foundation courses (cts-curriculum.js); this is not about that gate,
+  // which is checked on its own below.
+  await ctx.addInitScript(() => { try {
+    if (!localStorage.getItem('cts_done_codes')) localStorage.setItem('cts_done_codes', JSON.stringify(['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK']));
+  } catch (e) {} });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
