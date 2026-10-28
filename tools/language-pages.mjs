@@ -64,7 +64,7 @@ function addStaticPairs(root, file, lang) {
     staticPairs.set(lang, byPage);
   }
   const map = staticPairs.get(lang).get(file);
-  if (!map) return;
+  if (!map) return false;
   const plain = (s) => parse(String(s).replaceAll('\\xa0', ' ')).text.replace(/\s+/g, ' ').trim();
   for (const el of root.querySelectorAll('*')) {
     if (markedLanguage(el) !== 'en' || el.closest('[data-cts-legacy-control]')) continue;
@@ -84,6 +84,7 @@ function addStaticPairs(root, file, lang) {
       el.insertAdjacentHTML('afterend', copy.toString());
     }
   }
+  return true;
 }
 function control(file, lang, sourceLang, translated) {
   const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" translate="no" lang="${l}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
@@ -140,7 +141,8 @@ export function buildLanguagePages(dir) {
       const room = roomsData.rooms[file.replace(/\.html$/, '')];
       if (lang === 'fr' && room && room.kind !== 'honors') frenchRoom(root, frBookTitle);
       // A later language's reading-room digests, kept beside the page (tools/import-language-books.mjs).
-      if (fromDictionary(lang)) { addLanguageBlocks(root, file, lang); addStaticPairs(root, file, lang); }
+      // a single-page course keeps its English exam for now: said on the page
+      const staticPage = fromDictionary(lang) && (addLanguageBlocks(root, file, lang), addStaticPairs(root, file, lang));
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       // Translated registration labels do not mean the course lesson is translated.
@@ -184,7 +186,7 @@ export function buildLanguagePages(dir) {
       // A dictionary language also says when only part of a lesson is translated.
       const notice = lang === sourceLang ? ''
         : fromDictionary(lang) ? (!translated ? dictNotice(lang, asks ? 'untranslatedAnswers' : 'untranslated')
-          : !complete ? dictNotice(lang, 'partlyTranslated') : '')
+          : !complete || staticPage ? dictNotice(lang, 'partlyTranslated') : '')
         : !translated ? fallbackNotice(lang, sourceLang, asks) : '';
       const controls = control(file, lang, sourceLang, translated);
       const brandRow = root.querySelector('.topbar .wrap');

@@ -114,15 +114,22 @@ try {
   ok(/Sehemu ya 1/.test(await page.title()), `title: ${await page.title()}`);
   eq(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex,follow', 'Swahili pages are not indexed yet');
 
-  // an elective unit with its Swahili (B-C1) and one without (B-C2): never a broken page
+  // an elective unit with its Swahili (B-C1), and a lesson with no Swahili yet
+  // (the first one found, if any is left): never a broken page
   await page.goto(`${BASE}/sw/CTSElecBap1Unit1.html`);
   ok(/Wabaptisti ni Akina Nani/.test(await page.locator('main').innerText()), 'B-C1 unit 1 is in Swahili');
-  await page.goto(`${BASE}/sw/CTSElecBap2Unit1.html`);
-  const fallback = await page.locator('main').innerText();
-  ok(fallback.includes(NOTE), 'an untranslated page says so in Swahili');
-  ok(fallback.length > 2000 && /[A-Za-z]{4,} [A-Za-z]{4,}/.test(fallback), 'and shows the English lesson');
-  await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { timeout: 15000 });
-  ok(await page.locator('#questionsContainer .option, #questionsContainer button').count() > 0, 'and its exam works');
+  const untranslated = fs.readdirSync('src/content/lessons').flatMap((c) => fs.readdirSync(`src/content/lessons/${c}`)
+    .filter((f) => /^\d+\.json$/.test(f)).map((f) => [c, f.slice(0, -5)]))
+    .find(([c, n]) => { const l = JSON.parse(fs.readFileSync(`src/content/lessons/${c}/${n}.json`, 'utf8'));
+      return l.sourceLang === 'en' && !l.blocks.some((b) => b.text && b.text.sw); });
+  if (untranslated) {
+    await page.goto(`${BASE}/sw/${untranslated[0]}Unit${untranslated[1]}.html`);
+    const fallback = await page.locator('main').innerText();
+    ok(fallback.includes(NOTE), `an untranslated page says so in Swahili (${untranslated.join(' ')})`);
+    ok(fallback.length > 2000 && /[A-Za-z]{4,} [A-Za-z]{4,}/.test(fallback), 'and shows the English lesson');
+    await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { timeout: 15000 });
+    ok(await page.locator('#questionsContainer .option, #questionsContainer button').count() > 0, 'and its exam works');
+  } else console.log('# every lesson has Swahili: no untranslated lesson to open');
 
   // a single-page course: its lesson text in Swahili, said to be partly translated
   await page.goto(`${BASE}/sw/CTSCounseling.html`);
