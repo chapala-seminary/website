@@ -6,6 +6,18 @@ import { parse } from 'node-html-parser';
 import { chromium } from 'playwright';
 const base = process.argv[2] || 'http://127.0.0.1:8798';
 const root = parse(fs.readFileSync('dist/fr/index.html', 'utf8'));
+// The textbook and reading directories are on the Study Library (issue #186).
+const library = parse(fs.readFileSync('dist/fr/CTSStudyLibrary.html', 'utf8'));
+assert.equal(library.querySelector('html').getAttribute('lang'), 'fr');
+assert.equal(library.querySelectorAll('[data-cts-fallback]').length, 0);
+// Like the other static pages translated by a dictionary (src/data/french-pages),
+// its French is published as a provisional translation for review.
+assert.equal(library.querySelector('.topbar .mark .cts-reading').text.trim(), 'Séminaire théologique de Chapala');
+assert.ok(library.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
+assert.ok(root.querySelector('a[href^="/fr/CTSStudyLibrary.html"]'), 'the French home page links to the French Study Library');
+// The seven foundation courses first, in French.
+assert.equal(root.querySelectorAll('#catalog a.fcard').length, 7);
+for (const link of root.querySelectorAll('#catalog a.fcard')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
 assert.equal(root.querySelector('html').getAttribute('lang'), 'fr');
 assert.equal(root.querySelectorAll('[data-cts-fallback]').length, 0);
 assert.equal(root.querySelectorAll('.cts-translation-pending').length, 0);
@@ -15,16 +27,17 @@ assert.equal(root.querySelectorAll('#catalog a.course').length, 65);
 const slugs = (d) => fs.readdirSync(d).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5));
 const electiveReadings = slugs('src/content/readings').filter((s) => s.startsWith('elec')).length;
 const electiveBooks = slugs('src/content/textbooks').filter((s) => s.startsWith('elec')).length;
-assert.equal(root.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 45 + electiveBooks);
-assert.equal(root.querySelectorAll('#elective-textbooks a.textbook:not(.reading)').length, electiveBooks);
-assert.equal(root.querySelectorAll('#required-readings a.textbook.reading').length, 45);
-assert.equal(root.querySelectorAll('#elective-readings a.textbook.reading').length, electiveReadings);
-assert.equal(root.querySelectorAll('#textbooks a.tb-test-link').length, 90 + electiveReadings + electiveBooks);
+assert.equal(library.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 45 + electiveBooks);
+assert.equal(library.querySelectorAll('#elective-textbooks a.textbook:not(.reading)').length, electiveBooks);
+assert.equal(library.querySelectorAll('#required-readings a.textbook.reading').length, 45);
+assert.equal(library.querySelectorAll('#elective-readings a.textbook.reading').length, electiveReadings);
+assert.equal(library.querySelectorAll('#textbooks a.tb-test-link').length, 90 + electiveReadings + electiveBooks);
 assert.ok(root.querySelector('#catalog').text.includes('en anglais, en espagnol et en français'));
 // Every course has a French draft, so every card carries the badge.
 assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 65);
 assert.ok(root.querySelector('#programs')?.text.includes('15 cours') || root.text.includes('Niveau master · 15 cours'));
-for (const link of root.querySelectorAll('#catalog a.course, #textbooks a.textbook')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
+for (const link of root.querySelectorAll('#catalog a.course')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
+for (const link of library.querySelectorAll('#textbooks a.textbook')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
 for (const node of root.querySelectorAll('script[type="application/ld+json"]')) {
   const data = JSON.parse(node.innerHTML);
   if (data['@type'] === 'FAQPage') {
