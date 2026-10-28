@@ -40,10 +40,12 @@ const post = (p, b) => call('POST', p, b);
 const unit = (prefix, n) => JSON.parse(fs.readFileSync(`src/content/units/${prefix}/${n}.json`, 'utf8'));
 const idx = (qid) => Number(qid.slice(qid.lastIndexOf('/') + 1));
 const RUN = Date.now().toString(36);
+let STUDENT_CODE = null;
 {
   const reg = await post('/api/register', { name: `Mwanafunzi ${RUN}`, email: `swahili-${RUN}@example.test`, track: 'associate', lang: 'sw' });
   eq(reg.status, 201, `register: ${JSON.stringify(reg.body)}`);
   const code = reg.body.code;
+  STUDENT_CODE = code;
   // CTSAL unit 2 has ng'ombe as a fill-in answer in Swahili
   const al2 = unit('CTSAL', 2);
   const at = await post('/api/attempt', { code, scope: 'u:CTSAL/2', lang: 'sw' });
@@ -75,9 +77,14 @@ try {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
   // Acts opens after the seven foundation courses (cts-curriculum.js); this is not about that gate,
   // which is checked on its own below.
-  await ctx.addInitScript(() => { try {
+  // The exam asks for a student record: the one registered above.
+  await ctx.addInitScript(({ code, name, email }) => { try {
     if (!localStorage.getItem('cts_done_codes')) localStorage.setItem('cts_done_codes', JSON.stringify(['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK']));
-  } catch (e) {} });
+    if (!localStorage.getItem('cts_student_code')) {
+      localStorage.setItem('cts_student', JSON.stringify({ name, email, track: 'associate' }));
+      localStorage.setItem('cts_student_code', code);
+    }
+  } catch (e) {} }, { code: STUDENT_CODE, name: `Mwanafunzi ${RUN}`, email: `swahili-${RUN}@example.test` });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -121,11 +128,15 @@ try {
 
   // a Swahili lesson: Swahili text, Swahili exam, the draft note, Show English
   await page.goto(`${BASE}/sw/CTSActsUnit1.html`);
-  await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { timeout: 15000 });
+  await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { state: 'attached', timeout: 15000 });
   const body = await page.locator('main').innerText();
   ok(/Fungua Biblia yako katika Matendo 1:1/.test(body), 'the lesson is in Swahili');
   ok(/Tafsiri ya awali/.test(await page.locator('.cts-translation-pending').innerText()), 'the draft note is shown');
   ok(!body.includes(NOTE), 'a translated lesson has no translation-pending note');
+  // the unit opens on its lesson; the exam is its own view (assets/js/cts-exam-view.js)
+  await page.evaluate(() => sessionStorage.setItem('cts_exam_view:' + location.pathname, '1'));
+  await page.reload();
+  await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { timeout: 15000 });
   const exam = await page.locator('#questionsContainer').innerText();
   ok(/Chagua Jibu|Jaza Pengo/.test(exam), `the exam labels are Swahili: ${exam.slice(0, 200)}`);
   ok(/Matendo ni juzuu ya pili ya Luka/.test(exam), 'the exam questions are Swahili');
@@ -137,7 +148,7 @@ try {
   // an elective unit with its Swahili (B-C1), and a lesson with no Swahili yet
   // (the first one found, if any is left): never a broken page
   await page.goto(`${BASE}/sw/CTSElecBap1Unit1.html`);
-  ok(/Wabaptisti ni Akina Nani/.test(await page.locator('main').innerText()), 'B-C1 unit 1 is in Swahili');
+  ok(/Wabaptisti ni Akina Nani/.test(await page.locator('body').innerText()), 'B-C1 unit 1 is in Swahili');
   const untranslated = fs.readdirSync('src/content/lessons').flatMap((c) => fs.readdirSync(`src/content/lessons/${c}`)
     .filter((f) => /^\d+\.json$/.test(f)).map((f) => [c, f.slice(0, -5)]))
     .find(([c, n]) => { const l = JSON.parse(fs.readFileSync(`src/content/lessons/${c}/${n}.json`, 'utf8'));
@@ -147,7 +158,7 @@ try {
     const fallback = await page.locator('main').innerText();
     ok(fallback.includes(NOTE), `an untranslated page says so in Swahili (${untranslated.join(' ')})`);
     ok(fallback.length > 2000 && /[A-Za-z]{4,} [A-Za-z]{4,}/.test(fallback), 'and shows the English lesson');
-    await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { timeout: 15000 });
+    await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { state: 'attached', timeout: 15000 });
     ok(await page.locator('#questionsContainer .option, #questionsContainer button').count() > 0, 'and its exam works');
   } else console.log('# every lesson has Swahili: no untranslated lesson to open');
   // a page with no Swahili at all (About): English, said so in Swahili
@@ -166,12 +177,13 @@ try {
   await page.goto(`${BASE}/sw/CTSTextbookElecBapOne.html`);
   ok(/Urithi au Ukweli\?/.test(await page.locator('.tb-book').first().innerText()), 'the B-C1 textbook is in Swahili');
   await page.goto(`${BASE}/sw/CTSElecBap1Readings.html`);
-  ok(/Chemchemi Baharini/.test(await page.locator('body').innerText()), 'the B-C1 readings are in Swahili');
+  // the digests sit in a reader that opens on demand, so the text is checked, not what is on screen
+  ok(/Chemchemi Baharini/.test(await page.locator('body').textContent()), 'the B-C1 readings are in Swahili');
 
   // the other languages are untouched: no Swahili on their pages
   for (const l of ['', 'es/', 'fr/']) {
     await page.goto(`${BASE}/${l}CTSTextbookElecBapOne.html?cts_lang=${l ? l.slice(0, 2) : 'en'}`);
-    ok(!/Urithi au Ukweli/.test(await page.locator('body').innerText()), `no Swahili book on /${l}`);
+    ok(!/Urithi au Ukweli/.test(await page.locator('body').textContent()), `no Swahili book on /${l}`);
   }
   eq(errors, [], 'no script errors');
 
