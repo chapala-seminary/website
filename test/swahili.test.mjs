@@ -166,5 +166,17 @@ try {
     ok(!/Urithi au Ukweli/.test(await page.locator('body').innerText()), `no Swahili book on /${l}`);
   }
   eq(errors, [], 'no script errors');
+
+  // a registered student who has not finished the foundation courses: the lock is said in Swahili
+  const locked = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await locked.addInitScript(() => { try {
+    localStorage.setItem('cts_student', JSON.stringify({ name: 'Mwanafunzi', email: 'lock@example.test', track: 'associate' }));
+    localStorage.setItem('cts_track', 'associate'); localStorage.setItem('cts_student_code', 'CTS-TEST-LOCK-0000');
+  } catch (e) {} });
+  const lp = await locked.newPage();
+  await lp.goto(`${BASE}/sw/CTSActsUnit1.html`, { waitUntil: 'load' });
+  ok(await lp.waitForFunction(() => document.body.innerText.includes('Kozi hii imefungwa'), null, { timeout: 10000 }).then(() => true, () => false), 'a locked course says so in Swahili');
+  ok(!(await lp.locator('body').innerText()).includes('This course is locked'), 'and not in English');
+  await locked.close();
 } finally { await browser.close(); }
 console.log(`PASS — Swahili: ${checks} checks.`);
