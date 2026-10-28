@@ -33,6 +33,7 @@ node test/single-completion.test.mjs
 node test/grading-unit.test.mjs
 node --test test/grading-feedback.test.mjs
 node test/single-page-readings.test.mjs
+node test/elective-french-room-parity.test.mjs
 node tools/verify-staged-readings.mjs
 node tools/verify-rubrics.mjs
 node test/eval-grader.test.mjs
