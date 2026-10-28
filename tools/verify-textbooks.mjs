@@ -92,16 +92,20 @@ ok(!leaked.length, `staff-only test-bank files under public/: ${leaked.join(', '
 // the built pages
 if (!fs.existsSync(path.join(DIST, 'index.html'))) { console.error(`no build at ${DIST}/ — run npm run build first`); process.exit(2); }
 const page = (f) => fs.existsSync(path.join(DIST, f)) ? fs.readFileSync(path.join(DIST, f), 'utf8') : null;
-const index = page('index.html');
+/* The textbook and reading directories moved from the front page to the
+   Study Library (issue #186); the front page links to it. */
+const index = page('CTSStudyLibrary.html');
+ok(!!index, 'CTSStudyLibrary.html was not built');
 /* The front page links with relative hrefs ("Page.html"); other pages use "/Page.html". Accept
    either form, with or without "./", a query or a fragment, so a valid link is never reported missing. */
 const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const linksTo = (html, file) => new RegExp(`href=["'](?:\\.?/)?${esc(file)}(?:[?#][^"']*)?["']`).test(html);
+ok(linksTo(page('index.html'), 'CTSStudyLibrary.html'), 'the front page does not link to the Study Library');
 for (const b of books) {
   const book = page(`${b.page}.html`), test = page(`${b.page}Test.html`);
   ok(!!book, `${b.page}.html was not built`);
   ok(!!test, `${b.page}Test.html was not built`);
-  ok(linksTo(index, `${b.page}.html`), `the front page does not list available textbook ${b.page}`);
+  ok(linksTo(index, `${b.page}.html`), `the Study Library does not list available textbook ${b.page}`);
   if (book) ok(book.includes(`${b.page}Test.html`), `${b.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${b.page}.html`), `${b.page}Test.html does not lead back to the book`);
@@ -177,7 +181,7 @@ for (const r of readings) {
   ok(!!room, `${r.page}.html was not built`);
   ok(!!test, `${r.page}Test.html was not built`);
   // Available readings remain discoverable independently of activation.
-  ok(linksTo(index, `${r.page}.html`), `the front page does not list available readings ${r.page}`);
+  ok(linksTo(index, `${r.page}.html`), `the Study Library does not list available readings ${r.page}`);
   if (test && pending) ok(/not yet required/.test(test), `${r.page}Test.html does not say the test is not yet required`);
   if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
   if (test) {

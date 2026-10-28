@@ -8,11 +8,11 @@ import { courseReadingsBox, READING_ROOM } from '../src/lib/partials.ts';
 import { shell } from '../src/lib/shell.ts';
 import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
 
-import { frenchLanding } from '../src/lib/french-landing.ts';
+import { frenchLanding, frenchLibraryCards } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchStaticCourse } from './french-static-courses.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
-import { frenchPage, frenchRoom, checkRoomDictionary, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
+import { frenchPage, frenchPageDictionary, frenchRoom, checkRoomDictionary, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
 import { frenchTitle, frCompletionNames, frBookTitle } from '../src/lib/french-titles.ts';
 import roomsData from '../src/data/rooms.json' with { type: 'json' };
 
@@ -80,6 +80,7 @@ export function buildLanguagePages(dir) {
         root.querySelector('#lesson')?.insertAdjacentHTML('beforeend',courseReadingsBox(READING_ROOM[lesson.course],lesson.course));
       }
       if (lang === 'fr' && file === 'index.html') frenchLanding(root);
+      if (lang === 'fr' && file === 'CTSStudyLibrary.html') frenchLibraryCards(root, frenchPageDictionary(file) || {});
       // A static page with its own French dictionary (src/data/french-pages).
       const frenchStatic = lang === 'fr' && !lesson && frenchPage(root, file);
       const room = roomsData.rooms[file.replace(/\.html$/, '')];

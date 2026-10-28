@@ -122,6 +122,23 @@ for (const [was, is] of COUNT) {
   o = o.replace(was, is);
 }
 let b = norm(catalog(builtFile));
+/* The redesigned front page (issue #186) adds to the catalog without changing
+   a card: the seven foundation courses shown first (a.fcard, checked here and
+   then set aside), two short sub-headings, and each group folded in a
+   <details> whose <summary> holds the group's heading and a course count.
+   Those are taken away so the cards and headings are still compared
+   character for character with the hand-written catalog. */
+{
+  const first = /<div class="foundation-first">[\s\S]*?<\/a><\/div><\/div>/.exec(b);
+  const fcards = first ? (first[0].match(/<a class="fcard" href="[^"]+"/g) || []).length : 0;
+  if (fcards !== 7) { console.log(`FAIL — the built catalog shows ${fcards} foundation courses first, not 7`); process.exit(1); }
+  b = b.replace(first[0], '');
+  b = b.replace(/<div class="catsub">[\s\S]*?<\/p><\/div>/g, '');
+  b = b.replace(/<details class="catfold"[^>]*><summary>(<h3>[\s\S]*?<\/h3>)<span class="catcount">\d+<\/span><\/summary>/g, '$1');
+  b = b.replace(/<\/div><\/details><\/div>/g, '</div></div>');
+  if (/<details|<summary|fcard|catsub/.test(b)) { console.log('FAIL — the catalog has redesign markup this check does not know how to set aside'); process.exit(1); }
+  console.log('redesign set aside: 7 foundation courses first, folded groups');
+}
 for (const [key, after] of ADDED) {
   const entry = JSON.parse(fs.readFileSync(`src/content/courses/${key}.json`, 'utf8')).entry;
   const prev = JSON.parse(fs.readFileSync(`src/content/courses/${after}.json`, 'utf8')).entry;
