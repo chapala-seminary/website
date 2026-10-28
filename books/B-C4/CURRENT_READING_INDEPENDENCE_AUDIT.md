@@ -1,5 +1,8 @@
 # B-C4 current textbook/reading independence and manifest-consistency audit
 
+> **SUPERSEDED — 2026-10-28:** This 26 October numerical audit is invalid. An unbounded OCR HTML-tag regex erased about 49.18% of textbook tokens and falsely classified B-C4 as mixed. All five readings are **99.8631%–99.9408%** contained in the textbook when normalized without that regex. **Do not use any of the numerical results or academic conclusions below.** See [the verified correction](CORRECTED_OCR_ANGLE_BRACKET_CONTAINMENT_AUDIT_2026-10-28.md). This document is retained solely as an audit trail.
+
+
 **Date:** 2026-10-26  
 **Scope:** exact files on `handoff/book-sources/books/B-C4` only.  
 **Decision status:** research evidence; no publication, grading, assessment-policy, or production change is authorized.
