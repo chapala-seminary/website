@@ -124,6 +124,11 @@ try {
   await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { timeout: 15000 });
   ok(await page.locator('#questionsContainer .option, #questionsContainer button').count() > 0, 'and its exam works');
 
+  // a single-page course: its lesson text in Swahili, said to be partly translated
+  await page.goto(`${BASE}/sw/CTSCounseling.html`);
+  ok(/Mbinu ya Ushauri ya Hatua Kumi ya Drakeford/.test(await page.locator('body').innerText()), 'Counseling text is in Swahili');
+  ok(/Baadhi ya maandishi haya bado hayajatafsiriwa/.test(await page.locator('body').innerText()), 'and says it is partly translated');
+
   // B-C1 textbook and room in Swahili
   await page.goto(`${BASE}/sw/CTSTextbookElecBapOne.html`);
   ok(/Urithi au Ukweli\?/.test(await page.locator('.tb-book').first().innerText()), 'the B-C1 textbook is in Swahili');

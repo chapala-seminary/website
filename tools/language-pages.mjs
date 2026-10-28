@@ -6,7 +6,7 @@ import path from 'node:path';
 import { parse } from 'node-html-parser';
 import { courseReadingsBox, READING_ROOM } from '../src/lib/partials.ts';
 import { shell } from '../src/lib/shell.ts';
-import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
+import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson, markedLanguage } from '../src/lib/language-content.ts';
 
 import { frenchLanding } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
@@ -46,6 +46,44 @@ function addLanguageBlocks(root, file, lang) {
   const anchors = root.querySelectorAll(after);
   if (anchors.length !== blocks.length) throw new Error(`${data}: ${blocks.length} blocks, but ${file} has ${anchors.length} "${after}"`);
   anchors.forEach((node, i) => node.insertAdjacentHTML('afterend', blocks[i]));
+}
+/* The single-page courses: src/data/interface/static/<lang>/<Course>.json pairs
+   English passages with their translation (tools/import-language-static.mjs).
+   Each English-marked passage that has one gets it as a sibling; a container
+   of paragraphs is translated paragraph by paragraph. */
+const staticPairs = new Map();
+function addStaticPairs(root, file, lang) {
+  const dir = `src/data/interface/static/${lang}`;
+  if (!staticPairs.has(lang)) {
+    const byPage = new Map();
+    if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) {
+      const { pages, pairs } = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      const map = new Map(); for (const [en, t] of pairs) if (!map.has(en)) map.set(en, t);
+      for (const p of pages) byPage.set(p, map);
+    }
+    staticPairs.set(lang, byPage);
+  }
+  const map = staticPairs.get(lang).get(file);
+  if (!map) return;
+  const plain = (s) => parse(String(s).replaceAll('\\xa0', ' ')).text.replace(/\s+/g, ' ').trim();
+  for (const el of root.querySelectorAll('*')) {
+    if (markedLanguage(el) !== 'en' || el.closest('[data-cts-legacy-control]')) continue;
+    let up = el.parentNode, inside = false; while (up) { if (up.tagName && markedLanguage(up)) { inside = true; break; } up = up.parentNode; }
+    if (inside) continue;
+    const next = el.nextElementSibling;
+    if (next && markedLanguage(next) === lang) continue;
+    const tag = el.tagName.toLowerCase();
+    const whole = map.get(plain(el.innerHTML));
+    if (whole) { el.insertAdjacentHTML('afterend', `<${tag} class="lang-${lang}">${whole}</${tag}>`); continue; }
+    const kids = el.childNodes.filter((n) => n.nodeType === 1);
+    if (kids.length >= 2 && kids.some((k) => map.has(plain(k.innerHTML)))) {
+      const copy = parse(el.toString(), { comment: true, parseNoneClosedTags: true }).firstChild;
+      copy.setAttribute('class', (copy.getAttribute('class') || '').replace(/\blang-en\b/, `lang-${lang}`));
+      copy.removeAttribute('id');
+      for (const k of copy.childNodes.filter((n) => n.nodeType === 1)) { const t = map.get(plain(k.innerHTML)); if (t) k.set_content(t); else k.setAttribute('lang', 'en'); }
+      el.insertAdjacentHTML('afterend', copy.toString());
+    }
+  }
 }
 function control(file, lang, sourceLang, translated) {
   const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" translate="no" lang="${l}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
@@ -102,7 +140,7 @@ export function buildLanguagePages(dir) {
       const room = roomsData.rooms[file.replace(/\.html$/, '')];
       if (lang === 'fr' && room && room.kind !== 'honors') frenchRoom(root, frBookTitle);
       // A later language's reading-room digests, kept beside the page (tools/import-language-books.mjs).
-      if (fromDictionary(lang)) addLanguageBlocks(root, file, lang);
+      if (fromDictionary(lang)) { addLanguageBlocks(root, file, lang); addStaticPairs(root, file, lang); }
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       // Translated registration labels do not mean the course lesson is translated.
@@ -146,7 +184,7 @@ export function buildLanguagePages(dir) {
       // A dictionary language also says when only part of a lesson is translated.
       const notice = lang === sourceLang ? ''
         : fromDictionary(lang) ? (!translated ? dictNotice(lang, asks ? 'untranslatedAnswers' : 'untranslated')
-          : !complete && lesson ? dictNotice(lang, 'partlyTranslated') : '')
+          : !complete ? dictNotice(lang, 'partlyTranslated') : '')
         : !translated ? fallbackNotice(lang, sourceLang, asks) : '';
       const controls = control(file, lang, sourceLang, translated);
       const brandRow = root.querySelector('.topbar .wrap');
