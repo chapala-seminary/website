@@ -1,3 +1,5 @@
+> **MISFILED REPORT — DO NOT USE THIS PATH AS A-C5 COURSE EVIDENCE (corrected 2026-10-29).** The public manifest and reading-room files analyzed below belong to **B-C5: Baptist Ministry and Missions / Carey**, not A-C5. The complete unchanged research findings, with corrected course label, are now at `books/B-C5/CURRENT_ASSIGNED_DIGEST_ALL_40_FAIRNESS_CHRONOLOGY_LANGUAGE_RIGHTS_GATE_2026-10-29.md`. This legacy file is retained only for audit history. No production course, exam, grade or student data was changed.
+
 # A-C5 — Baptist Pastoral Ministry, Missions, and Church Leadership
 ## Current assigned-digest 40-question fairness, chronology, language and source-rights gate
 
