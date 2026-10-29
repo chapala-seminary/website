@@ -56,6 +56,15 @@
 
 **Classification checksum:** 40/40 consecutive public prompt numbers; **19 provisionally linked to signed Seymour articles**, **21 to unsigned/unresolved newspaper contributions**. This is a **room-attribution triage**, not 19 cleared and 21 infringements. R1 = #1–8; R2 = #9–16; R3 = #17–24; R4 = #25–32; R5 = #33–40. No question answer values were read or inferred for this report.
 
+
+## Independent public-site observation (29 October 2026, read-only)
+
+The **live public** https://chapalaseminary.org/CTSElecPC3ReadingsTest.html was successfully fetched using a fresh JavaScript-capable page reader. Its rendered instructions explicitly say: **“On the M.Div. and Th.M. tracks this test is required”** and **“It counts from October 29, 2026”**; they preserve earlier Master's completions and make the exam optional for Certificate/Associate students. The live https://chapalaseminary.org/CTSElecPC3Readings.html also renders the five CTS digests and links to the test. This verifies a **public student-facing requirement statement**, not a successful exam submission, private answer-bank behavior, or durable server-side enforcement.
+
+**New multilingual fairness issue:** The live test instructions say **“you may answer in English or Spanish”** despite all 40 manifest stems carrying **French and Swahili** prompt strings. This may be outdated help text rather than a real grading limitation; however, Claude must inspect the actual runtime accepted-language policy and private grading variants, run synthetic French/Swahili submissions, and correct instructions only after tests and approval. Do not tell French/Swahili students their answers are accepted without evidence. This issue is distinct from whether the five source readings are academically approved and copyright-cleared.
+
+**Priority change:** Live public-facing activation language is now **verified**. The remaining unknown is **actual server enforcement and language-specific grading**; the copyright/source hold remains unresolved. Escalate for owner review rather than silently changing activation or credits.
+
 ## Required faculty and technical handoff
 
 1. **Immediate production-state check:** The source/version and requiredFrom date are present on `main`, and the configured threshold has elapsed. Verify the live site is actually enforcing A-C3's Master's reading examination, the applicable tracks, and whether student records are affected. If a rights/academic hold conflicts with live enforcement, obtain Wayne's decision before changing activation, tests, or records. Preserve earned credits and audit logs. Do not assume a main-branch file alone proves deployment.
