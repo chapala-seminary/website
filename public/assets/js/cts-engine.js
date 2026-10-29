@@ -1310,10 +1310,37 @@
     function batch(items, list, working) {
       if (!items.length) return Promise.resolve(true);
       live.working = working; renderQuestions();
-      return G.calls.grade(live.attemptId, items).then(function (r) {
-        if (!r.ok || !r.data) { trouble(r, again); return false; }
-        absorbGraded(r.data, list); saveState();
-        return true;
+      // A full master's exam has ten written answers. Grade at most five per
+      // request so one slow model call cannot hold every answer hostage.
+      // Every successful chunk must acknowledge each qid before final submit.
+      var at = 0;
+      function next() {
+        if (at >= items.length) return Promise.resolve(true);
+        var part = items.slice(at, at + 5);
+        return G.calls.grade(live.attemptId, part).then(function (r) {
+          if (!r || !r.ok || !r.data || !Array.isArray(r.data.items)) {
+            trouble(r || { offline: true }, again); return false;
+          }
+          var seen = {};
+          r.data.items.forEach(function (it) {
+            if (it && typeof it.qid === "string" && typeof it.verdict === "string")
+              seen[it.qid] = true;
+          });
+          if (!part.every(function (it) { return seen[it.qid] === true; })) {
+            // A 200 response is not proof that every answer was received.
+            // Keep the student's work and offer a safe retry, never submit an
+            // attempt with an unacknowledged written-answer batch.
+            trouble({ status: 502, data: { error: "incomplete grading acknowledgement" } }, again);
+            return false;
+          }
+          absorbGraded(r.data, list); saveState();
+          at += part.length;
+          return next();
+        });
+      }
+      return next().catch(function () {
+        trouble({ offline: true }, again);
+        return false;
       });
     }
     live.working = "submitting"; renderQuestions();
