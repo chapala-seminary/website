@@ -186,11 +186,11 @@ if (want(4)) {
   await saAll(p, ['[[met]]', '[[partly]]', '[[not_met]]', '[[pending]]', '[[met]]', '[[met]]', '[[met]]', '[[met]]', '[[met]]', '[[met]]']);
   const before = stub.calls('/grade').length;
   await p.locator('#submitExamBtn').click();
-  ok(await waitText(p, 'Reviewing your written answers…'), '"Reviewing your written answers…" shows during the one call');
+  ok(await waitText(p, 'Reviewing your written answers…'), '"Reviewing your written answers…" shows while bounded calls are in progress');
   ok(await p.locator('#submitExamBtn').isDisabled(), 'Submit is closed while the server reviews');
   ok(await waitText(p, 'Submitted — grading pending.'), 'a pending answer makes the unit "Submitted — grading pending."');
   const sa = stub.calls('/grade').slice(before);
-  ok(sa.length === 1 && sa[0].body.items.length === 10 && sa[0].body.items.every((x) => x.qid.includes('/sa/')), 'all ten written answers go in one /api/grade call');
+  ok(sa.length === 2 && sa.every((call) => call.body.items.length === 5 && call.body.items.every((x) => x.qid.includes('/sa/'))) && new Set(sa.flatMap((call) => call.body.items.map((x) => x.qid))).size === 10, 'all ten written answers receive exactly one receipt across two bounded /api/grade calls');
   ok(await has(p, '.question[data-sa="0"] .feedback-text', 'Meets the standard'), 'met: "Meets the standard"');
   // the answer-disclosure policy: what the model said is missing waits for a pass
   ok(await has(p, '.question[data-sa="1"] .feedback-text', 'Partly') && !(await has(p, '.question[data-sa="1"]', 'You named the covenant but did not say what God promised.')), 'partly: the verdict, and not what is missing');
