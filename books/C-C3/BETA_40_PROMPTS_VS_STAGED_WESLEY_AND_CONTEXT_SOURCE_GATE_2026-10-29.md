@@ -13,9 +13,9 @@
 
 ## Result
 
-- **35 DIRECT**: the staged excerpt contains the core fact needed by the prompt.
+- **34 DIRECT**: the staged excerpt contains the core fact needed by the prompt.
 - **2 PARTIAL**: the staged excerpt contains the doctrinal/textual core, but the prompt also relies on CTS historical attribution or chronology.
-- **3 CTS CONTEXT**: the prompt is supported by the current CTS digest, not by the assigned staged primary-source excerpt.
+- **4 CTS CONTEXT**: the prompt is supported by the current CTS digest, not by the assigned staged primary-source excerpt.
 - Current room coverage is therefore not the same thing as primary-source provenance.
 - All five readings are extracts from the staged textbook, not five independent works. Normalized 12-token containment in the textbook is R1 **97.5771%**, R2 **98.8425%**, R3 **98.7175%**, R4 **99.2999%**, R5 **97.9077%**. The small shortfall is dominated by file headers/provenance wrappers.
 
