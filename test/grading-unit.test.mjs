@@ -283,6 +283,17 @@ eq([v.ok.get('q1')?.verdict, v.ok.get('q1')?.record?.quote_dropped], ['partly', 
   const started = Date.now();
   r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: started + 50 });
   eq([t.calls.length, r.results.size, r.unresolved.length], [1, 0, 1], 'deadline: unresolved answer goes back for queueing without another model call');
+  // Ten written answers go to the model three at a time, side by side, and every result comes back.
+  {
+    const ten = Array.from({ length: 10 }, (_, i) => ({ qid: `c${i}`, key, answer: ANS }));
+    const sizes = [];
+    const env = { AI: { run: async (m, p) => { const asked = [...p.messages[p.messages.length - 1].content.matchAll(/"qid":"(c\d+)"/g)].map((x) => x[1]);
+        const ids = [...new Set(asked)]; sizes.push(ids.length); return reply(...ids.map((q) => good(q))); } },
+      GRADER_MODEL: 'p', GRADER_MODEL_FALLBACK: 'f', GRADER_PROMPT_VERSION: 't',
+      DB: { prepare: () => ({ bind: () => ({ run: async () => {} }) }) } };
+    r = await gradeBatch(env, 'sa', 'en', ten, { chunk: 3 });
+    eq([sizes.slice().sort().join(','), r.results.size, r.unresolved.length, r.error], ['1,3,3,3', 10, 0, null], 'chunks: ten answers in calls of 3, 3, 3 and 1, all graded');
+  }
   ok(Date.now() - started < 1000, 'deadline: the batch returns within its shared request budget');
   t = mkEnv([]);
   r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: Date.now() - 1 });
