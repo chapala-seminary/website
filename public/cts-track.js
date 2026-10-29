@@ -147,7 +147,9 @@
             : 'The track change could not be saved. Check your connection and try again. Your answers are kept.';
         }
         Promise.resolve(sync ? sync() : null).then(function (state) {
-          if (window.CTSGrading && (!state || !state.student || state.student.track !== newTrack || (state.student.goal || '') !== newGoal)) return failed();
+          // Require the server's confirmed track on every page, not only pages with
+          // the grading widget. An absent/failed sync must never look saved.
+          if (!state || !state.student || state.student.track !== newTrack || (state.student.goal || '') !== newGoal) return failed();
           location.reload();
         }, failed);
       });
