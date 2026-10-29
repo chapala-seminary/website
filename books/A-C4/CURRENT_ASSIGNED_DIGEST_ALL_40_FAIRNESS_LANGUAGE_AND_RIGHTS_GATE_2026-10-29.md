@@ -1,3 +1,5 @@
+> **MISFILED REPORT — DO NOT USE THIS PATH AS A-C4 COURSE EVIDENCE (corrected 2026-10-29).** The public manifest and reading-room files analyzed below belong to **B-C4: Baptist Worship and Preaching / Broadus**, not A-C4. The complete unchanged research findings, with corrected course label, are now at `books/B-C4/CURRENT_ASSIGNED_DIGEST_ALL_40_FAIRNESS_LANGUAGE_AND_RIGHTS_GATE_2026-10-29.md`. This legacy file is retained only for audit history. No production course, exam, grade or student data was changed.
+
 # A-C4 current assigned-digest all-40 fairness, language and preliminary rights gate
 
 **Course:** A-C4 — Baptist Worship, Ordinances, and Preaching  
