@@ -1,3 +1,5 @@
+> **MISFILED REPORT — DO NOT USE THIS PATH AS A-C3 COURSE EVIDENCE (corrected 2026-10-29).** The public manifest and reading-room files analyzed below belong to **B-C3: Baptist Congregational Polity / Hiscox**, not A-C3. The complete unchanged research findings, with corrected course label, are now at `books/B-C3/CURRENT_ASSIGNED_DIGEST_ALL_40_FAIRNESS_AND_LANGUAGE_GATE_2026-10-29.md`. This legacy file is retained only for audit history. No production course, exam, grade or student data was changed.
+
 # A-C3 / Bap3 — all 40 public reading prompts against ACTUALLY ASSIGNED CTS digests
 
 **29 October 2026 | Nonproduction, non-answer-bearing academic/fairness handoff for Claude and Baptist faculty. No student, grading, policy, copyright or deployment change.**
