@@ -1,3 +1,5 @@
+> **MISFILED REPORT — DO NOT USE THIS PATH AS B-C2 COURSE EVIDENCE (corrected 2026-10-29).** The public manifest and reading-room files analyzed below belong to **A-C2: Pentecostal and Charismatic Theology / Durham**, not B-C2. The complete unchanged research findings, with corrected course label, are now at `books/A-C2/CURRENT_ASSIGNED_DIGEST_ALL_40_FAIRNESS_PROVENANCE_LANGUAGE_RIGHTS_GATE_2026-10-29.md`. This legacy file is retained only for audit history. No production course, exam, grade or student data was changed.
+
 # B-C2 current assigned-digest all-40 fairness, provenance, language and rights gate
 
 **Course:** B-C2 — Pentecostal and Charismatic Theology  
