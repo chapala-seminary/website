@@ -14,7 +14,7 @@ import { exactFill, normAnswer, wordCount, copiedOnly } from './text.js';
 import { SITE_LANGUAGES } from '../../src/lib/languages.mjs';
 import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeInstruction,
   MIN_SA_WORDS, MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP } from './rules.js';
-import { gradeBatch, modelsOf, GRADING_BUDGET_MS } from './model.js';
+import { gradeBatch, modelsOf, GRADING_BUDGET_MS, CHUNK } from './model.js';
 import { SINGLES } from './singles.js';
 
 export const nowIso = () => new Date().toISOString();
@@ -681,7 +681,15 @@ export async function gradeWritten(env, attempt, entries) {
   }
   for (const [kind, idx] of [['fill', fillAsk], ['sa', toModel.sa]]) {
     if (!idx.length) continue;
-    const batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })), { deadline });
+    // Any failure here leaves the answers pending and queued, never lost: the
+    // rows below are still written, so the student's words are kept.
+    let batch;
+    try {
+      batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })), { deadline, chunk: CHUNK[kind] });
+    } catch (err) {
+      console.error('grading failed; answers queued', err && err.message);
+      batch = { results: new Map(), unresolved: [], error: String((err && err.message) || err).slice(0, 300) };
+    }
     for (const i of idx) {
       const r = batch.results.get(entries[i].qid);
       if (!r) { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('waiting', lang), queue: batch.error || 'unresolved' }; continue; }

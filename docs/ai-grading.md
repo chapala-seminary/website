@@ -347,7 +347,8 @@ Notes on the routes (as built):
   (`points` is `[{id, made}]`, never the quotes or the rubric text). A banked
   short answer comes back `{verdict: "met", banked: true}`. The first answer to
   a question stands in an attempt, for fill-ins as for multiple choice; asking
-  again returns it. Fill-ins are at most 80 characters, short answers 2,000.
+  again returns it. Fill-ins are at most 80 characters, short answers 4,000; a longer short
+  answer gets 422 `{error, tooLong: [qid], max}` so the page can point at it.
   The per-student cap (150 written items an hour) counts written items in
   `answer_grades`, so it applies to the shadow trial too.
 - **Submit** on an attempt that is no longer open returns the current result.
