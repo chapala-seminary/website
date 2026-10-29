@@ -428,11 +428,15 @@ for (const lang of ['es', 'fr']) {
   await doFill(code, a);
   const items = a.items.sa.map((qid, i) => ({ qid, answer: essay(i < 8 ? 'met' : i === 8 ? 'error' : 'not_met') }));
   const g = await post('/api/grade', { code, attemptId: a.attemptId, items });
-  // the fake model, like a real outage, fails the whole call: all ten wait
+  // Answers go to the model three at a time (model.js CHUNK). The fake model, like a
+  // real outage, fails the whole call that holds answer 8: answers 6, 7 and 8 wait,
+  // and the other calls are graded.
   const pend = g.body.items[8];
-  ok(g.body.items.every((i) => i.verdict === 'pending') && /graded shortly/.test(pend.feedback), 'when the model fails the answers are saved as pending', g.body.items.map((i) => i.verdict));
+  eq(g.body.items.map((i) => i.verdict), ['met', 'met', 'met', 'met', 'met', 'met', 'pending', 'pending', 'pending', 'not_met'],
+    'when a model call fails, the answers in that call are saved as pending and the others are graded');
+  ok(/graded shortly/.test(pend.feedback), '...with the "graded shortly" note', pend);
   eq(q1(`SELECT COUNT(*) AS n FROM grade_queue WHERE grade_id = ${pend.gradeId}`)[0].n, 1, 'and queued');
-  eq(q1(`SELECT COUNT(*) AS n FROM grade_queue q JOIN answer_grades g ON g.id = q.grade_id WHERE g.attempt_id = '${a.attemptId}'`)[0].n, 10, '...all of them');
+  eq(q1(`SELECT COUNT(*) AS n FROM grade_queue q JOIN answer_grades g ON g.id = q.grade_id WHERE g.attempt_id = '${a.attemptId}'`)[0].n, 3, '...all three of that call');
   eq(q1("SELECT COALESCE(SUM(errors), 0) AS n FROM ai_usage WHERE model = '@cf/test/fallback'")[0].n >= 1, true, 'after the retry and the fallback model both failed (errors counted)');
   const sub = (await submit(code, a)).body;
   eq([sub.status, sub.unitDone], ['pending', false], 'a unit that depends on a pending answer is pending, with no credit', sub);
@@ -471,6 +475,14 @@ for (const lang of ['es', 'fr']) {
   db(`UPDATE answer_grades SET verdict = 'met', graded_by = 'human', grader_email = 'faculty@example.test' WHERE id IN (${t1}, ${t2})`);
   const view = (await get(`/api/attempt/${a.attemptId}?code=${code}`)).body;
   ok(view.answered[a.items.sa[1]].verdict === 'met', 'a human grade shows in the attempt', view.answered);
+}
+
+/* ---- a written answer that is too long: the page is told which one --------------------------------------------- */
+{
+  const code = await student('thm'), a = (await start(code, SCOPE(9))).body;
+  const long = await post('/api/grade', { code, attemptId: a.attemptId, items: [{ qid: a.items.sa[0], answer: essay('met') }, { qid: a.items.sa[1], answer: essay('met') + ' x'.repeat(2100) }] });
+  eq([long.status, long.body.tooLong, long.body.max], [422, [a.items.sa[1]], 4000], 'an answer over 4,000 characters is named, not a generic error', long.body);
+  eq(q1(`SELECT COUNT(*) AS n FROM answer_grades WHERE attempt_id = '${a.attemptId}' AND kind = 'sa'`)[0].n, 0, '...and nothing in that batch is graded, so the student can shorten and resend');
 }
 
 /* ---- the fallback model, bad replies -------------------------------------------------------------------------------- */
