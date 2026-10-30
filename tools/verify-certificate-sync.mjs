@@ -62,8 +62,8 @@ try {
  // just because the learner later selects M.Div as the CURRENT program.
  // These are synthetic browser records; no student or production data touched.
  for (const scenario of [
-   { track:'mdiv', goal:'', expected:'Current program: Master of Divinity (M.Div.)' },
-   { track:'cert', goal:'assoc', expected:'Current program: Associate of Divinity' }
+   { track:'mdiv', goal:'', expected:'Program selected in this browser: Master of Divinity (M.Div.)' },
+   { track:'cert', goal:'assoc', expected:'Program selected in this browser: Associate of Divinity' }
  ]) {
    const ctx=await browser.newContext();
    const page=await ctx.newPage();
@@ -97,7 +97,7 @@ try {
    const label=await page.locator('#track-label').textContent();
    assert.ok(label.includes(scenario.expected),'current-program label expected '+scenario.expected+'; got '+label);checks++;
    const note=await page.locator('#program-not-credit').textContent();
-   assert.ok(note.includes('current enrollment')&&note.includes('not necessarily'),
+   assert.ok(note.includes('local browser selection')&&note.includes('not a verified award'),
      'the certificate distinguishes enrollment from the earned credit level');checks++;
    assert.ok(!label.includes('Master of Divinity Track'),
      'a bare M.Div. Track label must not be presented as an earned credential');checks++;
