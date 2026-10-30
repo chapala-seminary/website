@@ -5,7 +5,7 @@
 export const PASS_RATIO = 0.9;
 export const MIN_SA_WORDS = 15;
 export const MAX_FILL_CHARS = 80;
-export const MAX_SA_CHARS = 2000;
+export const MAX_SA_CHARS = 4000;
 export const LOCK_MASTERS_MIN = 15;
 export const LOCK_OTHER_MIN = 2;
 export const HOURLY_CAP = 150;        // graded written items per student per hour

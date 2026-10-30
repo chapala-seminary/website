@@ -278,7 +278,7 @@ export async function digest(env, asOf = new Date()) {
   const byStudent = {};
   for (const f of finished) (byStudent[f.name] ??= []).push(courseName(f.code));
   const gradingLine = await gradingDigestLine(env, asOf);
-  const KIND = { quiet: 'quiet 3 weeks', not_started: 'not started after a week' };
+  const KIND = { quiet: 'quiet 3 weeks', not_started: 'not started after a week', confirm_invite: 'please confirm your registration' };
   const lines = [
     `The week to ${day(asOf.toISOString())}`,
     `${total} students; ${active} made progress in the last ${QUIET_DAYS} days.`,

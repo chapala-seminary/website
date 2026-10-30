@@ -147,10 +147,12 @@ async function gradeAnswers(request, env, h) {
     if (seen.has(it.qid)) throw new h.HttpError(400, 'a question appears twice');
     seen.add(it.qid);
     const isFill = items.fill.includes(it.qid);
-    const max = isFill ? MAX_FILL_CHARS : MAX_SA_CHARS;
-    if (it.answer.length > max) throw new h.HttpError(400, `an answer is longer than ${max} characters`);
+    if (isFill && it.answer.length > MAX_FILL_CHARS) throw new h.HttpError(400, `an answer is longer than ${MAX_FILL_CHARS} characters`);
     asked.push({ ...it, kind: isFill ? 'fill' : 'sa' });
   }
+  // A written answer that is too long is the student's to shorten: say which one, so the page can point at it.
+  const tooLong = asked.filter((a) => a.kind === 'sa' && a.answer.length > MAX_SA_CHARS).map((a) => a.qid);
+  if (tooLong.length) return h.json({ error: `an answer is longer than ${MAX_SA_CHARS} characters`, tooLong, max: MAX_SA_CHARS }, 422);
 
   // What is already settled: a banked short answer, or an answer given earlier in this attempt.
   const done = new Map((rows.results ?? []).map((r) => [r.qid, r]));

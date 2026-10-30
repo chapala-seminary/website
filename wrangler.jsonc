@@ -85,6 +85,10 @@
 		"OUTREACH_MODE": "send",
 		// the Monday summary to the seminary: "send" to email it
 		"DIGEST_MODE": "send",
+		// the one-time "please confirm your registration" note (worker/confirm-invite.js):
+		// "send" lets a staff member send it from /staff/confirm-invite in batches.
+		// Off until Wayne has read the sample from beta and approved it.
+		"CONFIRM_INVITE_MODE": "off",
 		"OUTREACH_FROM": "Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>",
 		"SITE_ORIGIN": "https://chapalaseminary.org",
 		// The staff pages (worker/staff.js): Cloudflare Access, team domain
@@ -171,6 +175,8 @@
 				// no Monday summary from beta: it went to the same inbox as
 				// the live one and was taken for it (Wayne, 5 Oct 2026)
 				"DIGEST_MODE": "off",
+				// beta's students are testers: never sent; samples to staff still work
+				"CONFIRM_INVITE_MODE": "off",
 				"OUTREACH_FROM": "Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>",
 				"SITE_ORIGIN": "https://beta.chapalaseminary.org",
 				// the same Access application covers beta's /staff

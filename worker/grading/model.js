@@ -278,7 +278,28 @@ async function repair(env, model, kind, lang, items, version, parsed0, repairs, 
   });
 }
 
-export async function gradeBatch(env, kind, lang, items, { deadline = Date.now() + GRADING_BUDGET_MS } = {}) {
+/* How many answers go to the model in one call. The model writes about three
+ * seconds of output per written answer, so ten in one call ran past the 25 s
+ * call limit and nearly every written answer fell back to the queue (and an
+ * answer that hit a second error was lost from the student's view). Small
+ * calls side by side finish well inside the limit. */
+export const CHUNK = { fill: 10, sa: 3 };
+
+export async function gradeBatch(env, kind, lang, items, { deadline = Date.now() + GRADING_BUDGET_MS, chunk = 0 } = {}) {
+  if (chunk > 0 && items.length > chunk) {
+    const parts = [];
+    for (let i = 0; i < items.length; i += chunk) parts.push(items.slice(i, i + chunk));
+    const done = await Promise.all(parts.map((p) => gradeBatch(env, kind, lang, p, { deadline })));
+    const results = new Map();
+    const unresolved = [];
+    let error = null;
+    for (const d of done) {
+      for (const [qid, r] of d.results) results.set(qid, r);
+      unresolved.push(...d.unresolved);
+      if (d.error) error = d.error;
+    }
+    return { results, unresolved, error: unresolved.length ? error : null };
+  }
   const { primary, fallback, version } = modelsOf(env);
   const results = new Map();
   let remaining = items.slice();

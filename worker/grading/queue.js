@@ -12,7 +12,7 @@
  * injection-like answer, or a model that answered "pending"): the faculty
  * pages list exactly those.
  */
-import { gradeBatch } from './model.js';
+import { gradeBatch, CHUNK } from './model.js';
 import { normAnswer } from './text.js';
 import { loadKeys, loadAttempt, loadStudent, settle, cacheDecision, nowIso } from './attempts.js';
 import { sendEmail, emailConfigured, emailLanguage } from '../email.js';
@@ -76,7 +76,7 @@ export async function runQueue(env, { limit = 40 } = {}) {
       const part = rows.slice(i, i + BATCH);
       // one entry per grade, so give the model a unique id for each
       const items = part.map((d) => ({ qid: `g${d.grade_id}`, key: keys.get(d.qid)?.key, answer: d.answer_text })).filter((x) => x.key);
-      let batch = items.length ? await gradeBatch(env, kind, lang, items) : { results: new Map(), unresolved: [], error: 'the question is no longer in grading_keys' };
+      let batch = items.length ? await gradeBatch(env, kind, lang, items, { chunk: CHUNK[kind] }) : { results: new Map(), unresolved: [], error: 'the question is no longer in grading_keys' };
       /* One answer that the model cannot take must not hold up the others in its
          batch: when nothing came back and the cause is not a capacity limit, ask for each on its own. */
       if (items.length > 1 && !batch.results.size && batch.error && !CAPACITY.test(batch.error)) {
