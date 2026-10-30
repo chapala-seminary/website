@@ -60,6 +60,10 @@ try {
  }
  // A course earned at Associate rigor must not appear to be an M.Div award
  // just because the learner later selects M.Div as the CURRENT program.
+ // In this **wording-only** browser scenario, synthetic textbook/reading passes
+ // satisfy the pre-existing local master's gate so we can inspect the label.
+ // The distinct concern that this gate may hide an already earned lower-level
+ // certificate after a track switch is tracked separately in issue #185.
  // These are synthetic browser records; no student or production data touched.
  for (const scenario of [
    { track:'mdiv', goal:'', expected:'Program selected in this browser: Master of Divinity (M.Div.)' },
@@ -76,7 +80,8 @@ try {
      progress:catalog.courses.hermeneutics.units.map(unit=>({course:'hermeneutics',unit})),
      doneCodes:['CTSHERMENEUTICS'],
      completions:[{code:'CTSHERMENEUTICS',track:'assoc'}],
-     textbooks:[],certificates:[]
+     textbooks:[{textbook:'studybible'},{textbook:'hermeneuticsreadings'}],
+     certificates:[]
    };
    await ctx.addInitScript(({s})=>{
      localStorage.setItem('cts_student',JSON.stringify(s));
@@ -84,6 +89,10 @@ try {
      localStorage.setItem('cts_track',s.track);
      if(s.goal)localStorage.setItem('cts_goal',s.goal);
      for(let unit=1;unit<=11;unit++)localStorage.setItem('cts_herm_u'+unit+'_passed','true');
+     // Only for this UI-label test: satisfy the existing M.Div. local test
+     // gate. This is synthetic browser state, not a genuine award or credit.
+     localStorage.setItem('cts_textbook_studybible_passed','true');
+     localStorage.setItem('cts_textbook_hermeneuticsreadings_passed','true');
    },{s:student});
    await page.route('**/api/**',route=>{
      const api=new URL(route.request().url()).pathname;
