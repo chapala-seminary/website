@@ -138,6 +138,52 @@ const seedLive = (code, rows) => db(
     'single-page: and its certificate is a Master of Theology award', cert);
 }
 
+
+/* ---- An Associate-earned Hermeneutics course never becomes an M.Div. award
+ * by changing enrollment, even if a legacy certificate page supplies the
+ * misleading M.Div. title. Synthetic local D1 rows, never real student data.
+ * This isolates the server credential boundary; separate frontend test
+ * checks that the printed HTML no longer mislabels current enrollment.
+ */
+{
+  const code = await student('cert');
+  db("UPDATE students SET track = 'mdiv', email_verified_at = '2026-10-01T00:00:00Z' WHERE id = '" + code + "'");
+  db("INSERT INTO course_completions (student_id, code, track, completed_at, source) VALUES ('"
+    + code + "', 'CTSHERMENEUTICS', 'assoc', '2026-10-01T00:00:00Z', 'server')");
+  db("INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES "
+    + Array.from({ length: 11 }, (_, i) => "('"
+      + code + "', 'hermeneutics', " + (i + 1) + ", '2026-10-01T00:00:00Z', 'server')").join(", "));
+  const req = { code, level: 'course', course: 'CTSHERMENEUTICS',
+    title: 'Hermeneutics — Master of Divinity' };
+  const first = await post('/api/certificate', req);
+  eq(first.status, 201, 'Associate-earned Hermeneutics is eligible for its actual course certificate');
+  ok(!!first.body?.verifyCode, 'Associate course certificate has server verification code', first);
+  if (first.body?.verifyCode) {
+    const records = q1("SELECT title, level, course FROM certificates WHERE verify_code = '"
+      + first.body.verifyCode + "'");
+    eq(records.length, 1, 'one verified Hermeneutics certificate exists');
+    eq(records[0]?.title, 'Hermeneutics — Associate of Divinity',
+      'the server records earned Associate level, ignoring the misleading M.Div page title');
+    eq(records[0]?.level, 'course', 'a course certificate is not an M.Div. degree');
+    const second = await post('/api/certificate', req);
+    eq([second.status, second.body?.verifyCode, second.body?.reissued],
+      [200, first.body.verifyCode, true],
+      'repeated claim reissues the same verified certificate rather than duplicating');
+    eq(q1("SELECT COUNT(*) AS n FROM certificates WHERE student_id = '" + code
+      + "' AND course = 'hermeneutics'")[0]?.n, 1,
+      'only one durable Hermeneutics certificate row');
+  }
+  eq(q1("SELECT track FROM course_completions WHERE student_id = '" + code
+    + "' AND code = 'CTSHERMENEUTICS'")[0]?.track, 'assoc',
+    'the course remains Associate-earned after M.Div. enrollment and certificate claim');
+
+  const degree = q1("SELECT courses_done, masters_done, mdiv_core_done FROM degree_progress WHERE student_id = '"
+    + code + "'")[0];
+  eq([degree?.courses_done, degree?.masters_done, degree?.mdiv_core_done], [1, 0, 0],
+    'an Associate Hermeneutics completion is retained but NOT counted toward M.Div degree progress');
+
+}
+
 console.log(`${checks} earned-level assertions against a live Worker and D1`);
 if (fails.length) { console.log(`FAIL — ${fails.length}:`); for (const f of fails) console.log('  ✗ ' + f); process.exit(1); }
 console.log('PASS — a completion is written only at the level its units were passed at; a track change and a textbook test do not raise it.');

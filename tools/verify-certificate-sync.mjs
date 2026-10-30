@@ -58,5 +58,59 @@ try {
   assert.equal(await page.locator('#cts-cert-pdf').count(),0); checks++;
   await ctx.close();
  }
+ // A course earned at Associate rigor must not appear to be an M.Div award
+ // just because the learner later selects M.Div as the CURRENT program.
+ // In this **wording-only** browser scenario, synthetic textbook/reading passes
+ // satisfy the pre-existing local master's gate so we can inspect the label.
+ // The distinct concern that this gate may hide an already earned lower-level
+ // certificate after a track switch is tracked separately in issue #185.
+ // These are synthetic browser records; no student or production data touched.
+ for (const scenario of [
+   { track:'mdiv', goal:'', expected:'Program selected in this browser: Master of Divinity (M.Div.)' },
+   { track:'cert', goal:'assoc', expected:'Program selected in this browser: Associate of Divinity' }
+ ]) {
+   const ctx=await browser.newContext();
+   const page=await ctx.newPage();
+   const student={
+     id:'CTS-TEST-TEST-TEST',name:'Earned Level Test',track:scenario.track,
+     goal:scenario.goal,email_verified_at:null
+   };
+   const state={
+     student,
+     progress:catalog.courses.hermeneutics.units.map(unit=>({course:'hermeneutics',unit})),
+     doneCodes:['CTSHERMENEUTICS'],
+     completions:[{code:'CTSHERMENEUTICS',track:'assoc'}],
+     textbooks:[{textbook:'studybible'},{textbook:'hermeneuticsreadings'}],
+     certificates:[]
+   };
+   await ctx.addInitScript(({s})=>{
+     localStorage.setItem('cts_student',JSON.stringify(s));
+     localStorage.setItem('cts_student_code',s.id);
+     localStorage.setItem('cts_track',s.track);
+     if(s.goal)localStorage.setItem('cts_goal',s.goal);
+     for(let unit=1;unit<=11;unit++)localStorage.setItem('cts_herm_u'+unit+'_passed','true');
+     // Only for this UI-label test: satisfy the existing M.Div. local test
+     // gate. This is synthetic browser state, not a genuine award or credit.
+     localStorage.setItem('cts_textbook_studybible_passed','true');
+     localStorage.setItem('cts_textbook_hermeneuticsreadings_passed','true');
+   },{s:student});
+   await page.route('**/api/**',route=>{
+     const api=new URL(route.request().url()).pathname;
+     if(api==='/api/health')return route.fulfill({json:{ok:true}});
+     if(api==='/api/sync'||api.startsWith('/api/student/'))
+       return route.fulfill({json:state});
+     return route.fulfill({status:503,json:{error:'test offline'}});
+   });
+   await page.goto(BASE+'/CTSHermeneuticsCertificate.html');
+   await page.locator('#cert-view').waitFor({state:'visible'});
+   const label=await page.locator('#track-label').textContent();
+   assert.ok(label.includes(scenario.expected),'current-program label expected '+scenario.expected+'; got '+label);checks++;
+   const note=await page.locator('#program-not-credit').textContent();
+   assert.ok(note.includes('local browser selection')&&note.includes('not a verified award'),
+     'the certificate distinguishes enrollment from the earned credit level');checks++;
+   assert.ok(!label.includes('Master of Divinity Track'),
+     'a bare M.Div. Track label must not be presented as an earned credential');checks++;
+   await ctx.close();
+ }
  console.log(`${checks} certificate sync checks passed (initial sync, partial record, subsequent restore, repeat restore).`);
 } finally {await browser.close();}
