@@ -23,6 +23,8 @@ node --test test/track-sync-ack.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
+# Synthetic end-to-end submit choreography: receipts, chunked grading and safe retry.
+node --test test/cts-written-submission.test.mjs
 node --test test/assessment-keys.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
