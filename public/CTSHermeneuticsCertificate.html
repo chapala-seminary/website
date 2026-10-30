@@ -519,8 +519,8 @@
     document.getElementById('student-name').textContent =
       student.name && student.name.trim() ? student.name : (document.body.dataset.pageLang==='fr' ? '[Nom de l’étudiant(e)]' : '[Student Name]');
 
-    // The browser holds the program NOW selected; that is not necessarily the
-    // level at which this course was earned (see the server's course completion).
+    // The browser holds the program selected locally; it is not authoritative,
+    // nor necessarily the level at which this course was earned.
     // Never print an unqualified "Master of Divinity Track" on a certificate
     // which may have been earned previously at Associate rigor.
     const trackLabel = document.getElementById('track-label');
@@ -552,17 +552,17 @@
       };
     }
     trackLabel.innerHTML =
-      '<span class="lang-en">Current program: ' + program.en + '</span>' +
-      '<span class="lang-es">Programa actual: ' + program.es + '</span>' +
-      '<span class="lang-fr">Programme actuel : ' + program.fr + '</span>';
+      '<span class="lang-en">Program selected in this browser: ' + program.en + '</span>' +
+      '<span class="lang-es">Programa seleccionado en este navegador: ' + program.es + '</span>' +
+      '<span class="lang-fr">Programme sélectionné dans ce navigateur : ' + program.fr + '</span>';
     // On both screen and print, tell students that the official earned-credit
     // level comes from the seminary's record, not their current enrollment.
     const programNote = document.getElementById('program-not-credit');
     if (programNote) {
       programNote.innerHTML =
-        '<span class="lang-en">The program shown reflects current enrollment, not necessarily the level at which this course was earned. See the seminary\'s verified certificate record for awarded credit.</span>' +
-        '<span class="lang-es">El programa mostrado corresponde a la inscripción actual, no necesariamente al nivel en que aprobó este curso. Consulte el certificado verificable del seminario para conocer el crédito otorgado.</span>' +
-        '<span class="lang-fr">Le programme indiqué correspond à l\'inscription actuelle, pas nécessairement au niveau auquel ce cours a été validé. Consultez le certificat vérifiable du séminaire pour les crédits accordés.</span>';
+        '<span class="lang-en">The program shown is a local browser selection, not a verified award or necessarily the level at which this course was earned. See the seminary\'s verified certificate record for awarded credit.</span>' +
+        '<span class="lang-es">El programa mostrado es una selección de este navegador, no un título verificado ni necesariamente el nivel en que aprobó este curso. Consulte el certificado verificable del seminario para conocer el crédito otorgado.</span>' +
+        '<span class="lang-fr">Le programme indiqué est un choix enregistré dans ce navigateur, pas un diplôme vérifié ni nécessairement le niveau auquel ce cours a été validé. Consultez le certificat vérifiable du séminaire pour les crédits accordés.</span>';
     }
 
     // Date — format in both languages
