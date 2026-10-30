@@ -65,11 +65,33 @@
      the lists is a completion (the old certificate pages sometimes wrote the
      master's list and not the general one); the later list wins, since the
      lists run from lowest level to highest. */
+  /* One code per course, as the Worker counts (worker/awards.js canonicalCode).
+     Old certificate pages stored the certificate file's name beside the code
+     (CTSOTSCERTIFICATE beside CTSOTS), so a student's page counted 14 courses
+     where the seminary's record had 8 (29 Oct 2026). A ...MDIVCERTIFICATE or
+     ...THMCERTIFICATE name also says the level it was earned on. */
+  var ALIASES = { CTSCOUNSELING: "COUNSELING", CTSNARRATIVEPREACHING: "STORYTEL", CTSPREACHING: "WISESPEAK", ETHICS_: "ETHICS" };
+  var RANK = { cert: 0, assoc: 1, thm: 2, mdiv: 3 };
+  function canonical(raw) {
+    var up = String(raw || "").trim().toUpperCase().replace(/\.HTML$/, "");
+    var m = /(MDIV|THM|MTH)CERTIFICATE$/.exec(up);
+    var named = m ? (m[1] === "MDIV" ? "mdiv" : "thm") : null;
+    up = up.replace(/(MDIV|THM|MTH)?CERTIFICATE$/, "");
+    if (ALIASES[up]) up = ALIASES[up];
+    var known = window.CTS_COURSE_NAMES;
+    if (!up || (known && !known[up])) return null;
+    return { code: up, level: named };
+  }
   function levels() {
     var out = {};
     [["cts_done_codes", "cert"], ["cts_assoc_done_codes", "assoc"],
      ["cts_thm_done_codes", "thm"], ["cts_mdiv_done_codes", "mdiv"]].forEach(function (p) {
-      list(p[0]).forEach(function (c) { out[c] = p[1]; });
+      list(p[0]).forEach(function (raw) {
+        var c = canonical(raw);
+        if (!c) return;
+        var lv = c.level && RANK[c.level] > RANK[p[1]] ? c.level : p[1];
+        if (!(c.code in out) || RANK[lv] >= RANK[out[c.code]]) out[c.code] = lv;
+      });
     });
     return out;
   }

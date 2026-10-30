@@ -20,6 +20,7 @@ CONFIG=test/wrangler.local.jsonc
 node tools/private-units.mjs --check
 node --test test/release-governance.test.mjs
 node --test test/track-sync-ack.test.mjs
+node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
 node --test test/assessment-keys.test.mjs
