@@ -470,6 +470,9 @@ node test/published-models.test.mjs
   # Swahili, the fourth language: routes, toggle, the translation-pending
   # note, a Swahili lesson and exam, and Swahili grading on the server.
   API_BASE="http://127.0.0.1:$PORT" node test/swahili.test.mjs
+  # "Listen to this lesson": what is read aloud, in which language, and that
+  # it stops when the exam opens (the device's voice replaced by a recorder).
+  node test/listen.test.mjs "http://127.0.0.1:$PORT"
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose
