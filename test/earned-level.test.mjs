@@ -176,6 +176,12 @@ const seedLive = (code, rows) => db(
   eq(q1("SELECT track FROM course_completions WHERE student_id = '" + code
     + "' AND code = 'CTSHERMENEUTICS'")[0]?.track, 'assoc',
     'the course remains Associate-earned after M.Div. enrollment and certificate claim');
+
+  const degree = q1("SELECT courses_done, masters_done, mdiv_core_done FROM degree_progress WHERE student_id = '"
+    + code + "'")[0];
+  eq([degree?.courses_done, degree?.masters_done, degree?.mdiv_core_done], [1, 0, 0],
+    'an Associate Hermeneutics completion is retained but NOT counted toward M.Div degree progress');
+
 }
 
 console.log(`${checks} earned-level assertions against a live Worker and D1`);
