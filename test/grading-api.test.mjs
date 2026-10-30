@@ -676,6 +676,8 @@ for (const [prefix, slug, unit] of [
   ];
   let acknowledged = true;
   for (const part of writtenChunks) {
+    // Never continue to the next written part after any lost/partial receipt.
+    if (!acknowledged) break;
     for (let k = 0; k < part.length; k += 5) {
       const chunk = part.slice(k,k+5);
       const response = await post('/api/grade', {code,attemptId:a.attemptId,items:chunk});
