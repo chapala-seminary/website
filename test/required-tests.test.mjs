@@ -183,10 +183,15 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
       const missing = A.textbookShortfall(t.code, 'mdiv', allExceptTarget, ctx());
       ok(typeof missing === 'string' && missing.includes(slug),
         'post-activation: missing activated test blocks M.Div completion: ' + slug, missing);
+      const thmMissing = A.textbookShortfall(t.code, 'thm', allExceptTarget, ctx());
+      ok(typeof thmMissing === 'string' && thmMissing.includes(slug),
+        'post-activation: missing activated test blocks Th.M completion: ' + slug, thmMissing);
       ok(A.textbookShortfall(t.code, 'mdiv', allExceptTarget, ctx(earned)) === null,
         'post-activation: earned master completion stays valid without retaking: ' + slug);
       ok(A.textbookShortfall(t.code, 'associate', allExceptTarget, ctx()) === null,
         'post-activation: Associate remains exempt from master test rule: ' + slug);
+      ok(A.textbookShortfall(t.code, 'cert', allExceptTarget, ctx()) === null,
+        'post-activation: Certificate remains exempt from master test rule: ' + slug);
     }
   }
 }
