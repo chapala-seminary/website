@@ -143,6 +143,59 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(held.pentecostalreadings === '2001-01-01T00:00:00Z', 'and the rule is still tested on pentecostalreadings, active since 2001');
 }
 
+
+/* ---- real scheduled activation, independent of test Worker's 2099 override ----
+ * The Worker integration suite deliberately postpones all dated exams with
+ * TEST_REQUIRED_FROM. Test the production catalog's unmodified scheduling
+ * and the academic earned-level boundary here, using a fixed post-cutoff
+ * clock, WITHOUT modifying live student records or exam policy.
+ *
+ * This confirms the effective rule, not faculty/rights signoff on a bank:
+ * release still needs a separate human academic review and a synthetic
+ * browser/Worker test with actual activated questions.
+ */
+{
+  const dated = Object.entries(SCHED);
+  const electives = dated.filter(([slug]) => slug.startsWith('elec'));
+  ok(dated.length === 48, 'post-activation: 48 explicitly dated examinations in the academic schedule', dated.length);
+  ok(electives.length === 40 && dated.length - electives.length === 8,
+    'post-activation: 40 elective and eight foundation/core reading tests', {
+      elective: electives.length, core: dated.length - electives.length,
+    });
+
+  const latest = Math.max(...dated.map(([, date]) => Date.parse(date)));
+  ok(Number.isFinite(latest), 'post-activation: every dated examination has a valid activation timestamp');
+  if (Number.isFinite(latest)) {
+    const afterAllDates = new Date(latest + 3600000).toISOString();
+    const oldMasterCompletion = '2026-10-20T00:00:00.000Z';
+    for (const [slug, date] of dated) {
+      const t = catalog.textbooks[slug];
+      ok(!!t && t.requiredFrom === date,
+        'post-activation: catalog and source schedule agree for ' + slug);
+      if (!t) continue;
+      const earned = [{ code: t.code, track: 'mdiv', completed_at: oldMasterCompletion }];
+      const ctx = (completions = []) => ({ now: afterAllDates, completions });
+      ok(A.testCounts(slug, t.code, ctx()),
+        'post-activation: the dated test actually counts for a new master student: ' + slug);
+      ok(!A.testCounts(slug, t.code, ctx(earned)),
+        'post-activation: previously earned master completion is grandfathered: ' + slug);
+      const allExceptTarget = A.testsFor(t.code).filter((test) => test !== slug);
+      const missing = A.textbookShortfall(t.code, 'mdiv', allExceptTarget, ctx());
+      ok(typeof missing === 'string' && missing.includes(slug),
+        'post-activation: missing activated test blocks M.Div completion: ' + slug, missing);
+      const thmMissing = A.textbookShortfall(t.code, 'thm', allExceptTarget, ctx());
+      ok(typeof thmMissing === 'string' && thmMissing.includes(slug),
+        'post-activation: missing activated test blocks Th.M completion: ' + slug, thmMissing);
+      ok(A.textbookShortfall(t.code, 'mdiv', allExceptTarget, ctx(earned)) === null,
+        'post-activation: earned master completion stays valid without retaking: ' + slug);
+      ok(A.textbookShortfall(t.code, 'associate', allExceptTarget, ctx()) === null,
+        'post-activation: Associate remains exempt from master test rule: ' + slug);
+      ok(A.textbookShortfall(t.code, 'cert', allExceptTarget, ctx()) === null,
+        'post-activation: Certificate remains exempt from master test rule: ' + slug);
+    }
+  }
+}
+
 if (fails.length) {
   console.log(`FAIL — ${fails.length} of ${checks} required-test checks:`);
   for (const f of fails) console.log('  - ' + f);
