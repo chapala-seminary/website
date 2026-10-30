@@ -314,7 +314,24 @@
       doc.setFont('times', 'bolditalic'); doc.setFontSize(14); doc.setTextColor.apply(doc, GOLD);
       centre(doc, w.honors, y + 6); y += 20;
     }
-    var band = TRACK[track()][lang].toUpperCase();
+    // The Hermeneutics HTML certificate explicitly labels current browser
+    // selection, not an earned academic level. The downloadable PDF must NOT
+    // continue to say an unqualified "Master of Divinity Track": its data
+    // comes from the same unverified localStorage selection, not D1.
+    var browserSelection = file === 'ctshermeneuticscertificate.html';
+    var selectedBand = {
+      en: 'BROWSER-SELECTED PROGRAM: ',
+      es: 'PROGRAMA ELEGIDO EN ESTE NAVEGADOR: ',
+      fr: 'PROGRAMME CHOISI SUR CET APPAREIL : '
+    };
+    var selectedNote = {
+      en: 'This browser selection does not verify the level of earned course credit. Check the seminary\'s verified certificate record.',
+      es: 'Esta selección no verifica el nivel académico aprobado. Consulte el certificado verificable del seminario.',
+      fr: 'Ce choix ne prouve pas le niveau de crédits obtenus. Consultez le certificat vérifiable du séminaire.'
+    };
+    var band = browserSelection
+      ? (selectedBand[lang] + DEGREE_NAME[track()][lang]).toUpperCase()
+      : TRACK[track()][lang].toUpperCase();
     doc.setFont('helvetica', 'bold'); doc.setFontSize(8.5);
     var bw = doc.getTextWidth(band) + 1.6 * (band.length - 1) + 36;
     doc.setFillColor.apply(doc, BLUE); doc.rect(f.Wp / 2 - bw / 2, y, bw, 19, 'F');
@@ -323,6 +340,12 @@
     doc.setTextColor.apply(doc, INK); doc.setFont('times', 'normal'); doc.setFontSize(11);
     var lines = doc.splitTextToSize(w.body, 500);
     doc.text(lines, f.Wp / 2, y + 42, { align: 'center', lineHeightFactor: 1.4 });
+    if (browserSelection) {
+      doc.setTextColor(78, 78, 78);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+      doc.text(doc.splitTextToSize(selectedNote[lang], 520), f.Wp / 2, y + 100,
+        { align: 'center', lineHeightFactor: 1.2 });
+    }
     var byline = (names[file] && names[file].authors) || ['cook'];
     footer(doc, lang, sig, 466, w.dateOf + dateText(lang, when), verifyCode(), signers(byline, w));
   }
