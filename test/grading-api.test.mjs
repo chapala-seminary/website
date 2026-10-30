@@ -661,7 +661,7 @@ for (const [prefix, slug, unit] of [
   if (opened.status !== 200 || !a?.attemptId || !a.items?.mc) continue;
   eq([a.track, a.lang, a.items.mc.length, a.items.fill.length, a.items.sa.length],
     ['mdiv', 'es', 20, 10, 10],
-    label + ': all forty questions are present at master's rigor');
+    label + ': all forty questions are present at master-level rigor');
   for (const mc of a.items.mc) {
     const choice = source.mc[idx(mc.qid)]?.answer;
     const r = await post('/api/mc', {code, attemptId:a.attemptId, qid:mc.qid, choice});
