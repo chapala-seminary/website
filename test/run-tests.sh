@@ -202,6 +202,8 @@ node tools/wr-readers.mjs
 # public-domain shelf its data says and an honours attestation, written by
 # tools/reading-rooms.mjs -- a room edited by hand drifts from the data.
 node tools/reading-rooms.mjs --check
+# The optional Greek/Hebrew labs must not change the five reading or honors requirements.
+node test/la-language-labs.test.mjs
 
 # The question bank: 451 units, 34,778 comparisons of stems, options and answer
 # keys, in a form that does not care what file format the content lives in.
