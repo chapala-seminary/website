@@ -160,6 +160,25 @@ const has = (t, s) => t.includes(s);
   const ce = (await build('CTSCECertificate.html', 'es', seed)).text;
   ok(has(ce, 'Andi Cook') && has(ce, 'Educación Cristiana'), 'Christian Education: Andi Cook, Course Author');
 }
+// Hermeneutics has a standalone legacy HTML certificate and a separate vector
+// PDF generator. BOTH must say that an M.Div. selected on this device does not
+// prove the level the course was earned at. Test actual generated PDF bytes.
+{
+  const seed = { cts_student: JSON.stringify({ name: 'Synthetic Hermeneutics Learner', track: 'mdiv' }), cts_track: 'mdiv' };
+  for (let i = 1; i <= 11; i++) seed['cts_herm_u' + i + '_passed'] = 'true';
+  for (const [lang, label] of [
+    ['en', 'BROWSER-SELECTED PROGRAM:'],
+    ['es', 'PROGRAMA ELEGIDO EN ESTE NAVEGADOR:'],
+    ['fr', 'PROGRAMME CHOISI SUR CET APPAREIL']
+  ]) {
+    const { text, errs } = await build('CTSHermeneuticsCertificate.html', lang, seed);
+    ok(!errs.length && text.startsWith('%PDF-'), 'Hermeneutics ' + lang + ' PDF renders without errors', errs.join(' | '));
+    ok(pages(text) === 1, 'Hermeneutics ' + lang + ' PDF is one page');
+    ok(has(text, label), 'Hermeneutics ' + lang + ' PDF marks program as device-selected rather than earned');
+    ok(!has(text, 'MASTER OF DIVINITY TRACK'),
+      'Hermeneutics ' + lang + ' PDF avoids the old unqualified masters-track title');
+  }
+}
 // a degree diploma
 {
   const seed = { cts_student: JSON.stringify({ name: 'Ana Lopez', track: 'mdiv' }) };
