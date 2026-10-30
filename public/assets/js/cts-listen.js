@@ -195,6 +195,18 @@
     playing = false; gen++; synth.cancel(); at = 0; light(null); show("idle");
   }
 
+  /* What would be read, for tools that make the downloadable recordings
+     (stage 2): the same text, in the same order, as the button reads. */
+  window.CTSListen = {
+    script: function () {
+      build();
+      return queue.map(function (q) {
+        var b = q.el.closest("[data-cts-block]");
+        return { lang: q.lang, text: q.text, block: b ? b.getAttribute("data-cts-block") : "" };
+      });
+    }
+  };
+
   playBtn.addEventListener("click", play);
   pauseBtn.addEventListener("click", pause);
   stopBtn.addEventListener("click", stop);

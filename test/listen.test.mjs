@@ -57,6 +57,8 @@ try {
     ok(said.every((s) => s.text.length <= 270), `${path}: in short parts`);
     const text = said.map((s) => s.text).join(' ');
     if (ref) ok(ref.test(text), `${path}: Bible references are said in words`);
+    const script = await page.evaluate(() => window.CTSListen.script());
+    ok(script.length === said.length && script.every((s, i) => s.text === said[i].text), `${path}: CTSListen.script() is what the button reads`);
     ok(!/\d+:\d+/.test(text), `${path}: no "1:1" left to read as numbers`);
     ok(!/Register once|Regístrese|Save registration/.test(text), `${path}: the registration box is not read`);
     ok(await page.locator('.cts-listening').count() === 0, `${path}: at the end, nothing is left highlighted`);
