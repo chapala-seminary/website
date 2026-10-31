@@ -44,15 +44,19 @@
   var W = {
     en: { listen: "Listen to this lesson", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
           novoice: "This device has no English voice. You can add one in the device's text-to-speech settings.",
+          tip: "Tip: you can choose a man’s or a woman’s voice in your phone’s or computer’s text-to-speech settings.",
           ch: "chapter", v: "verse", vs: "verses", to: "to" },
     es: { listen: "Escuchar esta lección", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
           novoice: "Este dispositivo no tiene voz en español. Puede añadir una en la configuración de texto a voz del dispositivo.",
+          tip: "Consejo: puede elegir una voz de hombre o de mujer en la configuración de texto a voz de su teléfono o computadora.",
           ch: "capítulo", v: "versículo", vs: "versículos", to: "al" },
     fr: { listen: "Écouter cette leçon", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
           novoice: "Cet appareil n’a pas de voix française. Vous pouvez en ajouter une dans les réglages de synthèse vocale de l’appareil.",
+          tip: "Astuce : vous pouvez choisir une voix d’homme ou de femme dans les réglages de synthèse vocale de votre téléphone ou ordinateur.",
           ch: "chapitre", v: "verset", vs: "versets", to: "à" },
     sw: { listen: "Sikiliza somo hili", pause: "Simama kidogo", resume: "Endelea", stop: "Acha", speed: "Kasi",
           novoice: "Kifaa hiki hakina sauti ya Kiswahili. Unaweza kuongeza moja katika mipangilio ya kusoma maandishi kwa sauti ya kifaa.",
+          tip: "Kidokezo: unaweza kuchagua sauti ya mwanamume au ya mwanamke katika mipangilio ya kusoma maandishi kwa sauti ya simu au kompyuta yako.",
           ch: "sura ya", v: "mstari wa", vs: "mistari", to: "hadi" }
   };
   var t = W[pageLang] || W.en;
@@ -110,7 +114,7 @@
     "#cts-listen{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 1rem}" +
     "#cts-listen .btn{font-size:1.05rem;padding:.55rem 1rem}" +
     "#cts-listen select{font-size:1rem;padding:.4rem}" +
-    "#cts-listen .cts-listen-msg{flex-basis:100%;margin:.25rem 0 0}" +
+    "#cts-listen .cts-listen-msg,#cts-listen .cts-listen-tip{flex-basis:100%;margin:.25rem 0 0}" +
     ".cts-listening{background:rgba(255,214,102,.35);border-radius:4px;box-shadow:0 0 0 3px rgba(255,214,102,.35)}";
   document.head.appendChild(css);
 
@@ -125,7 +129,8 @@
     '<button type="button" class="btn" data-act="stop" hidden>⏹ ' + t.stop + '</button>' +
     '<label class="small">' + t.speed + ' <select data-act="rate">' +
     RATES.map(function (r) { return '<option value="' + r + '"' + (r === rate ? " selected" : "") + ">" + String(r).replace(".", pageLang === "en" ? "." : ",") + "×</option>"; }).join("") +
-    '</select></label><p class="small muted cts-listen-msg" hidden></p>';
+    '</select></label><p class="small muted cts-listen-msg" hidden></p>' +
+    '<p class="small muted cts-listen-tip">' + t.tip + '</p>';
   var top = all[0];
   while (top.parentElement && top.parentElement !== main) top = top.parentElement;
   main.insertBefore(bar, top);

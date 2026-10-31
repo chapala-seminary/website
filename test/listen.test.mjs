@@ -43,6 +43,7 @@ try {
     const play = page.locator('#cts-listen [data-act="play"]');
     await play.waitFor({ timeout: 10000 });
     ok((await play.innerText()).includes(label), `${path}: the button says ${label}`);
+    ok(/(voice|voz|voix)/.test(await page.locator('#cts-listen .cts-listen-tip').innerText()), `${path}: the voice tip is shown`);
     // it sits before the lesson text
     ok(await page.evaluate(() => {
       const bar = document.getElementById('cts-listen');
@@ -100,6 +101,7 @@ try {
   await sp.locator('#cts-listen [data-act="play"]').click();
   await sp.waitForTimeout(500);
   ok(/Kifaa hiki hakina sauti ya Kiswahili/.test(await sp.locator('#cts-listen').innerText()), 'no Swahili voice: said so in Swahili');
+  ok(/sauti ya mwanamume au ya mwanamke/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
   ok(await sp.evaluate(() => window.__said.length) === 0, 'and nothing is read in another voice');
   await sw.close();
 
