@@ -60,6 +60,7 @@ try {
     const script = await page.evaluate(() => window.CTSListen.script());
     ok(script.length === said.length && script.every((s, i) => s.text === said[i].text), `${path}: CTSListen.script() is what the button reads`);
     ok(!/\d+:\d+/.test(text), `${path}: no "1:1" left to read as numbers`);
+    ok(!/\d\s*[–—-]\s*\d/.test(text), `${path}: no "1-7" left to read as a subtraction`);
     ok(!/Register once|Regístrese|Save registration/.test(text), `${path}: the registration box is not read`);
     ok(await page.locator('.cts-listening').count() === 0, `${path}: at the end, nothing is left highlighted`);
     await page.evaluate(() => { window.__said.length = 0; window.__delay = 150; });

@@ -67,6 +67,8 @@
     text = text.replace(/\b(\d{1,3}):(\d{1,3})(?:\s*[–—-]\s*(\d{1,3})(?!:))?/g, function (_, c, a, b) {
       return w.ch + " " + c + ", " + (b ? w.vs + " " + a + " " + w.to + " " + b : w.v + " " + a);
     });
+    /* "chapters 1-7", "Acts 2:42-47" done above; any other plain number range */
+    text = text.replace(/\b(\d{1,4})\s*[–—-]\s*(\d{1,4})\b/g, function (_, a, b) { return a + " " + w.to + " " + b; });
     text = text.replace(/\b(NKJV|KJV|ESV|NIV|NASB|CSB|RVR1960|RVR60|RVG|NVI|LSG|SUV)\b/g, function (m) { return VERSIONS[m]; });
     return text.replace(/\s+/g, " ").trim();
   }
