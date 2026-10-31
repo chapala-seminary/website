@@ -163,6 +163,31 @@ try {
     const langs = [...new Set((await page.evaluate(() => window.CTSListen.script())).map((x) => x.lang))];
     ok(langs.includes(lang), `${path}: read in ${lang} (${langs.join(',')})`);
   }
+  // Changing language on a textbook goes through the site-wide control (cts-lang.js), which opens the page
+  // in the new language: the English narration must stop and the new page must offer Listen in Spanish.
+  await page.goto(BASE + '/CTSTextbookActsStokes.html?cts_lang=en');
+  await page.evaluate(() => { window.__delay = 350; window.__said.length = 0; });
+  const tbPlay = page.locator('#cts-listen [data-act="play"]');
+  await tbPlay.click();
+  await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
+  ok(await page.locator('.cts-listening').count() === 1, 'English textbook is being narrated');
+  // The old in-page EN/ES/Both buttons are hidden and hand over to the site-wide control.
+  ok(await page.evaluate(() => [...document.querySelectorAll('button[data-lang]')].every((b) => !b.offsetParent)), 'legacy textbook language buttons stay hidden');
+  await Promise.all([page.waitForURL(/\/es\/CTSTextbookActsStokes\.html/), page.evaluate(() => window.CTSLanguage.choose('es'))]);
+  await tbPlay.waitFor({ timeout: 10000 });
+  ok(await tbPlay.isVisible(), 'EN→ES opens the Spanish page with Listen idle');
+  ok((await tbPlay.innerText()).includes('Escuchar este libro de texto'), 'EN→ES: textbook Listen label is Spanish');
+  ok(await page.locator('.cts-listening').count() === 0, 'EN→ES: no paragraph is still marked as being read');
+  ok((await page.locator('#cts-listen .cts-listen-tip').innerText()).includes('Consejo'), 'EN→ES: voice tip is Spanish');
+  await page.evaluate(() => { window.__said.length = 0; });
+  await tbPlay.click();
+  await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
+  ok((await page.evaluate(() => window.__said)).every((v) => v.lang.startsWith('es')), 'Listen on the Spanish page reads Spanish');
+  // A same-page language event (as the legacy textbook control now sends) stops and relabels at once.
+  await page.evaluate(() => document.dispatchEvent(new CustomEvent('cts-lang', { detail: 'es' })));
+  ok(await tbPlay.isVisible(), 'a cts-lang event during playback stops audio and restores Listen');
+  ok(await page.locator('.cts-listening').count() === 0, 'a cts-lang event clears the narrated highlight');
+
   // keyboard: Enter on Listen moves focus to Pause; Enter on Stop moves it back to Listen
   await page.goto(BASE + '/CTSUnit1.html?cts_lang=en');
   await page.evaluate(() => { sessionStorage.clear(); window.__delay = 300; });
