@@ -163,6 +163,34 @@ try {
     const langs = [...new Set((await page.evaluate(() => window.CTSListen.script())).map((x) => x.lang))];
     ok(langs.includes(lang), `${path}: read in ${lang} (${langs.join(',')})`);
   }
+  // A textbook can switch EN/ES/Both without navigation: audio must be cancelled and the control relabelled.
+  await page.goto(BASE + '/CTSTextbookActsStokes.html?cts_lang=en');
+  await page.evaluate(() => {
+    window.__delay = 350;
+    document.querySelector('button[data-lang="en"]').click();
+    window.__said.length = 0;
+  });
+  const tbPlay = page.locator('#cts-listen [data-act="play"]');
+  await tbPlay.click();
+  await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
+  ok(await page.locator('.cts-listening').count() === 1, 'English textbook is being narrated');
+
+  await page.locator('button[data-lang="es"]').click();
+  ok(await tbPlay.isVisible(), 'EN→ES during playback immediately stops and restores Play');
+  ok((await tbPlay.innerText()).includes('Escuchar este libro de texto'), 'EN→ES updates textbook Listen label');
+  ok(await page.locator('.cts-listening').count() === 0, 'EN→ES clears the old narrated paragraph');
+  ok((await page.locator('#cts-listen .cts-listen-tip').innerText()).includes('Consejo'), 'EN→ES updates voice tip');
+
+  await page.evaluate(() => { window.__said.length = 0; });
+  await tbPlay.click();
+  await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
+  ok((await page.evaluate(() => window.__said)).every((v) => v.lang.startsWith('es')), 'restarting after switch reads Spanish');
+
+  await page.locator('button[data-lang="both"]').click();
+  ok(await tbPlay.isVisible(), 'ES→Both during playback stops audio');
+  ok(await page.locator('.cts-listening').count() === 0, 'ES→Both clears the narrated highlight');
+  ok(await page.evaluate(() => document.body.classList.contains('lang-both')), 'Both mode remains selected');
+
   // keyboard: Enter on Listen moves focus to Pause; Enter on Stop moves it back to Listen
   await page.goto(BASE + '/CTSUnit1.html?cts_lang=en');
   await page.evaluate(() => { sessionStorage.clear(); window.__delay = 300; });
