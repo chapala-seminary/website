@@ -161,11 +161,18 @@ try {
     await page.waitForSelector('#questionsContainer .option, #questionsContainer button', { state: 'attached', timeout: 15000 });
     ok(await page.locator('#questionsContainer .option, #questionsContainer button').count() > 0, 'and its exam works');
   } else console.log('# every lesson has Swahili: no untranslated lesson to open');
-  // a page with no Swahili at all (About): English, said so in Swahili
+  // a main page translated from static/sw/MainPages.json (About): Swahili, no pending note
   await page.goto(`${BASE}/sw/CTSAbout.html`);
   const about = await page.locator('body').innerText();
-  ok(about.includes(NOTE), 'an untranslated page says so in Swahili (CTSAbout)');
-  ok(/[A-Za-z]{4,} [A-Za-z]{4,} [A-Za-z]{4,}/.test(about), 'and shows the English page');
+  ok(!about.includes(NOTE), 'a translated main page has no translation-pending note (CTSAbout)');
+  ok(/Seminari/.test(about), 'and its text is in Swahili');
+  ok(!/Baadhi ya maandishi haya bado hayajatafsiriwa/.test(about), 'and is not said to be partly in English');
+  ok(/Tafsiri ya awali/.test(about), 'but is said to be a draft translation');
+  // a page with no Swahili yet (Resources): English, said so in Swahili
+  await page.goto(`${BASE}/sw/CTSResources.html`);
+  const resources = await page.locator('body').innerText();
+  ok(resources.includes(NOTE), 'an untranslated page says so in Swahili (CTSResources)');
+  ok(/[A-Za-z]{4,} [A-Za-z]{4,} [A-Za-z]{4,}/.test(resources), 'and shows the English page');
   eq(await page.evaluate(() => document.documentElement.lang), 'sw', 'and stays on the Swahili route');
 
   // a single-page course: its lesson text in Swahili, said to be partly translated
