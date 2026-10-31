@@ -39,16 +39,17 @@ test('Claude faculty-review corrections: Unit 1 intros, five readings, Swahili l
   assert.ok(!page.includes('the five assigned reading rooms'), 'there is one room containing five readings');
   assert.ok(page.includes('the five assigned readings'));
   const introMarkers = {
-    en: ['Introduction to the Old Testament', '11–14 (introduction); 17–24 (Genesis)'],
-    es: ['Introducción al Antiguo Testamento', '13–16 (introducción); 19–26 (Génesis)'],
-    fr: ['Introduction à l’Ancien Testament', '15–17 (introduction); 31–33 (Genèse)'],
-    sw: ['Utangulizi wa Agano la Kale', '25–26 (utangulizi); 27 (Mwanzo)'],
+    en: ['Introduction to the Old Testament', '11–15 (introduction); 17–24 (Genesis)'],
+    es: ['Introducción al Antiguo Testamento', '13–17 (introducción); 19–26 (Génesis)'],
+    fr: ['Introduction à l’Ancien Testament', '15–30 (introduction); 31–33 (Genèse)'],
+    sw: ['Utangulizi wa Agano la Kale', '25–26 (utangulizi); 27–28 (Mwanzo)'],
   };
   for (const [lang, markers] of Object.entries(introMarkers)) {
     const first = page.indexOf('<section class="book" id="' + lang + '"');
     const section = page.slice(first, page.indexOf('</section>', first));
     for (const marker of markers) assert.ok(section.includes(marker), lang + ' introduction missing: ' + marker);
   }
+  assert.ok(page.includes('<td>Kutoka na Mambo ya Walawi</td><td>29–30</td>'), 'Swahili Unit 2 starts Exodus on p.29, after Genesis exercise p.28');
   const sw = JSON.parse(readFileSync('src/data/interface/static/sw/MainPages.json', 'utf8'));
   const source = 'Old Testament Survey: complete optional books in four languages (download once, study offline)';
   const matches = sw.pairs.filter((pair) => pair[0] === source);
