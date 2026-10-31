@@ -22,11 +22,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p faculty-research/original-publisher-pdfs
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils >/dev/null
           for entry in 'CH1-2E-en.pdf:121' 'CH2-2E-en.pdf:125'; do
             file="${entry%%:*}"; pages="${entry#*:}"
             curl --fail --location --silent --show-error --retry 3 --max-time 180 "https://shepherdsglobal.org/files/english/$file" -o "faculty-research/original-publisher-pdfs/$file"
             test "$(head -c5 "faculty-research/original-publisher-pdfs/$file")" = '%PDF-'
-            sudo apt-get install -y -qq poppler-utils >/dev/null
             test "$(pdfinfo "faculty-research/original-publisher-pdfs/$file" | awk '/^Pages:/ {print $2}')" = "$pages"
           done
           sha256sum faculty-research/original-publisher-pdfs/*.pdf > faculty-research/original-publisher-pdfs/SHA256SUMS.txt
