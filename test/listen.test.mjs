@@ -43,6 +43,7 @@ try {
     const play = page.locator('#cts-listen [data-act="play"]');
     await play.waitFor({ timeout: 10000 });
     ok((await play.innerText()).includes(label), `${path}: the button says ${label}`);
+    ok(/(voice|voz|voix)/.test(await page.locator('#cts-listen .cts-listen-tip').innerText()), `${path}: the voice tip is shown`);
     // it sits before the lesson text
     ok(await page.evaluate(() => {
       const bar = document.getElementById('cts-listen');
@@ -100,8 +101,82 @@ try {
   await sp.locator('#cts-listen [data-act="play"]').click();
   await sp.waitForTimeout(500);
   ok(/Kifaa hiki hakina sauti ya Kiswahili/.test(await sp.locator('#cts-listen').innerText()), 'no Swahili voice: said so in Swahili');
+  ok(/mwanamume au ya mwanamke/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
   ok(await sp.evaluate(() => window.__said.length) === 0, 'and nothing is read in another voice');
   await sw.close();
+
+  // Textbooks and reading rooms (Dr. Cook, 30 Oct): what is open on screen; never on a test page.
+  await page.evaluate(() => { window.__delay = 1; });
+  for (const [path, phrase] of [['/CTSTextbookActsStokes.html?cts_lang=en', /Pentecost/], ['/CTSActsReadings.html?cts_lang=en', /readings/i]]) {
+    await page.goto(BASE + path);
+    await page.evaluate(() => { window.__delay = 1; });
+    const p2 = page.locator('#cts-listen [data-act="play"]');
+    await p2.waitFor({ timeout: 10000 });
+    ok(true, `${path}: the Listen button is there`);
+    await p2.click();
+    await page.waitForFunction(() => window.__said.length > 2 && !document.querySelector('#cts-listen [data-act="play"]').hidden, null, { timeout: 120000 });
+    const t2 = (await page.evaluate(() => window.__said)).map((x) => x.text).join(' ');
+    ok(phrase.test(t2), `${path}: the page text is read`);
+    ok(!/Your information|All courses/.test(t2), `${path}: the footer is not read`);
+  }
+  // a reading opened in the room is read; a closed one is not
+  await page.goto(BASE + '/CTSActsReadings.html?cts_lang=en');
+  const closed = await page.evaluate(() => { const d = document.querySelector('details.digest-inline'); return d ? d.innerText.length : 0; });
+  if (closed) {
+    const before = await page.evaluate(() => window.CTSListen.script().map((x) => x.text).join(' ').length);
+    await page.evaluate(() => { document.querySelector('details.digest-inline').open = true; });
+    const after = await page.evaluate(() => window.CTSListen.script().map((x) => x.text).join(' ').length);
+    ok(after > before + 200, `an opened reading is read (${before} -> ${after} characters)`);
+  }
+  for (const t of ['/CTSTextbookActsStokesTest.html?cts_lang=en', '/CTSActsReadingsTest.html?cts_lang=en', '/es/CTSTextbookActsStokesTest.html']) {
+    await page.goto(BASE + t);
+    await page.waitForTimeout(800);
+    ok(await page.locator('#cts-listen').count() === 0, `no Listen button on a test page (${t})`);
+  }
+
+  // ChatGPT's review (30 Oct): anything that belongs to a test is never read, wherever it sits; hidden text is
+  // never read; each page type has its own label in each language; keyboard focus follows the controls.
+  const INJECT = () => {
+    const c = document.getElementById('content') || document.getElementById('lesson');
+    c.insertAdjacentHTML('beforeend',
+      '<div id="tb-questions"><p><span class="cts-reading">SECRET-TBQ answer</span></p></div>' +
+      '<div data-cts-part="exam"><p><span class="cts-reading">SECRET-EXAM answer</span></p></div>' +
+      '<section class="exam"><p>SECRET-SECTION answer</p></section>' +
+      '<form><p>SECRET-FORM answer</p></form>' +
+      '<p><span style="display:none">SECRET-HIDDEN text</span></p>');
+  };
+  for (const path of ['/CTSTextbookActsStokes.html?cts_lang=en', '/CTSActsReadings.html?cts_lang=en', '/es/CTSTextbookActsStokes.html', '/CTSUnit1.html?cts_lang=en']) {
+    await page.goto(BASE + path);
+    await page.evaluate(() => sessionStorage.clear());
+    await page.locator('#cts-listen').waitFor({ state: 'attached', timeout: 10000 });
+    await page.evaluate(INJECT);
+    const text = (await page.evaluate(() => window.CTSListen.script())).map((x) => x.text).join(' ');
+    ok(text.length > 200 && !/SECRET/.test(text), `${path}: no test question, form or hidden text is read`);
+  }
+  for (const [path, label, lang] of [['/es/CTSTextbookActsStokes.html', 'Escuchar este libro de texto', 'es'],
+    ['/fr/CTSActsReadings.html', 'Écouter ces lectures', 'fr'], ['/CTSTextbookActsStokes.html?cts_lang=en', 'Listen to this textbook', 'en'],
+    ['/sw/CTSActsReadings.html', 'Sikiliza masomo haya ya kusoma', 'sw']]) {
+    await page.goto(BASE + path);
+    const btn = page.locator('#cts-listen [data-act="play"]');
+    await btn.waitFor({ timeout: 10000 });
+    ok((await btn.innerText()).includes(label), `${path}: the button says ${label}`);
+    const langs = [...new Set((await page.evaluate(() => window.CTSListen.script())).map((x) => x.lang))];
+    ok(langs.includes(lang), `${path}: read in ${lang} (${langs.join(',')})`);
+  }
+  // keyboard: Enter on Listen moves focus to Pause; Enter on Stop moves it back to Listen
+  await page.goto(BASE + '/CTSUnit1.html?cts_lang=en');
+  await page.evaluate(() => { sessionStorage.clear(); window.__delay = 300; });
+  await page.reload();
+  await page.evaluate(() => { window.__delay = 300; });
+  await page.locator('#cts-listen [data-act="play"]').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.getAttribute('data-act') === 'pause', null, { timeout: 3000 });
+  ok(true, 'keyboard: focus moves to Pause');
+  await page.locator('#cts-listen [data-act="stop"]').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.getAttribute('data-act') === 'play', null, { timeout: 3000 });
+  ok(true, 'keyboard: focus returns to Listen after Stop');
+  ok(await page.locator('#cts-listen .cts-listen-msg[aria-live="polite"]').count() === 1, 'messages are announced politely');
 
   assert.deepEqual(errors, [], 'no script errors'); checks++;
 } finally { await browser.close(); }
