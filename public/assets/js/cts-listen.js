@@ -168,6 +168,9 @@
   var top = blocks ? main.firstElementChild : all[0];
   while (top && top.parentElement && top.parentElement !== main) top = top.parentElement;
   main.insertBefore(bar, top || null);
+  /* On a unit the control belongs to the lesson part: cts-exam-view.js's own rule hides it the instant the exam
+     opens (body.cts-exam-open [data-cts-part=lesson]), not on the next check below. */
+  if (!blocks && main.querySelector("[data-cts-part]")) bar.setAttribute("data-cts-part", "lesson");
 
   var playBtn = bar.querySelector('[data-act="play"]'), pauseBtn = bar.querySelector('[data-act="pause"]'),
       stopBtn = bar.querySelector('[data-act="stop"]'), rateSel = bar.querySelector('[data-act="rate"]'),
@@ -300,4 +303,5 @@
   }
   follow();
   setInterval(follow, 700);
+  if (window.MutationObserver) new MutationObserver(follow).observe(document.body, { attributes: true, attributeFilter: ["class"] });
 })();
