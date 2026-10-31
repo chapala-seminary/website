@@ -175,7 +175,9 @@ try {
   await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
   ok(await page.locator('.cts-listening').count() === 1, 'English textbook is being narrated');
 
-  await page.locator('button[data-lang="es"]').click();
+  // This page's older inline language buttons are hidden by the current global-language navigation.
+  // Exercise the legacy inline event handler directly; Playwright's visible click would time out.
+  await page.locator('button[data-lang="es"]').evaluate((button) => button.click());
   ok(await tbPlay.isVisible(), 'EN→ES during playback immediately stops and restores Play');
   ok((await tbPlay.innerText()).includes('Escuchar este libro de texto'), 'EN→ES updates textbook Listen label');
   ok(await page.locator('.cts-listening').count() === 0, 'EN→ES clears the old narrated paragraph');
@@ -186,7 +188,7 @@ try {
   await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
   ok((await page.evaluate(() => window.__said)).every((v) => v.lang.startsWith('es')), 'restarting after switch reads Spanish');
 
-  await page.locator('button[data-lang="both"]').click();
+  await page.locator('button[data-lang="both"]').evaluate((button) => button.click());
   ok(await tbPlay.isVisible(), 'ES→Both during playback stops audio');
   ok(await page.locator('.cts-listening').count() === 0, 'ES→Both clears the narrated highlight');
   ok(await page.evaluate(() => document.body.classList.contains('lang-both')), 'Both mode remains selected');
