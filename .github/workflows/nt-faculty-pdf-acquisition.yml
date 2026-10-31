@@ -1,6 +1,6 @@
-# Faculty research only: acquire one unaltered, permission-granted publisher PDF.
-# No site deploy, no student-visible content, no private student data, no write token.
-name: Acquire NT Survey publisher PDF for faculty
+# Faculty research only: transfer unaltered permission-granted publisher PDFs.
+# No site deploy, no student-facing content, no private student data, no write token.
+name: Acquire remaining six foundation publisher PDFs for faculty
 on:
   push:
     branches:
@@ -13,36 +13,50 @@ permissions:
 jobs:
   acquire:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 25
     steps:
       - name: Install PDF metadata tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
-      - name: Download intact official original and inspect
+      - name: Verify and archive the six complete official originals
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p reference
-          url='https://shepherdsglobal.org/files/english/EXNT-3E-en.pdf'
-          curl --fail --location --silent --show-error --retry 3 --retry-delay 2 --max-time 180 "$url" -o reference/EXNT-3E-en.pdf
-          test "$(head -c 5 reference/EXNT-3E-en.pdf)" = '%PDF-'
-          bytes=$(wc -c < reference/EXNT-3E-en.pdf)
-          test "$bytes" -gt 100000
-          pages=$(pdfinfo reference/EXNT-3E-en.pdf | awk '/^Pages:/ {print $2}')
-          test "$pages" = 172
-          pdftotext -f 2 -l 3 reference/EXNT-3E-en.pdf reference/copyright-review.txt
-          grep -qi 'Randall.*McElwain' reference/copyright-review.txt
-          grep -qi '2025.*Shepherds Global Classroom' reference/copyright-review.txt
-          grep -qi 'Third Edition' reference/copyright-review.txt
-          grep -qi 'may not be altered' reference/copyright-review.txt
-          sha256sum reference/EXNT-3E-en.pdf > reference/SHA256SUMS.txt
-          printf "Source: %s\nFile: EXNT-3E-en.pdf\nBytes: %s\nPages: %s\nStatus: FULL ORIGINAL, FACULTY RESEARCH ONLY, not adopted or student-facing\n" "$url" "$bytes" "$pages" > reference/METADATA.txt
+          # Filename, expected PDF-viewer pages, subject/foundation course.
+          books=(
+            "CB-4E-en.pdf|189|03 Systematic Theology"
+            "BED-3E-en.pdf|161|04 Evangelism"
+            "ML-3E-en.pdf|175|05 Pastoral Ministries"
+            "CH1-2E-en.pdf|121|06 Church History volume 1"
+            "CH2-2E-en.pdf|125|06 Church History volume 2"
+            "POC-3E-en.pdf|151|07 Preaching"
+          )
+          : > reference/SHA256SUMS.txt
+          : > reference/METADATA.txt
+          for entry in "${books[@]}"; do
+            IFS='|' read -r filename expected course <<< "$entry"
+            url="https://shepherdsglobal.org/files/english/$filename"
+            echo "Fetching $filename"
+            curl --fail --location --silent --show-error --retry 3 --retry-delay 2 --max-time 180 "$url" -o "reference/$filename"
+            test "$(head -c 5 "reference/$filename")" = '%PDF-'
+            bytes=$(wc -c < "reference/$filename")
+            test "$bytes" -gt 100000
+            pages=$(pdfinfo "reference/$filename" | awk '/^Pages:/ {print $2}')
+            test "$pages" = "$expected"
+            pdftotext -f 2 -l 3 "reference/$filename" "reference/$filename-review.txt"
+            grep -qi 'Shepherds Global Classroom' "reference/$filename-review.txt"
+            grep -Eqi 'may not be altered|may not be modified|Course content may not be altered' "reference/$filename-review.txt"
+            sha256sum "reference/$filename" >> reference/SHA256SUMS.txt
+            printf "File: %s\nCourse: %s\nSource: %s\nBytes: %s\nPages: %s\nStatus: FULL ORIGINAL, FACULTY RESEARCH ONLY, not student-facing\n\n" "$filename" "$course" "$url" "$bytes" "$pages" >> reference/METADATA.txt
+            rm -f "reference/$filename-review.txt"
+          done
           cat reference/METADATA.txt reference/SHA256SUMS.txt
-      - name: Upload temporary original for faculty verification
+      - name: Upload temporary complete original PDFs for faculty archive
         uses: actions/upload-artifact@v4
         with:
-          name: sgc-exnt-3e-en-faculty-only
+          name: sgc-six-remaining-foundation-faculty-only
           path: |
-            reference/EXNT-3E-en.pdf
+            reference/*.pdf
             reference/SHA256SUMS.txt
             reference/METADATA.txt
           if-no-files-found: error
