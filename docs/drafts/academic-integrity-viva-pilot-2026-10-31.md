@@ -1,11 +1,12 @@
 # CTS Academic Integrity: Verified-Learning Pilot and Oral Defense Protocol
 **Faculty design draft — 31 October 2026. Not an adopted policy; not student-facing.**
+**REVISION after Wayne's 400-M.Div.-student scalability objection:** the supervised viva below is now an **exception-only backup protocol**. The default solution is scalable self-grading, not routine faculty interviews. More detail in issue #233.
 **Workstream:** https://github.com/chapala-seminary/website/issues/233
 **Scope:** Program-level confirmation of independently held knowledge, not machine detection of AI.
 
 ## 1. Decision requested of Dr. Cook and Dr. Rogers
 
-Offer **open self-study** and, separately, **academic verification** for a completed Certificate/Associate/Th.M./M.Div. record. Recommend a pilot at the **seven-foundation-course milestone** for Associate/Master's-track learners and at academic graduation. Do not remove any existing completion or issue an unannounced new requirement retroactively. Until a policy is approved, ordinary current CTS certificates continue unchanged.
+**Owner scalability constraint (31 Oct):** 400 simultaneous M.Div. students make required human oral exams per course incompatible with CTS's core self-grading model. **Human oral defenses are OPTIONAL exception/appeal/spot-verification tools, not the default requirement, and are not yet approved as degree gates.** Retain automatic independent grading for every student's main examination workflow. Pilot affordable, secure self-graded credit exams with larger private question banks, server-side unique 20/40 draws for *unit* exams (textbook/reading tests already have draws), adaptive faculty-reviewed applications/follow-ups, and feedback after an attempt rather than per-question disclosures. A human review queue should be small, prioritized and used only on evidence of unusual patterns or randomly sampled opt-in validation, with no automatic misconduct finding. The sampling rate must be budgeted and its limitations disclosed: sampling cannot certify that every unsampled learner was independent. Continue **open self-study** and distinguish ordinary course completion from any separately approved academic verification program. Do not remove any existing completion or impose new requirements retroactively. Until a policy is approved, ordinary current CTS certificates continue unchanged.
 
 We should **not claim unsupervised online exams are AI-proof**. A second screen or browser agent can answer ordinary questions, even when question/answer keys are private. A supervised, genuinely interactive, independently witnessed explanation is more meaningful evidence of student comprehension. Listening to a recording that a student uploads unobserved is **not** identity or anti-AI proof.
 
