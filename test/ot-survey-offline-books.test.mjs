@@ -33,3 +33,25 @@ test('all four 13-unit reading maps exist without mutating graded textbook', () 
   assert.ok(page.includes('noindex,nofollow'), 'stage as faculty preview until release approval');
   assert.ok(library.includes('CTSOTSurveyBooks.html'), 'no Study Library entry');
 });
+
+
+test('Claude faculty-review corrections: Unit 1 intros, five readings, Swahili library link', () => {
+  assert.ok(!page.includes('the five assigned reading rooms'), 'there is one room containing five readings');
+  assert.ok(page.includes('the five assigned readings'));
+  const introMarkers = {
+    en: ['Introduction to the Old Testament', '11–14 (introduction); 17–24 (Genesis)'],
+    es: ['Introducción al Antiguo Testamento', '13–16 (introducción); 19–26 (Génesis)'],
+    fr: ['Introduction à l’Ancien Testament', '15–17 (introduction); 31–33 (Genèse)'],
+    sw: ['Utangulizi wa Agano la Kale', '25–26 (utangulizi); 27 (Mwanzo)'],
+  };
+  for (const [lang, markers] of Object.entries(introMarkers)) {
+    const first = page.indexOf('<section class="book" id="' + lang + '"');
+    const section = page.slice(first, page.indexOf('</section>', first));
+    for (const marker of markers) assert.ok(section.includes(marker), lang + ' introduction missing: ' + marker);
+  }
+  const sw = JSON.parse(readFileSync('src/data/interface/static/sw/MainPages.json', 'utf8'));
+  const source = 'Old Testament Survey: complete optional books in four languages (download once, study offline)';
+  const matches = sw.pairs.filter((pair) => pair[0] === source);
+  assert.equal(matches.length, 1, 'exactly one Study Library dictionary pair needed');
+  assert.ok(matches[0][1].includes('vitabu kamili vya hiari'), 'Swahili text should describe optional books');
+});
