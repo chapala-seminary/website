@@ -205,9 +205,14 @@ try {
   ok(await lp.waitForFunction(() => document.body.innerText.includes('Kozi hii imefungwa'), null, { timeout: 10000 }).then(() => true, () => false), 'a locked course says so in Swahili');
   const lockedText = await lp.locator('body').innerText();
   ok(!lockedText.includes('This course is locked'), 'and not in English');
-  // the track control and the email box are in Swahili too
+  // The lock renders before the asynchronous student sync. Wait for the
+  // confirmation notice itself instead of assuming it is already in body.
   ok(lockedText.includes('Badilisha programu') && !lockedText.includes('Change track'), 'the track control is in Swahili');
-  ok(lockedText.includes('Thibitisha barua pepe') && !lockedText.includes('Confirm your email'), 'the email box is in Swahili');
+  const emailBanner = lp.locator('#cts-email-confirm');
+  await emailBanner.waitFor({ state: 'visible', timeout: 20000 });
+  const emailText = await emailBanner.innerText();
+  ok(emailText.includes('Thibitisha barua pepe') && !emailText.includes('Confirm your email'),
+    `the email box is in Swahili: ${emailText.slice(0, 200)}`);
   await locked.close();
 } finally { await browser.close(); }
 console.log(`PASS — Swahili: ${checks} checks.`);
