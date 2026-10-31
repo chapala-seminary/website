@@ -22,7 +22,13 @@
 (function () {
   "use strict";
   var synth = window.speechSynthesis;
-  var main = document.getElementById("lesson");
+  /* Three kinds of page (Dr. Cook, 30 Oct: "do the textbooks as well"):
+     a unit (main#lesson) reads its lesson; a textbook (data-textbook-page="book") and a reading room
+     (body.cts-room) read what is open on screen, block by block. A textbook's TEST page gets no button. */
+  var tbPage = document.body.getAttribute("data-textbook-page");
+  var blocks = tbPage === "book" || document.body.classList.contains("cts-room");
+  if (tbPage && tbPage !== "book") return;
+  var main = document.getElementById(blocks ? "content" : "lesson");
   if (!synth || !window.SpeechSynthesisUtterance || !main) return;
 
   var CHROME = "[data-cts-chrome], #cts-register, #greeting, #questionsContainer, .cts-source, script, style";
@@ -37,7 +43,21 @@
       return !!el.textContent.trim();
     });
   }
-  var all = lessonEls();
+  /* Textbooks and rooms: the smallest visible text blocks, minus the contents list and buttons. */
+  var BLOCK = "p, h1, h2, h3, h4, h5, li, blockquote, dd, dt, figcaption, td, th, summary";
+  function blockEls() {
+    return Array.prototype.filter.call(main.querySelectorAll(BLOCK), function (el) {
+      if (el.closest(CHROME + ", nav, .tb-toc, .tb-actions, .actions, button, #cts-listen")) return false;
+      if (el.querySelector(BLOCK)) return false;                       // read the innermost block once
+      return !!el.textContent.trim();
+    });
+  }
+  function textOf(el) { return blocks ? (el.innerText || el.textContent) : el.textContent; }
+  function langOf(el) {
+    var r = blocks && el.querySelector(".cts-reading[lang]");
+    return (((r || el.closest("[lang]")) || {}).lang || pageLang).slice(0, 2).toLowerCase();
+  }
+  var all = blocks ? blockEls() : lessonEls();
   if (!all.length) return;
 
   var pageLang = (document.documentElement.lang || "en").slice(0, 2).toLowerCase();
@@ -131,9 +151,9 @@
     RATES.map(function (r) { return '<option value="' + r + '"' + (r === rate ? " selected" : "") + ">" + String(r).replace(".", pageLang === "en" ? "." : ",") + "×</option>"; }).join("") +
     '</select></label><p class="small muted cts-listen-msg" hidden></p>' +
     '<p class="small muted cts-listen-tip">' + t.tip + '</p>';
-  var top = all[0];
-  while (top.parentElement && top.parentElement !== main) top = top.parentElement;
-  main.insertBefore(bar, top);
+  var top = blocks ? main.firstElementChild : all[0];
+  while (top && top.parentElement && top.parentElement !== main) top = top.parentElement;
+  main.insertBefore(bar, top || null);
 
   var playBtn = bar.querySelector('[data-act="play"]'), pauseBtn = bar.querySelector('[data-act="pause"]'),
       stopBtn = bar.querySelector('[data-act="stop"]'), rateSel = bar.querySelector('[data-act="rate"]'),
@@ -141,7 +161,13 @@
 
   /* ---- reading ---- */
   var queue = [], at = 0, playing = false, lit = null, gen = 0;
-  function visible(el) { return !!(el && el.getClientRects().length); }
+  /* A closed <details> (a reading not yet opened) still has layout boxes in Chrome: not visible. */
+  function visible(el) {
+    if (!el || !el.getClientRects().length) return false;
+    var d = el.closest("details:not([open])");
+    if (d && !el.closest("summary")) return false;
+    return el.checkVisibility ? el.checkVisibility({ visibilityProperty: true }) : true;
+  }
   function light(el) {
     if (lit) lit.classList.remove("cts-listening");
     lit = el ? (el.closest("p, li, h1, h2, h3, h4, blockquote, td") || el) : null;
@@ -153,9 +179,9 @@
   }
   function build() {
     queue = [];
-    lessonEls().filter(visible).forEach(function (el) {
-      var lang = ((el.closest("[lang]") || {}).lang || pageLang).slice(0, 2).toLowerCase();
-      chunks(spoken(el.textContent, lang)).forEach(function (c) { queue.push({ el: el, lang: lang, text: c }); });
+    (blocks ? blockEls() : lessonEls()).filter(visible).forEach(function (el) {
+      var lang = langOf(el);
+      chunks(spoken(textOf(el), lang)).forEach(function (c) { queue.push({ el: el, lang: lang, text: c }); });
     });
   }
   function show(state) {
@@ -227,7 +253,7 @@
 
   /* The control goes with the lesson: hidden when the exam is on screen. */
   function follow() {
-    var showing = !document.body.classList.contains("cts-exam-open") && all.some(visible);
+    var showing = blocks || (!document.body.classList.contains("cts-exam-open") && all.some(visible));
     bar.hidden = !showing;
     if (!showing && (playing || !pauseBtn.hidden)) stop();
   }

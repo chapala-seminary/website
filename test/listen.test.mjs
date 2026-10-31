@@ -105,6 +105,33 @@ try {
   ok(await sp.evaluate(() => window.__said.length) === 0, 'and nothing is read in another voice');
   await sw.close();
 
+  // Textbooks and reading rooms (Dr. Cook, 30 Oct): what is open on screen; never on a test page.
+  await page.evaluate(() => { window.__delay = 1; });
+  for (const [path, phrase] of [['/CTSTextbookActsStokes.html?cts_lang=en', /Pentecost/], ['/CTSActsReadings.html?cts_lang=en', /readings/i]]) {
+    await page.goto(BASE + path);
+    await page.evaluate(() => { window.__delay = 1; });
+    const p2 = page.locator('#cts-listen [data-act="play"]');
+    await p2.waitFor({ timeout: 10000 });
+    ok(true, `${path}: the Listen button is there`);
+    await p2.click();
+    await page.waitForFunction(() => window.__said.length > 2 && !document.querySelector('#cts-listen [data-act="play"]').hidden, null, { timeout: 120000 });
+    const t2 = (await page.evaluate(() => window.__said)).map((x) => x.text).join(' ');
+    ok(phrase.test(t2), `${path}: the page text is read`);
+    ok(!/Your information|All courses/.test(t2), `${path}: the footer is not read`);
+  }
+  // a reading opened in the room is read; a closed one is not
+  await page.goto(BASE + '/CTSActsReadings.html?cts_lang=en');
+  const closed = await page.evaluate(() => { const d = document.querySelector('details.digest-inline'); return d ? d.innerText.length : 0; });
+  if (closed) {
+    const before = await page.evaluate(() => window.CTSListen.script().map((x) => x.text).join(' ').length);
+    await page.evaluate(() => { document.querySelector('details.digest-inline').open = true; });
+    const after = await page.evaluate(() => window.CTSListen.script().map((x) => x.text).join(' ').length);
+    ok(after > before + 200, `an opened reading is read (${before} -> ${after} characters)`);
+  }
+  await page.goto(BASE + '/CTSTextbookActsStokesTest.html?cts_lang=en');
+  await page.waitForTimeout(800);
+  ok(await page.locator('#cts-listen').count() === 0, 'no Listen button on a textbook test page');
+
   assert.deepEqual(errors, [], 'no script errors'); checks++;
 } finally { await browser.close(); }
 console.log(`PASS — Listen: ${checks} checks.`);

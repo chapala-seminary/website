@@ -102,6 +102,8 @@ const reading = kind === 'reading-test';
     {live && sync && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
     <script is:inline src={version('/assets/js/cts-textbook.js')}></script>
+    {/* Listen with the device's own voice (Dr. Cook, 30 Oct); not on test pages. */}
+    <script is:inline src={version('/assets/js/cts-listen.js')} defer></script>
     {sync && <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>}
     {!live && sync && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
   </body>
