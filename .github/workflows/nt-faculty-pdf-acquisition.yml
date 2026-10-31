@@ -1,0 +1,50 @@
+# Faculty research only: acquire one unaltered, permission-granted publisher PDF.
+# No site deploy, no student-visible content, no private student data, no write token.
+name: Acquire NT Survey publisher PDF for faculty
+on:
+  push:
+    branches:
+      - ai/nt-modern-pdf-faculty-acquisition-20261031
+    paths:
+      - .github/workflows/nt-faculty-pdf-acquisition.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Install PDF metadata tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Download intact official original and inspect
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reference
+          url='https://shepherdsglobal.org/files/english/EXNT-3E-en.pdf'
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 2 --max-time 180 "$url" -o reference/EXNT-3E-en.pdf
+          test "$(head -c 5 reference/EXNT-3E-en.pdf)" = '%PDF-'
+          bytes=$(wc -c < reference/EXNT-3E-en.pdf)
+          test "$bytes" -gt 100000
+          pages=$(pdfinfo reference/EXNT-3E-en.pdf | awk '/^Pages:/ {print $2}')
+          test "$pages" = 172
+          pdftotext -f 2 -l 3 reference/EXNT-3E-en.pdf reference/copyright-review.txt
+          grep -qi 'Randall.*McElwain' reference/copyright-review.txt
+          grep -qi '2025.*Shepherds Global Classroom' reference/copyright-review.txt
+          grep -qi 'Third Edition' reference/copyright-review.txt
+          grep -qi 'may not be altered' reference/copyright-review.txt
+          sha256sum reference/EXNT-3E-en.pdf > reference/SHA256SUMS.txt
+          printf "Source: %s\nFile: EXNT-3E-en.pdf\nBytes: %s\nPages: %s\nStatus: FULL ORIGINAL, FACULTY RESEARCH ONLY, not adopted or student-facing\n" "$url" "$bytes" "$pages" > reference/METADATA.txt
+          cat reference/METADATA.txt reference/SHA256SUMS.txt
+      - name: Upload temporary original for faculty verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: sgc-exnt-3e-en-faculty-only
+          path: |
+            reference/EXNT-3E-en.pdf
+            reference/SHA256SUMS.txt
+            reference/METADATA.txt
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
