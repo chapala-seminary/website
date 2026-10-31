@@ -187,12 +187,14 @@ export function buildLanguagePages(dir) {
       // A dictionary language also says when only part of a lesson is translated.
       // A static page translated from src/data/interface/static/: counted after the dictionary has run, so a
       // page with nothing left in English is called a draft translation, not "partly translated" (the browser
-      // assistant's Swahili check, 30 Oct 2026). Empty fallback markers say nothing to a reader.
+      // assistant's Swahili check, 30 Oct 2026). Empty fallback markers say nothing to a reader. A single-page
+      // course still keeps its English exam, so it stays "partly translated".
       const englishLeft = root.querySelectorAll('[data-cts-fallback]').some(el => content(el) && el.textContent.trim());
+      const dictPending = (key) => `<aside class="cts-translation-pending" lang="${lang}">${dictNotice(lang, key)}</aside>`;
       const notice = lang === sourceLang ? ''
-        : fromDictionary(lang) ? (!translated ? dictNotice(lang, asks ? 'untranslatedAnswers' : 'untranslated')
-          : staticPage ? dictNotice(lang, englishLeft ? 'partlyTranslated' : 'draftPage')
-          : !complete ? dictNotice(lang, 'partlyTranslated') : '')
+        : fromDictionary(lang) ? (!translated ? dictPending(asks ? 'untranslatedAnswers' : 'untranslated')
+          : staticPage ? dictPending(englishLeft || asks ? 'partlyTranslated' : 'draftPage')
+          : !complete ? dictPending('partlyTranslated') : '')
         : !translated ? fallbackNotice(lang, sourceLang, asks) : '';
       const controls = control(file, lang, sourceLang, translated);
       const brandRow = root.querySelector('.topbar .wrap');
