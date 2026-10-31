@@ -31,14 +31,20 @@
   var main = document.getElementById(blocks ? "content" : "lesson");
   if (!synth || !window.SpeechSynthesisUtterance || !main) return;
 
-  var CHROME = "[data-cts-chrome], #cts-register, #greeting, #questionsContainer, .cts-source, script, style";
+  /* Never read: the frame, and anything that belongs to a test (ChatGPT's review, 30 Oct: exclude every known
+     assessment container, not just one). */
+  var ASSESS = "#questionsContainer, #tb-questions, #examResult, #examStatus, #mcSection, #saSection, #kwContainer, " +
+    "[data-cts-part=\"exam\"], .exam, section.assess, #exam-section, .tb-test, [data-cts-exam], form";
+  var CHROME = "[data-cts-chrome], #cts-register, #greeting, .cts-source, script, style, " + ASSESS;
+  /* A unit with questions whose lesson and exam were not told apart (cts-exam-view.js did not run): no button. */
+  if (!blocks && main.querySelector("#questionsContainer") && !main.querySelector("[data-cts-part]")) return;
   /* cts-exam-view.js (loaded before this file) marks the two parts of the
      page data-cts-part="lesson" / "exam"; where it has, only the lesson part
      is read. The exam's own wording is .cts-reading too. */
   function lessonEls() {
     var parted = !!main.querySelector("[data-cts-part]");
     return Array.prototype.filter.call(main.querySelectorAll(".cts-reading"), function (el) {
-      if (el.closest(CHROME) || el.closest('[data-cts-part="exam"]')) return false;
+      if (el.closest(CHROME)) return false;
       if (parted && !el.closest('[data-cts-part="lesson"]')) return false;
       return !!el.textContent.trim();
     });
@@ -52,34 +58,42 @@
       return !!el.textContent.trim();
     });
   }
-  function textOf(el) { return blocks ? (el.innerText || el.textContent) : el.textContent; }
-  function langOf(el) {
-    var r = blocks && el.querySelector(".cts-reading[lang]");
-    return (((r || el.closest("[lang]")) || {}).lang || pageLang).slice(0, 2).toLowerCase();
+  /* innerText is what is on screen; an empty innerText means nothing visible, never the hidden textContent. */
+  function textOf(el) { return blocks && typeof el.innerText === "string" ? el.innerText : el.textContent; }
+  function langOf(el) { return (((el.closest("[lang]")) || {}).lang || pageLang).slice(0, 2).toLowerCase(); }
+  /* A textbook or room block can hold two passages (English and a translation, "Both"): each visible one is its
+     own part, in its own language. */
+  function parts(el) {
+    if (!blocks) return [el];
+    var r = Array.prototype.filter.call(el.querySelectorAll(".cts-reading"), function (x) { return !x.closest(CHROME) && visible(x); });
+    return r.length ? r : [el];
   }
   var all = blocks ? blockEls() : lessonEls();
   if (!all.length) return;
 
-  var pageLang = (document.documentElement.lang || "en").slice(0, 2).toLowerCase();
+  var kind = tbPage === "book" ? "book" : blocks ? "room" : "lesson";
+  function docLang() { return (document.documentElement.lang || "en").slice(0, 2).toLowerCase(); }
+  var pageLang = docLang();
   var W = {
-    en: { listen: "Listen to this lesson", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
+    en: { lesson: "Listen to this lesson", book: "Listen to this textbook", room: "Listen to these readings", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
           novoice: "This device has no English voice. You can add one in the device's text-to-speech settings.",
-          tip: "Tip: you can choose a man’s or a woman’s voice in your phone’s or computer’s text-to-speech settings.",
+          tip: "Tip: depending on your device, you may be able to choose a different reading voice (for example a man’s or a woman’s) in its accessibility or text-to-speech settings.",
           ch: "chapter", v: "verse", vs: "verses", to: "to" },
-    es: { listen: "Escuchar esta lección", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
+    es: { lesson: "Escuchar esta lección", book: "Escuchar este libro de texto", room: "Escuchar estas lecturas", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
           novoice: "Este dispositivo no tiene voz en español. Puede añadir una en la configuración de texto a voz del dispositivo.",
-          tip: "Consejo: puede elegir una voz de hombre o de mujer en la configuración de texto a voz de su teléfono o computadora.",
+          tip: "Consejo: según su dispositivo, quizá pueda elegir otra voz de lectura (por ejemplo, de hombre o de mujer) en la configuración de accesibilidad o de texto a voz.",
           ch: "capítulo", v: "versículo", vs: "versículos", to: "al" },
-    fr: { listen: "Écouter cette leçon", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
+    fr: { lesson: "Écouter cette leçon", book: "Écouter ce manuel", room: "Écouter ces lectures", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
           novoice: "Cet appareil n’a pas de voix française. Vous pouvez en ajouter une dans les réglages de synthèse vocale de l’appareil.",
-          tip: "Astuce : vous pouvez choisir une voix d’homme ou de femme dans les réglages de synthèse vocale de votre téléphone ou ordinateur.",
+          tip: "Astuce : selon votre appareil, vous pourrez peut-être choisir une autre voix de lecture (par exemple une voix d’homme ou de femme) dans les réglages d’accessibilité ou de synthèse vocale.",
           ch: "chapitre", v: "verset", vs: "versets", to: "à" },
-    sw: { listen: "Sikiliza somo hili", pause: "Simama kidogo", resume: "Endelea", stop: "Acha", speed: "Kasi",
+    sw: { lesson: "Sikiliza somo hili", book: "Sikiliza kitabu hiki cha kiada", room: "Sikiliza masomo haya ya kusoma", pause: "Sitisha", resume: "Endelea", stop: "Acha", speed: "Kasi",
           novoice: "Kifaa hiki hakina sauti ya Kiswahili. Unaweza kuongeza moja katika mipangilio ya kusoma maandishi kwa sauti ya kifaa.",
-          tip: "Kidokezo: unaweza kuchagua sauti ya mwanamume au ya mwanamke katika mipangilio ya kusoma maandishi kwa sauti ya simu au kompyuta yako.",
+          tip: "Kidokezo: kulingana na kifaa chako, huenda ukaweza kuchagua sauti nyingine ya kusoma (kwa mfano ya mwanamume au ya mwanamke) katika mipangilio ya ufikivu au ya kusoma maandishi kwa sauti.",
           ch: "sura ya", v: "mstari wa", vs: "mistari", to: "hadi" }
   };
   var t = W[pageLang] || W.en;
+  function label() { return t[kind]; }
 
   /* Bible versions and references, said the way a reader would say them. */
   var VERSIONS = { NKJV: "New King James Version", KJV: "King James Version", ESV: "English Standard Version",
@@ -142,14 +156,14 @@
   bar.id = "cts-listen";
   bar.setAttribute("data-cts-chrome", "");
   bar.setAttribute("role", "group");
-  bar.setAttribute("aria-label", t.listen);
+  bar.setAttribute("aria-label", label());
   bar.innerHTML =
-    '<button type="button" class="btn solid" data-act="play">🔊 ' + t.listen + '</button>' +
+    '<button type="button" class="btn solid" data-act="play">🔊 ' + label() + '</button>' +
     '<button type="button" class="btn" data-act="pause" hidden>⏸ ' + t.pause + '</button>' +
     '<button type="button" class="btn" data-act="stop" hidden>⏹ ' + t.stop + '</button>' +
-    '<label class="small">' + t.speed + ' <select data-act="rate">' +
+    '<label class="small"><span class="cts-listen-speed">' + t.speed + '</span> <select data-act="rate">' +
     RATES.map(function (r) { return '<option value="' + r + '"' + (r === rate ? " selected" : "") + ">" + String(r).replace(".", pageLang === "en" ? "." : ",") + "×</option>"; }).join("") +
-    '</select></label><p class="small muted cts-listen-msg" hidden></p>' +
+    '</select></label><p class="small muted cts-listen-msg" role="status" aria-live="polite" hidden></p>' +
     '<p class="small muted cts-listen-tip">' + t.tip + '</p>';
   var top = blocks ? main.firstElementChild : all[0];
   while (top && top.parentElement && top.parentElement !== main) top = top.parentElement;
@@ -179,16 +193,32 @@
   }
   function build() {
     queue = [];
-    (blocks ? blockEls() : lessonEls()).filter(visible).forEach(function (el) {
-      var lang = langOf(el);
-      chunks(spoken(textOf(el), lang)).forEach(function (c) { queue.push({ el: el, lang: lang, text: c }); });
+    (blocks ? blockEls() : lessonEls()).filter(visible).forEach(function (block) {
+      parts(block).forEach(function (el) {
+        var lang = langOf(el), text = textOf(el);
+        if (!text || !text.trim()) return;
+        chunks(spoken(text, lang)).forEach(function (c) { queue.push({ el: el, lang: lang, text: c }); });
+      });
     });
   }
+  /* Keyboard and screen readers: when the focused button is hidden, focus moves to the one that replaces it. */
   function show(state) {
+    var f = document.activeElement, hadFocus = bar.contains(f);
     playBtn.hidden = state !== "idle";
     pauseBtn.hidden = state === "idle";
     stopBtn.hidden = state === "idle";
+    playBtn.innerHTML = "🔊 " + label();
     pauseBtn.innerHTML = state === "paused" ? "▶ " + t.resume : "⏸ " + t.pause;
+    stopBtn.innerHTML = "⏹ " + t.stop;
+    if (hadFocus && f.hidden) (state === "idle" ? playBtn : pauseBtn).focus();
+  }
+  /* The page's language can change without a reload (textbooks and rooms): the control follows it. */
+  function relabel() {
+    pageLang = docLang(); t = W[pageLang] || W.en;
+    bar.setAttribute("aria-label", label());
+    bar.querySelector(".cts-listen-speed").textContent = t.speed;
+    bar.querySelector(".cts-listen-tip").textContent = t.tip;
+    show(playing ? "playing" : pauseBtn.hidden ? "idle" : "paused");
   }
   function say(text) { msg.textContent = text; msg.hidden = !text; }
   function next() {
@@ -197,6 +227,9 @@
     var item = queue[at];
     if (!visible(item.el)) { stop(); return; }                       // the lesson was hidden (the exam opened)
     var voice = voiceFor(item.lang);
+    /* The device never listed its voices: speak only in the device's own language, which it reads with its own
+       voice; any other language could come out in the wrong voice, so it is treated as unavailable. */
+    if (voice === undefined && (navigator.language || "").slice(0, 2).toLowerCase() !== item.lang) voice = null;
     if (voice === null) {
       if (item.lang === pageLang) { stop(); say((W[item.lang] || t).novoice); return; }
       at++; next(); return;                                         // a passage in another language this device cannot read
@@ -212,13 +245,20 @@
     synth.speak(u);
   }
   function play() {
+    relabel();
     say("");
     build();
     if (!queue.length) return;
     at = 0; playing = true; show("playing");
     synth.cancel();
-    /* Some browsers fill in their voice list a moment after the page loads. */
-    if (voiceFor(pageLang) === undefined) setTimeout(next, 400); else next();
+    /* Some browsers fill in their voice list a moment after the page loads: wait for it, up to two seconds. */
+    if (voiceFor(pageLang) !== undefined) { next(); return; }
+    var mine = gen, waited = 0;
+    (function wait() {
+      if (mine !== gen || !playing) return;
+      if (voiceFor(pageLang) !== undefined || waited >= 2000) { next(); return; }
+      waited += 200; setTimeout(wait, 200);
+    })();
   }
   function pause() {
     if (playing) { playing = false; gen++; synth.cancel(); show("paused"); }
@@ -249,6 +289,7 @@
     if (playing) { gen++; synth.cancel(); next(); }                 // say the current part again at the new speed
   });
   if (synth.addEventListener) synth.addEventListener("voiceschanged", function () {});
+  document.addEventListener("cts-lang", function () { if (playing || !pauseBtn.hidden) stop(); relabel(); });
   window.addEventListener("pagehide", function () { synth.cancel(); });
 
   /* The control goes with the lesson: hidden when the exam is on screen. */

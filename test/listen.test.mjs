@@ -101,7 +101,7 @@ try {
   await sp.locator('#cts-listen [data-act="play"]').click();
   await sp.waitForTimeout(500);
   ok(/Kifaa hiki hakina sauti ya Kiswahili/.test(await sp.locator('#cts-listen').innerText()), 'no Swahili voice: said so in Swahili');
-  ok(/sauti ya mwanamume au ya mwanamke/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
+  ok(/mwanamume au ya mwanamke/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
   ok(await sp.evaluate(() => window.__said.length) === 0, 'and nothing is read in another voice');
   await sw.close();
 
@@ -128,9 +128,55 @@ try {
     const after = await page.evaluate(() => window.CTSListen.script().map((x) => x.text).join(' ').length);
     ok(after > before + 200, `an opened reading is read (${before} -> ${after} characters)`);
   }
-  await page.goto(BASE + '/CTSTextbookActsStokesTest.html?cts_lang=en');
-  await page.waitForTimeout(800);
-  ok(await page.locator('#cts-listen').count() === 0, 'no Listen button on a textbook test page');
+  for (const t of ['/CTSTextbookActsStokesTest.html?cts_lang=en', '/CTSActsReadingsTest.html?cts_lang=en', '/es/CTSTextbookActsStokesTest.html']) {
+    await page.goto(BASE + t);
+    await page.waitForTimeout(800);
+    ok(await page.locator('#cts-listen').count() === 0, `no Listen button on a test page (${t})`);
+  }
+
+  // ChatGPT's review (30 Oct): anything that belongs to a test is never read, wherever it sits; hidden text is
+  // never read; each page type has its own label in each language; keyboard focus follows the controls.
+  const INJECT = () => {
+    const c = document.getElementById('content') || document.getElementById('lesson');
+    c.insertAdjacentHTML('beforeend',
+      '<div id="tb-questions"><p><span class="cts-reading">SECRET-TBQ answer</span></p></div>' +
+      '<div data-cts-part="exam"><p><span class="cts-reading">SECRET-EXAM answer</span></p></div>' +
+      '<section class="exam"><p>SECRET-SECTION answer</p></section>' +
+      '<form><p>SECRET-FORM answer</p></form>' +
+      '<p><span style="display:none">SECRET-HIDDEN text</span></p>');
+  };
+  for (const path of ['/CTSTextbookActsStokes.html?cts_lang=en', '/CTSActsReadings.html?cts_lang=en', '/es/CTSTextbookActsStokes.html', '/CTSUnit1.html?cts_lang=en']) {
+    await page.goto(BASE + path);
+    await page.evaluate(() => sessionStorage.clear());
+    await page.locator('#cts-listen').waitFor({ state: 'attached', timeout: 10000 });
+    await page.evaluate(INJECT);
+    const text = (await page.evaluate(() => window.CTSListen.script())).map((x) => x.text).join(' ');
+    ok(text.length > 200 && !/SECRET/.test(text), `${path}: no test question, form or hidden text is read`);
+  }
+  for (const [path, label, lang] of [['/es/CTSTextbookActsStokes.html', 'Escuchar este libro de texto', 'es'],
+    ['/fr/CTSActsReadings.html', 'Écouter ces lectures', 'fr'], ['/CTSTextbookActsStokes.html?cts_lang=en', 'Listen to this textbook', 'en'],
+    ['/sw/CTSActsReadings.html', 'Sikiliza masomo haya ya kusoma', 'sw']]) {
+    await page.goto(BASE + path);
+    const btn = page.locator('#cts-listen [data-act="play"]');
+    await btn.waitFor({ timeout: 10000 });
+    ok((await btn.innerText()).includes(label), `${path}: the button says ${label}`);
+    const langs = [...new Set((await page.evaluate(() => window.CTSListen.script())).map((x) => x.lang))];
+    ok(langs.includes(lang), `${path}: read in ${lang} (${langs.join(',')})`);
+  }
+  // keyboard: Enter on Listen moves focus to Pause; Enter on Stop moves it back to Listen
+  await page.goto(BASE + '/CTSUnit1.html?cts_lang=en');
+  await page.evaluate(() => { sessionStorage.clear(); window.__delay = 300; });
+  await page.reload();
+  await page.evaluate(() => { window.__delay = 300; });
+  await page.locator('#cts-listen [data-act="play"]').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.getAttribute('data-act') === 'pause', null, { timeout: 3000 });
+  ok(true, 'keyboard: focus moves to Pause');
+  await page.locator('#cts-listen [data-act="stop"]').focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.getAttribute('data-act') === 'play', null, { timeout: 3000 });
+  ok(true, 'keyboard: focus returns to Listen after Stop');
+  ok(await page.locator('#cts-listen .cts-listen-msg[aria-live="polite"]').count() === 1, 'messages are announced politely');
 
   assert.deepEqual(errors, [], 'no script errors'); checks++;
 } finally { await browser.close(); }
