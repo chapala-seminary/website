@@ -166,6 +166,8 @@ try {
   const about = await page.locator('body').innerText();
   ok(!about.includes(NOTE), 'a translated main page has no translation-pending note (CTSAbout)');
   ok(/Seminari/.test(about), 'and its text is in Swahili');
+  ok(!/Baadhi ya maandishi haya bado hayajatafsiriwa/.test(about), 'and is not said to be partly in English');
+  ok(/Tafsiri ya awali/.test(about), 'but is said to be a draft translation');
   // a page with no Swahili yet (Resources): English, said so in Swahili
   await page.goto(`${BASE}/sw/CTSResources.html`);
   const resources = await page.locator('body').innerText();
