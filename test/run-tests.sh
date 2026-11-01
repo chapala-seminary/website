@@ -19,6 +19,8 @@ CONFIG=test/wrangler.local.jsonc
 
 node tools/private-units.mjs --check
 node --test test/release-governance.test.mjs
+# Faculty-review World Library catalog; counts, URLs, filters, accessibility.
+node --test test/world-library-v1.test.mjs
 node --test test/track-sync-ack.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
