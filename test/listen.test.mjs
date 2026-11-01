@@ -222,7 +222,7 @@ try {
   await page.locator('#cts-listen [data-act="stop"]').click();
   await page.reload();
   ok((await voiceSelect.inputValue()).includes('Test English Second'), 'chosen voice survives reloading the page');
-  ok((await page.locator('#cts-listen .cts-listen-help-text').innerText()).includes('General management'), 'the Samsung speech-settings steps are present');
+  ok((await page.locator('#cts-listen .cts-listen-help-text').textContent()).includes('General management'), 'the Samsung speech-settings steps are present');
   await voiceSelect.selectOption('');
   ok((await page.evaluate(() => localStorage.getItem('cts_listen_voice_en'))) === null, 'automatic voice selection clears the preference');
   // Switching to Spanish must never offer the user's English-only voice as a Spanish narrator.
