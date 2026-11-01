@@ -15,8 +15,8 @@ So nothing in this file goes onto the site until **both** Claude and ChatGPT agr
 
 | Course | Add (main book) | Keep | Drop |
 |---|---|---|---|
-| Church Administration & Leadership | Gibson, *Ministry Leadership*: EN 3rd ed. 2024, ES 2022, SW 2023 (no French edition: see Not included) | Roland Allen, *Spontaneous Expansion*; Murray, *Humility*; Fairbairn, *Pastoral Epistles* | Bridges, *Proverbs*; Meyer, *Joseph*; Meyer, *Moses*; Miller, *Building of Character*; James, *Christian Fellowship*; Burroughs, *Irenicum*; Rutherford, *Letters* |
-| Apologetics | Bird, *Introduction to Apologetics*: EN 2nd ed. 2019, FR 2016, SW 2019 (no Spanish edition: see Not included; Spanish students keep the current readings) | Pascal, *Pensées*; Athanasius, *On the Incarnation*; Augustine, *Confessions*; Chesterton, *Orthodoxy*; Greenleaf, *Testimony of the Evangelists* | Butler, *Analogy*; Paley, *Natural Theology*; Boethius; Rawlinson; Orr |
+| Church Administration & Leadership | Gibson, *Ministry Leadership*: EN 3rd ed. 2024, ES 2022, FR 1st ed., SW 2023 | Roland Allen, *Spontaneous Expansion*; Murray, *Humility*; Fairbairn, *Pastoral Epistles* | Bridges, *Proverbs*; Meyer, *Joseph*; Meyer, *Moses*; Miller, *Building of Character*; James, *Christian Fellowship*; Burroughs, *Irenicum*; Rutherford, *Letters* |
+| Apologetics | Bird, *Introduction to Apologetics*: EN 2nd ed. 2019, ES, FR 2016, SW 2019 | Pascal, *Pensées*; Athanasius, *On the Incarnation*; Augustine, *Confessions*; Chesterton, *Orthodoxy*; Greenleaf, *Testimony of the Evangelists* | Butler, *Analogy*; Paley, *Natural Theology*; Boethius; Rawlinson; Orr |
 | Christian Education | Gibson, *Biblical Evangelism and Discipleship* (EN 3rd ed. 2023, ES, FR, SW: chapters on ministry to children, discipleship, small groups); Jones, *Curriculum Development for Christian Ministry* (EN, CC BY 4.0) | Gregory, *Seven Laws of Teaching* (both chapters); Horne, *Jesus the Master Teacher* | Comenius (both); Augustine, *Catechising* (both); Luther, *Large Catechism* preface; Anderson |
 
 ## Group B: both, with selected lessons from each
@@ -25,7 +25,7 @@ So nothing in this file goes onto the site until **both** Claude and ChatGPT agr
 |---|---|---|---|
 | 1 Peter | Utley, *The Gospel According to Peter* (EN; ES per-chapter files); McElwain, *Survol / Mapitio ya Agano Jipya*, 1 Peter lesson (FR, SW) | Leighton; Meyer, *Tried by Fire*; Ryle, *Holiness*; Sibbes, *Bruised Reed*; Brooks, *Precious Remedies*; Boston, *Crook in the Lot* | Paley, *Evidences*; Foxe; Bunyan, *Pilgrim's Progress*; Baxter, *Reformed Pastor* |
 | Acts | Utley, *Luke the Historian: Acts* (EN, ES, SW); McElwain, *Survol du NT*, Lesson 4 (FR) | Alexander; Morgan; Ramsay, *St. Paul the Traveller*; Conybeare & Howson; Allen, *Missionary Methods* | Parker; Taylor, *Peter*; Matheson; Erdman; Pierson |
-| How We Got the Bible | McElwain, *Exploring the OT* Lesson 1 and *Exploring the NT* Lesson 1 canon/textual sections (EN, ES, SW); Gibson, *Croyances chrétiennes* Lesson 1 (FR) | Kenyon; Westcott; Price; Green; Smith, *Historical Geography* | Scrivener; Burgon; Sayce; Rawlinson; Cobern |
+| How We Got the Bible | McElwain, *Exploring the OT* Lesson 1 and *Exploring the NT* Lesson 1 canon/textual sections (EN, ES, SW); Gibson, *Croyances chrétiennes* Lesson 1 (FR) | Kenyon; Westcott; Price; Green; Smith, *Historical Geography*; Scrivener; Burgon | Sayce; Rawlinson; Cobern (Scrivener and Burgon kept: Unit 6 sets the Received Text beside the critical text, and Burgon is the Received Text's voice) |
 | Bible Characters I | McElwain, *Exploring the OT* Lessons 2–4 (EN, ES, SW); Utley, *Survol de l'AT*, Genesis–Joshua (FR) | All ten (Whyte, Meyer, Taylor, Cox, Matheson suit the course) | none; new lessons are added as selections |
 | Bible Characters II | McElwain, *Exploring the NT* (EN, ES, FR, SW): the lessons on Jesus, Peter, Paul, John, James | All ten | none; new lessons are added as selections |
 
@@ -34,7 +34,7 @@ So nothing in this file goes onto the site until **both** Claude and ChatGPT agr
 - Utley's French 1 Peter (VOL02 French): its front matter forbids reproduction without permission.
 - Utley's Swahili OT Survey: no permission line found.
 - Older French SGC 1st editions marked "all rights reserved": left out.
-- Checked 1 Nov 2026 (copyright pages read in Chrome): Gibson, *Leadership et ministère* (FR, ©2018) and Bird, *Introducción a la apologética* (ES, ©2016) both say "all rights reserved" with no free-distribution permission. Left out.
+- Checked 1 Nov 2026 (copyright pages read in Chrome): Bird, *Introducción a la apologética* (ES, ©2016) carries SGC's free-distribution notice. Gibson, *Leadership et ministère* (FR, ©2018) says "tous droits réservés" with no such notice: it is **linked** on SGC's own site, never copied.
 
 ## After both agree
 
@@ -44,3 +44,13 @@ Course by course, on beta only:
 3. Write new reading-test questions from the assigned pages; answer keys go in the private keys repo.
 4. ChatGPT reviews the new test questions before they replace the old ones.
 5. Wayne checks the result on beta before it goes live.
+
+## Update after ChatGPT's approval in principle (issue #240, 1 Nov 2026)
+
+- **Linked, not hosted.** Every companion book opens on its publisher's own site; nothing is copied into the repository. So no book needs hosting permission.
+- **No exam changes.** Each room's required-reading test covers the five CTS digests, which do not change. The books dropped and added are on the further-study shelf and in a new "Companion Books" section. No test, record or credit is touched.
+- **Optional.** The companion books are optional, with the lessons that go with each unit; Dr. Cook can later make any of them required.
+- **How We Got the Bible:** Scrivener and Burgon are kept (see the table).
+- **Bible Characters II:** its first five units are Old Testament figures (Jonah, Hosea, Jeremiah, Esther, Ezra), so *Exploring the Old Testament* is added beside *Exploring the New Testament*.
+- Lesson numbers were checked against each linked edition's contents: they are the same in every language edition linked.
+- Built on beta in PR (see #240).
