@@ -75,21 +75,21 @@
   function docLang() { return (document.documentElement.lang || "en").slice(0, 2).toLowerCase(); }
   var pageLang = docLang();
   var W = {
-    en: { lesson: "Listen to this lesson", book: "Listen to this textbook", room: "Listen to these readings", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
+    en: { voice: "Voice", automatic: "Automatic (browser's choice)", helpTitle: "How to install or change voices", helpText: "On a Samsung Galaxy tablet, open Settings → General management → Text-to-speech output. Choose the speech engine, then its settings to install or change voices. On another Android device, search Settings for Text-to-speech. On iPhone or iPad, open Settings → Accessibility → Spoken Content → Voices. On Windows, open Settings → Time & language → Speech. Return here and refresh. Some installed voices may not appear in this browser.", lesson: "Listen to this lesson", book: "Listen to this textbook", room: "Listen to these readings", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
           novoice: "This device has no English voice. You can add one in the device's text-to-speech settings.",
-          tip: "Tip: depending on your device, you may be able to choose a different reading voice (for example a man’s or a woman’s) in its accessibility or text-to-speech settings.",
+          tip: "Choose an available reading voice above. To add voices, open the instructions below.",
           ch: "chapter", v: "verse", vs: "verses", to: "to" },
-    es: { lesson: "Escuchar esta lección", book: "Escuchar este libro de texto", room: "Escuchar estas lecturas", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
+    es: { voice: "Voz", automatic: "Automática (del navegador)", helpTitle: "Cómo instalar o cambiar las voces", helpText: "En una tableta Samsung Galaxy, abre Ajustes → Administración general → Texto a voz. Elige el motor de voz y entra en sus ajustes para instalar voces. En otros Android, busca Texto a voz en Ajustes. En iPhone o iPad: Ajustes → Accesibilidad → Contenido leído → Voces. En Windows: Configuración → Hora e idioma → Voz. Regresa a la lección y actualiza la página. Algunas voces instaladas quizá no aparezcan en el navegador.", lesson: "Escuchar esta lección", book: "Escuchar este libro de texto", room: "Escuchar estas lecturas", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
           novoice: "Este dispositivo no tiene voz en español. Puede añadir una en la configuración de texto a voz del dispositivo.",
-          tip: "Consejo: según su dispositivo, quizá pueda elegir otra voz de lectura (por ejemplo, de hombre o de mujer) en la configuración de accesibilidad o de texto a voz.",
+          tip: "Elige una voz disponible arriba. Para instalar otras voces, abre las instrucciones.",
           ch: "capítulo", v: "versículo", vs: "versículos", to: "al" },
-    fr: { lesson: "Écouter cette leçon", book: "Écouter ce manuel", room: "Écouter ces lectures", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
+    fr: { voice: "Voix", automatic: "Automatique (navigateur)", helpTitle: "Installer ou changer les voix", helpText: "Sur une tablette Samsung Galaxy, ouvrez Paramètres → Gestion globale → Synthèse vocale. Choisissez le moteur vocal, puis ses réglages pour installer des voix. Sur un autre Android, cherchez Synthèse vocale dans les paramètres. Sur iPhone ou iPad : Réglages → Accessibilité → Contenu énoncé → Voix. Sur Windows : Paramètres → Heure et langue → Voix. Revenez à la leçon et actualisez la page. Certaines voix installées peuvent ne pas être proposées par le navigateur.", lesson: "Écouter cette leçon", book: "Écouter ce manuel", room: "Écouter ces lectures", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
           novoice: "Cet appareil n’a pas de voix française. Vous pouvez en ajouter une dans les réglages de synthèse vocale de l’appareil.",
           tip: "Astuce : selon votre appareil, vous pourrez peut-être choisir une autre voix de lecture (par exemple une voix d’homme ou de femme) dans les réglages d’accessibilité ou de synthèse vocale.",
           ch: "chapitre", v: "verset", vs: "versets", to: "à" },
-    sw: { lesson: "Sikiliza somo hili", book: "Sikiliza kitabu hiki cha kiada", room: "Sikiliza masomo haya ya kusoma", pause: "Sitisha", resume: "Endelea", stop: "Acha", speed: "Kasi",
+    sw: { voice: "Sauti", automatic: "Chaguo la kivinjari", helpTitle: "Jinsi ya kusakinisha au kubadili sauti", helpText: "Kwenye Samsung Galaxy, fungua Settings → General management → Text-to-speech output. Chagua injini ya sauti, kisha mipangilio yake ili kuongeza sauti. Kwenye Android nyingine, tafuta Text-to-speech ndani ya Settings. Kwenye iPhone au iPad: Settings → Accessibility → Spoken Content → Voices. Kwenye Windows: Settings → Time & language → Speech. Rudi hapa na upakie upya ukurasa. Huenda kivinjari kisionyeshe sauti zote zilizosakinishwa.", lesson: "Sikiliza somo hili", book: "Sikiliza kitabu hiki cha kiada", room: "Sikiliza masomo haya ya kusoma", pause: "Sitisha", resume: "Endelea", stop: "Acha", speed: "Kasi",
           novoice: "Kifaa hiki hakina sauti ya Kiswahili. Unaweza kuongeza moja katika mipangilio ya kusoma maandishi kwa sauti ya kifaa.",
-          tip: "Kidokezo: kulingana na kifaa chako, huenda ukaweza kuchagua sauti nyingine ya kusoma (kwa mfano ya mwanamume au ya mwanamke) katika mipangilio ya ufikivu au ya kusoma maandishi kwa sauti.",
+          tip: "Chagua sauti inayopatikana hapo juu. Fungua maelekezo ili kuongeza sauti.",
           ch: "sura ya", v: "mstari wa", vs: "mistari", to: "hadi" }
   };
   var t = W[pageLang] || W.en;
@@ -126,10 +126,17 @@
     return out;
   }
 
+  function voiceKey(v) { return [v.name, v.lang, v.voiceURI || ""].join("|"); }
+  function savedVoice(lang) {
+    try { return localStorage.getItem("cts_listen_voice_" + lang) || ""; } catch (_) { return ""; }
+  }
   function voiceFor(lang) {
     var vs = synth.getVoices() || [];
     var mine = vs.filter(function (v) { return (v.lang || "").toLowerCase().replace("_", "-").slice(0, 2) === lang; });
     if (!mine.length) return vs.length ? null : undefined;           // null: none for this language; undefined: list not ready
+    var wanted = savedVoice(lang);
+    var selected = mine.find(function (v) { return voiceKey(v) === wanted; });
+    if (selected) return selected;
     var region = { en: /en-us/i, es: /es-(mx|us|419)/i, fr: /fr-fr/i, sw: /sw/i }[lang];
     function score(v) {
       return (/natural|neural|premium|enhanced|google/i.test(v.name) ? 2 : 0) + (region && region.test(v.lang) ? 1 : 0) + (v.default ? 0.5 : 0);
@@ -147,7 +154,11 @@
     "#cts-listen[hidden],#cts-listen [hidden]{display:none!important}" +
     "#cts-listen{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 1rem}" +
     "#cts-listen .btn{font-size:1.05rem;padding:.55rem 1rem}" +
-    "#cts-listen select{font-size:1rem;padding:.4rem}" +
+    "#cts-listen select{font-size:1rem;padding:.4rem;max-width:min(78vw,340px)}" +
+    "#cts-listen .cts-listen-voice-label{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem}" +
+    "#cts-listen .cts-listen-help{flex-basis:100%;font-size:.93rem}" +
+    "#cts-listen .cts-listen-help summary{cursor:pointer;text-decoration:underline;min-height:30px}" +
+    "#cts-listen .cts-listen-help p{margin:.3rem 0;max-width:720px}" +
     "#cts-listen .cts-listen-msg,#cts-listen .cts-listen-tip{flex-basis:100%;margin:.25rem 0 0}" +
     ".cts-listening{background:rgba(255,214,102,.35);border-radius:4px;box-shadow:0 0 0 3px rgba(255,214,102,.35)}";
   document.head.appendChild(css);
@@ -163,8 +174,13 @@
     '<button type="button" class="btn" data-act="stop" hidden>⏹ ' + t.stop + '</button>' +
     '<label class="small"><span class="cts-listen-speed">' + t.speed + '</span> <select data-act="rate">' +
     RATES.map(function (r) { return '<option value="' + r + '"' + (r === rate ? " selected" : "") + ">" + String(r).replace(".", pageLang === "en" ? "." : ",") + "×</option>"; }).join("") +
-    '</select></label><p class="small muted cts-listen-msg" role="status" aria-live="polite" hidden></p>' +
-    '<p class="small muted cts-listen-tip">' + t.tip + '</p>';
+    '</select></label>' +
+    '<label class="small cts-listen-voice-label"><span class="cts-listen-voice-title">' + t.voice +
+    '</span> <select data-act="voice" aria-label="' + t.voice + '"><option value="">' + t.automatic + '</option></select></label>' +
+    '<p class="small muted cts-listen-tip">' + t.tip + '</p>' +
+    '<details class="cts-listen-help"><summary class="cts-listen-help-title">' + t.helpTitle +
+    '</summary><p class="cts-listen-help-text">' + t.helpText + '</p></details>' +
+    '<p class="small muted cts-listen-msg" role="status" aria-live="polite" hidden></p>';
   var top = blocks ? main.firstElementChild : all[0];
   while (top && top.parentElement && top.parentElement !== main) top = top.parentElement;
   main.insertBefore(bar, top || null);
@@ -174,7 +190,24 @@
 
   var playBtn = bar.querySelector('[data-act="play"]'), pauseBtn = bar.querySelector('[data-act="pause"]'),
       stopBtn = bar.querySelector('[data-act="stop"]'), rateSel = bar.querySelector('[data-act="rate"]'),
-      msg = bar.querySelector(".cts-listen-msg");
+      voiceSel = bar.querySelector('[data-act="voice"]'), msg = bar.querySelector(".cts-listen-msg");
+
+  function refreshVoices() {
+    var lang = pageLang, wanted = savedVoice(lang);
+    var available = (synth.getVoices() || []).filter(function (v) {
+      return (v.lang || "").toLowerCase().replace("_", "-").slice(0, 2) === lang;
+    });
+    while (voiceSel.firstChild) voiceSel.removeChild(voiceSel.firstChild);
+    var automatic = document.createElement("option");
+    automatic.value = ""; automatic.textContent = t.automatic; voiceSel.appendChild(automatic);
+    available.forEach(function (v) {
+      var option = document.createElement("option");
+      option.value = voiceKey(v); option.textContent = v.name + " (" + v.lang + ")";
+      voiceSel.appendChild(option);
+    });
+    voiceSel.value = available.some(function (v) { return voiceKey(v) === wanted; }) ? wanted : "";
+  }
+  refreshVoices();
 
   /* ---- reading ---- */
   var queue = [], at = 0, playing = false, lit = null, gen = 0;
@@ -221,6 +254,11 @@
     bar.setAttribute("aria-label", label());
     bar.querySelector(".cts-listen-speed").textContent = t.speed;
     bar.querySelector(".cts-listen-tip").textContent = t.tip;
+    bar.querySelector(".cts-listen-voice-title").textContent = t.voice;
+    voiceSel.setAttribute("aria-label", t.voice);
+    bar.querySelector(".cts-listen-help-title").textContent = t.helpTitle;
+    bar.querySelector(".cts-listen-help-text").textContent = t.helpText;
+    refreshVoices();
     show(playing ? "playing" : pauseBtn.hidden ? "idle" : "paused");
   }
   function say(text) { msg.textContent = text; msg.hidden = !text; }
@@ -291,7 +329,15 @@
     try { localStorage.setItem("cts_listen_rate", String(rate)); } catch (e) {}
     if (playing) { gen++; synth.cancel(); next(); }                 // say the current part again at the new speed
   });
-  if (synth.addEventListener) synth.addEventListener("voiceschanged", function () {});
+  voiceSel.addEventListener("change", function () {
+    try {
+      if (voiceSel.value) localStorage.setItem("cts_listen_voice_" + pageLang, voiceSel.value);
+      else localStorage.removeItem("cts_listen_voice_" + pageLang);
+    } catch (_) {}
+    if (playing) { gen++; synth.cancel(); next(); }
+  });
+  if (synth.addEventListener) synth.addEventListener("voiceschanged", refreshVoices);
+  else if ("onvoiceschanged" in synth) synth.onvoiceschanged = refreshVoices;
   document.addEventListener("cts-lang", function () { if (playing || !pauseBtn.hidden) stop(); relabel(); });
   window.addEventListener("pagehide", function () { synth.cancel(); });
 
