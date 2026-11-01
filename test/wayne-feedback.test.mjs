@@ -103,6 +103,7 @@ const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:proc
 try {
   for(const slug of ['doctrines','streadings','joshua','wrreadings']) for(const lang of langs) {
     const bank=books.find(b=>b.slug===slug),ctx=await browser.newContext();
+    await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await ctx.route('**/*',r=>new URL(r.request().url()).origin===new URL(base).origin?r.continue():r.abort());
     const page=await ctx.newPage();
     await page.clock.install();
@@ -133,6 +134,7 @@ try {
   // Reported routes, storage preferences, native language links and tablet/phone layouts.
   for(const width of [360,800]) for(const stored of langs) {
     const ctx=await browser.newContext({viewport:{width,height:1000},isMobile:true,hasTouch:true});
+    await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await ctx.route('**/*',r=>new URL(r.request().url()).origin===new URL(base).origin?r.continue():r.abort());
     await ctx.addInitScript(value=>{if(!sessionStorage.getItem('seeded')){localStorage.setItem('cts_lang',value);sessionStorage.setItem('seeded','1');}},stored);
     const page=await ctx.newPage();

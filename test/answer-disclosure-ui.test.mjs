@@ -40,6 +40,7 @@ const L = 'ABCDEFGH';
 
 async function device(student) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.route('**/*', (r) => (new URL(r.request().url()).origin === ORIGIN ? r.fallback() : r.abort()));
   const mc = [];
   ctx.on('request', (req) => { const u = new URL(req.url()); if (u.pathname === '/api/mc') mc.push(JSON.parse(req.postData() || '{}')); });

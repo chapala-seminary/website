@@ -13,6 +13,7 @@ const courses = [
 ];
 async function open(c, track, count, textbook=false, existing=false, assoc=false) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const seed = {
     cts_student: JSON.stringify({name:'Synthetic Completion Test', country:'Test', track, goal:assoc?'assoc':''}),
     cts_track: track,

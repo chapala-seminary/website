@@ -49,6 +49,7 @@ for (const u of units) {
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const page = await browser.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await page.setContent('<html lang="en"><body data-lang="en" class="lang-en"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>');
   await page.evaluate(() => {
     Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' });

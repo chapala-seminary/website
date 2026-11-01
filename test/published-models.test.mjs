@@ -13,6 +13,7 @@ assert.equal(units.length, 666);  // 466 + 200 denominational elective units (24
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const page = await browser.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await page.setContent('<html lang="fr"><body data-lang="fr" class="lang-fr"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>');
   await page.evaluate(() => {
     Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' });

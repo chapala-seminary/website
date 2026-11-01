@@ -204,6 +204,7 @@ node tools/wr-readers.mjs
 node tools/reading-rooms.mjs --check
 # The optional Greek/Hebrew labs must not change the five reading or honors requirements.
 node test/la-language-labs.test.mjs
+node test/exam-integrity.test.mjs
 
 # The question bank: 451 units, 34,778 comparisons of stems, options and answer
 # keys, in a form that does not care what file format the content lives in.

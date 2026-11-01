@@ -9,6 +9,7 @@ let checks=0;
 try {
  for(const width of [1280,375]){
   const context=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' }, viewport:{width,height:900}});
+  await context.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   try{
    await context.addInitScript(()=>localStorage.setItem('cts_show_source','true'));
    const page=await context.newPage();

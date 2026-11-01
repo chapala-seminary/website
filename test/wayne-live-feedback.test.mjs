@@ -11,6 +11,7 @@ try{
     const file=slug==='doctrines'?'CTSTextbookFundamentalDoctrinesTest.html':'CTSSTReadingsTest.html';
     const stub=new GradingStub({track:'mdiv',lockMs:15*60*1000});
     const context=await browser.newContext();
+    await context.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await context.route('**/*',r=>new URL(r.request().url()).origin===new URL(base).origin?r.fallback():r.abort());
     await stub.install(context);
     await context.addInitScript(({lang,code})=>{
