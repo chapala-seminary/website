@@ -15,8 +15,8 @@ So nothing in this file goes onto the site until **both** Claude and ChatGPT agr
 
 | Course | Add (main book) | Keep | Drop |
 |---|---|---|---|
-| Church Administration & Leadership | Gibson, *Ministry Leadership*: EN 3rd ed. 2024, ES 2022, FR 1st ed. (license page to confirm), SW 2023 | Roland Allen, *Spontaneous Expansion*; Murray, *Humility*; Fairbairn, *Pastoral Epistles* | Bridges, *Proverbs*; Meyer, *Joseph*; Meyer, *Moses*; Miller, *Building of Character*; James, *Christian Fellowship*; Burroughs, *Irenicum*; Rutherford, *Letters* |
-| Apologetics | Bird, *Introduction to Apologetics*: EN 2nd ed. 2019, FR 2016, SW 2019, ES (license page to confirm) | Pascal, *Pensées*; Athanasius, *On the Incarnation*; Augustine, *Confessions*; Chesterton, *Orthodoxy*; Greenleaf, *Testimony of the Evangelists* | Butler, *Analogy*; Paley, *Natural Theology*; Boethius; Rawlinson; Orr |
+| Church Administration & Leadership | Gibson, *Ministry Leadership*: EN 3rd ed. 2024, ES 2022, SW 2023 (no French edition: see Not included) | Roland Allen, *Spontaneous Expansion*; Murray, *Humility*; Fairbairn, *Pastoral Epistles* | Bridges, *Proverbs*; Meyer, *Joseph*; Meyer, *Moses*; Miller, *Building of Character*; James, *Christian Fellowship*; Burroughs, *Irenicum*; Rutherford, *Letters* |
+| Apologetics | Bird, *Introduction to Apologetics*: EN 2nd ed. 2019, FR 2016, SW 2019 (no Spanish edition: see Not included; Spanish students keep the current readings) | Pascal, *Pensées*; Athanasius, *On the Incarnation*; Augustine, *Confessions*; Chesterton, *Orthodoxy*; Greenleaf, *Testimony of the Evangelists* | Butler, *Analogy*; Paley, *Natural Theology*; Boethius; Rawlinson; Orr |
 | Christian Education | Gibson, *Biblical Evangelism and Discipleship* (EN 3rd ed. 2023, ES, FR, SW: chapters on ministry to children, discipleship, small groups); Jones, *Curriculum Development for Christian Ministry* (EN, CC BY 4.0) | Gregory, *Seven Laws of Teaching* (both chapters); Horne, *Jesus the Master Teacher* | Comenius (both); Augustine, *Catechising* (both); Luther, *Large Catechism* preface; Anderson |
 
 ## Group B: both, with selected lessons from each
@@ -34,6 +34,7 @@ So nothing in this file goes onto the site until **both** Claude and ChatGPT agr
 - Utley's French 1 Peter (VOL02 French): its front matter forbids reproduction without permission.
 - Utley's Swahili OT Survey: no permission line found.
 - Older French SGC 1st editions marked "all rights reserved": left out.
+- Checked 1 Nov 2026 (copyright pages read in Chrome): Gibson, *Leadership et ministère* (FR, ©2018) and Bird, *Introducción a la apologética* (ES, ©2016) both say "all rights reserved" with no free-distribution permission. Left out.
 
 ## After both agree
 
