@@ -69,13 +69,45 @@ ${L.block(e.captionEn, e.captionEs, 'p', ' cts-shelf-caption')}
 </article>`;
 }
 
+/* Modern companion books (Dr. Cook, 1 Nov 2026; agreed with ChatGPT, issue
+   #240): free books by present-day evangelical authors, linked on their
+   publishers' own sites (never copied here), with the lessons or passages
+   that go with each unit. Optional: they change no exam and no honors rule.
+   Lesson numbers are the same in every language edition linked. Each room's
+   `companion` in src/data/reading-shelf.json: books, columns, rows. */
+function companionHtml(c) {
+  if (!c) return '';
+  const book = (b) => `<article class="cts-companion-book">
+<div class="cts-shelf-title">${esc(b.author)}, <em>${esc(b.title)}</em></div>
+<div class="cts-shelf-byline">${esc(b.publisher)}</div>
+<div class="cts-shelf-foot">${b.links.map((l) => `<a class="cts-shelf-link" href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)} &#8599;</a>`).join(' ')}</div>
+</article>`;
+  const head = `<tr><th scope="col">${L.inline('Unit', 'Unidad')}</th>${c.cols.map((k) => `<th scope="col">${L.inline(k.headEn, k.headEs)}<div class="cts-companion-who">${esc(k.who)}</div></th>`).join('')}</tr>`;
+  const rows = c.rows.map(([unit, ...cells]) => `<tr><th scope="row">${unit}</th>${cells.map((x) => `<td>${esc(x)}</td>`).join('')}</tr>`).join('\n');
+  return `<section class="cts-shelf cts-companion" id="cts-companion" aria-labelledby="cts-companion-h">
+<div class="cts-shelf-head"><h2 id="cts-companion-h">${L.inline('Companion Books: Modern and Free', 'Libros complementarios: modernos y gratuitos')}</h2><div class="cts-shelf-rule"></div></div>
+${L.block(
+  'These free books by present-day evangelical authors go with this course. Each opens on its publisher’s own website, at no cost. You do not need to read a whole book: the table shows the lessons that go with each unit. They are optional companions; they do not change the course’s exams or the honors reading above.',
+  'Estos libros gratuitos de autores evangélicos actuales acompañan este curso. Cada uno se abre en el sitio web de su propia editorial, sin costo. No necesita leer el libro entero: la tabla muestra las lecciones que corresponden a cada unidad. Son compañeros opcionales; no cambian los exámenes del curso ni la lectura con honores de arriba.',
+  'div', ' cts-shelf-note')}
+${c.books.map(book).join('\n')}
+<div class="cts-companion-scroll"><table class="cts-companion-plan">
+<thead>${head}</thead>
+<tbody>
+${rows}
+</tbody>
+</table></div>
+</section>
+`;
+}
+
 function shelfHtml(room) {
   const n = room.entries.length + (room.panels || []).reduce((s, p) => s + p.entries.length, 0);
   const WORDS = { 3: ['three', 'tres'], 4: ['four', 'cuatro'], 5: ['five', 'cinco'], 6: ['six', 'seis'], 7: ['seven', 'siete'], 8: ['eight', 'ocho'], 9: ['nine', 'nueve'], 10: ['ten', 'diez'], 12: ['twelve', 'doce'], 14: ['fourteen', 'catorce'] }[n] || [String(n), String(n)];
   const headEn = `Further Study: ${WORDS[0][0].toUpperCase() + WORDS[0].slice(1)} Public-Domain Works`;
   const headEs = `Para Profundizar: ${WORDS[1]} obras de dominio público`;
   let h = `${SHELF[0]}
-<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+${companionHtml(room.companion)}<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
 <div class="cts-shelf-head"><h2 id="cts-shelf-h">${L.inline(headEn, headEs)}</h2><div class="cts-shelf-rule"></div></div>
 ${L.block(
   `These ${WORDS[0]} works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ${WORDS[0]} are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).`,
