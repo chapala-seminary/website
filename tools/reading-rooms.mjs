@@ -77,7 +77,7 @@ ${L.block(e.captionEn, e.captionEs, 'p', ' cts-shelf-caption')}
    `companion` in src/data/reading-shelf.json: books, columns, rows. */
 function companionHtml(c) {
   if (!c) return '';
-  const book = (b) => `<article class="cts-shelf-entry cts-companion-book">
+  const book = (b) => `<article class="cts-companion-book">
 <div class="cts-shelf-title">${esc(b.author)}, <em>${esc(b.title)}</em></div>
 <div class="cts-shelf-byline">${esc(b.publisher)}</div>
 <div class="cts-shelf-foot">${b.links.map((l) => `<a class="cts-shelf-link" href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)} &#8599;</a>`).join(' ')}</div>
