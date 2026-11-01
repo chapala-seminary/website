@@ -148,6 +148,7 @@ if (!BASE) {
   try {
     for (const r of french.filter((r) => r.test.questions.some((q) => q.prompt.fr)).slice(0, 4)) {
       const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+      await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
       await ctx.route('**/*', (route) => (route.request().url().startsWith(BASE) ? route.continue() : route.abort()));
       const p = await ctx.newPage();
       const errors = [];

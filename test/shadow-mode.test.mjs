@@ -18,6 +18,7 @@ const bank = bankOf('u:CTSJohn/1');
 
 async function open(path) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const posts = [];
   await ctx.route('**/api/shadow', async (r) => { posts.push(JSON.parse(r.request().postData())); await r.fulfill({ json: { ok: true } }); });
   await ctx.route('**/api/**', (r) => r.request().url().endsWith('/api/shadow') ? r.fallback() : r.fulfill({ json: { ok: true } }));

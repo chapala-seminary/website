@@ -38,6 +38,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 /* A student's browser, opened on `path`, with the stub answering /api. */
 async function open(stub, { path = UNIT, student = true, code = true, track = stub.track, lang } = {}) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.route('**/*', (r) => { const u = new URL(r.request().url()); return u.origin === new URL(BASE).origin ? r.fallback() : r.abort(); });
   await stub.install(ctx);
   await ctx.addInitScript(({ student, code, track, codeValue, lang }) => {

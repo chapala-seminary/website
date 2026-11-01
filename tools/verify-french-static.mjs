@@ -20,6 +20,7 @@ try {
     const c = COURSES[key];
     for (const file of c.pages) {
       const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+      await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
       await ctx.addInitScript(() => { localStorage.setItem('cts_lang', 'fr'); localStorage.setItem('cts_student', JSON.stringify({ name: 'French Test', email: 'french-test@example.invalid', track: 'mdiv', country: 'RDC' })); localStorage.setItem('cts_track', 'mdiv'); });
       const page = await ctx.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
       await page.goto(`${base}/fr/${file}?cts_lang=fr`, { waitUntil: 'load' });

@@ -129,6 +129,7 @@ const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 async function open(d, track, prepare) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

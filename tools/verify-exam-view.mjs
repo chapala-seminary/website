@@ -27,9 +27,10 @@ const snapshot = () => {
   const qs = document.getElementById('questionsContainer');
   const bar = document.getElementById('cts-exam-switch');
   const blocks = [...document.querySelectorAll('#lesson p, #lesson li, #lesson blockquote')]
-    // Completion notes and the reading-requirement/navigation box are interface
-    // guidance shown with either view, not lesson teaching.
-    .filter((e) => !qs.contains(e) && !(bar && bar.contains(e)) && !e.closest('.course-done, [data-cts-rrbox]') && vis(e) && e.textContent.replace(/\s+/g, ' ').trim().length > 160)
+    // Completion notes, the reading-requirement/navigation box and the off-screen
+    // assessment-integrity note (cts-integrity.js) are interface guidance shown
+    // with either view, not lesson teaching.
+    .filter((e) => !qs.contains(e) && !(bar && bar.contains(e)) && !e.closest('.course-done, [data-cts-rrbox], #cts-ai-note') && vis(e) && e.textContent.replace(/\s+/g, ' ').trim().length > 160)
     .map((e) => e.textContent.replace(/\s+/g, ' ').trim().slice(0, 70));
   const q = qs.querySelector('.question');
   return {
@@ -41,6 +42,7 @@ const snapshot = () => {
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function check(file) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.addInitScript(() => {
     if (!localStorage.getItem('cts_student')) {
       localStorage.setItem('cts_student', JSON.stringify({ name: 'View Test', track: 'mdiv' }));

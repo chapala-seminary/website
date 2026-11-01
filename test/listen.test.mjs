@@ -27,6 +27,7 @@ const fakeSpeech = () => {
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH });
 try {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.addInitScript(fakeSpeech);
   const page = await ctx.newPage();
   const errors = [];
@@ -93,6 +94,7 @@ try {
 
   // no voice for the page language: said so, nothing read
   const sw = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await sw.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await sw.addInitScript(fakeSpeech);
   const sp = await sw.newPage();
   await sp.goto(BASE + '/sw/CTSUnit1.html');

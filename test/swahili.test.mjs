@@ -75,6 +75,7 @@ let STUDENT_CODE = null;
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   // Acts opens after the seven foundation courses (cts-curriculum.js); this is not about that gate,
   // which is checked on its own below.
   // The exam asks for a student record: the one registered above.
@@ -107,6 +108,7 @@ try {
   // the redesigned home page and the Study Library offer Kiswahili too
   // (in a browser of their own: the home page leaves state behind that the lesson checks must not see)
   const homeCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
+  await homeCtx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const home = await homeCtx.newPage();
   for (const file of ['index.html', 'CTSStudyLibrary.html']) {
     await home.goto(`${BASE}/${file}?cts_lang=en`);
@@ -196,6 +198,7 @@ try {
 
   // a registered student who has not finished the foundation courses: the lock is said in Swahili
   const locked = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await locked.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await locked.addInitScript(() => { try {
     localStorage.setItem('cts_student', JSON.stringify({ name: 'Mwanafunzi', email: 'lock@example.test', track: 'associate' }));
     localStorage.setItem('cts_track', 'associate'); localStorage.setItem('cts_student_code', 'CTS-TEST-LOCK-0000');

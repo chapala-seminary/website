@@ -32,6 +32,7 @@ function firstDiff(x, y) {
 
 async function probe(browser, base, unit, mode) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const page = await ctx.newPage();
   const errors = [];
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
