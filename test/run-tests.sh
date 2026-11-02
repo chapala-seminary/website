@@ -27,6 +27,7 @@ node --test test/assessment-keys.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/catalog-landing.test.mjs
+node --test test/ot-survey-offline-books.test.mjs
 node test/review-assets.test.mjs
 node test/single-completion.test.mjs
 # The grading rules with no server: the fill-in text rules against the browser
