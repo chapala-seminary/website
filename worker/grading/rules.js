@@ -6,6 +6,8 @@ export const PASS_RATIO = 0.9;
 export const MIN_SA_WORDS = 15;
 export const MAX_FILL_CHARS = 80;
 export const MAX_SA_CHARS = 4000;
+/* A final's essays may be longer (its meta row says how long), never beyond this. */
+export const MAX_ESSAY_CHARS = 12000;
 export const LOCK_MASTERS_MIN = 15;
 export const LOCK_OTHER_MIN = 2;
 export const HOURLY_CAP = 150;        // graded written items per student per hour
@@ -26,6 +28,12 @@ export function counts(track) {
  *  meta: the textbook/reading test's { pass } (a fill-in-only test, passed
  *  with the same number on every track), or null for a unit. */
 export function requirements(track, totals, meta) {
+  // A final (fn:): fill-ins and essays, the same marks on every track (meta.pass = { fill, sa }).
+  if (meta && meta.kind === 'final') {
+    const p = meta.pass && typeof meta.pass === 'object' ? meta.pass : {};
+    const part = (total, n) => ({ total, need: total ? Math.min(Number.isInteger(n) && n > 0 ? n : total, total) : 0 });
+    return { mc: { total: 0, need: 0 }, fill: part(totals.fill, p.fill), sa: part(totals.sa, p.sa) };
+  }
   if (meta && meta.pass != null) {
     const total = totals.fill;
     return { mc: { total: 0, need: 0 }, fill: { total, need: Math.min(meta.pass, total) }, sa: { total: 0, need: 0 } };
