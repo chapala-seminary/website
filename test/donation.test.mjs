@@ -13,7 +13,7 @@ test('donation page and quiet footer remain safe in all four locales', () => {
   const study=fs.readFileSync(path.join('dist',prefix,'CTSStudyLibrary.html'),'utf8');
   assert.match(home,/cts-support-footer/);
   assert.match(study,/cts-support-footer/);
-  assert.match(home,/href="(?:\/[^"]*\/)?CTSSupport\.html"/);
+  assert.match(home,new RegExp('href="/'+(lang==='en'?'':lang+'/')+'CTSSupport\\.html"'));
   assert.match(support,/https:\/\/cash\.app\/\$Cookww/);
   assert.match(support,/https:\/\/paypal\.me\/cookww51/);
   assert.equal((support.match(/https:\/\/paypal\.me\/cookww51/g)||[]).length, 4, 'one PayPal link per locale');
