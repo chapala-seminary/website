@@ -15,9 +15,11 @@ test('donation page and quiet footer remain safe in all four locales', () => {
   assert.match(study,/cts-support-footer/);
   assert.match(home,/href="(?:\/[^"]*\/)?CTSSupport\.html"/);
   assert.match(support,/https:\/\/cash\.app\/\$Cookww/);
+  assert.match(support,/https:\/\/paypal\.me\/cookww51/);
+  assert.equal((support.match(/https:\/\/paypal\.me\/cookww51/g)||[]).length, 4, 'one PayPal link per locale');
   assert.match(support,new RegExp('<html\\s+lang="'+lang+'"'));
   assert.match(support,new RegExp('class="locale cts-reading" lang="'+lang+'"'));
-  assert.doesNotMatch(support,/https:\/\/py\.pl|PayPal/i,'fixed one-time PayPal request must not be published');
+  assert.doesNotMatch(support,/https:\/\/py\.pl|\/myaccount\/transfer\/pay-request/i,'fixed one-time PayPal request must not be published');
   assert.doesNotMatch(support,/<form\b|<input\b|name="(?:card|cc-number|amount)"/i,'do not collect payment info');
   assert.doesNotMatch(support,/tax.deductible donation|tax.deductible gift/i,'do not claim donor deduction');
   assert.match(support,/rel="noopener noreferrer"/);
@@ -29,6 +31,6 @@ test('donations are not inserted into exams and registration',()=>{
  for(const name of pages){
   let p=path.join('dist',name);if(!fs.existsSync(p))continue;
   const text=fs.readFileSync(p,'utf8');
-  assert.doesNotMatch(text,/cts-support-footer|cash\.app\/\$Cookww|\bSupport Our Ministry\b/);
+  assert.doesNotMatch(text,/cts-support-footer|cash\.app\/\$Cookww|paypal\.me\/cookww51|\bSupport Our Ministry\b/);
  }
 });
