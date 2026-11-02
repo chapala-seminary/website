@@ -483,6 +483,7 @@ if (STATE) {
       appeals: count(`SELECT 1 FROM appeals WHERE student_id = '${id}'`),
       calibration: count(`SELECT 1 FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
       grade_queue: count(`SELECT 1 FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
+      assignments: count(`SELECT 1 FROM assignments WHERE student_id = '${id}'`),
     };
     await new Promise((r) => setTimeout(r, 500));
     return out;
@@ -500,10 +501,14 @@ if (STATE) {
   ok((await live('/api/appeal', { code: CODE, gradeId, note: 'please look again' })).status === 200, 'and ask for one to be reviewed');
   await new Promise((r) => setTimeout(r, 500));
   q(`INSERT INTO calibration (grade_id, marked_by, human_verdict, marked_at, week) VALUES (${Number(gradeId)}, 'deletion-test@example.test', 'met', '2026-01-01T00:00:00Z', '2026-W01')`);
+  // A ministry paper (worker/assignments.js), the student's own text: Delete My Record removes it too.
+  const paper = await live('/api/assignment', { code: CODE, slug: 'otspaper', format: 'study', topic: 'story', lang: 'en',
+    body: 'In my own church the story of Ruth shows the loyal love of God and the line of David that leads to Christ. '.repeat(55) + ' [[paper-revise]]' });
+  ok(paper.status === 201 && paper.body?.assignment?.status === 'revise', 'and submit a ministry paper', JSON.stringify(paper));
   await new Promise((r) => setTimeout(r, 500));
   const before = await rowsOf(CODE);
-  ok(before.attempts >= 1 && before.answer_grades === 3 && before.appeals === 1 && before.calibration === 1 && before.grade_queue >= 1,
-    'the record holds attempts, answers, an appeal, a calibration mark and a queued answer', JSON.stringify(before));
+  ok(before.attempts >= 1 && before.answer_grades === 3 && before.appeals === 1 && before.calibration === 1 && before.grade_queue >= 1 && before.assignments === 1,
+    'the record holds attempts, answers, an appeal, a calibration mark, a queued answer and a paper', JSON.stringify(before));
 }
 
 const del = await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' });
@@ -514,7 +519,7 @@ ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' })).status ===
   'deleting twice is a 404, not an error');
 if (rowsOf) {
   const after = await rowsOf(CODE);
-  ok(Object.values(after).every((n) => n === 0), 'deleting the record deletes their attempts, written answers, appeals, calibration marks and queued answers', JSON.stringify(after));
+  ok(Object.values(after).every((n) => n === 0), 'deleting the record deletes their attempts, written answers, appeals, calibration marks, queued answers and papers', JSON.stringify(after));
 }
 
 /* -------------------------------------------------------------------------- */
