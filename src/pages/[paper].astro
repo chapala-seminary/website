@@ -1,0 +1,69 @@
+---
+/* A master's ministry assignment, on a page of its own: CTSOTSPaper.html
+ * (Dr. Cook, 2 Nov 2026). The student pastes the paper (and, for a sermon, the
+ * exegetical study notes) and the seminary's server scores it with the AI
+ * against the rubric printed on the course's master's page
+ * (src/content/papers/<slug>.json; worker/assignments.js). 80 of 100 meets
+ * the standard; below that the student revises and submits again. No file
+ * upload and no faculty step. The pledge ("This paper is my own work") and the
+ * note for AI assistants come with the layout (cts-integrity.js, mounted on
+ * #tb-questions with data-pledge="paper"). The page's script is
+ * public/assets/js/cts-paper.js. Not a requirement of any track yet. */
+import { getCollection } from 'astro:content';
+import Textbook from '../layouts/Textbook.astro';
+import catalog from '../../worker/catalog.json';
+
+export async function getStaticPaths() {
+  const papers = await getCollection('papers');
+  const courses = await getCollection('courses');
+  const units = await getCollection('units');
+  const card = new Map(courses.map((c) => [c.id, c.data]));
+  const slugOf = new Map(units.map((u) => [u.data.pagePrefix, u.data.course]));
+  return papers.map((p) => {
+    const course = card.get(p.data.course);
+    if (!course) throw new Error(`paper ${p.data.slug} belongs to course "${p.data.course}", which has no catalog card`);
+    return { params: { paper: p.data.page }, props: { paper: p.data, course, accent: slugOf.get(p.data.course) ?? null } };
+  });
+}
+const { paper, course, accent } = Astro.props;
+const entry = (catalog as any).assessments?.[paper.slug];
+if (!entry || entry.kind !== 'paper') throw new Error(`worker/catalog.json does not carry the paper ${paper.slug}: run node tools/gen-worker-catalog.mjs`);
+const masters = paper.page.replace(/Paper$/, 'Masters');
+const data = JSON.stringify({
+  slug: paper.slug, title: paper.title, pass: paper.pass, minWords: paper.minWords, maxChars: paper.maxChars,
+  minNotesWords: paper.minNotesWords, maxNotesChars: paper.maxNotesChars, formats: paper.formats,
+  topics: paper.topics, criteria: paper.criteria,
+}).replace(/</g, '\\u003c');
+const book = { slug: paper.slug, page: paper.page, course: paper.course, title: { ...paper.title, fr: paper.title.en }, edition: 'paper' };
+---
+<Textbook kind="paper" book={book} course={course} accent={accent} sync={true} scripts={['/assets/js/cts-paper.js']}
+  back={{ href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }}>
+  <section class="card tb-about" data-cts-chrome>
+    <h2><span class="lang-en">Ministry assignment</span><span class="lang-es">Tarea ministerial</span><span class="lang-fr">Travail pastoral</span></h2>
+    <p>
+      <span class="lang-en">About 1,200–1,800 words, written by you, on one of the topics below, applied to your own church or ministry setting. Choose a format, choose a topic, and paste your paper into the box (no file upload). A sermon also needs its study notes: how you interpreted the passage and the sources you used. The paper is scored against the rubric below; {paper.pass} of 100 meets the standard. Below that you receive the scores and comments, revise, and submit a new version (up to three a day).</span>
+      <span class="lang-es">Unas 1.200–1.800 palabras, escritas por usted, sobre uno de los temas siguientes, aplicadas a su propia iglesia o ministerio. Elija un formato, elija un tema y pegue su trabajo en el cuadro (no se suben archivos). Un sermón necesita además sus notas de estudio: cómo interpretó el pasaje y las fuentes que usó. El trabajo se evalúa con la rúbrica de abajo; {paper.pass} de 100 cumple el nivel. Si no lo alcanza, recibe las puntuaciones y los comentarios, lo revisa y envía una nueva versión (hasta tres al día).</span>
+      <span class="lang-fr">Environ 1 200 à 1 800 mots, écrits par vous, sur l’un des sujets ci-dessous, appliqués à votre propre Église ou ministère. Choisissez un format et un sujet, puis collez votre travail dans la case (pas d’envoi de fichier). Un sermon demande aussi ses notes d’étude. Le travail est noté selon la grille ci-dessous ; {paper.pass} sur 100 atteint le niveau requis. Sinon, vous recevez les notes et les commentaires, vous révisez et vous envoyez une nouvelle version (trois au plus par jour).</span>
+    </p>
+    <p>
+      <span class="lang-en">This assignment is being introduced for the M.Div. and Th.M. tracks and is not yet required: nothing in any student's course, certificate or degree depends on it. A paper that meets the standard is kept in your record. Your paper is stored with your record so that you can see it and revise it; Delete My Record removes it.</span>
+      <span class="lang-es">Esta tarea se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatoria: nada del curso, certificado o título de ningún estudiante depende de ella. Un trabajo que cumple el nivel queda en su registro. Su trabajo se guarda con su registro para que pueda verlo y revisarlo; «Borrar mi registro» lo elimina.</span>
+      <span class="lang-fr">Ce travail est en cours d’introduction pour les parcours M.Div. et Th.M. et n’est pas encore obligatoire : rien dans le cours, le certificat ou le diplôme d’un étudiant n’en dépend. Votre travail est conservé avec votre dossier pour que vous puissiez le revoir ; la suppression de votre dossier l’efface.</span>
+    </p>
+    <h3><span class="lang-en">How it is judged (100 points)</span><span class="lang-es">Cómo se evalúa (100 puntos)</span><span class="lang-fr">Comment il est noté (100 points)</span></h3>
+    <table class="tb-rubric">
+      <tr><th><span class="lang-en">Part</span><span class="lang-es">Parte</span><span class="lang-fr">Partie</span></th><th><span class="lang-en">Points</span><span class="lang-es">Puntos</span><span class="lang-fr">Points</span></th><th><span class="lang-en">What is looked for</span><span class="lang-es">Lo que se busca</span><span class="lang-fr">Ce qui est attendu</span></th></tr>
+      {paper.criteria.map((c) => (
+        <tr><td><span class="lang-en">{c.name.en}</span><span class="lang-es">{c.name.es}</span><span class="lang-fr">{c.name.en}</span></td><td>{c.points}</td><td><span class="lang-en">{c.look.en}</span><span class="lang-es">{c.look.es}</span><span class="lang-fr">{c.look.en}</span></td></tr>
+      ))}
+    </table>
+  </section>
+
+  <section class="card tb-test" id="tb-test">
+    <div id="tb-status" role="status"></div>
+    <div id="tb-questions" data-pledge="paper"></div>
+    <div id="tb-result" role="status" style="margin-top:15px;"></div>
+  </section>
+
+  <script is:inline set:html={`window.CTS_PAPER = ${data};`} />
+</Textbook>

@@ -36,12 +36,19 @@
  * keys: "private" and carry no answer, accept or tr on any question; so is
  * every private textbook (keys: "private"; every "elec" book is one). Those
  * belong only in the assessment-keys checkout (docs/reading-rooms.md).
+ *
+ * The final synthesis exams (src/content/finals, Dr. Cook, 2 Nov 2026), in
+ * both modes: the public file says keys: "private" and carries prompts only;
+ * every built page with window.CTS_FINAL (any language) carries only a qid,
+ * prompt and reading per item, says grading: "live", loads cts-grading.js, and
+ * holds none of the final's model answers (read from the private checkout when
+ * it is present) anywhere in the page.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { COURSES, singleSections } from './single-pages-lib.mjs';
 import { PRIVATE_READINGS } from './import-readings.mjs';
-import { privateReadingLeaks } from './grading-keys-lib.mjs';
+import { privateReadingLeaks, finalLeaks, finalQuestions, resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const args = process.argv.slice(2);
 /* A deploy builds in the mode CTS_GRADING_MODE names; this checks the build for
@@ -247,6 +254,42 @@ let privateReadings = 0, privateBooks = 0;
   }
 }
 
+/* ---- the final synthesis exams ---- */
+let finalPages = 0, finalFiles = 0;
+{
+  const fdir = path.join(ROOT, 'src/content/finals');
+  const secrets = [];
+  const keysRoot = resolveKeysRoot(ROOT);
+  for (const f of fs.existsSync(fdir) ? fs.readdirSync(fdir).filter((x) => x.endsWith('.json')) : []) {
+    const pub = JSON.parse(fs.readFileSync(path.join(fdir, f), 'utf8'));
+    finalFiles++;
+    for (const m of finalLeaks(pub, `src/content/finals/${f}`)) note(m);
+    const qs = finalQuestions(keysRoot, pub);
+    if (!qs) continue;
+    // the model answers, in full (fill-in answers are single words that may well be on the page
+    // elsewhere; the field whitelist below is what keeps them out of the data)
+    for (const q of qs.sa) for (const v of Object.values(q.model || {})) if (typeof v === 'string' && v.trim().length >= 40) secrets.push(v.trim());
+  }
+  const FINAL_SHOWN = new Set(['qid', 'prompt', 'reading']);
+  for (const file of walk(dir)) {
+    const html = fs.readFileSync(file, 'utf8');
+    if (!html.includes('window.CTS_FINAL = ')) continue;
+    const rel = path.relative(dir, file);
+    finalPages++;
+    const d = dataOf(html, 'CTS_FINAL');
+    if (!d || d.error) { note(`${rel}: the final's data does not parse`); continue; }
+    if (d.json.grading !== 'live') note(`${rel}: a final page does not say grading: "live"`);
+    if (!liveScriptOk(html)) note(`${rel}: a final page without cts-grading.js`);
+    for (const part of ['fill', 'sa']) (d.json[part] || []).forEach((q, i) => {
+      for (const k of Object.keys(q)) if (!FINAL_SHOWN.has(k)) note(`${rel}: ${part}[${i}] carries "${k}"`);
+      if (!q.qid) note(`${rel}: ${part}[${i}] has no qid`);
+    });
+    for (const k of Object.keys(d.json)) if (/answer|accept|model|rubric|keyword/i.test(k)) note(`${rel}: the final's data carries "${k}"`);
+    for (const sct of secrets)
+      if (html.includes(sct) || html.includes(JSON.stringify(sct).slice(1, -1))) note(`${rel}: a final's model answer (${sct.slice(0, 40)}...) is on the page`);
+  }
+  if (finalFiles && !finalPages && !expectKeys && fs.existsSync(path.join(dir, 'index.html'))) note(`no final page found under ${dir} for ${finalFiles} final(s)`);
+}
 /* Every course's unit keys are private (tools/private-units.mjs), so every
    folder of src/content/units has its keyless public twin in units-public, and
    no review pin (it fingerprints a prompt with its answer) is kept here. */
@@ -275,3 +318,4 @@ console.log(expectKeys
   ? `PASS — shadow build: ${unitPages} unit pages and ${testPages} test pages keep their keys (${withKeys} with keys) and post to /api/shadow (${shadowHook} carry the hook); ${singlePages} single-page course pages keep theirs and carry the hook.`
   : `PASS — live build: ${unitPages} unit pages and ${testPages} test pages carry no answer key, accept list, model answer, keyword, rubric, explanation or review passage (${reviewFiles} passage files kept for the Worker); nor do the ${singlePages} single-page course pages (Counseling, Narrative and WiseSpeak Preaching, Ethics) or their fill-in data.`);
 console.log(`PASS — ${privateReadings} private reading bank(s) and ${privateBooks} private textbook bank(s): their public files carry no answer, accept or tr.`);
+console.log(`PASS — ${finalFiles} final exam(s): public prompts only; ${finalPages} final page(s) carry prompts only and no model answer.`);

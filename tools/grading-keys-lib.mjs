@@ -57,6 +57,7 @@ export function buildKeyRows({ root = '.', warn = () => {}, keysRoot } = {}) {
   addTestRows(root, catalog, 'src/content/textbooks', 'tb', 'textbook', add, warn, keys);
   addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', add, warn, keys);
   addSingleRows(root, add);
+  addFinalRows(root, catalog, add, warn, keys);
   return rows;
 }
 
@@ -220,5 +221,60 @@ function addSingleRows(root, add) {
       add(`${base}/sa/${i}`, 'sa', 'single',
         { ...keepOnly({ ...q, model: dropLangs(q.model, generic) }, ['prompt', 'model', 'keywords']), rubric }, rubric?.v ?? null);
     });
+  }
+}
+
+/* ---- final synthesis exams (Dr. Cook, 2 Nov 2026) ----------------------------
+ * The public file src/content/finals/<slug>.json holds the prompts only
+ * (fill-ins and essays, keys: "private"); the answers, accepted answers, model
+ * answers and rubrics are in <keys>/finals/<slug>.json, item for item in the
+ * same order. Rows: `fn:<slug>/meta/0` {pass: {fill, sa}, maxChars, n, code,
+ * kind: "final", page}, `fn:<slug>/fill/<i>` and `fn:<slug>/sa/<i>`, the key
+ * shapes of a unit's. Without the private file (or with one whose counts do
+ * not match) the final is skipped with a warning: the page still builds, and
+ * the server says the test is not on it yet. Nothing is ever graded from the
+ * public file alone. */
+export const FINAL_PUBLIC_FIELDS = new Set(['prompt', 'reading', 'part']);
+/** Problems with a public final file: any field beyond the prompt and its
+ *  reading, or a missing keys: "private". Empty when it is clean. */
+export function finalLeaks(pub, where = pub?.slug || 'final') {
+  const out = [];
+  if (pub?.keys !== 'private') out.push(`${where}: a final must say keys: "private" in its public file`);
+  for (const part of ['fill', 'sa'])
+    for (const [i, q] of (pub?.[part] || []).entries())
+      for (const k of Object.keys(q || {})) if (!FINAL_PUBLIC_FIELDS.has(k)) out.push(`${where} ${part}[${i}]: the public file carries "${k}"; it belongs only in assessment-keys/finals`);
+  return out;
+}
+/** The final's questions joined with the private keys, or null (with a warning) when they are not there. */
+export function finalQuestions(keysRoot, pub, warn = () => {}) {
+  if (!keysRoot) { warn(`  final ${pub.slug}: no assessment-keys checkout; not synced`); return null; }
+  const p = path.join(keysRoot, 'finals', `${pub.slug}.json`);
+  if (!fs.existsSync(p)) { warn(`  final ${pub.slug}: assessment-keys has no finals/${pub.slug}.json; not synced`); return null; }
+  let k;
+  try { k = readJson(p); } catch (e) { warn(`  final ${pub.slug}: finals/${pub.slug}.json does not parse (${e.message}); not synced`); return null; }
+  if (k.slug !== pub.slug || (k.fill || []).length !== (pub.fill || []).length || (k.sa || []).length !== (pub.sa || []).length) {
+    warn(`  final ${pub.slug}: the private file does not match the public questions (slug or counts); not synced`); return null;
+  }
+  if (!k.fill.every((q) => q?.answer?.en) || !k.sa.every((q) => q?.model?.en && q?.rubric?.points?.length)) {
+    warn(`  final ${pub.slug}: a fill-in without an answer or an essay without a model answer and rubric; not synced`); return null;
+  }
+  return {
+    fill: pub.fill.map((q, i) => ({ prompt: q.prompt, ...keepOnly(k.fill[i], ['answer', 'accept']), group: q.reading ?? null })),
+    sa: pub.sa.map((q, i) => ({ prompt: q.prompt, model: k.sa[i].model, rubric: k.sa[i].rubric })),
+  };
+}
+function addFinalRows(root, catalog, add, warn, keysRoot) {
+  const dir = path.join(root, 'src/content/finals');
+  if (!fs.existsSync(dir)) return;
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
+    const pub = readJson(path.join(dir, f));
+    const t = catalog.assessments?.[pub.slug];
+    if (!t || t.kind !== 'final') { warn(`  skipped finals/${f}: not a final in worker/catalog.json`); continue; }
+    const qs = finalQuestions(keysRoot, pub, warn);
+    if (!qs) continue;
+    const base = `fn:${pub.slug}`;
+    add(`${base}/meta/0`, 'meta', 'final', { pass: pub.pass, maxChars: pub.maxChars ?? null, n: qs.fill.length + qs.sa.length, code: t.code, kind: 'final', page: t.page });
+    qs.fill.forEach((q, i) => add(`${base}/fill/${i}`, 'fill', 'final', q));
+    qs.sa.forEach((q, i) => add(`${base}/sa/${i}`, 'sa', 'final', q, q.rubric?.v ?? null));
   }
 }
