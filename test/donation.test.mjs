@@ -16,7 +16,7 @@ test('donation page and quiet footer remain safe in all four locales', () => {
   assert.match(home,/href="(?:\/[^"]*\/)?CTSSupport\.html"/);
   assert.match(support,/https:\/\/cash\.app\/\$Cookww/);
   assert.match(support,new RegExp('<html\\s+lang="'+lang+'"'));
-  assert.match(support,new RegExp('class="locale" lang="'+lang+'"'));
+  assert.match(support,new RegExp('class="locale cts-reading" lang="'+lang+'"'));
   assert.doesNotMatch(support,/https:\/\/py\.pl|PayPal/i,'fixed one-time PayPal request must not be published');
   assert.doesNotMatch(support,/<form\b|<input\b|name="(?:card|cc-number|amount)"/i,'do not collect payment info');
   assert.doesNotMatch(support,/tax.deductible donation|tax.deductible gift/i,'do not claim donor deduction');
