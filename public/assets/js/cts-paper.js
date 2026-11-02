@@ -165,7 +165,7 @@
       if (r.status === 422 && d.tooShort) { msg(t(W.tooShort) + d.min + t(W.wordsLbl) + " (" + d.words + ")."); return; }
       if (r.status === 422 && d.needsNotes) { msg(t(W.needsNotes) + d.min + t(W.wordsLbl) + "."); return; }
       if (r.status === 422 && d.tooLong) { msg(t(W.tooLong) + d.max + t(W.chars)); return; }
-      if (r.status === 422 && d.held) { msg(t(W.held)); return; }
+      if (r.status === 422 && d.held) { msg(t(W.held) + (d.match ? "<br><q>" + String(d.match).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]; }) + "</q>" : "")); return; }
       msg(d.error ? esc(d.error) : t(W.noServer));
     });
   }

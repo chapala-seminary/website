@@ -23,6 +23,7 @@ import { LANG_NAMES } from './prompt.js';
 import { normalise, fold } from './text.js';
 
 export const PAPER_PROMPT_VERSION = '2026-11-02.paper.1';
+export const PAPER_QUOTE_MIN_WORDS = 5;    // a score above half needs a real quotation, not one word
 export const PAPER_TIMEOUT_MS = 45000;      // one call: a long paper and a long reply
 export const PAPER_BUDGET_MS = 50000;       // all calls of one request (the page waits up to 60 s)
 
@@ -109,7 +110,7 @@ export function checkPaperReply(def, paper, parsed) {
     let points = r.score;
     const half = Math.floor(c.points / 2);
     // A score above half the points needs the student's own words to show for it.
-    if (points > half && !quoteFound(r.quote, hay).ok) { capped.push({ id: c.id, claimed: points, quote: String(r.quote || '').slice(0, 300) }); points = half; }
+    if (points > half && (String(r.quote || '').trim().split(/\s+/).filter(Boolean).length < PAPER_QUOTE_MIN_WORDS || !quoteFound(r.quote, hay).ok)) { capped.push({ id: c.id, claimed: points, quote: String(r.quote || '').slice(0, 300) }); points = half; }
     return { id: c.id, points, max: c.points, comment: typeof r.comment === 'string' ? r.comment.trim().slice(0, 700) : '' };
   });
   const total = scores.reduce((n, s) => n + s.points, 0);

@@ -24,7 +24,7 @@
  *   - the body is at most maxChars (25,000) characters, the notes maxNotesChars
  *     (12,000); together at least minWords words; a sermon needs notes of at
  *     least minNotesWords words. Each refusal is a 422 the page can point at;
- *   - text addressed to the grader (rules.js looksLikeInstruction) is refused
+ *   - text addressed to the grader (rules.js paperInstruction) is refused, and the passage is returned
  *     with a 422, never sent to the model and not stored: there is no faculty
  *     step to hold it for, so the student is asked to remove it;
  *   - one paper waits for grading at a time; a passed paper is not graded
@@ -40,7 +40,7 @@
 import catalog from './catalog.json';
 import { SITE_LANGUAGES } from '../src/lib/languages.mjs';
 import { wordCount } from './grading/text.js';
-import { looksLikeInstruction } from './grading/rules.js';
+import { paperInstruction } from './grading/rules.js';
 import { loadStudent, trackOf, completeCourseIfDone, nowIso } from './grading/attempts.js';
 import { gradePaper, PAPER_BUDGET_MS } from './grading/paper.js';
 import { sendEmail, emailConfigured, emailLanguage, languageLink } from './email.js';
@@ -84,8 +84,9 @@ export function checkSubmission(def, b) {
     return { status: 422, error: `a sermon needs its study notes (at least ${def.minNotesWords} words)`, needsNotes: true, min: def.minNotesWords, words: noteWords };
   const words = wordCount(body) + noteWords;
   if (words < def.minWords) return { status: 422, error: `the paper is too short (at least ${def.minWords} words)`, tooShort: true, min: def.minWords, words };
-  if (looksLikeInstruction(body) || looksLikeInstruction(notes))
-    return { status: 422, held: 'instruction', error: 'Part of the paper reads as an instruction to the grader. Remove it and submit again.' };
+  const flagged = paperInstruction(body) || paperInstruction(notes);
+  if (flagged)
+    return { status: 422, held: 'instruction', match: flagged, error: 'Part of the paper reads as an instruction to the grader. Remove it and submit again.' };
   return null;
 }
 
