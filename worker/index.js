@@ -23,12 +23,15 @@ import { handleStaff } from './staff.js';
 import { handleCoord } from './coord.js';
 import { scheduled, stopNotes } from './outreach.js';
 import { runQueue } from './grading/queue.js';
+import { runPaperQueue } from './assignments.js';
 import { blocksReviewAsset } from './review-assets.js';
 
 const GRADING_CRON = '*/15 * * * *';
 async function gradingRun(env) {
   try { console.log('grading queue', JSON.stringify(await runQueue(env))); }
   catch (e) { console.error('grading queue error', e && e.stack || e); }
+  try { console.log('paper queue', JSON.stringify(await runPaperQueue(env))); }
+  catch (e) { console.error('paper queue error', e && e.stack || e); }
 }
 
 /* The address that IS the seminary. www 301s here. Everything else -- beta,
