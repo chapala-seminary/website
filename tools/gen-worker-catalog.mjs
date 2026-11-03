@@ -149,13 +149,15 @@ for (const [slug, c] of Object.entries(courses)) {
 // courses by the code their certificate page names. On the master's tracks the
 // course is complete only when the textbook test is passed (worker/awards.js,
 // public/assets/js/cts-record.js); the pages and the Worker read this one map.
+// The single-page courses (no numbered unit records), by the completion code
+// their certificate page writes.
+const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL', CTS_WiseSpeak_Preaching: 'WISESPEAK', ethics_unit01: 'ETHICS' };
 const textbooks = {};
 {
   // Preaching (WiseSpeak) is here for its five-reading test (10 Oct 2026).
   // Christian Ethics (ethics_unit01..10, hand-written pages outside the unit
   // engine) is known by the code its certificate page writes, ETHICS, for its
   // textbook (Alexander, 12 Oct 2026).
-  const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL', CTS_WiseSpeak_Preaching: 'WISESPEAK', ethics_unit01: 'ETHICS' };
   const dir = 'src/content/textbooks';
   for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort() : []) {
     const t = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
@@ -212,13 +214,16 @@ const assessments = {};
       const a = JSON.parse(fs.readFileSync(path.join(rel, f), 'utf8'));
       const where = `${rel}/${f}`;
       const unitCourse = Object.entries(courses).find(([, c]) => c.pages === a.course);
+      // A single-page course (Counseling, Ethics, Narrative Preaching,
+      // Preaching) is known by its catalog card and completion code (3 Nov 2026).
+      const code = unitCourse ? unitCourse[1].code : SINGLE[a.course];
       if (!a.slug || a.slug !== f.replace(/\.json$/, '') || !/^[a-z0-9]{2,40}$/.test(a.slug)) { console.error(`${where}: slug must be the file name (a-z, 0-9)`); process.exit(2); }
-      if (!unitCourse) { console.error(`${where}: course ${a.course} is not a unit course`); process.exit(2); }
+      if (!code || !completions[code]) { console.error(`${where}: course ${a.course} is neither a unit course nor a single-page course with a completion code`); process.exit(2); }
       if (textbooks[a.slug] || assessments[a.slug]) { console.error(`${where}: slug ${a.slug} is already a test`); process.exit(2); }
-      if (Object.values(assessments).some((x) => x.code === unitCourse[1].code && x.kind === kind)) { console.error(`${where}: ${a.course} already has a ${kind}; a course has one`); process.exit(2); }
+      if (Object.values(assessments).some((x) => x.code === code && x.kind === kind)) { console.error(`${where}: ${a.course} already has a ${kind}; a course has one`); process.exit(2); }
       if (!('requiredFrom' in a) || a.requiredFrom !== null) { console.error(`${where}: requiredFrom must be null (not a requirement yet)`); process.exit(2); }
       if (!/^[A-Za-z0-9_]+$/.test(a.page || '') || !a.title?.en || !a.title?.es) { console.error(`${where}: needs a page name and an English and Spanish title`); process.exit(2); }
-      const entry = { code: unitCourse[1].code, course: unitCourse[0], page: a.page, title: a.title, kind, requiredFrom: null };
+      const entry = { code, course: unitCourse ? unitCourse[0] : a.course, page: a.page, title: a.title, kind, requiredFrom: null };
       if (kind === 'final') {
         if (a.keys !== 'private') { console.error(`${where}: a final's keys are private: say keys: "private"`); process.exit(2); }
         for (const [part, list] of [['fill', a.fill], ['sa', a.sa]]) {
