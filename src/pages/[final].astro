@@ -1,0 +1,73 @@
+---
+/* A master's final synthesis exam, on a page of its own: CTSOTSFinal.html
+ * (Dr. Cook, 2 Nov 2026). Fill-ins drawn from both parts of the course's five
+ * readings, and essays that connect the whole course. Graded by the server
+ * alone, in any build mode: fill-ins exactly or by the AI, essays by the AI
+ * against private rubrics (worker/grading/attempts.js, scope fn:<slug>). The
+ * page carries the prompts only (src/content/finals/<slug>.json); answers,
+ * model answers and rubrics are in the private assessment-keys checkout.
+ * The pledge and the note for AI assistants come with the layout
+ * (cts-integrity.js, mounted on #tb-questions). The page's script is
+ * public/assets/js/cts-final.js. Not a requirement of any track yet. */
+import { getCollection } from 'astro:content';
+import Textbook from '../layouts/Textbook.astro';
+import catalog from '../../worker/catalog.json';
+
+export async function getStaticPaths() {
+  const finals = await getCollection('finals');
+  const courses = await getCollection('courses');
+  const units = await getCollection('units');
+  const card = new Map(courses.map((c) => [c.id, c.data]));
+  const slugOf = new Map(units.map((u) => [u.data.pagePrefix, u.data.course]));
+  return finals.map((f) => {
+    const course = card.get(f.data.course);
+    if (!course) throw new Error(`final ${f.data.slug} belongs to course "${f.data.course}", which has no catalog card`);
+    return { params: { final: f.data.page }, props: { final: f.data, course, accent: slugOf.get(f.data.course) ?? null } };
+  });
+}
+const { final, course, accent } = Astro.props;
+const entry = (catalog as any).assessments?.[final.slug];
+if (!entry || entry.kind !== 'final') throw new Error(`worker/catalog.json does not carry the final ${final.slug}: run node tools/gen-worker-catalog.mjs`);
+const masters = final.page.replace(/Final$/, 'Masters');
+const scope = `fn:${final.slug}`;
+/* Wording only: never an answer, a model answer or a rubric (tools/verify-no-keys.mjs). */
+const data = JSON.stringify({
+  slug: final.slug, scope, grading: 'live', title: final.title, pass: final.pass, maxChars: final.maxChars,
+  fill: final.fill.map((q, i) => ({ qid: `${scope}/fill/${i}`, prompt: q.prompt, ...(q.reading ? { reading: q.reading } : {}) })),
+  sa: final.sa.map((q, i) => ({ qid: `${scope}/sa/${i}`, prompt: q.prompt })),
+}).replace(/</g, '\\u003c');
+const book = { slug: final.slug, page: final.page, course: final.course, title: { ...final.title, fr: final.title.en }, edition: 'final' };
+const nf = final.fill.length, ns = final.sa.length;
+---
+<Textbook kind="final" book={book} course={course} accent={accent} sync={true} scripts={['/assets/js/cts-final.js']}
+  back={{ href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }}>
+  <section class="card tb-about" data-cts-chrome>
+    <h2><span class="lang-en">Final synthesis exam</span><span class="lang-es">Examen final de síntesis</span><span class="lang-fr">Examen final de synthèse</span></h2>
+    <p>
+      <span class="lang-en">{nf} fill-in-the-blank questions from both parts of the five readings, and {ns} written questions that connect the whole course. You need {final.pass.fill} of {nf} fill-ins and {final.pass.sa} of {ns} written answers that meet the standard. Each written answer may be up to {final.maxChars.toLocaleString('en-US')} characters (about {Math.round(final.maxChars / 6 / 10) * 10} words). Answers are graded by the seminary's server; a written answer that meets the standard is kept if you need to try again. If you fall short, review the course and try again after a short wait.</span>
+      <span class="lang-es">{nf} preguntas para completar sobre ambas partes de las cinco lecturas, y {ns} preguntas escritas que relacionan todo el curso. Necesita {final.pass.fill} de {nf} respuestas para completar y {final.pass.sa} de {ns} respuestas escritas que cumplan el nivel. Cada respuesta escrita puede tener hasta {final.maxChars.toLocaleString('es-MX')} caracteres (unas {Math.round(final.maxChars / 6 / 10) * 10} palabras). Las respuestas las califica el servidor del seminario; una respuesta escrita que cumple el nivel se conserva si necesita intentarlo de nuevo. Si no alcanza la nota, repase el curso e inténtelo de nuevo tras una breve espera.</span>
+      <span class="lang-fr">{nf} questions à compléter sur les deux parties des cinq lectures, et {ns} questions écrites qui relient tout le cours. Il faut {final.pass.fill} bonnes réponses sur {nf} et {final.pass.sa} réponses écrites sur {ns} qui atteignent le niveau requis. Chaque réponse écrite peut compter jusqu’à {final.maxChars} caractères. Les réponses sont corrigées par le serveur du séminaire ; une réponse écrite qui atteint le niveau est conservée si vous devez réessayer. Les questions sont en anglais et en espagnol.</span>
+    </p>
+    <p>
+      <span class="lang-en">This exam is being introduced for the M.Div. and Th.M. tracks and is not yet required: nothing in any student's course, certificate or degree depends on it. A pass is kept in your record.</span>
+      <span class="lang-es">Este examen se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatorio: nada del curso, certificado o título de ningún estudiante depende de él. La aprobación queda en su registro.</span>
+      <span class="lang-fr">Cet examen est en cours d’introduction pour les parcours M.Div. et Th.M. et n’est pas encore obligatoire : rien dans le cours, le certificat ou le diplôme d’un étudiant n’en dépend. Une réussite est conservée dans votre dossier.</span>
+    </p>
+    <p class="small muted">
+      <span class="lang-en">Answer in your own words. Short answers of one sentence are returned for expansion; write a full paragraph or more.</span>
+      <span class="lang-es">Responda con sus propias palabras. Las respuestas de una sola frase se devuelven para que las amplíe; escriba un párrafo completo o más.</span>
+      <span class="lang-fr">Répondez avec vos propres mots. Une réponse d’une seule phrase est renvoyée pour être développée ; écrivez au moins un paragraphe complet.</span>
+    </p>
+  </section>
+
+  <section class="card tb-test" id="tb-test">
+    <div id="tb-status" role="status"></div>
+    <div id="tb-questions"></div>
+    <div class="actions" data-cts-chrome>
+      <button type="button" class="btn solid" id="fn-submit"><span class="lang-en">Submit the final exam</span><span class="lang-es">Enviar el examen final</span><span class="lang-fr">Envoyer l’examen final</span></button>
+    </div>
+    <div id="tb-result" role="status" style="margin-top:15px;"></div>
+  </section>
+
+  <script is:inline set:html={`window.CTS_FINAL = ${data};`} />
+</Textbook>

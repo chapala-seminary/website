@@ -27,6 +27,7 @@ const fakeSpeech = () => {
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH });
 try {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.addInitScript(fakeSpeech);
   const page = await ctx.newPage();
   const errors = [];
@@ -93,6 +94,7 @@ try {
 
   // no voice for the page language: said so, nothing read
   const sw = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await sw.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await sw.addInitScript(fakeSpeech);
   const sp = await sw.newPage();
   await sp.goto(BASE + '/sw/CTSUnit1.html');
@@ -202,6 +204,48 @@ try {
   await page.waitForFunction(() => document.activeElement && document.activeElement.getAttribute('data-act') === 'play', null, { timeout: 3000 });
   ok(true, 'keyboard: focus returns to Listen after Stop');
   ok(await page.locator('#cts-listen .cts-listen-msg[aria-live="polite"]').count() === 1, 'messages are announced politely');
+
+  // The three one-page courses (Gabe's report, 1 Nov): a button in every unit; each reads that unit's
+  // teaching only -- never its quiz, fill-ins or written-answer prompts -- in the language on screen.
+  for (const [path, units] of [['/CTSCounseling.html', 12], ['/CTS_Narrative_Preaching.html', 8], ['/CTS_WiseSpeak_Preaching.html', 10]]) {
+    await page.goto(BASE + path + '?cts_lang=en');
+    await page.locator('#cts-listen').waitFor({ state: 'attached', timeout: 10000 });
+    ok(await page.locator('.teaching-block .cts-listen-unit').count() >= units, `${path}: a Listen button in every unit`);
+    const target = page.locator('.teaching-block').nth(2);
+    await page.evaluate(() => { window.__said.length = 0; window.__delay = 1; });
+    await target.locator('.cts-listen-unit').evaluate((b) => b.click());   // under the foundation-lock overlay on locked courses
+    await page.waitForFunction(() => window.__said.length > 5 && !document.querySelector('#cts-listen [data-act="play"]').hidden, null, { timeout: 60000 });
+    const r = await page.evaluate(() => {
+      const unit = document.querySelectorAll('.teaching-block')[2];
+      const said = window.__said.map((s) => s.text).join(' ');
+      const quiz = [...document.querySelectorAll('.quiz-section, .cts-fill, .essay-section')].map((q) => q.innerText).join(' ');
+      const quizLines = quiz.split(/\n+/).map((l) => l.trim()).filter((l) => l.length > 40);
+      const other = document.querySelectorAll('.teaching-block')[3].innerText.split(/\n+/).map((l) => l.trim()).filter((l) => l.length > 60);
+      return { inUnit: unit.contains(document.getElementById('cts-listen')), langs: [...new Set(window.__said.map((s) => s.lang.slice(0, 2)))],
+        quiz: quizLines.some((l) => said.includes(l.slice(0, 40))), other: other.some((l) => said.includes(l.slice(0, 50))), n: window.__said.length };
+    });
+    ok(r.inUnit, `${path}: the control moves to the unit whose button was pressed`);
+    ok(r.langs.join() === 'en', `${path}: read in English (${r.langs})`);
+    ok(!r.quiz, `${path}: no quiz, fill-in or written-answer text is read`);
+    ok(!r.other, `${path}: the next unit is not read`);
+    // in Spanish, the same unit is read in Spanish
+    await page.goto(BASE + path + '?cts_lang=es');
+    await page.locator('#cts-listen').waitFor({ state: 'attached', timeout: 10000 });
+    await page.evaluate(() => { window.__said.length = 0; window.__delay = 1; });
+    await page.locator('.teaching-block').nth(2).locator('.cts-listen-unit').evaluate((b) => b.click());
+    await page.waitForFunction(() => window.__said.length > 5 && !document.querySelector('#cts-listen [data-act="play"]').hidden, null, { timeout: 60000 });
+    // Spanish, except paragraphs that have no Spanish yet and show in English on the Spanish page (data-cts-fallback):
+    // those are read with the English voice, as they are shown.
+    const es = await page.evaluate(() => {
+      const squeeze = (t) => t.replace(/\s+/g, '');
+      const fb = squeeze([...document.querySelectorAll('[data-cts-fallback]')].map((e) => e.textContent).join(' '));
+      const said = window.__said;
+      return { spanish: said.filter((x) => x.lang.startsWith('es')).length, all: said.length,
+        strayEnglish: said.filter((x) => !x.lang.startsWith('es') && !fb.includes(squeeze(x.text).slice(0, 40))).length };
+    });
+    ok(es.spanish > 0 && es.strayEnglish === 0, `${path}: read in Spanish when Spanish is on (${es.spanish}/${es.all}; English only where no Spanish exists yet)`);
+    ok((await page.locator('#cts-listen [data-act="play"]').innerText()).includes('Escuchar esta unidad'), `${path}: Spanish label`);
+  }
 
   assert.deepEqual(errors, [], 'no script errors'); checks++;
 } finally { await browser.close(); }

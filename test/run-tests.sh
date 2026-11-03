@@ -24,9 +24,12 @@ node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
 node --test test/assessment-keys.test.mjs
+# The final synthesis exams: public prompts only, private keys joined, no key on a page (2 Nov 2026).
+node --test test/finals-keys.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/catalog-landing.test.mjs
+node --test test/donation.test.mjs
 node test/review-assets.test.mjs
 node test/single-completion.test.mjs
 # The grading rules with no server: the fill-in text rules against the browser
@@ -204,6 +207,7 @@ node tools/wr-readers.mjs
 node tools/reading-rooms.mjs --check
 # The optional Greek/Hebrew labs must not change the five reading or honors requirements.
 node test/la-language-labs.test.mjs
+node test/exam-integrity.test.mjs
 
 # The question bank: 451 units, 34,778 comparisons of stems, options and answer
 # keys, in a form that does not care what file format the content lives in.
@@ -300,6 +304,10 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/outr
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/confirm-invite.test.mjs
 # Coordinator-led paper study: groups, enrollment without email, paper sheets (worker/coord.js).
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/coord.test.mjs
+# The final synthesis exam (fn:) and the ministry paper (/api/assignment), Dr. Cook, 2 Nov 2026:
+# graded by the server alone, credited once, and required of no one. After the grading and
+# calibration suites, so its AI-graded essays are not in their samples.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/assessments.api.mjs
 
 # Returning students from the old site (Dr. Cook's review, 29 Sept 2026):
 # three browsers as the old site left them, each opening the new site -- the
