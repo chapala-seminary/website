@@ -27,6 +27,7 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
 import { activationEnvironment, activatedTests } from './test-activation.js';
 import { testContext } from './test-context.js';
 import { gradingRoute } from './grading/routes.js';
+import { assignmentRoute } from './assignments.js';
 import { isLive, legacySyncOpen, legacyCohortMember } from './grading/mode.js';
 import { completeCourseIfDone, completeSingleIfDone, loadStudent } from './grading/attempts.js';
 import { SINGLES } from './grading/singles.js';
@@ -173,6 +174,8 @@ function textbookRows(id, raw) {
     if (!t || typeof t !== 'object') continue;
     const slug = String(t.slug || t.textbook || '').toLowerCase();
     if (!/^[a-z]{2,40}$/.test(slug)) continue;
+    // A final or a ministry paper is recorded only by the server (worker/assignments.js, grading/attempts.js).
+    if (catalog.assessments?.[slug]) continue;
     const at = typeof t.passedAt === 'string' && !Number.isNaN(Date.parse(t.passedAt)) ? new Date(t.passedAt).toISOString() : now();
     const prev = seen.get(slug);
     if (!prev || at < prev) seen.set(slug, at);
@@ -752,6 +755,8 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM appeals WHERE student_id = ? OR grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g, g),
       env.DB.prepare('DELETE FROM answer_grades WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM attempts WHERE student_id = ?').bind(g),
+      // Ministry papers (migrations/0019_assignments.sql): the student's own text and its grades.
+      env.DB.prepare('DELETE FROM assignments WHERE student_id = ?').bind(g),
     ]),
   ]);
   return json({ deleted: true });
@@ -1010,6 +1015,12 @@ export async function handle(request, env, ctx) {
     if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'
         || path === '/api/appeal' || path === '/api/shadow') {
       const res = await gradingRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
+      if (res) return res;
+      return fail(405, 'method not allowed');
+    }
+    // Ministry papers: submit, and the result (worker/assignments.js).
+    if (path === '/api/assignment') {
+      const res = await assignmentRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
       if (res) return res;
       return fail(405, 'method not allowed');
     }

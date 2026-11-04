@@ -63,6 +63,7 @@ const RUN = Date.now().toString(36);
 const sent = [];
 async function device({ student, code } = {}) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.route('**/*', (r) => (new URL(r.request().url()).origin === ORIGIN ? r.fallback() : r.abort()));
   ctx.on('request', (req) => {
     const u = new URL(req.url());

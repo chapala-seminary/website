@@ -9,6 +9,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 let checks = 0;
 try {
   const page = await browser.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await page.route('http://grading.test/**', route => route.fulfill({ contentType: 'text/html', body: '<html lang="en"><body data-lang="en"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn">Submit</button><div id="examResult"></div></body></html>' }));
   await page.goto('http://grading.test/');
   await page.evaluate(() => {
