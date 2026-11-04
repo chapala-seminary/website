@@ -39,6 +39,8 @@ export async function getStaticPaths() {
     const first = head.find((x) => ['title', 'heading'].includes(x.type) && x.es && x.es.length < 140);
     return first ? { en: clean(first.en), es: clean(first.es) } : {};
   }
+  // Unit titles are shown as text: markup such as <em> in a title must not appear literally.
+  const plain = (t: string) => t.replace(/<[^>]+>/g, '').trim();
   const courses = (await getCollection('courses')).map((e) => e.data);
   const units = await getCollection('units');
   const textbooks = await getCollection('textbooks');
@@ -63,8 +65,8 @@ export async function getStaticPaths() {
       return {
         n: u.data.unit,
         href: `${u.data.pagePrefix}Unit${u.data.unit}.html`,
-        en: titles?.en?.[i] || fromLesson.en || fallback,
-        es: titles?.es?.[i] && titles.es[i] !== titles.en?.[i] ? titles.es[i] : (fromLesson.es || fallback),
+        en: plain(titles?.en?.[i] || fromLesson.en || fallback),
+        es: plain(titles?.es?.[i] && titles.es[i] !== titles.en?.[i] ? titles.es[i] : (fromLesson.es || fallback)),
       };
     });
     if (!unitList.length && /^ethics_unit/i.test(course.entry)) {
