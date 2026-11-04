@@ -10,27 +10,26 @@ import {
 } from '../lib/seo';
 import { frTextbookTitle, frReadingsTitle } from '../lib/french-titles';
 
-/* The unit title in each language, read from the lesson's first heading line ("Course — Unit N: Title"). */
-function lessonTitle(id: string, unit: number): { en?: string; es?: string } {
-  const file = `src/content/lessons/${id.replace(/\.json$/, '')}.json`;
-  if (!fs.existsSync(file)) return {};
-  let blocks: any[] = [];
-  try { blocks = JSON.parse(fs.readFileSync(file, 'utf8')).blocks || []; } catch { return {}; }
-  const strip = (t: string) => t.replace(/<[^>]+>/g, '').replace(/^\W*?(?=\S)/u, '').trim();
-  for (const b of blocks.slice(0, 6)) {
-    const en = typeof b.text?.en === 'string' ? strip(b.text.en) : '';
-    const es = typeof b.text?.es === 'string' ? strip(b.text.es) : '';
-    const me = new RegExp(`(?:Unit)\\s*${unit}\\s*[—–:-]\\s*(.+)$`, 'i').exec(en);
-    const ms = new RegExp(`(?:Unidad)\\s*${unit}\\s*[—–:-]\\s*(.+)$`, 'i').exec(es);
-    if (me || ms) {
-      const clean = (x?: string) => x?.replace(/\s*\((?:Bilingual|Bilingüe)\)\s*$/i, '').trim();
-      return { en: clean(me?.[1]), es: clean(ms?.[1]) };
-    }
-  }
-  return {};
-}
-
 export async function getStaticPaths() {
+  /* The unit title in each language, read from the lesson's first heading line ("Course — Unit N: Title"). */
+  function lessonTitle(id: string, unit: number): { en?: string; es?: string } {
+    const file = `src/content/lessons/${id.replace(/\.json$/, '')}.json`;
+    if (!fs.existsSync(file)) return {};
+    let blocks: any[] = [];
+    try { blocks = JSON.parse(fs.readFileSync(file, 'utf8')).blocks || []; } catch { return {}; }
+    const strip = (t: string) => t.replace(/<[^>]+>/g, '').replace(/^\W*?(?=\S)/u, '').trim();
+    for (const b of blocks.slice(0, 6)) {
+      const en = typeof b.text?.en === 'string' ? strip(b.text.en) : '';
+      const es = typeof b.text?.es === 'string' ? strip(b.text.es) : '';
+      const me = new RegExp(`(?:Unit)\\s*${unit}\\s*[—–:-]\\s*(.+)$`, 'i').exec(en);
+      const ms = new RegExp(`(?:Unidad)\\s*${unit}\\s*[—–:-]\\s*(.+)$`, 'i').exec(es);
+      if (me || ms) {
+        const clean = (x?: string) => x?.replace(/\s*\((?:Bilingual|Bilingüe)\)\s*$/i, '').trim();
+        return { en: clean(me?.[1]), es: clean(ms?.[1]) };
+      }
+    }
+    return {};
+  }
   const courses = (await getCollection('courses')).map((e) => e.data);
   const units = await getCollection('units');
   const textbooks = await getCollection('textbooks');
