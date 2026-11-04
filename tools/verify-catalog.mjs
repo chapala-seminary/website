@@ -104,8 +104,9 @@ const COUNT = [
   ["Forty-four courses", "Sixty-five courses"],  // 45 on 3 Oct, 65 on 24 Oct 2026
   ["Cuarenta y cuatro cursos", "Sesenta y cinco cursos"],
   /* 13 Oct 2026: the site is in three languages, so the lead no longer says "bilingual". */
-  ["each complete and bilingual.", "each complete, in English, Spanish, and French."],
-  ["cada uno completo y bilingüe.", "cada uno completo, en inglés, español y francés."],
+  /* 3 Nov 2026: English and Spanish, with French and Swahili translations still being reviewed. */
+  ["each complete and bilingual.", "each complete, in English and Spanish, with French and Swahili translations being reviewed."],
+  ["cada uno completo y bilingüe.", "cada uno completo, en inglés y español, con traducciones al francés y al suajili en revisión."],
 ];
 
 const [origFile = REF, builtFile = 'dist/index.html'] = process.argv.slice(2);
