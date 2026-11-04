@@ -77,11 +77,19 @@ test('a failed second chunk stops submission, preserves the first five, and retr
 
 test('HTTP 200 without every question receipt is not a successful grading submission', async () => {
   const x = scenario({ omitAt: 1 });
+  const answers = x.state.saAnswers.slice();
   x.run(); await x.wait();
   assert.equal(x.log.submit, 0);
   assert.equal(x.log.errors.length, 1);
   assert.equal(Object.keys(x.state.live.saRes).length, 0);
+  assert.deepEqual(x.state.saAnswers, answers);
   assert.match(x.log.errors[0].data.error, /incomplete grading acknowledgement/);
+
+  // A later retry may submit only after the complete five-answer receipt arrives.
+  x.run(); await x.wait();
+  assert.deepEqual(x.log.grades.map((g) => g.length), [5, 5, 5]);
+  assert.equal(x.log.submit, 1);
+  assert.equal(Object.keys(x.state.live.saRes).length, 10);
 });
 
 test('interrupted Promise never permits final submit or erases answers', async () => {
