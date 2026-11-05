@@ -25,6 +25,8 @@ node --test test/track-sync-ack.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
+# Synthetic end-to-end submit choreography: receipts, chunked grading and safe retry.
+node --test test/cts-written-submission.test.mjs
 node --test test/assessment-keys.test.mjs
 # The final synthesis exams: public prompts only, private keys joined, no key on a page (2 Nov 2026).
 node --test test/finals-keys.test.mjs
