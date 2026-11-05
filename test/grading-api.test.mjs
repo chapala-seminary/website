@@ -649,6 +649,91 @@ for (const lang of ['es', 'fr']) {
   ok((await post('/api/shadow', { code, scope: SCOPE(1), answers: 'no' })).status === 400, 'a bad shadow body is refused');
 }
 
+
+/* ---- exact reported Spanish master's exams: real Worker and local D1 -------
+ * The two specific student reports were Evangelism lesson 6 and Pastoral
+ * Ministries lesson 1. The generic John test does not prove these keys,
+ * scopes, receipts and course-progress paths work. Never use real student
+ * credentials, responses, records or live production for these tests.
+ *
+ * Simulate #200's two five-answer batches against beta's #199 server-side
+ * parallel grading; only final-submit after every individual receipt.
+ */
+for (const [prefix, slug, unit] of [
+  ['CTSEvangelism', 'evangelism', 6],
+  ['CTSPM', 'pm', 1]
+]) {
+  const scope = 'u:' + prefix + '/' + unit;
+  const label = slug + ' lesson ' + unit + ' / Spanish M.Div.';
+  const source = unitFile(prefix, unit); // merged by tools/private-units.mjs in CI
+  const code = await student('mdiv');
+  const opened = await start(code, scope, 'es');
+  eq(opened.status, 200, label + ': opens without verification error');
+  const a = opened.body;
+  if (opened.status !== 200 || !a?.attemptId || !a.items?.mc) continue;
+  eq([a.track, a.lang, a.items.mc.length, a.items.fill.length, a.items.sa.length],
+    ['mdiv', 'es', 20, 10, 10],
+    label + ': all forty questions are present at master-level rigor');
+  for (const mc of a.items.mc) {
+    const choice = source.mc[idx(mc.qid)]?.answer;
+    const r = await post('/api/mc', {code, attemptId:a.attemptId, qid:mc.qid, choice});
+    ok(r.status === 200, label + ': multiple-choice answer receives durable acknowledgement', {qid:mc.qid,status:r.status});
+  }
+  const writtenChunks = [
+    a.items.fill.map(qid=>({
+      qid,
+      answer: source.fill[idx(qid)]?.answer?.es || source.fill[idx(qid)]?.answer?.en
+    })),
+    a.items.sa.map(qid=>({qid,answer:essay('met')}))
+  ];
+  let acknowledged = true;
+  for (const part of writtenChunks) {
+    // Never continue to the next written part after any lost/partial receipt.
+    if (!acknowledged) break;
+    for (let k = 0; k < part.length; k += 5) {
+      const chunk = part.slice(k,k+5);
+      const response = await post('/api/grade', {code,attemptId:a.attemptId,items:chunk});
+      const seen = new Set(Array.isArray(response.body?.items)
+        ? response.body.items.filter(x=>x?.qid && typeof x.verdict==='string').map(x=>x.qid)
+        : []);
+      const accepted = response.status===200 && chunk.every(x=>seen.has(x.qid));
+      ok(accepted,label+': every written answer individually acknowledged before submit',{
+        part:chunk.map(x=>x.qid),got:[...seen],status:response.status
+      });
+      acknowledged = acknowledged && accepted;
+      if(!accepted)break;
+    }
+  }
+  if(!acknowledged)continue; // Do not mark an incomplete attempt submitted.
+  const recovered = await start(code,scope,'es');
+  eq(recovered.body?.attemptId,a.attemptId,
+    label+': reloading the sitting resumes same attempt without losing responses');
+  const saved = q1("SELECT kind, COUNT(*) AS n FROM answer_grades WHERE attempt_id = '"
+    + a.attemptId + "' GROUP BY kind");
+  eq(saved.find(x=>x.kind==='fill')?.n,10,label+': ten fill-in grades durably saved');
+  eq(saved.find(x=>x.kind==='sa')?.n,10,label+': ten short-answer grades durably saved');
+  const result = await submit(code,a);
+  ok(result.status===200 && ['passed','pending'].includes(result.body?.status),
+    label+': final attempt receives clear passed/pending receipt',result);
+  if(result.body?.status==='pending') {
+    await cron();
+    const settled=await waitFor(async()=>{
+      const row=q1("SELECT status FROM attempts WHERE id = '"+a.attemptId+"'")[0];
+      return row?.status==='passed'||row?.status==='failed'?row:null;
+    },label+' to settle after queue');
+    eq(settled?.status,'passed',label+': written grades settle and meet the existing rubric');
+  } else {
+    eq(result.body?.status,'passed',label+': successfully graded responses pass at M.Div. rigor');
+  }
+  const record = q1("SELECT status FROM attempts WHERE id = '"+a.attemptId+"'")[0];
+  eq(record?.status,'passed',label+': server preserves passed attempt after reload');
+  eq(q1("SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '"+code+
+     "' AND course = '"+slug+"' AND unit = "+unit)[0]?.n,1,
+     label+': durable unit credit appears once in local D1');
+  const again=await submit(code,a);
+  eq(again.body?.status,'passed',label+': duplicate final-submit keeps passed status');
+}
+
 // These students are not people to write to: leave the daily notes (a capped run) to the suites about them.
 db("UPDATE students SET contact_opt_out_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') WHERE email LIKE 'grading-%@example.test'");
 
