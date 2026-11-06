@@ -71,8 +71,13 @@ export const lockKind = (mcOK) => (mcOK ? 'sa' : 'full');
    (Contract deviation, recorded in docs/ai-grading.md section 5.) */
 const INJECTION = [
   // English
-  /\b(ignore|disregard|forget|override|bypass)\b[^.!?\n]{0,40}\b(instructions?|rules?|rubric|prompt|directions?|guidelines|criteria|above|previous)\b/i,
-  /\b(ignore|disregard|forget)\s+(all|any|every|previous|prior|your|these|those|the above|the previous|everything above)\b/i,
+  // "ignore"/"forget" only with words aimed at the grader. Common words such as
+  // "rules", "previous", "every" or "your" held honest answers ("Pharaoh chose to
+  // ignore every warning", "do not forget these promises") for a faculty review
+  // that was not happening (audit, 6 Nov 2026).
+  /\b(ignore|disregard|forget|override|bypass)\b[^.!?\n]{0,40}\b(instructions?|rubric|prompt|grading|marking|scoring|the grader|the ai|the model|everything above)\b/i,
+  /\b(ignore|disregard|forget)\s+((all|any|the|your)\s+){0,2}(previous|prior|earlier|above)\s+(instructions?|rules|directions|prompts?|messages?|guidelines|text|criteria)\b/i,
+  /\b(ignore|disregard|forget)\s+the\s+above\s*(and|[.,;:]|$)/i,
   /\bmark\s+(this|it|me|my answer|that)\b[^.!?\n]{0,20}\b(as\s+)?(correct|right|met|passed?|full)\b/i,
   /\b(grade|score|rate)\s+(this|it|me)\b[^.!?\n]{0,20}\b(as\s+)?(met|correct|right|pass|full|100)/i,
   /\bsystem\s+(prompt|message|instructions?)\b/i,
@@ -81,12 +86,12 @@ const INJECTION = [
   /\b(new|updated)\s+instructions?\b/i,
   /\boutput\s+(only\s+)?(met|json|the following)\b/i,
   // Spanish
-  /\b(ignora|ignore|ignorar|olvida|omite)\b[^.!?\n]{0,40}\b(instrucciones|reglas|r[uú]brica|indicaciones|anteriores|todo lo anterior)\b/i,
+  /\b(ignora|ignore|ignorar|olvida|omite)\b[^.!?\n]{0,40}\b(instrucciones|r[uú]brica|indicaciones anteriores|reglas anteriores|todo lo anterior|texto anterior|el evaluador|la ia|criterios de evaluaci[oó]n)\b/i,
   /\bmarca(r|lo|la)?\s+(esto|esta|este|mi respuesta|la respuesta)?\s*como\s+(correct[ao]|bien|aprobad[ao])\b/i,
   /\b(prompt|mensaje|instrucciones)\s+del\s+sistema\b/i,
   /\beres\s+(un|una)\s+(ia|inteligencia artificial|calificador|evaluador)\b/i,
   // French
-  /\b(ignore|ignorez|oublie|oubliez|n[ée]glige)\b[^.!?\n]{0,40}\b(instructions|consignes|r[èe]gles|grille|pr[ée]c[ée]dent)/i,
+  /\b(ignore|ignorez|oublie|oubliez|n[ée]glige)\b[^.!?\n]{0,40}\b(instructions|consignes|grille|le correcteur|l'ia|r[èe]gles pr[ée]c[ée]dentes|texte pr[ée]c[ée]dent)/i,
   /\bmarque(z)?\s+(ceci|cela|cette r[ée]ponse|ma r[ée]ponse)?\s*comme\s+(correct|juste|r[ée]ussi)/i,
   /\b(prompt|invite|message|instructions)\s+syst[èe]me\b/i,
   /\b(tu es|vous [êe]tes)\s+(un|une)\s+(ia|intelligence artificielle|correcteur|[ée]valuateur)\b/i,
