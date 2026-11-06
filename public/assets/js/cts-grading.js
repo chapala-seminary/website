@@ -348,7 +348,10 @@
     // In that case do not suggest enrolling a second time: restore the record.
     var hasLocalIdentity = false;
     try { hasLocalIdentity = !!JSON.parse(lsGet("cts_student") || "null")?.name; } catch (e) {}
-    var restoreFirst = hasLocalIdentity && !code();
+    // Only show restore-first guidance for a known disconnected identity; a
+    // fresh registration may still be obtaining its code asynchronously.
+    var restoreFirst = hasLocalIdentity && !code() &&
+      (lsGet("cts_sync_off") === "1" || !!lsGet("cts_reg_existing"));
     var message = restoreFirst ? bi({
       en: "Your name is saved on this device, but your student record is not connected. Restore your existing record with your student code; do not register again.",
       es: "Su nombre está guardado en este dispositivo, pero su expediente estudiantil no está conectado. Recupere su expediente con su código de estudiante; no se registre de nuevo.",
