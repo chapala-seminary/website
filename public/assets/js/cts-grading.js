@@ -344,9 +344,20 @@
      not, point at the home page. Both point at the restore page, where a
      student with a code gets their record back. */
   function registerHtml(bi, onTestPage) {
+    // A local greeting can survive after the server student code is lost.
+    // In that case do not suggest enrolling a second time: restore the record.
+    var hasLocalIdentity = false;
+    try { hasLocalIdentity = !!JSON.parse(lsGet("cts_student") || "null")?.name; } catch (e) {}
+    var restoreFirst = hasLocalIdentity && !code();
+    var message = restoreFirst ? bi({
+      en: "Your name is saved on this device, but your student record is not connected. Restore your existing record with your student code; do not register again.",
+      es: "Su nombre está guardado en este dispositivo, pero su expediente estudiantil no está conectado. Recupere su expediente con su código de estudiante; no se registre de nuevo.",
+      fr: "Votre nom est enregistré sur cet appareil, mais votre dossier étudiant n'est pas connecté. Restaurez votre dossier avec votre code étudiant ; ne vous inscrivez pas de nouveau.",
+      sw: "Jina lako limehifadhiwa kwenye kifaa hiki, lakini rekodi yako ya mwanafunzi haijaunganishwa. Rejesha rekodi yako kwa msimbo wako wa mwanafunzi; usijisajili tena."
+    }) : bi(onTestPage ? S.registerPage : S.register);
     return '<div class="cts-grade-register" role="status" style="margin:12px 0;padding:12px 16px;border-left:4px solid #b08324;background:#fbf6ea;color:#2a241d">' +
-      "<p>" + bi(onTestPage ? S.registerPage : S.register) + "</p><p>" +
-      (onTestPage ? '<a class="btn solid" href="/index.html#register">' + bi(S.registerHome) + "</a> " : "") +
+      "<p>" + message + "</p><p>" +
+      (onTestPage && !restoreFirst ? '<a class="btn solid" href="/index.html#register">' + bi(S.registerHome) + "</a> " : "") +
       '<a class="btn" href="/cts-backup.html">' + bi(S.registerRestore) + "</a></p></div>";
   }
 
