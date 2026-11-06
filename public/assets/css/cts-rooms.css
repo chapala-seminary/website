@@ -57,6 +57,7 @@ body.lang-both.cts-room :is(.counter,.cts-seg button.active,.cts-seg button[aria
 .cts-room .grid{display:block}
 /* The count of chosen readings sits just under the sticky bar while the
    student scrolls the five; --cts-nav-h is set by cts-room.js. */
+@media (max-width:700px){.cts-room .counter{top:8px!important}} /* the bar is not pinned on phones (cts.css) */
 .cts-room .counter{position:sticky;top:calc(var(--cts-nav-h,60px) + 8px);z-index:20;
   width:max-content;max-width:100%;margin:var(--s3) auto var(--s2);
   background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;
