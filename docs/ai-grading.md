@@ -330,8 +330,14 @@ Notes on the routes (as built):
 
 - **`needs`** in the attempt reply is the number that must be right in each
   part (`{mc: 18, fill: 9, sa: 9}`, 0 for a part the track does not count),
-  and **`totals`** the number asked. `banked.fill` is always `[]`: only
-  multiple choice and short answers bank. `status` is also in the reply
+  and **`totals`** the number asked. On a unit (`u:`, `sp:`), `banked.fill` lists the
+  fill-ins answered right in earlier failed attempts since the last pass;
+  they count toward the retake and come back in `answered` as `right`
+  with `banked: true` and the student's own text (since 7 Nov 2026; before
+  then only multiple choice and short answers banked, and a student who
+  resubmitted only his short answers failed for blank fill-ins). Tests
+  (`tb:`, `rd:`, `fn:`) draw new questions each attempt, so their
+  `banked.fill` is always `[]`. `status` is also in the reply
   (`open`, or `pending` when the student comes back to an attempt that is
   waiting). `answered[qid]` is described in section 12.
 - **Drawn prompts.** A textbook or reading attempt (`tb:` / `rd:`) includes

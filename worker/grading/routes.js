@@ -156,9 +156,10 @@ async function gradeAnswers(request, env, h) {
   const tooLong = asked.filter((a) => a.kind === 'sa' && a.answer.length > saMax).map((a) => a.qid);
   if (tooLong.length) return h.json({ error: `an answer is longer than ${saMax} characters`, tooLong, max: saMax }, 422);
 
-  // What is already settled: a banked short answer, or an answer given earlier in this attempt.
+  // What is already settled: a banked short answer or fill-in, or an answer given earlier in this attempt.
   const done = new Map((rows.results ?? []).map((r) => [r.qid, r]));
-  const fresh = asked.filter((a) => !done.has(a.qid) && !(a.kind === 'sa' && banked.sa.includes(a.qid)));
+  const bankedFill = new Set((banked.fill || []).filter((q) => items.fill.includes(q)));
+  const fresh = asked.filter((a) => !done.has(a.qid) && !(a.kind === 'sa' && banked.sa.includes(a.qid)) && !(a.kind === 'fill' && bankedFill.has(a.qid)));
   // Validate the whole batch before grading any item. Students may expand and
   // resend in this same open sitting; no failed grade or lockout is written.
   const short = fresh.filter((a) => a.kind === 'sa' && a.answer.trim() && wordCount(a.answer) < MIN_SA_WORDS);
@@ -182,7 +183,7 @@ async function gradeAnswers(request, env, h) {
       if (byQid.has(a.qid)) return byQid.get(a.qid);
       const was = done.get(a.qid);
       if (was) return { qid: a.qid, gradeId: was.id, verdict: was.verdict, feedback: feedbackFor(was, disclosure), gradedBy: was.graded_by };
-      return { qid: a.qid, verdict: 'met', feedback: null, banked: true };
+      return { qid: a.qid, verdict: a.kind === 'fill' ? 'right' : 'met', feedback: null, banked: true };
     }),
   });
 }
