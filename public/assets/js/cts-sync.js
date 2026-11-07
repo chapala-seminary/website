@@ -466,6 +466,38 @@
     return (lang && set[lang]) || set.en;
   }
   function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || ''); }
+  /* Phones: the full box covered nearly half the screen on every page (audit,
+     6 Nov 2026; Wayne chose a small strip). On a narrow screen it starts as one
+     line; tapping the line opens the whole box, and × puts it away for this
+     visit, exactly as "Keep studying" does. Wider screens keep the full box. */
+  function compactOnPhone(note, code, label) {
+    if (!(window.matchMedia && window.matchMedia('(max-width: 700px)').matches)) return;
+    var parts = Array.prototype.slice.call(note.children);
+    var padding = note.style.padding;
+    var strip = document.createElement('div');
+    strip.style.cssText = 'display:flex;align-items:center;gap:6px';
+    var open = document.createElement('button');
+    open.type = 'button';
+    open.textContent = '✉ ' + words(label);
+    open.setAttribute('aria-expanded', 'false');
+    open.style.cssText = 'flex:1;text-align:left;border:0;background:none;padding:4px 2px;font:600 15px/1.3 Georgia,serif;color:#6d2233;cursor:pointer;min-height:36px';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = '×';
+    close.setAttribute('aria-label', words({ en: 'Close', es: 'Cerrar', fr: 'Fermer', sw: 'Funga' }));
+    close.style.cssText = 'border:0;background:none;font:24px/1 Georgia,serif;color:#6d2233;cursor:pointer;min-width:40px;min-height:36px';
+    parts.forEach(function (el) { el.style.display = 'none'; });
+    note.style.padding = '2px 8px';
+    note.style.bottom = '54px'; // above the "Change track" button pinned at the bottom left
+    open.addEventListener('click', function () {
+      parts.forEach(function (el) { el.style.display = ''; });
+      note.style.padding = padding;
+      strip.remove();
+    });
+    close.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
+    strip.appendChild(open); strip.appendChild(close);
+    note.insertBefore(strip, note.firstChild);
+  }
   function postJson(path, payload) {
     return fetch(API + path, {
       method: 'POST',
@@ -540,6 +572,7 @@
     });
     keep.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
     note.appendChild(p); note.appendChild(status); note.appendChild(input); note.appendChild(save); note.appendChild(keep);
+    compactOnPhone(note, code, { en: 'Add your email (optional)', es: 'Añada su correo (opcional)', fr: 'Ajoutez votre e-mail (facultatif)', sw: 'Ongeza barua pepe yako (si lazima)' });
     document.body.appendChild(note);
   }
   function buildEmailBanner(code) {
@@ -616,6 +649,7 @@
     note.appendChild(confirmBtn);
     note.appendChild(keep);
     note.appendChild(link);
+    compactOnPhone(note, code, { en: 'Confirm your email (tap to open)', es: 'Confirme su correo (toque para abrir)', fr: 'Confirmez votre e-mail (touchez pour ouvrir)', sw: 'Thibitisha barua pepe yako (gusa kufungua)' });
     document.body.appendChild(note);
     return note;
   }

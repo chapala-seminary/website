@@ -29,6 +29,10 @@ function rewriteLinks(root, file, lang, files) {
     for (const attr of ['href', 'src', 'action']) {
       const v = node.getAttribute(attr);
       if (!v || /^(?:[a-z]+:|\/\/|#)/i.test(v)) continue;
+      // A link written inside a page script's template text (`href="CTSJohnUnit${i}.html"`)
+      // is not a real link: rewriting it turned "${" into "$%7B" and broke every
+      // numbered unit button on the certificate and Ethics pages (audit, 6 Nov 2026).
+      if (v.includes('${')) continue;
       const url = new URL(v, `${SITE}/${file}`);
       if (url.origin !== SITE) continue;
       const page = url.pathname.slice(1);
