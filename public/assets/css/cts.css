@@ -104,8 +104,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:var(--s5) 0}
 /* Phones: with the unit pills, Previous/Next and the four language buttons the
    bar is about 290px tall on a phone, so pinned it covered nearly half the
    screen while the student read (audit, 6 Nov 2026). On narrow screens it
-   scrolls away with the page; wider screens keep it pinned. */
-@media (max-width:700px){.cts-nav{position:static;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--paper)}}
+   scrolls away with the page; wider screens keep it pinned. Reading rooms keep
+   it pinned on phones too: their bar is short (tools/verify-room-language.mjs). */
+@media (max-width:700px){body:not(.cts-room) .cts-nav{position:static;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--paper)}}
 .cts-nav .wrap{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;
                justify-content:space-between;padding-block:var(--s2)}
 /* min-width:0 on every flex child: without it a long row of unit pills sets a
