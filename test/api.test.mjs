@@ -143,7 +143,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
   st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' } });
   ok(lv(st) === 'mdiv', `a master's-level report raises it (${lv(st)})`);
   const cert = await jpost('/api/register', { name: 'Cert Twentyfive', email: 'cert-twentyfive@example.org', track: 'cert' });
-  // every course (65 since the electives of 24 Oct 2026; a fixed slice could miss a foundation course)
+  // every course (66 since the electives of 24 Oct 2026; a fixed slice could miss a foundation course)
   const codes = Object.keys((await jget('/api/catalog')).body.completions);
   const all = await jpost('/api/sync', { code: cert.body.code, progress: [], doneCodes: codes, completionTracks: {} });
   ok(all.body.degrees.certificate === true && all.body.degrees.associate === false,
