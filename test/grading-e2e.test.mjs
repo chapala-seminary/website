@@ -376,8 +376,14 @@ ok(await m.locator('textarea[data-sa="0"]').getAttribute('readonly') !== null &&
 ok(await m.locator('textarea[data-sa="0"]').inputValue().then((v) => v.includes('My own considered explanation')), "and shows the student's own words, from the server");
 ok(await m.locator('textarea[data-sa="5"]').getAttribute('readonly') === null, 'one that did not is open to rewrite');
 
-// retake: fill-ins again; three better answers, one the model cannot take just now, one still short
-await fillAll(m, john1);
+// retake: the fill-ins answered right are kept (since 7 Nov 2026; before then they were asked again,
+// and a student who resubmitted only his short answers failed); three better answers, one the
+// model cannot take just now, one still short
+await m.waitForSelector('.question[data-fill="0"] .feedback-text.correct', { timeout: 20000 });
+ok(await has(m, '.question[data-fill="0"] .feedback-text', 'Kept from your earlier attempt')
+  && await m.locator('button[data-fill-check="0"]').count() === 0
+  && (await m.locator('input[data-fill="0"]').inputValue()).trim().length > 0,
+  'a fill-in answered right is kept on the retake, with its answer and no Check button');
 const hints2 = { 5: '[[met]]', 6: '[[met]]', 7: '[[met]]', 8: '[[error]] [[met]]', 9: '[[not_met]]' };
 for (const i of [5, 6, 7, 8, 9]) await m.locator(`textarea[data-sa="${i}"]`).fill(essay(hints2[i]));
 await m.locator('#submitExamBtn').click();
