@@ -34,7 +34,7 @@ assert.equal(library.querySelectorAll('#elective-readings a.textbook.reading').l
 assert.equal(library.querySelectorAll('#textbooks a.tb-test-link').length, 90 + electiveReadings + electiveBooks);
 assert.ok(root.querySelector('#catalog').text.includes('en anglais et en espagnol, avec des traductions en français et en swahili'));
 // Every course has a French draft, so every card carries the badge.
-assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 65);
+assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 66);
 assert.ok(root.querySelector('#programs')?.text.includes('15 cours') || root.text.includes('Niveau master · 15 cours'));
 for (const link of root.querySelectorAll('#catalog a.course')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
 for (const link of library.querySelectorAll('#textbooks a.textbook')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
