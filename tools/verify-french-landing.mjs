@@ -22,7 +22,7 @@ assert.equal(root.querySelector('html').getAttribute('lang'), 'fr');
 assert.equal(root.querySelectorAll('[data-cts-fallback]').length, 0);
 assert.equal(root.querySelectorAll('.cts-translation-pending').length, 0);
 assert.ok(root.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
-assert.equal(root.querySelectorAll('#catalog a.course').length, 65);
+assert.equal(root.querySelectorAll('#catalog a.course').length, 66);
 // The 45 core textbooks and reading sets; the electives' (slug "elec…") are listed apart as each is added.
 const slugs = (d) => fs.readdirSync(d).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5));
 const electiveReadings = slugs('src/content/readings').filter((s) => s.startsWith('elec')).length;
@@ -125,5 +125,5 @@ try {
     assert.deepEqual(errors,[]);
     await context.close();
   }
-  console.log(`French landing: complete copy, 65 courses, 45 core and ${electiveBooks} elective textbooks, 45 core and ${electiveReadings} elective reading sets, metadata, mobile layout, source toggle and registration states — PASS`);
+  console.log(`French landing: complete copy, 66 courses, 45 core and ${electiveBooks} elective textbooks, 45 core and ${electiveReadings} elective reading sets, metadata, mobile layout, source toggle and registration states — PASS`);
 } finally { await browser.close(); }
