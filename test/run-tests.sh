@@ -265,6 +265,7 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
 # A routine save from an old device cannot change the track; only a chosen change can (#298).
 API_BASE="http://127.0.0.1:$PORT" node test/track-explicit-change.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/honors-on-record.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/legacy-sync-window.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs

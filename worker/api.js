@@ -128,11 +128,12 @@ async function loadState(env, id) {
     'SELECT id, name, email, email_verified_at, country, track, goal, heard, lang, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
-  const [progress, completions, certs, textbooks] = await Promise.all([
+  const [progress, completions, certs, textbooks, honors] = await Promise.all([
     env.DB.prepare('SELECT course, unit, completed_at FROM unit_progress WHERE student_id = ? ORDER BY course, unit').bind(id).all(),
     env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
     env.DB.prepare('SELECT verify_code, level, course, title, issued_at, revoked_at FROM certificates WHERE student_id = ? ORDER BY issued_at').bind(id).all(),
     env.DB.prepare('SELECT textbook, passed_at FROM textbook_results WHERE student_id = ? ORDER BY textbook').bind(id).all(),
+    env.DB.prepare('SELECT course, data, recorded_at FROM honors_readings WHERE student_id = ? ORDER BY course').bind(id).all(),
   ]);
   // Each completion carries the track it was earned on and the course name
   // the certificate page wrote, so a device restored from a code can rebuild
@@ -157,12 +158,33 @@ async function loadState(env, id) {
     // the textbook tests passed (migration 0009): a course's completion on the
     // master's tracks waits for its textbook's (worker/awards.js)
     textbooks: textbooks.results ?? [],
+    // honors reading attestations (migration 0020): optional, on the student's
+    // honor, never credit; kept so a new browser shows "with honors" too
+    honors: honors.results ?? [],
     // The required-reading tests this record does not need: a master's
     // completion of the course it held before the test was activated
     // (worker/awards.js exemptBefore). The browser keeps them so its pages say
     // what the record says (cts-sync.js). Never a pass: passes are above.
     exemptions: exemptionsFor(done, testContext(env, done)),
   };
+}
+
+/* Honors readings the browser holds (cts_honors_v1:<course>). They are the
+ * student's own attestation, not graded credit, so they are kept in every
+ * grading mode. The first one recorded for a course stands. */
+function honorsRows(id, raw) {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Map();
+  for (const h of raw.slice(0, 200)) {
+    if (!h || typeof h !== 'object') continue;
+    const course = String(h.course || '');
+    if (!/^[A-Za-z0-9]{1,40}$/.test(course) || seen.has(course)) continue;
+    const data = typeof h.data === 'string' ? h.data : '';
+    if (!data || data.length > 4000) continue;
+    try { if (!JSON.parse(data) || typeof JSON.parse(data) !== 'object') continue; } catch { continue; }
+    seen.set(course, data);
+  }
+  return [...seen].map(([course, data]) => [id, course, data, now()]);
 }
 
 /* A textbook test passed on any device stays passed, with the earliest time
@@ -364,6 +386,11 @@ async function sync(request, env) {
        ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = excluded.passed_at
        WHERE excluded.passed_at < textbook_results.passed_at`)
       .bind(...row));
+
+  for (const row of honorsRows(id, b.honors))
+    statements.push(env.DB.prepare(
+      `INSERT INTO honors_readings (student_id, course, data, recorded_at) VALUES (?, ?, ?, ?)
+       ON CONFLICT(student_id, course) DO NOTHING`).bind(...row));
 
   // A completion's level only rises: a row with none takes the first any
   // device reports, and a Certificate or Associate completion is raised when a
@@ -751,6 +778,7 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM textbook_results WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM honors_readings WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(g),
