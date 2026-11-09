@@ -192,7 +192,8 @@ s = await jpost('/api/sync', { code: CODE, progress: [{ course: '1peter', unit: 
 ok(find(s.body, '1peter', 1)?.completed_at === T_EARLY, 'a later completion time does not overwrite an earlier one');
 
 // Identity is last-writer-wins; that is a deliberate difference from progress.
-s = await jpost('/api/sync', { code: CODE, student: { name: 'María Cruz', track: 'thm' } });
+// A track change is deliberate (Change track sends trackChange; #298): a plain save no longer moves it.
+s = await jpost('/api/sync', { code: CODE, student: { name: 'María Cruz', track: 'thm', trackChange: true } });
 ok(s.body.student.name === 'María Cruz' && s.body.student.track === 'thm', 'the student can correct their own details');
 ok(s.body.student.email === 'maria@example.org', 'fields the client omits are left alone, not blanked');
 
@@ -432,7 +433,7 @@ ok(d.status === 201, `but they earn the Certificate of Ministry (${d.status}: ${
 // ...and switching to the M.Div. afterwards does not turn certificate-track
 // completions into master's ones: the track a completion was earned on is
 // kept, and a completion sent with a master's track is counted there.
-await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv' }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' } });
+await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv', trackChange: true }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' } });
 let st = await jget(`/api/student/${certReg.body.code}`);
 const byCode = Object.fromEntries((st.body?.completions || []).map(c => [c.code, c]));
 ok(byCode.CTSOTS?.track === 'cert' && byCode.CTSJOHN?.track === 'mdiv',
