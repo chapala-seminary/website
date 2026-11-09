@@ -60,7 +60,7 @@ test('queued Associate goal reaches server on next ordinary poll without navigat
 });
 
 test('Associate goal saved only in cts_goal is still transmitted', async () => {
-  const h = start({ studentGoal: undefined });
+  const h = start({ studentGoal: null });
   await settle();
   assert.equal(h.submissions[0].goal, 'assoc');
   await h.poll();
