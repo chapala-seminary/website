@@ -177,7 +177,9 @@
       student: student ? {
         name: student.name, email: student.email, country: student.country,
         track: (student.track || track || '').toLowerCase() || undefined,
-        goal: student.goal, heard: student.heard,
+        // The goal can live only in cts_goal (Change track writes it there);
+        // without it an Associate record would be created as Certificate.
+        goal: student.goal != null ? student.goal : (get('cts_goal') || undefined), heard: student.heard,
         // Only a deliberate choice (Change track, the sign-up form) may change the
         // track on the record; a routine save from an old device must not (#298).
         trackChange: get('cts_track_change') === '1' || undefined,
@@ -234,6 +236,10 @@
       return;                                    // the student's own change is still on its way
     }
     if (mine === theirs) return;
+    // A record whose goal was never set (null, not '') cannot say the student
+    // is not Associate: records made before the goal was sent have none. Send
+    // this browser's Associate up as the student's choice instead of losing it.
+    if (mine === 'assoc' && theirs === 'cert' && server.goal == null) { set('cts_track_change', '1'); return; }
     var token = server.track === 'associate' ? 'ad' : server.track;
     local.track = token; local.goal = server.goal || '';
     set('cts_student', JSON.stringify(local));
