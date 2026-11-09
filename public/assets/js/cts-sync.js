@@ -195,7 +195,7 @@
 
   function digest(s) {
     return JSON.stringify([
-      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard],
+      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard, s.student.goal, !!s.student.trackChange],
       s.doneCodes.slice().sort(),
       Object.keys(s.completionTracks).sort().map(function (k) { return k + ':' + s.completionTracks[k]; }),
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
