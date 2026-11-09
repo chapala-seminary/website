@@ -444,7 +444,10 @@
     }).then(function (packed) {
       if (!packed) return null;
       if (packed.state) {
-        apply(packed.state); lastDigest = digest(snapshot());
+        // A response may queue an explicit Associate reconciliation in apply().
+        // Record the digest that was actually sent so the next normal poll
+        // detects and transmits that new change instead of swallowing it.
+        apply(packed.state); lastDigest = d;
         var problem = document.getElementById('cts-registration-problem');
         if (problem) problem.remove();
       }
