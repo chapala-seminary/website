@@ -178,6 +178,9 @@
         name: student.name, email: student.email, country: student.country,
         track: (student.track || track || '').toLowerCase() || undefined,
         goal: student.goal, heard: student.heard,
+        // Only a deliberate choice (Change track, the sign-up form) may change the
+        // track on the record; a routine save from an old device must not (#298).
+        trackChange: get('cts_track_change') === '1' || undefined,
       } : null,
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
@@ -210,6 +213,33 @@
     set('cts_required_from', JSON.stringify(dates));
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
   }
+  /* The seminary record decides the student's track (#298, #183). A browser
+     keeps its own copy only while a change the student made here is on its way;
+     otherwise an old phone that still said "Certificate" kept grading a master's
+     student at Certificate level. Levels are compared, not spellings: the
+     sign-up form saves Associate as "ad", Change track as "cert" + goal "assoc". */
+  function trackLevel(t, g) {
+    t = String(t || '').toLowerCase(); g = String(g || '').toLowerCase();
+    if (t === 'mdiv') return 'mdiv';
+    if (t === 'thm' || t === 'mth') return 'thm';
+    if (t === 'ad' || t === 'assoc' || t === 'associate' || g === 'assoc') return 'assoc';
+    return 'cert';
+  }
+  function adoptTrack(local, server) {
+    if (!server || !server.track) return;
+    var mine = trackLevel(local.track || get('cts_track'), local.goal != null ? local.goal : get('cts_goal'));
+    var theirs = trackLevel(server.track, server.goal);
+    if (get('cts_track_change') === '1') {
+      if (mine === theirs) { try { localStorage.removeItem('cts_track_change'); } catch (e) {} }
+      return;                                    // the student's own change is still on its way
+    }
+    if (mine === theirs) return;
+    var token = server.track === 'associate' ? 'ad' : server.track;
+    local.track = token; local.goal = server.goal || '';
+    set('cts_student', JSON.stringify(local));
+    set('cts_track', token);
+    set('cts_goal', server.goal || '');
+  }
   function apply(state) {
     applyPolicy(state);
     if (!state || !state.student) return;
@@ -230,6 +260,7 @@
       if (confirmed) confirmed.remove();
     }
     if (!get('cts_track') && state.student.track) set('cts_track', state.student.track);
+    adoptTrack(local, state.student);
 
     var done = parse(get('cts_done_codes'), []);
     if (!Array.isArray(done)) done = [];

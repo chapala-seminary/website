@@ -447,6 +447,7 @@
       var t = el("regTrack");
       if (t && t.value) {
         lsSet("cts_track", t.value);
+        lsSet("cts_track_change", "1");            // chosen here on purpose (#298)
         var st = student();
         if (st) { st.track = t.value; lsSet("cts_student", JSON.stringify(st)); }
       }
@@ -1298,6 +1299,25 @@
       return;
     }
     if (live.status !== "ready" || live.working || unitPassed) return;
+    /* A track that counts the fill-ins cannot pass with them blank, and nothing
+       said so: 98 exams from 29 students reached the seminary with every
+       fill-in empty, failed, and locked the next unit (8 Nov 2026 audit). The
+       first press says how many are blank; a second press sends anyway. */
+    if (fillCounts() && fill.length) {
+      var answered = 0;
+      fill.forEach(function (q, i) {
+        if (fillChecked[i] || live.fillRes[q.qid] || String(fillAnswers[i] || "").trim()) answered++;
+      });
+      if (answered < needFill() && !live.blankWarned) {
+        live.blankWarned = true;
+        var blank = fill.length - answered;
+        say(bi({ en: "You left " + blank + " fill-in-the-blank answer(s) empty. On your track you need " + needFill() + " of " + fill.length + " right to pass. Scroll up to answer them, or press Submit again to send the exam as it is.",
+                 es: "Dejó " + blank + " respuesta(s) de completar en blanco. En su trayecto necesita " + needFill() + " de " + fill.length + " correctas para aprobar. Suba para contestarlas, o pulse Enviar otra vez para enviar el examen tal como está.",
+                 fr: "Vous avez laissé " + blank + " réponse(s) à compléter vides. Dans votre parcours, il faut " + needFill() + " bonnes réponses sur " + fill.length + " pour réussir. Remontez pour y répondre, ou appuyez de nouveau sur Envoyer pour envoyer l’examen tel quel." }), C_WARN);
+        return;
+      }
+    }
+    live.blankWarned = false;
     live.trouble = null;
     var fillItems = [], saItems = [];
     fill.forEach(function (q, i) {
