@@ -133,7 +133,8 @@ async function loadState(env, id) {
     env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
     env.DB.prepare('SELECT verify_code, level, course, title, issued_at, revoked_at FROM certificates WHERE student_id = ? ORDER BY issued_at').bind(id).all(),
     env.DB.prepare('SELECT textbook, passed_at FROM textbook_results WHERE student_id = ? ORDER BY textbook').bind(id).all(),
-    env.DB.prepare('SELECT course, data, recorded_at FROM honors_readings WHERE student_id = ? ORDER BY course').bind(id).all(),
+    // before migration 0020 is applied there is no table: no honors, not a failed load
+    env.DB.prepare('SELECT course, data, recorded_at FROM honors_readings WHERE student_id = ? ORDER BY course').bind(id).all().catch(() => ({ results: [] })),
   ]);
   // Each completion carries the track it was earned on and the course name
   // the certificate page wrote, so a device restored from a code can rebuild
@@ -387,10 +388,11 @@ async function sync(request, env) {
        WHERE excluded.passed_at < textbook_results.passed_at`)
       .bind(...row));
 
-  for (const row of honorsRows(id, b.honors))
-    statements.push(env.DB.prepare(
-      `INSERT INTO honors_readings (student_id, course, data, recorded_at) VALUES (?, ?, ?, ?)
-       ON CONFLICT(student_id, course) DO NOTHING`).bind(...row));
+  // In a batch of their own, after the record's: a Worker deployed before
+  // migration 0020 is applied loses only the honors, never the sync.
+  const honorsStatements = honorsRows(id, b.honors).map((row) => env.DB.prepare(
+    `INSERT INTO honors_readings (student_id, course, data, recorded_at) VALUES (?, ?, ?, ?)
+     ON CONFLICT(student_id, course) DO NOTHING`).bind(...row));
 
   // A completion's level only rises: a row with none takes the first any
   // device reports, and a Certificate or Associate completion is raised when a
@@ -436,6 +438,9 @@ async function sync(request, env) {
           OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
+  if (honorsStatements.length) {
+    try { await env.DB.batch(honorsStatements); } catch (e) { console.error('honors not kept', e?.message || e); }
+  }
 
   /* In the cutover window the server, not the browser, decides what the
      imported units complete: the same check a live pass runs, at the
@@ -778,7 +783,6 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM textbook_results WHERE student_id = ?').bind(g),
-      env.DB.prepare('DELETE FROM honors_readings WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(g),
@@ -794,6 +798,9 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM assignments WHERE student_id = ?').bind(g),
     ]),
   ]);
+  // apart, like the sync's: before migration 0020 there is nothing to delete
+  try { await env.DB.batch(gone.map((g) => env.DB.prepare('DELETE FROM honors_readings WHERE student_id = ?').bind(g))); }
+  catch (e) { console.error('honors not deleted', e?.message || e); }
   return json({ deleted: true });
 }
 
