@@ -301,13 +301,19 @@ async function sync(request, env) {
     const name = str(s.name, MAX.name, { field: 'name' });
     const track = trackName((str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase()) || null;
     if (track && !TRACKS.has(track)) throw new HttpError(400, 'unknown track: ' + track);
+    // The track and goal change only when the student chose them on purpose
+    // (Change track, the sign-up form: trackChange). Every routine save resends
+    // the browser's copy, and an old device's "Certificate" used to overwrite a
+    // master's student's record, so their next exams were graded and their
+    // courses recorded at Certificate level (#298, #292, #239).
+    const chosen = s.trackChange === true;
     statements.push(env.DB.prepare(
       `UPDATE students SET name = COALESCE(?, name),
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
          goal = CASE WHEN ? THEN ? ELSE goal END, heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
       .bind(name, str(s.email, MAX.email, { field: 'email' }), canonicalCountry(str(s.country, MAX.country, { field: 'country' })),
-        track, Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
+        chosen ? track : null, chosen && Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
   // Browsers resend their full record. D1 counts an UPDATE as a write even
@@ -363,7 +369,8 @@ async function sync(request, env) {
   // device reports, and a Certificate or Associate completion is raised when a
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
-  const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
+  // An old device's track is not the student's (#298): only a chosen change counts.
+  const trackNow = (s && typeof s === 'object' && s.trackChange === true && String(s.track || '').toLowerCase()) || exists.track;
   let completions = imports && !legacy ? completionRows(id, b.doneCodes, b.completionTracks, trackNow) : [];
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct

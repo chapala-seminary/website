@@ -118,6 +118,8 @@
         var oldTrack = localStorage.getItem(KEY), oldGoal = localStorage.getItem('cts_goal');
         localStorage.setItem(KEY, newTrack);
         localStorage.setItem("cts_goal", newGoal);
+        // A deliberate change: the next save may change the track on the record (#298).
+        localStorage.setItem("cts_track_change", "1");
         // Some courses (Joshua, Matthew, Pentateuch) read the track from the
         // student record instead of the standalone key — update that too.
         try {
@@ -134,6 +136,7 @@
         var sync = window.CTS_SYNC && window.CTS_SYNC.sync;
         Array.prototype.forEach.call(wrap.querySelectorAll('button'), function (button) { button.disabled = true; });
         function failed() {
+          localStorage.removeItem("cts_track_change");
           if (oldTrack === null) localStorage.removeItem(KEY); else localStorage.setItem(KEY, oldTrack);
           if (oldGoal === null) localStorage.removeItem('cts_goal'); else localStorage.setItem('cts_goal', oldGoal);
           var current = JSON.parse(localStorage.getItem('cts_student') || 'null');
