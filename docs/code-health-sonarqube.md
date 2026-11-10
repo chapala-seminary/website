@@ -94,14 +94,13 @@ Community Build 26.11, the scope above: 344 files, about 29,900 lines of code.
 |---|---|---|
 | Bugs | 52 | 31 `sort()` without a compare function (most sort plain strings, which is fine); 10 "`===` is always false" in `cts-textbook.js`/`exam-review.mjs` are **false positives**: Sonar can't see that `CTSRecord.course()` returns `"new"` |
 | Vulnerabilities | 45 | 39 are `vm`/`eval` in build and verification tools that run our own files, which is low risk. 2 regexes in `src/lib/french-pages.ts` that could run slowly (build-time only) |
-| Code smells | 130 | Maintainability rating A; 6.4% duplicated lines |
+| Code smells | 130 | Maintainability rating A; 6.4% duplicated lines. The one "blocker", undeclared `mcAnswers` in `tools/verify-fill-single.mjs:111`, is a **false positive**: that line runs inside the page (`p.evaluate`), where `mcAnswers` is the page's own variable |
 | Security hotspots | 0 | |
 
 Small real findings worth a later fix:
 
 - `tools/verify-seo.mjs:42` checks the same Spanish URL twice, so one of the
   intended checks is missing.
-- `tools/verify-fill-single.mjs:111` assigns `mcAnswers` without declaring it.
 - `public/assets/js/cts-email-confirm.js:43,53,63` start promises whose errors
   nothing catches.
 - `worker/awards.js:188` has a regex whose `|` precedence is easy to misread.
