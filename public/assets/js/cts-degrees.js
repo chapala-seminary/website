@@ -105,6 +105,26 @@
     } catch (e) { return null; }
   }
 
+  /* A degree page counts from this browser's lists as it opens, and the
+     student's record arrives a moment later (cts-sync.js). On a phone or
+     browser the student has not used before, the page said "0 / 30, not yet
+     eligible" to a student who had finished (M.Div. walk-through, 10 Nov
+     2026). When the record changes what a page has shown, it opens again
+     once, with the record's numbers. Once per new state, so it cannot loop. */
+  var shown = {};
+  function sig(count, missing) { return count + "/" + missing; }
+  if (typeof document !== "undefined" && document.addEventListener) document.addEventListener("cts-sync-applied", function () {
+    var changed = Object.keys(shown).filter(function (d) {
+      var before = shown[d], now = status(d);
+      return now && sig(now.count, now.missing.length) !== before;
+    });
+    if (!changed.length) return;
+    var key = "cts_degree_refreshed:" + location.pathname;
+    var mark = changed.map(function (d) { return d + "=" + shown[d]; }).join(",");
+    try { if (sessionStorage.getItem(key) === mark) return; sessionStorage.setItem(key, mark); } catch (e) { return; }
+    location.reload();
+  });
+
   /* Where a student stands on one degree: the courses that count, the
      required ones still missing, and whether it is earned. */
   function status(degree) {
@@ -115,6 +135,7 @@
     var plan = degree === "thm" ? studyPlan() : null;
     var core = d.core.map(function (c) { return plan && plan[c] || c; });
     var missing = core.filter(function (c) { return !have[c]; });
+    shown[degree] = sig(count, missing.length);
     return {
       degree: degree, count: count, required: d.courses, have: have,
       core: core, coreDone: core.length - missing.length, missing: missing,
