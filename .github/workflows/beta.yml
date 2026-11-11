@@ -50,6 +50,89 @@ jobs:
           fi
       - run: npm run build
       - run: npm test
+
+  # The journey suite (e2e/, docs/e2e-journeys.md), beside the feature tests.
+  # Nothing is uploaded: traces and screenshots hold the answer keys.
+  journeys:
+    if: github.ref == 'refs/heads/beta'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # Private answer banks must be present before build/test: public textbook
+      # JSON no longer holds answer/accept. continue-on-error: a missing token
+      # must not fail the job at checkout; later steps fail clearly if keys are absent.
+      - name: Checkout private assessment keys
+        id: assessment_keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+            echo "Private assessment-keys checkout ready at .assessment-keys"
+          else
+            echo "No private assessment-keys checkout; textbook grading needs ASSESSMENT_KEYS_TOKEN."
+          fi
+      - run: npm run build
+      - run: npm run test:e2e
+      - name: The local Worker's last log lines
+        if: failure()
+        run: tail -n 80 .wrangler-e2e/dev.log || true
+
+  # Published only once the feature tests and the journeys have both passed on
+  # this commit. The deploy rebuilds from source (npm run deploy:beta:publish),
+  # so it needs no output of the jobs above.
+  deploy:
+    if: github.ref == 'refs/heads/beta'
+    needs: [beta, journeys]
+    environment: beta
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      # Private answer banks must be present before build/test: public textbook
+      # JSON no longer holds answer/accept. continue-on-error: a missing token
+      # must not fail the job at checkout; later steps fail clearly if keys are absent.
+      - name: Checkout private assessment keys
+        id: assessment_keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+            echo "Private assessment-keys checkout ready at .assessment-keys"
+          else
+            echo "No private assessment-keys checkout; textbook grading needs ASSESSMENT_KEYS_TOKEN."
+          fi
       - name: Deploy the tested beta commit
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CTS_BETA_CLOUDFLARE_API_TOKEN }}

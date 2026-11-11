@@ -21,7 +21,10 @@ node tools/private-units.mjs --check
 node --test test/release-governance.test.mjs
 # Faculty-review World Library catalog; counts, URLs, filters, accessibility.
 node --test test/world-library-v1.test.mjs
+node --test test/ethics-unit-links.test.mjs
 node --test test/track-sync-ack.test.mjs
+# Legacy Associate goals must reach the server on an ordinary sync poll.
+node --test test/track-adopt-poll.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
@@ -40,6 +43,7 @@ node test/single-completion.test.mjs
 node test/grading-unit.test.mjs
 node --test test/grading-feedback.test.mjs
 node test/single-page-readings.test.mjs
+node --test test/elective-reading-manifest-integrity.test.mjs
 node tools/verify-staged-readings.mjs
 node tools/verify-rubrics.mjs
 node test/eval-grader.test.mjs
@@ -269,6 +273,7 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
 # A routine save from an old device cannot change the track; only a chosen change can (#298).
 API_BASE="http://127.0.0.1:$PORT" node test/track-explicit-change.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/honors-on-record.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/legacy-sync-window.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs

@@ -7,7 +7,7 @@
 // message it would have sent, so the link inside it can be opened here.
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
