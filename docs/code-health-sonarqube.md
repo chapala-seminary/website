@@ -10,9 +10,19 @@ There are two free ways to run it, and both read the same settings file,
 | | SonarQube Cloud (Free plan) | SonarQube Community Build |
 |---|---|---|
 | Where it runs | GitHub Actions, results on sonarcloud.io | Your own machine, in Docker |
-| When | Every push to `beta`/`main` and every PR to them | When you run it |
+| When | Every PR into `beta` or `main`, and every push to `main` | When you run it |
 | Cost | Free for public repositories (this one is public) | Free, open source |
 | Comments on PRs | Yes | No (Community Build can't decorate PRs) |
+
+**What the Free plan shows.** It shows two things: each PR's result (pass/fail
+plus the new issues it adds, also posted as a PR comment) and the dashboard for
+the **main branch**, `main`. Every other branch, `beta` included, is analysed
+as a side branch whose results are locked on Free ("Organization is not
+allowed to access data from non main branches"). So the workflow doesn't scan
+pushes to `beta`. The full findings dashboard shows production code and
+updates each time `beta` is promoted to `main`. Day to day, the PR results
+are what matter: they flag new problems in each change before it reaches
+`beta`.
 
 ## What is scanned
 
@@ -57,8 +67,9 @@ this once. Until then the `Code health (SonarQube Cloud)` workflow runs, prints
    secret named `SONAR_TOKEN`.
 6. Set **New code** to "Previous version" or "Number of days: 30". The quality
    gate then judges new changes, not the backlog from the old site.
-7. Re-run the latest `Code health (SonarQube Cloud)` run, or push to `beta`. The
-   dashboard fills in within a minute or two.
+7. The first PR into `beta` or `main` gets the first analysis. The main-branch
+   dashboard fills in after the next push to `main`, that is, the next
+   `beta` → `main` promotion.
 
 Workflow file: `.github/workflows/sonar.yml`. Fork PRs don't get secrets, so the
 scan skips on them.
