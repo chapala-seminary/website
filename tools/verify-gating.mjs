@@ -29,6 +29,8 @@ const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WI
    baseline below keeps the whole page, added courses included. */
 const ADDED = [
   'Parables of the Bible',
+  // 7 Nov 2026
+  'Defending the Christian Faith in Conversation with Islam',
   // 24 Oct 2026: the twenty denominational electives
   "History and Development of Pentecostalism",
   "Pentecostal and Charismatic Theology",

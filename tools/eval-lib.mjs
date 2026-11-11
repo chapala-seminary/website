@@ -69,7 +69,9 @@ export function loadUnit(course, n, root = ROOT) {
    assessment-keys is a follow-up (docs/answer-exposure-audit.md). */
 export function listCourses(root = ROOT) {
   return fs.readdirSync(path.join(root, 'src', 'content', 'units'), { withFileTypes: true })
-    .filter(d => d.isDirectory() && !d.name.startsWith('CTSElec')).map(d => d.name).sort();
+    // Courses added after the eval set was drawn are left out, as the electives are:
+    // adding one would redraw every sample (CTSIslam, 7 Nov 2026).
+    .filter(d => d.isDirectory() && !d.name.startsWith('CTSElec') && d.name !== 'CTSIslam').map(d => d.name).sort();
 }
 export function listUnits(course, root = ROOT) {
   return fs.readdirSync(path.join(root, 'src', 'content', 'units', course))
