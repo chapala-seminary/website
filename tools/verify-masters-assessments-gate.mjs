@@ -73,6 +73,7 @@ const LAST = `${c.pages}Unit${c.units[c.units.length - 1]}.html`;
 const dated = JSON.stringify({ otsfinal: '2026-01-01T00:00:00Z', otspaper: '2026-01-01T00:00:00Z' });
 async function unit(seed, isDated) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.route(/\/api\//, (r) => r.abort());   // as above: the dates below are the only ones
   const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.goto(`${BASE}/${LAST}`);
   await p.evaluate((s) => { localStorage.clear(); for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, seed);
