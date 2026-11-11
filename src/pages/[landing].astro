@@ -11,6 +11,36 @@ import {
 import { frTextbookTitle, frReadingsTitle } from '../lib/french-titles';
 
 export async function getStaticPaths() {
+  /* The unit title in each language, read from the lesson's first heading line ("Course — Unit N: Title"). */
+  function lessonTitle(id: string, unit: number): { en?: string; es?: string } {
+    const file = `src/content/lessons/${id.replace(/\.json$/, '')}.json`;
+    if (!fs.existsSync(file)) return {};
+    let blocks: any[] = [];
+    try { blocks = JSON.parse(fs.readFileSync(file, 'utf8')).blocks || []; } catch { return {}; }
+    const strip = (t: string) => t.replace(/<[^>]+>/g, '').replace(/^\W*?(?=\S)/u, '').trim();
+    const clean = (x?: string) => x?.replace(/\s*\((?:Bilingual|Bilingüe)\)\s*$/i, '').trim() || undefined;
+    const head = blocks.slice(0, 8).map((b) => ({
+      type: b.type,
+      en: typeof b.text?.en === 'string' ? strip(b.text.en) : '',
+      es: typeof b.text?.es === 'string' ? strip(b.text.es) : '',
+    }));
+    const sep = '\\s*[—–:·|-]\\s*';
+    for (let i = 0; i < head.length; i++) {
+      const me = new RegExp(`Unit\\s*${unit}(?:${sep}(.+))?$`, 'i').exec(head[i].en);
+      const ms = new RegExp(`Unidad\\s*${unit}(?:${sep}(.+))?$`, 'i').exec(head[i].es);
+      if (!me && !ms) continue;
+      if (me?.[1] || ms?.[1]) return { en: clean(me?.[1]), es: clean(ms?.[1]) };
+      // "Course — Unit 1" with the title on the next heading line
+      const next = head.slice(i + 1).find((x) => ['title', 'masthead', 'heading'].includes(x.type) && x.es && x.es.length < 140);
+      if (next) return { en: clean(next.en), es: clean(next.es) };
+      return {};
+    }
+    // No "Unit N" line: the lesson opens with its title as a heading
+    const first = head.find((x) => ['title', 'heading'].includes(x.type) && x.es && x.es.length < 140);
+    return first ? { en: clean(first.en), es: clean(first.es) } : {};
+  }
+  // Unit titles are shown as text: markup such as <em> in a title must not appear literally.
+  const plain = (t: string) => t.replace(/<[^>]+>/g, '').trim();
   const courses = (await getCollection('courses')).map((e) => e.data);
   const units = await getCollection('units');
   const textbooks = await getCollection('textbooks');
@@ -28,12 +58,15 @@ export async function getStaticPaths() {
     const first = unitEntries[0]?.data.unit ?? 1;
     let unitList = unitEntries.map((u) => {
       const i = u.data.unit - first;
-      const fallback = u.data.title.replace(/^.*?(?:Unit|Unidad)\s*\d+\s*[—–:-]\s*/i, '').trim() || `Unit ${u.data.unit}`;
+      const fallback = u.data.title.replace(/^.*?(?:Unit|Unidad)\s*\d+\s*[—–:-]\s*/i, '').replace(/\s*\((?:Bilingual|Bilingüe)\)\s*$/i, '').trim() || `Unit ${u.data.unit}`;
+      // 4 Nov 2026 (Gemini audit #103): with no unitTitles, the Spanish list fell back to the English title.
+      // The lesson's own heading line ("Curso — Unidad N: Título") has the Spanish; use it.
+      const fromLesson = lessonTitle(u.id, u.data.unit);
       return {
         n: u.data.unit,
         href: `${u.data.pagePrefix}Unit${u.data.unit}.html`,
-        en: titles?.en?.[i] || fallback,
-        es: titles?.es?.[i] && titles.es[i] !== titles.en?.[i] ? titles.es[i] : fallback,
+        en: plain(titles?.en?.[i] || fromLesson.en || fallback),
+        es: plain(titles?.es?.[i] && titles.es[i] !== titles.en?.[i] ? titles.es[i] : (fromLesson.es || fallback)),
       };
     });
     if (!unitList.length && /^ethics_unit/i.test(course.entry)) {

@@ -412,4 +412,46 @@ const readings = defineCollection({
   }),
 });
 
-export const collections = { units, courses, lessons, textbooks, readings };
+/* The master's final synthesis exams and ministry papers (Dr. Cook, 2 Nov
+   2026). A final's public file holds its prompts only: answers, model answers
+   and rubrics are in the private assessment-keys checkout (finals/<slug>.json),
+   so `.strict()` refuses any other field here. A paper's file is its topics
+   and the rubric printed on the course's master's page. Neither is a
+   requirement yet: requiredFrom must be null (tools/gen-worker-catalog.mjs). */
+const finalPrompt = z.object({ prompt: bilingual, reading: z.number().int().positive().optional(), part: z.number().int().positive().optional() }).strict();
+const finals = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/finals', generateId: ({ entry }) => entry.replace(/\.json$/, '') }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z0-9]+final$/, 'the slug ends in "final"'),
+    course: z.string().min(1),
+    page: z.string().regex(/^CTS[A-Za-z0-9]+Final$/, 'the page is CTS<Course>Final'),
+    title: bilingual,
+    requiredFrom: z.null(),
+    keys: z.literal('private'),
+    pass: z.object({ fill: z.number().int().positive(), sa: z.number().int().positive() }),
+    maxChars: z.number().int().min(4000).max(12000),
+    fill: z.array(finalPrompt.refine((q) => Object.values(q.prompt).every(oneBlank), { message: `a fill-in prompt must contain exactly one blank, written ${BLANK}` })).min(1),
+    sa: z.array(finalPrompt).min(1),
+  }).strict(),
+});
+const papers = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/papers', generateId: ({ entry }) => entry.replace(/\.json$/, '') }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z0-9]+paper$/, 'the slug ends in "paper"'),
+    course: z.string().min(1),
+    page: z.string().regex(/^CTS[A-Za-z0-9]+Paper$/, 'the page is CTS<Course>Paper'),
+    title: bilingual,
+    requiredFrom: z.null(),
+    pass: z.number().int().min(1).max(100),
+    minWords: z.number().int().positive(),
+    maxChars: z.number().int().positive().max(25000),
+    minNotesWords: z.number().int().positive(),
+    maxNotesChars: z.number().int().positive().max(12000),
+    formats: z.array(z.enum(['study', 'sermon', 'plan'])).min(1),
+    topics: z.array(z.object({ id: z.string().regex(/^[a-z]{2,20}$/), en: z.string().min(1), es: z.string().min(1) })).min(1),
+    criteria: z.array(z.object({ id: z.string().regex(/^[a-z]{2,20}$/), points: z.number().int().positive(), name: bilingual, look: bilingual }))
+      .refine((c) => c.reduce((n, x) => n + x.points, 0) === 100, { message: 'the criteria add up to 100 points' }),
+  }).strict(),
+});
+
+export const collections = { units, courses, lessons, textbooks, readings, finals, papers };

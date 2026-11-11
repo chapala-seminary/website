@@ -14,18 +14,26 @@ interface Bi { en: string; es: string; fr?: string }
 interface Book { slug: string; page: string; course: string; title: Bi; subtitle?: Bi; credits?: Bi; edition: string }
 interface Card { entry: string; title: Bi }
 interface Props {
-  kind: 'book' | 'test' | 'reading-test';   // reading-test: a required-reading test (src/pages/[readingtest].astro)
+  kind: 'book' | 'test' | 'reading-test' | 'final' | 'paper';   // reading-test: src/pages/[readingtest].astro; final, paper: [final].astro, [paper].astro (2 Nov 2026)
   book: Book;
   course: Card;
   accent: string | null;      // the course's storage slug, for its colour
   scripts?: string[];
   sync?: boolean;             // the test page: a pass goes to the student record
+  back?: { href: string; en: string; es: string; fr: string };   // final, paper: the course's master's page
 }
-const { kind, book, course, accent, scripts = [], sync = false } = Astro.props;
+const { kind, book, course, accent, scripts = [], sync = false, back } = Astro.props;
 const title = kind === 'book' ? `CTS Textbook: ${book.title.en}`
   : kind === 'reading-test' ? `CTS Required-Reading Test: ${book.title.en}`
+  : kind === 'final' || kind === 'paper' ? `CTS ${book.title.en}`
   : `CTS Textbook Test: ${book.title.en}`;
 const reading = kind === 'reading-test';
+/* A final or a ministry paper is graded only by the server, in any build mode:
+   it has no browser grader and no shadow trial. */
+const serverOnly = kind === 'final' || kind === 'paper';
+const eyebrow = kind === 'final' ? { en: "Master's level · final synthesis exam", es: 'Nivel de maestría · examen final de síntesis', fr: 'Niveau master · examen final de synthèse' }
+  : kind === 'paper' ? { en: "Master's level · ministry assignment", es: 'Nivel de maestría · tarea ministerial', fr: 'Niveau master · travail pastoral' }
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -35,7 +43,7 @@ const reading = kind === 'reading-test';
     <title>{title}</title>
     <link rel="stylesheet" href={version('/assets/css/cts.css')} />
   </head>
-  <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind} data-textbook-kind={reading ? 'reading' : 'textbook'}>
+  <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind} data-textbook-kind={serverOnly ? kind : reading ? 'reading' : 'textbook'}>
     <script is:inline src={version('/cts-lang.js')}></script>
     <a class="btn skip" href="#content" style="position:absolute;left:-9999px" data-cts-chrome>
       <span class="lang-en">Skip to the content</span><span class="lang-es">Saltar al contenido</span><span class="lang-fr">Aller au contenu</span>
@@ -44,11 +52,13 @@ const reading = kind === 'reading-test';
     <header class="cts-masthead">
       <div class="wrap">
         <div class="eyebrow" data-cts-chrome>
+          {eyebrow ? (<><span class="lang-en">{eyebrow.en}</span><span class="lang-es">{eyebrow.es}</span><span class="lang-fr">{eyebrow.fr}</span></>) : (<>
           <span class="lang-en">{kind === 'book' ? "Master's textbook" : reading ? 'Required readings · test' : "Master's textbook · test"}</span>
           <span class="lang-es">{kind === 'book' ? 'Libro de texto de maestría' : reading ? 'Lecturas requeridas · examen' : 'Libro de texto de maestría · examen'}</span>
           <span class="lang-fr">{kind === 'book' ? 'Manuel de master' : reading ? 'Lectures obligatoires · examen' : 'Manuel de master · examen'}</span>
+          </>)}
         </div>
-        <h1 data-cts-chrome>{reading ? '📖' : '📘'} <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span><span class="lang-fr">{book.title.fr}</span></h1>
+        <h1 data-cts-chrome>{kind === 'final' ? '🎓' : kind === 'paper' ? '✍️' : reading ? '📖' : '📘'} <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span><span class="lang-fr">{book.title.fr}</span></h1>
         {book.subtitle && (book.subtitle.en || book.subtitle.es) && (
           <h2><span class="lang-en">{book.subtitle.en}</span><span class="lang-es">{book.subtitle.es}</span>{book.subtitle.fr && <span class="lang-fr">{book.subtitle.fr}</span>}</h2>
         )}
@@ -63,7 +73,9 @@ const reading = kind === 'reading-test';
         <div class="cts-navmain">
           <div class="cts-steps">
             <a class="btn" href={`/${course.entry}`}>← <span class="lang-en">Course: {course.title.en}</span><span class="lang-es">Curso: {course.title.es}</span><span class="lang-fr">Cours : {course.title.fr}</span></a>
-            {kind === 'book'
+            {serverOnly && back
+              ? <a class="btn solid" href={back.href}>← <span class="lang-en">{back.en}</span><span class="lang-es">{back.es}</span><span class="lang-fr">{back.fr}</span></a>
+              : kind === 'book'
               ? <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span><span class="lang-fr">Examen du manuel</span> →</a>
               : reading
               ? <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">The readings</span><span class="lang-es">Las lecturas</span><span class="lang-fr">Les lectures</span></a>
@@ -99,10 +111,14 @@ const reading = kind === 'reading-test';
       </div>
     </footer>
 
-    {live && sync && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
+    {((live && sync) || serverOnly) && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
     <script is:inline src={version('/assets/js/cts-textbook.js')}></script>
+    {/* A pledge before each test, and a note for AI assistants (Dr. Cook, 31 Oct). */}
+    <script is:inline src={version('/assets/js/cts-integrity.js')} defer></script>
+    {/* Listen with the device's own voice (Dr. Cook, 30 Oct); not on test pages. */}
+    <script is:inline src={version('/assets/js/cts-listen.js')} defer></script>
     {sync && <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>}
-    {!live && sync && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
+    {!live && sync && !serverOnly && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
   </body>
 </html>

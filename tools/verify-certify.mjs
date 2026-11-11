@@ -198,8 +198,18 @@ s = await panelState(two.page);
 ok(/^[A-Z0-9-]{6,}$/i.test(s.verifyCode || ''), 'a single-page course\'s certificate page registers by its named code', s.text.slice(0, 160));
 const sp = await fetch(`${BASE}/api/verify/${encodeURIComponent(s.verifyCode || 'x')}`).then((r) => r.json()).catch(() => null);
 ok(sp && sp.valid === true && sp.course === 'STORYTEL' && /Narrative Preaching/.test(sp.title || ''), 'and the public check knows it as Narrative Preaching', JSON.stringify(sp));
-// without the code, the same page shows nothing to print
+// Removed from this browser only, the code comes back: the record still has
+// STORYTEL, and a certificate page that was behind opens again once with the
+// record (cts-certify.js). Wait for that second load rather than race it.
 await two.page.evaluate(() => localStorage.setItem('cts_done_codes', JSON.stringify(['CTS1PETER'])));
+await two.page.reload({ waitUntil: 'load' });
+const reopened = await two.page.waitForEvent('load', { timeout: 15000 }).then(() => true, () => false);
+await waitFor(two.page, () => document.querySelector('#cts-cert-panel .cc-ok code'));
+s = await panelState(two.page);
+ok(reopened && s.panel && JSON.parse(await two.page.evaluate(() => localStorage.getItem('cts_done_codes'))).includes('STORYTEL'),
+  'a device missing the completion catches up from the record and shows the certificate again', s.text.slice(0, 80));
+// Without the code and with no record to restore it from, the same page shows nothing to print.
+await two.page.evaluate(() => { localStorage.setItem('cts_done_codes', JSON.stringify(['CTS1PETER'])); localStorage.removeItem('cts_student_code'); localStorage.setItem('cts_sync_off', '1'); });
 await two.page.reload({ waitUntil: 'load' });
 await two.page.waitForTimeout(800);
 s = await panelState(two.page);

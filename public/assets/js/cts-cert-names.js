@@ -395,6 +395,14 @@ window.CTS_CERT_NAMES = {
    "cook"
   ]
  },
+ "ctsislamcertificate.html": {
+  "en": "Defending the Christian Faith in Conversation with Islam",
+  "es": "Defensa de la fe cristiana en diálogo con el islam",
+  "fr": "Défendre la foi chrétienne en dialogue avec l’islam",
+  "authors": [
+   "cook"
+  ]
+ },
  "ctsjohncertificate.html": {
   "en": "The Gospel of John",
   "es": "El Evangelio de Juan",
@@ -940,6 +948,11 @@ window.CTS_COURSE_NAMES = {
   "en": "Hermeneutics",
   "es": "Hermenéutica",
   "fr": "Herméneutique"
+ },
+ "CTSISLAM": {
+  "en": "Defending the Christian Faith in Conversation with Islam",
+  "es": "Defensa de la fe cristiana en diálogo con el islam",
+  "fr": "Défendre la foi chrétienne en dialogue avec l’islam"
  },
  "CTSJOHN": {
   "en": "The Gospel of John",

@@ -115,6 +115,33 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([])) !== null, 'Case 4: no c
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track: 'mdiv', completed_at: before }])) !== null,
   'Case 4: another course finished before does not count for this one');
 
+/* ---- the final synthesis exam and the ministry paper stay inactive ------ */
+/* (Dr. Cook, 2 Nov 2026.) They live in catalog.assessments, never in
+   catalog.textbooks or a course's tests, so no rule above -- and not beta's
+   activation default (worker/test-activation.js), which makes every textbook
+   entry with requiredFrom null required -- can make them count for anyone. */
+{
+  const { activatedTests } = await import('../worker/test-activation.js');
+  const ASSESS = Object.entries(catalog.assessments || {});
+  ok(ASSESS.some(([s, a]) => s === 'otsfinal' && a.kind === 'final') && ASSESS.some(([s, a]) => s === 'otspaper' && a.kind === 'paper'),
+    'the catalog carries the OTS final and paper', Object.keys(catalog.assessments || {}));
+  for (const [slug, a] of ASSESS) {
+    ok(a.requiredFrom === null, `${slug}: requiredFrom is null (not a requirement)`, a.requiredFrom);
+    ok(!(slug in catalog.textbooks), `${slug}: not in catalog.textbooks`);
+    ok(!Object.values(catalog.courses).some((c) => (c.tests || []).includes(slug)), `${slug}: in no course's tests`);
+    ok(!A.testsFor(a.code).includes(slug), `${slug}: not among the tests ${a.code} requires`, A.testsFor(a.code));
+    const policy = activatedTests({ MASTER_TESTS_ACTIVE_FROM: '2026-10-01T00:00:00.000Z' });
+    ok(!(slug in policy), `${slug}: beta's activation default never activates it`);
+  }
+  // the OTS rule is exactly what it was, with or without a final or paper pass
+  for (const level of ['cert', 'assoc', 'thm', 'mdiv'])
+    for (const held of [[], ['oldtestament'], ['oldtestament', 'otsreadings']])
+      ok(A.textbookShortfall('CTSOTS', level, [...held, 'otsfinal', 'otspaper'], active()) === A.textbookShortfall('CTSOTS', level, held, active()),
+        `CTSOTS ${level} with ${held.join('+') || 'no tests'}: a final or paper pass changes nothing`);
+  ok(A.courseShortfall('ots', catalog.courses.ots.units, 'mdiv', ['otsfinal', 'otspaper']) === A.courseShortfall('ots', catalog.courses.ots.units, 'mdiv', []),
+    'an M.Div. OTS completion is neither helped nor held by the final or the paper');
+}
+
 /* ---- what the pages are given ------------------------------------------- */
 {
   const fs = await import('node:fs');
@@ -125,6 +152,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(JSON.stringify(m[CODE]?.map((t) => t.slug)) === JSON.stringify([BOOK, READ]), 'cts-required-tests.js gives the pages both tests', m[CODE]);
   ok(m[CODE]?.[1]?.requiredFrom === shipped, 'and the reading test\'s activation, as shipped');
   ok(m.COUNSELING?.[0]?.slug === 'counseling' && m.STORYTEL?.[0]?.slug === 'narrative', 'the single-page courses keep their textbooks');
+  ok(!/otsfinal|otspaper/.test(js), 'the certificate pages are not told of the final or the paper');
 }
 
 /* The suite's Worker must not change when a dated activation passes: every test
