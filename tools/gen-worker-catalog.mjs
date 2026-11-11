@@ -205,8 +205,10 @@ const textbooks = {};
 // requiredFrom null required at the beta cutoff. So nothing here changes any
 // student's credential: a pass is recorded (textbook_results, under the slug)
 // and that is all. Making one required is a later decision and a code change.
-// One final and one paper per course; requiredFrom must say null until then.
+// One final and one paper per course; requiredFrom says null until Dr. Cook
+// dates it with tools/activate-required.mjs (#318).
 const assessments = {};
+const REQUIRED_SCHEDULE = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
 {
   const KEYED = ['answer', 'accept', 'model', 'keywords', 'rubric', 'tr'];
   for (const [rel, kind] of [['src/content/finals', 'final'], ['src/content/papers', 'paper']]) {
@@ -221,9 +223,12 @@ const assessments = {};
       if (!code || !completions[code]) { console.error(`${where}: course ${a.course} is neither a unit course nor a single-page course with a completion code`); process.exit(2); }
       if (textbooks[a.slug] || assessments[a.slug]) { console.error(`${where}: slug ${a.slug} is already a test`); process.exit(2); }
       if (Object.values(assessments).some((x) => x.code === code && x.kind === kind)) { console.error(`${where}: ${a.course} already has a ${kind}; a course has one`); process.exit(2); }
-      if (!('requiredFrom' in a) || a.requiredFrom !== null) { console.error(`${where}: requiredFrom must be null (not a requirement yet)`); process.exit(2); }
+      /* null: not a requirement. A date only as tools/activate-required.mjs
+         records it in src/data/required-from.json (#318): a stray date would
+         hold master's students for no reason. */
+      if (!('requiredFrom' in a) || (a.requiredFrom !== null && (Number.isNaN(Date.parse(a.requiredFrom)) || REQUIRED_SCHEDULE[a.slug] !== a.requiredFrom))) { console.error(`${where}: requiredFrom must be null, or the moment tools/activate-required.mjs recorded in src/data/required-from.json`); process.exit(2); }
       if (!/^[A-Za-z0-9_]+$/.test(a.page || '') || !a.title?.en || !a.title?.es) { console.error(`${where}: needs a page name and an English and Spanish title`); process.exit(2); }
-      const entry = { code, course: unitCourse ? unitCourse[0] : a.course, page: a.page, title: a.title, kind, requiredFrom: null };
+      const entry = { code, course: unitCourse ? unitCourse[0] : a.course, page: a.page, title: a.title, kind, requiredFrom: a.requiredFrom };
       if (kind === 'final') {
         if (a.keys !== 'private') { console.error(`${where}: a final's keys are private: say keys: "private"`); process.exit(2); }
         for (const [part, list] of [['fill', a.fill], ['sa', a.sa]]) {

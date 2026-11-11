@@ -13,6 +13,7 @@
  *   node tools/activate-required.mjs --list
  *   node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending [--except actsreadings,...]
  *   node tools/activate-required.mjs --at 2026-11-01T00:00:00Z joshua,joshuareadings
+ *   node tools/activate-required.mjs --at 2026-12-01T06:00:00Z otsfinal,otspaper
  *     ... add --write to change the files; without it, says what it would do.
  *
  * The moment must be in the future and AFTER the deploy that carries it, so no
@@ -25,6 +26,11 @@
  * A test already in force is never changed here; one scheduled for a moment
  * not yet reached is moved to the new --at (so the start can be brought
  * forward or put back before it arrives).
+ *
+ * A course's final synthesis exam and ministry paper (src/content/finals,
+ * src/content/papers; #318, 11 Nov 2026) are activated the same way, but only
+ * by name: --all-pending never includes them, so turning on the textbook
+ * tests cannot turn on a final or paper by accident.
  */
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -39,6 +45,8 @@ const load = (dir) => fs.readdirSync(dir).filter((f) => f.endsWith('.json'))
 const tests = [
   ...load('src/content/textbooks').map((t) => ({ ...t, kind: 'textbook' })),
   ...load('src/content/readings').map((t) => ({ ...t, kind: 'reading' })),
+  ...load('src/content/finals').map((t) => ({ ...t, kind: 'final' })),
+  ...load('src/content/papers').map((t) => ({ ...t, kind: 'paper' })),
 ].map((t) => ({ ...t, slug: t.rec.slug, course: t.rec.course, state: !('requiredFrom' in t.rec) ? 'always' : t.rec.requiredFrom === null ? 'pending' : t.rec.requiredFrom }));
 
 if (flag('--list') || !args.length) {
@@ -59,7 +67,8 @@ const movable = (t) => t.state === 'pending' || (t.state !== 'always' && Date.pa
 const except = new Set((val('--except') || '').split(',').filter(Boolean));
 const named = args.filter((a, i) => !a.startsWith('--') && !['--at', '--except'].includes(args[i - 1])).flatMap((a) => a.split(',')).filter(Boolean);
 let chosen;
-if (flag('--all-pending')) chosen = tests.filter((t) => movable(t) && !except.has(t.slug));
+const byNameOnly = (t) => t.kind === 'final' || t.kind === 'paper';
+if (flag('--all-pending')) chosen = tests.filter((t) => movable(t) && !byNameOnly(t) && !except.has(t.slug));
 else {
   if (!named.length) { console.error('name the tests (slugs) or say --all-pending'); process.exit(2); }
   chosen = named.map((s) => tests.find((t) => t.slug === s) || (console.error(`no test called ${s}`), process.exit(2)));
@@ -77,7 +86,7 @@ if (!flag('--write')) { console.log('Nothing written (add --write).'); process.e
 const schedule = fs.existsSync(SCHEDULE) ? JSON.parse(fs.readFileSync(SCHEDULE, 'utf8')) : {};
 for (const t of chosen) {
   schedule[t.slug] = at;
-  if (t.kind === 'textbook') { t.rec.requiredFrom = at; fs.writeFileSync(t.file, JSON.stringify(t.rec, null, 2) + '\n'); }
+  if (t.kind !== 'reading') { t.rec.requiredFrom = at; fs.writeFileSync(t.file, JSON.stringify(t.rec, null, 2) + '\n'); }
 }
 fs.writeFileSync(SCHEDULE, JSON.stringify(Object.fromEntries(Object.entries(schedule).sort()), null, 2) + '\n');
 if (chosen.some((t) => t.kind === 'reading')) execFileSync('node', ['tools/import-readings.mjs', '--write'], { stdio: 'inherit' });

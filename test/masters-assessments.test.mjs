@@ -16,6 +16,10 @@ register('data:text/javascript,' + encodeURIComponent(
    }`));
 const A = await import('../worker/awards.js');
 const catalog = (await import('../worker/catalog.json')).default;
+const fs = await import('node:fs');
+// shipped NOT in force (null) -- or, once Dr. Cook dates one with
+// tools/activate-required.mjs, the moment it recorded, and nothing else
+const SCHED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
 
 let checks = 0;
 const fails = [];
@@ -36,10 +40,15 @@ const PILOT = [
 
 for (const p of PILOT) {
   ok(JSON.stringify(A.assessmentsFor(p.code)) === JSON.stringify([p.final, p.paper]), `${p.code}: its final, then its paper`, A.assessmentsFor(p.code));
-  ok(catalog.assessments[p.final].requiredFrom === null && catalog.assessments[p.paper].requiredFrom === null, `${p.code}: final and paper ship NOT in force`);
+  for (const s of [p.final, p.paper]) ok(catalog.assessments[s].requiredFrom === (SCHED[s] ?? null), `${s}: not in force, or from the moment activate-required.mjs recorded`, catalog.assessments[s].requiredFrom);
 }
 // every final and paper in the catalog ships not in force: nothing changes for anyone until Dr. Cook sets a date
-for (const [slug, t] of Object.entries(catalog.assessments)) ok(t.requiredFrom === null, `${slug} ships with requiredFrom null`, t.requiredFrom);
+for (const [slug, t] of Object.entries(catalog.assessments)) ok(t.requiredFrom === (SCHED[slug] ?? null), `${slug}: requiredFrom is null or its recorded moment`, t.requiredFrom);
+for (const kind of ['finals', 'papers'])
+  for (const f of fs.readdirSync(`src/content/${kind}`).filter((x) => x.endsWith('.json'))) {
+    const r = JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`, 'utf8'));
+    ok(r.requiredFrom === null || SCHED[r.slug] === r.requiredFrom, `${r.slug}: requiredFrom ${r.requiredFrom} is not the moment recorded in src/data/required-from.json`);
+  }
 // the textbook tests a course had are unchanged: assessmentsFor is separate from testsFor
 ok(!A.testsFor('CTSOTS').some((s) => catalog.assessments[s]), 'testsFor still lists textbook and reading tests only');
 
@@ -59,7 +68,7 @@ for (const p of PILOT) {
     // before the moment: as today
     ok(short([], level, ctxOn([], before)) === null, `${p.code} ${level}: before activation, nothing is required of the final or paper`);
     // as shipped (null): as today
-    ok(short([], level, { now: after, completions: [] }) === null, `${p.code} ${level}: requiredFrom null holds no one`);
+    ok(short([], level, { requiredFrom: { [p.final]: null, [p.paper]: null }, now: after, completions: [] }) === null, `${p.code} ${level}: requiredFrom null holds no one`);
     // a completion the record held at a master's level before the moment stays complete
     const earlier = [{ code: p.code, track: level, completed_at: '2026-11-15T10:00:00.000Z' }];
     ok(short([], level, ctxOn(earlier)) === null, `${p.code} ${level}: a master's completion from before activation is protected`);
@@ -82,7 +91,7 @@ for (const p of PILOT) {
   // an unreadable date never lets an item lapse (testCounts' existing rule)
   ok(A.textbookShortfall(p.code, 'mdiv', tests, { requiredFrom: { [p.final]: 'soon', [p.paper]: R }, now: after, completions: [] }) !== null, `${p.code}: an unreadable activation date still holds`);
   // activating only the final holds only the final
-  ok(A.textbookShortfall(p.code, 'mdiv', [...tests, p.final], { requiredFrom: { [p.final]: R }, now: after, completions: [] }) === null, `${p.code}: final activated alone -- passing it is enough`);
+  ok(A.textbookShortfall(p.code, 'mdiv', [...tests, p.final], { requiredFrom: { [p.final]: R, [p.paper]: null }, now: after, completions: [] }) === null, `${p.code}: final activated alone -- passing it is enough`);
 
   /* the whole course: units done, textbook tests passed */
   const units = A.courseUnits(p.slug);
@@ -90,7 +99,7 @@ for (const p of PILOT) {
   ok(A.courseShortfall(p.slug, units, 'mdiv', tests, ctxOn()) !== null, `${p.code}: course not complete with the units alone once activated`);
   ok(A.courseShortfall(p.slug, units, 'mdiv', [...tests, p.final, p.paper], ctxOn()) === null, `${p.code}: course complete with units, tests, final and paper`);
   ok(/units not recorded/.test(A.courseShortfall(p.slug, units.slice(1), 'mdiv', [...tests, p.final, p.paper], ctxOn()) || ''), `${p.code}: the units still come first`);
-  ok(A.courseShortfall(p.slug, units, 'mdiv', tests, { now: after, completions: [] }) === null, `${p.code}: as shipped, the units and tests complete the course, as today`);
+  ok(A.courseShortfall(p.slug, units, 'mdiv', tests, { requiredFrom: { [p.final]: null, [p.paper]: null }, now: after, completions: [] }) === null, `${p.code}: not in force, the units and tests complete the course, as today`);
 }
 
 /* ---- beta's automatic activation never reaches a final or paper -------- */
@@ -111,7 +120,7 @@ for (const p of PILOT) {
   const done = [{ code: 'CTSOTS', track: 'mdiv', completed_at: '2026-11-15T10:00:00.000Z' }];
   const ex = A.exemptionsFor(done, { requiredFrom: { otsfinal: R, otspaper: R } });
   ok(ex.includes('otsfinal') && ex.includes('otspaper'), 'the record lists the exempt final and paper (cts-sync.js keeps them as cts_textbook_<slug>_exempt)', ex);
-  ok(A.exemptionsFor(done, {}).filter((s) => catalog.assessments[s]).length === 0, 'as shipped, no final or paper is listed as exempt');
+  ok(A.exemptionsFor(done, { requiredFrom: Object.fromEntries(Object.keys(catalog.assessments).map((s) => [s, null])) }).filter((s) => catalog.assessments[s]).length === 0, 'not in force, no final or paper is listed as exempt');
 }
 
 if (fails.length) {

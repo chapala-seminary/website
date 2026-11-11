@@ -157,7 +157,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(!Object.values(m).flat().some((t) => /final$|paper$/.test(t.kind || '') || /^(otsfinal|otspaper)$/.test(t.slug)), 'the textbook and reading map is not told of the final or the paper');
   const am = win.CTS_REQUIRED_ASSESSMENTS || {};
   ok(JSON.stringify((am.CTSOTS || []).map((t) => t.slug)) === '["otsfinal","otspaper"]', 'the final and paper have a map of their own, final first', am.CTSOTS);
-  ok(Object.values(am).flat().every((t) => t.requiredFrom === null), 'and every one ships not in force');
+  ok(Object.values(am).flat().every((t) => t.requiredFrom === null || SCHED[t.slug] === t.requiredFrom), 'and each is not in force, or dated as activate-required.mjs recorded');
 }
 
 /* The suite's Worker must not change when a dated activation passes: every test
