@@ -81,12 +81,20 @@ dialog, page or file of the site that fails to load, or a 500 from the Worker
 A test marked `test.fail()` describes a bug that is known and not yet fixed.
 It is expected to fail, so the suite stays green; when the bug is fixed the
 test passes, Playwright reports that as a failure, and the marker must be
-removed. Each has a comment saying what the bug is.
+removed. Each has a comment saying what the bug is. None is held today.
 
-- `two-devices.spec.mjs`: a course certificate page opened on a device that
-  is behind keeps showing "units still to do" after the record has arrived,
-  until the student reloads (found by this suite, 10 Nov 2026; the degree
-  pages had the same fault, fixed in #310).
+Found and fixed so far:
+
+- A course certificate page opened on a device that was behind kept showing
+  "units still to do" after the record had arrived, until the student
+  reloaded: 57 of the 62 course certificate pages with unit pages (found on
+  the suite's first run, 10 Nov 2026; measured on every page, 11 Nov). The
+  sync client now reports what credit a record brought that the browser
+  lacked (`cts-sync-applied`, `detail.credit`), and `cts-certify.js` opens a
+  course certificate page again once when that credit is for its course --
+  not on the pages that redraw themselves, never while the student types, and
+  never twice in 30 seconds. `two-devices.spec.mjs` checks both sides: a
+  device that is behind reopens once; one that is up to date does not.
 
 ## In CI
 

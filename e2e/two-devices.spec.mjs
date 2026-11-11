@@ -71,26 +71,25 @@ test('a student\'s work follows them between devices, and the device that fell b
     expect((await record(code)).degrees, 'the Worker agrees').toMatchObject({ certificate: true });
   });
 
-  await test.step('and the course certificate, with the student\'s name', async () => {
+  await test.step('and the course certificate, with the student\'s name, opened once: the phone is up to date now', async () => {
+    const loads = countLoads(phone.page);
     await phone.page.goto('/CTSCHCertificate.html');
     await expect(phone.page.locator('#cert-section'), 'the certificate is shown').toBeVisible();
     await expect(phone.page.locator('#cert-name')).toHaveText(who.name);
     await expect(phone.page.locator('#partial-msg')).toBeHidden();
+    await phone.page.waitForTimeout(4_000);
+    expect(loads.count, 'a device already up to date does not open the page again').toBe(1);
   });
 });
 
-/* KNOWN BUG, found by this suite on 10 Nov 2026. The course certificate pages
- * decide once, as they open, from this browser's lists. On a device that is
- * behind, the record arrives a moment later (cts-sync.js fills in every unit)
- * but the page goes on showing "units still to do" until the student reloads.
- * The degree pages had the same fault and were fixed in #310.
- *
- * test.fail(): this test is expected to fail while the bug stands, so the
- * suite stays green -- and it turns red the day the bug is fixed, so the
- * marker cannot be forgotten. Remove test.fail() then.
+/* A course certificate page decides once, as it opens, from this browser's
+ * lists. On a device that is behind, the record arrives a moment later and
+ * the page used to go on showing "units still to do" until the student
+ * reloaded (found by this suite on 10 Nov 2026; the degree pages had the same
+ * fault, fixed in #310). cts-certify.js now opens the page again once when
+ * the record changes this browser's storage -- once, and only then.
  */
-test('a device that is behind shows a finished course\'s certificate without a reload', async ({ device, students }) => {
-  test.fail(true, 'known bug: course certificate pages do not look again when the record arrives (see the comment above)');
+test('a device that is behind shows a finished course\'s certificate without a reload by the student', async ({ device, students }) => {
   const laptop = await device('laptop');
   const phone = await device('phone', { viewport: PHONE });
   const code = await signUp(laptop.page, { ...person('Behind Cert'), track: 'cert' });
@@ -99,8 +98,19 @@ test('a device that is behind shows a finished course\'s certificate without a r
   // The course is finished elsewhere after the phone was restored.
   priorUnits(code, CH.course, Array.from({ length: CH.units }, (_, i) => i + 1));
   priorCourses(code, [CH.code], 'cert');
+
+  const loads = countLoads(phone.page);
   await phone.page.goto('/CTSCHCertificate.html');
-  await expect.poll(() => lsJson(phone.page, 'cts_ch_progress', {}), { message: 'the record reached the phone' })
-    .toMatchObject({ unit1: true, [`unit${CH.units}`]: true });
-  await expect(phone.page.locator('#cert-section'), 'the certificate is shown without a reload').toBeVisible({ timeout: 10_000 });
+  await expect(phone.page.locator('#cert-section'), 'the certificate is shown').toBeVisible({ timeout: 15_000 });
+  expect(await lsJson(phone.page, 'cts_ch_progress', {}), 'with the record\'s units').toMatchObject({ unit1: true, [`unit${CH.units}`]: true });
+  await phone.page.waitForTimeout(4_000);
+  expect(loads.count, 'the page opened again once, and then stayed put').toBe(2);
+  await expect(phone.page.locator('#cert-section')).toBeVisible();
 });
+
+/** How many times the page has loaded since this was called. */
+function countLoads(page) {
+  const c = { count: 0 };
+  page.on('load', () => { c.count++; });
+  return c;
+}
