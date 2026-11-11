@@ -39,7 +39,7 @@ body[data-course="ch"],body[data-course="pentecostal"],body[data-course="cults"]
 body[data-course="pm"],body[data-course="cs"],body[data-course="dp"],body[data-course="deaconfamilyministry"]{--accent:#2b4a5e}
 body[data-course="evangelism"],body[data-course="evanpreach"],body[data-course="missions"],body[data-course="radical"]{--accent:#8a4a12}
 body[data-course="apol"],body[data-course="bible"],body[data-course="hermeneutics"],body[data-course="la"]{--accent:#37474f}
-body[data-course="ce"],body[data-course="cg"],body[data-course="pt"],body[data-course="wr"],body[data-course="worship"]{--accent:#4a3566}
+body[data-course="ce"],body[data-course="cg"],body[data-course="pt"],body[data-course="wr"],body[data-course="islam"],body[data-course="worship"]{--accent:#4a3566}
 body[data-course="biblecharacters"],body[data-course="biblecharacters2"],body[data-course="josh"],body[data-course="loc"],body[data-course="re"],body[data-course="al"]{--accent:#6b4423}
 
 /* ── Base ───────────────────────────────────────────────────────────────── */
@@ -101,6 +101,12 @@ hr{border:0;border-top:1px solid var(--rule);margin:var(--s5) 0}
          -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
          border-bottom:1px solid var(--rule)}
 @supports not (backdrop-filter:blur(8px)){.cts-nav{background:var(--paper)}}
+/* Phones: with the unit pills, Previous/Next and the four language buttons the
+   bar is about 290px tall on a phone, so pinned it covered nearly half the
+   screen while the student read (audit, 6 Nov 2026). On narrow screens it
+   scrolls away with the page; wider screens keep it pinned. Reading rooms keep
+   it pinned on phones too: their bar is short (tools/verify-room-language.mjs). */
+@media (max-width:700px){body:not(.cts-room) .cts-nav{position:static;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--paper)}}
 .cts-nav .wrap{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;
                justify-content:space-between;padding-block:var(--s2)}
 /* min-width:0 on every flex child: without it a long row of unit pills sets a

@@ -98,11 +98,12 @@ const RENAMED = [
    character. [course file, the course file whose card it follows] */
 const ADDED = [
   ["CTSParables", "CTSBibleCharacters2"],          // 3 Oct 2026, the 45th course
+  ["CTSIslam", "CTSWR"],                            // 7 Nov 2026, the 66th course
 ];
 /* The lead spells the course count out in words; the reference says forty-four. */
 const COUNT = [
-  ["Forty-four courses", "Sixty-five courses"],  // 45 on 3 Oct, 65 on 24 Oct 2026
-  ["Cuarenta y cuatro cursos", "Sesenta y cinco cursos"],
+  ["Forty-four courses", "Sixty-six courses"],  // 45 on 3 Oct, 65 on 24 Oct, 66 on 7 Nov 2026
+  ["Cuarenta y cuatro cursos", "Sesenta y seis cursos"],
   /* 13 Oct 2026: the site is in three languages, so the lead no longer says "bilingual". */
   /* 3 Nov 2026: English and Spanish, with French and Swahili translations still being reviewed. */
   ["each complete and bilingual.", "each complete, in English and Spanish, with French and Swahili translations being reviewed."],
