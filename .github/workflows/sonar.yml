@@ -5,9 +5,13 @@ name: Code health (SonarQube Cloud)
 # Advisory only: this job reports findings to SonarQube Cloud and as a PR
 # decoration, but never blocks a build, a beta deploy or a release. Until the
 # repository secret SONAR_TOKEN exists, it skips with a notice.
+#
+# The Free plan shows only the main branch and pull requests. A push to beta
+# would be analysed as a side branch whose results nobody can open, so pushes
+# are scanned on main only; PRs into beta and main are still analysed.
 on:
   push:
-    branches: [main, beta]
+    branches: [main]
   pull_request:
     branches: [main, beta]
     types: [opened, synchronize, reopened]
