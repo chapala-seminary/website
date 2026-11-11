@@ -126,7 +126,8 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(ASSESS.some(([s, a]) => s === 'otsfinal' && a.kind === 'final') && ASSESS.some(([s, a]) => s === 'otspaper' && a.kind === 'paper'),
     'the catalog carries the OTS final and paper', Object.keys(catalog.assessments || {}));
   for (const [slug, a] of ASSESS) {
-    ok(a.requiredFrom === null, `${slug}: requiredFrom is null (not a requirement)`, a.requiredFrom);
+    // null until Dr. Cook dates it with activate-required.mjs (#318, 11 Nov 2026); never a stray date
+    ok(a.requiredFrom === null || SCHED[slug] === a.requiredFrom, `${slug}: requiredFrom is null, or the moment activate-required.mjs recorded`, a.requiredFrom);
     ok(!(slug in catalog.textbooks), `${slug}: not in catalog.textbooks`);
     ok(!Object.values(catalog.courses).some((c) => (c.tests || []).includes(slug)), `${slug}: in no course's tests`);
     ok(!A.testsFor(a.code).includes(slug), `${slug}: not among the tests ${a.code} requires`, A.testsFor(a.code));

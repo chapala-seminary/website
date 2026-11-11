@@ -91,4 +91,5 @@ for (const t of chosen) {
 fs.writeFileSync(SCHEDULE, JSON.stringify(Object.fromEntries(Object.entries(schedule).sort()), null, 2) + '\n');
 if (chosen.some((t) => t.kind === 'reading')) execFileSync('node', ['tools/import-readings.mjs', '--write'], { stdio: 'inherit' });
 execFileSync('node', ['tools/gen-worker-catalog.mjs'], { stdio: 'inherit' });
+console.log(`Also hold each in the suite's Worker as not yet required: add ${chosen.map((t) => `"${t.slug}":"2099-01-01T00:00:00Z"`).join(', ')} to TEST_REQUIRED_FROM in test/wrangler.local.jsonc (test/required-tests.test.mjs checks it).`);
 console.log(`Written. Now: npm run build && test/run-tests.sh, then deploy BEFORE ${at}.`);
