@@ -190,6 +190,10 @@
       lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
+      // honors readings (cts_honors_v1:<course>): the student's own attestation,
+      // kept on the record too so a new browser still shows "with honors"
+      honors: keys().filter(function (k) { return /^cts_honors_v1:[A-Za-z0-9]{1,40}$/.test(k) && get(k); })
+        .map(function (k) { return { course: k.slice('cts_honors_v1:'.length), data: get(k) }; }),
     };
   }
 
@@ -201,6 +205,7 @@
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
       (s.textbooks || []).map(function (t) { return t.slug; }).sort(),
       s.lang,
+      (s.honors || []).map(function (h) { return h.course; }).sort(),
     ]);
   }
 
@@ -245,10 +250,17 @@
     set('cts_student', JSON.stringify(local));
     set('cts_track', token);
     set('cts_goal', server.goal || '');
+    return true;
   }
   function apply(state) {
     applyPolicy(state);
     if (!state || !state.student) return;
+    // What the record gave this browser that it did not have: a unit, a
+    // course, a level, a textbook pass or exemption, a track. Not the keys
+    // that only mirror those, nor the profile. Pages that decided once as
+    // they opened use it to tell whether they now show the wrong thing
+    // (cts-certify.js); it is empty on a device that was already up to date.
+    var credit = [];
     // Server-owned approval cache: replace or clear it; never send it in snapshot().
     set('cts_thm_study_plan', JSON.stringify({ studentId: state.student.id, plan: state.thmStudyPlan || null }));
     var local = parse(get('cts_student'), {}) || {};
@@ -266,12 +278,12 @@
       if (confirmed) confirmed.remove();
     }
     if (!get('cts_track') && state.student.track) set('cts_track', state.student.track);
-    adoptTrack(local, state.student);
+    if (adoptTrack(local, state.student)) credit.push('track');
 
     var done = parse(get('cts_done_codes'), []);
     if (!Array.isArray(done)) done = [];
     var added = false;
-    (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; } });
+    (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; credit.push('done:' + c); } });
     if (added) set('cts_done_codes', JSON.stringify(done));
 
     // The lists the degree pages count: master's completions by code, and
@@ -281,29 +293,36 @@
     function addTo(key, value) {
       var list = parse(get(key), []);
       if (!Array.isArray(list)) list = [];
-      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); }
+      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); return true; }
+      return false;
     }
     (state.completions || []).forEach(function (c) {
       if (!c || !c.code) return;
-      if (c.track === 'mdiv') addTo('cts_mdiv_done_codes', c.code);
-      if (c.track === 'thm') addTo('cts_thm_done_codes', c.code);
-      if (c.track === 'assoc') addTo('cts_assoc_done_codes', c.code);
+      var lists = { mdiv: 'cts_mdiv_done_codes', thm: 'cts_thm_done_codes', assoc: 'cts_assoc_done_codes' };
+      if (lists[c.track] && addTo(lists[c.track], c.code)) credit.push(c.track + ':' + c.code);
       if (c.name) addTo('cts_degree_courses', c.name);
     });
 
     (state.progress || []).forEach(function (p) {
       var pk = 'cts_' + p.course + '_progress';
       var map = parse(get(pk), {}) || {};
-      if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); }
+      if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); credit.push('unit:' + p.course + ':' + p.unit); }
       var mk = 'cts_' + p.course + '_u' + p.unit + '_mc_passed';
       if (get(mk) !== '1') set(mk, '1');
       writeLegacy(p.course, p.unit);                   // the keys the certificate page reads
     });
 
+    // An honors reading recorded on another device: written here as it was there.
+    (state.honors || []).forEach(function (h) {
+      if (!h || !/^[A-Za-z0-9]{1,40}$/.test(String(h.course || '')) || typeof h.data !== 'string') return;
+      var hk = 'cts_honors_v1:' + h.course;
+      if (!get(hk)) set(hk, h.data);
+    });
+
     (state.textbooks || []).forEach(function (t) {
       if (!t || !/^[a-z]+$/.test(String(t.textbook || ''))) return;
       var k = 'cts_textbook_' + t.textbook + '_passed';
-      if (!get(k)) set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10));
+      if (!get(k)) { set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10)); credit.push('textbook:' + t.textbook); }
       addTo('cts_textbooks_passed', t.textbook);
     });
 
@@ -315,10 +334,12 @@
     (state.exemptions || []).forEach(function (slug) {
       if (!/^[a-z]+$/.test(String(slug || ''))) return;
       var k = 'cts_textbook_' + slug + '_exempt';
-      if (!get(k)) set(k, 'record');
+      if (!get(k)) { set(k, 'record'); credit.push('exempt:' + slug); }
     });
-    // pages that show something by these keys (the certificate's gate) look again
-    try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
+    // pages that show something by these keys (the certificate's gate) look again;
+    // detail.record says the student's own record arrived (cts-degrees.js), and
+    // detail.credit what it brought that this browser lacked (cts-certify.js)
+    try { document.dispatchEvent(new CustomEvent('cts-sync-applied', { detail: { record: true, credit: credit } })); } catch (e) {}
   }
 
   // ---- the network, which is always allowed to fail ------------------------
@@ -439,7 +460,7 @@
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
-                             textbooks: snap.textbooks, lang: snap.lang })
+                             textbooks: snap.textbooks, honors: snap.honors, lang: snap.lang })
         .then(function (state) { return { state: state, code: c }; });
     }).then(function (packed) {
       if (!packed) return null;
