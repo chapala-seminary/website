@@ -417,7 +417,8 @@ const readings = defineCollection({
    and rubrics are in the private assessment-keys checkout (finals/<slug>.json),
    so `.strict()` refuses any other field here. A paper's file is its topics
    and the rubric printed on the course's master's page. Neither is a
-   requirement yet: requiredFrom must be null (tools/gen-worker-catalog.mjs). */
+   requirement until dated: requiredFrom is null, or the moment
+   tools/activate-required.mjs recorded (tools/gen-worker-catalog.mjs checks it; #318). */
 const finalPrompt = z.object({ prompt: bilingual, reading: z.number().int().positive().optional(), part: z.number().int().positive().optional() }).strict();
 const finals = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/finals', generateId: ({ entry }) => entry.replace(/\.json$/, '') }),
@@ -426,7 +427,8 @@ const finals = defineCollection({
     course: z.string().min(1),
     page: z.string().regex(/^CTS[A-Za-z0-9]+Final$/, 'the page is CTS<Course>Final'),
     title: bilingual,
-    requiredFrom: z.null(),
+    requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
+      { message: 'requiredFrom is null, or the ISO time tools/activate-required.mjs recorded' }).nullable(),
     keys: z.literal('private'),
     pass: z.object({ fill: z.number().int().positive(), sa: z.number().int().positive() }),
     maxChars: z.number().int().min(4000).max(12000),
@@ -441,7 +443,8 @@ const papers = defineCollection({
     course: z.string().min(1),
     page: z.string().regex(/^CTS[A-Za-z0-9]+Paper$/, 'the page is CTS<Course>Paper'),
     title: bilingual,
-    requiredFrom: z.null(),
+    requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
+      { message: 'requiredFrom is null, or the ISO time tools/activate-required.mjs recorded' }).nullable(),
     pass: z.number().int().min(1).max(100),
     minWords: z.number().int().positive(),
     maxChars: z.number().int().positive().max(25000),

@@ -10,6 +10,7 @@
  *   GET  /staff/grading/copying            identical short answers from different students
  *   GET  /staff/grading/usage              AI calls and cost, the queue, the oldest waiting answer
  *   GET  /staff/grading/papers             ministry papers the AI graded: read and spot-check (#318)
+ *   POST /staff/grading/papers/<id>/pass   a faculty review: pass a paper the AI marked "revise" or could not grade
  *   POST /staff/grading/appeals/<id>/claim | release | decide
  *   POST /staff/grading/pending/<gradeId>/grade
  *   POST /staff/grading/calibration/mark
@@ -33,6 +34,7 @@ import { isoWeek, lastWeeks, calibrationSample, calibrationAgreement, aiRecord, 
 import { sendEmail, emailConfigured } from './email.js';
 import { appealEmail } from './grading/appeal-email.js';
 import catalog from './catalog.json';
+import { passPaperByFaculty } from './assignments.js';
 
 const DAY = 86400000;
 const WRITTEN = { sa: ['met', 'partly', 'not_met'], fill: ['right', 'wrong'] };
@@ -41,7 +43,7 @@ const TABS = [['appeals', 'Appeals'], ['pending', 'Pending'], ['calibration', 'C
 const FLASH = {
   claimed: 'You have taken this appeal.', released: 'Released.', upheld: 'The first result stands.', overturned: 'Changed.',
   passed: 'The student now passes this test.', course: 'The course is now complete.', emailed: 'The student has been emailed.',
-  graded: 'Graded.', marked: 'Your mark is saved.', kept: 'Kept: this answer is now always right.', rejected: 'Rejected: this answer is now always wrong.',
+  graded: 'Graded.', paperpassed: 'The paper now passes; the student has the credit.', marked: 'Your mark is saved.', kept: 'Kept: this answer is now always right.', rejected: 'Rejected: this answer is now always wrong.',
 };
 
 const one = async (env, sql, ...b) => await env.DB.prepare(sql).bind(...b).first();
@@ -478,10 +480,13 @@ async function papersTab(env, kit, user, flash) {
       + (r.status === 'unavailable' ? ` · ${esc(r.tries)} tries${r.last_error ? ': ' + esc(String(r.last_error).slice(0, 120)) : ''}` : '') + '</div>'
       + (scores.length ? `<ul class="pts">${scores.map((c) => `<li>${esc(crit.get(c.id)?.en || c.id)}: <strong>${esc(c.score)}</strong> of ${esc(crit.get(c.id)?.points ?? '?')}${c.capped ? ' (cut to half: no real quotation)' : ''}${c.quote ? ` <em>“${esc(c.quote)}”</em>` : ''}${c.comment ? ' — ' + esc(c.comment) : ''}</li>`).join('')}</ul>` : '')
       + (r.feedback ? `<div class="meta">Feedback the student saw: ${esc(r.feedback)}</div>` : '')
+      + (r.status === 'revise' || r.status === 'unavailable' ? `<form method="post" action="/staff/grading/papers/${encodeURIComponent(r.id)}/pass">
+<div class="meta">If the student asked for a review and the paper meets the standard: the note the student will read (required; one or two sentences in the student's language):</div>
+<textarea name="note" rows="2" maxlength="500" required></textarea><div class="row"><button>Pass this paper</button></div></form>` : '')
       + `<details><summary>The paper</summary><div class="ans">${esc(r.body_text)}</div>${r.notes_text ? `<div class="meta">Study notes:</div><div class="ans">${esc(r.notes_text)}</div>` : ''}</details></div>`;
   };
   return frame(kit, 'papers', user, await tabCounts(env), `
-<p>Ministry papers are graded by the AI against each course's rubric, with no faculty step. This page is for reading them: a spot check of how the AI scores, before papers become a course requirement. Nothing here changes a result. A paper the AI could not grade is never passed by default; it is listed first.</p>
+<p>Ministry papers are graded by the AI against each course's rubric. This page is for reading them -- a spot check of how the AI scores -- and for reviews: a student who believes a grade is wrong may email the seminary (the paper page says so), and a faculty member can pass a paper the AI marked "to revise" or could not grade, with a note the student reads. The AI's scores stay on record. A paper the AI could not grade is never passed by default; it is listed first.</p>
 <h2>The AI could not grade these</h2>${stuck.map(card).join('\n') || '<p>None.</p>'}
 <h2>Recently graded</h2>${recent.map(card).join('\n') || '<p>No papers graded yet.</p>'}`, flash);
 }
@@ -543,6 +548,14 @@ export async function handleGrading(request, env, user, url, path, kit) {
     if ((m = /^\/staff\/grading\/pending\/(\d+)\/grade$/.exec(path))) return await pendingAction(env, kit, user, +m[1], request);
     if (path === '/staff/grading/calibration/mark') return await calibrationMark(env, kit, user, request);
     if (path === '/staff/grading/rulings/decide') return await rulingDecide(env, kit, user, request);
+    if ((m = /^\/staff\/grading\/papers\/([^/]+)\/pass$/.exec(path))) {
+      const form = await request.formData().catch(() => null);
+      const note = form ? text(form, 'note', 500) : '';
+      if (!note) return refuse(kit, 400, 'A note for the student is required.');
+      const r = await passPaperByFaculty(env, decodeURIComponent(m[1]), { by: user, note });
+      if (r.error) return refuse(kit, r.status, r.error);
+      return back('papers', r.emailed ? 'paperpassed-emailed' : 'paperpassed');
+    }
   }
   return kit.html('<p>No such page.</p>', 404);
 }

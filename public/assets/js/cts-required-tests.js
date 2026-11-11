@@ -933,7 +933,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "1peterpaper",
    "page": "CTS1PeterPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSACTS": [
@@ -947,7 +947,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "actspaper",
    "page": "CTSActsPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSAL": [
@@ -961,7 +961,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "alpaper",
    "page": "CTSALPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSAPOL": [
@@ -975,7 +975,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "apolpaper",
    "page": "CTSApolPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSBIBLECHARACTERS2": [
@@ -989,7 +989,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "biblecharacters2paper",
    "page": "CTSBibleCharacters2Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSBIBLECHARACTERS": [
@@ -1003,7 +1003,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "biblecharacterspaper",
    "page": "CTSBibleCharactersPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSBIBLE": [
@@ -1017,7 +1017,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "biblepaper",
    "page": "CTSBiblePaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSCE": [
@@ -1031,7 +1031,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "cepaper",
    "page": "CTSCEPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSCG": [
@@ -1045,7 +1045,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "cgpaper",
    "page": "CTSCGPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSCH": [
@@ -1059,7 +1059,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "chpaper",
    "page": "CTSCHPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "COUNSELING": [
@@ -1073,7 +1073,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "counselingpaper",
    "page": "CTSCounselingPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSCS": [
@@ -1087,7 +1087,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "cspaper",
    "page": "CTSCSPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSCULTS": [
@@ -1101,7 +1101,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "cultspaper",
    "page": "CTSCultsPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSDEACONFAMILYMINISTRY": [
@@ -1115,7 +1115,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "deaconfamilyministrypaper",
    "page": "CTSDeaconFamilyMinistryPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSDP": [
@@ -1129,7 +1129,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "dppaper",
    "page": "CTSDPPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECBAP1": [
@@ -1143,7 +1143,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecbap1paper",
    "page": "CTSElecBap1Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECBAP2": [
@@ -1157,7 +1157,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecbap2paper",
    "page": "CTSElecBap2Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECBAP3": [
@@ -1171,7 +1171,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecbap3paper",
    "page": "CTSElecBap3Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECBAP4": [
@@ -1185,7 +1185,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecbap4paper",
    "page": "CTSElecBap4Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECBAP5": [
@@ -1199,7 +1199,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecbap5paper",
    "page": "CTSElecBap5Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECPC1": [
@@ -1213,7 +1213,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecpc1paper",
    "page": "CTSElecPC1Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECPC2": [
@@ -1227,7 +1227,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecpc2paper",
    "page": "CTSElecPC2Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECPC3": [
@@ -1241,7 +1241,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecpc3paper",
    "page": "CTSElecPC3Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECPC4": [
@@ -1255,7 +1255,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecpc4paper",
    "page": "CTSElecPC4Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECPC5": [
@@ -1269,7 +1269,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecpc5paper",
    "page": "CTSElecPC5Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECREF1": [
@@ -1283,7 +1283,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecref1paper",
    "page": "CTSElecRef1Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECREF2": [
@@ -1297,7 +1297,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecref2paper",
    "page": "CTSElecRef2Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECREF3": [
@@ -1311,7 +1311,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecref3paper",
    "page": "CTSElecRef3Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECREF4": [
@@ -1325,7 +1325,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecref4paper",
    "page": "CTSElecRef4Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECREF5": [
@@ -1339,7 +1339,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecref5paper",
    "page": "CTSElecRef5Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECWES1": [
@@ -1353,7 +1353,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecwes1paper",
    "page": "CTSElecWes1Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECWES2": [
@@ -1367,7 +1367,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecwes2paper",
    "page": "CTSElecWes2Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECWES3": [
@@ -1381,7 +1381,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecwes3paper",
    "page": "CTSElecWes3Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECWES4": [
@@ -1395,7 +1395,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecwes4paper",
    "page": "CTSElecWes4Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSELECWES5": [
@@ -1409,7 +1409,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "elecwes5paper",
    "page": "CTSElecWes5Paper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "ETHICS": [
@@ -1423,7 +1423,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "ethicspaper",
    "page": "CTSEthicsPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSEVANGELISM": [
@@ -1437,7 +1437,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "evangelismpaper",
    "page": "CTSEvangelismPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSEVANPREACH": [
@@ -1451,7 +1451,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "evanpreachpaper",
    "page": "CTSEvanPreachPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSGALATIANS": [
@@ -1465,7 +1465,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "galatianspaper",
    "page": "CTSGalatiansPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSGENESIS": [
@@ -1479,7 +1479,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "genesispaper",
    "page": "CTSGenesisPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSHERMENEUTICS": [
@@ -1493,7 +1493,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "hermeneuticspaper",
    "page": "CTSHermeneuticsPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSHS": [
@@ -1507,7 +1507,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "hspaper",
    "page": "CTSHSPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSJOHN": [
@@ -1521,7 +1521,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "johnpaper",
    "page": "CTSJohnPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSJOSH": [
@@ -1535,7 +1535,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "joshpaper",
    "page": "CTSJoshPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSLA": [
@@ -1549,7 +1549,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "lapaper",
    "page": "CTSLAPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSLOC": [
@@ -1563,7 +1563,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "locpaper",
    "page": "CTSLOCPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSMATT": [
@@ -1577,7 +1577,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "mattpaper",
    "page": "CTSMattPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSMISSIONS": [
@@ -1591,7 +1591,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "missionspaper",
    "page": "CTSMissionsPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "STORYTEL": [
@@ -1605,7 +1605,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "narrativepaper",
    "page": "CTSNarrativePreachingPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSNT": [
@@ -1619,7 +1619,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "ntpaper",
    "page": "CTSNTPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSOTS": [
@@ -1633,7 +1633,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "otspaper",
    "page": "CTSOTSPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSPARABLES": [
@@ -1647,7 +1647,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "parablespaper",
    "page": "CTSParablesPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSPENTECOSTAL": [
@@ -1661,7 +1661,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "pentecostalpaper",
    "page": "CTSPentecostalPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSPENT": [
@@ -1675,7 +1675,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "pentpaper",
    "page": "CTSPentPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSPM": [
@@ -1689,7 +1689,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "pmpaper",
    "page": "CTSPMPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "WISESPEAK": [
@@ -1703,7 +1703,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "preachingpaper",
    "page": "CTSPreachingPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSPSALMS": [
@@ -1717,7 +1717,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "psalmspaper",
    "page": "CTSPsalmsPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSPT": [
@@ -1731,7 +1731,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "ptpaper",
    "page": "CTSPTPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSRADICAL": [
@@ -1745,7 +1745,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "radicalpaper",
    "page": "CTSRadicalPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSRE": [
@@ -1759,7 +1759,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "repaper",
    "page": "CTSREPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSREV": [
@@ -1773,7 +1773,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "revpaper",
    "page": "CTSRevPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSROMANS": [
@@ -1787,7 +1787,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "romanspaper",
    "page": "CTSRomansPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSST": [
@@ -1801,7 +1801,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "stpaper",
    "page": "CTSSTPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSWORSHIP": [
@@ -1815,7 +1815,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "worshippaper",
    "page": "CTSWorshipPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ],
  "CTSWR": [
@@ -1829,7 +1829,7 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "slug": "wrpaper",
    "page": "CTSWRPaper",
    "kind": "paper",
-   "requiredFrom": null
+   "requiredFrom": "2026-11-15T06:00:00Z"
   }
  ]
 };

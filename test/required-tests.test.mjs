@@ -89,8 +89,10 @@ const case1 = [{ code: CODE, track: 'mdiv', completed_at: before }];
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active(case1)) === null, 'Case 1: a master\'s completion the record held before activation needs no reading test');
 ok(A.textbookShortfall(CODE, 'thm', [BOOK], active([{ code: CODE, track: 'thm', completed_at: before }])) === null, 'Case 1 on the Th.M. as well');
 ok(/textbook test/.test(A.textbookShortfall(CODE, 'mdiv', [], active(case1)) || ''), 'Case 1 protects from the new test only: the textbook rule of 4 Oct is unchanged');
-ok(JSON.stringify(A.exemptionsFor(case1, active())) === JSON.stringify([READ]), 'Case 1: the record names the exemption, for the browser to show', A.exemptionsFor(case1, active()));
-ok(A.exemptionsFor(case1).length === (shipped && Date.parse(before) < Date.parse(shipped) ? 1 : 0), 'and names none while the test is not activated (one, once it is and the completion came first)');
+// (the textbook and reading tests only: a dated ministry paper is exempted beside them, #318)
+const testsOnly = (list) => list.filter((s) => !/paper$|final$/.test(s));
+ok(JSON.stringify(testsOnly(A.exemptionsFor(case1, active()))) === JSON.stringify([READ]), 'Case 1: the record names the exemption, for the browser to show', A.exemptionsFor(case1, active()));
+ok(testsOnly(A.exemptionsFor(case1)).length === (shipped && Date.parse(before) < Date.parse(shipped) ? 1 : 0), 'and names none while the test is not activated (one, once it is and the completion came first)');
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: CODE, track: 'mdiv', completed_at: '2026-10-20 15:00:00' }])) === null,
   'Case 1 with the time as SQLite writes it');
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSPENTECOSTALMDIVCERTIFICATE', track: 'mdiv', completed_at: before }])) === null,

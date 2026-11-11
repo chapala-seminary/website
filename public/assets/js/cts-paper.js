@@ -57,6 +57,7 @@
     passed: { en: "Your paper meets the standard.", es: "Su trabajo cumple el nivel.", fr: "Votre travail atteint le niveau requis." },
     revise: { en: "Not yet at the standard. Read the comments, revise your paper below and submit it again.", es: "Aún no cumple el nivel. Lea los comentarios, revise su trabajo abajo y envíelo de nuevo.", fr: "Pas encore au niveau requis. Lisez les commentaires, révisez votre travail ci-dessous et envoyez-le de nouveau." },
     unavailable: { en: "Your last version could not be graded. Please submit it again.", es: "Su última versión no pudo calificarse. Envíela de nuevo, por favor.", fr: "Votre dernière version n’a pas pu être corrigée. Veuillez l’envoyer de nouveau." },
+    review: { en: "If you believe this grade is wrong, you may ask the faculty to review it: email info@chapalaseminary.org with your student code and the name of the course.", es: "Si cree que esta calificación no es correcta, puede pedir que la facultad la revise: escriba a info@chapalaseminary.org con su código de estudiante y el nombre del curso.", fr: "Si vous pensez que cette note est erronée, vous pouvez demander à la faculté de la revoir : écrivez à info@chapalaseminary.org avec votre code d’étudiant et le nom du cours." },
     total: { en: "Score: ", es: "Puntuación: ", fr: "Note : " },
     need: { en: " of 100 (meets the standard at ", es: " de 100 (cumple el nivel con ", fr: " sur 100 (niveau requis : " },
     version: { en: "Version ", es: "Versión ", fr: "Version " },
@@ -115,7 +116,7 @@
       h += '<p class="tb-wait">' + t(W.pending) + "</p>";
       if (!polling) polling = setTimeout(refresh, 20000);
     } else if (a.status === "unavailable") {
-      h += '<p class="tb-bad">' + t(W.unavailable) + "</p>";
+      h += '<p class="tb-bad">' + t(W.unavailable) + "</p>" + '<p class="pp-review">' + t(W.review) + "</p>";
     } else {
       if (a.status === "passed") lsSet(KEY.passed, String(a.gradedAt || "").slice(0, 10) || new Date().toISOString().slice(0, 10));
       h += '<p class="' + (a.status === "passed" ? "tb-ok" : "tb-bad") + '"><strong>' + (a.status === "passed" ? "&#10003; " + t(W.passed) : t(W.revise)) + "</strong></p>" +
@@ -124,7 +125,8 @@
       (a.scores || []).forEach(function (s) {
         h += "<tr><td>" + (CRIT[s.id] ? t(CRIT[s.id]) : esc(s.id)) + "</td><td>" + s.points + " / " + s.max + "</td><td>" + esc(s.comment) + "</td></tr>";
       });
-      h += "</table>" + (a.feedback ? "<p><strong>" + t(W.overall) + ":</strong> " + esc(a.feedback) + "</p>" : "");
+      h += "</table>" + (a.feedback ? "<p><strong>" + t(W.overall) + ":</strong> " + esc(a.feedback) + "</p>" : "")
+        + (a.status === "revise" ? '<p class="pp-review">' + t(W.review) + "</p>" : "");
     }
     resultEl.innerHTML = h;
     var btn = host.querySelector("#pp-submit");

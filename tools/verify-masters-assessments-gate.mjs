@@ -11,6 +11,12 @@ const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const catalog = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
 const c = catalog.courses.ots, slug = 'ots', F = 'CTSOTSMDivCertificate.html';
 const shipped = fs.readFileSync('public/assets/js/cts-required-tests.js', 'utf8');
+// not in force: the same map with every final and paper undated (the pages carry the real dates)
+const offJs = (() => {
+  const w = {}; new Function('window', shipped)(w);
+  for (const list of Object.values(w.CTS_REQUIRED_ASSESSMENTS)) for (const t of list) t.requiredFrom = null;
+  return `window.CTS_REQUIRED_TESTS = ${JSON.stringify(w.CTS_REQUIRED_TESTS)};\nwindow.CTS_REQUIRED_ASSESSMENTS = ${JSON.stringify(w.CTS_REQUIRED_ASSESSMENTS)};`;
+})();
 const activeJs = (() => {
   const w = {}; new Function('window', shipped)(w);
   for (const t of w.CTS_REQUIRED_ASSESSMENTS.CTSOTS) t.requiredFrom = '2026-01-01T00:00:00Z';
@@ -26,7 +32,10 @@ const base = (track) => {
 };
 async function open(seed, active) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
-  if (active) await ctx.route(/\/assets\/js\/cts-required-tests\.js(\?.*)?$/, (r) => r.fulfill({ status: 200, contentType: 'application/javascript', body: activeJs }));
+  // the record and the server's dates stay out of these cases: the test
+  // suite's server sends its own "not yet" dates for papers (browserRequiredFrom)
+  await ctx.route(/\/api\//, (r) => r.abort());
+  await ctx.route(/\/assets\/js\/cts-required-tests\.js(\?.*)?$/, (r) => r.fulfill({ status: 200, contentType: 'application/javascript', body: active ? activeJs : offJs }));
   const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.goto(`${BASE}/${c.pages}Unit${c.units[0]}.html`);
   await p.evaluate((s) => { localStorage.clear(); for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, seed);
@@ -43,7 +52,7 @@ async function open(seed, active) {
 }
 const passed = { cts_textbook_otsfinal_passed: '1', cts_textbook_otspaper_passed: '1' };
 const cases = [
-  ['as shipped: an M.Div. student without the final and paper gets the diploma, as today', base('mdiv'), false, true],
+  ['not in force: an M.Div. student without the final and paper gets the diploma, as before', base('mdiv'), false, true],
   ['dated: neither passed -> held, naming both', base('mdiv'), true, false, /final exam and the ministry paper/],
   ['dated: final only -> held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, /ministry paper is still/],
   ['dated: paper only -> held for the final', { ...base('mdiv'), cts_textbook_otspaper_passed: '1' }, true, false, /final synthesis exam is still/],
@@ -68,14 +77,14 @@ async function unit(seed, isDated) {
   await p.goto(`${BASE}/${LAST}`);
   await p.evaluate((s) => { localStorage.clear(); for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, seed);
   await p.reload(); await p.waitForTimeout(1500);
-  if (isDated) await p.evaluate((v) => localStorage.setItem('cts_required_from', v), dated);
+  await p.evaluate((v) => localStorage.setItem('cts_required_from', v), isDated ? dated : JSON.stringify({ otsfinal: '2099-01-01T00:00:00Z', otspaper: '2099-01-01T00:00:00Z' }));
   const r = await p.evaluate(() => { const comp = window.CTS_UNIT && window.CTS_UNIT.completion;
     return { complete: window.CTSRecord.isComplete(comp), pending: window.CTSRecord.pendingTests(comp).map((t) => t.slug) }; });
   await ctx.close();
   return { ...r, errs };
 }
 for (const [label, seed, isDated, complete, pending] of [
-  ['unit page, as shipped: complete with units and tests', base('mdiv'), false, true, []],
+  ['unit page, not in force: complete with units and tests', base('mdiv'), false, true, []],
   ['unit page, dated: held for both', base('mdiv'), true, false, ['otsfinal', 'otspaper']],
   ['unit page, dated, final passed: held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, ['otspaper']],
   ['unit page, dated, both passed: complete', { ...base('mdiv'), ...passed }, true, true, []],
