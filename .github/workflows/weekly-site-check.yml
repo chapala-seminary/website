@@ -1,0 +1,41 @@
+name: Weekly site check
+# Once a week, load the live site's key pages in all four languages and check
+# they work (tools/weekly-site-check.mjs, from the 6 Nov 2026 audit). Read only.
+# When something is wrong it opens one GitHub issue labelled "weekly-site-check"
+# (or comments on the open one), so Chat, Claude and Robert see it.
+on:
+  schedule:
+    - cron: '17 13 * * 1'   # Mondays 13:17 UTC (07:17 in Chapala)
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: weekly-site-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check the live site
+        id: check
+        run: |
+          set -o pipefail
+          node tools/weekly-site-check.mjs 2>&1 | tee site-check.txt
+      - name: Report a problem as a GitHub issue
+        if: failure() && steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          body="$(printf 'The weekly check of the live site found a problem.\n\n```\n%s\n```\n\nRun: %s' "$(grep -E 'PROBLEM|problem\(s\)|Checking|not usable' site-check.txt | head -40)" "$RUN_URL")"
+          gh label create weekly-site-check --color D93F0B --description "Weekly live-site check" 2>/dev/null || true
+          open=$(gh issue list --label weekly-site-check --state open --json number --jq '.[0].number')
+          if [ -n "$open" ]; then gh issue comment "$open" --body "$body"; else gh issue create --title "Weekly site check: something on the live site needs attention" --label weekly-site-check --body "$body"; fi

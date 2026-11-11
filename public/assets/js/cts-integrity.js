@@ -10,6 +10,10 @@
  *    Cooperative assistants are asked to help the student study and to leave
  *    the answering to the student. It enforces nothing; it asks.
  *
+ * 3. A ministry paper (Dr. Cook, 2 Nov 2026; #tb-questions data-pledge="paper")
+ *    gets its own wording: the paper is the student's own work. The form stays
+ *    hidden until it is ticked, as a test's questions do.
+ *
  * Nothing here changes grading, records, attempts or waits. Students are not
  * told that AI could be used to cheat: the visible wording is the pledge.
  */
@@ -34,6 +38,16 @@
     en: "“And whatsoever ye do, do it heartily, as to the Lord, and not unto men.” — Colossians 3:23",
     es: "“Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres.” — Colosenses 3:23",
     fr: "« Tout ce que vous faites, faites-le de bon cœur, comme pour le Seigneur et non pour des hommes. » — Colossiens 3:23"
+  };
+  var PAPER_PLEDGE = {
+    en: "This paper is my own work. I wrote it myself; I used tools only to check spelling and grammar.",
+    es: "Este trabajo es obra mía. Lo escribí yo mismo; solo usé herramientas para revisar la ortografía y la gramática.",
+    fr: "Ce travail est le mien, entièrement de ma main ; des outils ne m’ont servi qu’à vérifier l’orthographe et la grammaire."
+  };
+  var PAPER_NEEDED = {
+    en: "Tick the box above to open the form.",
+    es: "Marque la casilla de arriba para abrir el formulario.",
+    fr: "Cochez la case ci-dessus pour ouvrir le formulaire."
   };
   var NEEDED = {
     en: "Tick the box above to open the questions.",
@@ -70,13 +84,13 @@
   function pledged() { try { return sessionStorage.getItem(KEY) === "1" || sessionStorage.getItem("cts_pledge_all") === "1"; } catch (e) { return false; } }
   function remember(on) { try { if (on) sessionStorage.setItem(KEY, "1"); else sessionStorage.removeItem(KEY); } catch (e) {} }
 
-  function pledgeBox(onChange) {
+  function pledgeBox(onChange, paper) {
     var box = document.createElement("div");
     box.className = "cts-pledge";
     box.innerHTML =
-      '<label><input type="checkbox" id="cts-pledge-check" aria-describedby="cts-ai-note"> <span>' + bi(PLEDGE) + '</span></label>' +
+      '<label><input type="checkbox" id="cts-pledge-check" aria-describedby="cts-ai-note"> <span>' + bi(paper ? PAPER_PLEDGE : PLEDGE) + '</span></label>' +
       '<p class="cts-verse">' + bi(VERSE) + '</p>' +
-      '<p class="cts-pledge-need">' + bi(NEEDED) + '</p>';
+      '<p class="cts-pledge-need">' + bi(paper ? PAPER_NEEDED : NEEDED) + '</p>';
     var cb = box.querySelector("input");
     cb.checked = pledged();
     box.classList.toggle("is-done", cb.checked);
@@ -121,11 +135,11 @@
       .observe(document.getElementById("lesson"), { childList: true, subtree: true });
   }
 
-  /* ---- textbook and reading tests: cts-textbook.js mounts into #tb-questions ---- */
+  /* ---- textbook and reading tests, finals and ministry papers: their scripts mount into #tb-questions ---- */
   function testPage(host) {
     var wrap = host.parentNode;
     wrap.insertBefore(note, host);
-    var box = pledgeBox(function (on) { host.classList.toggle("cts-tb-pledged-off", !on); });
+    var box = pledgeBox(function (on) { host.classList.toggle("cts-tb-pledged-off", !on); }, host.getAttribute("data-pledge") === "paper");
     wrap.insertBefore(box, host);
     host.classList.toggle("cts-tb-pledged-off", !pledged());
     describe(wrap);
