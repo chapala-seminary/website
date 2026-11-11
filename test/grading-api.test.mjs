@@ -213,7 +213,7 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   const before = (await start(code, 'u:CTSGenesis/1')).body;
   eq([before.track, before.needs.sa], ['assoc', 0], 'track change: Associate starts with reflection only');
   await post('/api/mc', { code, attemptId: before.attemptId, qid: 'u:CTSGenesis/1/mc/0', choice: unitFile('CTSGenesis',1).mc[0].answer });
-  await post('/api/sync', { code, student: { track: 'mdiv', goal: '' } });
+  await post('/api/sync', { code, student: { track: 'mdiv', goal: '', trackChange: true } });
   const after = (await start(code, 'u:CTSGenesis/1')).body;
   eq([after.attemptId, after.track, after.needs.sa], [before.attemptId, 'mdiv', 9], 'track change: same open sitting now requires master’s written answers');
   ok(!!after.answered['u:CTSGenesis/1/mc/0'], 'track change: existing answers are retained');

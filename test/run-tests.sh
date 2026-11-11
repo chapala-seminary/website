@@ -19,6 +19,8 @@ CONFIG=test/wrangler.local.jsonc
 
 node tools/private-units.mjs --check
 node --test test/release-governance.test.mjs
+# Faculty-review World Library catalog; counts, URLs, filters, accessibility.
+node --test test/world-library-v1.test.mjs
 node --test test/track-sync-ack.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
@@ -261,6 +263,9 @@ node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
+# A routine save from an old device cannot change the track; only a chosen change can (#298).
+API_BASE="http://127.0.0.1:$PORT" node test/track-explicit-change.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/honors-on-record.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/legacy-sync-window.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs

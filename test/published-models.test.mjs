@@ -9,7 +9,7 @@ for (const course of fs.readdirSync('src/content/lessons')) {
     units.push(JSON.parse(fs.readFileSync(`src/content/units/${course}/${file}`, 'utf8')));
   }
 }
-assert.equal(units.length, 666);  // 466 + 200 denominational elective units (24 Oct 2026)
+assert.equal(units.length, 678);  // 466 + 200 denominational elective units (24 Oct 2026) + 12 Islam (7 Nov 2026)
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const page = await browser.newPage();
