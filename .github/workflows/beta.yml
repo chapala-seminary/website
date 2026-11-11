@@ -24,7 +24,9 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      # GitHub-hosted Ubuntu already has the Chromium shared libraries; avoid
+      # apt font downloads when Ubuntu mirrors have intermittent DNS failures.
+      - run: npx playwright install chromium
       # Private answer banks must be present before build/test: public textbook
       # JSON no longer holds answer/accept. continue-on-error: a missing token
       # must not fail the job at checkout; later steps fail clearly if keys are absent.
