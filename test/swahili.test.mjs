@@ -145,7 +145,8 @@ try {
   eq(await page.locator('#cts-show-source').count(), 1, 'Show English is offered');
   ok(/Onyesha Kiingereza/.test(await page.locator('.cts-source-control').innerText()), 'Show English is in Swahili');
   ok(/Sehemu ya 1/.test(await page.title()), `title: ${await page.title()}`);
-  eq(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex,follow', 'Swahili pages are not indexed yet');
+  eq(await page.locator('meta[name="robots"][content*="noindex"]').count(), 0, 'Swahili pages can be found by search engines (Wayne, 3 Nov 2026)');
+  ok(/info@chapalaseminary\.org/.test(await page.locator('.cts-translation-pending').first().innerHTML()), 'the draft notice invites translation corrections');
 
   // an elective unit with its Swahili (B-C1), and a lesson with no Swahili yet
   // (the first one found, if any is left): never a broken page
