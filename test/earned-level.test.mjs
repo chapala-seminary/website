@@ -9,7 +9,7 @@
  * before it change which twenty it is shown. Every name here is made up.
  */
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { singleSections } from '../tools/single-pages-lib.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
