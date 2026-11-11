@@ -21,7 +21,7 @@ import { isPrivateReading, readingQuestions } from './grading-keys-lib.mjs';
 const drafts = new Set();
 const reviewed = new Set();
 
-export const NOTICE = '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; vous pouvez afficher le texte anglais de référence.</aside>';
+export const NOTICE = '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; vous pouvez afficher le texte anglais de référence. Une traduction à améliorer ? Écrivez-nous à <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>.</aside>';
 const ASKS = ' Vos réponses sont acceptées en français ou en anglais.';
 
 const json = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));

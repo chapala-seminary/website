@@ -31,6 +31,9 @@ export const PENDING_FACULTY_REVIEW = new Set(['otsreadings', 'ntreadings', 'str
    required is a decision for Wayne, by an explicit requiredFrom date
    (tools/activate-required.mjs), not by this default. test/eight-optional.test.mjs
    checks the rule. */
+/* The Islam course's reading and textbook tests (8 Nov 2026) arrive optional
+   in the same way, until Wayne sets a requiredFrom date for them. */
+export const NEW_COURSE_TESTS_PENDING = new Set(['islamreadings', 'islamtext']);
 export const ELECTIVE_TEST_PREFIX = 'elec';
 export const ELECTIVE_TESTS_PENDING = Object.freeze({
   has: (slug) => typeof slug === 'string' && slug.startsWith(ELECTIVE_TEST_PREFIX),
@@ -40,6 +43,6 @@ export function activatedTests(env, tests = catalog.textbooks) {
   const date = env.MASTER_TESTS_ACTIVE_FROM || env.MASTER_TESTS_ACTIVATION;
   if (!date || Number.isNaN(Date.parse(date)) || Date.parse(date) > Date.now()) return {};
   return Object.fromEntries(Object.entries(tests)
-    .filter(([slug, t]) => t.requiredFrom === null && !PENDING_FACULTY_REVIEW.has(slug) && !ELECTIVE_TESTS_PENDING.has(slug))
+    .filter(([slug, t]) => t.requiredFrom === null && !PENDING_FACULTY_REVIEW.has(slug) && !ELECTIVE_TESTS_PENDING.has(slug) && !NEW_COURSE_TESTS_PENDING.has(slug))
     .map(([slug]) => [slug, date]));
 }

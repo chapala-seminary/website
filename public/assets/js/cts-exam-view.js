@@ -129,7 +129,7 @@
                        'Quand vous êtes prêt, ouvrez l\u2019examen. La leçon sera masquée pendant l\u2019examen.') + '</p>' +
         // the seminary's view of examinations (Dr. Cook, 1 Oct 2026), where every student sees it
         '<p class="cts-exam-aim">' + wording('This exam is here to help you learn, not to trick you. If you do not pass the first time, review the lesson and try again &mdash; you may retake it as many times as you need.',
-                       'Este examen está para ayudarle a aprender, no para engañarle. Si no aprueba la primera vez, repase la lección e inténtelo de nuevo &mdash; puede volver a presentarlo cuantas veces lo necesite.',
+                       'Este examen está para ayudarle a aprender, no para ponerle trampas. Si no aprueba la primera vez, repase la lección e inténtelo de nuevo &mdash; puede volver a presentarlo cuantas veces lo necesite.',
                        'Cet examen est là pour vous aider à apprendre, non pour vous piéger. Si vous ne réussissez pas du premier coup, relisez la leçon et réessayez\u00a0: vous pouvez le repasser autant de fois que nécessaire.') + '</p>' +
         '<button type="button" id="cts-exam-open">' + wording('Take the exam', 'Presentar el examen', 'Passer l\u2019examen') + '</button>';
     bar.querySelector("button").addEventListener("click", function () { set(!open, true); });

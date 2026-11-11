@@ -29,6 +29,10 @@ function rewriteLinks(root, file, lang, files) {
     for (const attr of ['href', 'src', 'action']) {
       const v = node.getAttribute(attr);
       if (!v || /^(?:[a-z]+:|\/\/|#)/i.test(v)) continue;
+      // A link written inside a page script's template text (`href="CTSJohnUnit${i}.html"`)
+      // is not a real link: rewriting it turned "${" into "$%7B" and broke every
+      // numbered unit button on the certificate and Ethics pages (audit, 6 Nov 2026).
+      if (v.includes('${')) continue;
       const url = new URL(v, `${SITE}/${file}`);
       if (url.origin !== SITE) continue;
       const page = url.pathname.slice(1);
@@ -179,8 +183,8 @@ export function buildLanguagePages(dir) {
       for (const node of h.querySelectorAll('link[rel="alternate"][hreflang], link[rel="canonical"]')) node.remove();
       h.insertAdjacentHTML('beforeend', LANGUAGES.map(l => `<link rel="alternate" hreflang="${l}" href="${SITE}${localeHref(file, l)}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE}${localeHref(file, 'en')}">` + `<link rel="canonical" href="${SITE}${localeHref(file, lang)}"><link rel="stylesheet" href="/assets/css/cts-languages.css">`);
       if (lang === 'fr' && (!translated || !complete)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
-      // A dictionary language is new and in review: none of its pages are indexed yet.
-      if (fromDictionary(lang)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
+      // A dictionary language (Swahili) is indexed so search engines can find it (Wayne, 3 Nov 2026): readers
+      // find translation problems and tell us; the draft notice on each page invites them to.
       // Said in the reader's language. Where the page asks questions, a French
       // reader is told which language the answers are marked in.
       const asks = !!root.querySelector('#questionsContainer, #tb-questions, script[src*="cts-fill.js"], script[src*="cts-engine.js"]');
@@ -208,7 +212,7 @@ export function buildLanguagePages(dir) {
       if (draftDictionary) b.insertAdjacentHTML('afterbegin', `<aside class="cts-translation-pending" lang="${lang}">${dictNotice(lang, asks ? 'draftAnswers' : 'draft')}</aside>`);
       if (draftFrench) {
         if (!h.querySelector('meta[name="robots"]')) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
-        b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; cochez « Afficher l’anglais » pour voir le texte de référence.' + (asks ? ' Vos réponses sont acceptées en français ou en anglais.' : '') + '</aside>');
+        b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; cochez « Afficher l’anglais » pour voir le texte de référence. Une traduction à améliorer ? Écrivez-nous à <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>.' + (asks ? ' Vos réponses sont acceptées en français ou en anglais.' : '') + '</aside>');
       }
       if (notice) { const main = root.querySelector('main'); if (main) main.insertAdjacentHTML('afterbegin', notice); else b.insertAdjacentHTML('afterbegin', notice); }
       // Language script must run before any legacy page initialization.
