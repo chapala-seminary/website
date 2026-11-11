@@ -23,6 +23,8 @@ node --test test/release-governance.test.mjs
 node --test test/world-library-v1.test.mjs
 node --test test/ethics-unit-links.test.mjs
 node --test test/track-sync-ack.test.mjs
+# Legacy Associate goals must reach the server on an ordinary sync poll.
+node --test test/track-adopt-poll.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
