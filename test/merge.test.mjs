@@ -13,7 +13,7 @@
 //   node test/merge.test.mjs                         (the SQL half only)
 //   API_BASE=... MERGE_STATE=... MERGE_CONFIG=... node test/merge.test.mjs
 import { DatabaseSync } from 'node:sqlite';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 

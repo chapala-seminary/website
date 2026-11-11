@@ -15,7 +15,7 @@
  * Every name and answer here is made up for the test.
  */
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { chromium } from 'playwright';
 import { singleSections } from '../tools/single-pages-lib.mjs';
 
