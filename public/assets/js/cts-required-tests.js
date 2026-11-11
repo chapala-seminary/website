@@ -1831,5 +1831,13 @@ window.CTS_REQUIRED_ASSESSMENTS = {
    "kind": "paper",
    "requiredFrom": "2026-11-15T06:00:00Z"
   }
+ ],
+ "CTSISLAM": [
+  {
+   "slug": "islampaper",
+   "page": "CTSIslamPaper",
+   "kind": "paper",
+   "requiredFrom": "2026-11-15T06:00:00Z"
+  }
  ]
 };
