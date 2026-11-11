@@ -188,6 +188,10 @@
       lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
+      // honors readings (cts_honors_v1:<course>): the student's own attestation,
+      // kept on the record too so a new browser still shows "with honors"
+      honors: keys().filter(function (k) { return /^cts_honors_v1:[A-Za-z0-9]{1,40}$/.test(k) && get(k); })
+        .map(function (k) { return { course: k.slice('cts_honors_v1:'.length), data: get(k) }; }),
     };
   }
 
@@ -199,6 +203,7 @@
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
       (s.textbooks || []).map(function (t) { return t.slug; }).sort(),
       s.lang,
+      (s.honors || []).map(function (h) { return h.course; }).sort(),
     ]);
   }
 
@@ -299,6 +304,13 @@
       var mk = 'cts_' + p.course + '_u' + p.unit + '_mc_passed';
       if (get(mk) !== '1') set(mk, '1');
       writeLegacy(p.course, p.unit);                   // the keys the certificate page reads
+    });
+
+    // An honors reading recorded on another device: written here as it was there.
+    (state.honors || []).forEach(function (h) {
+      if (!h || !/^[A-Za-z0-9]{1,40}$/.test(String(h.course || '')) || typeof h.data !== 'string') return;
+      var hk = 'cts_honors_v1:' + h.course;
+      if (!get(hk)) set(hk, h.data);
     });
 
     (state.textbooks || []).forEach(function (t) {
@@ -442,7 +454,7 @@
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
-                             textbooks: snap.textbooks, lang: snap.lang })
+                             textbooks: snap.textbooks, honors: snap.honors, lang: snap.lang })
         .then(function (state) { return { state: state, code: c }; });
     }).then(function (packed) {
       if (!packed) return null;
