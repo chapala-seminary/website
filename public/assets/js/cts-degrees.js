@@ -113,7 +113,10 @@
      once, with the record's numbers. Once per new state, so it cannot loop. */
   var shown = {};
   function sig(count, missing) { return count + "/" + missing; }
-  if (typeof document !== "undefined" && document.addEventListener) document.addEventListener("cts-sync-applied", function () {
+  if (typeof document !== "undefined" && document.addEventListener) document.addEventListener("cts-sync-applied", function (e) {
+    // Only the student's record, not the seminary's settings, which arrive for
+    // every visitor (the reload then cut across the page's own; beta, 10 Nov).
+    if (!(e && e.detail && e.detail.record)) return;
     var changed = Object.keys(shown).filter(function (d) {
       var before = shown[d], now = status(d);
       return now && sig(now.count, now.missing.length) !== before;

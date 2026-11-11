@@ -311,8 +311,9 @@
       var k = 'cts_textbook_' + slug + '_exempt';
       if (!get(k)) set(k, 'record');
     });
-    // pages that show something by these keys (the certificate's gate) look again
-    try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
+    // pages that show something by these keys (the certificate's gate) look again;
+    // detail.record says the student's own record arrived (cts-degrees.js)
+    try { document.dispatchEvent(new CustomEvent('cts-sync-applied', { detail: { record: true } })); } catch (e) {}
   }
 
   // ---- the network, which is always allowed to fail ------------------------
