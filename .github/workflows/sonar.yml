@@ -1,0 +1,48 @@
+name: Code health (SonarQube Cloud)
+# Free SonarQube Cloud analysis (free for public repositories). Settings live in
+# sonar-project.properties; setup is in docs/code-health-sonarqube.md.
+#
+# Advisory only: this job reports findings to SonarQube Cloud and as a PR
+# decoration, but never blocks a build, a beta deploy or a release. Until the
+# repository secret SONAR_TOKEN exists, it skips with a notice.
+on:
+  push:
+    branches: [main, beta]
+  pull_request:
+    branches: [main, beta]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+concurrency:
+  group: cts-sonar-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  sonar:
+    name: SonarQube Cloud scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check for the SonarQube Cloud token
+        id: token
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -n "$SONAR_TOKEN" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::SONAR_TOKEN is not set (or this is a fork PR); skipping the SonarQube scan. See docs/code-health-sonarqube.md."
+          fi
+      # Full history so SonarQube can tell new code from old code.
+      # The private assessment-keys repository is deliberately NOT checked out.
+      - uses: actions/checkout@v4
+        if: steps.token.outputs.present == 'true'
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: SonarQube Cloud scan
+        if: steps.token.outputs.present == 'true'
+        uses: SonarSource/sonarqube-scan-action@e805d875275f728fac1885b413934be6d7c63f65 # v8.4.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
