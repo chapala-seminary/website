@@ -54,6 +54,9 @@ existing production baseline/token/enablement setup is complete. Read
 - **Don't lose student progress.** `localStorage` keys are a contract.
 - Before committing: `npm run build && test/run-tests.sh`. Build on the Mac —
   `node_modules` are macOS binaries.
+- The journey suite (`npm run test:e2e`, `docs/e2e-journeys.md`) runs whole
+  student and staff journeys across devices. Run it too when a change touches
+  what a student sees across pages or devices; CI runs it on every PR.
 - Plain language: define a term or don't use it.
 
 ## Cursor Cloud specific instructions

@@ -118,6 +118,8 @@
         var oldTrack = localStorage.getItem(KEY), oldGoal = localStorage.getItem('cts_goal');
         localStorage.setItem(KEY, newTrack);
         localStorage.setItem("cts_goal", newGoal);
+        // A deliberate change: the next save may change the track on the record (#298).
+        localStorage.setItem("cts_track_change", "1");
         // Some courses (Joshua, Matthew, Pentateuch) read the track from the
         // student record instead of the standalone key — update that too.
         try {
@@ -134,6 +136,7 @@
         var sync = window.CTS_SYNC && window.CTS_SYNC.sync;
         Array.prototype.forEach.call(wrap.querySelectorAll('button'), function (button) { button.disabled = true; });
         function failed() {
+          localStorage.removeItem("cts_track_change");
           if (oldTrack === null) localStorage.removeItem(KEY); else localStorage.setItem(KEY, oldTrack);
           if (oldGoal === null) localStorage.removeItem('cts_goal'); else localStorage.setItem('cts_goal', oldGoal);
           var current = JSON.parse(localStorage.getItem('cts_student') || 'null');
@@ -147,7 +150,13 @@
             : 'The track change could not be saved. Check your connection and try again. Your answers are kept.';
         }
         Promise.resolve(sync ? sync() : null).then(function (state) {
-          if (window.CTSGrading && (!state || !state.student || state.student.track !== newTrack || (state.student.goal || '') !== newGoal)) return failed();
+          // A registered student's change counts only once the seminary has it, on
+          // every page (a catalog page reloading on a failed sync looked saved, #183).
+          // A visitor with no record, or a page with no sync, keeps the local change.
+          var registered = false;
+          try { registered = !!localStorage.getItem('cts_student_code'); } catch (e) {}
+          var mustConfirm = !!window.CTSGrading || (!!sync && registered);
+          if (mustConfirm && (!state || !state.student || state.student.track !== newTrack || (state.student.goal || '') !== newGoal)) return failed();
           location.reload();
         }, failed);
       });

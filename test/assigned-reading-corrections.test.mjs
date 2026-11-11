@@ -12,6 +12,7 @@ let checks = 0;
 try {
   for (const book of books) for (const lang of ['en', 'es', 'fr']) for (const scenario of ['unfinished', 'passed', 'current']) {
     const context = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+    await context.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     const passed = scenario === 'passed' ? '2026-10-01' : null;
     const revision = scenario === 'current' ? book.test.revision : 'old-assignment';
     await context.addInitScript(({ slug, revision, passed, lang }) => {
