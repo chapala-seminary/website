@@ -18,11 +18,29 @@ export const BASE = `http://127.0.0.1:${PORT}`;
 const STATE = process.env.E2E_STATE || '.wrangler-e2e';
 const CONFIG = 'test/wrangler.local.jsonc';
 
-/** Run SQL against the suite's database; returns the rows of each statement. */
+/** Run SQL against the suite's database; returns the rows of each statement.
+ *
+ *  This writes from a second process while the Worker -- serving several
+ *  journeys at once -- writes to the same SQLite file, and SQLite turns a
+ *  writer away while another holds the lock (SQLITE_BUSY, "database is
+ *  locked"; first seen in CI on beta run 43071560767). That is the test's own
+ *  set-up colliding with the site, not the site failing, so a busy database
+ *  is tried again a few times. Any other failure says what wrangler said. */
 export function db(sql) {
-  const out = execFileSync('npx', ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE,
-    '--config', CONFIG, '--json', '--command', sql], { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 64 << 20 }).toString();
-  return JSON.parse(out.slice(out.indexOf('['))).map((r) => r.results);
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const out = execFileSync('npx', ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE,
+        '--config', CONFIG, '--json', '--command', sql], { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 64 << 20 }).toString();
+      return JSON.parse(out.slice(out.indexOf('['))).map((r) => r.results);
+    } catch (e) {
+      const said = `${e.stdout || ''}\n${e.stderr || ''}`;
+      if (attempt < 6 && /SQLITE_BUSY|database is locked/i.test(said)) {
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 300 * attempt);
+        continue;
+      }
+      throw new Error(`d1 execute failed (attempt ${attempt}): ${sql.slice(0, 120)}\n${said.trim().split('\n').slice(-12).join('\n')}`);
+    }
+  }
 }
 export const rows = (sql) => db(sql)[0];
 
