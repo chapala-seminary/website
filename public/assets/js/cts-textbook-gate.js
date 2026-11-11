@@ -37,6 +37,11 @@
   var map = window.CTS_REQUIRED_TESTS, code = pageCode();
   var tests = map && code && Object.prototype.hasOwnProperty.call(map, code) ? map[code]
     : (slug && page ? [{ slug: slug, page: page, kind: reading ? "reading" : "textbook" }] : []);
+  /* Then the course's final synthesis exam and ministry paper (#318, 11 Nov
+     2026), from the same generated script: they hold the diploma only once
+     dated, exactly as a dated test does. */
+  var amap = window.CTS_REQUIRED_ASSESSMENTS;
+  tests = tests.concat(amap && code && Object.prototype.hasOwnProperty.call(amap, code) ? amap[code] : []);
   if (!tests.length) return;
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function counts(t) {
@@ -106,6 +111,18 @@
     shown = state;
     note.style.display = hold ? "" : "none";
     if (!hold) return;
+    var finalPaper = left.filter(function (t) { return t.kind === "final" || t.kind === "paper"; });
+    left = left.filter(function (t) { return t.kind !== "final" && t.kind !== "paper"; });
+    if (!left.length) {
+      var fin = finalPaper.filter(function (t) { return t.kind === "final"; })[0], pap = finalPaper.filter(function (t) { return t.kind === "paper"; })[0];
+      var es = isEs(), links = [];
+      if (fin) links.push('<a href="' + fin.page + '.html">' + (es ? "El examen final de síntesis" : "The final synthesis exam") + '</a>');
+      if (pap) links.push('<a href="' + pap.page + '.html">' + (es ? "La tarea ministerial" : "The ministry paper") + '</a>');
+      note.innerHTML = es
+        ? "<strong>" + (fin && pap ? "Faltan el examen final y la tarea ministerial." : fin ? "Falta el examen final de síntesis." : "Falta la tarea ministerial.") + "</strong> En los trayectos M.Div. y Th.M. este curso se completa, y su certificado se emite, cuando también se aprueba" + (fin && pap ? "n ambos" : "") + ". " + links.join(" &nbsp;·&nbsp; ")
+        : "<strong>" + (fin && pap ? "The final exam and the ministry paper are still to pass." : fin ? "The final synthesis exam is still to pass." : "The ministry paper is still to pass.") + "</strong> On the M.Div. and Th.M. tracks this course is complete, and its certificate issued, when " + (fin && pap ? "both are" : "it is") + " passed as well. " + links.join(" &nbsp;·&nbsp; ");
+      return;
+    }
     if (left.length > 1) {
       var tb = left.filter(function (t) { return t.kind !== "reading"; })[0] || left[0];
       var rd = left.filter(function (t) { return t.kind === "reading"; })[0] || left[1];

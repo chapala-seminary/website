@@ -140,6 +140,26 @@ export function testsFor(code) {
  *  course could have two. */
 export function textbookFor(code) { return testsFor(code)[0] ?? null; }
 
+/** A course's final synthesis exam and ministry paper, by completion code
+ *  (worker/catalog.json `assessments`): final first, then paper. Each passes
+ *  into textbook_results under its own slug, as a textbook test does
+ *  (worker/grading/attempts.js for the final, worker/assignments.js for the
+ *  paper). On the master's tracks they hold a course's completion only once
+ *  activated, under the same rule as a dated test (testCounts): `requiredFrom`
+ *  null -- every one as shipped -- holds no one; from its moment it holds
+ *  every master's student except a master's completion of the course the
+ *  record already held before it (#318, 11 Nov 2026). */
+export function assessmentsFor(code) {
+  const up = String(code || '').toUpperCase();
+  const out = [];
+  for (const [slug, t] of Object.entries(catalog.assessments || {})) if (t.code === up && (t.kind === 'final' || t.kind === 'paper')) out.push(slug);
+  return out.sort((a, b) => (catalog.assessments[a].kind === 'final' ? 0 : 1) - (catalog.assessments[b].kind === 'final' ? 0 : 1) || (a < b ? -1 : 1));
+}
+/* A required item by slug: a textbook or reading test, or a final or paper. */
+function requiredItem(slug) {
+  return (catalog.textbooks || {})[slug] || (catalog.assessments || {})[slug] || null;
+}
+
 /** Whether a test counts toward a master's completion of `code`, judged by
  *  the seminary's own record (Dr. Cook and ChatGPT's authorization, 9 Oct
  *  2026). A test with no `requiredFrom` -- every textbook, and Genesis and
@@ -158,7 +178,7 @@ export function textbookFor(code) { return testsFor(code)[0] ?? null; }
  *  ctx.completions: [{ code, track, completed_at }] from the record;
  *  ctx.now: an ISO time, the server's own clock unless a test passes one. */
 export function testCounts(slug, code, ctx = {}) {
-  const t = (catalog.textbooks || {})[slug];
+  const t = requiredItem(slug);
   if (!t) return false;
   /* ctx.requiredFrom: { slug: time } stands in for the catalog's date. Only
      the test suite passes one (worker/api.js testRequiredFrom); a deployed
@@ -194,7 +214,7 @@ function when(s) {
  *  (cts-sync.js keeps it as cts_textbook_<slug>_exempt). */
 export function exemptionsFor(completions, ctx = {}) {
   const out = [];
-  for (const [slug, t] of Object.entries(catalog.textbooks || {})) {
+  for (const [slug, t] of [...Object.entries(catalog.textbooks || {}), ...Object.entries(catalog.assessments || {})]) {
     const raw = ctx.requiredFrom && Object.prototype.hasOwnProperty.call(ctx.requiredFrom, slug) ? ctx.requiredFrom[slug] : t.requiredFrom;
     if (raw && !Number.isNaN(Date.parse(raw)) && exemptBefore(t.code, new Date(raw).toISOString(), completions)) out.push(slug);
   }
@@ -211,6 +231,13 @@ export function textbookShortfall(code, level, textbooks, ctx) {
     return catalog.textbooks[slug].kind === 'reading'
       ? `required-reading test not recorded as passed: ${slug}`
       : `textbook test not recorded as passed: ${slug}`;
+  }
+  // then the final and the paper, once activated (assessmentsFor)
+  for (const slug of assessmentsFor(code)) {
+    if (have.has(slug) || !testCounts(slug, code, ctx)) continue;
+    return catalog.assessments[slug].kind === 'final'
+      ? `final synthesis exam not recorded as passed: ${slug}`
+      : `ministry paper not recorded as passed: ${slug}`;
   }
   return null;
 }

@@ -919,3 +919,917 @@ window.CTS_REQUIRED_TESTS = {
   }
  ]
 };
+/* Each course's final synthesis exam and ministry paper: required on the
+ * M.Div. and Th.M. tracks only once dated (requiredFrom null: not in force). */
+window.CTS_REQUIRED_ASSESSMENTS = {
+ "CTS1PETER": [
+  {
+   "slug": "1peterfinal",
+   "page": "CTS1PeterFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "1peterpaper",
+   "page": "CTS1PeterPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSACTS": [
+  {
+   "slug": "actsfinal",
+   "page": "CTSActsFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "actspaper",
+   "page": "CTSActsPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSAL": [
+  {
+   "slug": "alfinal",
+   "page": "CTSALFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "alpaper",
+   "page": "CTSALPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSAPOL": [
+  {
+   "slug": "apolfinal",
+   "page": "CTSApolFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "apolpaper",
+   "page": "CTSApolPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSBIBLECHARACTERS2": [
+  {
+   "slug": "biblecharacters2final",
+   "page": "CTSBibleCharacters2Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblecharacters2paper",
+   "page": "CTSBibleCharacters2Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSBIBLECHARACTERS": [
+  {
+   "slug": "biblecharactersfinal",
+   "page": "CTSBibleCharactersFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblecharacterspaper",
+   "page": "CTSBibleCharactersPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSBIBLE": [
+  {
+   "slug": "biblefinal",
+   "page": "CTSBibleFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblepaper",
+   "page": "CTSBiblePaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSCE": [
+  {
+   "slug": "cefinal",
+   "page": "CTSCEFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "cepaper",
+   "page": "CTSCEPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSCG": [
+  {
+   "slug": "cgfinal",
+   "page": "CTSCGFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "cgpaper",
+   "page": "CTSCGPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSCH": [
+  {
+   "slug": "chfinal",
+   "page": "CTSCHFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "chpaper",
+   "page": "CTSCHPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "COUNSELING": [
+  {
+   "slug": "counselingfinal",
+   "page": "CTSCounselingFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "counselingpaper",
+   "page": "CTSCounselingPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSCS": [
+  {
+   "slug": "csfinal",
+   "page": "CTSCSFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "cspaper",
+   "page": "CTSCSPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSCULTS": [
+  {
+   "slug": "cultsfinal",
+   "page": "CTSCultsFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "cultspaper",
+   "page": "CTSCultsPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSDEACONFAMILYMINISTRY": [
+  {
+   "slug": "deaconfamilyministryfinal",
+   "page": "CTSDeaconFamilyMinistryFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "deaconfamilyministrypaper",
+   "page": "CTSDeaconFamilyMinistryPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSDP": [
+  {
+   "slug": "dpfinal",
+   "page": "CTSDPFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "dppaper",
+   "page": "CTSDPPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP1": [
+  {
+   "slug": "elecbap1final",
+   "page": "CTSElecBap1Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbap1paper",
+   "page": "CTSElecBap1Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP2": [
+  {
+   "slug": "elecbap2final",
+   "page": "CTSElecBap2Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbap2paper",
+   "page": "CTSElecBap2Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP3": [
+  {
+   "slug": "elecbap3final",
+   "page": "CTSElecBap3Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbap3paper",
+   "page": "CTSElecBap3Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP4": [
+  {
+   "slug": "elecbap4final",
+   "page": "CTSElecBap4Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbap4paper",
+   "page": "CTSElecBap4Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECBAP5": [
+  {
+   "slug": "elecbap5final",
+   "page": "CTSElecBap5Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecbap5paper",
+   "page": "CTSElecBap5Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC1": [
+  {
+   "slug": "elecpc1final",
+   "page": "CTSElecPC1Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpc1paper",
+   "page": "CTSElecPC1Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC2": [
+  {
+   "slug": "elecpc2final",
+   "page": "CTSElecPC2Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpc2paper",
+   "page": "CTSElecPC2Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC3": [
+  {
+   "slug": "elecpc3final",
+   "page": "CTSElecPC3Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpc3paper",
+   "page": "CTSElecPC3Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC4": [
+  {
+   "slug": "elecpc4final",
+   "page": "CTSElecPC4Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpc4paper",
+   "page": "CTSElecPC4Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECPC5": [
+  {
+   "slug": "elecpc5final",
+   "page": "CTSElecPC5Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecpc5paper",
+   "page": "CTSElecPC5Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF1": [
+  {
+   "slug": "elecref1final",
+   "page": "CTSElecRef1Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecref1paper",
+   "page": "CTSElecRef1Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF2": [
+  {
+   "slug": "elecref2final",
+   "page": "CTSElecRef2Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecref2paper",
+   "page": "CTSElecRef2Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF3": [
+  {
+   "slug": "elecref3final",
+   "page": "CTSElecRef3Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecref3paper",
+   "page": "CTSElecRef3Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF4": [
+  {
+   "slug": "elecref4final",
+   "page": "CTSElecRef4Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecref4paper",
+   "page": "CTSElecRef4Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECREF5": [
+  {
+   "slug": "elecref5final",
+   "page": "CTSElecRef5Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecref5paper",
+   "page": "CTSElecRef5Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES1": [
+  {
+   "slug": "elecwes1final",
+   "page": "CTSElecWes1Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwes1paper",
+   "page": "CTSElecWes1Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES2": [
+  {
+   "slug": "elecwes2final",
+   "page": "CTSElecWes2Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwes2paper",
+   "page": "CTSElecWes2Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES3": [
+  {
+   "slug": "elecwes3final",
+   "page": "CTSElecWes3Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwes3paper",
+   "page": "CTSElecWes3Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES4": [
+  {
+   "slug": "elecwes4final",
+   "page": "CTSElecWes4Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwes4paper",
+   "page": "CTSElecWes4Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSELECWES5": [
+  {
+   "slug": "elecwes5final",
+   "page": "CTSElecWes5Final",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "elecwes5paper",
+   "page": "CTSElecWes5Paper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "ETHICS": [
+  {
+   "slug": "ethicsfinal",
+   "page": "CTSEthicsFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "ethicspaper",
+   "page": "CTSEthicsPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSEVANGELISM": [
+  {
+   "slug": "evangelismfinal",
+   "page": "CTSEvangelismFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "evangelismpaper",
+   "page": "CTSEvangelismPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSEVANPREACH": [
+  {
+   "slug": "evanpreachfinal",
+   "page": "CTSEvanPreachFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "evanpreachpaper",
+   "page": "CTSEvanPreachPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSGALATIANS": [
+  {
+   "slug": "galatiansfinal",
+   "page": "CTSGalatiansFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "galatianspaper",
+   "page": "CTSGalatiansPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSGENESIS": [
+  {
+   "slug": "genesisfinal",
+   "page": "CTSGenesisFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "genesispaper",
+   "page": "CTSGenesisPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSHERMENEUTICS": [
+  {
+   "slug": "hermeneuticsfinal",
+   "page": "CTSHermeneuticsFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "hermeneuticspaper",
+   "page": "CTSHermeneuticsPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSHS": [
+  {
+   "slug": "hsfinal",
+   "page": "CTSHSFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "hspaper",
+   "page": "CTSHSPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSJOHN": [
+  {
+   "slug": "johnfinal",
+   "page": "CTSJohnFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "johnpaper",
+   "page": "CTSJohnPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSJOSH": [
+  {
+   "slug": "joshfinal",
+   "page": "CTSJoshFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "joshpaper",
+   "page": "CTSJoshPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSLA": [
+  {
+   "slug": "lafinal",
+   "page": "CTSLAFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "lapaper",
+   "page": "CTSLAPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSLOC": [
+  {
+   "slug": "locfinal",
+   "page": "CTSLOCFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "locpaper",
+   "page": "CTSLOCPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSMATT": [
+  {
+   "slug": "mattfinal",
+   "page": "CTSMattFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "mattpaper",
+   "page": "CTSMattPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSMISSIONS": [
+  {
+   "slug": "missionsfinal",
+   "page": "CTSMissionsFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "missionspaper",
+   "page": "CTSMissionsPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "STORYTEL": [
+  {
+   "slug": "narrativefinal",
+   "page": "CTSNarrativePreachingFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "narrativepaper",
+   "page": "CTSNarrativePreachingPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSNT": [
+  {
+   "slug": "ntfinal",
+   "page": "CTSNTFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "ntpaper",
+   "page": "CTSNTPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSOTS": [
+  {
+   "slug": "otsfinal",
+   "page": "CTSOTSFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "otspaper",
+   "page": "CTSOTSPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPARABLES": [
+  {
+   "slug": "parablesfinal",
+   "page": "CTSParablesFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "parablespaper",
+   "page": "CTSParablesPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPENTECOSTAL": [
+  {
+   "slug": "pentecostalfinal",
+   "page": "CTSPentecostalFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "pentecostalpaper",
+   "page": "CTSPentecostalPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPENT": [
+  {
+   "slug": "pentfinal",
+   "page": "CTSPentFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "pentpaper",
+   "page": "CTSPentPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPM": [
+  {
+   "slug": "pmfinal",
+   "page": "CTSPMFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "pmpaper",
+   "page": "CTSPMPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "WISESPEAK": [
+  {
+   "slug": "preachingfinal",
+   "page": "CTSPreachingFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "preachingpaper",
+   "page": "CTSPreachingPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPSALMS": [
+  {
+   "slug": "psalmsfinal",
+   "page": "CTSPsalmsFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "psalmspaper",
+   "page": "CTSPsalmsPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPT": [
+  {
+   "slug": "ptfinal",
+   "page": "CTSPTFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "ptpaper",
+   "page": "CTSPTPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSRADICAL": [
+  {
+   "slug": "radicalfinal",
+   "page": "CTSRadicalFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "radicalpaper",
+   "page": "CTSRadicalPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSRE": [
+  {
+   "slug": "refinal",
+   "page": "CTSREFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "repaper",
+   "page": "CTSREPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSREV": [
+  {
+   "slug": "revfinal",
+   "page": "CTSRevFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "revpaper",
+   "page": "CTSRevPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSROMANS": [
+  {
+   "slug": "romansfinal",
+   "page": "CTSRomansFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "romanspaper",
+   "page": "CTSRomansPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSST": [
+  {
+   "slug": "stfinal",
+   "page": "CTSSTFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "stpaper",
+   "page": "CTSSTPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSWORSHIP": [
+  {
+   "slug": "worshipfinal",
+   "page": "CTSWorshipFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "worshippaper",
+   "page": "CTSWorshipPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ],
+ "CTSWR": [
+  {
+   "slug": "wrfinal",
+   "page": "CTSWRFinal",
+   "kind": "final",
+   "requiredFrom": null
+  },
+  {
+   "slug": "wrpaper",
+   "page": "CTSWRPaper",
+   "kind": "paper",
+   "requiredFrom": null
+  }
+ ]
+};

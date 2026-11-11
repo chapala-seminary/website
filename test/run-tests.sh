@@ -198,6 +198,10 @@ node test/french-readings.test.mjs
 # completions the record held before a reading test was activated: the rule
 # itself, case by case, without a server.
 node test/required-tests.test.mjs
+# The master's final synthesis exam and ministry paper as course requirements
+# (#318, 11 Nov 2026): none in force as shipped, and once dated, a master's
+# course needs both, except a master's completion from before the date.
+node test/masters-assessments.test.mjs
 # The World Religions Spanish readers (Oct 2026): each page is what its
 # translation gives, and every Spanish answer of the revised bank is in its
 # reading's reader -- for every reading, once the revised bank is in force.
