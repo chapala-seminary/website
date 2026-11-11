@@ -56,6 +56,36 @@ for (const [label, seed, active, want, note] of cases) {
   const r = await open(seed, active);
   if (r.diploma !== want || r.errs.length || (note && !note.test(r.note))) fails.push(`${label}: diploma ${r.diploma}, note "${r.note.slice(0, 80)}" ${r.errs.join(' | ')}`);
 }
+/* The last unit page's recorder (cts-record.js, data from Unit.astro): it
+   records the course only when the dated final and paper are passed. The
+   dates are set as cts-sync.js keeps them (cts_required_from), after the
+   page's own sync has written the record's. */
+const LAST = `${c.pages}Unit${c.units[c.units.length - 1]}.html`;
+const dated = JSON.stringify({ otsfinal: '2026-01-01T00:00:00Z', otspaper: '2026-01-01T00:00:00Z' });
+async function unit(seed, isDated) {
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+  await p.goto(`${BASE}/${LAST}`);
+  await p.evaluate((s) => { localStorage.clear(); for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, seed);
+  await p.reload(); await p.waitForTimeout(1500);
+  if (isDated) await p.evaluate((v) => localStorage.setItem('cts_required_from', v), dated);
+  const r = await p.evaluate(() => { const comp = window.CTS_UNIT && window.CTS_UNIT.completion;
+    return { complete: window.CTSRecord.isComplete(comp), pending: window.CTSRecord.pendingTests(comp).map((t) => t.slug) }; });
+  await ctx.close();
+  return { ...r, errs };
+}
+for (const [label, seed, isDated, complete, pending] of [
+  ['unit page, as shipped: complete with units and tests', base('mdiv'), false, true, []],
+  ['unit page, dated: held for both', base('mdiv'), true, false, ['otsfinal', 'otspaper']],
+  ['unit page, dated, final passed: held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, ['otspaper']],
+  ['unit page, dated, both passed: complete', { ...base('mdiv'), ...passed }, true, true, []],
+  ['unit page, dated, exempt: complete', { ...base('mdiv'), cts_textbook_otsfinal_exempt: '1', cts_textbook_otspaper_exempt: '1' }, true, true, []],
+  ['unit page, dated, Certificate track: complete', base('cert'), true, true, []],
+]) {
+  const r = await unit(seed, isDated);
+  cases.push(label);
+  if (r.complete !== complete || JSON.stringify(r.pending) !== JSON.stringify(pending) || r.errs.length) fails.push(`${label}: ${JSON.stringify(r)}`);
+}
 await browser.close();
 if (fails.length) { console.error('FAIL'); for (const f of fails) console.error('  ' + f); process.exit(1); }
-console.log(`PASS — ${cases.length} certificate-page cases for the master's final and paper.`);
+console.log(`PASS — ${cases.length} certificate-page and unit-page cases for the master's final and paper.`);

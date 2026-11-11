@@ -495,8 +495,15 @@
     var first = pending[0] || (U.completion ? { page: U.completion.textbookPage, kind: U.completion.textbookKind } : {});
     // the same hold for a required-reading test (Genesis, World Religions), in its own words
     var tbReading = tbHold && first.kind === "reading";
-    var tbBoth = tbHold && pending.length > 1;
-    var go = tbHold ? { href: first.page + "Test.html",
+    // the final synthesis exam and ministry paper, once dated (#318): after the textbook and reading tests
+    var fp = function (t) { return t.kind === "final" || t.kind === "paper"; };
+    var tbAssess = tbHold && fp(first);
+    var tbBoth = tbHold && !tbAssess && pending.filter(function (t) { return !fp(t); }).length > 1;
+    var go = tbAssess ? { href: first.page + ".html",
+                          en: first.kind === "final" ? "Take the final synthesis exam" : "Write the ministry paper",
+                          es: first.kind === "final" ? "Presentar el examen final de síntesis" : "Escribir la tarea ministerial",
+                          fr: first.kind === "final" ? "Passer l'examen final de synthèse" : "Rédiger le travail ministériel" }
+      : tbHold ? { href: first.page + "Test.html",
                         en: tbReading ? "Take the required-reading test" : "Take the textbook test",
                         es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro", fr: tbReading ? "Passer l'examen des lectures obligatoires" : "Passer l'examen du manuel" }
       : all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso", fr: "Accéder au certificat du cours" }
@@ -506,7 +513,18 @@
       '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada", fr: "Unité " + U.unit + " réussie" }) + "</p>" +
       "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
                    es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : "."), fr: "Votre progression est enregistrée" + (total ? " : " + n + " unités réussies sur " + total + "." : ".") }) + "</p>";
-    if (tbBoth) h += "<p>" + bi({ en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test and the required-reading test are both passed as well.",
+    if (tbAssess) h += "<p>" + bi(pending.length > 1
+      ? { en: "On the M.Div. and Th.M. tracks the course is complete when its final synthesis exam and its ministry paper are both passed as well.",
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueban el examen final de síntesis y la tarea ministerial.",
+          fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir l'examen final de synthèse et le travail ministériel pour terminer le cours." }
+      : first.kind === "final"
+      ? { en: "On the M.Div. and Th.M. tracks the course is complete when its final synthesis exam is passed as well.",
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen final de síntesis.",
+          fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir l'examen final de synthèse pour terminer le cours." }
+      : { en: "On the M.Div. and Th.M. tracks the course is complete when its ministry paper is passed as well.",
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba la tarea ministerial.",
+          fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le travail ministériel pour terminer le cours." }) + "</p>";
+    else if (tbBoth) h += "<p>" + bi({ en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test and the required-reading test are both passed as well.",
                                   es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueban el examen del libro de texto y el examen de lecturas requeridas.",
                                   fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir l'examen du manuel et l'examen des lectures obligatoires pour terminer le cours." }) + "</p>";
     else if (tbHold) h += "<p>" + bi(tbReading
