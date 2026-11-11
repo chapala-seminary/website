@@ -27,11 +27,19 @@
     "CTSHERMENEUTICS", "CTSLA", "CTSGENESIS", "CTSPSALMS", "CTSMATT", "CTSROMANS", "CTSACTS",
     "CTSAPOL", "COUNSELING", "CTSAL", "CTSWORSHIP", "CTSCE", "CTSMISSIONS"
   ]);
+  /* The twenty JTS courses, by code (e.g. "CTSROMANS"). Keep equal to
+     JTS_COURSES in worker/awards.js. */
+  var JTS_COURSES = [];
   var DEGREES = {
     certificate: { courses: 12, core: FOUNDATION, levels: ["cert", "assoc", "thm", "mdiv"] },
     associate:   { courses: 25, core: FOUNDATION, levels: ["assoc", "thm", "mdiv"] },
     thm:         { courses: 15, core: FOUNDATION, levels: ["thm", "mdiv"] },
-    mdiv:        { courses: 30, core: MDIV_CORE,  levels: ["thm", "mdiv"] }
+    mdiv:        { courses: 30, core: MDIV_CORE,  levels: ["thm", "mdiv"] },
+    // Diploma in Theology (JTS): for students taking CTS courses for credit at
+    // Jamaica Theological Seminary. Twenty named courses, every one required,
+    // at Associate level or higher. The list is not chosen yet (Dr. Cook,
+    // 10 Nov 2026); until it is, nobody can earn it. Not on the live site.
+    jts:         { courses: 20, core: JTS_COURSES, levels: ["assoc", "thm", "mdiv"] }
   };
 
   var mem = {};
@@ -131,7 +139,11 @@
     var d = DEGREES[degree];
     if (!d) return null;
     var lv = levels(), have = {}, count = 0;
-    Object.keys(lv).forEach(function (c) { if (d.levels.indexOf(lv[c]) !== -1) { have[c] = true; count++; } });
+    Object.keys(lv).forEach(function (c) {
+      if (d.levels.indexOf(lv[c]) === -1) return;
+      if (degree === "jts" && JTS_COURSES.indexOf(c) === -1) return;   // only the twenty named courses count
+      have[c] = true; count++;
+    });
     var plan = degree === "thm" ? studyPlan() : null;
     var core = d.core.map(function (c) { return plan && plan[c] || c; });
     var missing = core.filter(function (c) { return !have[c]; });
@@ -139,12 +151,13 @@
     return {
       degree: degree, count: count, required: d.courses, have: have,
       core: core, coreDone: core.length - missing.length, missing: missing,
-      earned: count >= d.courses && missing.length === 0
+      listSet: degree !== "jts" || JTS_COURSES.length >= d.courses,
+      earned: count >= d.courses && missing.length === 0 && (degree !== "jts" || JTS_COURSES.length >= d.courses)
     };
   }
 
   window.CTSDegrees = {
-    FOUNDATION: FOUNDATION, MDIV_CORE: MDIV_CORE, DEGREES: DEGREES,
+    FOUNDATION: FOUNDATION, MDIV_CORE: MDIV_CORE, JTS_COURSES: JTS_COURSES, DEGREES: DEGREES,
     studyPlan: studyPlan, grandfather: grandfather, levels: levels, status: status, goalIsAssoc: goalIsAssoc
   };
 })();

@@ -32,6 +32,7 @@ const EXCLUDE = new Set([
   'START_HERE.html',            // internal note, not student-facing
   'Apologetics_Self_Contained_Unlocked_Preview.html', // ungated duplicate of the ethics course
   'Romans_Digest_01_Haldane_EN.html',                 // a reading digest under an older name
+  'CTSJTSDiploma.html',                               // draft diploma, not public yet (10 Nov 2026)
   '404.html',                                         // the miss page; not a document to index
 ]);
 

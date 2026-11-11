@@ -24,6 +24,13 @@ import catalog from './catalog.json';
 
 export const FOUNDATION = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
 
+/** Diploma in Theology (JTS), for students taking CTS courses for credit at
+ *  Jamaica Theological Seminary: twenty named courses, all required, at
+ *  Associate level or higher. Dr. Cook has not chosen the twenty yet
+ *  (10 Nov 2026); while the list is empty nobody can earn it. Keep equal to
+ *  JTS_COURSES in public/assets/js/cts-degrees.js. */
+export const JTS_COURSES = [];
+
 export const MDIV_CORE = [
   ...FOUNDATION,
   'CTSHERMENEUTICS', 'CTSLA', 'CTSGENESIS', 'CTSPSALMS', 'CTSMATT', 'CTSROMANS', 'CTSACTS',
@@ -39,6 +46,7 @@ export const DEGREES = {
   associate:   { courses: 25, core: FOUNDATION, levels: ['assoc', 'thm', 'mdiv'] },           // Associate of Divinity
   thm:         { courses: 15, core: FOUNDATION, levels: ['thm', 'mdiv'] },                    // Master of Theology
   mdiv:        { courses: 30, core: MDIV_CORE,  levels: ['thm', 'mdiv'] },                    // Master of Divinity
+  jts:         { courses: 20, core: JTS_COURSES, levels: ['assoc', 'thm', 'mdiv'] },          // Diploma in Theology (JTS); list not chosen yet
 };
 
 /** The level a student's work is done at now: their track, with the
@@ -227,10 +235,12 @@ export function degreeShortfall(level, completions, track, substitutions) {
     const code = canonicalCode(typeof c === 'string' ? c : c.code);
     if (!code) continue;                       // not a course: counts toward nothing
     const earned = studentLevel((typeof c === 'string' ? null : c.track) || own);
+    if (level === 'jts' && !JTS_COURSES.includes(code)) continue;   // only the twenty named courses count
     if (d.levels.includes(earned)) have.add(code);
   }
-  const level_ = level === 'thm' || level === 'mdiv' ? "master's-level " : level === 'associate' ? 'Associate-level ' : '';
+  const level_ = level === 'thm' || level === 'mdiv' ? "master's-level " : level === 'associate' || level === 'jts' ? 'Associate-level ' : '';
   const problems = [];
+  if (level === 'jts' && JTS_COURSES.length < d.courses) problems.push('the JTS course list is not set yet');
   if (have.size < d.courses) problems.push(`${have.size} of ${d.courses} ${level_}courses recorded`);
   const core = (level === 'thm' ? thmFoundation(substitutions) : d.core).filter((c) => !have.has(c));
   if (core.length) problems.push(`required ${level_}courses not recorded: ${core.join(', ')}`);
