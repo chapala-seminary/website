@@ -22,7 +22,9 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      # GitHub-hosted Ubuntu already has the Chromium shared libraries; avoid
+      # apt font downloads when Ubuntu mirrors have intermittent DNS failures.
+      - run: npx playwright install chromium
       # Public textbook JSON omits answer/accept; tests and the shadow build
       # read them from chapala-seminary/assessment-keys.
       - name: Checkout private assessment keys
