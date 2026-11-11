@@ -131,7 +131,7 @@ async function failedUnit(unit, opts = {}) {
 }
 
 /* ---- who may see these pages ---------------------------------------------------------------- */
-const TABS = ['', '/appeals', '/pending', '/calibration', '/calibration.json', '/rulings', '/synonyms.json', '/copying', '/usage'];
+const TABS = ['', '/appeals', '/pending', '/calibration', '/calibration.json', '/rulings', '/synonyms.json', '/copying', '/papers', '/usage'];
 const other = crypto.generateKeyPairSync('rsa', { modulusLength: 2048 }).privateKey;
 for (const p of TABS) {
   const noTok = await fetch(BASE + '/staff/grading' + p, { redirect: 'manual' });
@@ -145,12 +145,29 @@ for (const p of ['/appeals/1/claim', '/appeals/1/decide', '/pending/1/grade', '/
 }
 
 /* ---- every tab renders ------------------------------------------------------------------------- */
-for (const [p, label] of [['', 'Appeals'], ['/appeals', 'Appeals'], ['/pending', 'Pending'], ['/calibration', 'Calibration'], ['/rulings', 'Fill-in rulings'], ['/copying', 'Possible copying'], ['/usage', 'Usage']]) {
+for (const [p, label] of [['', 'Appeals'], ['/appeals', 'Appeals'], ['/pending', 'Pending'], ['/calibration', 'Calibration'], ['/rulings', 'Fill-in rulings'], ['/copying', 'Possible copying'], ['/papers', 'Papers'], ['/usage', 'Usage']]) {
   const r = await sget('/staff/grading' + p);
   const page = await r.text();
   ok(r.status === 200 && /text\/html/.test(r.headers.get('content-type')), `/staff/grading${p} renders (${r.status})`);
   ok(r.headers.get('cache-control') === 'no-store' && /noindex/.test(r.headers.get('x-robots-tag') || ''), `/staff/grading${p} is never cached or indexed`);
   ok(page.includes(WAYNE) && page.includes(label) && !/CTS-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(page), `/staff/grading${p} names the signed-in person and shows no student code`);
+}
+/* ---- papers: read-only spot check of the AI's paper grades (#318) ------------------------------------ */
+{
+  const sid = `CTS-PAPR-${Date.now().toString(36).toUpperCase().slice(-4).padStart(4, '0')}-TEST`;
+  const at = new Date().toISOString();
+  db(`INSERT INTO students (id, name, email, country, track, created_at, updated_at) VALUES ('${sid}', 'Paper Reader Test', 'paper-reader@example.test', 'MX', 'mdiv', '${at}', '${at}')`);
+  db(`INSERT INTO assignments (id, student_id, slug, version, format, topic, lang, body_text, word_count, status, scores_json, total, feedback, model, tries, submitted_at, graded_at)
+      VALUES ('pp-1-${sid}', '${sid}', 'otspaper', 1, 'study', 'covenant', 'en', 'A made-up paper about the covenants for the staff test.', 1100, 'passed',
+              '[{"id":"exegesis","score":25,"quote":"about the covenants","comment":"sound"}]', 86, 'Clear and well argued.', 'fake-model', 1, '${at}', '${at}'),
+             ('pp-2-${sid}', '${sid}', 'otspaper', 2, 'study', 'covenant', 'en', 'A second made-up paper the AI could not grade.', 1200, 'unavailable', NULL, NULL, NULL, NULL, 6, '${at}', '${at}')`);
+  const page = await (await sget('/staff/grading/papers')).text();
+  ok(/made-up paper about the covenants/.test(page) && /86 of 100/.test(page) && /Clear and well argued/.test(page), 'the Papers tab shows a graded paper, its score and feedback');
+  ok(/could not grade it/.test(page) && /second made-up paper/.test(page), 'and lists a paper the AI could not grade, first');
+  ok(/Papers <small>\(\d+\)<\/small>/.test(page), 'the tab counts the papers the AI could not grade');
+  ok(!/CTS-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(page), 'and shows no student code');
+  ok(!/<form/.test(page.split('<h2>The AI could not grade these</h2>')[1] || ''), 'it changes nothing: no form on the tab');
+  db(`DELETE FROM students WHERE id = '${sid}'`);
 }
 ok((await sget('/staff/grading/nothing')).status === 404, 'an unknown grading page is a 404');
 ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark cannot be made with GET');
