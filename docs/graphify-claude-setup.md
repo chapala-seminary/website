@@ -1,45 +1,77 @@
-# Graphify for Claude Code — CTS development (pilot)
+# Graphify for CTS Claude Code — safe local pilot
 
-**Purpose:** Make routine source-code exploration less costly on the $20 Claude Pro plan by building a local, reusable dependency map. This is an **optional developer tool**, not a change to courses, examinations, databases, or production deployments. It cannot raise Claude subscription limits, and savings must be measured rather than assumed.
+**Purpose:** Help Claude Code on the $20 Pro plan locate related source files without repeatedly reading the entire CTS repository. Graphify cannot expand Claude usage limits or guarantee savings. This is **not** a browser extension and is **not** a CTS production dependency.
 
-Official source: <https://github.com/Graphify-Labs/graphify>. The published Python package is `graphifyy`, whereas the command is `graphify`. Do not install unrelated similarly named packages or sign up for paid Graphify Cloud to try this.
+Official project: <https://github.com/Graphify-Labs/graphify>. The official PyPI package is `graphifyy` (double y); the command is `graphify`. Do not install similarly named packages or subscribe to paid Graphify Cloud for this test.
 
-## One-time install (on the actual computer where Claude Code runs)
+## Where this must be installed
 
-From the `chapala-seminary/website` checkout:
+Run the commands **on the Mac or other actual computer where Claude Code uses the `chapala-seminary/website` checkout**. A GitHub PR cannot install a program on that computer. Do not install Graphify on the live website, student computers, or Cloudflare/Oracle merely to satisfy this checklist.
+
+The original shell installer was withdrawn from this pilot after SonarQube reported a new-code security issue on PR #317; without the exact diagnostic, we will not dismiss the warning. These documented manual commands instead follow the official upstream setup.
+
+## One-time manual setup
+
+From the CTS website checkout on the Claude Code host, verify `uv` first:
 
 ```sh
-bash tools/setup-graphify.sh
+uv --version
 ```
 
-Requirements: `uv` installed, connectivity to download the official package, and a Claude Code installation. If `uv` is absent, follow <https://docs.astral.sh/uv/getting-started/installation/> and rerun. This script installs the isolated CLI to the **current user**, registers the Graphify skill in Claude Code, and builds a **code-only, local graph** using `GRAPHIFY_BACKEND=none`. It does not need or use an Anthropic/OpenRouter API key. It installs nothing on the CTS public website, Cloudflare, or Oracle unless run there explicitly.
-
-It should produce `graphify-out/graph.json`, with optional `GRAPH_REPORT.md` and `graph.html`. Graphify honors the repository `.gitignore`: private D1 exports, local secrets, and ignored answer banks must remain excluded. The script adds `/graphify-out/` to the checkout's `.git/info/exclude` (local only); never commit generated graph files or data exports to GitHub. Do not run the full documentation/media semantic pass without checking privacy and model costs.
-
-## Test with Claude
-
-Open Claude Code in this checkout and ask it first to use `graphify query` to locate relevant parts of the code instead of reading every source file. A useful test is:
+If `uv` is missing on a Mac using Homebrew: `brew install uv`. Otherwise follow <https://docs.astral.sh/uv/getting-started/installation/>. Verify the official upstream source and package version before installing third-party code.
 
 ```sh
+uv tool install graphifyy
 graphify --version
-GRAPHIFY_BACKEND=none graphify query "how is student course progress calculated?"
+graphify claude install
 ```
 
-If the graph is stale after changes:
+If `graphify` is not on PATH, run `uv tool update-shell`, reopen the terminal, and retry. `graphify claude install` installs the Claude Code integration into the current **user profile**, not into the CTS website repository.
+
+Exclude generated graphs locally; this changes only the checkout's Git metadata, not tracked files:
 
 ```sh
-GRAPHIFY_BACKEND=none graphify extract . --code-only
+mkdir -p .git/info
+printf '\n/graphify-out/\n' >> .git/info/exclude
 ```
 
-Compare one actual CTS bug investigation with and without Graphify. Record whether Claude found the right files and approximately how many messages/tokens were used. Graphify's marketing claims do **not** establish CTS-specific savings.
+Create a code-only graph, explicitly disabling **all LLM backends** and query logging:
 
-## Safety and rollback
+```sh
+GRAPHIFY_BACKEND=none GRAPHIFY_QUERY_LOG_DISABLE=1 graphify extract . --code-only
+```
 
-Graphify's Claude integration adds local instructions/hooks; it must not be installed on a production web server. The installer intentionally makes **no Git commits**, changes **no website source**, and does **not** add a Git post-commit hook or always-on scanning. Changes in source control should use the usual beta PR and test procedure. To remove the integration on the computer where it was installed:
+Check that `graphify-out/graph.json` exists and contains data. Do not use full documentation, PDF, images, media, `--deep` or paid semantic extraction in this pilot.
+
+## Measure whether it actually helps CTS
+
+Ask Claude Code to use `/graphify` or the local map before searching the entire tree, and try the read-only question:
+
+```sh
+GRAPHIFY_BACKEND=none GRAPHIFY_QUERY_LOG_DISABLE=1 graphify query "student course progress"
+```
+
+Check whether Graphify identifies `worker/awards.js` and `public/assets/js/cts-degrees.js`, then verify the actual code. Record whether this finds the correct files, and compare approximate token/tool usage against a normal investigation. The upstream marketing savings figure is not a CTS benchmark.
+
+After code changes, refresh locally without LLM calls:
+
+```sh
+GRAPHIFY_BACKEND=none GRAPHIFY_QUERY_LOG_DISABLE=1 graphify extract . --code-only
+```
+
+## Privacy and rollback
+
+**Never index or query private student records, D1 exports, production credentials, `.env` files, private assessment keys, or student emails.** Graphify code parsing runs locally, but document and media extraction can invoke models; keep this pilot code-only. `graphify query` logs question text by default, so use `GRAPHIFY_QUERY_LOG_DISABLE=1` with each invocation. Inspect the installed Claude skill before using it on sensitive work.
+
+On the **same computer**:
 
 ```sh
 graphify claude uninstall
 uv tool uninstall graphifyy
 ```
 
-Remove `graphify-out/` separately if you no longer need the generated graph. The Graphify package may maintain query logs under the user's cache directory; do not include student personally identifiable information in graph queries.
+Remove `graphify-out/` locally if desired. Uninstallation does not touch CTS student grades or live website.
+
+## Release boundary
+
+This documentation-only pilot may be reviewed for **beta**. No site runtime, grading, Cloudflare, Oracle, certificates, or student records should change. Do not promote beta to main solely for Graphify. If the security scan still fails, inspect the precise rule rather than bypass it with exclusions.
