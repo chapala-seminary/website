@@ -14,6 +14,16 @@ import { defineConfig } from '@playwright/test';
 const PORT = Number(process.env.E2E_PORT || 8808);
 const CI = !!process.env.CI;
 
+// Specs that set up a record by writing to the local D1 from outside the
+// Worker (e2e/lib/site.mjs db(), priorUnits, priorCourses). That write runs in
+// a second process on the same SQLite file; a Worker request that lands while
+// it holds the lock fails with HTTP 500 (SQLITE_BUSY), which another spec then
+// reports as the site failing (beta run 43257510965: the Spanish degree page's
+// /api/sync, while two-devices seeded a finished course). The production D1
+// has no second writer, so these run on their own, after everything else.
+// A new spec that calls db() belongs in this list.
+const SEEDS_D1 = /two-devices\.spec\.mjs$/;
+
 export default defineConfig({
   testDir: 'e2e',
   outputDir: 'e2e-results',
@@ -41,6 +51,12 @@ export default defineConfig({
     navigationTimeout: 60_000,
     ...(process.env.CHROME_PATH ? { launchOptions: { executablePath: process.env.CHROME_PATH } } : {}),
   },
+  projects: [
+    { name: 'journeys', testIgnore: SEEDS_D1 },
+    // Runs once 'journeys' has finished (and is skipped if it failed), so no
+    // other spec is talking to the Worker while it writes to D1.
+    { name: 'seeded', testMatch: SEEDS_D1, dependencies: ['journeys'] },
+  ],
   webServer: {
     command: 'node e2e/serve.mjs',
     url: `http://127.0.0.1:${PORT}/api/health`,

@@ -12,12 +12,12 @@ const ok = (v, m) => { assert.ok(v, m); checks++; };
 
 const fakeSpeech = () => {
   const said = []; window.__said = said;
-  const voices = [{ name: 'Test English', lang: 'en-US' }, { name: 'Test Español', lang: 'es-MX' }, { name: 'Test Français', lang: 'fr-FR' }];
+  const voices = [{ name: 'Test English', lang: 'en-US' }, { name: 'Test English Second', lang: 'en-US' }, { name: 'Test Español', lang: 'es-MX' }, { name: 'Test Français', lang: 'fr-FR' }];
   let current = null;
   window.SpeechSynthesisUtterance = function (text) { this.text = text; };
   const synth = {
     getVoices: () => voices,
-    speak(u) { said.push({ text: u.text, lang: u.lang }); current = u; setTimeout(() => { if (current === u && u.onend) u.onend({}); }, window.__delay || 5); },
+    speak(u) { said.push({ text: u.text, lang: u.lang, voice: u.voice && u.voice.name }); current = u; setTimeout(() => { if (current === u && u.onend) u.onend({}); }, window.__delay || 5); },
     cancel() { current = null; },
     addEventListener() {},
   };
@@ -103,7 +103,7 @@ try {
   await sp.locator('#cts-listen [data-act="play"]').click();
   await sp.waitForTimeout(500);
   ok(/Kifaa hiki hakina sauti ya Kiswahili/.test(await sp.locator('#cts-listen').innerText()), 'no Swahili voice: said so in Swahili');
-  ok(/mwanamume au ya mwanamke/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
+  ok(/Chagua sauti inayopatikana/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
   ok(await sp.evaluate(() => window.__said.length) === 0, 'and nothing is read in another voice');
   await sw.close();
 
@@ -180,7 +180,7 @@ try {
   ok(await tbPlay.isVisible(), 'EN→ES opens the Spanish page with Listen idle');
   ok((await tbPlay.innerText()).includes('Escuchar este libro de texto'), 'EN→ES: textbook Listen label is Spanish');
   ok(await page.locator('.cts-listening').count() === 0, 'EN→ES: no paragraph is still marked as being read');
-  ok((await page.locator('#cts-listen .cts-listen-tip').innerText()).includes('Consejo'), 'EN→ES: voice tip is Spanish');
+  ok((await page.locator('#cts-listen .cts-listen-tip').innerText()).includes('Elige una voz'), 'EN→ES: voice tip is Spanish');
   await page.evaluate(() => { window.__said.length = 0; });
   await tbPlay.click();
   await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
@@ -205,6 +205,34 @@ try {
   ok(true, 'keyboard: focus returns to Listen after Stop');
   ok(await page.locator('#cts-listen .cts-listen-msg[aria-live="polite"]').count() === 1, 'messages are announced politely');
 
+  // Voice selection is an actual working control, not just a tip about phone settings.
+  await page.goto(BASE + '/CTSUnit1.html?cts_lang=en');
+  await page.evaluate(() => { sessionStorage.clear(); localStorage.removeItem('cts_listen_voice_en'); window.__said.length = 0; window.__delay = 200; });
+  await page.reload();
+  const voiceSelect = page.locator('#cts-listen [data-act="voice"]');
+  await voiceSelect.waitFor({ timeout: 10000 });
+  ok(await voiceSelect.locator('option').count() === 3, 'the voice selector lists automatic and both device English voices');
+  const voiceOptions = await voiceSelect.locator('option').allTextContents();
+  ok(voiceOptions.some(v => v.includes('Test English Second')), 'a second available English voice is listed');
+  await voiceSelect.selectOption({ label: 'Test English Second (en-US)' });
+  const pref = await page.evaluate(() => localStorage.getItem('cts_listen_voice_en'));
+  ok(pref && pref.includes('Test English Second'), 'the chosen voice is remembered locally');
+  await page.locator('#cts-listen [data-act="play"]').click();
+  await page.waitForFunction(() => window.__said.length > 0);
+  const selectedVoice = await page.evaluate(() => window.__said[0].voice);
+  ok(selectedVoice === 'Test English Second', 'the chosen voice actually speaks');
+  await page.locator('#cts-listen [data-act="stop"]').click();
+  await page.reload();
+  ok((await voiceSelect.inputValue()).includes('Test English Second'), 'chosen voice survives reloading the page');
+  ok((await page.locator('#cts-listen .cts-listen-help-text').textContent()).includes('General management'), 'the Samsung speech-settings steps are present');
+  await voiceSelect.selectOption('');
+  ok((await page.evaluate(() => localStorage.getItem('cts_listen_voice_en'))) === null, 'automatic voice selection clears the preference');
+  // Switching to Spanish must never offer the user's English-only voice as a Spanish narrator.
+  await page.goto(BASE + '/es/CTSUnit1.html');
+  const esVoice = page.locator('#cts-listen [data-act="voice"]');
+  await esVoice.waitFor({ timeout: 10000 });
+  ok((await esVoice.locator('option').allTextContents()).every(x => !x.includes('Test English')), 'Spanish selector excludes English voices');
+  ok((await page.locator('#cts-listen .cts-listen-help-title').innerText()).includes('Cómo'), 'Spanish voice setup directions are translated');
   // The three one-page courses (Gabe's report, 1 Nov): a button in every unit; each reads that unit's
   // teaching only -- never its quiz, fill-ins or written-answer prompts -- in the language on screen.
   for (const [path, units] of [['/CTSCounseling.html', 12], ['/CTS_Narrative_Preaching.html', 8], ['/CTS_WiseSpeak_Preaching.html', 10]]) {

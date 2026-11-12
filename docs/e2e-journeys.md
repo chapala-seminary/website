@@ -71,7 +71,11 @@ dialog, page or file of the site that fails to load, or a 500 from the Worker
   the feature tests.
 - Set up only what would take too long through the site, in the database,
   with `priorUnits` and `priorCourses` (`e2e/lib/site.mjs`), and say so in
-  the test.
+  the test. Those writes come from a second process on the Worker's SQLite
+  file, and a Worker request that arrives meanwhile fails with HTTP 500. So a
+  spec that writes to the database goes in `SEEDS_D1` in
+  `playwright.config.mjs`. Specs listed there run on their own, after the
+  other specs have finished, and are skipped if any of those failed.
 - Check the record through the API the browser uses (`record(code)`).
 - Every person is made up (`person()`), with an `example.test` address.
 - No retries. A journey that passes on the second try has found a race.
