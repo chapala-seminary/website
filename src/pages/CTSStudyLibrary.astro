@@ -27,7 +27,7 @@ const readings = (await getCollection('readings')).map((e) => e.data)
 for (const r of readings)
   if (!cardOf.has(r.course))
     throw new Error(`required readings ${r.slug} belong to course "${r.course}", which has no catalog card`);
-// The 45 core courses' readings, and the denominational electives' (slug
+// The 46 core courses' readings, and the denominational electives' (slug
 // "elec…", tools/build-elective-readings.mjs) in a list of their own.
 const coreReadings = readings.filter((r) => !r.slug.startsWith('elec'));
 const coreTextbooks = textbooks.filter((t) => !t.slug.startsWith('elec'));
@@ -130,8 +130,8 @@ const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
     </style>
     <div class="kicker"><span class="en">Required Reading</span><span class="es">Lecturas Obligatorias</span></div>
     <h2 class="section"><span class="en">Master's Textbooks</span><span class="es">Libros de Texto de Maestría</span></h2>
-    <p><span class="en">Each of our 45 core courses has a textbook and a separate required-reading test. Both tests are required for new M.Div. and Th.M. course completions after activation; valid earlier master’s completions remain valid. The books and tests are open to every student and optional for Certificate and Associate students.</span>
-    <span class="es">Cada uno de nuestros 45 cursos básicos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
+    <p><span class="en">Each of our 46 core courses has a textbook and a separate required-reading test. Both tests are required for new M.Div. and Th.M. course completions after activation; valid earlier master’s completions remain valid. The books and tests are open to every student and optional for Certificate and Associate students.</span>
+    <span class="es">Cada uno de nuestros 46 cursos básicos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
     <div class="tb-grid">
       {coreTextbooks.map((t) => (
         <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
@@ -147,7 +147,7 @@ const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
     </div>
     </>)}
     <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
-    <p><span class="en">All 45 core courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity. Textbooks and assigned readings for the 20 denominational electives are being prepared.</span><span class="es">Los 45 cursos básicos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta. Se están preparando libros de texto y lecturas asignadas para las 20 electivas denominacionales.</span></p>
+    <p><span class="en">All 46 core courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity. Assigned readings for the 20 denominational electives are being prepared; their textbooks are listed under Elective Textbooks above.</span><span class="es">Los 46 cursos básicos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta. Se están preparando las lecturas asignadas para las 20 electivas denominacionales; sus libros de texto aparecen arriba, en Libros de Texto de las Electivas.</span></p>
     <div class="tb-grid" id="required-readings">
       {coreReadings.map((r) => (
         <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
@@ -190,9 +190,16 @@ const electiveReadings = readings.filter((r) => r.slug.startsWith('elec'));
         <a href="CTSResources.html" style="display:inline-block;background:#4A1E3A;color:#fff;text-decoration:none;padding:14px 34px;border-radius:30px;font-weight:bold;letter-spacing:.3px;font-size:1.08rem;">
           <span class="en">Explore Study Resources &rarr;</span><span class="es">Explorar Recursos de Estudio &rarr;</span>
         </a>
+        <p style="margin-top:16px;font-size:1.05rem;line-height:1.6;max-width:760px;">
+          <span class="en">For independent exploration, our optional World Theological Library links to classic books and external research collections. It does not replace course readings or tests.</span>
+          <span class="es">Para estudiar por su cuenta, nuestra Biblioteca Teológica Mundial opcional reúne libros clásicos y colecciones de investigación externas. No reemplaza las lecturas ni los exámenes de los cursos.</span>
+        </p>
+        <p><a href="CTSWorldLibrary.html" style="font-weight:bold;color:var(--oxblood);text-underline-offset:4px;"><span class="en">Explore the World Theological Library &rarr;</span><span class="es">Explorar la Biblioteca Teológica Mundial &rarr;</span></a></p>
       </section>
 </main>
 <footer><div class="wrap">
+  <div class="cts-support-footer"><a href="CTSSupport.html" style="display:inline-block;background:#b3261e;color:#fff;text-decoration:none;font-weight:600;padding:.45em 1.1em;border-radius:999px;margin:.2em 0 .6em"><span class="en">Support Our Ministry</span><span class="es">Apoye nuestro ministerio</span></a></div>
+
   <div><a href="index.html"><span class="en">Home</span><span class="es">Inicio</span></a> &middot; <a href="index.html#catalog"><span class="en">Course Catalog</span><span class="es">Catálogo de cursos</span></a> &middot; <a href="CTSBeforeYouBegin.html"><span class="en">Program Requirements</span><span class="es">Requisitos del Programa</span></a></div>
   <div><span class="en">Questions, a certificate not working, or a comment? Email <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>.</span>
   <span class="es">¿Preguntas, un certificado que no funciona, o un comentario? Escriba a <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>.</span></div>

@@ -75,6 +75,7 @@ let STUDENT_CODE = null;
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   // Acts opens after the seven foundation courses (cts-curriculum.js); this is not about that gate,
   // which is checked on its own below.
   // The exam asks for a student record: the one registered above.
@@ -107,6 +108,7 @@ try {
   // the redesigned home page and the Study Library offer Kiswahili too
   // (in a browser of their own: the home page leaves state behind that the lesson checks must not see)
   const homeCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
+  await homeCtx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const home = await homeCtx.newPage();
   for (const file of ['index.html', 'CTSStudyLibrary.html']) {
     await home.goto(`${BASE}/${file}?cts_lang=en`);
@@ -143,7 +145,8 @@ try {
   eq(await page.locator('#cts-show-source').count(), 1, 'Show English is offered');
   ok(/Onyesha Kiingereza/.test(await page.locator('.cts-source-control').innerText()), 'Show English is in Swahili');
   ok(/Sehemu ya 1/.test(await page.title()), `title: ${await page.title()}`);
-  eq(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex,follow', 'Swahili pages are not indexed yet');
+  eq(await page.locator('meta[name="robots"][content*="noindex"]').count(), 0, 'Swahili pages can be found by search engines (Wayne, 3 Nov 2026)');
+  ok(/info@chapalaseminary\.org/.test(await page.locator('.cts-translation-pending').first().innerHTML()), 'the draft notice invites translation corrections');
 
   // an elective unit with its Swahili (B-C1), and a lesson with no Swahili yet
   // (the first one found, if any is left): never a broken page
@@ -166,6 +169,8 @@ try {
   const about = await page.locator('body').innerText();
   ok(!about.includes(NOTE), 'a translated main page has no translation-pending note (CTSAbout)');
   ok(/Seminari/.test(about), 'and its text is in Swahili');
+  ok(!/Baadhi ya maandishi haya bado hayajatafsiriwa/.test(about), 'and is not said to be partly in English');
+  ok(/Tafsiri ya awali/.test(about), 'but is said to be a draft translation');
   // a page with no Swahili yet (Resources): English, said so in Swahili
   await page.goto(`${BASE}/sw/CTSResources.html`);
   const resources = await page.locator('body').innerText();
@@ -194,6 +199,7 @@ try {
 
   // a registered student who has not finished the foundation courses: the lock is said in Swahili
   const locked = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  await locked.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await locked.addInitScript(() => { try {
     localStorage.setItem('cts_student', JSON.stringify({ name: 'Mwanafunzi', email: 'lock@example.test', track: 'associate' }));
     localStorage.setItem('cts_track', 'associate'); localStorage.setItem('cts_student_code', 'CTS-TEST-LOCK-0000');
@@ -203,9 +209,14 @@ try {
   ok(await lp.waitForFunction(() => document.body.innerText.includes('Kozi hii imefungwa'), null, { timeout: 10000 }).then(() => true, () => false), 'a locked course says so in Swahili');
   const lockedText = await lp.locator('body').innerText();
   ok(!lockedText.includes('This course is locked'), 'and not in English');
-  // the track control and the email box are in Swahili too
+  // The lock renders before the asynchronous student sync. Wait for the
+  // confirmation notice itself instead of assuming it is already in body.
   ok(lockedText.includes('Badilisha programu') && !lockedText.includes('Change track'), 'the track control is in Swahili');
-  ok(lockedText.includes('Thibitisha barua pepe') && !lockedText.includes('Confirm your email'), 'the email box is in Swahili');
+  const emailBanner = lp.locator('#cts-email-confirm');
+  await emailBanner.waitFor({ state: 'visible', timeout: 20000 });
+  const emailText = await emailBanner.innerText();
+  ok(emailText.includes('Thibitisha barua pepe') && !emailText.includes('Confirm your email'),
+    `the email box is in Swahili: ${emailText.slice(0, 200)}`);
   await locked.close();
 } finally { await browser.close(); }
 console.log(`PASS — Swahili: ${checks} checks.`);

@@ -84,6 +84,7 @@ try {
   // The engine as each language page loads it: French grades French or English keys.
   const grader = async lang => {
     const page = await browser.newPage();
+    await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await page.setContent(`<html lang="${lang}"><body data-lang="${lang}" class="lang-${lang}"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>`);
     await page.evaluate(() => {
       Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' });
