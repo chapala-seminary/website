@@ -45,6 +45,17 @@ file has no tests": our suite is plain Node scripts, which Sonar doesn't
 recognize as tests. The other is "command found through PATH" in `tools/` and
 `test/`, where developer scripts call `git`, `npx` and `wrangler`.
 
+**Coverage is not measured.** The quality gate's "Coverage on New Code"
+condition needs a coverage report, and our tests don't write one: they are
+plain Node scripts and browser tests against the built Worker. Without a
+report, SonarQube counted every new line as untested and failed any PR that
+added more than a few lines of code (for example #210, #211 and #315 on
+12 Nov 2026, each with no other finding). The settings file therefore leaves
+all files out of coverage (`sonar.coverage.exclusions=**/*`), so the gate
+judges bugs, security, maintainability, duplication and hotspots only. If a
+coverage report is added later, remove that line and point
+`sonar.javascript.lcov.reportPaths` at the report.
+
 ## One-time setup: SonarQube Cloud
 
 Someone with admin rights on the `chapala-seminary` GitHub organization does
