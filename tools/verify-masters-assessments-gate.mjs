@@ -11,14 +11,20 @@ const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const catalog = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
 const c = catalog.courses.ots, slug = 'ots', F = 'CTSOTSMDivCertificate.html';
 const shipped = fs.readFileSync('public/assets/js/cts-required-tests.js', 'utf8');
+// Read the generated file's two maps as data (JSON), not by running it.
+const readMaps = () => {
+  const grab = (name) => { const m = new RegExp(`window\\.${name} = (\\{[\\s\\S]*?\\n\\});`).exec(shipped);
+    if (!m) throw new Error(`cts-required-tests.js has no ${name}`); return JSON.parse(m[1]); };
+  return { CTS_REQUIRED_TESTS: grab('CTS_REQUIRED_TESTS'), CTS_REQUIRED_ASSESSMENTS: grab('CTS_REQUIRED_ASSESSMENTS') };
+};
 // not in force: the same map with every paper undated (the pages carry the real dates)
 const offJs = (() => {
-  const w = {}; new Function('window', shipped)(w);
+  const w = readMaps();
   for (const list of Object.values(w.CTS_REQUIRED_ASSESSMENTS)) for (const t of list) t.requiredFrom = null;
   return `window.CTS_REQUIRED_TESTS = ${JSON.stringify(w.CTS_REQUIRED_TESTS)};\nwindow.CTS_REQUIRED_ASSESSMENTS = ${JSON.stringify(w.CTS_REQUIRED_ASSESSMENTS)};`;
 })();
 const activeJs = (() => {
-  const w = {}; new Function('window', shipped)(w);
+  const w = readMaps();
   for (const t of w.CTS_REQUIRED_ASSESSMENTS.CTSOTS) t.requiredFrom = '2026-01-01T00:00:00Z';
   return `window.CTS_REQUIRED_TESTS = ${JSON.stringify(w.CTS_REQUIRED_TESTS)};\nwindow.CTS_REQUIRED_ASSESSMENTS = ${JSON.stringify(w.CTS_REQUIRED_ASSESSMENTS)};`;
 })();

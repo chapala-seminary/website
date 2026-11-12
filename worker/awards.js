@@ -153,7 +153,7 @@ export function assessmentsFor(code) {
   const up = String(code || '').toUpperCase();
   const out = [];
   for (const [slug, t] of Object.entries(catalog.assessments || {})) if (t.code === up && t.kind === 'paper') out.push(slug);
-  return out.sort();
+  return out.sort((a, b) => a.localeCompare(b));
 }
 /* A required item by slug: a textbook or reading test, or a final or paper. */
 function requiredItem(slug) {
