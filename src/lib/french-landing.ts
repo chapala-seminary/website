@@ -34,8 +34,22 @@ export const FRENCH_HOME_MESSAGES: Record<string, string> = {
 /* The catalog and textbook cards: French from the course collection, keyed
    by the card's English (title, description, "For <course>", reading title). */
 function catalogFrench(node: HTMLElement): string | null {
-  if (!node.closest('#catalog a.course, #textbooks a.textbook')) return null;
+  if (!node.closest('#catalog a.course, #catalog a.fcard, #textbooks a.textbook')) return null;
   return catalogCards()[node.text.trim()] ?? null;
+}
+/* The Study Library (CTSStudyLibrary.html, issue #186): its textbook and
+   reading cards take their French from the course collection, as they did on
+   the front page; everything else on it is translated by its own dictionary,
+   src/data/french-pages/CTSStudyLibrary.json (frenchPage, run after this).
+   A card text that dictionary names itself is left to it. */
+export function frenchLibraryCards(root: HTMLElement, dict: Record<string, string>) {
+  for (const node of root.querySelectorAll('#textbooks a.textbook .en')) {
+    if (node.parentNode?.closest('.en')) continue;
+    if (node.innerHTML.replace(/\s+/g, ' ').trim() in dict) continue;
+    const text = catalogFrench(node);
+    if (text == null) throw new Error(`Missing French for a Study Library card: ${node.innerHTML}`);
+    node.insertAdjacentHTML('afterend', `<${node.rawTagName} class="fr">${text}</${node.rawTagName}>`);
+  }
 }
 export function frenchLanding(root: HTMLElement) {
   const used = new Set<string>();

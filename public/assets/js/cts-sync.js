@@ -177,25 +177,35 @@
       student: student ? {
         name: student.name, email: student.email, country: student.country,
         track: (student.track || track || '').toLowerCase() || undefined,
-        goal: student.goal, heard: student.heard,
+        // The goal can live only in cts_goal (Change track writes it there);
+        // without it an Associate record would be created as Certificate.
+        goal: student.goal != null ? student.goal : (get('cts_goal') || undefined), heard: student.heard,
+        // Only a deliberate choice (Change track, the sign-up form) may change the
+        // track on the record; a routine save from an old device must not (#298).
+        trackChange: get('cts_track_change') === '1' || undefined,
       } : null,
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
       // the language the student reads in, for notes the seminary sends them
-      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' ? l : null; })(get('cts_lang')),
+      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
+      // honors readings (cts_honors_v1:<course>): the student's own attestation,
+      // kept on the record too so a new browser still shows "with honors"
+      honors: keys().filter(function (k) { return /^cts_honors_v1:[A-Za-z0-9]{1,40}$/.test(k) && get(k); })
+        .map(function (k) { return { course: k.slice('cts_honors_v1:'.length), data: get(k) }; }),
     };
   }
 
   function digest(s) {
     return JSON.stringify([
-      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard],
+      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard, s.student.goal, !!s.student.trackChange],
       s.doneCodes.slice().sort(),
       Object.keys(s.completionTracks).sort().map(function (k) { return k + ':' + s.completionTracks[k]; }),
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
       (s.textbooks || []).map(function (t) { return t.slug; }).sort(),
       s.lang,
+      (s.honors || []).map(function (h) { return h.course; }).sort(),
     ]);
   }
 
@@ -210,9 +220,47 @@
     set('cts_required_from', JSON.stringify(dates));
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
   }
+  /* The seminary record decides the student's track (#298, #183). A browser
+     keeps its own copy only while a change the student made here is on its way;
+     otherwise an old phone that still said "Certificate" kept grading a master's
+     student at Certificate level. Levels are compared, not spellings: the
+     sign-up form saves Associate as "ad", Change track as "cert" + goal "assoc". */
+  function trackLevel(t, g) {
+    t = String(t || '').toLowerCase(); g = String(g || '').toLowerCase();
+    if (t === 'mdiv') return 'mdiv';
+    if (t === 'thm' || t === 'mth') return 'thm';
+    if (t === 'ad' || t === 'assoc' || t === 'associate' || g === 'assoc') return 'assoc';
+    return 'cert';
+  }
+  function adoptTrack(local, server) {
+    if (!server || !server.track) return;
+    var mine = trackLevel(local.track || get('cts_track'), local.goal != null ? local.goal : get('cts_goal'));
+    var theirs = trackLevel(server.track, server.goal);
+    if (get('cts_track_change') === '1') {
+      if (mine === theirs) { try { localStorage.removeItem('cts_track_change'); } catch (e) {} }
+      return;                                    // the student's own change is still on its way
+    }
+    if (mine === theirs) return;
+    // A record whose goal was never set (null, not '') cannot say the student
+    // is not Associate: records made before the goal was sent have none. Send
+    // this browser's Associate up as the student's choice instead of losing it.
+    if (mine === 'assoc' && theirs === 'cert' && server.goal == null) { set('cts_track_change', '1'); return; }
+    var token = server.track === 'associate' ? 'ad' : server.track;
+    local.track = token; local.goal = server.goal || '';
+    set('cts_student', JSON.stringify(local));
+    set('cts_track', token);
+    set('cts_goal', server.goal || '');
+    return true;
+  }
   function apply(state) {
     applyPolicy(state);
     if (!state || !state.student) return;
+    // What the record gave this browser that it did not have: a unit, a
+    // course, a level, a textbook pass or exemption, a track. Not the keys
+    // that only mirror those, nor the profile. Pages that decided once as
+    // they opened use it to tell whether they now show the wrong thing
+    // (cts-certify.js); it is empty on a device that was already up to date.
+    var credit = [];
     // Server-owned approval cache: replace or clear it; never send it in snapshot().
     set('cts_thm_study_plan', JSON.stringify({ studentId: state.student.id, plan: state.thmStudyPlan || null }));
     var local = parse(get('cts_student'), {}) || {};
@@ -230,11 +278,12 @@
       if (confirmed) confirmed.remove();
     }
     if (!get('cts_track') && state.student.track) set('cts_track', state.student.track);
+    if (adoptTrack(local, state.student)) credit.push('track');
 
     var done = parse(get('cts_done_codes'), []);
     if (!Array.isArray(done)) done = [];
     var added = false;
-    (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; } });
+    (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; credit.push('done:' + c); } });
     if (added) set('cts_done_codes', JSON.stringify(done));
 
     // The lists the degree pages count: master's completions by code, and
@@ -244,29 +293,36 @@
     function addTo(key, value) {
       var list = parse(get(key), []);
       if (!Array.isArray(list)) list = [];
-      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); }
+      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); return true; }
+      return false;
     }
     (state.completions || []).forEach(function (c) {
       if (!c || !c.code) return;
-      if (c.track === 'mdiv') addTo('cts_mdiv_done_codes', c.code);
-      if (c.track === 'thm') addTo('cts_thm_done_codes', c.code);
-      if (c.track === 'assoc') addTo('cts_assoc_done_codes', c.code);
+      var lists = { mdiv: 'cts_mdiv_done_codes', thm: 'cts_thm_done_codes', assoc: 'cts_assoc_done_codes' };
+      if (lists[c.track] && addTo(lists[c.track], c.code)) credit.push(c.track + ':' + c.code);
       if (c.name) addTo('cts_degree_courses', c.name);
     });
 
     (state.progress || []).forEach(function (p) {
       var pk = 'cts_' + p.course + '_progress';
       var map = parse(get(pk), {}) || {};
-      if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); }
+      if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); credit.push('unit:' + p.course + ':' + p.unit); }
       var mk = 'cts_' + p.course + '_u' + p.unit + '_mc_passed';
       if (get(mk) !== '1') set(mk, '1');
       writeLegacy(p.course, p.unit);                   // the keys the certificate page reads
     });
 
+    // An honors reading recorded on another device: written here as it was there.
+    (state.honors || []).forEach(function (h) {
+      if (!h || !/^[A-Za-z0-9]{1,40}$/.test(String(h.course || '')) || typeof h.data !== 'string') return;
+      var hk = 'cts_honors_v1:' + h.course;
+      if (!get(hk)) set(hk, h.data);
+    });
+
     (state.textbooks || []).forEach(function (t) {
       if (!t || !/^[a-z]+$/.test(String(t.textbook || ''))) return;
       var k = 'cts_textbook_' + t.textbook + '_passed';
-      if (!get(k)) set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10));
+      if (!get(k)) { set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10)); credit.push('textbook:' + t.textbook); }
       addTo('cts_textbooks_passed', t.textbook);
     });
 
@@ -278,10 +334,12 @@
     (state.exemptions || []).forEach(function (slug) {
       if (!/^[a-z]+$/.test(String(slug || ''))) return;
       var k = 'cts_textbook_' + slug + '_exempt';
-      if (!get(k)) set(k, 'record');
+      if (!get(k)) { set(k, 'record'); credit.push('exempt:' + slug); }
     });
-    // pages that show something by these keys (the certificate's gate) look again
-    try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
+    // pages that show something by these keys (the certificate's gate) look again;
+    // detail.record says the student's own record arrived (cts-degrees.js), and
+    // detail.credit what it brought that this browser lacked (cts-certify.js)
+    try { document.dispatchEvent(new CustomEvent('cts-sync-applied', { detail: { record: true, credit: credit } })); } catch (e) {}
   }
 
   // ---- the network, which is always allowed to fail ------------------------
@@ -402,12 +460,15 @@
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
-                             textbooks: snap.textbooks, lang: snap.lang })
+                             textbooks: snap.textbooks, honors: snap.honors, lang: snap.lang })
         .then(function (state) { return { state: state, code: c }; });
     }).then(function (packed) {
       if (!packed) return null;
       if (packed.state) {
-        apply(packed.state); lastDigest = digest(snapshot());
+        // A response may queue an explicit Associate reconciliation in apply().
+        // Record the digest that was actually sent so the next normal poll
+        // detects and transmits that new change instead of swallowing it.
+        apply(packed.state); lastDigest = d;
         var problem = document.getElementById('cts-registration-problem');
         if (problem) problem.remove();
       }
@@ -427,18 +488,18 @@
     // or for an address that was typed but is not usable.
     var malformed = !!(student && student.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email);
     var words = malformed
-      ? { en: 'That email address is not valid. Correct it, or clear it and enroll without one. Your work in this browser is still saved.', es: 'Ese correo no es válido. Corríjalo, o bórrelo e inscríbase sin él. Su trabajo en este navegador sigue guardado.', fr: 'Cette adresse e-mail n’est pas valide. Corrigez-la, ou effacez-la et inscrivez-vous sans elle. Votre travail dans ce navigateur reste enregistré.' }
-      : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
+      ? { en: 'That email address is not valid. Correct it, or clear it and enroll without one. Your work in this browser is still saved.', es: 'Ese correo no es válido. Corríjalo, o bórrelo e inscríbase sin él. Su trabajo en este navegador sigue guardado.', fr: 'Cette adresse e-mail n’est pas valide. Corrigez-la, ou effacez-la et inscrivez-vous sans elle. Votre travail dans ce navigateur reste enregistré.', sw: 'Anwani hiyo ya barua pepe si sahihi. Isahihishe, au ifute ujisajili bila barua pepe. Kazi yako kwenye kivinjari hiki bado imehifadhiwa.' }
+      : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.', sw: 'Hatukuweza kuhifadhi usajili wako kwa seminari. Kazi yako imehifadhiwa kwenye kivinjari hiki. Tafadhali jaribu tena.' };
     var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     note.innerHTML = '<p>' + text + '</p>';
     if (malformed) {
       var input = document.createElement('input');
       input.type = 'email'; input.autocomplete = 'email'; input.value = student.email;
-      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
+      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'sw' ? 'Barua pepe' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
       note.appendChild(input);
     }
     var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
-    var labels = { en: malformed ? 'Save and try again' : 'Try again', es: malformed ? 'Guardar y reintentar' : 'Reintentar', fr: malformed ? 'Enregistrer et réessayer' : 'Réessayer' };
+    var labels = { en: malformed ? 'Save and try again' : 'Try again', es: malformed ? 'Guardar y reintentar' : 'Reintentar', fr: malformed ? 'Enregistrer et réessayer' : 'Réessayer', sw: malformed ? 'Hifadhi na ujaribu tena' : 'Jaribu tena' };
     retry.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(labels) : labels.en;
     retry.addEventListener('click', function () {
       var input = note.querySelector('input');
@@ -466,6 +527,38 @@
     return (lang && set[lang]) || set.en;
   }
   function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || ''); }
+  /* Phones: the full box covered nearly half the screen on every page (audit,
+     6 Nov 2026; Wayne chose a small strip). On a narrow screen it starts as one
+     line; tapping the line opens the whole box, and × puts it away for this
+     visit, exactly as "Keep studying" does. Wider screens keep the full box. */
+  function compactOnPhone(note, code, label) {
+    if (!(window.matchMedia && window.matchMedia('(max-width: 700px)').matches)) return;
+    var parts = Array.prototype.slice.call(note.children);
+    var padding = note.style.padding;
+    var strip = document.createElement('div');
+    strip.style.cssText = 'display:flex;align-items:center;gap:6px';
+    var open = document.createElement('button');
+    open.type = 'button';
+    open.textContent = '✉ ' + words(label);
+    open.setAttribute('aria-expanded', 'false');
+    open.style.cssText = 'flex:1;text-align:left;border:0;background:none;padding:4px 2px;font:600 15px/1.3 Georgia,serif;color:#6d2233;cursor:pointer;min-height:36px';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = '×';
+    close.setAttribute('aria-label', words({ en: 'Close', es: 'Cerrar', fr: 'Fermer', sw: 'Funga' }));
+    close.style.cssText = 'border:0;background:none;font:24px/1 Georgia,serif;color:#6d2233;cursor:pointer;min-width:40px;min-height:36px';
+    parts.forEach(function (el) { el.style.display = 'none'; });
+    note.style.padding = '2px 8px';
+    note.style.bottom = '54px'; // above the "Change track" button pinned at the bottom left
+    open.addEventListener('click', function () {
+      parts.forEach(function (el) { el.style.display = ''; });
+      note.style.padding = padding;
+      strip.remove();
+    });
+    close.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
+    strip.appendChild(open); strip.appendChild(close);
+    note.insertBefore(strip, note.firstChild);
+  }
   function postJson(path, payload) {
     return fetch(API + path, {
       method: 'POST',
@@ -505,7 +598,7 @@
     p.textContent = words({
       en: 'Email is optional. Add one so we can return your student code, send reminders, and deliver a certificate. You can enroll and keep studying without it.',
       es: 'El correo es opcional. Añádalo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede inscribirse y seguir estudiando sin él.',
-      fr: 'L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle.'
+      fr: 'L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle.', sw: 'Barua pepe si lazima. Iongeze ili tuweze kukurudishia msimbo wako wa mwanafunzi, kukutumia vikumbusho na kukupa cheti. Unaweza kujisajili na kuendelea kusoma bila barua pepe.'
     });
     var status = document.createElement('p');
     status.className = 'cts-email-status';
@@ -513,22 +606,22 @@
     var input = document.createElement('input');
     input.type = 'email'; input.autocomplete = 'email'; input.maxLength = 160;
     input.style.cssText = 'width:16em;max-width:100%;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
-    input.setAttribute('aria-label', words({ en: 'Email', es: 'Correo electrónico', fr: 'Adresse e-mail' }));
+    input.setAttribute('aria-label', words({ en: 'Email', es: 'Correo electrónico', fr: 'Adresse e-mail', sw: 'Barua pepe' }));
     function button(label, primary) {
       var b = document.createElement('button');
       b.type = 'button'; b.textContent = label;
       b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
       return b;
     }
-    var save = button(words({ en: 'Save email', es: 'Guardar correo', fr: 'Enregistrer l’e-mail' }), true);
-    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    var save = button(words({ en: 'Save email', es: 'Guardar correo', fr: 'Enregistrer l’e-mail', sw: 'Hifadhi barua pepe' }), true);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier', sw: 'Endelea kusoma' }), false);
     save.addEventListener('click', function () {
       var value = input.value.trim();
       if (!validEmail(value)) {
         status.textContent = words({
           en: 'Enter a valid email address, or choose Keep studying.',
           es: 'Escriba un correo válido, o elija Seguir estudiando.',
-          fr: 'Saisissez une adresse e-mail valide, ou choisissez Continuer à étudier.'
+          fr: 'Saisissez une adresse e-mail valide, ou choisissez Continuer à étudier.', sw: 'Andika anwani sahihi ya barua pepe, au chagua Endelea kusoma.'
         });
         return;
       }
@@ -540,6 +633,7 @@
     });
     keep.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
     note.appendChild(p); note.appendChild(status); note.appendChild(input); note.appendChild(save); note.appendChild(keep);
+    compactOnPhone(note, code, { en: 'Add your email (optional)', es: 'Añada su correo (opcional)', fr: 'Ajoutez votre e-mail (facultatif)', sw: 'Ongeza barua pepe yako (si lazima)' });
     document.body.appendChild(note);
   }
   function buildEmailBanner(code) {
@@ -552,7 +646,7 @@
     p.textContent = words({
       en: 'Confirm your email so we can return your student code, send reminders, and deliver a certificate. You can keep studying if the message is slow to arrive.',
       es: 'Confirme su correo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede seguir estudiando si el mensaje tarda en llegar.',
-      fr: 'Confirmez votre adresse e-mail afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez continuer à étudier si le message tarde à arriver.'
+      fr: 'Confirmez votre adresse e-mail afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez continuer à étudier si le message tarde à arriver.', sw: 'Thibitisha barua pepe yako ili tuweze kukurudishia msimbo wako wa mwanafunzi, kukutumia vikumbusho na kukupa cheti. Unaweza kuendelea kusoma hata ujumbe ukichelewa kufika.'
     });
     var status = document.createElement('p');
     status.className = 'cts-email-status';
@@ -563,7 +657,7 @@
     input.autocomplete = 'one-time-code';
     input.maxLength = 6;
     input.style.cssText = 'width:8em;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
-    input.setAttribute('aria-label', words({ en: 'Six-digit code', es: 'Código de seis dígitos', fr: 'Code à six chiffres' }));
+    input.setAttribute('aria-label', words({ en: 'Six-digit code', es: 'Código de seis dígitos', fr: 'Code à six chiffres', sw: 'Msimbo wa tarakimu sita' }));
     function button(label, primary) {
       var b = document.createElement('button');
       b.type = 'button';
@@ -571,13 +665,13 @@
       b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
       return b;
     }
-    var sendBtn = button(words({ en: 'Send confirmation', es: 'Enviar confirmación', fr: 'Envoyer la confirmation' }), true);
-    var confirmBtn = button(words({ en: 'Enter code', es: 'Introducir código', fr: 'Saisir le code' }), false);
-    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    var sendBtn = button(words({ en: 'Send confirmation', es: 'Enviar confirmación', fr: 'Envoyer la confirmation', sw: 'Tuma uthibitisho' }), true);
+    var confirmBtn = button(words({ en: 'Enter code', es: 'Introducir código', fr: 'Saisir le code', sw: 'Andika msimbo' }), false);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier', sw: 'Endelea kusoma' }), false);
     var link = document.createElement('a');
     link.href = '/cts-confirm-email.html';
     link.style.color = '#6d2233';
-    link.textContent = words({ en: 'Open the confirmation page', es: 'Abrir la página de confirmación', fr: 'Ouvrir la page de confirmation' });
+    link.textContent = words({ en: 'Open the confirmation page', es: 'Abrir la página de confirmación', fr: 'Ouvrir la page de confirmation', sw: 'Fungua ukurasa wa uthibitisho' });
     sendBtn.addEventListener('click', function () {
       var local = parse(get('cts_student'), {}) || {};
       sendConfirmation(code, local.email || '', note);
@@ -588,7 +682,7 @@
         status.textContent = words({
           en: 'Enter the six-digit code from the email.',
           es: 'Escriba el código de seis dígitos del correo.',
-          fr: 'Saisissez le code à six chiffres reçu par e-mail.'
+          fr: 'Saisissez le code à six chiffres reçu par e-mail.', sw: 'Andika msimbo wa tarakimu sita uliokuja kwenye barua pepe.'
         });
         return;
       }
@@ -604,7 +698,7 @@
         status.textContent = words({
           en: 'That code was not accepted. You can ask for another, or keep studying and try later.',
           es: 'Ese código no fue aceptado. Puede pedir otro, o seguir estudiando e intentarlo más tarde.',
-          fr: 'Ce code n’a pas été accepté. Vous pouvez en demander un autre, ou continuer à étudier et réessayer plus tard.'
+          fr: 'Ce code n’a pas été accepté. Vous pouvez en demander un autre, ou continuer à étudier et réessayer plus tard.', sw: 'Msimbo huo haukukubaliwa. Unaweza kuomba mwingine, au kuendelea kusoma na kujaribu baadaye.'
         });
       });
     });
@@ -616,6 +710,7 @@
     note.appendChild(confirmBtn);
     note.appendChild(keep);
     note.appendChild(link);
+    compactOnPhone(note, code, { en: 'Confirm your email (tap to open)', es: 'Confirme su correo (toque para abrir)', fr: 'Confirmez votre e-mail (touchez pour ouvrir)', sw: 'Thibitisha barua pepe yako (gusa kufungua)' });
     document.body.appendChild(note);
     return note;
   }
@@ -625,22 +720,22 @@
       status.textContent = words({
         en: 'Add a valid email address on your registration, then send the confirmation. Your study in this browser is saved.',
         es: 'Añada un correo válido en su registro y luego envíe la confirmación. Su estudio en este navegador está guardado.',
-        fr: 'Ajoutez une adresse e-mail valide à votre inscription, puis envoyez la confirmation. Votre étude dans ce navigateur est enregistrée.'
+        fr: 'Ajoutez une adresse e-mail valide à votre inscription, puis envoyez la confirmation. Votre étude dans ce navigateur est enregistrée.', sw: 'Ongeza anwani sahihi ya barua pepe kwenye usajili wako, kisha tuma uthibitisho. Masomo yako kwenye kivinjari hiki yamehifadhiwa.'
       });
       return Promise.resolve();
     }
-    status.textContent = words({ en: 'Sending the confirmation…', es: 'Enviando la confirmación…', fr: 'Envoi de la confirmation…' });
+    status.textContent = words({ en: 'Sending the confirmation…', es: 'Enviando la confirmación…', fr: 'Envoi de la confirmation…', sw: 'Tunatuma uthibitisho…' });
     return postJson('/email/start', { code: code, email: email, lang: get('cts_lang') }).then(function (r) {
       status.textContent = r.ok
         ? words({
           en: 'We sent a six-digit code. Enter it here. Check the spam folder if it is not in your inbox. You can keep studying while you wait.',
           es: 'Enviamos un código de seis dígitos. Escríbalo aquí. Revise la carpeta de correo no deseado si no está en su bandeja. Puede seguir estudiando mientras espera.',
-          fr: 'Nous avons envoyé un code à six chiffres. Saisissez-le ici. Vérifiez le dossier des indésirables s’il n’est pas dans votre boîte. Vous pouvez continuer à étudier en attendant.'
+          fr: 'Nous avons envoyé un code à six chiffres. Saisissez-le ici. Vérifiez le dossier des indésirables s’il n’est pas dans votre boîte. Vous pouvez continuer à étudier en attendant.', sw: 'Tumetuma msimbo wa tarakimu sita. Uandike hapa. Kama haumo kwenye kikasha chako, angalia folda ya barua taka (spam). Unaweza kuendelea kusoma ukisubiri.'
         })
         : words({
           en: 'We could not send the confirmation just now. You can keep studying and confirm later from the confirmation page.',
           es: 'No pudimos enviar la confirmación en este momento. Puede seguir estudiando y confirmar más tarde en la página de confirmación.',
-          fr: 'Nous n’avons pas pu envoyer la confirmation pour le moment. Vous pouvez continuer à étudier et confirmer plus tard sur la page de confirmation.'
+          fr: 'Nous n’avons pas pu envoyer la confirmation pour le moment. Vous pouvez continuer à étudier et confirmer plus tard sur la page de confirmation.', sw: 'Hatukuweza kutuma uthibitisho sasa hivi. Unaweza kuendelea kusoma na kuthibitisha baadaye kwenye ukurasa wa uthibitisho.'
         });
     });
   }
@@ -741,7 +836,8 @@
     var words = {
       en: 'You already have a student record under this name and email. ' + link('Continue with it') + ' so this progress is kept with it.',
       es: 'Ya tiene un registro de estudiante con este nombre y correo. ' + link('Contin\u00fae con \u00e9l') + ' para que este progreso se guarde en \u00e9l.',
-      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse e-mail. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.'
+      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse e-mail. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.',
+      sw: 'Tayari una kumbukumbu ya mwanafunzi kwa jina hili na barua pepe hii. ' + link('Endelea nayo') + ' ili maendeleo haya yahifadhiwe pamoja nayo.'
     };
     d.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words)
       : '<span class="lang-en en en-only">' + words.en + '</span><span class="lang-es es es-only">' + words.es + '</span>';

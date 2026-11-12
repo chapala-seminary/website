@@ -17,6 +17,9 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
  *   POST /staff/students/<n>/notes  stop=1 | stop=0: stop or resume notes to one student
  *   POST /staff/notes/run           run today's notes now (as the daily run would)
  *   POST /staff/digest              the weekly summary (?send=1 also emails it)
+ *   GET  /staff/confirm-invite      the one-time "please confirm your registration" note
+ *   POST /staff/confirm-invite/sample  mail the note to the signed-in staff member
+ *   POST /staff/confirm-invite/send    send it to the next batch (CONFIRM_INVITE_MODE=send only)
  *   GET/POST /staff/groups          coordinator-led study groups (worker/coord.js)
  *   POST /staff/groups/sheet        enter one paper sheet, the same rules as /coord
  *   /staff/grading/...              the faculty's grading pages (worker/staff-grading.js):
@@ -48,6 +51,7 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
 import catalog from './catalog.json';
 import { handleGrading } from './staff-grading.js';
 import { handleStaffGroups } from './coord.js';
+import { confirmInvitePage, runConfirmInvites, sendSample } from './confirm-invite.js';
 import { candidates, runOutreach, digest, sendDigest, note, programLevel, PROGRAM_NAMES, QUIET_DAYS, NOT_STARTED_DAYS } from './outreach.js';
 
 const DAY = 86400000;
@@ -204,7 +208,7 @@ function rosterPage(rows, show, user) {
 <h1>CTS students</h1>
 <p>${rows.length} students: ${count('active')} active in the last ${QUIET_DAYS} days, ${count('quiet')} quiet, ${count('not started')} not started, ${count('new')} registered this week.
 ${rows.filter((r) => r.email_verified).length} of ${rows.length} have confirmed their email (${rows.filter((r) => r.email && !r.email_verified).length} gave an address and have not confirmed it). Confirmation is recorded only when the student opens the link or enters the six-digit code. An unconfirmed address is a real address that was not confirmed, not a column the report failed to load.
-Signed in as ${esc(user)}. <a href="/staff/students.csv">Download CSV</a> · <a href="/staff/notes">Notes to students</a></p>
+Signed in as ${esc(user)}. <a href="/staff/students.csv">Download CSV</a> · <a href="/staff/notes">Notes to students</a> · <a href="/staff/confirm-invite">Confirm-registration note</a></p>
 <p><small>Country is an ISO code (US, MX, CU). Typed names such as USA, EEUU, and Estados Unidos are counted as the same country. OT is Other / prefer not to say.</small></p>
 <p><small>"Last progress" is the last unit passed or course completed. A returning student's history from the old site arrives dated the day of their first visit to the new one, so their clock starts then.</small></p>
 <details><summary>How students found the seminary (${rows.filter((r) => heardKey(r.heard)).length} of ${rows.length} answered)</summary>
@@ -266,6 +270,7 @@ export async function handleStaff(request, env) {
   if (method === 'GET' && path === '/staff/students.json') return json(await roster(env));
   if (method === 'GET' && path === '/staff/heard.json') return json(heardSummary(await roster(env)));
   if (method === 'GET' && path === '/staff/notes') return notesPage(env, user);
+  if (method === 'GET' && path === '/staff/confirm-invite') return confirmInvitePage(env, user, { esc, html, STYLE });
 
   let m;
   // A change must come from these pages, not from a form on another site.
@@ -289,6 +294,19 @@ export async function handleStaff(request, env) {
     return new Response(null, { status: 303, headers: { location: '/staff/students', ...NOSTORE } });
   }
   if (method === 'POST' && path === '/staff/notes/run') return json(await runOutreach(env, { asOf: asOfParam(url) }));
+  if (method === 'POST' && path === '/staff/confirm-invite/sample') {
+    const form = await request.formData().catch(() => null);
+    const r = await sendSample(env, user, String(form?.get('lang') || url.searchParams.get('lang') || 'en'));
+    return confirmInvitePage(env, user, { esc, html, STYLE }, r.status === 'sent' ? `Sample (${r.lang}) sent to ${r.to}.` : `Sample not sent: ${r.why}.`);
+  }
+  if (method === 'POST' && path === '/staff/confirm-invite/send') {
+    const form = await request.formData().catch(() => null);
+    const r = await runConfirmInvites(env, { limit: Number(form?.get('limit') || url.searchParams.get('limit')) || undefined });
+    if ((request.headers.get('accept') || '').includes('application/json')) return json(r);
+    const sent = r.results.filter((x) => x.status === 'sent').length, failed = r.results.length - sent;
+    return confirmInvitePage(env, user, { esc, html, STYLE },
+      r.mode !== 'send' ? 'Sending is off on this site.' : r.error ? `Not sent: ${r.error}.` : `Sent ${sent}${failed ? `, ${failed} failed` : ''}. ${r.waiting} still waiting.`);
+  }
   if (method === 'POST' && path === '/staff/digest') {
     const asOf = asOfParam(url);
     return json(url.searchParams.get('send') === '1' ? await sendDigest(env, asOf) : await digest(env, asOf));

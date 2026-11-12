@@ -1,9 +1,10 @@
 import { parse, type HTMLElement } from 'node-html-parser';
 import { PARTIALS } from './partials.ts';
 import type { Lesson } from './lesson.ts';
+import { SITE_LANGUAGES, LANGUAGE_NAMES } from './languages.mjs';
 
-export const LANGUAGES = ['en', 'es', 'fr'];
-export const NAMES: Record<string, string> = { en: 'English', es: 'Español', fr: 'Français' };
+export const LANGUAGES: string[] = [...SITE_LANGUAGES];
+export const NAMES: Record<string, string> = { ...LANGUAGE_NAMES };
 /* A block whose text in a language is exactly this is left out of that
    language's page: e.g. the Spanish half of an old two-language caption that
    was stored as "English" and has no place on a French page. */
@@ -13,6 +14,9 @@ const MARKERS: Record<string, string[]> = {
   en: ['lang-en', 'en-only', 'block-en', 'teach-en', 'en-lbl', 'en', 'english'],
   es: ['lang-es', 'es-only', 'block-es', 'teach-es', 'es-lbl', 'es', 'spanish'],
   fr: ['lang-fr', 'fr-only', 'block-fr', 'teach-fr', 'fr-lbl', 'fr'],
+  // Later languages follow the same pattern (src/lib/languages.mjs).
+  ...Object.fromEntries(SITE_LANGUAGES.filter((l) => !['en', 'es', 'fr'].includes(l))
+    .map((l) => [l, [`lang-${l}`, `${l}-only`, `block-${l}`, `teach-${l}`, `${l}-lbl`, l]])),
 };
 const classes = (el: HTMLElement) => (el.getAttribute('class') || '').split(/\s+/).filter(Boolean);
 export function markedLanguage(el: HTMLElement): string | null {

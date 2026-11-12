@@ -46,6 +46,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 try {
   for (const lang of ['en', 'es', 'fr']) {
     const page = await browser.newPage();
+    await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await page.setContent(`<html lang="${lang}"><body data-lang="${lang}" class="lang-${lang}"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>`);
     await page.evaluate(() => {
       Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' });

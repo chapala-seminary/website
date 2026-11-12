@@ -87,6 +87,12 @@ INSERT INTO textbook_results (student_id, textbook, passed_at)
   ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = MIN(passed_at, excluded.passed_at);
 DELETE FROM textbook_results WHERE student_id IN (SELECT id FROM students WHERE merged_into IS NOT NULL);
 
+INSERT INTO honors_readings (student_id, course, data, recorded_at)
+  SELECT m.merged_into, h.course, h.data, h.recorded_at
+  FROM honors_readings h JOIN students m ON m.id = h.student_id WHERE m.merged_into IS NOT NULL
+  ON CONFLICT(student_id, course) DO NOTHING;
+DELETE FROM honors_readings WHERE student_id IN (SELECT id FROM students WHERE merged_into IS NOT NULL);
+
 INSERT INTO course_completions (student_id, code, track, completed_at)
   SELECT m.merged_into, c.code, c.track, c.completed_at
   FROM course_completions c JOIN students m ON m.id = c.student_id WHERE m.merged_into IS NOT NULL

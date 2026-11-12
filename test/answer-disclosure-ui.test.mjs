@@ -15,7 +15,7 @@
  * Every name and answer here is made up for the test.
  */
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { chromium } from 'playwright';
 import { singleSections } from '../tools/single-pages-lib.mjs';
 
@@ -40,6 +40,7 @@ const L = 'ABCDEFGH';
 
 async function device(student) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.route('**/*', (r) => (new URL(r.request().url()).origin === ORIGIN ? r.fallback() : r.abort()));
   const mc = [];
   ctx.on('request', (req) => { const u = new URL(req.url()); if (u.pathname === '/api/mc') mc.push(JSON.parse(req.postData() || '{}')); });
