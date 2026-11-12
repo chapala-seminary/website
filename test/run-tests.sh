@@ -36,6 +36,7 @@ node --test test/finals-keys.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/catalog-landing.test.mjs
+node --test test/ot-survey-offline-books.test.mjs
 node --test test/donation.test.mjs
 node test/review-assets.test.mjs
 node test/single-completion.test.mjs
