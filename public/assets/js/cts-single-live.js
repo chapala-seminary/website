@@ -456,6 +456,9 @@
       if (!mcHost) return;
       var c = sec(n), s = st(n), closed = c.closed();
       var h = '<div class="cts-live-notes">' + c.notes() + "</div>";
+      // #312: when multiple choice is banked from an earlier attempt, its radios are disabled.
+      // Say so, or the student sees their choices vanish and thinks the exam is broken.
+      if (c.mcBanked) h += '<p class="small cts-mc-kept">' + bi(G.S.mcKept) + "</p>";
       unit.mcq.forEach(function (q, i) {
         var chosen = c.cfg.getMc(i), res = c.mcRes[c.qid("mc", i)], answered = chosen != null && !!res, busy = !!c.busy[c.qid("mc", i)];
         var cls = answered ? (res.right ? " correct" : " incorrect") : "";

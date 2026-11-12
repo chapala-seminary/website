@@ -14,7 +14,7 @@
  */
 import { loadScope, loadKeys, loadStudent, loadAttempt, trackOf, nowIso, itemsOf, standing, bankedFor,
   attemptView, resultOf, settle, gradeWritten, gradedThisHour, canned, disclosureOf, feedbackFor } from './attempts.js';
-import { MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP, OPEN_APPEALS_MAX, MIN_SA_WORDS } from './rules.js';
+import { MAX_FILL_CHARS, MAX_SA_CHARS, MAX_ESSAY_CHARS, HOURLY_CAP, OPEN_APPEALS_MAX, MIN_SA_WORDS } from './rules.js';
 
 import { wordCount } from './text.js';
 import { SITE_LANGUAGES } from '../../src/lib/languages.mjs';
@@ -147,10 +147,14 @@ async function gradeAnswers(request, env, h) {
     if (seen.has(it.qid)) throw new h.HttpError(400, 'a question appears twice');
     seen.add(it.qid);
     const isFill = items.fill.includes(it.qid);
-    const max = isFill ? MAX_FILL_CHARS : MAX_SA_CHARS;
-    if (it.answer.length > max) throw new h.HttpError(400, `an answer is longer than ${max} characters`);
+    if (isFill && it.answer.length > MAX_FILL_CHARS) throw new h.HttpError(400, `an answer is longer than ${MAX_FILL_CHARS} characters`);
     asked.push({ ...it, kind: isFill ? 'fill' : 'sa' });
   }
+  // A written answer that is too long is the student's to shorten: say which one, so the page can point at it.
+  // A final's essays may be longer, as its meta row says (never beyond MAX_ESSAY_CHARS).
+  const saMax = scope.type === 'fn' && Number.isInteger(scope.meta?.maxChars) ? Math.min(Math.max(scope.meta.maxChars, MAX_SA_CHARS), MAX_ESSAY_CHARS) : MAX_SA_CHARS;
+  const tooLong = asked.filter((a) => a.kind === 'sa' && a.answer.length > saMax).map((a) => a.qid);
+  if (tooLong.length) return h.json({ error: `an answer is longer than ${saMax} characters`, tooLong, max: saMax }, 422);
 
   // What is already settled: a banked short answer, or an answer given earlier in this attempt.
   const done = new Map((rows.results ?? []).map((r) => [r.qid, r]));
@@ -166,7 +170,7 @@ async function gradeAnswers(request, env, h) {
   if (fresh.length) {
     const keys = await loadKeys(env, fresh.map((a) => a.qid));
     if (fresh.some((a) => !keys.get(a.qid))) throw new h.HttpError(409, 'the answer key is not on the server');
-    const entries = fresh.map((a) => ({ qid: a.qid, kind: a.kind, answer: a.answer, key: keys.get(a.qid).key, rubricVersion: keys.get(a.qid).rubricVersion }));
+    const entries = fresh.map((a) => ({ qid: a.qid, kind: a.kind, answer: a.answer, key: keys.get(a.qid).key, rubricVersion: keys.get(a.qid).rubricVersion, maxChars: saMax }));
     graded = await gradeWritten(env, attempt, entries);
   }
   const byQid = new Map(graded.map((g) => [g.qid, g]));
@@ -249,7 +253,7 @@ async function shadow(request, env, ctx, h) {
   const student = await studentFor(env, h, b.code);
   if (!student) return noStudent(h);
   const scope = await loadScope(env, String(b.scope || ''));
-  if (!scope) throw new h.HttpError(400, 'unknown test');
+  if (!scope || scope.type === 'fn') throw new h.HttpError(400, 'unknown test');
   if (!Array.isArray(b.answers) || b.answers.length > MAX_SHADOW) throw new h.HttpError(400, `send up to ${MAX_SHADOW} answers`);
   const lang = LANGS.includes(b.lang) ? b.lang : LANGS.includes(student.lang) ? student.lang : 'en';
   const all = new Set([...scope.qids.mc, ...scope.qids.fill, ...scope.qids.sa]);

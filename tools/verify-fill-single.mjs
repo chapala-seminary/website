@@ -77,8 +77,9 @@ const single = (key, page, regKey, extra = {}) => ({
     await p.evaluate(([regKey, t, goal, extra]) => {
       localStorage.clear();
       const who = { name: 'Fill Test', email: 'fill-test-' + Math.random().toString(36).slice(2) + '@example.invalid', country: 'MX' };
-      localStorage.setItem('cts_student', JSON.stringify({ ...who, track: t === 'cert' ? 'certificate' : t }));
+      localStorage.setItem('cts_student', JSON.stringify({ ...who, track: t === 'cert' ? 'certificate' : t, ...(goal ? { goal } : {}) }));
       if (goal) localStorage.setItem('cts_goal', goal);
+      localStorage.setItem('cts_track_change', '1'); // the student chose this track here (#298): the record takes it
       localStorage.setItem(regKey, JSON.stringify({ ...who, track: t }));
       for (const [k, v] of Object.entries(extra)) localStorage.setItem(k, v);
     }, [regKey, TRACK.single[track], track === 'assoc' ? 'assoc' : '', extra]);
@@ -102,8 +103,9 @@ const DRIVERS = [
     async register(p, track) {
       await p.evaluate(([t, goal]) => {
         localStorage.clear();
-        localStorage.setItem('cts_student', JSON.stringify({ name: 'Fill Test', email: 'fill-test-' + Math.random().toString(36).slice(2) + '@example.invalid', track: t }));
+        localStorage.setItem('cts_student', JSON.stringify({ name: 'Fill Test', email: 'fill-test-' + Math.random().toString(36).slice(2) + '@example.invalid', track: t, ...(goal ? { goal } : {}) }));
         if (goal) localStorage.setItem('cts_goal', goal);
+        localStorage.setItem('cts_track_change', '1'); // chosen on purpose (#298)
       }, [TRACK.ethics[track], track === 'assoc' ? 'assoc' : '']);
     },
     answerMC: (p) => p.evaluate(() => { mcAnswers = mcQuestions.map((q) => String.fromCharCode(65 + q.correct)); saveState(); renderQuestions(); }),
@@ -129,6 +131,7 @@ const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 async function open(d, track, prepare) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

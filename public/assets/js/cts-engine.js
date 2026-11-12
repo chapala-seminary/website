@@ -447,6 +447,7 @@
       var t = el("regTrack");
       if (t && t.value) {
         lsSet("cts_track", t.value);
+        lsSet("cts_track_change", "1");            // chosen here on purpose (#298)
         var st = student();
         if (st) { st.track = t.value; lsSet("cts_student", JSON.stringify(st)); }
       }

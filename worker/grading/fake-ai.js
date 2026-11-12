@@ -18,6 +18,12 @@
  *   [[bad-quote-once]]               the same, but the repair call (a third message) gets it right
  *   [[missing-item]]                 leaves the item out of the reply
  *
+ * A ministry paper (payload.kind "paper", worker/grading/paper.js) reads hints
+ * in the paper's text: [[paper-pass]] full marks, [[paper-revise]] about 60,
+ * [[paper-bad-quote]] full marks backed by words the student never wrote (the
+ * server cuts each to half), [[error]], [[error:3040]], [[bad-json]] as above.
+ * Without a hint a paper scores about 40, so it never passes by accident.
+ *
  * Without a hint a short answer is not_met and a fill-in is wrong, so a test
  * never passes by accident.
  */
@@ -30,6 +36,7 @@ const hintsOf = (text) => [...String(text).matchAll(HINT)].map((m) => m[1].toLow
 export function fakeAIRun(env, model, params) {
   const sys = params.messages.find((m) => m.role === 'system')?.content || '';
   const payload = JSON.parse(params.messages.find((m) => m.role === 'user').content);
+  if (payload.kind === 'paper') return fakePaper(env, model, sys, payload);
   const fill = payload.kind === 'fill';
   const primary = model === env.GRADER_MODEL;
   const repairing = params.messages.length > 2;                                     // the repair call (model.js) adds two messages
@@ -77,4 +84,20 @@ export function fakeAIRun(env, model, params) {
   // Half the time as an object, half as text, so both shapes of reply are exercised.
   const reply = { items };
   return { response: payload.items.length % 2 ? JSON.stringify(reply) : reply, usage };
+}
+
+function fakePaper(env, model, sys, payload) {
+  const hs = hintsOf(`${payload.paper}\n${payload.study_notes}`);
+  for (const h of hs) {
+    if (h === 'error') throw new Error('fake AI error');
+    if (h.startsWith('error:')) throw new Error(`AiError: ${h.slice(6)}: fake capacity error`);
+    if (h === 'primary-error' && model === env.GRADER_MODEL) throw new Error('fake primary model error');
+  }
+  const usage = { prompt_tokens: Math.ceil((sys.length + JSON.stringify(payload).length) / 4), completion_tokens: 300 };
+  if (hs.includes('bad-json')) return { response: 'This paper deserves a high score.', usage };
+  const share = hs.includes('paper-pass') || hs.includes('paper-bad-quote') ? 1 : hs.includes('paper-revise') ? 0.6 : 0.4;
+  const words = String(payload.paper).replace(/\[\[[^\]]*\]\]/g, ' ').trim().split(/\s+/).slice(0, 8).join(' ');
+  const quote = hs.includes('paper-bad-quote') ? 'words the student never wrote anywhere at all' : words;
+  const criteria = payload.criteria.map((c) => ({ id: c.id, score: Math.round(c.max_points * share), quote, comment: `Fake comment on ${c.id}.` }));
+  return { response: JSON.stringify({ criteria, feedback: 'Fake overall feedback on this paper.' }), usage };
 }

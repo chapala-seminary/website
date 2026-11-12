@@ -21,7 +21,7 @@ import { shortAnswerFeedback } from './feedback.js';
 export const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const DEFAULT_FALLBACK = '@cf/openai/gpt-oss-120b';
 export const DEFAULT_VERSION = '2026-10-19.1';
-const CAPACITY = /\b(3036|3040|3007)\b/;
+export const CAPACITY = /\b(3036|3040|3007)\b/;
 const TIMEOUT_MS = 25000;
 // Leave the browser's 60-second request deadline time for database writes.
 // Retries and quote repairs share this budget rather than each consuming it.
@@ -37,7 +37,7 @@ export const modelsOf = (env) => ({
 export const aiAvailable = (env) => !!(env.AI_FAKE || (env.AI && typeof env.AI.run === 'function'));
 
 /* The text of a reply, whatever shape the model family returns it in. */
-function replyText(res) {
+export function replyText(res) {
   if (res == null) return null;
   if (typeof res === 'string') return res;
   const r = res.response ?? res.result?.response;
@@ -52,7 +52,7 @@ function replyText(res) {
   if (res.items) return JSON.stringify(res);
   return null;
 }
-function parseJson(text) {
+export function parseJson(text) {
   if (typeof text !== 'string') return null;
   const t = text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
   try { return JSON.parse(t); } catch { /* fall through */ }
@@ -61,7 +61,7 @@ function parseJson(text) {
   return null;
 }
 
-async function addUsage(env, model, { calls = 0, input = 0, output = 0, errors = 0 }) {
+export async function addUsage(env, model, { calls = 0, input = 0, output = 0, errors = 0 }) {
   try {
     await env.DB.prepare(
       `INSERT INTO ai_usage (day, model, calls, input_tokens, output_tokens, errors) VALUES (?, ?, ?, ?, ?, ?)
@@ -72,25 +72,33 @@ async function addUsage(env, model, { calls = 0, input = 0, output = 0, errors =
 }
 
 async function call(env, model, kind, lang, items, version, more = [], deadline = Date.now() + GRADING_BUDGET_MS) {
-  const remaining = deadline - Date.now();
-  if (remaining <= 0) throw new Error('grading request time budget reached');
-  const params = {
+  return await runModel(env, model, {
     messages: [...buildMessages(kind, lang, items, version), ...more],
     response_format: { type: 'json_schema', json_schema: schema(kind) },
     max_tokens: 250 * items.length + 300,
     temperature: 0,
-  };
+  }, { deadline });
+}
+
+/** One model call with its time limit: the Workers AI binding, or the test
+ *  fake when AI_FAKE is set. Shared by the answer grader above and the
+ *  ministry-paper grader (worker/grading/paper.js). Throws on an error, on the
+ *  call's own limit (timeoutMs) and on the shared budget (deadline; the error
+ *  then has code GRADING_DEADLINE). */
+export async function runModel(env, model, params, { deadline = Date.now() + GRADING_BUDGET_MS, timeoutMs = TIMEOUT_MS } = {}) {
+  const remaining = deadline - Date.now();
+  if (remaining <= 0) throw new Error('grading request time budget reached');
   const run = env.AI_FAKE ? Promise.resolve().then(() => fakeAIRun(env, model, params)) : env.AI.run(model, params);
   let timer;
   const timeout = new Promise((_, rej) => {
     timer = setTimeout(() => {
-      const error = new Error(remaining <= TIMEOUT_MS ? 'grading request time budget reached' : 'the model took too long');
+      const error = new Error(remaining <= timeoutMs ? 'grading request time budget reached' : 'the model took too long');
       // Timers can fire just before Date.now() reaches the absolute deadline.
       // Once the shared-budget timer fires, its budget is spent regardless of
       // that rounding; do not start another provider call in the remaining ms.
-      if (remaining <= TIMEOUT_MS) error.code = 'GRADING_DEADLINE';
+      if (remaining <= timeoutMs) error.code = 'GRADING_DEADLINE';
       rej(error);
-    }, Math.min(TIMEOUT_MS, remaining));
+    }, Math.min(timeoutMs, remaining));
   });
   try { return await Promise.race([run, timeout]); } finally { clearTimeout(timer); }
 }
@@ -278,7 +286,28 @@ async function repair(env, model, kind, lang, items, version, parsed0, repairs, 
   });
 }
 
-export async function gradeBatch(env, kind, lang, items, { deadline = Date.now() + GRADING_BUDGET_MS } = {}) {
+/* How many answers go to the model in one call. The model writes about three
+ * seconds of output per written answer, so ten in one call ran past the 25 s
+ * call limit and nearly every written answer fell back to the queue (and an
+ * answer that hit a second error was lost from the student's view). Small
+ * calls side by side finish well inside the limit. */
+export const CHUNK = { fill: 10, sa: 3 };
+
+export async function gradeBatch(env, kind, lang, items, { deadline = Date.now() + GRADING_BUDGET_MS, chunk = 0 } = {}) {
+  if (chunk > 0 && items.length > chunk) {
+    const parts = [];
+    for (let i = 0; i < items.length; i += chunk) parts.push(items.slice(i, i + chunk));
+    const done = await Promise.all(parts.map((p) => gradeBatch(env, kind, lang, p, { deadline })));
+    const results = new Map();
+    const unresolved = [];
+    let error = null;
+    for (const d of done) {
+      for (const [qid, r] of d.results) results.set(qid, r);
+      unresolved.push(...d.unresolved);
+      if (d.error) error = d.error;
+    }
+    return { results, unresolved, error: unresolved.length ? error : null };
+  }
   const { primary, fallback, version } = modelsOf(env);
   const results = new Map();
   let remaining = items.slice();

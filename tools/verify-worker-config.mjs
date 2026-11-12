@@ -128,6 +128,9 @@ ok(prod.env?.beta?.vars?.OUTREACH_MODE !== 'send',
 ok(prod.vars?.DIGEST_MODE === 'send', 'production emails the Monday summary');
 ok(prod.env?.beta?.vars?.DIGEST_MODE !== 'send',
   'beta does not email a Monday summary (it shared the live inbox and was mistaken for it)');
+// the one-time confirm-registration note (worker/confirm-invite.js): never from beta,
+// whose students are testers; production turns it on only with Wayne's approval
+ok(prod.env?.beta?.vars?.CONFIRM_INVITE_MODE !== 'send', 'beta never sends the confirm-registration note to students');
 
 /* Anything still spelled PUT-THE-...
  *

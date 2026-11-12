@@ -14,7 +14,7 @@ import { exactFill, normAnswer, wordCount, copiedOnly } from './text.js';
 import { SITE_LANGUAGES } from '../../src/lib/languages.mjs';
 import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeInstruction,
   MIN_SA_WORDS, MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP } from './rules.js';
-import { gradeBatch, modelsOf, GRADING_BUDGET_MS } from './model.js';
+import { gradeBatch, modelsOf, GRADING_BUDGET_MS, CHUNK } from './model.js';
 import { SINGLES } from './singles.js';
 
 export const nowIso = () => new Date().toISOString();
@@ -36,6 +36,11 @@ export function parseScope(scope) {
     return t && (m[1] === 'rd') === (t.kind === 'reading') ? { type: m[1], prefix: `${m[1]}:${m[2]}/`, testSlug: m[2], code: t.code } : null;
   }
   if ((m = /^sp:([A-Za-z0-9_-]{1,60})$/.exec(scope))) return { type: 'sp', prefix: `sp:${m[1]}/`, page: m[1] };
+  // a final synthesis exam (Dr. Cook, 2 Nov 2026): every fill-in and every essay, in its catalog map of its own
+  if ((m = /^fn:([a-z0-9]{2,40})$/.exec(scope))) {
+    const t = catalog.assessments?.[m[1]];
+    return t && t.kind === 'final' ? { type: 'fn', prefix: `fn:${m[1]}/`, testSlug: m[1], code: t.code } : null;
+  }
   return null;
 }
 
@@ -134,6 +139,7 @@ export async function loadAttempt(env, id) {
 export function itemsOf(scope, attempt, rows) {
   if (attempt.shadow && (scope.type === 'tb' || scope.type === 'rd'))
     return { mc: [], fill: [...new Set(rows.filter((r) => r.kind === 'fill').map((r) => r.qid))], sa: [] };
+  // A final asks everything it holds: no draw.
   return { mc: scope.qids.mc, fill: scope.type === 'tb' || scope.type === 'rd' ? drawFor(scope, attempt.id) : scope.qids.fill, sa: scope.qids.sa };
 }
 
@@ -172,8 +178,9 @@ export async function standing(env, attempt, scope) {
   const rows = await gradesOf(env, attempt.id);
   const items = itemsOf(scope, attempt, rows);
   const banked = attempt.shadow ? { mc: false, sa: [], saText: {} } : await bankedFor(env, attempt.student_id, attempt.scope, attempt.id);
-  const meta = scope.type === 'tb' || scope.type === 'rd' ? (scope.meta || { pass: items.fill.length }) : null;
-  const totals = { mc: scope.type === 'tb' || scope.type === 'rd' ? 0 : items.mc.length, fill: items.fill.length, sa: items.sa.length };
+  const meta = scope.type === 'tb' || scope.type === 'rd' ? (scope.meta || { pass: items.fill.length })
+    : scope.type === 'fn' ? { kind: 'final', pass: (scope.meta && scope.meta.pass) || { fill: items.fill.length, sa: items.sa.length } } : null;
+  const totals = { mc: isTest(scope) ? 0 : items.mc.length, fill: items.fill.length, sa: items.sa.length };
   const req = requirements(attempt.track, totals, meta);
   const mine = (kind, v) => rows.filter((r) => r.kind === kind && r.verdict === v).length;
   const saMetSet = new Set([...banked.sa, ...rows.filter((r) => r.kind === 'sa' && r.verdict === 'met').map((r) => r.qid)]);
@@ -185,6 +192,10 @@ export async function standing(env, attempt, scope) {
   };
   return { rows, items, banked, totals, req, state, verdict: evaluate(req, state) };
 }
+
+/* A test recorded in textbook_results under its own slug: a textbook test, a
+   reading test, or a final. */
+const isTest = (scope) => scope.type === 'tb' || scope.type === 'rd' || scope.type === 'fn';
 
 /* ---- credit ------------------------------------------------------------------- */
 
@@ -305,7 +316,7 @@ async function creditPass(env, attempt, scope) {
     const c = await completeCourseIfDone(env, student, scope.slug, attempt.track, { scope: attempt.scope, track: attempt.track });
     return { unitDone: true, courseDone: c.done, courseNew: c.newly };
   }
-  if (scope.type === 'tb' || scope.type === 'rd') {
+  if (isTest(scope)) {
     await env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at, source) VALUES (?, ?, ?, 'server')
        ON CONFLICT(student_id, textbook) DO NOTHING`).bind(student.id, scope.testSlug, t).run();
@@ -336,7 +347,7 @@ async function reconcileCourse(env, attempt, scope) {
   const student = await loadStudent(env, attempt.student_id);
   if (!student) return none;
   if (scope.type === 'unit') return await completeCourseIfDone(env, student, scope.slug, attempt.track);
-  if (scope.type === 'tb' || scope.type === 'rd') return await completeCourseIfDone(env, student, scope.code, attempt.track);
+  if (isTest(scope)) return await completeCourseIfDone(env, student, scope.code, attempt.track);
   if (scope.type === 'sp') {
     const code = scope.meta?.code || Object.keys(SINGLES).find((k) => SINGLES[k].course === scope.meta?.course);
     return code && SINGLES[code] ? await completeSingleIfDone(env, student, code, attempt.track) : none;
@@ -347,7 +358,7 @@ async function reconcileCourse(env, attempt, scope) {
 async function alreadyCredited(env, attempt, scope) {
   if (scope.type === 'unit')
     return !!(await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(attempt.student_id, scope.slug, scope.unit).first());
-  if (scope.type === 'tb' || scope.type === 'rd')
+  if (isTest(scope))
     return !!(await env.DB.prepare('SELECT 1 FROM textbook_results WHERE student_id = ? AND textbook = ?').bind(attempt.student_id, scope.testSlug).first());
   if (scope.type === 'sp' && scope.meta && scope.meta.course && scope.meta.unit != null)
     return !!(await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(attempt.student_id, scope.meta.course, scope.meta.unit).first());
@@ -643,7 +654,8 @@ export async function cacheDecision(env, qid, lang, norm, verdict, feedback, mod
     .bind(qid, lang, norm, verdict, feedback || null, model || null, version || null, t, t).run();
 }
 
-/** Grade written answers and write the rows. entries: [{ qid, kind, answer, key, rubricVersion }].
+/** Grade written answers and write the rows. entries: [{ qid, kind, answer, key, rubricVersion, maxChars? }]
+ *  (maxChars: a final's longer essays; otherwise MAX_SA_CHARS).
  *  The caller has checked ownership, lengths and that none is already graded.
  *  Returns one reply item per entry, in order. */
 export async function gradeWritten(env, attempt, entries) {
@@ -681,7 +693,15 @@ export async function gradeWritten(env, attempt, entries) {
   }
   for (const [kind, idx] of [['fill', fillAsk], ['sa', toModel.sa]]) {
     if (!idx.length) continue;
-    const batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })), { deadline });
+    // Any failure here leaves the answers pending and queued, never lost: the
+    // rows below are still written, so the student's words are kept.
+    let batch;
+    try {
+      batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })), { deadline, chunk: CHUNK[kind] });
+    } catch (err) {
+      console.error('grading failed; answers queued', err && err.message);
+      batch = { results: new Map(), unresolved: [], error: String((err && err.message) || err).slice(0, 300) };
+    }
     for (const i of idx) {
       const r = batch.results.get(entries[i].qid);
       if (!r) { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('waiting', lang), queue: batch.error || 'unresolved' }; continue; }
@@ -701,7 +721,7 @@ export async function gradeWritten(env, attempt, entries) {
          model, prompt_version, rubric_version, created_at, graded_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT(attempt_id, qid) DO NOTHING RETURNING id`)
-      .bind(attempt.id, attempt.student_id, e.qid, e.kind, lang, String(e.answer ?? '').slice(0, MAX_SA_CHARS), r.verdict, r.feedback || null,
+      .bind(attempt.id, attempt.student_id, e.qid, e.kind, lang, String(e.answer ?? '').slice(0, e.maxChars || MAX_SA_CHARS), r.verdict, r.feedback || null,
         r.record ? JSON.stringify(r.record) : r.points ? JSON.stringify(r.points) : r.held ? JSON.stringify({ held: r.held }) : null, r.by,
         r.model || null, r.version || (r.by === 'ai' ? version : null), e.kind === 'sa' ? (e.rubricVersion ?? null) : null, t, pending ? null : t).first();
     if (!res) {

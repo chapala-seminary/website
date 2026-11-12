@@ -178,6 +178,12 @@
       fr: "Votre réponse est trop courte pour être évaluée. Veuillez la développer pour expliquer votre compréhension de la question.",
       sw: "Jibu lako ni fupi mno kuweza kutathminiwa. Tafadhali liongeze ili ueleze unavyolielewa swali."
     },
+    tooLong: {
+      en: "This answer is longer than 4,000 characters. Please shorten it and try again.",
+      es: "Esta respuesta tiene más de 4.000 caracteres. Acórtela e inténtelo de nuevo.",
+      fr: "Cette réponse dépasse 4 000 caractères. Veuillez la raccourcir et réessayer.",
+      sw: "Jibu hili lina zaidi ya herufi 4,000. Tafadhali lifupishe kisha ujaribu tena."
+    },
     connecting: { en: "Connecting to the seminary…", es: "Conectando con el seminario…", fr: "Connexion au séminaire…" },
     checking: { en: "Checking…", es: "Comprobando…", fr: "Vérification…" },
     reviewing: { en: "Reviewing your written answers…", es: "Revisando sus respuestas escritas…", fr: "Correction de vos réponses écrites…" },
@@ -282,6 +288,7 @@
   function troubleKey(r) {
     if (r.unregistered) return "register";
     if (r.status === 422 && r.data && r.data.needsExpansion) return "expansion";
+    if (r.status === 422 && r.data && r.data.tooLong) return "tooLong";
     if (r.offline) return "offline";
     if (r.status === 429) return "throttled";
     if (r.status === 404 || r.status === 401 || r.status === 403) return "unknownStudent";
@@ -308,7 +315,9 @@
     note.remove(); field._ctsExpansionNote = null;
   }
   function showExpansion(reply, fields) {
-    var wanted = reply && reply.data && reply.data.needsExpansion;
+    var long = !!(reply && reply.data && reply.data.tooLong);
+    var wanted = reply && reply.data && (reply.data.needsExpansion || reply.data.tooLong);
+    var said = long ? S.tooLong : S.expansion;
     if (!Array.isArray(wanted)) return;
     var first = null;
     fields.forEach(function (entry) {
@@ -318,7 +327,7 @@
       var note = document.createElement("p");
       note.id = "cts-sa-expansion-" + (++expansionSerial);
       note.className = "small cts-sa-too-short";
-      note.setAttribute("role", "alert"); note.textContent = S.expansion[(document.documentElement.lang || "en").split("-")[0]] || S.expansion.en;
+      note.setAttribute("role", "alert"); note.textContent = said[(document.documentElement.lang || "en").split("-")[0]] || said.en;
       field.setAttribute("aria-invalid", "true");
       field.setAttribute("aria-describedby", ((field.getAttribute("aria-describedby") || "") + " " + note.id).trim());
       field.insertAdjacentElement("afterend", note); field._ctsExpansionNote = note;
@@ -335,9 +344,23 @@
      not, point at the home page. Both point at the restore page, where a
      student with a code gets their record back. */
   function registerHtml(bi, onTestPage) {
+    // A local greeting can survive after the server student code is lost.
+    // In that case do not suggest enrolling a second time: restore the record.
+    var hasLocalIdentity = false;
+    try { hasLocalIdentity = !!JSON.parse(lsGet("cts_student") || "null")?.name; } catch (e) {}
+    // Only show restore-first guidance for a known disconnected identity; a
+    // fresh registration may still be obtaining its code asynchronously.
+    var restoreFirst = hasLocalIdentity && !code() &&
+      (lsGet("cts_sync_off") === "1" || !!lsGet("cts_reg_existing"));
+    var message = restoreFirst ? bi({
+      en: "Your name is saved on this device, but your student record is not connected. Restore your existing record with your student code; do not register again.",
+      es: "Su nombre está guardado en este dispositivo, pero su expediente estudiantil no está conectado. Recupere su expediente con su código de estudiante; no se registre de nuevo.",
+      fr: "Votre nom est enregistré sur cet appareil, mais votre dossier étudiant n'est pas connecté. Restaurez votre dossier avec votre code étudiant ; ne vous inscrivez pas de nouveau.",
+      sw: "Jina lako limehifadhiwa kwenye kifaa hiki, lakini rekodi yako ya mwanafunzi haijaunganishwa. Rejesha rekodi yako kwa msimbo wako wa mwanafunzi; usijisajili tena."
+    }) : bi(onTestPage ? S.registerPage : S.register);
     return '<div class="cts-grade-register" role="status" style="margin:12px 0;padding:12px 16px;border-left:4px solid #b08324;background:#fbf6ea;color:#2a241d">' +
-      "<p>" + bi(onTestPage ? S.registerPage : S.register) + "</p><p>" +
-      (onTestPage ? '<a class="btn solid" href="/index.html#register">' + bi(S.registerHome) + "</a> " : "") +
+      "<p>" + message + "</p><p>" +
+      (onTestPage && !restoreFirst ? '<a class="btn solid" href="/index.html#register">' + bi(S.registerHome) + "</a> " : "") +
       '<a class="btn" href="/cts-backup.html">' + bi(S.registerRestore) + "</a></p></div>";
   }
 
