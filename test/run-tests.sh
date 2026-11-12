@@ -19,14 +19,22 @@ CONFIG=test/wrangler.local.jsonc
 
 node tools/private-units.mjs --check
 node --test test/release-governance.test.mjs
+# Faculty-review World Library catalog; counts, URLs, filters, accessibility.
+node --test test/world-library-v1.test.mjs
+node --test test/ethics-unit-links.test.mjs
 node --test test/track-sync-ack.test.mjs
+# Legacy Associate goals must reach the server on an ordinary sync poll.
+node --test test/track-adopt-poll.test.mjs
 node --test test/degree-count-dedupe.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
 node --test test/assessment-keys.test.mjs
+# The final synthesis exams: public prompts only, private keys joined, no key on a page (2 Nov 2026).
+node --test test/finals-keys.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/catalog-landing.test.mjs
+node --test test/donation.test.mjs
 node test/review-assets.test.mjs
 node test/single-completion.test.mjs
 # The grading rules with no server: the fill-in text rules against the browser
@@ -35,6 +43,7 @@ node test/single-completion.test.mjs
 node test/grading-unit.test.mjs
 node --test test/grading-feedback.test.mjs
 node test/single-page-readings.test.mjs
+node --test test/elective-reading-manifest-integrity.test.mjs
 node tools/verify-staged-readings.mjs
 node tools/verify-rubrics.mjs
 node test/eval-grader.test.mjs
@@ -202,6 +211,9 @@ node tools/wr-readers.mjs
 # public-domain shelf its data says and an honours attestation, written by
 # tools/reading-rooms.mjs -- a room edited by hand drifts from the data.
 node tools/reading-rooms.mjs --check
+# The optional Greek/Hebrew labs must not change the five reading or honors requirements.
+node test/la-language-labs.test.mjs
+node test/exam-integrity.test.mjs
 
 # The question bank: 451 units, 34,778 comparisons of stems, options and answer
 # keys, in a form that does not care what file format the content lives in.
@@ -255,6 +267,9 @@ node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
+# A routine save from an old device cannot change the track; only a chosen change can (#298).
+API_BASE="http://127.0.0.1:$PORT" node test/track-explicit-change.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/honors-on-record.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/legacy-sync-window.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
@@ -298,6 +313,10 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/outr
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/confirm-invite.test.mjs
 # Coordinator-led paper study: groups, enrollment without email, paper sheets (worker/coord.js).
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/coord.test.mjs
+# The final synthesis exam (fn:) and the ministry paper (/api/assignment), Dr. Cook, 2 Nov 2026:
+# graded by the server alone, credited once, and required of no one. After the grading and
+# calibration suites, so its AI-graded essays are not in their samples.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/assessments.api.mjs
 
 # Returning students from the old site (Dr. Cook's review, 29 Sept 2026):
 # three browsers as the old site left them, each opening the new site -- the
@@ -468,6 +487,9 @@ node test/published-models.test.mjs
   # Swahili, the fourth language: routes, toggle, the translation-pending
   # note, a Swahili lesson and exam, and Swahili grading on the server.
   API_BASE="http://127.0.0.1:$PORT" node test/swahili.test.mjs
+  # "Listen to this lesson": what is read aloud, in which language, and that
+  # it stops when the exam opens (the device's voice replaced by a recorder).
+  node test/listen.test.mjs "http://127.0.0.1:$PORT"
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose

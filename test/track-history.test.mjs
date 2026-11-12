@@ -10,7 +10,7 @@
  * Completions are written as the server writes them (source = 'server') so
  * each case starts from a known record. Every name here is made up.
  */
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';

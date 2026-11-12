@@ -78,6 +78,8 @@
     b.setAttribute("data-lang", lang);
     if (lang !== "both") { document.documentElement.lang = lang; lsSet("cts_lang", lang); }
     syncLang(lang);
+    // Listen must stop the previous language immediately when the textbook changes without a reload.
+    try { document.dispatchEvent(new CustomEvent("cts-lang", { detail: lang })); } catch (e) {}
   }
   function langNow() { return document.body.classList.contains("lang-both") ? "both" : isEs() ? "es" : "en"; }
   function syncLang(lang) {

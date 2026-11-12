@@ -12,7 +12,7 @@
 // from before is written straight into the local database, as the record of
 // a student who finished before activation would already hold it.
 
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';

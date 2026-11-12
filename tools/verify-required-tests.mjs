@@ -52,6 +52,7 @@ ok(activeMap[CODE].length === 2, 'the generated requirements give Pentecostalism
 
 async function context({ active = false } = {}) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   if (active) {
     const js = `window.CTS_REQUIRED_TESTS = ${JSON.stringify(activeMap)};`;
     await ctx.addInitScript(js);

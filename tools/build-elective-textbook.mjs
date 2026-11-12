@@ -54,7 +54,8 @@ const argv = process.argv.slice(2);
 const WRITE = argv.includes('--write');
 const opt = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
 const CODE = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content');
-if (!CODE || !/^[A-D]-C[1-5]$/.test(CODE)) { console.error('usage: node tools/build-elective-textbook.mjs <A-C1 … D-C5> [--write] [--content DIR]'); process.exit(2); }
+const ISLAM = CODE === 'ISLAM';   // the core course CTSIslam (tools/import-islam.mjs), same layout
+if (!CODE || !(ISLAM || /^[A-D]-C[1-5]$/.test(CODE))) { console.error('usage: node tools/build-elective-textbook.mjs <A-C1 … D-C5 | ISLAM> [--write] [--content DIR]'); process.exit(2); }
 refuseHeld(CODE, 'textbook');
 const DIR = path.join(path.resolve(opt('--content') || process.env.ELECTIVE_CONTENT || path.join(ROOT, '..', 'elective-content')), CODE, 'textbook');
 const LANGS = ['en', 'es', 'fr'];
@@ -73,9 +74,9 @@ const fold = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCa
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
 
 /* ---- names ---- */
-const prefix = prefixOf(CODE), tag = TRADITIONS[CODE[0]].tag, num = NUM[+CODE.slice(-1) - 1];
-const slug = `elec${tag.toLowerCase()}${num}`;
-const page = `CTSTextbookElec${tag}${cap(num)}`;
+const prefix = ISLAM ? 'CTSIslam' : prefixOf(CODE), tag = ISLAM ? '' : TRADITIONS[CODE[0]].tag, num = ISLAM ? '' : NUM[+CODE.slice(-1) - 1];
+const slug = ISLAM ? 'islamtext' : `elec${tag.toLowerCase()}${num}`;
+const page = ISLAM ? 'CTSTextbookIslam' : `CTSTextbookElec${tag}${cap(num)}`;
 const out = `src/content/textbooks/${slug}.json`;
 if (!fs.existsSync(`src/content/courses/${prefix}.json`)) { console.error(`src/content/courses/${prefix}.json is missing: import the course first`); process.exit(2); }
 console.log(`${CODE} -> ${prefix}: textbook ${slug}, pages ${page}.html and ${page}Test.html, content ${DIR}`);

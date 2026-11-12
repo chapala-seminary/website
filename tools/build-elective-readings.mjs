@@ -62,7 +62,10 @@ const argv = process.argv.slice(2);
 const WRITE = argv.includes('--write');
 const opt = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };
 const CODE = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--content');
-if (!CODE || !/^[A-D]-C[1-5]$/.test(CODE)) { console.error('usage: node tools/build-elective-readings.mjs <A-C1 … D-C5> [--write] [--content DIR]'); process.exit(2); }
+/* ISLAM: the core course Defending the Christian Faith in Conversation with
+   Islam (tools/import-islam.mjs) uses the same room and test layout. */
+const ISLAM = CODE === 'ISLAM';
+if (!CODE || !(ISLAM || /^[A-D]-C[1-5]$/.test(CODE))) { console.error('usage: node tools/build-elective-readings.mjs <A-C1 … D-C5 | ISLAM> [--write] [--content DIR]'); process.exit(2); }
 refuseHeld(CODE, 'reading room and reading test');
 const CONTENT = path.resolve(opt('--content') || process.env.ELECTIVE_CONTENT || path.join(ROOT, '..', 'elective-content'), CODE);
 const LANGS = ['en', 'es', 'fr'];
@@ -79,8 +82,8 @@ const run = (args) => {
 };
 
 /* ---- names ---- */
-const prefix = prefixOf(CODE);
-const slug = `elec${TRADITIONS[CODE[0]].tag.toLowerCase()}${NUM[+CODE.slice(-1) - 1]}readings`;
+const prefix = ISLAM ? 'CTSIslam' : prefixOf(CODE);
+const slug = ISLAM ? 'islamreadings' : `elec${TRADITIONS[CODE[0]].tag.toLowerCase()}${NUM[+CODE.slice(-1) - 1]}readings`;
 const page = `${prefix}Readings`;
 const roomFile = `src/body/rooms/${page}.html`;
 const cardFile = `src/content/courses/${prefix}.json`;
@@ -290,5 +293,6 @@ if (!new RegExp(`\\n  ${prefix}: "${page}\\.html",`).test(ts)) {
   fs.writeFileSync(partials, ts);
 }
 const SOURCES = path.join(keys, 'sources', 'denominational');
-console.log(`4. READING_ROOM.${prefix}; ${run(['tools/import-electives.mjs', SOURCES, keys, CODE, '--write'])}; ${run(['tools/private-units.mjs'])}; ${run(['tools/gen-worker-catalog.mjs'])}`);
+const reimport = ISLAM ? ['tools/import-islam.mjs', path.join(keys, 'sources', 'islam'), keys, '--write'] : ['tools/import-electives.mjs', SOURCES, keys, CODE, '--write'];
+console.log(`4. READING_ROOM.${prefix}; ${run(reimport)}; ${run(['tools/private-units.mjs'])}; ${run(['tools/gen-worker-catalog.mjs'])}`);
 console.log(`Done. Now: npm run build; node tools/exam-review.mjs dist --refresh-missing; npm run build.`);
