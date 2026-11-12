@@ -1,6 +1,6 @@
 // Real Worker/D1 and browser tests for either way of confirming an email.
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { chromium } from 'playwright';
 import { verificationEmail } from '../worker/email.js';
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';

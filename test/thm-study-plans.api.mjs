@@ -77,7 +77,9 @@ try {
   const page=await browser.newPage();
   await page.goto(BASE+'/CTSThMCertificate.html?cts_lang=en');
   await page.evaluate(code=>window.CTS_SYNC.restore(code),code);
-  await page.waitForFunction(()=>document.getElementById('totalNum').textContent==='15 / 15');
+  // The degree page reopens itself once when the record arrives (#310/#314);
+  // until the reopened page has drawn, the element is not there yet.
+  await page.waitForFunction(()=>document.getElementById('totalNum')?.textContent==='15 / 15');
   check(await page.locator('#printBtn').isEnabled(),'recovered degree becomes available without reloading');
   check((await page.locator('#certName').innerText())===name,'recovered diploma refreshes the student name without reloading');
   check((await page.locator('#reqGrid').innerText()).includes('Systematic Theology')&&(await page.locator('#reqGrid').innerText()).includes('Gospel of John'),'progress names protected courses and actual replacements');

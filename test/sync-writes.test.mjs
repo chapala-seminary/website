@@ -2,7 +2,7 @@
 // value must not merely round-trip correctly: it must avoid the UPDATE itself.
 // This test never connects to a remote database or sends email.
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';

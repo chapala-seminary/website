@@ -12,7 +12,7 @@
 // and its retry, a pass written once, three versions a day.
 // Needs the private keys synced (tools/sync-grading-keys.mjs with the
 // assessment-keys checkout); without finals/ the final part is skipped.
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { resolveKeysRoot } from '../tools/grading-keys-lib.mjs';

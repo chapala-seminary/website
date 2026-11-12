@@ -177,7 +177,12 @@
       student: student ? {
         name: student.name, email: student.email, country: student.country,
         track: (student.track || track || '').toLowerCase() || undefined,
-        goal: student.goal, heard: student.heard,
+        // The goal can live only in cts_goal (Change track writes it there);
+        // without it an Associate record would be created as Certificate.
+        goal: student.goal != null ? student.goal : (get('cts_goal') || undefined), heard: student.heard,
+        // Only a deliberate choice (Change track, the sign-up form) may change the
+        // track on the record; a routine save from an old device must not (#298).
+        trackChange: get('cts_track_change') === '1' || undefined,
       } : null,
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
@@ -185,17 +190,22 @@
       lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
+      // honors readings (cts_honors_v1:<course>): the student's own attestation,
+      // kept on the record too so a new browser still shows "with honors"
+      honors: keys().filter(function (k) { return /^cts_honors_v1:[A-Za-z0-9]{1,40}$/.test(k) && get(k); })
+        .map(function (k) { return { course: k.slice('cts_honors_v1:'.length), data: get(k) }; }),
     };
   }
 
   function digest(s) {
     return JSON.stringify([
-      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard],
+      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard, s.student.goal, !!s.student.trackChange],
       s.doneCodes.slice().sort(),
       Object.keys(s.completionTracks).sort().map(function (k) { return k + ':' + s.completionTracks[k]; }),
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
       (s.textbooks || []).map(function (t) { return t.slug; }).sort(),
       s.lang,
+      (s.honors || []).map(function (h) { return h.course; }).sort(),
     ]);
   }
 
@@ -210,9 +220,47 @@
     set('cts_required_from', JSON.stringify(dates));
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
   }
+  /* The seminary record decides the student's track (#298, #183). A browser
+     keeps its own copy only while a change the student made here is on its way;
+     otherwise an old phone that still said "Certificate" kept grading a master's
+     student at Certificate level. Levels are compared, not spellings: the
+     sign-up form saves Associate as "ad", Change track as "cert" + goal "assoc". */
+  function trackLevel(t, g) {
+    t = String(t || '').toLowerCase(); g = String(g || '').toLowerCase();
+    if (t === 'mdiv') return 'mdiv';
+    if (t === 'thm' || t === 'mth') return 'thm';
+    if (t === 'ad' || t === 'assoc' || t === 'associate' || g === 'assoc') return 'assoc';
+    return 'cert';
+  }
+  function adoptTrack(local, server) {
+    if (!server || !server.track) return;
+    var mine = trackLevel(local.track || get('cts_track'), local.goal != null ? local.goal : get('cts_goal'));
+    var theirs = trackLevel(server.track, server.goal);
+    if (get('cts_track_change') === '1') {
+      if (mine === theirs) { try { localStorage.removeItem('cts_track_change'); } catch (e) {} }
+      return;                                    // the student's own change is still on its way
+    }
+    if (mine === theirs) return;
+    // A record whose goal was never set (null, not '') cannot say the student
+    // is not Associate: records made before the goal was sent have none. Send
+    // this browser's Associate up as the student's choice instead of losing it.
+    if (mine === 'assoc' && theirs === 'cert' && server.goal == null) { set('cts_track_change', '1'); return; }
+    var token = server.track === 'associate' ? 'ad' : server.track;
+    local.track = token; local.goal = server.goal || '';
+    set('cts_student', JSON.stringify(local));
+    set('cts_track', token);
+    set('cts_goal', server.goal || '');
+    return true;
+  }
   function apply(state) {
     applyPolicy(state);
     if (!state || !state.student) return;
+    // What the record gave this browser that it did not have: a unit, a
+    // course, a level, a textbook pass or exemption, a track. Not the keys
+    // that only mirror those, nor the profile. Pages that decided once as
+    // they opened use it to tell whether they now show the wrong thing
+    // (cts-certify.js); it is empty on a device that was already up to date.
+    var credit = [];
     // Server-owned approval cache: replace or clear it; never send it in snapshot().
     set('cts_thm_study_plan', JSON.stringify({ studentId: state.student.id, plan: state.thmStudyPlan || null }));
     var local = parse(get('cts_student'), {}) || {};
@@ -230,11 +278,12 @@
       if (confirmed) confirmed.remove();
     }
     if (!get('cts_track') && state.student.track) set('cts_track', state.student.track);
+    if (adoptTrack(local, state.student)) credit.push('track');
 
     var done = parse(get('cts_done_codes'), []);
     if (!Array.isArray(done)) done = [];
     var added = false;
-    (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; } });
+    (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; credit.push('done:' + c); } });
     if (added) set('cts_done_codes', JSON.stringify(done));
 
     // The lists the degree pages count: master's completions by code, and
@@ -244,29 +293,36 @@
     function addTo(key, value) {
       var list = parse(get(key), []);
       if (!Array.isArray(list)) list = [];
-      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); }
+      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); return true; }
+      return false;
     }
     (state.completions || []).forEach(function (c) {
       if (!c || !c.code) return;
-      if (c.track === 'mdiv') addTo('cts_mdiv_done_codes', c.code);
-      if (c.track === 'thm') addTo('cts_thm_done_codes', c.code);
-      if (c.track === 'assoc') addTo('cts_assoc_done_codes', c.code);
+      var lists = { mdiv: 'cts_mdiv_done_codes', thm: 'cts_thm_done_codes', assoc: 'cts_assoc_done_codes' };
+      if (lists[c.track] && addTo(lists[c.track], c.code)) credit.push(c.track + ':' + c.code);
       if (c.name) addTo('cts_degree_courses', c.name);
     });
 
     (state.progress || []).forEach(function (p) {
       var pk = 'cts_' + p.course + '_progress';
       var map = parse(get(pk), {}) || {};
-      if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); }
+      if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); credit.push('unit:' + p.course + ':' + p.unit); }
       var mk = 'cts_' + p.course + '_u' + p.unit + '_mc_passed';
       if (get(mk) !== '1') set(mk, '1');
       writeLegacy(p.course, p.unit);                   // the keys the certificate page reads
     });
 
+    // An honors reading recorded on another device: written here as it was there.
+    (state.honors || []).forEach(function (h) {
+      if (!h || !/^[A-Za-z0-9]{1,40}$/.test(String(h.course || '')) || typeof h.data !== 'string') return;
+      var hk = 'cts_honors_v1:' + h.course;
+      if (!get(hk)) set(hk, h.data);
+    });
+
     (state.textbooks || []).forEach(function (t) {
       if (!t || !/^[a-z]+$/.test(String(t.textbook || ''))) return;
       var k = 'cts_textbook_' + t.textbook + '_passed';
-      if (!get(k)) set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10));
+      if (!get(k)) { set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10)); credit.push('textbook:' + t.textbook); }
       addTo('cts_textbooks_passed', t.textbook);
     });
 
@@ -278,10 +334,12 @@
     (state.exemptions || []).forEach(function (slug) {
       if (!/^[a-z]+$/.test(String(slug || ''))) return;
       var k = 'cts_textbook_' + slug + '_exempt';
-      if (!get(k)) set(k, 'record');
+      if (!get(k)) { set(k, 'record'); credit.push('exempt:' + slug); }
     });
-    // pages that show something by these keys (the certificate's gate) look again
-    try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
+    // pages that show something by these keys (the certificate's gate) look again;
+    // detail.record says the student's own record arrived (cts-degrees.js), and
+    // detail.credit what it brought that this browser lacked (cts-certify.js)
+    try { document.dispatchEvent(new CustomEvent('cts-sync-applied', { detail: { record: true, credit: credit } })); } catch (e) {}
   }
 
   // ---- the network, which is always allowed to fail ------------------------
@@ -402,12 +460,15 @@
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
-                             textbooks: snap.textbooks, lang: snap.lang })
+                             textbooks: snap.textbooks, honors: snap.honors, lang: snap.lang })
         .then(function (state) { return { state: state, code: c }; });
     }).then(function (packed) {
       if (!packed) return null;
       if (packed.state) {
-        apply(packed.state); lastDigest = digest(snapshot());
+        // A response may queue an explicit Associate reconciliation in apply().
+        // Record the digest that was actually sent so the next normal poll
+        // detects and transmits that new change instead of swallowing it.
+        apply(packed.state); lastDigest = d;
         var problem = document.getElementById('cts-registration-problem');
         if (problem) problem.remove();
       }
