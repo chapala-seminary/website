@@ -103,7 +103,7 @@ try {
   await sp.locator('#cts-listen [data-act="play"]').click();
   await sp.waitForTimeout(500);
   ok(/Kifaa hiki hakina sauti ya Kiswahili/.test(await sp.locator('#cts-listen').innerText()), 'no Swahili voice: said so in Swahili');
-  ok(/mwanamume au ya mwanamke/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
+  ok(/Chagua sauti inayopatikana/.test(await sp.locator('#cts-listen .cts-listen-tip').innerText()), 'the voice tip is in Swahili');
   ok(await sp.evaluate(() => window.__said.length) === 0, 'and nothing is read in another voice');
   await sw.close();
 
@@ -180,7 +180,7 @@ try {
   ok(await tbPlay.isVisible(), 'EN→ES opens the Spanish page with Listen idle');
   ok((await tbPlay.innerText()).includes('Escuchar este libro de texto'), 'EN→ES: textbook Listen label is Spanish');
   ok(await page.locator('.cts-listening').count() === 0, 'EN→ES: no paragraph is still marked as being read');
-  ok((await page.locator('#cts-listen .cts-listen-tip').innerText()).includes('Consejo'), 'EN→ES: voice tip is Spanish');
+  ok((await page.locator('#cts-listen .cts-listen-tip').innerText()).includes('Elige una voz'), 'EN→ES: voice tip is Spanish');
   await page.evaluate(() => { window.__said.length = 0; });
   await tbPlay.click();
   await page.waitForFunction(() => window.__said.length > 1, null, { timeout: 10000 });
