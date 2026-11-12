@@ -34,6 +34,7 @@ import { SINGLES } from './grading/singles.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
+import { sendWelcome } from './outreach.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
 import { awardTitle, officialTitle } from './award-names.js';
 
@@ -258,7 +259,7 @@ function completionRows(id, raw, tracks, studentTrack) {
 
 /* ---- routes -------------------------------------------------------------- */
 
-async function register(request, env) {
+async function register(request, env, ctx) {
   const b = await body(request);
   const name = str(b.name, MAX.name, { required: true, field: 'name' });
   const track = trackName((str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase());
@@ -295,7 +296,16 @@ async function register(request, env) {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
       .bind(id, name, email, canonicalCountry(str(b.country, MAX.country, { field: 'country' })),
         track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
-    if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
+    if (res.meta?.changes) {
+      /* The welcome note (worker/outreach.js sendWelcome; Wayne, 12 Nov 2026):
+         after the response, so registering never waits on the mail service
+         or fails because of it. No address, no note. */
+      if (email) {
+        const welcome = sendWelcome(env, id);
+        if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(welcome); else await welcome;
+      }
+      return json({ code: id, student: (await loadState(env, id)).student }, 201);
+    }
   }
   throw new HttpError(503, 'could not allocate a student code, please try again');
 }
@@ -1005,7 +1015,7 @@ export async function handle(request, env, ctx) {
     if (!env?.DB) throw new HttpError(503, 'student records are not configured');
     env = await activationEnvironment(env);
 
-    if (path === '/api/register' && method === 'POST') return await register(request, env);
+    if (path === '/api/register' && method === 'POST') return await register(request, env, ctx);
     if (path === '/api/sync' && method === 'POST')
       return await guarded(request, env, 'student', () => sync(request, env));
 

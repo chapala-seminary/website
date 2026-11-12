@@ -83,6 +83,9 @@
 		// notes to students who have gone quiet (worker/outreach.js):
 		// "send" to write to them, anything else to write to nobody
 		"OUTREACH_MODE": "send",
+		// the welcome note right after a student registers with an email address
+		// (worker/outreach.js sendWelcome; Wayne, 12 Nov 2026): "send" to send it
+		"WELCOME_MODE": "send",
 		// the Monday summary to the seminary: "send" to email it
 		"DIGEST_MODE": "send",
 		// the one-time "please confirm your registration" note (worker/confirm-invite.js):
@@ -172,6 +175,8 @@
 				// beta's students are people testing the site: nobody is written
 				// to; /staff/notes shows who would be, and the notes themselves
 				"OUTREACH_MODE": "off",
+				// beta does not write to students, the welcome note included (tools/verify-worker-config.mjs)
+				"WELCOME_MODE": "off",
 				// no Monday summary from beta: it went to the same inbox as
 				// the live one and was taken for it (Wayne, 5 Oct 2026)
 				"DIGEST_MODE": "off",
