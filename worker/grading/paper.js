@@ -18,7 +18,7 @@
  * quoteFound), or it is cut to half (recorded as `capped`). The total and the
  * pass are worked out here, never taken from the model.
  */
-import { runModel, modelsOf, aiAvailable, addUsage, parseJson, replyText, quoteFound, CAPACITY } from './model.js';
+import { runModel, modelsOf, aiAvailable, addUsage, parseJson, replyText, quoteFound, CAPACITY, maxTokensFor } from './model.js';
 import { LANG_NAMES } from './prompt.js';
 import { normalise, fold } from './text.js';
 
@@ -133,7 +133,7 @@ export async function gradePaper(env, def, paper, { deadline = Date.now() + PAPE
       res = await runModel(env, model, {
         messages: paperMessages(def, paper, version),
         response_format: { type: 'json_schema', json_schema: paperSchema() },
-        max_tokens: 1600,
+        max_tokens: maxTokensFor(model, 1600),
         temperature: 0,
       }, { deadline, timeoutMs });
     } catch (e) {

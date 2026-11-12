@@ -147,8 +147,12 @@ async function gradesOf(env, attemptId) {
   return (await env.DB.prepare('SELECT * FROM answer_grades WHERE attempt_id = ? ORDER BY id').bind(attemptId).all()).results ?? [];
 }
 
-/** Earlier work that still counts: a multiple-choice pass, and the short
- *  answers already met. Real attempts only (the shadow trial banks nothing),
+/** Earlier work that still counts: a multiple-choice pass, the short
+ *  answers already met, and -- on a unit (u:, sp:) -- the fill-ins already
+ *  answered right, so a retake after a short-answer failure asks only what is
+ *  still missing (6 Nov 2026: a student who had all ten fill-ins right failed
+ *  his retake for leaving them blank). Tests (tb:, rd:, fn:) draw new
+ *  questions each attempt and bank no fill-ins. Real attempts only (the shadow trial banks nothing),
  *  and only attempts before this one and after the last pass: once a unit is
  *  passed, another attempt at it is practice and starts from nothing. */
 export async function bankedFor(env, studentId, scope, attemptId) {
@@ -163,21 +167,29 @@ export async function bankedFor(env, studentId, scope, attemptId) {
     ids.push(a.id);
     if (a.mc_total > 0 && a.mc_right * 10 >= a.mc_total * 9) mc = true;
   }
-  if (!ids.length) return { mc, sa: [], saText: {} };
+  if (!ids.length) return { mc, sa: [], saText: {}, fill: [], fillText: {} };
   const sa = (await env.DB.prepare(
     `SELECT qid, answer_text FROM answer_grades WHERE kind = 'sa' AND verdict = 'met' AND attempt_id IN (${ids.map(() => '?').join(',')}) ORDER BY id`)
     .bind(...ids).all()).results ?? [];
   // the student's own words that met the standard (the latest, if more than one attempt got there)
   const saText = {};
   for (const r of sa) saText[r.qid] = r.answer_text;
-  return { mc, sa: Object.keys(saText), saText };
+  const fillText = {};
+  if (/^(u|sp):/.test(scope)) {
+    const fill = (await env.DB.prepare(
+      `SELECT qid, answer_text FROM answer_grades WHERE kind = 'fill' AND verdict = 'right' AND attempt_id IN (${ids.map(() => '?').join(',')}) ORDER BY id`)
+      .bind(...ids).all()).results ?? [];
+    for (const r of fill) fillText[r.qid] = r.answer_text;
+  }
+  return { mc, sa: Object.keys(saText), saText, fill: Object.keys(fillText), fillText };
 }
 
 /** Where the student stands on this attempt, by the rules for their track. */
 export async function standing(env, attempt, scope) {
   const rows = await gradesOf(env, attempt.id);
   const items = itemsOf(scope, attempt, rows);
-  const banked = attempt.shadow ? { mc: false, sa: [], saText: {} } : await bankedFor(env, attempt.student_id, attempt.scope, attempt.id);
+  const banked = attempt.shadow ? { mc: false, sa: [], saText: {}, fill: [], fillText: {} } : await bankedFor(env, attempt.student_id, attempt.scope, attempt.id);
+  banked.fill = (banked.fill || []).filter((q) => items.fill.includes(q));
   const meta = scope.type === 'tb' || scope.type === 'rd' ? (scope.meta || { pass: items.fill.length })
     : scope.type === 'fn' ? { kind: 'final', pass: (scope.meta && scope.meta.pass) || { fill: items.fill.length, sa: items.sa.length } } : null;
   const totals = { mc: isTest(scope) ? 0 : items.mc.length, fill: items.fill.length, sa: items.sa.length };
@@ -187,7 +199,8 @@ export async function standing(env, attempt, scope) {
   const saPending = rows.filter((r) => r.kind === 'sa' && r.verdict === 'pending' && !saMetSet.has(r.qid)).length;
   const state = {
     mcRight: mine('mc', 'right'), mcBanked: banked.mc, mcPending: 0,
-    fillRight: mine('fill', 'right'), fillPending: mine('fill', 'pending'),
+    fillRight: new Set([...banked.fill, ...rows.filter((r) => r.kind === 'fill' && r.verdict === 'right').map((r) => r.qid)]).size,
+    fillPending: rows.filter((r) => r.kind === 'fill' && r.verdict === 'pending' && !banked.fill.includes(r.qid)).length,
     saMet: saMetSet.size, saPending,
   };
   return { rows, items, banked, totals, req, state, verdict: evaluate(req, state) };
@@ -479,6 +492,7 @@ export async function answeredOf(env, rows, banked, lang, disclosure = 'verdict'
   const keys = need.length ? await loadKeys(env, need) : new Map();
   const out = {};
   for (const q of banked.sa) out[q] = { verdict: 'met', feedback: null, banked: true, ...(banked.saText && banked.saText[q] ? { answerText: banked.saText[q] } : {}) };
+  for (const q of banked.fill || []) out[q] = { verdict: 'right', feedback: null, banked: true, ...(banked.fillText && banked.fillText[q] != null ? { answerText: banked.fillText[q] } : {}) };
   for (const r of rows) {
     const a = { gradeId: r.id, verdict: r.verdict, feedback: feedbackFor(r, disclosure), gradedBy: r.graded_by };
     if (r.kind === 'mc') {
@@ -581,7 +595,7 @@ export async function attemptView(env, attempt, scope, keys) {
     attemptId: attempt.id, scope: attempt.scope, status: attempt.status, track: attempt.track, lang: attempt.lang, disclosure,
     needs: { mc: st.req.mc.need, fill: st.req.fill.need, sa: st.req.sa.need },
     totals: { mc: st.req.mc.total, fill: st.req.fill.total, sa: st.req.sa.total },
-    banked: { mc: st.banked.mc, fill: [], sa: st.banked.sa },
+    banked: { mc: st.banked.mc, fill: st.banked.fill, sa: st.banked.sa },
     answered,
     lock: lockOf(attempt),
     ...(prompts ? { prompts } : {}),
