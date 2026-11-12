@@ -545,6 +545,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSISLAM": [
+  {
+   "slug": "islamtext",
+   "page": "CTSTextbookIslam",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "islamreadings",
+   "page": "CTSIslamReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSJOHN": [
   {
    "slug": "john",

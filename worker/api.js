@@ -27,6 +27,7 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
 import { activationEnvironment, activatedTests } from './test-activation.js';
 import { testContext } from './test-context.js';
 import { gradingRoute } from './grading/routes.js';
+import { assignmentRoute } from './assignments.js';
 import { isLive, legacySyncOpen, legacyCohortMember } from './grading/mode.js';
 import { completeCourseIfDone, completeSingleIfDone, loadStudent } from './grading/attempts.js';
 import { SINGLES } from './grading/singles.js';
@@ -127,11 +128,13 @@ async function loadState(env, id) {
     'SELECT id, name, email, email_verified_at, country, track, goal, heard, lang, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
-  const [progress, completions, certs, textbooks] = await Promise.all([
+  const [progress, completions, certs, textbooks, honors] = await Promise.all([
     env.DB.prepare('SELECT course, unit, completed_at FROM unit_progress WHERE student_id = ? ORDER BY course, unit').bind(id).all(),
     env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
     env.DB.prepare('SELECT verify_code, level, course, title, issued_at, revoked_at FROM certificates WHERE student_id = ? ORDER BY issued_at').bind(id).all(),
     env.DB.prepare('SELECT textbook, passed_at FROM textbook_results WHERE student_id = ? ORDER BY textbook').bind(id).all(),
+    // before migration 0020 is applied there is no table: no honors, not a failed load
+    env.DB.prepare('SELECT course, data, recorded_at FROM honors_readings WHERE student_id = ? ORDER BY course').bind(id).all().catch(() => ({ results: [] })),
   ]);
   // Each completion carries the track it was earned on and the course name
   // the certificate page wrote, so a device restored from a code can rebuild
@@ -156,12 +159,33 @@ async function loadState(env, id) {
     // the textbook tests passed (migration 0009): a course's completion on the
     // master's tracks waits for its textbook's (worker/awards.js)
     textbooks: textbooks.results ?? [],
+    // honors reading attestations (migration 0020): optional, on the student's
+    // honor, never credit; kept so a new browser shows "with honors" too
+    honors: honors.results ?? [],
     // The required-reading tests this record does not need: a master's
     // completion of the course it held before the test was activated
     // (worker/awards.js exemptBefore). The browser keeps them so its pages say
     // what the record says (cts-sync.js). Never a pass: passes are above.
     exemptions: exemptionsFor(done, testContext(env, done)),
   };
+}
+
+/* Honors readings the browser holds (cts_honors_v1:<course>). They are the
+ * student's own attestation, not graded credit, so they are kept in every
+ * grading mode. The first one recorded for a course stands. */
+function honorsRows(id, raw) {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Map();
+  for (const h of raw.slice(0, 200)) {
+    if (!h || typeof h !== 'object') continue;
+    const course = String(h.course || '');
+    if (!/^[A-Za-z0-9]{1,40}$/.test(course) || seen.has(course)) continue;
+    const data = typeof h.data === 'string' ? h.data : '';
+    if (!data || data.length > 4000) continue;
+    try { if (!JSON.parse(data) || typeof JSON.parse(data) !== 'object') continue; } catch { continue; }
+    seen.set(course, data);
+  }
+  return [...seen].map(([course, data]) => [id, course, data, now()]);
 }
 
 /* A textbook test passed on any device stays passed, with the earliest time
@@ -173,6 +197,8 @@ function textbookRows(id, raw) {
     if (!t || typeof t !== 'object') continue;
     const slug = String(t.slug || t.textbook || '').toLowerCase();
     if (!/^[a-z]{2,40}$/.test(slug)) continue;
+    // A final or a ministry paper is recorded only by the server (worker/assignments.js, grading/attempts.js).
+    if (catalog.assessments?.[slug]) continue;
     const at = typeof t.passedAt === 'string' && !Number.isNaN(Date.parse(t.passedAt)) ? new Date(t.passedAt).toISOString() : now();
     const prev = seen.get(slug);
     if (!prev || at < prev) seen.set(slug, at);
@@ -298,13 +324,19 @@ async function sync(request, env) {
     const name = str(s.name, MAX.name, { field: 'name' });
     const track = trackName((str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase()) || null;
     if (track && !TRACKS.has(track)) throw new HttpError(400, 'unknown track: ' + track);
+    // The track and goal change only when the student chose them on purpose
+    // (Change track, the sign-up form: trackChange). Every routine save resends
+    // the browser's copy, and an old device's "Certificate" used to overwrite a
+    // master's student's record, so their next exams were graded and their
+    // courses recorded at Certificate level (#298, #292, #239).
+    const chosen = s.trackChange === true;
     statements.push(env.DB.prepare(
       `UPDATE students SET name = COALESCE(?, name),
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
          goal = CASE WHEN ? THEN ? ELSE goal END, heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
       .bind(name, str(s.email, MAX.email, { field: 'email' }), canonicalCountry(str(s.country, MAX.country, { field: 'country' })),
-        track, Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
+        chosen ? track : null, chosen && Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
   // Browsers resend their full record. D1 counts an UPDATE as a write even
@@ -356,11 +388,18 @@ async function sync(request, env) {
        WHERE excluded.passed_at < textbook_results.passed_at`)
       .bind(...row));
 
+  // In a batch of their own, after the record's: a Worker deployed before
+  // migration 0020 is applied loses only the honors, never the sync.
+  const honorsStatements = honorsRows(id, b.honors).map((row) => env.DB.prepare(
+    `INSERT INTO honors_readings (student_id, course, data, recorded_at) VALUES (?, ?, ?, ?)
+     ON CONFLICT(student_id, course) DO NOTHING`).bind(...row));
+
   // A completion's level only rises: a row with none takes the first any
   // device reports, and a Certificate or Associate completion is raised when a
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
-  const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
+  // An old device's track is not the student's (#298): only a chosen change counts.
+  const trackNow = (s && typeof s === 'object' && s.trackChange === true && String(s.track || '').toLowerCase()) || exists.track;
   let completions = imports && !legacy ? completionRows(id, b.doneCodes, b.completionTracks, trackNow) : [];
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
@@ -399,6 +438,9 @@ async function sync(request, env) {
           OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
+  if (honorsStatements.length) {
+    try { await env.DB.batch(honorsStatements); } catch (e) { console.error('honors not kept', e?.message || e); }
+  }
 
   /* In the cutover window the server, not the browser, decides what the
      imported units complete: the same check a live pass runs, at the
@@ -752,8 +794,13 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM appeals WHERE student_id = ? OR grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g, g),
       env.DB.prepare('DELETE FROM answer_grades WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM attempts WHERE student_id = ?').bind(g),
+      // Ministry papers (migrations/0019_assignments.sql): the student's own text and its grades.
+      env.DB.prepare('DELETE FROM assignments WHERE student_id = ?').bind(g),
     ]),
   ]);
+  // apart, like the sync's: before migration 0020 there is nothing to delete
+  try { await env.DB.batch(gone.map((g) => env.DB.prepare('DELETE FROM honors_readings WHERE student_id = ?').bind(g))); }
+  catch (e) { console.error('honors not deleted', e?.message || e); }
   return json({ deleted: true });
 }
 
@@ -1010,6 +1057,12 @@ export async function handle(request, env, ctx) {
     if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'
         || path === '/api/appeal' || path === '/api/shadow') {
       const res = await gradingRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
+      if (res) return res;
+      return fail(405, 'method not allowed');
+    }
+    // Ministry papers: submit, and the result (worker/assignments.js).
+    if (path === '/api/assignment') {
+      const res = await assignmentRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
       if (res) return res;
       return fail(405, 'method not allowed');
     }
