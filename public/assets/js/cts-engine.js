@@ -1077,7 +1077,8 @@
   function gid(a) { return a.gradeId != null ? a.gradeId : a.grade_id != null ? a.grade_id : null; }
   function info(a) {
     return { verdict: a.verdict, feedback: a.feedback || "", gradeId: gid(a), by: a.gradedBy || a.graded_by || null,
-             answer: a.correctAnswer != null ? a.correctAnswer : null, text: a.answerText != null ? a.answerText : a.answer_text != null ? a.answer_text : null };
+             answer: a.correctAnswer != null ? a.correctAnswer : null, text: a.answerText != null ? a.answerText : a.answer_text != null ? a.answer_text : null,
+             banked: !!a.banked };
   }
   function qidIndex(list, qid) { for (var i = 0; i < list.length; i++) if (list[i].qid === qid) return i; return -1; }
 
