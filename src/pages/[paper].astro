@@ -8,10 +8,10 @@
  * upload. The pledge ("This paper is my own work") and the
  * note for AI assistants come with the layout (cts-integrity.js, mounted on
  * #tb-questions with data-pledge="paper"). The page's script is
- * public/assets/js/cts-paper.js. Required for new M.Div./Th.M. course
- * completions beginning 2026-11-15T06:00:00Z; earlier completions stand.
- * A faculty member may pass a paper on review (worker/assignments.js
- * passPaperByFaculty, /staff/grading/papers). */
+ * public/assets/js/cts-paper.js. Not a requirement of any track yet: a
+ * paper becomes one only when Dr. Cook dates it (tools/activate-required.mjs;
+ * a three-course pilot first, 12 Nov 2026). A faculty member may pass a paper
+ * on review (worker/assignments.js passPaperByFaculty, /staff/grading/papers). */
 import { existsSync } from 'node:fs';
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
@@ -33,11 +33,11 @@ const { paper, course, accent } = Astro.props;
 const entry = (catalog as any).assessments?.[paper.slug];
 if (!entry || entry.kind !== 'paper') throw new Error(`worker/catalog.json does not carry the paper ${paper.slug}: run node tools/gen-worker-catalog.mjs`);
 const masters = paper.page.replace(/Paper$/, 'Masters');
-// A course without a master's page yet (Islam, 11 Nov 2026) links back to its course page.
+// A course without a master's page yet (Islam, 11 Nov 2026) links back to its first unit.
 const hasMasters = existsSync(`public/${masters}.html`);
 const back = hasMasters
   ? { href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }
-  : { href: `/${paper.page.replace(/Paper$/, 'Course')}.html`, en: 'The course', es: 'El curso', fr: 'Le cours' };
+  : { href: `/${paper.page.replace(/Paper$/, 'Unit1')}.html`, en: 'The course', es: 'El curso', fr: 'Le cours' };
 const data = JSON.stringify({
   slug: paper.slug, title: paper.title, pass: paper.pass, minWords: paper.minWords, maxChars: paper.maxChars,
   minNotesWords: paper.minNotesWords, maxNotesChars: paper.maxNotesChars, formats: paper.formats,
@@ -55,9 +55,9 @@ const book = { slug: paper.slug, page: paper.page, course: paper.course, title: 
       <span class="lang-fr">Longueur conseillée : 1 200 à 1 800 mots (minimum accepté : 1 000 mots, notes d’étude comprises), écrits par vous, sur l’un des sujets ci-dessous, appliqués à votre propre Église ou ministère. Choisissez un format et un sujet, puis collez votre travail dans la case (pas d’envoi de fichier). Un sermon demande aussi ses notes d’étude. Le travail est noté selon la grille ci-dessous ; {paper.pass} sur 100 atteint le niveau requis. Sinon, vous recevez les notes et les commentaires, vous révisez et vous envoyez une nouvelle version (trois au plus par jour).</span>
     </p>
     <p>
-      <span class="lang-en">For M.Div. and Th.M. students, a passing ministry paper is required to complete a course beginning November 15, 2026. Courses already completed before that date remain valid. Your paper and its result are kept in your record so you can review or revise it; Delete My Record removes them.</span>
-      <span class="lang-es">Para los estudiantes de M.Div. y Th.M., a partir del 15 de noviembre de 2026 es obligatorio aprobar esta tarea ministerial para completar un curso. Los cursos completados antes de esa fecha siguen siendo válidos. Su trabajo y su resultado se guardan en su registro para que pueda consultarlos o revisarlos; «Borrar mi registro» los elimina.</span>
-      <span class="lang-fr">Pour les étudiants M.Div. et Th.M., la réussite de ce travail pastoral est obligatoire pour terminer un cours à partir du 15 novembre 2026. Les cours terminés avant cette date restent acquis. Votre travail et son résultat sont conservés dans votre dossier pour consultation ou révision ; la suppression de votre dossier les efface.</span>
+      <span class="lang-en">This assignment is being introduced for the M.Div. and Th.M. tracks and is not yet required: nothing in any student's course, certificate or degree depends on it. A paper that meets the standard is kept in your record. Your paper is stored with your record so that you can see it and revise it; Delete My Record removes it.</span>
+      <span class="lang-es">Esta tarea se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatoria: nada del curso, certificado o título de ningún estudiante depende de ella. Un trabajo que cumple el nivel queda en su registro. Su trabajo se guarda con su registro para que pueda verlo y revisarlo; «Borrar mi registro» lo elimina.</span>
+      <span class="lang-fr">Ce travail est en cours d’introduction pour les parcours M.Div. et Th.M. et n’est pas encore obligatoire : rien dans le cours, le certificat ou le diplôme d’un étudiant n’en dépend. Votre travail est conservé avec votre dossier pour que vous puissiez le revoir ; la suppression de votre dossier l’efface.</span>
     </p>
     <h3><span class="lang-en">How it is judged (100 points)</span><span class="lang-es">Cómo se evalúa (100 puntos)</span><span class="lang-fr">Comment il est noté (100 points)</span></h3>
     <table class="tb-rubric">

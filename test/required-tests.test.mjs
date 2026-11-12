@@ -155,11 +155,12 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(JSON.stringify(m[CODE]?.map((t) => t.slug)) === JSON.stringify([BOOK, READ]), 'cts-required-tests.js gives the pages both tests', m[CODE]);
   ok(m[CODE]?.[1]?.requiredFrom === shipped, 'and the reading test\'s activation, as shipped');
   ok(m.COUNSELING?.[0]?.slug === 'counseling' && m.STORYTEL?.[0]?.slug === 'narrative', 'the single-page courses keep their textbooks');
-  // the final and paper are not tests in this map; since #318 (11 Nov 2026)
-  // they sit in a map of their own, every one not in force as shipped
+  // the final and paper are not tests in this map; since #318 the paper sits
+  // in a map of its own, not in force as shipped (finals are never required)
   ok(!Object.values(m).flat().some((t) => /final$|paper$/.test(t.kind || '') || /^(otsfinal|otspaper)$/.test(t.slug)), 'the textbook and reading map is not told of the final or the paper');
   const am = win.CTS_REQUIRED_ASSESSMENTS || {};
-  ok(JSON.stringify((am.CTSOTS || []).map((t) => t.slug)) === '["otsfinal","otspaper"]', 'the final and paper have a map of their own, final first', am.CTSOTS);
+  ok(JSON.stringify((am.CTSOTS || []).map((t) => t.slug)) === '["otspaper"]', 'the paper has a map of its own; the final is never in it (Dr. Cook, 12 Nov 2026)', am.CTSOTS);
+  ok(!Object.values(am).flat().some((t) => t.kind === 'final'), 'no final is in the requirements map');
   ok(Object.values(am).flat().every((t) => t.requiredFrom === null || SCHED[t.slug] === t.requiredFrom), 'and each is not in force, or dated as activate-required.mjs recorded');
 }
 
@@ -191,7 +192,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
  * browser/Worker test with actual activated questions.
  */
 {
-  // textbook and reading tests only: the ministry papers dated for 15 Nov 2026
+  // textbook and reading tests only: a pilot ministry paper, once dated
   // (#318) sit in the same schedule and are checked in masters-assessments.test.mjs
   const dated = Object.entries(SCHED).filter(([slug]) => catalog.textbooks[slug]);
   const electives = dated.filter(([slug]) => slug.startsWith('elec'));

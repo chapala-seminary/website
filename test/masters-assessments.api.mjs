@@ -1,9 +1,10 @@
-// The master's final and paper as course requirements (#318), through the
-// real Worker and a real local D1, for Old Testament Survey.
+// The master's ministry paper as a course requirement (#318), through the
+// real Worker and a real local D1, for Old Testament Survey. The paper only:
+// a final is never required, even dated (Dr. Cook, 12 Nov 2026).
 //
 //   API_BASE=http://127.0.0.1:8861 STATE=.wrangler-mastersfinal CONFIG=<config> node test/masters-assessments.api.mjs
 //
-// Needs a Worker whose TEST_REQUIRED_FROM dates otsfinal and otspaper (the
+// Needs a Worker whose TEST_REQUIRED_FROM dates otspaper (and otsfinal; the
 // suite's own test/wrangler.local.jsonc does not, so every other test sees
 // them as shipped: not in force). tools/masters-assessments-config.mjs writes
 // such a config from the suite's. A final or paper pass is recorded only by
@@ -56,28 +57,28 @@ const verify = async (code, email) => {
 for (const track of ['mdiv', 'thm']) {
   const c = await student(track);
   let st = (await jpost('/api/sync', { code: c, progress: units, textbooks: tests, ...done(track) })).body;
-  ok(!has(st), `${track}: units and textbook tests, no final or paper -> not complete`, st?.completions);
+  ok(!has(st), `${track}: units and textbook tests, no paper -> not complete`, st?.completions);
   const forged = (await jpost('/api/sync', { code: c, textbooks: [{ slug: FINAL, passedAt: AT }, { slug: PAPER, passedAt: AT }], ...done(track) })).body;
-  ok(!has(forged) && !(forged.textbooks || []).some((t) => t.textbook === FINAL || t.textbook === PAPER), `${track}: a browser claiming the final and paper is refused`, forged?.textbooks);
+  ok(!has(forged) && !(forged.textbooks || []).some((t) => t.textbook === FINAL || t.textbook === PAPER), `${track}: a browser claiming the paper is refused`, forged?.textbooks);
   ok(await verify(c, `final-paper-${track}.${Date.now()}@example.org`), `${track}: the student verifies an email (a certificate needs one)`);
   pass(c, FINAL);
   st = (await jpost('/api/sync', { code: c, ...done(track) })).body;
-  ok(!has(st), `${track}: final passed, paper not -> not complete`, st?.completions);
+  ok(!has(st), `${track}: a final passed is not the paper -> not complete`, st?.completions);
   const cert = await jpost('/api/certificate', { code: c, level: 'course', course: COURSE, title: 'Old Testament Survey' });
   ok(cert.status === 409 && /ministry paper/.test(cert.body?.error || ''), `${track}: no course certificate meanwhile (${cert.status}: ${cert.body?.error})`);
   pass(c, PAPER);
   st = (await jpost('/api/sync', { code: c, ...done(track) })).body;
-  ok(has(st, track), `${track}: final and paper passed -> complete at the ${track} level`, st?.completions);
+  ok(has(st, track), `${track}: paper passed -> complete at the ${track} level`, st?.completions);
   const cert2 = await jpost('/api/certificate', { code: c, level: 'course', course: COURSE, title: 'Old Testament Survey' });
   ok(cert2.status === 201, `${track}: then the course certificate is issued (${cert2.status}: ${cert2.body?.error})`);
 }
 
-{ // paper passed, final not
+{ // paper passed, final not: complete (the final is never required, even dated)
   const c = await student('mdiv');
   await jpost('/api/sync', { code: c, progress: units, textbooks: tests, ...done('mdiv') });
   pass(c, PAPER);
   const st = (await jpost('/api/sync', { code: c, ...done('mdiv') })).body;
-  ok(!has(st), 'mdiv: paper passed, final not -> not complete', st?.completions);
+  ok(has(st, 'mdiv'), 'mdiv: paper passed, final not -> complete', st?.completions);
 }
 
 { // a master's completion the record held before activation stands
@@ -85,7 +86,7 @@ for (const track of ['mdiv', 'thm']) {
   sql(`INSERT INTO course_completions (student_id, code, completed_at, track, source) VALUES ('${c}', '${CODE}', '2000-06-01T00:00:00.000Z', 'mdiv', 'server')`);
   const st = (await jpost('/api/sync', { code: c, ...done('mdiv') })).body;
   ok(has(st, 'mdiv'), 'a master\'s completion from before activation is kept', st?.completions);
-  ok([FINAL, PAPER].every((s) => (st.exemptions || []).includes(s)), 'and the record names the final and paper as exempt', st?.exemptions);
+  ok((st.exemptions || []).includes(PAPER) && !(st.exemptions || []).includes(FINAL), 'and the record names the paper as exempt (never the final)', st?.exemptions);
 }
 
 for (const [label, extra] of [['cert', {}], ['assoc', { goal: 'assoc' }]]) { // unchanged

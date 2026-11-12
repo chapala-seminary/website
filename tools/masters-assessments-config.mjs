@@ -1,7 +1,8 @@
 // Writes a local Worker config for test/masters-assessments.api.mjs: the
-// suite's test/wrangler.local.jsonc with Old Testament Survey's final and
-// paper dated in TEST_REQUIRED_FROM (2001, so every completion the Worker
-// records is "after"). The suite's own config is left as it is.
+// suite's test/wrangler.local.jsonc with Old Testament Survey's paper dated
+// in TEST_REQUIRED_FROM (2001, so every completion the Worker records is
+// "after"). Its final is dated too, only to show a final is never required
+// even with a date (Dr. Cook, 12 Nov 2026). The suite's own config is left as it is.
 //
 //   node tools/masters-assessments-config.mjs [out]   (default test/.wrangler.mastersfinal.jsonc)
 import fs from 'node:fs';

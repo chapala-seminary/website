@@ -140,20 +140,20 @@ export function testsFor(code) {
  *  course could have two. */
 export function textbookFor(code) { return testsFor(code)[0] ?? null; }
 
-/** A course's final synthesis exam and ministry paper, by completion code
- *  (worker/catalog.json `assessments`): final first, then paper. Each passes
- *  into textbook_results under its own slug, as a textbook test does
- *  (worker/grading/attempts.js for the final, worker/assignments.js for the
- *  paper). On the master's tracks they hold a course's completion only once
- *  activated, under the same rule as a dated test (testCounts): `requiredFrom`
- *  null -- every one as shipped -- holds no one; from its moment it holds
- *  every master's student except a master's completion of the course the
- *  record already held before it (#318, 11 Nov 2026). */
+/** A course's ministry paper, by completion code (worker/catalog.json
+ *  `assessments`). It passes into textbook_results under its own slug, as a
+ *  textbook test does (worker/assignments.js). On the master's tracks it holds
+ *  a course's completion only once activated, under the same rule as a dated
+ *  test (testCounts): `requiredFrom` null -- every one as shipped -- holds no
+ *  one; from its moment it holds every master's student except a master's
+ *  completion of the course the record already held before it (#318).
+ *  The paper only: a course's final synthesis exam is never a requirement
+ *  (Dr. Cook, 12 Nov 2026), so it is not listed here even if dated. */
 export function assessmentsFor(code) {
   const up = String(code || '').toUpperCase();
   const out = [];
-  for (const [slug, t] of Object.entries(catalog.assessments || {})) if (t.code === up && (t.kind === 'final' || t.kind === 'paper')) out.push(slug);
-  return out.sort((a, b) => (catalog.assessments[a].kind === 'final' ? 0 : 1) - (catalog.assessments[b].kind === 'final' ? 0 : 1) || (a < b ? -1 : 1));
+  for (const [slug, t] of Object.entries(catalog.assessments || {})) if (t.code === up && t.kind === 'paper') out.push(slug);
+  return out.sort();
 }
 /* A required item by slug: a textbook or reading test, or a final or paper. */
 function requiredItem(slug) {
@@ -214,7 +214,7 @@ function when(s) {
  *  (cts-sync.js keeps it as cts_textbook_<slug>_exempt). */
 export function exemptionsFor(completions, ctx = {}) {
   const out = [];
-  for (const [slug, t] of [...Object.entries(catalog.textbooks || {}), ...Object.entries(catalog.assessments || {})]) {
+  for (const [slug, t] of [...Object.entries(catalog.textbooks || {}), ...Object.entries(catalog.assessments || {}).filter(([, a]) => a.kind === 'paper')]) {
     const raw = ctx.requiredFrom && Object.prototype.hasOwnProperty.call(ctx.requiredFrom, slug) ? ctx.requiredFrom[slug] : t.requiredFrom;
     if (raw && !Number.isNaN(Date.parse(raw)) && exemptBefore(t.code, new Date(raw).toISOString(), completions)) out.push(slug);
   }
@@ -232,12 +232,10 @@ export function textbookShortfall(code, level, textbooks, ctx) {
       ? `required-reading test not recorded as passed: ${slug}`
       : `textbook test not recorded as passed: ${slug}`;
   }
-  // then the final and the paper, once activated (assessmentsFor)
+  // then the ministry paper, once activated (assessmentsFor)
   for (const slug of assessmentsFor(code)) {
     if (have.has(slug) || !testCounts(slug, code, ctx)) continue;
-    return catalog.assessments[slug].kind === 'final'
-      ? `final synthesis exam not recorded as passed: ${slug}`
-      : `ministry paper not recorded as passed: ${slug}`;
+    return `ministry paper not recorded as passed: ${slug}`;
   }
   return null;
 }

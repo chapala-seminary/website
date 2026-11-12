@@ -76,10 +76,10 @@ const tbMap = catalog.textbooks as Record<string, { page: string; kind: string; 
 const required = (cat.tests ?? []).map((slug) => ({ slug, page: tbMap[slug].page, kind: tbMap[slug].kind,
   ...('requiredFrom' in tbMap[slug] ? { requiredFrom: tbMap[slug].requiredFrom } : {}) }));
 const first = cat.tests?.[0] ?? null;
-/* The course's final synthesis exam and ministry paper (#318, 11 Nov 2026):
-   cts-record.js holds a master's completion for each only once it is dated. */
+/* The course's ministry paper (#318): cts-record.js holds a master's
+   completion for it only once it is dated. Never the final (Dr. Cook, 12 Nov 2026). */
 const asMap = (catalog as { assessments?: Record<string, { code: string; page: string; kind: string; requiredFrom: string | null }> }).assessments ?? {};
-const assessments = Object.entries(asMap).filter(([, a]) => a.code === cat.code && (a.kind === 'final' || a.kind === 'paper'))
+const assessments = Object.entries(asMap).filter(([, a]) => a.code === cat.code && a.kind === 'paper')
   .sort(([x, a], [y, b]) => (a.kind === b.kind ? (x < y ? -1 : 1) : a.kind === 'final' ? -1 : 1))
   .map(([slug, a]) => ({ slug, page: a.page, kind: a.kind, requiredFrom: a.requiredFrom }));
 /* Live mode (docs/ai-grading.md): the page carries no answers, accept lists,

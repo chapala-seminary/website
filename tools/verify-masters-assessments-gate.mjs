@@ -1,7 +1,7 @@
-// The certificate page and the master's final and paper (#318, 11 Nov 2026):
-// Old Testament Survey's M.Div. certificate, as shipped (not in force) and
-// with its final and paper dated (served in place of cts-required-tests.js),
-// for the cases of the acceptance table.
+// The certificate page and the master's ministry paper (#318): Old Testament
+// Survey's M.Div. certificate, as shipped (not in force) and with its paper
+// dated (served in place of cts-required-tests.js), for the cases of the
+// acceptance table. The paper only: a final is never required (Dr. Cook, 12 Nov 2026).
 //
 //   node tools/verify-masters-assessments-gate.mjs http://127.0.0.1:8798
 import { chromium } from 'playwright';
@@ -11,7 +11,7 @@ const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const catalog = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
 const c = catalog.courses.ots, slug = 'ots', F = 'CTSOTSMDivCertificate.html';
 const shipped = fs.readFileSync('public/assets/js/cts-required-tests.js', 'utf8');
-// not in force: the same map with every final and paper undated (the pages carry the real dates)
+// not in force: the same map with every paper undated (the pages carry the real dates)
 const offJs = (() => {
   const w = {}; new Function('window', shipped)(w);
   for (const list of Object.values(w.CTS_REQUIRED_ASSESSMENTS)) for (const t of list) t.requiredFrom = null;
@@ -50,14 +50,12 @@ async function open(seed, active) {
   await ctx.close();
   return { ...r, errs };
 }
-const passed = { cts_textbook_otsfinal_passed: '1', cts_textbook_otspaper_passed: '1' };
 const cases = [
-  ['not in force: an M.Div. student without the final and paper gets the diploma, as before', base('mdiv'), false, true],
-  ['dated: neither passed -> held, naming both', base('mdiv'), true, false, /final exam and the ministry paper/],
-  ['dated: final only -> held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, /ministry paper is still/],
-  ['dated: paper only -> held for the final', { ...base('mdiv'), cts_textbook_otspaper_passed: '1' }, true, false, /final synthesis exam is still/],
-  ['dated: both passed -> the diploma', { ...base('mdiv'), ...passed }, true, true],
-  ['dated: exempt (finished before the date) -> the diploma', { ...base('mdiv'), cts_textbook_otsfinal_exempt: '1', cts_textbook_otspaper_exempt: '1' }, true, true],
+  ['not in force: an M.Div. student without the paper gets the diploma, as before', base('mdiv'), false, true],
+  ['dated: paper not passed -> held, naming the paper only', base('mdiv'), true, false, /^(?![\s\S]*final)[\s\S]*ministry paper is still/],
+  ['dated: a final passed is not the paper -> held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, /ministry paper is still/],
+  ['dated: paper passed, no final -> the diploma', { ...base('mdiv'), cts_textbook_otspaper_passed: '1' }, true, true],
+  ['dated: exempt (finished before the date) -> the diploma', { ...base('mdiv'), cts_textbook_otspaper_exempt: '1' }, true, true],
   ['dated: a Certificate-track student is not held', base('cert'), true, true],
 ];
 const fails = [];
@@ -66,10 +64,11 @@ for (const [label, seed, active, want, note] of cases) {
   if (r.diploma !== want || r.errs.length || (note && !note.test(r.note))) fails.push(`${label}: diploma ${r.diploma}, note "${r.note.slice(0, 80)}" ${r.errs.join(' | ')}`);
 }
 /* The last unit page's recorder (cts-record.js, data from Unit.astro): it
-   records the course only when the dated final and paper are passed. The
+   records the course only when the dated paper is passed. The
    dates are set as cts-sync.js keeps them (cts_required_from), after the
    page's own sync has written the record's. */
 const LAST = `${c.pages}Unit${c.units[c.units.length - 1]}.html`;
+// the final is dated too, to show it is never required
 const dated = JSON.stringify({ otsfinal: '2026-01-01T00:00:00Z', otspaper: '2026-01-01T00:00:00Z' });
 async function unit(seed, isDated) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
@@ -86,10 +85,10 @@ async function unit(seed, isDated) {
 }
 for (const [label, seed, isDated, complete, pending] of [
   ['unit page, not in force: complete with units and tests', base('mdiv'), false, true, []],
-  ['unit page, dated: held for both', base('mdiv'), true, false, ['otsfinal', 'otspaper']],
-  ['unit page, dated, final passed: held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, ['otspaper']],
-  ['unit page, dated, both passed: complete', { ...base('mdiv'), ...passed }, true, true, []],
-  ['unit page, dated, exempt: complete', { ...base('mdiv'), cts_textbook_otsfinal_exempt: '1', cts_textbook_otspaper_exempt: '1' }, true, true, []],
+  ['unit page, dated: held for the paper only', base('mdiv'), true, false, ['otspaper']],
+  ['unit page, dated, final passed: still held for the paper', { ...base('mdiv'), cts_textbook_otsfinal_passed: '1' }, true, false, ['otspaper']],
+  ['unit page, dated, paper passed: complete', { ...base('mdiv'), cts_textbook_otspaper_passed: '1' }, true, true, []],
+  ['unit page, dated, exempt: complete', { ...base('mdiv'), cts_textbook_otspaper_exempt: '1' }, true, true, []],
   ['unit page, dated, Certificate track: complete', base('cert'), true, true, []],
 ]) {
   const r = await unit(seed, isDated);
@@ -98,4 +97,4 @@ for (const [label, seed, isDated, complete, pending] of [
 }
 await browser.close();
 if (fails.length) { console.error('FAIL'); for (const f of fails) console.error('  ' + f); process.exit(1); }
-console.log(`PASS — ${cases.length} certificate-page and unit-page cases for the master's final and paper.`);
+console.log(`PASS — ${cases.length} certificate-page and unit-page cases for the master's ministry paper.`);
