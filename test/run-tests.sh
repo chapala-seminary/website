@@ -47,6 +47,7 @@ node test/grading-unit.test.mjs
 node --test test/pledge-exam-opening.test.mjs
 node --test test/grading-feedback.test.mjs
 node test/single-page-readings.test.mjs
+node test/elective-french-room-parity.test.mjs
 node --test test/elective-reading-manifest-integrity.test.mjs
 node tools/verify-staged-readings.mjs
 node tools/verify-rubrics.mjs
