@@ -122,10 +122,37 @@
     function apply() {
       var open = bar.querySelector("#cts-exam-open");
       if (!open || bar.querySelector(".cts-pledge")) return;
-      var box = pledgeBox(function (on) { open.disabled = !on; open.setAttribute("aria-disabled", String(!on)); });
+      // A natively disabled button cannot explain why tapping it does nothing.
+      // Keep it focusable, advertise the unmet pledge with aria-disabled, and
+      // intercept activation *before* cts-exam-view's click handler can open
+      // the questions. This does not change the pledge or examination rules.
+      var prompt = document.createElement("p");
+      prompt.className = "cts-pledge-prompt";
+      prompt.setAttribute("role", "status");
+      prompt.setAttribute("aria-live", "polite");
+      var box = pledgeBox(function (on) {
+        open.setAttribute("aria-disabled", String(!on));
+        if (on) prompt.textContent = "";
+      });
+      var checkbox = box.querySelector("input");
+      checkbox.setAttribute("aria-describedby", "cts-ai-note cts-pledge-needed");
+      var need = box.querySelector(".cts-pledge-need");
+      if (need) need.id = "cts-pledge-needed";
+      box.appendChild(prompt);
       open.parentNode.insertBefore(box, open);
-      open.disabled = !pledged();
-      open.setAttribute("aria-disabled", String(open.disabled));
+      open.disabled = false; // aria-disabled + capture handler, never an inert control
+      open.setAttribute("aria-disabled", String(!pledged()));
+      open.addEventListener("click", function (event) {
+        if (pledged()) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        prompt.innerHTML = bi({
+          en: "Before opening the exam, check the honesty pledge above.",
+          es: "Antes de abrir el examen, marque la casilla de compromiso de honestidad que aparece arriba.",
+          fr: "Avant d’ouvrir l’examen, cochez la déclaration d’honnêteté ci-dessus."
+        });
+        checkbox.focus();
+      }, true);
       describe(bar);
     }
     apply();
