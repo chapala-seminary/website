@@ -45,7 +45,7 @@ const opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] :
 const ENV = opt('--env', 'local');
 const DRY = flag('--dry-run');
 const STATE = opt('--state', '.wrangler-local');
-const MANAGED = ['u:', 'tb:', 'rd:', 'sp:'];
+const MANAGED = ['u:', 'tb:', 'rd:', 'sp:', 'fn:'];
 const CHUNK_BYTES = 3 * 1024 * 1024;
 
 const jsonc = (f) => JSON.parse(fs.readFileSync(f, 'utf8').replace(/^\s*\/\/.*$/gm, ''));

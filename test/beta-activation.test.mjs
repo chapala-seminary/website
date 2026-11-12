@@ -3,7 +3,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {spawn,execFileSync} from 'node:child_process';
+import {spawn} from 'node:child_process';
+import {execFileSync} from './lib/d1-exec.mjs';
 import {chromium} from 'playwright';
 import catalog from '../worker/catalog.json' with {type:'json'};
 const port=Number(new URL(process.env.API_BASE||'http://127.0.0.1:8798').port)+100;

@@ -115,6 +115,33 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([])) !== null, 'Case 4: no c
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track: 'mdiv', completed_at: before }])) !== null,
   'Case 4: another course finished before does not count for this one');
 
+/* ---- the final synthesis exam and the ministry paper stay inactive ------ */
+/* (Dr. Cook, 2 Nov 2026.) They live in catalog.assessments, never in
+   catalog.textbooks or a course's tests, so no rule above -- and not beta's
+   activation default (worker/test-activation.js), which makes every textbook
+   entry with requiredFrom null required -- can make them count for anyone. */
+{
+  const { activatedTests } = await import('../worker/test-activation.js');
+  const ASSESS = Object.entries(catalog.assessments || {});
+  ok(ASSESS.some(([s, a]) => s === 'otsfinal' && a.kind === 'final') && ASSESS.some(([s, a]) => s === 'otspaper' && a.kind === 'paper'),
+    'the catalog carries the OTS final and paper', Object.keys(catalog.assessments || {}));
+  for (const [slug, a] of ASSESS) {
+    ok(a.requiredFrom === null, `${slug}: requiredFrom is null (not a requirement)`, a.requiredFrom);
+    ok(!(slug in catalog.textbooks), `${slug}: not in catalog.textbooks`);
+    ok(!Object.values(catalog.courses).some((c) => (c.tests || []).includes(slug)), `${slug}: in no course's tests`);
+    ok(!A.testsFor(a.code).includes(slug), `${slug}: not among the tests ${a.code} requires`, A.testsFor(a.code));
+    const policy = activatedTests({ MASTER_TESTS_ACTIVE_FROM: '2026-10-01T00:00:00.000Z' });
+    ok(!(slug in policy), `${slug}: beta's activation default never activates it`);
+  }
+  // the OTS rule is exactly what it was, with or without a final or paper pass
+  for (const level of ['cert', 'assoc', 'thm', 'mdiv'])
+    for (const held of [[], ['oldtestament'], ['oldtestament', 'otsreadings']])
+      ok(A.textbookShortfall('CTSOTS', level, [...held, 'otsfinal', 'otspaper'], active()) === A.textbookShortfall('CTSOTS', level, held, active()),
+        `CTSOTS ${level} with ${held.join('+') || 'no tests'}: a final or paper pass changes nothing`);
+  ok(A.courseShortfall('ots', catalog.courses.ots.units, 'mdiv', ['otsfinal', 'otspaper']) === A.courseShortfall('ots', catalog.courses.ots.units, 'mdiv', []),
+    'an M.Div. OTS completion is neither helped nor held by the final or the paper');
+}
+
 /* ---- what the pages are given ------------------------------------------- */
 {
   const fs = await import('node:fs');
@@ -125,6 +152,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(JSON.stringify(m[CODE]?.map((t) => t.slug)) === JSON.stringify([BOOK, READ]), 'cts-required-tests.js gives the pages both tests', m[CODE]);
   ok(m[CODE]?.[1]?.requiredFrom === shipped, 'and the reading test\'s activation, as shipped');
   ok(m.COUNSELING?.[0]?.slug === 'counseling' && m.STORYTEL?.[0]?.slug === 'narrative', 'the single-page courses keep their textbooks');
+  ok(!/otsfinal|otspaper/.test(js), 'the certificate pages are not told of the final or the paper');
 }
 
 /* The suite's Worker must not change when a dated activation passes: every test
@@ -141,6 +169,59 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   const missing = Object.keys(dated).filter((slug) => !(slug in held) || Date.parse(held[slug]) <= Date.now());
   ok(!missing.length, 'every dated test is held at "not yet required" in the suite\'s Worker', missing);
   ok(held.pentecostalreadings === '2001-01-01T00:00:00Z', 'and the rule is still tested on pentecostalreadings, active since 2001');
+}
+
+
+/* ---- real scheduled activation, independent of test Worker's 2099 override ----
+ * The Worker integration suite deliberately postpones all dated exams with
+ * TEST_REQUIRED_FROM. Test the production catalog's unmodified scheduling
+ * and the academic earned-level boundary here, using a fixed post-cutoff
+ * clock, WITHOUT modifying live student records or exam policy.
+ *
+ * This confirms the effective rule, not faculty/rights signoff on a bank:
+ * release still needs a separate human academic review and a synthetic
+ * browser/Worker test with actual activated questions.
+ */
+{
+  const dated = Object.entries(SCHED);
+  const electives = dated.filter(([slug]) => slug.startsWith('elec'));
+  ok(dated.length === 48, 'post-activation: 48 explicitly dated examinations in the academic schedule', dated.length);
+  ok(electives.length === 40 && dated.length - electives.length === 8,
+    'post-activation: 40 elective and eight foundation/core reading tests', {
+      elective: electives.length, core: dated.length - electives.length,
+    });
+
+  const latest = Math.max(...dated.map(([, date]) => Date.parse(date)));
+  ok(Number.isFinite(latest), 'post-activation: every dated examination has a valid activation timestamp');
+  if (Number.isFinite(latest)) {
+    const afterAllDates = new Date(latest + 3600000).toISOString();
+    const oldMasterCompletion = '2026-10-20T00:00:00.000Z';
+    for (const [slug, date] of dated) {
+      const t = catalog.textbooks[slug];
+      ok(!!t && t.requiredFrom === date,
+        'post-activation: catalog and source schedule agree for ' + slug);
+      if (!t) continue;
+      const earned = [{ code: t.code, track: 'mdiv', completed_at: oldMasterCompletion }];
+      const ctx = (completions = []) => ({ now: afterAllDates, completions });
+      ok(A.testCounts(slug, t.code, ctx()),
+        'post-activation: the dated test actually counts for a new master student: ' + slug);
+      ok(!A.testCounts(slug, t.code, ctx(earned)),
+        'post-activation: previously earned master completion is grandfathered: ' + slug);
+      const allExceptTarget = A.testsFor(t.code).filter((test) => test !== slug);
+      const missing = A.textbookShortfall(t.code, 'mdiv', allExceptTarget, ctx());
+      ok(typeof missing === 'string' && missing.includes(slug),
+        'post-activation: missing activated test blocks M.Div completion: ' + slug, missing);
+      const thmMissing = A.textbookShortfall(t.code, 'thm', allExceptTarget, ctx());
+      ok(typeof thmMissing === 'string' && thmMissing.includes(slug),
+        'post-activation: missing activated test blocks Th.M completion: ' + slug, thmMissing);
+      ok(A.textbookShortfall(t.code, 'mdiv', allExceptTarget, ctx(earned)) === null,
+        'post-activation: earned master completion stays valid without retaking: ' + slug);
+      ok(A.textbookShortfall(t.code, 'associate', allExceptTarget, ctx()) === null,
+        'post-activation: Associate remains exempt from master test rule: ' + slug);
+      ok(A.textbookShortfall(t.code, 'cert', allExceptTarget, ctx()) === null,
+        'post-activation: Certificate remains exempt from master test rule: ' + slug);
+    }
+  }
 }
 
 if (fails.length) {

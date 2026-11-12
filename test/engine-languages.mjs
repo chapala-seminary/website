@@ -8,6 +8,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 let checks = 0;
 try {
   const page = await browser.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await page.setContent('<html lang="fr"><body data-lang="fr" class="lang-fr"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>');
   await page.evaluate(() => { Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' }); window.CTS_UNIT = { course: 'language-test', unit: 1, totalUnits: 1, sourceLang: 'en', langs: ['en', 'es', 'fr', 'uk', 'sw'], mc: [], sa: [], fill: [] }; });
   await page.addScriptTag({ path: path.resolve('public/assets/js/cts-engine.js') });

@@ -26,15 +26,20 @@
      a unit (main#lesson) reads its lesson; a textbook (data-textbook-page="book") and a reading room
      (body.cts-room) read what is open on screen, block by block. A textbook's TEST page gets no button. */
   var tbPage = document.body.getAttribute("data-textbook-page");
-  var blocks = tbPage === "book" || document.body.classList.contains("cts-room");
+  /* A fourth kind (Gabe's report, 1 Nov): the three one-page courses (Counseling, Narrative and WiseSpeak
+     Preaching) keep every unit on one page as div.teaching-block, each followed by its own quiz-section. Each
+     unit gets its own button and only that unit's teaching is read, never the quiz beside it. */
+  var units = !tbPage && !document.getElementById("lesson") ? document.querySelectorAll(".teaching-block") : [];
+  var blocks = tbPage === "book" || document.body.classList.contains("cts-room") || units.length > 0;
   if (tbPage && tbPage !== "book") return;
-  var main = document.getElementById(blocks ? "content" : "lesson");
+  var main = units.length ? units[0] : document.getElementById(blocks ? "content" : "lesson");
   if (!synth || !window.SpeechSynthesisUtterance || !main) return;
 
   /* Never read: the frame, and anything that belongs to a test (ChatGPT's review, 30 Oct: exclude every known
      assessment container, not just one). */
   var ASSESS = "#questionsContainer, #tb-questions, #examResult, #examStatus, #mcSection, #saSection, #kwContainer, " +
-    "[data-cts-part=\"exam\"], .exam, section.assess, #exam-section, .tb-test, [data-cts-exam], form";
+    "[data-cts-part=\"exam\"], .exam, section.assess, #exam-section, .tb-test, [data-cts-exam], form, " +
+    ".cts-fill, .quiz-section, .essay-section, .unit-result";   // one-page courses: their quiz, fill-ins and results
   var CHROME = "[data-cts-chrome], #cts-register, #greeting, .cts-source, script, style, " + ASSESS;
   /* A unit with questions whose lesson and exam were not told apart (cts-exam-view.js did not run): no button. */
   if (!blocks && main.querySelector("#questionsContainer") && !main.querySelector("[data-cts-part]")) return;
@@ -71,23 +76,23 @@
   var all = blocks ? blockEls() : lessonEls();
   if (!all.length) return;
 
-  var kind = tbPage === "book" ? "book" : blocks ? "room" : "lesson";
+  var kind = tbPage === "book" ? "book" : units.length ? "unit" : blocks ? "room" : "lesson";
   function docLang() { return (document.documentElement.lang || "en").slice(0, 2).toLowerCase(); }
   var pageLang = docLang();
   var W = {
-    en: { voice: "Voice", automatic: "Automatic (browser's choice)", helpTitle: "How to install or change voices", helpText: "On a Samsung Galaxy tablet, open Settings → General management → Text-to-speech output. Choose the speech engine, then its settings to install or change voices. On another Android device, search Settings for Text-to-speech. On iPhone or iPad, open Settings → Accessibility → Spoken Content → Voices. On Windows, open Settings → Time & language → Speech. Return here and refresh. Some installed voices may not appear in this browser.", lesson: "Listen to this lesson", book: "Listen to this textbook", room: "Listen to these readings", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
+    en: { voice: "Voice", automatic: "Automatic (browser's choice)", helpTitle: "How to install or change voices", helpText: "On a Samsung Galaxy tablet, open Settings → General management → Text-to-speech output. Choose the speech engine, then its settings to install or change voices. On another Android device, search Settings for Text-to-speech. On iPhone or iPad, open Settings → Accessibility → Spoken Content → Voices. On Windows, open Settings → Time & language → Speech. Return here and refresh. Some installed voices may not appear in this browser.", lesson: "Listen to this lesson", unit: "Listen to this unit", book: "Listen to this textbook", room: "Listen to these readings", pause: "Pause", resume: "Continue", stop: "Stop", speed: "Speed",
           novoice: "This device has no English voice. You can add one in the device's text-to-speech settings.",
           tip: "Choose an available reading voice above. To add voices, open the instructions below.",
           ch: "chapter", v: "verse", vs: "verses", to: "to" },
-    es: { voice: "Voz", automatic: "Automática (del navegador)", helpTitle: "Cómo instalar o cambiar las voces", helpText: "En una tableta Samsung Galaxy, abre Ajustes → Administración general → Texto a voz. Elige el motor de voz y entra en sus ajustes para instalar voces. En otros Android, busca Texto a voz en Ajustes. En iPhone o iPad: Ajustes → Accesibilidad → Contenido leído → Voces. En Windows: Configuración → Hora e idioma → Voz. Regresa a la lección y actualiza la página. Algunas voces instaladas quizá no aparezcan en el navegador.", lesson: "Escuchar esta lección", book: "Escuchar este libro de texto", room: "Escuchar estas lecturas", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
+    es: { voice: "Voz", automatic: "Automática (del navegador)", helpTitle: "Cómo instalar o cambiar las voces", helpText: "En una tableta Samsung Galaxy, abre Ajustes → Administración general → Texto a voz. Elige el motor de voz y entra en sus ajustes para instalar voces. En otros Android, busca Texto a voz en Ajustes. En iPhone o iPad: Ajustes → Accesibilidad → Contenido leído → Voces. En Windows: Configuración → Hora e idioma → Voz. Regresa a la lección y actualiza la página. Algunas voces instaladas quizá no aparezcan en el navegador.", lesson: "Escuchar esta lección", unit: "Escuchar esta unidad", book: "Escuchar este libro de texto", room: "Escuchar estas lecturas", pause: "Pausa", resume: "Continuar", stop: "Detener", speed: "Velocidad",
           novoice: "Este dispositivo no tiene voz en español. Puede añadir una en la configuración de texto a voz del dispositivo.",
           tip: "Elige una voz disponible arriba. Para instalar otras voces, abre las instrucciones.",
           ch: "capítulo", v: "versículo", vs: "versículos", to: "al" },
-    fr: { voice: "Voix", automatic: "Automatique (navigateur)", helpTitle: "Installer ou changer les voix", helpText: "Sur une tablette Samsung Galaxy, ouvrez Paramètres → Gestion globale → Synthèse vocale. Choisissez le moteur vocal, puis ses réglages pour installer des voix. Sur un autre Android, cherchez Synthèse vocale dans les paramètres. Sur iPhone ou iPad : Réglages → Accessibilité → Contenu énoncé → Voix. Sur Windows : Paramètres → Heure et langue → Voix. Revenez à la leçon et actualisez la page. Certaines voix installées peuvent ne pas être proposées par le navigateur.", lesson: "Écouter cette leçon", book: "Écouter ce manuel", room: "Écouter ces lectures", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
+    fr: { voice: "Voix", automatic: "Automatique (navigateur)", helpTitle: "Installer ou changer les voix", helpText: "Sur une tablette Samsung Galaxy, ouvrez Paramètres → Gestion globale → Synthèse vocale. Choisissez le moteur vocal, puis ses réglages pour installer des voix. Sur un autre Android, cherchez Synthèse vocale dans les paramètres. Sur iPhone ou iPad : Réglages → Accessibilité → Contenu énoncé → Voix. Sur Windows : Paramètres → Heure et langue → Voix. Revenez à la leçon et actualisez la page. Certaines voix installées peuvent ne pas être proposées par le navigateur.", lesson: "Écouter cette leçon", unit: "Écouter cette unité", book: "Écouter ce manuel", room: "Écouter ces lectures", pause: "Pause", resume: "Reprendre", stop: "Arrêter", speed: "Vitesse",
           novoice: "Cet appareil n’a pas de voix française. Vous pouvez en ajouter une dans les réglages de synthèse vocale de l’appareil.",
           tip: "Choisissez une voix disponible ci-dessus. Pour en ajouter, ouvrez les instructions.",
           ch: "chapitre", v: "verset", vs: "versets", to: "à" },
-    sw: { voice: "Sauti", automatic: "Chaguo la kivinjari", helpTitle: "Jinsi ya kusakinisha au kubadili sauti", helpText: "Kwenye Samsung Galaxy, fungua Settings → General management → Text-to-speech output. Chagua injini ya sauti, kisha mipangilio yake ili kuongeza sauti. Kwenye Android nyingine, tafuta Text-to-speech ndani ya Settings. Kwenye iPhone au iPad: Settings → Accessibility → Spoken Content → Voices. Kwenye Windows: Settings → Time & language → Speech. Rudi hapa na upakie upya ukurasa. Huenda kivinjari kisionyeshe sauti zote zilizosakinishwa.", lesson: "Sikiliza somo hili", book: "Sikiliza kitabu hiki cha kiada", room: "Sikiliza masomo haya ya kusoma", pause: "Sitisha", resume: "Endelea", stop: "Acha", speed: "Kasi",
+    sw: { voice: "Sauti", automatic: "Chaguo la kivinjari", helpTitle: "Jinsi ya kusakinisha au kubadili sauti", helpText: "Kwenye Samsung Galaxy, fungua Settings → General management → Text-to-speech output. Chagua injini ya sauti, kisha mipangilio yake ili kuongeza sauti. Kwenye Android nyingine, tafuta Text-to-speech ndani ya Settings. Kwenye iPhone au iPad: Settings → Accessibility → Spoken Content → Voices. Kwenye Windows: Settings → Time & language → Speech. Rudi hapa na upakie upya ukurasa. Huenda kivinjari kisionyeshe sauti zote zilizosakinishwa.", lesson: "Sikiliza somo hili", unit: "Sikiliza sehemu hii", book: "Sikiliza kitabu hiki cha kiada", room: "Sikiliza masomo haya ya kusoma", pause: "Sitisha", resume: "Endelea", stop: "Acha", speed: "Kasi",
           novoice: "Kifaa hiki hakina sauti ya Kiswahili. Unaweza kuongeza moja katika mipangilio ya kusoma maandishi kwa sauti ya kifaa.",
           tip: "Chagua sauti inayopatikana hapo juu. Fungua maelekezo ili kuongeza sauti.",
           ch: "sura ya", v: "mstari wa", vs: "mistari", to: "hadi" }
@@ -320,6 +325,25 @@
       });
     }
   };
+
+  /* One-page courses: every unit has its own button; the full control sits in the unit being read (the first one
+     to begin with) and moves to whichever unit's button is pressed, which then reads that unit only. */
+  Array.prototype.forEach.call(units, function (unit, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "btn cts-listen-unit"; b.setAttribute("data-cts-chrome", "");
+    b.style.cssText = "font-size:1rem;padding:.45rem .9rem;margin:0 0 .8rem";
+    b.textContent = "🔊 " + label();
+    b.hidden = i === 0;
+    document.addEventListener("cts-lang", function () { b.textContent = "🔊 " + label(); });
+    b.addEventListener("click", function () {
+      stop();
+      main = unit;
+      unit.insertBefore(bar, unit.firstChild);
+      Array.prototype.forEach.call(document.querySelectorAll(".cts-listen-unit"), function (o) { o.hidden = o === b; });
+      play();
+    });
+    unit.insertBefore(b, unit.firstChild);
+  });
 
   playBtn.addEventListener("click", play);
   pauseBtn.addEventListener("click", pause);
