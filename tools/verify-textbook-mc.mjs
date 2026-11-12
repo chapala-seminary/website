@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { chromium } from 'playwright';
+import { textbookQuestions } from './grading-keys-lib.mjs';
 const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 let checks = 0;
 const ok = (condition, label) => { assert.ok(condition, label); checks++; };
@@ -11,7 +12,8 @@ const w = {};
 vm.runInNewContext(fs.readFileSync('public/assets/js/cts-fill.js', 'utf8'), { window: w, document: {}, setTimeout, clearTimeout });
 for (const file of fs.readdirSync('src/content/textbooks')) {
   const book = JSON.parse(fs.readFileSync(`src/content/textbooks/${file}`, 'utf8'));
-  for (const [i, q] of book.test.questions.entries()) {
+  const keyed = textbookQuestions('.', book.slug).questions;
+  for (const [i, q] of keyed.entries()) {
     ok(!q.options, `${book.slug} Q${i + 1}: typed answer, no choices`);
     for (const lang of ['en', 'es']) {
       ok(w.CTSFill.fillRight(q, q.answer[lang]), `${book.slug} Q${i + 1}/${lang}: key accepted`);
@@ -24,6 +26,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 try {
   // Check every standalone textbook test, including source-language fallback pages.
   const catalogContext = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await catalogContext.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   try {
     await catalogContext.route('**/*', r => new URL(r.request().url()).origin === new URL(BASE).origin ? r.continue() : r.abort());
     const page = await catalogContext.newPage();
@@ -40,6 +43,7 @@ try {
   for (const slug of ['joshua', 'revelationmilligan']) for (const lang of ['en', 'es']) {
     const book = JSON.parse(fs.readFileSync(`src/content/textbooks/${slug}.json`, 'utf8'));
     const prior = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+    await prior.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     try {
       await prior.route('**/*', r => new URL(r.request().url()).origin === new URL(BASE).origin ? r.continue() : r.abort());
       await prior.addInitScript(({slug, date}) => {
@@ -53,6 +57,7 @@ try {
       ok(await page.locator('#tb-submit:disabled').count() === 1, `${slug}/${lang}: previous pass does not require another exam`);
     } finally { await prior.close(); }
     const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }), errors = [];
+    await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     try {
       await ctx.route('**/*', r => new URL(r.request().url()).origin === new URL(BASE).origin ? r.continue() : r.abort());
       await ctx.addInitScript(() => {

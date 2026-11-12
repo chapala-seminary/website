@@ -24,6 +24,10 @@
 // word (tools/verify-fill-single.mjs checks that).
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
+/* Review packets quote answers, so they are private (docs/answer-exposure-audit.md):
+   assessment-keys/review/. */
+const REVIEW = path.join(resolveKeysRoot('.') || '../assessment-keys', 'review');
 import { parse } from 'node-html-parser';
 
 /* Each course: its pages, its units, and where each unit's lesson is. The
@@ -49,8 +53,8 @@ if (!C) {
   console.error(`usage: add-fill-ins-page.mjs --course <${Object.keys(COURSES).join('|')}> [--lesson <n> | --units a,b | --write]`);
   process.exit(2);
 }
-const DRAFTS = `_review/fill-ins/drafts/${course}`;
-const SHEET = `_review/fill-ins/${course}.md`;
+const DRAFTS = path.join(REVIEW, 'fill-ins', 'drafts', course);
+const SHEET = path.join(REVIEW, 'fill-ins', `${course}.md`);
 const OUT = `public/assets/js/fill/${course}.js`;
 
 // ---- the engine's grader, taken from the engine ---------------------------

@@ -13,7 +13,7 @@
  * written for the test.
  */
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
@@ -213,7 +213,7 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   const before = (await start(code, 'u:CTSGenesis/1')).body;
   eq([before.track, before.needs.sa], ['assoc', 0], 'track change: Associate starts with reflection only');
   await post('/api/mc', { code, attemptId: before.attemptId, qid: 'u:CTSGenesis/1/mc/0', choice: unitFile('CTSGenesis',1).mc[0].answer });
-  await post('/api/sync', { code, student: { track: 'mdiv', goal: '' } });
+  await post('/api/sync', { code, student: { track: 'mdiv', goal: '', trackChange: true } });
   const after = (await start(code, 'u:CTSGenesis/1')).body;
   eq([after.attemptId, after.track, after.needs.sa], [before.attemptId, 'mdiv', 9], 'track change: same open sitting now requires master’s written answers');
   ok(!!after.answered['u:CTSGenesis/1/mc/0'], 'track change: existing answers are retained');
@@ -237,6 +237,7 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   unlock(assoc);
   a = (await start(assoc)).body;
   eq([a.banked.mc, a.items.mc.length], [true, 0], 'multiple choice is banked: the retake asks only for the written part');
+  eq(a.banked.fill.length, 8, 'Associate: the eight fill-ins answered right are kept for the retake');
   await doFill(assoc, a);
   sub = (await submit(assoc, a)).body;
   eq([sub.status, sub.unitDone], ['passed', true], 'Associate: multiple choice banked plus 10 fill-ins passes without short answer', sub);
@@ -412,10 +413,12 @@ for (const lang of ['es', 'fr']) {
   eq(b.banked.sa.length, 8, 'eight short answers are banked');
   eq(b.items.sa.length, 2, 'the retake asks only for the other two');
   eq([b.banked.mc, b.items.mc.length], [true, 0], 'multiple choice is banked');
-  eq(b.items.fill.length, 10, 'the fill-ins are asked again');
+  eq(b.banked.fill.length, 10, 'the ten fill-ins answered right are kept (6 Nov 2026: they were asked again and a retake without them failed)');
+  eq(Object.values(b.answered).filter((x) => x.banked && x.verdict === 'right' && x.answerText).length, 10, 'each kept fill-in comes back as right, with the student\u2019s own answer');
+  const keptFill = await post('/api/grade', { code, attemptId: b.attemptId, items: [{ qid: b.banked.fill[0], answer: 'zzzz nothing' }] });
+  eq([keptFill.body.items?.[0]?.verdict, keptFill.body.items?.[0]?.banked], ['right', true], 'a kept fill-in is not graded again');
   const banked = await post('/api/grade', { code, attemptId: b.attemptId, items: [{ qid: a.items.sa[0], answer: 'anything' }] });
   eq([banked.body.items?.[0]?.verdict, banked.body.items?.[0]?.banked], ['met', true], 'a banked answer is not graded again');
-  await doFill(code, b);
   await doSA(code, b, ['met', 'not_met']);
   const sub2 = (await submit(code, b)).body;
   eq([sub2.status, sub2.scores.sa.right, sub2.unitDone], ['passed', 9, true], 'banked eight and one more is 9 of 10: the unit passes', sub2);
@@ -428,11 +431,15 @@ for (const lang of ['es', 'fr']) {
   await doFill(code, a);
   const items = a.items.sa.map((qid, i) => ({ qid, answer: essay(i < 8 ? 'met' : i === 8 ? 'error' : 'not_met') }));
   const g = await post('/api/grade', { code, attemptId: a.attemptId, items });
-  // the fake model, like a real outage, fails the whole call: all ten wait
+  // Answers go to the model three at a time (model.js CHUNK). The fake model, like a
+  // real outage, fails the whole call that holds answer 8: answers 6, 7 and 8 wait,
+  // and the other calls are graded.
   const pend = g.body.items[8];
-  ok(g.body.items.every((i) => i.verdict === 'pending') && /graded shortly/.test(pend.feedback), 'when the model fails the answers are saved as pending', g.body.items.map((i) => i.verdict));
+  eq(g.body.items.map((i) => i.verdict), ['met', 'met', 'met', 'met', 'met', 'met', 'pending', 'pending', 'pending', 'not_met'],
+    'when a model call fails, the answers in that call are saved as pending and the others are graded');
+  ok(/graded shortly/.test(pend.feedback), '...with the "graded shortly" note', pend);
   eq(q1(`SELECT COUNT(*) AS n FROM grade_queue WHERE grade_id = ${pend.gradeId}`)[0].n, 1, 'and queued');
-  eq(q1(`SELECT COUNT(*) AS n FROM grade_queue q JOIN answer_grades g ON g.id = q.grade_id WHERE g.attempt_id = '${a.attemptId}'`)[0].n, 10, '...all of them');
+  eq(q1(`SELECT COUNT(*) AS n FROM grade_queue q JOIN answer_grades g ON g.id = q.grade_id WHERE g.attempt_id = '${a.attemptId}'`)[0].n, 3, '...all three of that call');
   eq(q1("SELECT COALESCE(SUM(errors), 0) AS n FROM ai_usage WHERE model = '@cf/test/fallback'")[0].n >= 1, true, 'after the retry and the fallback model both failed (errors counted)');
   const sub = (await submit(code, a)).body;
   eq([sub.status, sub.unitDone], ['pending', false], 'a unit that depends on a pending answer is pending, with no credit', sub);
@@ -471,6 +478,14 @@ for (const lang of ['es', 'fr']) {
   db(`UPDATE answer_grades SET verdict = 'met', graded_by = 'human', grader_email = 'faculty@example.test' WHERE id IN (${t1}, ${t2})`);
   const view = (await get(`/api/attempt/${a.attemptId}?code=${code}`)).body;
   ok(view.answered[a.items.sa[1]].verdict === 'met', 'a human grade shows in the attempt', view.answered);
+}
+
+/* ---- a written answer that is too long: the page is told which one --------------------------------------------- */
+{
+  const code = await student('thm'), a = (await start(code, SCOPE(9))).body;
+  const long = await post('/api/grade', { code, attemptId: a.attemptId, items: [{ qid: a.items.sa[0], answer: essay('met') }, { qid: a.items.sa[1], answer: essay('met') + ' x'.repeat(2100) }] });
+  eq([long.status, long.body.tooLong, long.body.max], [422, [a.items.sa[1]], 4000], 'an answer over 4,000 characters is named, not a generic error', long.body);
+  eq(q1(`SELECT COUNT(*) AS n FROM answer_grades WHERE attempt_id = '${a.attemptId}' AND kind = 'sa'`)[0].n, 0, '...and nothing in that batch is graded, so the student can shorten and resend');
 }
 
 /* ---- the fallback model, bad replies -------------------------------------------------------------------------------- */
@@ -589,7 +604,8 @@ for (const lang of ['es', 'fr']) {
   eq(new Set(a.items.fill).size, 20, 'all different');
   const again = (await start(code, 'tb:cults')).body;
   eq(again.items.fill, a.items.fill, 'the same draw for the same attempt');
-  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const bank = textbookQuestions('.', 'cults').questions;
   const answerOf = (qid) => bank[idx(qid)].answer.en;
   let res = await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.slice(0, 10).map((qid, i) => ({ qid, answer: i < 3 ? 'wrong' : answerOf(qid) })) });
   res = await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.slice(10).map((qid) => ({ qid, answer: answerOf(qid) })) });
@@ -634,6 +650,91 @@ for (const lang of ['es', 'fr']) {
   const real = (await start(code)).body;
   ok(real.attemptId !== att?.id && real.answered && Object.keys(real.answered).length === 0, 'and is invisible to the student\'s real attempts');
   ok((await post('/api/shadow', { code, scope: SCOPE(1), answers: 'no' })).status === 400, 'a bad shadow body is refused');
+}
+
+
+/* ---- exact reported Spanish master's exams: real Worker and local D1 -------
+ * The two specific student reports were Evangelism lesson 6 and Pastoral
+ * Ministries lesson 1. The generic John test does not prove these keys,
+ * scopes, receipts and course-progress paths work. Never use real student
+ * credentials, responses, records or live production for these tests.
+ *
+ * Simulate #200's two five-answer batches against beta's #199 server-side
+ * parallel grading; only final-submit after every individual receipt.
+ */
+for (const [prefix, slug, unit] of [
+  ['CTSEvangelism', 'evangelism', 6],
+  ['CTSPM', 'pm', 1]
+]) {
+  const scope = 'u:' + prefix + '/' + unit;
+  const label = slug + ' lesson ' + unit + ' / Spanish M.Div.';
+  const source = unitFile(prefix, unit); // merged by tools/private-units.mjs in CI
+  const code = await student('mdiv');
+  const opened = await start(code, scope, 'es');
+  eq(opened.status, 200, label + ': opens without verification error');
+  const a = opened.body;
+  if (opened.status !== 200 || !a?.attemptId || !a.items?.mc) continue;
+  eq([a.track, a.lang, a.items.mc.length, a.items.fill.length, a.items.sa.length],
+    ['mdiv', 'es', 20, 10, 10],
+    label + ': all forty questions are present at master-level rigor');
+  for (const mc of a.items.mc) {
+    const choice = source.mc[idx(mc.qid)]?.answer;
+    const r = await post('/api/mc', {code, attemptId:a.attemptId, qid:mc.qid, choice});
+    ok(r.status === 200, label + ': multiple-choice answer receives durable acknowledgement', {qid:mc.qid,status:r.status});
+  }
+  const writtenChunks = [
+    a.items.fill.map(qid=>({
+      qid,
+      answer: source.fill[idx(qid)]?.answer?.es || source.fill[idx(qid)]?.answer?.en
+    })),
+    a.items.sa.map(qid=>({qid,answer:essay('met')}))
+  ];
+  let acknowledged = true;
+  for (const part of writtenChunks) {
+    // Never continue to the next written part after any lost/partial receipt.
+    if (!acknowledged) break;
+    for (let k = 0; k < part.length; k += 5) {
+      const chunk = part.slice(k,k+5);
+      const response = await post('/api/grade', {code,attemptId:a.attemptId,items:chunk});
+      const seen = new Set(Array.isArray(response.body?.items)
+        ? response.body.items.filter(x=>x?.qid && typeof x.verdict==='string').map(x=>x.qid)
+        : []);
+      const accepted = response.status===200 && chunk.every(x=>seen.has(x.qid));
+      ok(accepted,label+': every written answer individually acknowledged before submit',{
+        part:chunk.map(x=>x.qid),got:[...seen],status:response.status
+      });
+      acknowledged = acknowledged && accepted;
+      if(!accepted)break;
+    }
+  }
+  if(!acknowledged)continue; // Do not mark an incomplete attempt submitted.
+  const recovered = await start(code,scope,'es');
+  eq(recovered.body?.attemptId,a.attemptId,
+    label+': reloading the sitting resumes same attempt without losing responses');
+  const saved = q1("SELECT kind, COUNT(*) AS n FROM answer_grades WHERE attempt_id = '"
+    + a.attemptId + "' GROUP BY kind");
+  eq(saved.find(x=>x.kind==='fill')?.n,10,label+': ten fill-in grades durably saved');
+  eq(saved.find(x=>x.kind==='sa')?.n,10,label+': ten short-answer grades durably saved');
+  const result = await submit(code,a);
+  ok(result.status===200 && ['passed','pending'].includes(result.body?.status),
+    label+': final attempt receives clear passed/pending receipt',result);
+  if(result.body?.status==='pending') {
+    await cron();
+    const settled=await waitFor(async()=>{
+      const row=q1("SELECT status FROM attempts WHERE id = '"+a.attemptId+"'")[0];
+      return row?.status==='passed'||row?.status==='failed'?row:null;
+    },label+' to settle after queue');
+    eq(settled?.status,'passed',label+': written grades settle and meet the existing rubric');
+  } else {
+    eq(result.body?.status,'passed',label+': successfully graded responses pass at M.Div. rigor');
+  }
+  const record = q1("SELECT status FROM attempts WHERE id = '"+a.attemptId+"'")[0];
+  eq(record?.status,'passed',label+': server preserves passed attempt after reload');
+  eq(q1("SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '"+code+
+     "' AND course = '"+slug+"' AND unit = "+unit)[0]?.n,1,
+     label+': durable unit credit appears once in local D1');
+  const again=await submit(code,a);
+  eq(again.body?.status,'passed',label+': duplicate final-submit keeps passed status');
 }
 
 // These students are not people to write to: leave the daily notes (a capped run) to the suites about them.

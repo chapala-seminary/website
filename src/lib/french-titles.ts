@@ -29,6 +29,10 @@ export function frCourse(code: string): string {
   if (!t?.fr) throw new Error(`src/content/courses/${code}.json has no French title`);
   return t.fr;
 }
+/* A book's French title: its own, when the book gives one (the electives'
+   textbooks, tools/build-elective-textbook.mjs); otherwise the English title
+   with our description of the assignment in French (frBookTitle). */
+export const frTextbookTitle = (book: { title: { en: string; fr?: string } }) => book.title.fr ?? frBookTitle(book.title.en);
 /* A book keeps its own (English) title; only our description of the
    assignment is French. */
 export function frBookTitle(title: string): string {
@@ -62,9 +66,9 @@ export function frenchPageTitle(root: HTMLElement, file: string, translated: boo
   const single = d.byPrefix.get(page);
   if (single?.fr) return single.fr;
   const test = /^(.*)Test$/.exec(page);
-  if (test && d.books.has(test[1])) return `Examen du manuel — ${frBookTitle(d.books.get(test[1]).title.en)}`;
+  if (test && d.books.has(test[1])) return `Examen du manuel — ${frTextbookTitle(d.books.get(test[1]))}`;
   if (test && d.readings.has(test[1])) return `Examen des lectures obligatoires — ${frCourse(d.readings.get(test[1]).course)}`;
-  if (d.books.has(page)) return `Manuel de master — ${frBookTitle(d.books.get(page).title.en)}`;
+  if (d.books.has(page)) return `Manuel de master — ${frTextbookTitle(d.books.get(page))}`;
   const room = d.rooms[page];
   if (room) {
     if (room.kind === 'honors') return `Lecture avec mention — ${SITE_FR}`;
@@ -127,7 +131,7 @@ export function catalogCards(): Record<string, string> {
     cards[c.title.en] = c.title.fr; cards[c.description.en] = c.description.fr;
     cards[`For ${c.title.en}`] = `Pour le cours ${c.title.fr}`;
   }
-  for (const b of data().books.values()) cards[b.title.en] = frBookTitle(b.title.en);
+  for (const b of data().books.values()) cards[b.title.en] = frTextbookTitle(b);
   for (const r of data().readings.values()) cards[r.title.en] = frReadingsTitle(r.course);
   return cards;
 }

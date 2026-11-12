@@ -13,8 +13,13 @@
  * bank changed underneath it -- and is refused, so nothing is overwritten
  * blind. */
 import fs from 'node:fs';
+import path from 'node:path';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 
-const FILE = 'src/data/textbooks/corrections.json';
+/* The corrections set answers, so they are private (docs/answer-exposure-audit.md):
+   assessment-keys/textbooks-src/corrections.json. */
+const KEYS = resolveKeysRoot('.');
+const FILE = KEYS ? path.join(KEYS, 'textbooks-src', 'corrections.json') : 'assessment-keys/textbooks-src/corrections.json';
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 export function applyCorrections(rec, edits = JSON.parse(fs.readFileSync(FILE, 'utf8')).edits) {

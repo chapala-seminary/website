@@ -6,19 +6,38 @@ import { parse } from 'node-html-parser';
 import { chromium } from 'playwright';
 const base = process.argv[2] || 'http://127.0.0.1:8798';
 const root = parse(fs.readFileSync('dist/fr/index.html', 'utf8'));
+// The textbook and reading directories are on the Study Library (issue #186).
+const library = parse(fs.readFileSync('dist/fr/CTSStudyLibrary.html', 'utf8'));
+assert.equal(library.querySelector('html').getAttribute('lang'), 'fr');
+assert.equal(library.querySelectorAll('[data-cts-fallback]').length, 0);
+// Like the other static pages translated by a dictionary (src/data/french-pages),
+// its French is published as a provisional translation for review.
+assert.equal(library.querySelector('.topbar .mark .cts-reading').text.trim(), 'Séminaire théologique de Chapala');
+assert.ok(library.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
+assert.ok(root.querySelector('a[href^="/fr/CTSStudyLibrary.html"]'), 'the French home page links to the French Study Library');
+// The seven foundation courses first, in French.
+assert.equal(root.querySelectorAll('#catalog a.fcard').length, 7);
+for (const link of root.querySelectorAll('#catalog a.fcard')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
 assert.equal(root.querySelector('html').getAttribute('lang'), 'fr');
 assert.equal(root.querySelectorAll('[data-cts-fallback]').length, 0);
 assert.equal(root.querySelectorAll('.cts-translation-pending').length, 0);
 assert.ok(root.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
-assert.equal(root.querySelectorAll('#catalog a.course').length, 45);
-assert.equal(root.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 45);
-assert.equal(root.querySelectorAll('#required-readings a.textbook.reading').length, 45);
-assert.equal(root.querySelectorAll('#textbooks a.tb-test-link').length, 90);
-assert.ok(root.querySelector('#catalog').text.includes('en anglais, en espagnol et en français'));
+assert.equal(root.querySelectorAll('#catalog a.course').length, 66);
+// The 46 core textbooks and reading sets (45, plus the Islam course on 8 Nov 2026); the electives' (slug "elec…") are listed apart as each is added.
+const slugs = (d) => fs.readdirSync(d).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5));
+const electiveReadings = slugs('src/content/readings').filter((s) => s.startsWith('elec')).length;
+const electiveBooks = slugs('src/content/textbooks').filter((s) => s.startsWith('elec')).length;
+assert.equal(library.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 46 + electiveBooks);
+assert.equal(library.querySelectorAll('#elective-textbooks a.textbook:not(.reading)').length, electiveBooks);
+assert.equal(library.querySelectorAll('#required-readings a.textbook.reading').length, 46);
+assert.equal(library.querySelectorAll('#elective-readings a.textbook.reading').length, electiveReadings);
+assert.equal(library.querySelectorAll('#textbooks a.tb-test-link').length, 92 + electiveReadings + electiveBooks);
+assert.ok(root.querySelector('#catalog').text.includes('en anglais et en espagnol, avec des traductions en français et en swahili'));
 // Every course has a French draft, so every card carries the badge.
-assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 45);
+assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 66);
 assert.ok(root.querySelector('#programs')?.text.includes('15 cours') || root.text.includes('Niveau master · 15 cours'));
-for (const link of root.querySelectorAll('#catalog a.course, #textbooks a.textbook')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
+for (const link of root.querySelectorAll('#catalog a.course')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
+for (const link of library.querySelectorAll('#textbooks a.textbook')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
 for (const node of root.querySelectorAll('script[type="application/ld+json"]')) {
   const data = JSON.parse(node.innerHTML);
   if (data['@type'] === 'FAQPage') {
@@ -106,5 +125,5 @@ try {
     assert.deepEqual(errors,[]);
     await context.close();
   }
-  console.log('French landing: complete copy, 45 courses, 45 textbooks and 45 reading sets, metadata, mobile layout, source toggle and registration states — PASS');
+  console.log(`French landing: complete copy, 66 courses, 46 core and ${electiveBooks} elective textbooks, 46 core and ${electiveReadings} elective reading sets, metadata, mobile layout, source toggle and registration states — PASS`);
 } finally { await browser.close(); }

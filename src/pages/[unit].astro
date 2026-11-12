@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Unit from '../layouts/Unit.astro';
 import { renderLesson, type Lesson } from '../lib/lesson.ts';
-import { frBookTitle, frReadingsTitle } from '../lib/french-titles.ts';
+import { frTextbookTitle, frReadingsTitle } from '../lib/french-titles.ts';
 
 // raw bodies, imported at build time so nothing is fetched at runtime
 const bodies = import.meta.glob('../body/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   type Test = { page: string; title: { en: string; es: string; fr: string }; kind: 'textbook' | 'reading'; requiredFrom?: string | null };
   const testsOf = new Map<string, Test[]>();
   const add = (course: string, t: Test) => (testsOf.get(course) ?? testsOf.set(course, []).get(course)!).push(t);
-  for (const t of await getCollection('textbooks')) add(t.data.course, { page: t.data.page, title: { ...t.data.title, fr: frBookTitle(t.data.title.en) }, kind: 'textbook',
+  for (const t of await getCollection('textbooks')) add(t.data.course, { page: t.data.page, title: { ...t.data.title, fr: frTextbookTitle(t.data) }, kind: 'textbook',
     ...('requiredFrom' in t.data ? { requiredFrom: t.data.requiredFrom ?? null } : {}) });
   // and its required readings (src/content/readings): a box of their own, after the textbook's --
   // a course may have both (9 Oct 2026); worker/catalog.json allows one required-reading test a course

@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { translationPlan, strings, applyTranslation } from './translation-plan.mjs';
+import { unitWrites } from './private-units.mjs';
 const args = process.argv.slice(2);
 const COURSE = args[0];
 const opt = (name, fallback) => { const i = args.indexOf(`--${name}`); return i < 0 ? fallback : args[i + 1]; };
@@ -43,7 +44,9 @@ for (const name of fs.readdirSync(dir).filter(f => /^\d+\.json$/.test(f)).sort((
   writes.push([lessonPath, lesson], [unitPath, unit]); files++;
 }
 // Prepare every unit before writing anything. Restore originals if a write fails.
-const originals = writes.map(([file]) => [file, fs.readFileSync(file)]);
-try { for (const [file, data] of writes) fs.writeFileSync(file, JSON.stringify(data, null, 1) + '\n'); }
+// A unit file is split: question wording to units-public, keys and tr stamps to assessment-keys (tools/private-units.mjs).
+const texts = writes.flatMap(([file, data]) => file === path.join('src/content/units', COURSE, path.basename(file)) ? unitWrites(file, data) : [[file, JSON.stringify(data, null, 1) + '\n']]);
+const originals = texts.map(([file]) => [file, fs.readFileSync(file)]);
+try { for (const [file, text] of texts) fs.writeFileSync(file, text); }
 catch (error) { for (const [file, bytes] of originals) fs.writeFileSync(file, bytes); throw error; }
 console.log(DRY ? `\n${count} item(s) would be translated. Nothing was written.` : `\n${count} item(s) translated into ${LANG} across ${files} unit(s), marked machine.`);

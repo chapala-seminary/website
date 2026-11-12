@@ -134,14 +134,17 @@ Every short-answer item gets:
   cannot make sync delete grading keys.
 
   `node tools/export-assessment-keys.mjs <dir>` writes that checkout from
-  the public banks. It refuses to write inside this repo. The public files
-  still hold the keys until a later change, after beta deploy is reading the
-  private checkout and a textbook test has been checked there. The beta
-  Actions workflow checks `chapala-seminary/assessment-keys` out with
-  repository secret `ASSESSMENT_KEYS_TOKEN` (read-only on that repo), sets
-  `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and uses
-  `continue-on-error` so a missing or bad token does not fail the deploy.
-  The Christian Education bank is authored only in that private checkout.
+  public banks that still hold answers. It refuses to write inside this repo,
+  and refuses when public textbook files already omit `answer`/`accept` (so it
+  cannot wipe the private checkout). Public textbook JSON keeps prompts (and
+  chapter); `answer`/`accept` are only in the private checkout. Since 25 Oct 2026
+  reading-test and unit-exam keys are private too (`docs/answer-exposure-audit.md`). The beta and
+  pull-request Actions workflows check `chapala-seminary/assessment-keys` out
+  with repository secret `ASSESSMENT_KEYS_TOKEN` before build/test/deploy, set
+  `ASSESSMENT_KEYS` when `.assessment-keys/textbooks` is present, and use
+  `continue-on-error` on the checkout step so a missing token fails later with
+  a clear message instead of a hard checkout error. Shadow textbook pages load
+  keys from that checkout. The Christian Education bank is authored only there.
 
 ## 5. Grading rules (server, `worker/grading/`)
 
@@ -327,8 +330,14 @@ Notes on the routes (as built):
 
 - **`needs`** in the attempt reply is the number that must be right in each
   part (`{mc: 18, fill: 9, sa: 9}`, 0 for a part the track does not count),
-  and **`totals`** the number asked. `banked.fill` is always `[]`: only
-  multiple choice and short answers bank. `status` is also in the reply
+  and **`totals`** the number asked. On a unit (`u:`, `sp:`), `banked.fill` lists the
+  fill-ins answered right in earlier failed attempts since the last pass;
+  they count toward the retake and come back in `answered` as `right`
+  with `banked: true` and the student's own text (since 7 Nov 2026; before
+  then only multiple choice and short answers banked, and a student who
+  resubmitted only his short answers failed for blank fill-ins). Tests
+  (`tb:`, `rd:`, `fn:`) draw new questions each attempt, so their
+  `banked.fill` is always `[]`. `status` is also in the reply
   (`open`, or `pending` when the student comes back to an attempt that is
   waiting). `answered[qid]` is described in section 12.
 - **Drawn prompts.** A textbook or reading attempt (`tb:` / `rd:`) includes
@@ -344,7 +353,8 @@ Notes on the routes (as built):
   (`points` is `[{id, made}]`, never the quotes or the rubric text). A banked
   short answer comes back `{verdict: "met", banked: true}`. The first answer to
   a question stands in an attempt, for fill-ins as for multiple choice; asking
-  again returns it. Fill-ins are at most 80 characters, short answers 2,000.
+  again returns it. Fill-ins are at most 80 characters, short answers 4,000; a longer short
+  answer gets 422 `{error, tooLong: [qid], max}` so the page can point at it.
   The per-student cap (150 written items an hour) counts written items in
   `answer_grades`, so it applies to the shadow trial too.
 - **Submit** on an attempt that is no longer open returns the current result.
@@ -1018,3 +1028,46 @@ the existing 90% threshold; only nonempty answers below the internal length
 floor request expansion. Certificate/Associate reflection remains optional.
 Robert authorized publication to beta and closure of #100 after this replacement.
 Production promotion and deployment remain separate.
+
+## 16. Master's finals and ministry papers (Dr. Cook, 2 Nov 2026)
+
+Old Testament Survey first; another course is added by data alone (a public
+file, a private key file for a final, `node tools/gen-worker-catalog.mjs`).
+Neither is required of anyone: both sit in `worker/catalog.json`
+`assessments` with `requiredFrom: null`, **not** in `textbooks` (whose
+`requiredFrom: null` entries beta's activation default makes required, and
+which `testsFor`, `cts-required-tests.js` and the unit pages read). Making one
+required is a later decision and a code change (`testsFor`, the pages).
+
+**Final** (`/CTS<Course>Final.html`, `src/pages/[final].astro`). Prompts in
+`src/content/finals/<slug>.json` (`keys: "private"`, strict schema);
+answers, accepted answers, model answers and rubrics in
+`assessment-keys/finals/<slug>.json`, item for item. Rows `fn:<slug>/fill|sa/<i>`
+and `fn:<slug>/meta/0` `{pass: {fill, sa}, maxChars, n, code, kind: "final",
+page}`; without the private file the final is skipped by the sync (warned),
+never graded from the public file. The scope asks every item (no draw); the
+pass marks (OTS: 9 of 10 fill-ins, 3 of 4 essays) hold on every track;
+essays up to `maxChars` (OTS 8,000; never above 12,000), graded by the
+short-answer path of section 5 with no faculty confirmation. A met essay is
+banked across attempts; a fail locks the whole test (`full`). A pass writes
+`textbook_results(<slug>)` (`source='server'`) and runs the course check,
+which it cannot change. No shadow trial; `/api/sync` cannot claim it.
+`tools/verify-no-keys.mjs` checks the public file and every built page with
+`window.CTS_FINAL`.
+
+**Paper** (`/CTS<Course>Paper.html`, `src/pages/[paper].astro`,
+`worker/assignments.js`, `worker/grading/paper.js`, migration
+`0019_assignments.sql`). The student pastes the paper (a sermon also its
+exegetical notes); `POST /api/assignment {code, slug, format, topic, lang,
+body, notes}` and `GET /api/assignment?code=&slug=`. Refused with 422 (never
+stored): over 25,000 characters (notes 12,000), under `minWords` in all, a
+sermon without `minNotesWords` of notes, or text `looksLikeInstruction`
+matches (no faculty step to hold it for). The AI scores each rubric criterion
+(weights from the course's master's page) with a quote of the student's own
+words and a comment; a score above half the points without a quote found in
+the paper is cut to half. The server adds the total: `>= pass` (80) passes
+and writes `textbook_results(<slug>)`; otherwise "revise". A paper the model
+cannot grade stays `pending` (retried by the 15-minute cron and by a GET
+when due; `unavailable` after 6 tries or 24 hours). One version waits at a
+time, three a day. The student is emailed only at a confirmed address.
+Delete My Record removes `assignments` rows (section 10).

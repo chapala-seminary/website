@@ -15,6 +15,7 @@ import catalog from '../../worker/catalog.json';
 import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
 import { frReadingsTitle, frReadingsRoom } from '../lib/french-titles.ts';
 import { live, liveBank } from '../lib/grading-mode';
+import { readingQuestions } from '../../tools/grading-keys-lib.mjs';
 
 export async function getStaticPaths() {
   const tests = await getCollection('readings');
@@ -59,9 +60,13 @@ const fromText = from ? { en: from.toLocaleDateString('en-US', { year: 'numeric'
                           es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
                           fr: from.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
 /* Live mode ships no question bank; the server sends the drawn prompts.
-   Shadow mode still embeds the bank. See src/pages/[test].astro. */
+   Shadow mode still embeds the bank. See src/pages/[test].astro. A private
+   bank (keys: "private") has no answers in its public file: in shadow mode
+   they are joined from the assessment-keys checkout, and the build stops
+   without it. A public bank is embedded as it is. */
 const shown = live ? liveBank({ slug: reading.slug, kind: 'reading', questions }) : null;
-const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions: shown ? [] : questions, completion,
+const shadowBank = live ? null : readingQuestions('.', reading, (m) => console.warn(m)).questions;
+const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions: shown ? [] : shadowBank, completion,
   ...(shown ? { grading: 'live', scope: shown.scope } : {}),
   ...(reading.test.resetWaitOnRevision ? { resetWaitOnRevision: true } : {}),
   ...(perGroup ? { perGroup } : {}), ...(revision ? { revision } : {}), ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');

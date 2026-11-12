@@ -7,6 +7,7 @@ let checks = 0;
 const check = (actual, expected) => { assert.ok(actual.includes(expected), `${expected} absent from ${actual}`); checks++; };
 try {
   const page = await browser.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await page.route('**/*', route => route.request().url().startsWith(base) ? route.continue() : route.abort());
   await page.goto(`${base}/fr/CTSUnit1.html?cts_lang=fr`);
   check(await page.locator('#cts-register').innerText(), 'Une seule inscription');

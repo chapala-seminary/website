@@ -7,7 +7,7 @@
  * message, never spliced into the instructions.
  */
 
-export const LANG_NAMES = { en: 'English', es: 'Spanish', fr: 'French' };
+export const LANG_NAMES = { en: 'English', es: 'Spanish', fr: 'French', sw: 'Swahili' };
 
 const COMMON = `You are a grading assistant for Chapala Theological Seminary, a Christian seminary. You grade one student's answers against standards written by the faculty.
 

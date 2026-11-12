@@ -324,6 +324,73 @@
   }
 
   document.addEventListener('cts-sync-applied', start);
+
+  /* A course certificate page decides once, as it opens, from this browser's
+     lists: every unit passed, or the units still to do. The student's record
+     arrives a moment later (cts-sync.js). On a phone or browser that was
+     behind -- the course finished on another device -- the page went on
+     saying "units still to do" until the student reloaded: 57 of the 62
+     course certificate pages with unit pages (measured 11 Nov 2026; found by
+     the journey suite, e2e/two-devices.spec.mjs). The degree pages had the
+     same fault (#310, fixed in cts-degrees.js, so not here).
+
+     Now, when the record brings credit for this page's course that this
+     browser did not have (cts-sync.js, detail.credit), the page opens again
+     once, a second later. Not for any change: a confirmed email reaching the
+     profile reopened the page and wiped the "a copy was emailed to you" note
+     (tools/verify-certify.mjs). Not on the four pages whose own script
+     redraws on cts-sync-applied (Hermeneutics, Evangelistic Preaching,
+     Missions, CS), which already catch up and are tested doing so
+     (tools/verify-certificate-sync.mjs). Never while the student is typing
+     (the name the certificate asks for); once per change and never twice in
+     30 seconds on one page, so it cannot loop. */
+  function redrawsItself() {
+    var s = document.scripts;
+    for (var i = 0; i < s.length; i++) if (!s[i].src && s[i].textContent.indexOf('cts-sync-applied') !== -1) return true;
+    return false;
+  }
+  /* What the record brought that bears on this page. Units of its course
+     (stored by the course's slug, its code without "CTS": all 62 courses with
+     unit pages) or its completion (the only sign for a single-page course,
+     which has no units) arrive only where this browser lacked them, so the
+     page was drawn from too little; so does a track the record changed.
+     A textbook result or an exemption counts only while the page still
+     holds the diploma back: the record exempts master's students from
+     reading tests not yet required on the first sync of nearly every course,
+     which reopened pages already showing their diploma
+     (tools/verify-certificate-unlock.mjs). Not a completion level on its
+     own: the record echoes back the level of a completion this very page has
+     just recorded. */
+  function forThisCourse(credit, code) {
+    var slug = code.replace(/^CTS/, '').toLowerCase(), held = !diploma();
+    return credit.filter(function (c) {
+      var p = c.split(':');
+      return c === 'track' || (p[0] === 'unit' && p[1] === slug) || (p[0] === 'done' && p[1] === code)
+        || (held && (p[0] === 'textbook' || p[0] === 'exempt'));
+    });
+  }
+  document.addEventListener('cts-sync-applied', function (e) {
+    var a = award(), credit = (e && e.detail && e.detail.credit) || [];
+    if (!a || a.level !== 'course' || redrawsItself()) return;
+    credit = forThisCourse(credit, a.course);
+    if (!credit.length) return;
+    // A second for a page that redraws on its own timer, then decide.
+    setTimeout(function () {
+      var el = document.activeElement;
+      if (el && /^(INPUT|TEXTAREA)$/.test(el.tagName) && el.value) return;
+      var mark = credit.slice().sort().join('\n'), h = 5381;
+      for (var i = 0; i < mark.length; i++) h = ((h << 5) + h + mark.charCodeAt(i)) | 0;
+      // and, whatever changed, not twice within 30 seconds on the same page
+      var key = 'cts_cert_refreshed:' + location.pathname, now = Date.now();
+      try {
+        var last = (sessionStorage.getItem(key) || '').split(' ');
+        if (last[0] === String(h) || now - Number(last[1] || 0) < 30000) return;
+        sessionStorage.setItem(key, h + ' ' + now);
+      } catch (err) { return; }
+      location.reload();
+    }, 1000);
+  });
+
   window.CTS_CERTIFY = { award: award, state: function () { return state; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();

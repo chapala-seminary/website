@@ -26,7 +26,8 @@
     document.querySelectorAll("[data-es]").forEach(function (e) {
       var en = e.getAttribute("data-en"), es = e.getAttribute("data-es");
       if (en == null) { en = e.tagName === "OPTION" ? e.textContent : e.getAttribute("placeholder"); e.setAttribute("data-en", en); }
-      var t = l === "fr" ? (e.getAttribute("data-fr") || en) : pick(en, es, l);
+      // French and later languages carry their own data-<lang> (tools/language-pages.mjs).
+      var t = l !== "en" && l !== "es" && l !== "both" ? (e.getAttribute("data-" + l) || en) : pick(en, es, l);
       if (e.tagName === "OPTION") e.textContent = t; else e.setAttribute("placeholder", t);
     });
     document.querySelectorAll("select[data-bilingual] option:not([data-es])").forEach(function (o) {

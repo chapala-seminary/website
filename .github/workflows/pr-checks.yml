@@ -11,7 +11,7 @@ jobs:
   pr-tests:
     name: CTS build and tests
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,5 +23,66 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      # Public textbook JSON omits answer/accept; tests and the shadow build
+      # read them from chapala-seminary/assessment-keys.
+      - name: Checkout private assessment keys
+        id: assessment_keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+            echo "Private assessment-keys checkout ready at .assessment-keys"
+          else
+            echo "No private assessment-keys checkout; textbook tests need ASSESSMENT_KEYS_TOKEN."
+            exit 1
+          fi
       - run: npm run build
       - run: npm test
+  # The journey suite (e2e/, docs/e2e-journeys.md): whole student and staff
+  # journeys across devices on the built site, beside the feature tests above.
+  # No traces, screenshots or report are uploaded: they hold the answer keys
+  # the journeys type, and this repository's artifacts are public.
+  journeys:
+    name: CTS journey tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Checkout private assessment keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+          else
+            echo "No private assessment-keys checkout; the journeys need ASSESSMENT_KEYS_TOKEN."
+            exit 1
+          fi
+      - run: npm run build
+      - run: npm run test:e2e
+      - name: The local Worker's last log lines
+        if: failure()
+        run: tail -n 80 .wrangler-e2e/dev.log || true

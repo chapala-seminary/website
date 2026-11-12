@@ -143,10 +143,11 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
   st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' } });
   ok(lv(st) === 'mdiv', `a master's-level report raises it (${lv(st)})`);
   const cert = await jpost('/api/register', { name: 'Cert Twentyfive', email: 'cert-twentyfive@example.org', track: 'cert' });
-  const codes = Object.keys((await jget('/api/catalog')).body.completions).slice(0, 44);
+  // every course (66 since the electives of 24 Oct 2026; a fixed slice could miss a foundation course)
+  const codes = Object.keys((await jget('/api/catalog')).body.completions);
   const all = await jpost('/api/sync', { code: cert.body.code, progress: [], doneCodes: codes, completionTracks: {} });
   ok(all.body.degrees.certificate === true && all.body.degrees.associate === false,
-    `44 Certificate-level courses make a Certificate of Ministry, not an Associate (${JSON.stringify(all.body.degrees)})`);
+    `${codes.length} Certificate-level courses make a Certificate of Ministry, not an Associate (${JSON.stringify(all.body.degrees)})`);
 }
 
 // One course, one completion (Dr. Cook, 5 Oct 2026): a returning browser
@@ -191,7 +192,8 @@ s = await jpost('/api/sync', { code: CODE, progress: [{ course: '1peter', unit: 
 ok(find(s.body, '1peter', 1)?.completed_at === T_EARLY, 'a later completion time does not overwrite an earlier one');
 
 // Identity is last-writer-wins; that is a deliberate difference from progress.
-s = await jpost('/api/sync', { code: CODE, student: { name: 'María Cruz', track: 'thm' } });
+// A track change is deliberate (Change track sends trackChange; #298): a plain save no longer moves it.
+s = await jpost('/api/sync', { code: CODE, student: { name: 'María Cruz', track: 'thm', trackChange: true } });
 ok(s.body.student.name === 'María Cruz' && s.body.student.track === 'thm', 'the student can correct their own details');
 ok(s.body.student.email === 'maria@example.org', 'fields the client omits are left alone, not blanked');
 
@@ -431,7 +433,7 @@ ok(d.status === 201, `but they earn the Certificate of Ministry (${d.status}: ${
 // ...and switching to the M.Div. afterwards does not turn certificate-track
 // completions into master's ones: the track a completion was earned on is
 // kept, and a completion sent with a master's track is counted there.
-await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv' }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' } });
+await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv', trackChange: true }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' } });
 let st = await jget(`/api/student/${certReg.body.code}`);
 const byCode = Object.fromEntries((st.body?.completions || []).map(c => [c.code, c]));
 ok(byCode.CTSOTS?.track === 'cert' && byCode.CTSJOHN?.track === 'mdiv',
@@ -468,7 +470,7 @@ ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'PUT' })).status === 40
 const STATE = process.env.STATE, CONFIG = process.env.CONFIG || 'test/wrangler.local.jsonc';
 let rowsOf = null;
 if (STATE) {
-  const { execFileSync } = await import('node:child_process');
+  const { execFileSync } = await import('./lib/d1-exec.mjs');
   const q = (command) => JSON.parse((s => s.slice(s.indexOf('[')))(execFileSync('npx',
     ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE, '--config', CONFIG, '--json', '--command', command],
     { stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 64 * 1024 * 1024 }).toString()))[0].results;
@@ -482,6 +484,7 @@ if (STATE) {
       appeals: count(`SELECT 1 FROM appeals WHERE student_id = '${id}'`),
       calibration: count(`SELECT 1 FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
       grade_queue: count(`SELECT 1 FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
+      assignments: count(`SELECT 1 FROM assignments WHERE student_id = '${id}'`),
     };
     await new Promise((r) => setTimeout(r, 500));
     return out;
@@ -499,10 +502,14 @@ if (STATE) {
   ok((await live('/api/appeal', { code: CODE, gradeId, note: 'please look again' })).status === 200, 'and ask for one to be reviewed');
   await new Promise((r) => setTimeout(r, 500));
   q(`INSERT INTO calibration (grade_id, marked_by, human_verdict, marked_at, week) VALUES (${Number(gradeId)}, 'deletion-test@example.test', 'met', '2026-01-01T00:00:00Z', '2026-W01')`);
+  // A ministry paper (worker/assignments.js), the student's own text: Delete My Record removes it too.
+  const paper = await live('/api/assignment', { code: CODE, slug: 'otspaper', format: 'study', topic: 'story', lang: 'en',
+    body: 'In my own church the story of Ruth shows the loyal love of God and the line of David that leads to Christ. '.repeat(55) + ' [[paper-revise]]' });
+  ok(paper.status === 201 && paper.body?.assignment?.status === 'revise', 'and submit a ministry paper', JSON.stringify(paper));
   await new Promise((r) => setTimeout(r, 500));
   const before = await rowsOf(CODE);
-  ok(before.attempts >= 1 && before.answer_grades === 3 && before.appeals === 1 && before.calibration === 1 && before.grade_queue >= 1,
-    'the record holds attempts, answers, an appeal, a calibration mark and a queued answer', JSON.stringify(before));
+  ok(before.attempts >= 1 && before.answer_grades === 3 && before.appeals === 1 && before.calibration === 1 && before.grade_queue >= 1 && before.assignments === 1,
+    'the record holds attempts, answers, an appeal, a calibration mark, a queued answer and a paper', JSON.stringify(before));
 }
 
 const del = await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' });
@@ -513,7 +520,7 @@ ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' })).status ===
   'deleting twice is a 404, not an error');
 if (rowsOf) {
   const after = await rowsOf(CODE);
-  ok(Object.values(after).every((n) => n === 0), 'deleting the record deletes their attempts, written answers, appeals, calibration marks and queued answers', JSON.stringify(after));
+  ok(Object.values(after).every((n) => n === 0), 'deleting the record deletes their attempts, written answers, appeals, calibration marks, queued answers and papers', JSON.stringify(after));
 }
 
 /* -------------------------------------------------------------------------- */

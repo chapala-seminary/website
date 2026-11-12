@@ -9,7 +9,7 @@
  * before it change which twenty it is shown. Every name here is made up.
  */
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { singleSections } from '../tools/single-pages-lib.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
@@ -41,7 +41,8 @@ const start = (code, scope) => post('/api/attempt', { code, scope, lang: 'en' })
 const submit = (code, a) => post(`/api/attempt/${a.attemptId}/submit`, { code });
 
 {
-  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const bank = textbookQuestions('.', 'cults').questions;
   const passTextbook = async (code) => {
     const a = (await start(code, 'tb:cults')).body;
     for (let i = 0; i < 20; i += 10)
@@ -103,7 +104,8 @@ const seedLive = (code, rows) => db(
   // through the API, then units 9 and 10 answered and both submitted at the same moment.
   const code = await student('thm');
   seedLive(code, Array.from({ length: 8 }, (_, i) => [`u:CTSCults/${i + 1}`, 'cults', i + 1]));
-  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const { textbookQuestions } = await import('../tools/grading-keys-lib.mjs');
+  const bank = textbookQuestions('.', 'cults').questions;
   const tb = (await start(code, 'tb:cults')).body;
   for (let i = 0; i < 20; i += 10)
     await post('/api/grade', { code, attemptId: tb.attemptId, items: tb.items.fill.slice(i, i + 10).map((qid) => ({ qid, answer: bank[idx(qid)].answer.en })) });
@@ -134,6 +136,52 @@ const seedLive = (code, rows) => db(
   const cert = await post('/api/certificate', { code, level: 'course', course: 'ETHICS', title: 'x' });
   ok(cert.status === 201 && / — Master of Theology$/.test(q1(`SELECT title FROM certificates WHERE verify_code = '${cert.body?.verifyCode}'`)[0]?.title || ''),
     'single-page: and its certificate is a Master of Theology award', cert);
+}
+
+
+/* ---- An Associate-earned Hermeneutics course never becomes an M.Div. award
+ * by changing enrollment, even if a legacy certificate page supplies the
+ * misleading M.Div. title. Synthetic local D1 rows, never real student data.
+ * This isolates the server credential boundary; separate frontend test
+ * checks that the printed HTML no longer mislabels current enrollment.
+ */
+{
+  const code = await student('cert');
+  db("UPDATE students SET track = 'mdiv', email_verified_at = '2026-10-01T00:00:00Z' WHERE id = '" + code + "'");
+  db("INSERT INTO course_completions (student_id, code, track, completed_at, source) VALUES ('"
+    + code + "', 'CTSHERMENEUTICS', 'assoc', '2026-10-01T00:00:00Z', 'server')");
+  db("INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES "
+    + Array.from({ length: 11 }, (_, i) => "('"
+      + code + "', 'hermeneutics', " + (i + 1) + ", '2026-10-01T00:00:00Z', 'server')").join(", "));
+  const req = { code, level: 'course', course: 'CTSHERMENEUTICS',
+    title: 'Hermeneutics — Master of Divinity' };
+  const first = await post('/api/certificate', req);
+  eq(first.status, 201, 'Associate-earned Hermeneutics is eligible for its actual course certificate');
+  ok(!!first.body?.verifyCode, 'Associate course certificate has server verification code', first);
+  if (first.body?.verifyCode) {
+    const records = q1("SELECT title, level, course FROM certificates WHERE verify_code = '"
+      + first.body.verifyCode + "'");
+    eq(records.length, 1, 'one verified Hermeneutics certificate exists');
+    eq(records[0]?.title, 'Hermeneutics — Associate of Divinity',
+      'the server records earned Associate level, ignoring the misleading M.Div page title');
+    eq(records[0]?.level, 'course', 'a course certificate is not an M.Div. degree');
+    const second = await post('/api/certificate', req);
+    eq([second.status, second.body?.verifyCode, second.body?.reissued],
+      [200, first.body.verifyCode, true],
+      'repeated claim reissues the same verified certificate rather than duplicating');
+    eq(q1("SELECT COUNT(*) AS n FROM certificates WHERE student_id = '" + code
+      + "' AND course = 'hermeneutics'")[0]?.n, 1,
+      'only one durable Hermeneutics certificate row');
+  }
+  eq(q1("SELECT track FROM course_completions WHERE student_id = '" + code
+    + "' AND code = 'CTSHERMENEUTICS'")[0]?.track, 'assoc',
+    'the course remains Associate-earned after M.Div. enrollment and certificate claim');
+
+  const degree = q1("SELECT courses_done, masters_done, mdiv_core_done FROM degree_progress WHERE student_id = '"
+    + code + "'")[0];
+  eq([degree?.courses_done, degree?.masters_done, degree?.mdiv_core_done], [1, 0, 0],
+    'an Associate Hermeneutics completion is retained but NOT counted toward M.Div degree progress');
+
 }
 
 console.log(`${checks} earned-level assertions against a live Worker and D1`);

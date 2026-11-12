@@ -15,6 +15,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const DIR = 'docs/readers/world-religions/es';
 const WRITE = process.argv.includes('--write');
@@ -132,8 +133,11 @@ for (const r of READERS) {
 
 /* Every Spanish answer of the revised bank, or one of its alternates, is in
    the reader of the question's reading. */
-const bank = JSON.parse(fs.readFileSync('src/data/readings/wrreadings.v2.bank.json', 'utf8'));
-const accept = JSON.parse(fs.readFileSync('src/data/readings/wrreadings.v2.accept.json', 'utf8'));
+/* The bank is private (docs/answer-exposure-audit.md): assessment-keys/readings-src. */
+const KEYS = resolveKeysRoot('.');
+if (!KEYS || !fs.existsSync(path.join(KEYS, 'readings-src', 'wrreadings.v2.bank.json'))) { console.error('wr-readers: the revised bank is in assessment-keys/readings-src; set ASSESSMENT_KEYS or place ../assessment-keys beside this repo'); process.exit(2); }
+const bank = JSON.parse(fs.readFileSync(path.join(KEYS, 'readings-src', 'wrreadings.v2.bank.json'), 'utf8'));
+const accept = JSON.parse(fs.readFileSync(path.join(KEYS, 'readings-src', 'wrreadings.v2.accept.json'), 'utf8'));
 let supported = 0, unread = 0;
 for (const q of bank.questions) {
   const t = ' ' + texts[q.reading] + ' ';

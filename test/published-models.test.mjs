@@ -9,10 +9,11 @@ for (const course of fs.readdirSync('src/content/lessons')) {
     units.push(JSON.parse(fs.readFileSync(`src/content/units/${course}/${file}`, 'utf8')));
   }
 }
-assert.equal(units.length, 466);
+assert.equal(units.length, 678);  // 466 + 200 denominational elective units (24 Oct 2026) + 12 Islam (7 Nov 2026)
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const page = await browser.newPage();
+  await page.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await page.setContent('<html lang="fr"><body data-lang="fr" class="lang-fr"><div id="questionsContainer"></div><div id="kwContainer"></div><button id="submitExamBtn"></button><div id="examResult"></div></body></html>');
   await page.evaluate(() => {
     Object.defineProperty(document, 'readyState', { configurable: true, get: () => 'loading' });
@@ -50,5 +51,5 @@ try {
     return { count, failures };
   }, units);
   assert.deepEqual(result.failures, []);
-  console.log(`PASS — ${result.count} published model/source grading checks across 466 units.`);
+  console.log(`PASS — ${result.count} published model/source grading checks across ${units.length} units.`);
 } finally { await browser.close(); }

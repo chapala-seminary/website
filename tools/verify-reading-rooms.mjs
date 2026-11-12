@@ -30,6 +30,7 @@ const want = (key) => { const r = DATA[key]; return r.entries.length + (r.panels
 
 async function open(file, seed = {}) {
   const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));
@@ -40,8 +41,10 @@ async function open(file, seed = {}) {
   return { ctx, p, errs };
 }
 
-// 1. the second family: World Religions (data-pick boxes), Counseling (plain boxes), Genesis (minified)
-for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religions'], ['CTSCounselingReadings.html', 'Counseling', 'Counseling'], ['CTSGenesisReadings.html', 'Genesis', 'Genesis Intensive']]) {
+// 1. the second family: World Religions (data-pick boxes), Counseling (plain boxes), Genesis (minified),
+//    and an elective room (tools/build-elective-readings.mjs, on the Worship room's markup)
+for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religions'], ['CTSCounselingReadings.html', 'Counseling', 'Counseling'], ['CTSGenesisReadings.html', 'Genesis', 'Genesis Intensive'],
+  ['CTSElecWes3Readings.html', 'ElecWes3', 'Holiness, Sanctification, and Christian Perfection']]) {
   const { ctx, p, errs } = await open(file);
   const key = file.replace(/\.html$/, '');
   const boxes = p.locator('main article input[type=checkbox]');

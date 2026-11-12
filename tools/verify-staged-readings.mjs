@@ -13,9 +13,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
 
 const DIR = 'src/data/readings/staged';
 const m = JSON.parse(fs.readFileSync(path.join(DIR, 'academic_manifest.json'), 'utf8'));
+/* The banks themselves are private (docs/answer-exposure-audit.md):
+   assessment-keys/readings-src/staged. The manifest stays here. */
+const KEYS = resolveKeysRoot('.');
+const BANKS = KEYS && path.join(KEYS, 'readings-src', 'staged');
+if (!BANKS || !fs.existsSync(BANKS)) { console.error('verify-staged-readings: the staged banks are in assessment-keys/readings-src/staged; set ASSESSMENT_KEYS or place ../assessment-keys beside this repo'); process.exit(2); }
 const problems = [];
 const bad = (s) => problems.push(s);
 const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
@@ -27,15 +33,19 @@ if (m.requiredFrom !== null || m.never_auto_import !== true) bad('manifest: requ
 let total = 0, missingAlt = 0;
 for (const c of m.courses) {
   const tag = `${c.course} (${c.slug})`;
-  const raw = fs.readFileSync(path.join(DIR, `${c.slug}.bank.json`));
-  const accRaw = fs.readFileSync(path.join(DIR, `${c.slug}.accept.json`));
+  const raw = fs.readFileSync(path.join(BANKS, `${c.slug}.bank.json`));
+  const accRaw = fs.readFileSync(path.join(BANKS, `${c.slug}.accept.json`));
   if (crypto.createHash('sha256').update(raw).digest('hex') !== c.bank_sha256) bad(`${tag}: bank differs from the delivered file`);
   if (crypto.createHash('sha256').update(accRaw).digest('hex') !== c.accept_sha256) bad(`${tag}: accept file differs from the delivered file`);
   if (c.requiredFrom !== null || c.academic_status !== 'DRAFT_NEEDS_FACULTY_REVIEW' || c.deployment_status !== 'STAGING_ONLY') bad(`${tag}: not marked inactive draft staging`);
   // Installed 10 Oct 2026 at Dr. Cook's request -- open to all, required of
   // no one: an installed test must still carry requiredFrom null.
   const inst = path.join('src/content/readings', `${c.slug}.json`);
-  if (fs.existsSync(inst) && JSON.parse(fs.readFileSync(inst, 'utf8')).requiredFrom !== null) bad(`${tag}: installed with a requiredFrom date; it must stay null until faculty approve`);
+  // Dr. Cook, 26 Oct 2026: these banks have long been reviewed; an installed
+  // test may now carry the requiredFrom date recorded in required-from.json.
+  const sched = JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8'));
+  const rf = fs.existsSync(inst) ? JSON.parse(fs.readFileSync(inst, 'utf8')).requiredFrom : null;
+  if (rf !== null && rf !== sched[c.slug]) bad(`${tag}: installed requiredFrom ${rf} does not match src/data/required-from.json`);
   const bank = JSON.parse(raw), acc = JSON.parse(accRaw), qs = bank.questions;
   const f = bank.format || {};
   if (qs.length !== 40 || f.questions_per_attempt !== 20 || f.questions_drawn_per_reading !== 4 || f.passing_score !== 18) bad(`${tag}: not 40 questions / 20 drawn / 4 per reading / 18 to pass`);

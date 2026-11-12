@@ -15,20 +15,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { readerEditorialNotice } from './editorial-notices.mjs';
+import { resolveKeysRoot } from './grading-keys-lib.mjs';
+/* The staged banks are private (docs/answer-exposure-audit.md): assessment-keys/textbooks-src/staged. */
+const STAGED = path.join(resolveKeysRoot('.') || '../assessment-keys', 'textbooks-src', 'staged');
 
 const WRITE = process.argv.includes('--write'), STRICT = process.argv.includes('--strict');
 const BOOKS = [
   { key: 'joshua', title: 'El libro de Josué', series: 'The Expositor’s Bible', author: 'William Garden Blaikie', year: '1893', gutenberg: 42319,
     english: 'CTSJoshua_Blaikie_English.html', out: 'public/textbooks/CTSJoshua_Blaikie_Spanish.html', room: 'CTSJoshReadings.html',
-    bank: 'src/data/textbooks/staged/joshua-blaikie.bank.v4-balanced.json',
+    bank: path.join(STAGED, 'joshua-blaikie.bank.v4-balanced.json'),
     groups: [['I', 'II', 'III'], ['X', 'XI'], ['XVIII', 'XIX', 'XX'], ['XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI'], ['XXX', 'XXXI', 'XXXII', 'XXXIII']] },
   { key: 'galatians', title: 'La epístola a los Gálatas', series: 'The Expositor’s Bible', author: 'George G. Findlay', year: '1888', gutenberg: 42645,
     english: 'CTSGalatians_Findlay_English.html', out: 'public/textbooks/CTSGalatians_Findlay_Spanish.html', room: 'CTSGalatiansReadings.html',
-    bank: 'src/data/textbooks/staged/galatians-findlay.bank.v2-balanced.json',
+    bank: path.join(STAGED, 'galatians-findlay.bank.v2-balanced.json'),
     groups: [['IV'], ['X'], ['XIV', 'XVI'], ['XXII', 'XXV'], ['XXVI', 'XXVII']] },
   { key: 'romans', title: 'La epístola de san Pablo a los Romanos', series: 'The Expositor’s Bible', author: 'Handley C. G. Moule', year: '1894', gutenberg: 48858,
     english: 'CTSRomans_Moule_English.html', out: 'public/textbooks/CTSRomans_Moule_Spanish.html', room: 'CTSRomansReadings.html',
-    bank: 'src/data/textbooks/staged/romans-moule.bank.v3-balanced.json',
+    bank: path.join(STAGED, 'romans-moule.bank.v3-balanced.json'),
     groups: [['III', 'VIII'], ['IX', 'XII'], ['XIV', 'XVII'], ['XX', 'XXIV'], ['XXV', 'XXIX']] },
 ];
 

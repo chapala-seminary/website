@@ -27,8 +27,9 @@
  * Every name and answer is made up for the test.
  */
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { chromium } from 'playwright';
+import { textbookQuestions } from '../tools/grading-keys-lib.mjs';
 
 const BASE = process.argv[2] || process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
@@ -51,7 +52,10 @@ function db(command) {
 const q1 = (command) => db(command)[0];
 const cron = async () => (await fetch(`${BASE}/__scheduled?cron=*%2F15+*+*+*+*`)).status;
 const unitBank = (prefix, n) => JSON.parse(fs.readFileSync(`src/content/units/${prefix}/${n}.json`, 'utf8'));
-const tbBank = (slug) => JSON.parse(fs.readFileSync(`src/content/textbooks/${slug}.json`, 'utf8'));
+const tbBank = (slug) => {
+  const { book, questions } = textbookQuestions('.', slug);
+  return { ...book, test: { ...book.test, questions } };
+};
 const RUN = Date.now().toString(36);
 
 /* ---- a student's browser ---------------------------------------------------- */
@@ -59,6 +63,7 @@ const RUN = Date.now().toString(36);
 const sent = [];
 async function device({ student, code } = {}) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
   await ctx.route('**/*', (r) => (new URL(r.request().url()).origin === ORIGIN ? r.fallback() : r.abort()));
   ctx.on('request', (req) => {
     const u = new URL(req.url());
@@ -95,16 +100,26 @@ async function mcAll(p, bank, wrong = 0) {
   for (let i = 0; i < bank.mc.length; i++) {
     const j = i < wrong ? (bank.mc[i].answer + 1) % bank.mc[i].options.en.length : bank.mc[i].answer;
     await p.locator(`button.option[data-mc="${i}"][data-opt="${j}"]`).click();
-    await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text`, { timeout: 15000 });
+    // Wait for Correct/Incorrect only — the live engine also paints a temporary
+    // .feedback-text "Checking…" while the request is in flight. Treating that
+    // as done lets later clicks race with late re-renders and starves fill-ins.
+    await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text.correct, .question[data-mc="${i}"] .feedback-text.incorrect`, { timeout: 30000 });
   }
 }
 async function fillOne(p, i, text) {
-  await p.locator(`input[data-fill="${i}"]`).fill(text);
   // The live engine replaces the question DOM as server replies arrive.
   // Click re-resolves the Check control instead of depending on retained focus
   // between fill() and a keyboard event. Enter is covered by grading-ui.
-  await p.locator(`button[data-fill-check="${i}"]`).click();
-  await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`, { timeout: 30000 });
+  // Retry once if a late MC re-render cleared the field before Check ran.
+  const done = `.question[data-fill="${i}"] .feedback-text.correct, .question[data-fill="${i}"] .feedback-text.incorrect`;
+  for (let tryN = 0; tryN < 2; tryN++) {
+    await p.waitForSelector(`button[data-fill-check="${i}"]`, { timeout: 15000 });
+    await p.locator(`input[data-fill="${i}"]`).fill(text);
+    await p.locator(`button[data-fill-check="${i}"]`).click();
+    const okFb = await p.waitForSelector(done, { timeout: 30000 }).then(() => true, () => false);
+    if (okFb) return;
+  }
+  await p.waitForSelector(done, { timeout: 1 });
 }
 async function fillAll(p, bank, { from = 0, special = {} } = {}) {
   for (let i = from; i < bank.fill.length; i++) await fillOne(p, i, special[i] ?? bank.fill[i].answer.en);
@@ -361,8 +376,14 @@ ok(await m.locator('textarea[data-sa="0"]').getAttribute('readonly') !== null &&
 ok(await m.locator('textarea[data-sa="0"]').inputValue().then((v) => v.includes('My own considered explanation')), "and shows the student's own words, from the server");
 ok(await m.locator('textarea[data-sa="5"]').getAttribute('readonly') === null, 'one that did not is open to rewrite');
 
-// retake: fill-ins again; three better answers, one the model cannot take just now, one still short
-await fillAll(m, john1);
+// retake: the fill-ins answered right are kept (since 7 Nov 2026; before then they were asked again,
+// and a student who resubmitted only his short answers failed); three better answers, one the
+// model cannot take just now, one still short
+await m.waitForSelector('.question[data-fill="0"] .feedback-text.correct', { timeout: 20000 });
+ok(await has(m, '.question[data-fill="0"] .feedback-text', 'Kept from your earlier attempt')
+  && await m.locator('button[data-fill-check="0"]').count() === 0
+  && (await m.locator('input[data-fill="0"]').inputValue()).trim().length > 0,
+  'a fill-in answered right is kept on the retake, with its answer and no Check button');
 const hints2 = { 5: '[[met]]', 6: '[[met]]', 7: '[[met]]', 8: '[[error]] [[met]]', 9: '[[not_met]]' };
 for (const i of [5, 6, 7, 8, 9]) await m.locator(`textarea[data-sa="${i}"]`).fill(essay(hints2[i]));
 await m.locator('#submitExamBtn').click();

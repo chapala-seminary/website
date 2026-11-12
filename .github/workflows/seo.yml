@@ -16,6 +16,26 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      # Public textbook JSON omits answer/accept; the exam-review build step
+      # reads them from chapala-seminary/assessment-keys.
+      - name: Checkout private assessment keys
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: chapala-seminary/assessment-keys
+          ref: main
+          path: .assessment-keys
+          token: ${{ secrets.ASSESSMENT_KEYS_TOKEN }}
+          fetch-depth: 1
+      - name: Use private assessment keys when the checkout is present
+        run: |
+          if [ -d .assessment-keys/textbooks ]; then
+            echo "ASSESSMENT_KEYS=${GITHUB_WORKSPACE}/.assessment-keys" >> "$GITHUB_ENV"
+            echo "Private assessment-keys checkout ready at .assessment-keys"
+          else
+            echo "No private assessment-keys checkout; exam-review needs ASSESSMENT_KEYS_TOKEN."
+            exit 1
+          fi
       - run: npm run build
       - name: robots, sitemap, hreflang, llms, JSON-LD, links, HTML
         run: |

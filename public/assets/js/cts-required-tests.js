@@ -72,7 +72,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "wisespeakreadings",
    "page": "CTSPreachingReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "ETHICS": [
@@ -100,7 +100,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "chreadings",
    "page": "CTSCHReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSWR": [
@@ -179,7 +179,287 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "streadings",
    "page": "CTSSTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECBAP5": [
+  {
+   "slug": "elecbapfive",
+   "page": "CTSTextbookElecBapFive",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecbapfivereadings",
+   "page": "CTSElecBap5Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECBAP4": [
+  {
+   "slug": "elecbapfour",
+   "page": "CTSTextbookElecBapFour",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecbapfourreadings",
+   "page": "CTSElecBap4Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECBAP1": [
+  {
+   "slug": "elecbapone",
+   "page": "CTSTextbookElecBapOne",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecbaponereadings",
+   "page": "CTSElecBap1Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECBAP3": [
+  {
+   "slug": "elecbapthree",
+   "page": "CTSTextbookElecBapThree",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecbapthreereadings",
+   "page": "CTSElecBap3Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECBAP2": [
+  {
+   "slug": "elecbaptwo",
+   "page": "CTSTextbookElecBapTwo",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecbaptworeadings",
+   "page": "CTSElecBap2Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECPC5": [
+  {
+   "slug": "elecpcfive",
+   "page": "CTSTextbookElecPCFive",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  },
+  {
+   "slug": "elecpcfivereadings",
+   "page": "CTSElecPC5Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  }
+ ],
+ "CTSELECPC4": [
+  {
+   "slug": "elecpcfour",
+   "page": "CTSTextbookElecPCFour",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecpcfourreadings",
+   "page": "CTSElecPC4Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECPC1": [
+  {
+   "slug": "elecpcone",
+   "page": "CTSTextbookElecPCOne",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  },
+  {
+   "slug": "elecpconereadings",
+   "page": "CTSElecPC1Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  }
+ ],
+ "CTSELECPC3": [
+  {
+   "slug": "elecpcthree",
+   "page": "CTSTextbookElecPCThree",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  },
+  {
+   "slug": "elecpcthreereadings",
+   "page": "CTSElecPC3Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  }
+ ],
+ "CTSELECPC2": [
+  {
+   "slug": "elecpctwo",
+   "page": "CTSTextbookElecPCTwo",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  },
+  {
+   "slug": "elecpctworeadings",
+   "page": "CTSElecPC2Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-29T06:00:00Z"
+  }
+ ],
+ "CTSELECREF5": [
+  {
+   "slug": "elecreffive",
+   "page": "CTSTextbookElecRefFive",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecreffivereadings",
+   "page": "CTSElecRef5Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECREF4": [
+  {
+   "slug": "elecreffour",
+   "page": "CTSTextbookElecRefFour",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecreffourreadings",
+   "page": "CTSElecRef4Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECREF1": [
+  {
+   "slug": "elecrefone",
+   "page": "CTSTextbookElecRefOne",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecrefonereadings",
+   "page": "CTSElecRef1Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECREF3": [
+  {
+   "slug": "elecrefthree",
+   "page": "CTSTextbookElecRefThree",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecrefthreereadings",
+   "page": "CTSElecRef3Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECREF2": [
+  {
+   "slug": "elecreftwo",
+   "page": "CTSTextbookElecRefTwo",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecreftworeadings",
+   "page": "CTSElecRef2Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECWES5": [
+  {
+   "slug": "elecwesfive",
+   "page": "CTSTextbookElecWesFive",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecwesfivereadings",
+   "page": "CTSElecWes5Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECWES4": [
+  {
+   "slug": "elecwesfour",
+   "page": "CTSTextbookElecWesFour",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecwesfourreadings",
+   "page": "CTSElecWes4Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECWES1": [
+  {
+   "slug": "elecwesone",
+   "page": "CTSTextbookElecWesOne",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecwesonereadings",
+   "page": "CTSElecWes1Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECWES3": [
+  {
+   "slug": "elecwesthree",
+   "page": "CTSTextbookElecWesThree",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecwesthreereadings",
+   "page": "CTSElecWes3Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  }
+ ],
+ "CTSELECWES2": [
+  {
+   "slug": "elecwestwo",
+   "page": "CTSTextbookElecWesTwo",
+   "kind": "textbook",
+   "requiredFrom": "2026-10-28T06:00:00Z"
+  },
+  {
+   "slug": "elecwestworeadings",
+   "page": "CTSElecWes2Readings",
+   "kind": "reading",
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSEVANGELISM": [
@@ -193,7 +473,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "evangelismreadings",
    "page": "CTSEvangelismReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTS1PETER": [
@@ -261,6 +541,20 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "hsreadings",
    "page": "CTSHSReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSISLAM": [
+  {
+   "slug": "islamtext",
+   "page": "CTSTextbookIslam",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "islamreadings",
+   "page": "CTSIslamReadings",
    "kind": "reading",
    "requiredFrom": null
   }
@@ -386,7 +680,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "ntreadings",
    "page": "CTSNTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSOTS": [
@@ -400,7 +694,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "otsreadings",
    "page": "CTSOTSReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSPARABLES": [
@@ -428,7 +722,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSAL": [
@@ -566,7 +860,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "hermeneuticsreadings",
    "page": "CTSHermeneuticsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-28T06:00:00Z"
   }
  ],
  "CTSCE": [

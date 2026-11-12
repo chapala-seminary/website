@@ -98,14 +98,16 @@ const RENAMED = [
    character. [course file, the course file whose card it follows] */
 const ADDED = [
   ["CTSParables", "CTSBibleCharacters2"],          // 3 Oct 2026, the 45th course
+  ["CTSIslam", "CTSWR"],                            // 7 Nov 2026, the 66th course
 ];
 /* The lead spells the course count out in words; the reference says forty-four. */
 const COUNT = [
-  ["Forty-four courses", "Forty-five courses"],
-  ["Cuarenta y cuatro cursos", "Cuarenta y cinco cursos"],
+  ["Forty-four courses", "Sixty-six courses"],  // 45 on 3 Oct, 65 on 24 Oct, 66 on 7 Nov 2026
+  ["Cuarenta y cuatro cursos", "Sesenta y seis cursos"],
   /* 13 Oct 2026: the site is in three languages, so the lead no longer says "bilingual". */
-  ["each complete and bilingual.", "each complete, in English, Spanish, and French."],
-  ["cada uno completo y bilingüe.", "cada uno completo, en inglés, español y francés."],
+  /* 3 Nov 2026: English and Spanish, with French and Swahili translations still being reviewed. */
+  ["each complete and bilingual.", "each complete, in English and Spanish, with French and Swahili translations being reviewed."],
+  ["cada uno completo y bilingüe.", "cada uno completo, en inglés y español, con traducciones al francés y al suajili en revisión."],
 ];
 
 const [origFile = REF, builtFile = 'dist/index.html'] = process.argv.slice(2);
@@ -122,6 +124,23 @@ for (const [was, is] of COUNT) {
   o = o.replace(was, is);
 }
 let b = norm(catalog(builtFile));
+/* The redesigned front page (issue #186) adds to the catalog without changing
+   a card: the seven foundation courses shown first (a.fcard, checked here and
+   then set aside), two short sub-headings, and each group folded in a
+   <details> whose <summary> holds the group's heading and a course count.
+   Those are taken away so the cards and headings are still compared
+   character for character with the hand-written catalog. */
+{
+  const first = /<div class="foundation-first">[\s\S]*?<\/a><\/div><\/div>/.exec(b);
+  const fcards = first ? (first[0].match(/<a class="fcard" href="[^"]+"/g) || []).length : 0;
+  if (fcards !== 7) { console.log(`FAIL — the built catalog shows ${fcards} foundation courses first, not 7`); process.exit(1); }
+  b = b.replace(first[0], '');
+  b = b.replace(/<div class="catsub">[\s\S]*?<\/p><\/div>/g, '');
+  b = b.replace(/<details class="catfold"[^>]*><summary>(<h3>[\s\S]*?<\/h3>)<span class="catcount">\d+<\/span><\/summary>/g, '$1');
+  b = b.replace(/<\/div><\/details><\/div>/g, '</div></div>');
+  if (/<details|<summary|fcard|catsub/.test(b)) { console.log('FAIL — the catalog has redesign markup this check does not know how to set aside'); process.exit(1); }
+  console.log('redesign set aside: 7 foundation courses first, folded groups');
+}
 for (const [key, after] of ADDED) {
   const entry = JSON.parse(fs.readFileSync(`src/content/courses/${key}.json`, 'utf8')).entry;
   const prev = JSON.parse(fs.readFileSync(`src/content/courses/${after}.json`, 'utf8')).entry;
@@ -133,6 +152,32 @@ for (const [key, after] of ADDED) {
   }
   b = b.split(card[0]).join('');
   console.log(`added course set aside: ${key}, after ${after}`);
+}
+
+/* Whole catalog groups added since (src/data/catalog-groups.json), each set
+   aside as one block after checking it holds exactly the cards of its courses,
+   in order. 24 Oct 2026: the twenty denominational electives, four groups of
+   five, after the last original group. */
+const ADDED_GROUPS = [
+  'pentecostal-charismatic-electives', 'baptist-electives', 'wesleyan-electives', 'reformed-electives',
+];
+{
+  const groups = JSON.parse(fs.readFileSync('src/data/catalog-groups.json', 'utf8'));
+  const cards = fs.readdirSync('src/content/courses').map(f => JSON.parse(fs.readFileSync(`src/content/courses/${f}`, 'utf8')));
+  for (const id of ADDED_GROUPS) {
+    const g = groups.find(x => x.id === id);
+    if (!g) { console.log(`FAIL — catalog group ${id} is not in src/data/catalog-groups.json`); process.exit(1); }
+    const head = norm(`<div class="catgroup"><h3><span class="en">${g.title.en}</span>`);
+    const at = b.indexOf(head);
+    if (at < 0 || b.indexOf(head, at + 1) >= 0) { console.log(`FAIL — the built catalog does not have exactly one "${g.title.en}" group`); process.exit(1); }
+    const end = b.indexOf('</div></div>', at) + '</div></div>'.length;
+    const block = b.slice(at, end);
+    const want = cards.filter(c => c.group === id).sort((x, y) => x.order - y.order).map(c => c.entry);
+    const got = [...block.matchAll(/<a class="course" href="([^"]+)"/g)].map(m => m[1]);
+    if (want.join() !== got.join()) { console.log(`FAIL — the "${g.title.en}" group shows ${got.join(', ')}; its courses are ${want.join(', ')}`); process.exit(1); }
+    b = b.slice(0, at) + b.slice(end);
+    console.log(`added group set aside: ${g.title.en} (${got.length} courses)`);
+  }
 }
 
 const count = s => (s.match(/<a class="course"/g) || []).length;

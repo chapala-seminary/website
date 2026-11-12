@@ -1,11 +1,12 @@
 # Pages by language
 
 English keeps the existing `.html` addresses. Spanish uses `/es/<same file>`;
-French uses `/fr/<same file>`. `tools/language-pages.mjs` runs last in the Astro
+French uses `/fr/<same file>`; Swahili uses `/sw/<same file>` (see
+`docs/swahili.md`). `tools/language-pages.mjs` runs last in the Astro
 build and builds each version from the same page and lesson data. Course lesson and
 question files are not duplicated or edited by this change.
 
-`English · Español · Français` chooses a URL. The separate source checkbox is
+`English · Español · Français · Kiswahili` chooses a URL. The separate source checkbox is
 named from `sourceLang`; it is absent on a page in that source language. Source
 text is beside each translated block on desktop, below it on phones, and below
 exam wording at every width. Exam options keep their original positions.
@@ -81,3 +82,14 @@ are required: the snapshot alone cannot prove the final transformation.
 The home page places its language choices at the right of the seminary-name
 header row. On narrow screens the controls wrap within that row. Unit-page
 choices remain in their course navigation bar.
+
+## Languages after French
+
+The site's languages are listed once, in `src/lib/languages.mjs`. English,
+Spanish and French keep their words in the layouts as before. A later
+language (Swahili first) gets its interface words from a dictionary,
+`src/data/interface/<code>.json`, applied by `tools/language-dictionary.mjs`
+while its pages are built, and in the browser by `/assets/js/cts-ui-<code>.js`.
+Its pages carry the same hreflang links (now four), are `noindex` until
+reviewed, and are left out of the sitemap. Course text comes from the lesson
+and question files as for French. See `docs/swahili.md`.

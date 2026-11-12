@@ -7,11 +7,20 @@ import vm from 'node:vm';
 import { parse } from 'node-html-parser';
 import { chromium } from 'playwright';
 import { leafKey, loadStore } from '../tools/french-readings-lib.mjs';
+import { textbookQuestions, readingQuestions } from '../tools/grading-keys-lib.mjs';
 const base = process.argv[2] || 'http://127.0.0.1:8798';
 const langs = ['en','es','fr'];
 let checks=0, passages=0;
 const ok=(value,message)=>{assert.ok(value,message);checks++;};
-const books=['textbooks','readings'].flatMap(kind=>fs.readdirSync(`src/content/${kind}`).filter(f=>f.endsWith('.json')).map(f=>JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`))));
+/* Textbook answer/accept live in assessment-keys; public JSON has prompts only. */
+const books=['textbooks','readings'].flatMap(kind=>fs.readdirSync(`src/content/${kind}`).filter(f=>f.endsWith('.json')).map(f=>{
+  const bank=JSON.parse(fs.readFileSync(`src/content/${kind}/${f}`,'utf8'));
+  // a private reading bank (keys: "private") takes its keys from assessment-keys; a public one is as it is
+  if(kind!=='textbooks') return {...bank, test:{...bank.test, questions:readingQuestions('.', bank).questions}};
+  const {questions:keyed}=textbookQuestions('.', bank.slug);
+  const questions=bank.test.questions.map((q,i)=>({...q, answer:keyed[i]?.answer, ...(keyed[i]?.accept?{accept:keyed[i].accept}:{})}));
+  return {...bank, test:{...bank.test, questions}};
+}));
 const documents=new Map(), plainDocuments=new Map();
 const documentFor=file=>{if(!documents.has(file)) documents.set(file,parse(fs.readFileSync(`dist/${file}`,'utf8')));return documents.get(file);};
 const normal=s=>s.replace(/\s+/g,' ').trim();
@@ -94,6 +103,7 @@ const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:proc
 try {
   for(const slug of ['doctrines','streadings','joshua','wrreadings']) for(const lang of langs) {
     const bank=books.find(b=>b.slug===slug),ctx=await browser.newContext();
+    await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await ctx.route('**/*',r=>new URL(r.request().url()).origin===new URL(base).origin?r.continue():r.abort());
     const page=await ctx.newPage();
     await page.clock.install();
@@ -124,6 +134,7 @@ try {
   // Reported routes, storage preferences, native language links and tablet/phone layouts.
   for(const width of [360,800]) for(const stored of langs) {
     const ctx=await browser.newContext({viewport:{width,height:1000},isMobile:true,hasTouch:true});
+    await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_pledge_all', '1'); } catch (e) {} }); // exam pledge (cts-integrity.js)
     await ctx.route('**/*',r=>new URL(r.request().url()).origin===new URL(base).origin?r.continue():r.abort());
     await ctx.addInitScript(value=>{if(!sessionStorage.getItem('seeded')){localStorage.setItem('cts_lang',value);sessionStorage.setItem('seeded','1');}},stored);
     const page=await ctx.newPage();

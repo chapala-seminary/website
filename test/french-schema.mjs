@@ -34,7 +34,10 @@ const book=JSON.parse(fs.readFileSync('src/content/textbooks/cults.json'));
 book.body.fr=book.body.en;book.tr={body:{fr:{status:'machine',from:'0123456789ab'}}};
 assert.equal(collections.textbooks.schema.parse(book).body.fr,book.body.en);checks++;
 book.tr.body.fr.status='guessed';assert.ok(!collections.textbooks.schema.safeParse(book).success);checks++;
+// every reading bank's keys are private (docs/answer-exposure-audit.md): join them, as a bank that holds its answers
+const { readingQuestions } = await import('../tools/grading-keys-lib.mjs');
 const reading=JSON.parse(fs.readFileSync('src/content/readings/genesisreadings.json'));
+reading.test.questions=readingQuestions('.',reading).questions;delete reading.keys;
 const rq=reading.test.questions[0];rq.prompt.fr='Sans blanc';rq.answer.fr='x';rq.accept.fr=[];
 assert.ok(!collections.readings.schema.safeParse(reading).success);checks++;
 rq.prompt.fr='Un ____.';assert.ok(collections.readings.schema.safeParse(reading).success);checks++;

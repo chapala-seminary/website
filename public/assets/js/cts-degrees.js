@@ -65,11 +65,33 @@
      the lists is a completion (the old certificate pages sometimes wrote the
      master's list and not the general one); the later list wins, since the
      lists run from lowest level to highest. */
+  /* One code per course, as the Worker counts (worker/awards.js canonicalCode).
+     Old certificate pages stored the certificate file's name beside the code
+     (CTSOTSCERTIFICATE beside CTSOTS), so a student's page counted 14 courses
+     where the seminary's record had 8 (29 Oct 2026). A ...MDIVCERTIFICATE or
+     ...THMCERTIFICATE name also says the level it was earned on. */
+  var ALIASES = { CTSCOUNSELING: "COUNSELING", CTSNARRATIVEPREACHING: "STORYTEL", CTSPREACHING: "WISESPEAK", ETHICS_: "ETHICS" };
+  var RANK = { cert: 0, assoc: 1, thm: 2, mdiv: 3 };
+  function canonical(raw) {
+    var up = String(raw || "").trim().toUpperCase().replace(/\.HTML$/, "");
+    var m = /(MDIV|THM|MTH)CERTIFICATE$/.exec(up);
+    var named = m ? (m[1] === "MDIV" ? "mdiv" : "thm") : null;
+    up = up.replace(/(MDIV|THM|MTH)?CERTIFICATE$/, "");
+    if (ALIASES[up]) up = ALIASES[up];
+    var known = window.CTS_COURSE_NAMES;
+    if (!up || (known && !known[up])) return null;
+    return { code: up, level: named };
+  }
   function levels() {
     var out = {};
     [["cts_done_codes", "cert"], ["cts_assoc_done_codes", "assoc"],
      ["cts_thm_done_codes", "thm"], ["cts_mdiv_done_codes", "mdiv"]].forEach(function (p) {
-      list(p[0]).forEach(function (c) { out[c] = p[1]; });
+      list(p[0]).forEach(function (raw) {
+        var c = canonical(raw);
+        if (!c) return;
+        var lv = c.level && RANK[c.level] > RANK[p[1]] ? c.level : p[1];
+        if (!(c.code in out) || RANK[lv] >= RANK[out[c.code]]) out[c.code] = lv;
+      });
     });
     return out;
   }
@@ -83,6 +105,29 @@
     } catch (e) { return null; }
   }
 
+  /* A degree page counts from this browser's lists as it opens, and the
+     student's record arrives a moment later (cts-sync.js). On a phone or
+     browser the student has not used before, the page said "0 / 30, not yet
+     eligible" to a student who had finished (M.Div. walk-through, 10 Nov
+     2026). When the record changes what a page has shown, it opens again
+     once, with the record's numbers. Once per new state, so it cannot loop. */
+  var shown = {};
+  function sig(count, missing) { return count + "/" + missing; }
+  if (typeof document !== "undefined" && document.addEventListener) document.addEventListener("cts-sync-applied", function (e) {
+    // Only the student's record, not the seminary's settings, which arrive for
+    // every visitor (the reload then cut across the page's own; beta, 10 Nov).
+    if (!(e && e.detail && e.detail.record)) return;
+    var changed = Object.keys(shown).filter(function (d) {
+      var before = shown[d], now = status(d);
+      return now && sig(now.count, now.missing.length) !== before;
+    });
+    if (!changed.length) return;
+    var key = "cts_degree_refreshed:" + location.pathname;
+    var mark = changed.map(function (d) { return d + "=" + shown[d]; }).join(",");
+    try { if (sessionStorage.getItem(key) === mark) return; sessionStorage.setItem(key, mark); } catch (e) { return; }
+    location.reload();
+  });
+
   /* Where a student stands on one degree: the courses that count, the
      required ones still missing, and whether it is earned. */
   function status(degree) {
@@ -93,6 +138,7 @@
     var plan = degree === "thm" ? studyPlan() : null;
     var core = d.core.map(function (c) { return plan && plan[c] || c; });
     var missing = core.filter(function (c) { return !have[c]; });
+    shown[degree] = sig(count, missing.length);
     return {
       degree: degree, count: count, required: d.courses, have: have,
       core: core, coreDone: core.length - missing.length, missing: missing,

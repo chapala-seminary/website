@@ -137,7 +137,18 @@ const TOTAL_UNITS = 13;
 const UNIT_LABELS = ["0 · Foundation","1 · The Dying","2 · Surgery","3 · The Abused","4 · Forced Termination","5 · Conflict Resolution","6 · Depression","7 · Grief","8 · Anxiety & Fear","9 · Anger & Forgiveness","10 · Addiction","11 · General Distress","12 · When to Refer"];
 
 function loadState(){ try{ return JSON.parse(localStorage.getItem("cts_cs_state")||"{}"); }catch(e){ return {}; } }
-function loadReg(){ try{ return JSON.parse(localStorage.getItem("cts_cs_reg")||"null"); }catch(e){ return null; } }
+// The student is the shared site registration (cts_student {name, track}), as on
+// every other certificate. Nothing writes the old cts_cs_reg any more, so the name
+// printed as "—" (audit, 6 Nov 2026); it is still read first for older browsers.
+function loadReg(){
+  var r = null, s = null;
+  try{ r = JSON.parse(localStorage.getItem("cts_cs_reg")||"null"); }catch(e){}
+  try{ s = JSON.parse(localStorage.getItem("cts_student")||"null"); }catch(e){}
+  var name = (r && r.name) || (s && s.name) || "";
+  var track = (r && r.track) || (s && s.track) || "";
+  try{ track = track || localStorage.getItem("cts_track") || ""; }catch(e){}
+  return name || track ? { name: name, track: track } : null;
+}
 
 function applyLang(){ const es = localStorage.getItem("cts_lang")==="es"; document.body.classList.toggle("spanish", es); const b=document.getElementById("langToggle"); if(b) b.textContent = es ? "🇺🇸 English" : "🇪🇸 Español"; }
 document.getElementById("langToggle").addEventListener("click", function(){ const es = localStorage.getItem("cts_lang")==="es"; localStorage.setItem("cts_lang", es?"en":"es"); applyLang(); });
@@ -180,7 +191,7 @@ applyLang(); render();
   <script src="cts-track.js" defer></script>
   <script src="cts-curriculum.js?v=20260915a" defer></script>
 <script src="assets/js/cts-sync.js" defer></script>
-<script src="assets/js/cts-required-tests.js?v=8743a03159" defer></script>
+<script src="assets/js/cts-required-tests.js?v=0440e5d7e5" defer></script>
 <script src="assets/js/cts-textbook-gate.js" defer></script>
 <script src="assets/js/cts-certify.js" defer></script>
 <script src="assets/js/cts-cert-pdf.js" defer></script>

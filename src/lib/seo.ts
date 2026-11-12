@@ -160,16 +160,16 @@ export const PAGE_META: Record<string, Record<Lang, Copy>> = {
   },
   'CTSCatalog.html': {
     en: {
-      title: '45 free Bible courses | CTS',
-      description: 'Browse 45 free Bible and theology courses in English, Spanish, and French. Foundation courses, M.Div. core, and electives.',
+      title: '66 free Bible courses | CTS',
+      description: 'Browse 66 free Bible and theology courses in English, Spanish, and French. Foundation courses, M.Div. core, and electives.',
     },
     es: {
-      title: '45 cursos bíblicos gratis | STC',
-      description: '45 cursos bíblicos y teológicos gratis en español, inglés y francés. Fundamento, núcleo del M.Div. y electivos.',
+      title: '66 cursos bíblicos gratis | STC',
+      description: '66 cursos bíblicos y teológicos gratis en español, inglés y francés. Fundamento, núcleo del M.Div. y electivos.',
     },
     fr: {
-      title: '45 cours de Bible gratuits | STC',
-      description: '45 cours de Bible et de théologie gratuits en français, en anglais et en espagnol. Fondements et cours à option.',
+      title: '66 cours de Bible gratuits | STC',
+      description: '66 cours de Bible et de théologie gratuits en français, en anglais et en espagnol. Fondements et cours à option.',
     },
   },
   'CTSBeforeYouBegin.html': {
