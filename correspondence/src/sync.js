@@ -6,7 +6,10 @@
  * Stops at once when settings.paused = '1'. Reading never sends anything;
  * after every mailbox is read, processAutoReplies() handles the routine
  * replies that are due (src/autoreply.js), so its "has anyone answered?"
- * check sees the newest mail from all six accounts.
+ * check sees the newest mail from all six accounts. If the reading was not
+ * complete -- a mailbox failed, a message failed to load, a message is still
+ * waiting for a retry, or a mailbox was only partly read -- that step is
+ * skipped for the run (sendHold).
  */
 import { accessToken, gmailClient, parseGmail } from './gmail.js';
 import { ingestMessage } from './ingest.js';
@@ -128,11 +131,29 @@ export async function syncAll(env) {
       out.push({ mailbox: mb.id, error: String(e.message || e) });
     }
   }
-  // a mailbox that could not be read might hold the answer that makes an
-  // automatic reply unnecessary: no sending in a run with a read failure
-  const failedRead = out.some((r) => r.error);
-  const auto = failedRead ? { held: 'a mailbox could not be read this run' } : await processAutoReplies(env);
+  // Any mail we could not read might be the answer, or the student's newer
+  // letter, that makes an automatic reply wrong. So no automatic step at all
+  // in a run where the reading was incomplete in any way.
+  const held = await sendHold(env, out);
+  const auto = held.length ? { held: held.join('; ') } : await processAutoReplies(env);
   return { mailboxes: out, auto };
+}
+
+/** Why this run must not send (empty: reading was complete). Exported for tests. */
+export async function sendHold(env, out) {
+  const why = [];
+  for (const r of out) {
+    if (r.error) why.push(`${r.mailbox}: could not be read`);
+    else {
+      if (r.failed > 0) why.push(`${r.mailbox}: ${r.failed} message(s) failed to load`);
+      if (r.more) why.push(`${r.mailbox}: only partly read (budget reached)`);
+    }
+  }
+  // messages from an earlier run still waiting for a retry: not read yet either
+  const waiting = (await env.DB.prepare(`SELECT d.mailbox_id, COUNT(*) n FROM dead_letters d JOIN mailboxes b ON b.id = d.mailbox_id
+                                          WHERE b.enabled = 1 AND d.given_up = 0 GROUP BY d.mailbox_id ORDER BY d.mailbox_id`).all()).results || [];
+  for (const w of waiting) if (!out.some((r) => r.mailbox === w.mailbox_id && r.failed > 0)) why.push(`${w.mailbox_id}: ${w.n} message(s) waiting for a retry`);
+  return why;
 }
 
 export const RETENTION_DAYS = 180;

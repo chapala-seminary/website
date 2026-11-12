@@ -1,8 +1,9 @@
 # CTS Correspondence Console
 
-A separate Cloudflare Worker that reads CTS's institutional Gmail **read-only**,
-files each message into a case once, and shows Dr. Cook only the decisions and
-exceptions. Design, policy table, privacy plan and rollout:
+A separate Cloudflare Worker that reads CTS's Gmail inboxes (read-only
+tokens), files each message into a case once, and shows Dr. Cook only the
+decisions and exceptions. It also holds code for automatic routine replies,
+which ships switched off (`auto_send` = `off`). Design, policy table, privacy plan and rollout:
 [`docs/correspondence-console.md`](../docs/correspondence-console.md) (issue #163).
 
 ```
@@ -11,7 +12,7 @@ correspondence/
   migrations/           the case ledger
   src/index.js          /console pages, cron entry
   src/sync.js           incremental Gmail sync, cursor recovery, retries
-  src/gmail.js          read-only Gmail API client and message parsing
+  src/gmail.js          Gmail reading client (gmail.readonly only) and parsing
   src/ingest.js         one message -> one case update (idempotent)
   src/triage.js         lanes, categories, flags, policy matrix
   src/summary.js        running summary; optional model step, checked

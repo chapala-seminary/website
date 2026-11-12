@@ -12,6 +12,8 @@
  * ('failed'); a timeout, a network error or a 5xx may have sent it, so the
  * reply is marked 'unknown' and never retried automatically.
  */
+import { grantedScopes } from './gmail.js';
+
 const SEND_SCOPE = 'https://www.googleapis.com/auth/gmail.send';
 
 export class SendError extends Error {
@@ -31,7 +33,7 @@ export async function sendAccessToken(env) {
   } catch (e) { throw new SendError(`token refresh failed: ${e.message || e}`, { notSent: true }); }
   if (!r.ok) throw new SendError(`token refresh failed: ${r.status}`, { notSent: true });
   const v = await r.json();
-  const scopes = String(v.scope || '').split(/\s+/).filter(Boolean);
+  const scopes = grantedScopes(v);
   if (scopes.length !== 1 || scopes[0] !== SEND_SCOPE)
     throw new SendError(`the sending token must carry only gmail.send (it has: ${scopes.join(' ') || 'none'}); refusing to use it`, { notSent: true });
   return v.access_token;

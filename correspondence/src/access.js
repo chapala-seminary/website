@@ -8,7 +8,8 @@
  *
  * Roles (CONSOLE_ROLES, a var): "email:role,email:role". 'owner' may change
  * switches and decide owner cases; 'reviewer' may change cases; 'viewer'
- * reads. Anyone Access lets in who is not listed is a viewer.
+ * reads. Anyone Access lets in who is NOT listed gets no page at all: the
+ * Access policy and this list must both name a person (fail closed).
  */
 const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), (c) => c.charCodeAt(0));
 const text = (b) => new TextDecoder().decode(b);
@@ -43,7 +44,9 @@ export async function consoleUser(request, env) {
     if (!(claims.exp > now) || (claims.nbf && claims.nbf > now + 60)) return null;
     const email = String(claims.email || '').toLowerCase();
     if (!email) return null;
-    return { email, role: roleOf(env, email) };
+    const role = roleOf(env, email);
+    if (!role) return null;   // signed in, but not on the console's list
+    return { email, role };
   } catch (e) {
     console.error('access token check failed', e && e.message);
     return null;
@@ -53,7 +56,7 @@ export async function consoleUser(request, env) {
 export function roleOf(env, email) {
   for (const pair of String(env.CONSOLE_ROLES || '').split(',')) {
     const [e, r] = pair.split(':').map((s) => s && s.trim().toLowerCase());
-    if (e === email && ['owner', 'reviewer', 'viewer'].includes(r)) return r;
+    if (e && e === email && ['owner', 'reviewer', 'viewer'].includes(r)) return r;
   }
-  return 'viewer';
+  return null;   // not listed: no access
 }

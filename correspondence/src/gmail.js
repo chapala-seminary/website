@@ -2,7 +2,9 @@
  *
  * The console reads each approved mailbox through the Gmail API with the
  * gmail.readonly scope: it can see mail and nothing else -- no sending, no
- * labels, no deleting. Sending is not in this Worker at all until M3.
+ * labels, no deleting. A reading token must carry exactly that scope. The
+ * automatic replies (off by default) send through src/send.js with a
+ * separate token that carries only gmail.send.
  *
  * Incremental: after the first run, only Gmail's history since the stored
  * cursor is read, one history record at a time, and the cursor advances past
@@ -19,6 +21,12 @@
  *   GMAIL_REFRESH_TOKEN_<MAILBOX ID, upper, -→_>    one per approved mailbox
  */
 const API = 'https://gmail.googleapis.com/gmail/v1/users/me';
+export const READ_SCOPE = 'https://www.googleapis.com/auth/gmail.readonly';
+
+/** The scopes Google says a token carries, as a set of names. */
+export function grantedScopes(v) {
+  return [...new Set(String(v?.scope || '').split(/\s+/).filter(Boolean))];
+}
 const RETRIES = 3;
 
 export function tokenName(mailboxId) {
@@ -47,8 +55,11 @@ export async function accessToken(env, mailboxId) {
   });
   if (!r.ok) throw new Error(`token refresh for ${mailboxId} failed: ${r.status}`);
   const v = await r.json();
-  if (v.scope && /gmail\.(send|modify|compose|insert)|mail\.google\.com/.test(v.scope))
-    throw new Error(`token for ${mailboxId} carries more than read-only access (${v.scope}); refusing to use it`);
+  // The granted scopes must be exactly { gmail.readonly }: not missing, not
+  // broader, not anything extra (fail closed; the send token is separate).
+  const scopes = grantedScopes(v);
+  if (scopes.length !== 1 || scopes[0] !== READ_SCOPE)
+    throw new Error(`token for ${mailboxId} must carry only gmail.readonly (it has: ${scopes.join(' ') || 'none'}); refusing to use it`);
   return v.access_token;
 }
 

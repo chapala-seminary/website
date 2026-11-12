@@ -304,6 +304,11 @@ test('the sending token must carry gmail.send and nothing else', async () => {
   assert.equal(await sendAccessToken(tok('https://www.googleapis.com/auth/gmail.send')), 'a');
   await assert.rejects(sendAccessToken(tok('https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly')), /only gmail\.send/);
   await assert.rejects(sendAccessToken(tok('https://mail.google.com/')), /only gmail\.send/);
+  await assert.rejects(sendAccessToken(tok('https://www.googleapis.com/auth/gmail.readonly')), /only gmail\.send/, 'a reading token cannot send');
+  await assert.rejects(sendAccessToken(tok('https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.labels')), /only gmail\.send/);
+  await assert.rejects(sendAccessToken(tok('https://www.googleapis.com/auth/gmail.compose')), /only gmail\.send/);
+  await assert.rejects(sendAccessToken(tok('')), /only gmail\.send/, 'no scope reported: refuse');
+  await assert.rejects(sendAccessToken(tok(undefined)), /only gmail\.send/);
   await assert.rejects(sendAccessToken({}), (e) => e.notSent === true);
 });
 

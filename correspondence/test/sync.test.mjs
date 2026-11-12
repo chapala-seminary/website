@@ -113,10 +113,21 @@ test('pause stops everything at once', async () => {
   assert.equal(g.reads.message + g.reads.list + g.reads.history, 0);
 });
 
-test('a token with more than read-only access is refused', async () => {
-  const e = { GMAIL_CLIENT_ID: 'i', GMAIL_CLIENT_SECRET: 's', GMAIL_REFRESH_TOKEN_CTS_GMAIL: 'r',
-    FETCH: async () => new Response(JSON.stringify({ access_token: 't', scope: 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send' })) };
-  await assert.rejects(accessToken(e, 'cts-gmail'), /more than read-only/);
+test('a reading token must carry exactly gmail.readonly and nothing else', async () => {
+  const G = 'https://www.googleapis.com/auth/';
+  const e = (scope) => ({ GMAIL_CLIENT_ID: 'i', GMAIL_CLIENT_SECRET: 's', GMAIL_REFRESH_TOKEN_CTS_GMAIL: 'r',
+    FETCH: async () => new Response(JSON.stringify(scope === undefined ? { access_token: 't' } : { access_token: 't', scope })) });
+  assert.equal(await accessToken(e(G + 'gmail.readonly'), 'cts-gmail'), 't');
+  assert.equal(await accessToken(e(` ${G}gmail.readonly  ${G}gmail.readonly `), 'cts-gmail'), 't', 'repeats and spaces are one scope');
+  for (const bad of [
+    `${G}gmail.readonly ${G}gmail.send`,          // read + send
+    `${G}gmail.send`,                              // the send token used for reading
+    `${G}gmail.readonly ${G}gmail.labels`,         // a write scope not on any blocklist
+    `${G}gmail.readonly ${G}gmail.metadata`,       // anything extra, even harmless-looking
+    `${G}gmail.readonly openid email`,
+    `${G}gmail.modify`, 'https://mail.google.com/', `${G}gmail.readonly.evil`,
+    '', undefined,                                 // Google did not say: refuse
+  ]) await assert.rejects(accessToken(e(bad), 'cts-gmail'), /must carry only gmail\.readonly/, String(bad));
   await assert.rejects(accessToken({}, 'cts-gmail'), /not authorized/);
 });
 
@@ -127,4 +138,68 @@ test('Gmail messages are parsed: plain text preferred, delivery reports kept, li
   assert.deepEqual(p.to.length, 2);
   assert.ok(p.headers['list-unsubscribe']);
   assert.equal(p.rfc_message_id, '<z@example.org>');
+});
+
+/* ---- no automatic step while any mail is unread (audit, 23 Oct) ---------- */
+
+async function autoSetup() {
+  const s = await setup();
+  const set = (k, v) => s.e.DB.prepare('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value').bind(k, v).run();
+  await set('auto_send', 'shadow');
+  const { TEMPLATES, templateVersion } = await import('../src/templates.js');
+  await set('approved_templates', JSON.stringify(Object.fromEntries(Object.keys(TEMPLATES).map((id) => [id, templateVersion(id)]))));
+  const now = Date.parse(s.e.NOW());
+  s.ask = (id, ms = now - 60000) => s.g.add(gmailMsg(id, 'th-ruth', 'Ruth Kim <ruth@example.org>', 'Studying', 'Hello, how do I register for the courses at the seminary?', ms));
+  s.row = () => s.e.DB.prepare('SELECT status, reason FROM auto_replies ORDER BY id DESC LIMIT 1').first();
+  return s;
+}
+
+test('a message that failed to load holds every automatic reply for the run', async () => {
+  const { g, e, ask, row } = await autoSetup();
+  ask('r1');
+  await syncAll(e);
+  assert.equal((await row()).status, 'pending', 'a routine reply is planned, due in 30 minutes');
+
+  // the student writes again, but Gmail fails on that one message: it is dead-lettered
+  const now = Date.parse(e.NOW());
+  g.add(gmailMsg('r2', 'th-ruth', 'Ruth Kim <ruth@example.org>', 'Re: Studying', 'Never mind, a friend helped me. Thanks!', now));
+  g.failNext.add('r2');
+  e.clock.advance(31 * 60000);
+  const run = await syncAll(e);
+  assert.equal(run.mailboxes[0].failed, 1);
+  assert.equal(run.mailboxes[0].error, undefined, 'no mailbox-level error: the old check would have let this run send');
+  assert.match(run.auto.held, /failed to load/);
+  assert.equal((await row()).status, 'pending', 'nothing recorded or sent while the newer letter is unread');
+  assert.equal((await e.DB.prepare('SELECT COUNT(*) n FROM dead_letters').first()).n, 1);
+
+  // still waiting for its retry (backoff not over): still held
+  e.clock.advance(60000);
+  assert.match((await syncAll(e)).auto.held, /waiting for a retry/);
+  assert.equal((await row()).status, 'pending');
+
+  // the retry succeeds: the newer letter is read, so the planned reply is dropped, not sent
+  e.clock.advance(10 * 60000);
+  const ok = await syncAll(e);
+  assert.equal(ok.auto.held, undefined);
+  assert.equal((await row()).status, 'superseded');
+});
+
+test('a mailbox read only partly (budget reached) holds automatic replies', async () => {
+  const { g, e } = await autoSetup();
+  const now = Date.parse(e.NOW());
+  for (let i = 0; i < BUDGET + 5; i++) g.add(gmailMsg(`n${i}`, `tn${i}`, `p${i}@example.org`, 'Hi', 'Hello', now - 7200000 + i));
+  const run = await syncAll(e);
+  assert.equal(run.mailboxes[0].more, true);
+  assert.match(run.auto.held, /only partly read/);
+});
+
+test('sendHold: complete reading holds nothing; any gap holds', async () => {
+  const { sendHold } = await import('../src/sync.js');
+  const { e } = await setup();
+  assert.deepEqual(await sendHold(e, [{ mailbox: 'cts-gmail', failed: 0, more: false }]), []);
+  assert.equal((await sendHold(e, [{ mailbox: 'cts-gmail', error: 'boom' }])).length, 1);
+  assert.equal((await sendHold(e, [{ mailbox: 'cts-gmail', failed: 2 }])).length, 1);
+  assert.equal((await sendHold(e, [{ mailbox: 'cts-gmail', more: true }])).length, 1);
+  await e.DB.prepare("INSERT INTO dead_letters (mailbox_id, provider_msg_id, attempts, last_error, next_try_at, given_up, created_at) VALUES ('cts-gmail', 'x', 1, 'e', ?, 0, ?)").bind(e.NOW(), e.NOW()).run();
+  assert.match((await sendHold(e, [{ mailbox: 'cts-gmail', failed: 0 }])).join(), /waiting for a retry/);
 });

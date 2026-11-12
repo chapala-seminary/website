@@ -19,7 +19,7 @@ function token(email, aud = AUD) {
 }
 async function env() {
   return makeEnv({ ACCESS_TEAM: 'chapalatheological', CONSOLE_ACCESS_AUD: AUD, ACCESS_JWKS: JSON.stringify({ keys: [jwk] }),
-    CONSOLE_ROLES: 'owner@example.org:owner,rev@example.org:reviewer' });
+    CONSOLE_ROLES: 'owner@example.org:owner,rev@example.org:reviewer,viewer@example.org:viewer' });
 }
 const req = (path, who, init = {}) => new Request('https://console.example' + path,
   { ...init, headers: { ...(who ? { 'cf-access-jwt-assertion': token(who) } : {}), ...(init.headers || {}) } });
@@ -113,4 +113,16 @@ test('automatic replies page: only the owner turns them on or approves a text; a
   assert.equal(await setting('auto_send'), 'off');
   assert.equal((await handle(req('/console/auto', 'owner@example.org', form({ withdraw: 'lost_code' })), e)).status, 303);
   assert.deepEqual(JSON.parse(await setting('approved_templates')), {});
+});
+
+test('signed in through Access but not on the roles list: refused, not a viewer', async () => {
+  const e = await env();
+  for (const path of ['/console', '/console/data.json', '/console/digest.txt', '/console/auto'])
+    assert.equal((await handle(req(path, 'stranger@example.org'), e)).status, 403, path);
+  assert.equal((await handle(req('/console/pause', 'stranger@example.org', form({})), e)).status, 403);
+  assert.equal((await handle(req('/console', 'viewer@example.org'), { ...e, CONSOLE_ROLES: '' })).status, 403, 'an empty list lets nobody in');
+  const { roleOf } = await import('../src/access.js');
+  assert.equal(roleOf({ CONSOLE_ROLES: 'a@example.org:owner' }, 'b@example.org'), null);
+  assert.equal(roleOf({ CONSOLE_ROLES: 'a@example.org:admin' }, 'a@example.org'), null, 'an unknown role is no role');
+  assert.equal(roleOf({ CONSOLE_ROLES: ' A@Example.org : Reviewer ' }, 'a@example.org'), 'reviewer');
 });

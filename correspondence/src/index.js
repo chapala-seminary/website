@@ -1,4 +1,5 @@
-/* CTS Correspondence Console (issue #163). Read-only toward mail.
+/* CTS Correspondence Console (issue #163). Reads mail; sends only the
+ * automatic routine replies, which are off by default (src/autoreply.js).
  *
  *   GET  /console                 the exception dashboard (phone-sized)
  *   GET  /console/digest.txt      today's digest as text

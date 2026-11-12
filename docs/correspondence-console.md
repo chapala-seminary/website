@@ -93,9 +93,11 @@ and `+tags` that Gmail itself ignores. Other providers' local parts are kept.
 
 ## 4. Reading mail incrementally (correspondence/src/sync.js, gmail.js)
 
-- **Scope `gmail.readonly` only.** A token that carries send/modify scope is
-  refused at startup (tested). There is no `send_email` binding and no sending
-  code in this Worker.
+- **Reading tokens: scope `gmail.readonly` exactly.** The scopes Google reports
+  for a token must be that one and nothing else; a token with any other or extra
+  scope, or none reported, is refused (tested). Reading never sends. The only
+  sending code is the automatic-reply path (section 10a), which uses a separate
+  token that must carry only `gmail.send`, and ships switched off.
 - **First run:** list the last 14 days by date, oldest first; take Gmail's
   history cursor *before* listing so nothing between is lost.
 - **Every run after:** `history.list` since the cursor. Each new message is
@@ -188,7 +190,8 @@ rules could not categorize — the only ones where a model adds a category.
   issuer and expiry itself. The site's staff sign-in does not open it (tested).
   No configuration means no page.
 - **Roles** (`CONSOLE_ROLES`): owner, reviewer, viewer. Viewers read. Reviewers
-  change cases and can **pause**. Only the owner can **resume**.
+  change cases and can **pause**. Only the owner can **resume**. Someone Access
+  lets in who is not on this list is refused, not made a viewer (tested).
 - **Kill switch:** one button pauses all automatic steps immediately; the next
   scheduled run does nothing, not even read mail (tested).
 - **Forms** refuse cross-site posts; pages are `no-store`, `noindex`, no scripts,
@@ -316,11 +319,16 @@ sending account, by In-Reply-To/References otherwise), is marked
 `Auto-Submitted: auto-replied`, and says plainly that it is automatic and that
 a reply reaches a person. Each message gets at most one automatic answer (a
 unique key on its Message-ID); a send is tried once, and an unconfirmed one is
-marked for a person to check Sent, never retried. Daily cap 40. A run in which
-any mailbox could not be read sends nothing.
+marked for a person to check Sent, never retried. Daily cap 40. A run whose
+reading was incomplete does no automatic step at all: a mailbox could not be
+read, a message failed to load or is still waiting for its retry, or a mailbox
+was only partly read because the run's budget ran out (tested). Any of those
+could be the newer letter or the answer that makes the reply wrong.
 
 **Switches.** `auto_send`: off (default) → shadow (writes exactly what would
-be sent, sends nothing) → live. Only the owner turns it on or approves texts;
+be sent, sends nothing) → live. Live also needs the deploy-time variable
+`M2_RELEASE_GATE` set to `M2_SEND_APPROVED`, which is not in the repo's config;
+without it a stored `live` acts as `off`. Only the owner turns it on or approves texts;
 any reviewer can turn it off; Pause stops everything. The console's
 "Automatic replies" page shows each template, its facts and their standing,
 the texts in all three languages, and every reply with its status; the daily
@@ -361,15 +369,18 @@ automatically; they stay escalated for a person).
 4. **Mailboxes:** decided 23 Oct 2026, all six. Each needs its own read-only
    sign-in (`GMAIL_REFRESH_TOKEN_<ID>`), and ChapalaTheological a second,
    send-only sign-in (`GMAIL_SEND_REFRESH_TOKEN`).
-6. **Automatic replies:** read the templates on the console's Automatic
-   replies page, approve the ones to use, confirm or correct the "languages"
-   fact, watch a shadow week, then switch to live.
-5. **Model summaries:** whether to turn `ai_enabled` on after the shadow week.
+5. **Automatic replies:** read the templates on the console's Automatic
+   replies page, approve the exact texts to use, confirm or correct the
+   "languages" fact, move `auto_send` to shadow and watch a week, then approve
+   the live release gate and switch to live.
+6. **Model summaries:** whether to turn `ai_enabled` on after the shadow week.
 
 ## 13. Tests
 
-`npm run test:correspondence` (also first in `test/run-tests.sh`): 55 tests, all
-passing on 23 Oct 2026 (19 new: personal-mail privacy, copies across mailboxes,
+`npm run test:correspondence` (also in `test/run-tests.sh`): 59 tests, all
+passing on 12 Nov 2026. Added then: no automatic step after a failed, waiting
+or partial read; Access users not on the roles list are refused; reading and
+sending tokens must carry exactly their one scope. On 23 Oct: 55 (19 new: personal-mail privacy, copies across mailboxes,
 shadow and live sending, approval, superseding answers from any mailbox, never-
 automatic cases, unknown sends, caps, the founder regressions (a)–(f), the send
 token's scope, header injection, the console's switches); 36 passing on 22 Oct 2026 — every acceptance test in the issue, the four seed
