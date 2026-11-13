@@ -89,8 +89,10 @@ const case1 = [{ code: CODE, track: 'mdiv', completed_at: before }];
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active(case1)) === null, 'Case 1: a master\'s completion the record held before activation needs no reading test');
 ok(A.textbookShortfall(CODE, 'thm', [BOOK], active([{ code: CODE, track: 'thm', completed_at: before }])) === null, 'Case 1 on the Th.M. as well');
 ok(/textbook test/.test(A.textbookShortfall(CODE, 'mdiv', [], active(case1)) || ''), 'Case 1 protects from the new test only: the textbook rule of 4 Oct is unchanged');
-ok(JSON.stringify(A.exemptionsFor(case1, active())) === JSON.stringify([READ]), 'Case 1: the record names the exemption, for the browser to show', A.exemptionsFor(case1, active()));
-ok(A.exemptionsFor(case1).length === (shipped && Date.parse(before) < Date.parse(shipped) ? 1 : 0), 'and names none while the test is not activated (one, once it is and the completion came first)');
+// (the textbook and reading tests only: a dated ministry paper is exempted beside them, #318)
+const testsOnly = (list) => list.filter((s) => !/paper$|final$/.test(s));
+ok(JSON.stringify(testsOnly(A.exemptionsFor(case1, active()))) === JSON.stringify([READ]), 'Case 1: the record names the exemption, for the browser to show', A.exemptionsFor(case1, active()));
+ok(testsOnly(A.exemptionsFor(case1)).length === (shipped && Date.parse(before) < Date.parse(shipped) ? 1 : 0), 'and names none while the test is not activated (one, once it is and the completion came first)');
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: CODE, track: 'mdiv', completed_at: '2026-10-20 15:00:00' }])) === null,
   'Case 1 with the time as SQLite writes it');
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSPENTECOSTALMDIVCERTIFICATE', track: 'mdiv', completed_at: before }])) === null,
@@ -126,7 +128,8 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(ASSESS.some(([s, a]) => s === 'otsfinal' && a.kind === 'final') && ASSESS.some(([s, a]) => s === 'otspaper' && a.kind === 'paper'),
     'the catalog carries the OTS final and paper', Object.keys(catalog.assessments || {}));
   for (const [slug, a] of ASSESS) {
-    ok(a.requiredFrom === null, `${slug}: requiredFrom is null (not a requirement)`, a.requiredFrom);
+    // null until Dr. Cook dates it with activate-required.mjs (#318, 11 Nov 2026); never a stray date
+    ok(a.requiredFrom === null || SCHED[slug] === a.requiredFrom, `${slug}: requiredFrom is null, or the moment activate-required.mjs recorded`, a.requiredFrom);
     ok(!(slug in catalog.textbooks), `${slug}: not in catalog.textbooks`);
     ok(!Object.values(catalog.courses).some((c) => (c.tests || []).includes(slug)), `${slug}: in no course's tests`);
     ok(!A.testsFor(a.code).includes(slug), `${slug}: not among the tests ${a.code} requires`, A.testsFor(a.code));
@@ -152,7 +155,13 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   ok(JSON.stringify(m[CODE]?.map((t) => t.slug)) === JSON.stringify([BOOK, READ]), 'cts-required-tests.js gives the pages both tests', m[CODE]);
   ok(m[CODE]?.[1]?.requiredFrom === shipped, 'and the reading test\'s activation, as shipped');
   ok(m.COUNSELING?.[0]?.slug === 'counseling' && m.STORYTEL?.[0]?.slug === 'narrative', 'the single-page courses keep their textbooks');
-  ok(!/otsfinal|otspaper/.test(js), 'the certificate pages are not told of the final or the paper');
+  // the final and paper are not tests in this map; since #318 the paper sits
+  // in a map of its own, not in force as shipped (finals are never required)
+  ok(!Object.values(m).flat().some((t) => /final$|paper$/.test(t.kind || '') || /^(otsfinal|otspaper)$/.test(t.slug)), 'the textbook and reading map is not told of the final or the paper');
+  const am = win.CTS_REQUIRED_ASSESSMENTS || {};
+  ok(JSON.stringify((am.CTSOTS || []).map((t) => t.slug)) === '["otspaper"]', 'the paper has a map of its own; the final is never in it (Dr. Cook, 12 Nov 2026)', am.CTSOTS);
+  ok(!Object.values(am).flat().some((t) => t.kind === 'final'), 'no final is in the requirements map');
+  ok(Object.values(am).flat().every((t) => t.requiredFrom === null || SCHED[t.slug] === t.requiredFrom), 'and each is not in force, or dated as activate-required.mjs recorded');
 }
 
 /* The suite's Worker must not change when a dated activation passes: every test
@@ -183,7 +192,9 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
  * browser/Worker test with actual activated questions.
  */
 {
-  const dated = Object.entries(SCHED);
+  // textbook and reading tests only: a pilot ministry paper, once dated
+  // (#318) sit in the same schedule and are checked in masters-assessments.test.mjs
+  const dated = Object.entries(SCHED).filter(([slug]) => catalog.textbooks[slug]);
   const electives = dated.filter(([slug]) => slug.startsWith('elec'));
   ok(dated.length === 48, 'post-activation: 48 explicitly dated examinations in the academic schedule', dated.length);
   ok(electives.length === 40 && dated.length - electives.length === 8,

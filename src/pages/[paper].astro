@@ -5,10 +5,14 @@
  * against the rubric printed on the course's master's page
  * (src/content/papers/<slug>.json; worker/assignments.js). 80 of 100 meets
  * the standard; below that the student revises and submits again. No file
- * upload and no faculty step. The pledge ("This paper is my own work") and the
+ * upload. The pledge ("This paper is my own work") and the
  * note for AI assistants come with the layout (cts-integrity.js, mounted on
  * #tb-questions with data-pledge="paper"). The page's script is
- * public/assets/js/cts-paper.js. Not a requirement of any track yet. */
+ * public/assets/js/cts-paper.js. Not a requirement of any track yet: a
+ * paper becomes one only when Dr. Cook dates it (tools/activate-required.mjs;
+ * a three-course pilot first, 12 Nov 2026). A faculty member may pass a paper
+ * on review (worker/assignments.js passPaperByFaculty, /staff/grading/papers). */
+import { existsSync } from 'node:fs';
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
@@ -29,6 +33,11 @@ const { paper, course, accent } = Astro.props;
 const entry = (catalog as any).assessments?.[paper.slug];
 if (!entry || entry.kind !== 'paper') throw new Error(`worker/catalog.json does not carry the paper ${paper.slug}: run node tools/gen-worker-catalog.mjs`);
 const masters = paper.page.replace(/Paper$/, 'Masters');
+// A course without a master's page yet (Islam, 11 Nov 2026) links back to its first unit.
+const hasMasters = existsSync(`public/${masters}.html`);
+const back = hasMasters
+  ? { href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }
+  : { href: `/${paper.page.replace(/Paper$/, 'Unit1')}.html`, en: 'The course', es: 'El curso', fr: 'Le cours' };
 const data = JSON.stringify({
   slug: paper.slug, title: paper.title, pass: paper.pass, minWords: paper.minWords, maxChars: paper.maxChars,
   minNotesWords: paper.minNotesWords, maxNotesChars: paper.maxNotesChars, formats: paper.formats,
@@ -37,7 +46,7 @@ const data = JSON.stringify({
 const book = { slug: paper.slug, page: paper.page, course: paper.course, title: { ...paper.title, fr: paper.title.en }, edition: 'paper' };
 ---
 <Textbook kind="paper" book={book} course={course} accent={accent} sync={true} scripts={['/assets/js/cts-paper.js']}
-  back={{ href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }}>
+  back={back}>
   <section class="card tb-about" data-cts-chrome>
     <h2><span class="lang-en">Ministry assignment</span><span class="lang-es">Tarea ministerial</span><span class="lang-fr">Travail pastoral</span></h2>
     <p>

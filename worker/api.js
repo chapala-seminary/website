@@ -24,8 +24,8 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { activationEnvironment, activatedTests } from './test-activation.js';
-import { testContext } from './test-context.js';
+import { activationEnvironment } from './test-activation.js';
+import { testContext, browserRequiredFrom } from './test-context.js';
 import { gradingRoute } from './grading/routes.js';
 import { assignmentRoute } from './assignments.js';
 import { isLive, legacySyncOpen, legacyCohortMember } from './grading/mode.js';
@@ -151,7 +151,7 @@ async function loadState(env, id) {
   return {
     student,
     thmStudyPlan,
-    requiredFrom: activatedTests(env),
+    requiredFrom: browserRequiredFrom(env),
     progress: progress.results ?? [],
     doneCodes: done.map(d => d.code),
     completions: done,
@@ -665,7 +665,7 @@ async function emailMyCode(request, env) {
     .bind(email).all()).results ?? [];
   if (students.length)
     await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin, lang: lang(b.lang) || students[0]?.lang }) });
-  return json({ ok: true, requiredFrom: activatedTests(env) });
+  return json({ ok: true, requiredFrom: browserRequiredFrom(env) });
 }
 
 async function emailStart(request, env) {
@@ -1061,7 +1061,7 @@ export async function handle(request, env, ctx) {
       });
       });
     }
-    if (path === '/api/health') return json({ ok: true, requiredFrom: activatedTests(env) });
+    if (path === '/api/health') return json({ ok: true, requiredFrom: browserRequiredFrom(env) });
 
     // AI grading: attempts, multiple choice, written answers, appeals, the shadow trial.
     if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'

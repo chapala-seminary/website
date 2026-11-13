@@ -13,6 +13,7 @@
  *   node tools/activate-required.mjs --list
  *   node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending [--except actsreadings,...]
  *   node tools/activate-required.mjs --at 2026-11-01T00:00:00Z joshua,joshuareadings
+ *   node tools/activate-required.mjs --at 2027-01-15T06:00:00Z otspaper,hermeneuticspaper,pmpaper
  *     ... add --write to change the files; without it, says what it would do.
  *
  * The moment must be in the future and AFTER the deploy that carries it, so no
@@ -25,6 +26,12 @@
  * A test already in force is never changed here; one scheduled for a moment
  * not yet reached is moved to the new --at (so the start can be brought
  * forward or put back before it arrives).
+ *
+ * A course's ministry paper (src/content/papers; #318) is activated the same
+ * way, but only by name, and only a paper in src/data/paper-pilot.json (Dr.
+ * Cook's three-course pilot, 12 Nov 2026): --all-pending never includes one,
+ * so turning on the textbook tests cannot turn on a paper by accident. A
+ * course's final synthesis exam is never a requirement and cannot be dated.
  */
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -39,6 +46,7 @@ const load = (dir) => fs.readdirSync(dir).filter((f) => f.endsWith('.json'))
 const tests = [
   ...load('src/content/textbooks').map((t) => ({ ...t, kind: 'textbook' })),
   ...load('src/content/readings').map((t) => ({ ...t, kind: 'reading' })),
+  ...load('src/content/papers').map((t) => ({ ...t, kind: 'paper' })),
 ].map((t) => ({ ...t, slug: t.rec.slug, course: t.rec.course, state: !('requiredFrom' in t.rec) ? 'always' : t.rec.requiredFrom === null ? 'pending' : t.rec.requiredFrom }));
 
 if (flag('--list') || !args.length) {
@@ -59,12 +67,16 @@ const movable = (t) => t.state === 'pending' || (t.state !== 'always' && Date.pa
 const except = new Set((val('--except') || '').split(',').filter(Boolean));
 const named = args.filter((a, i) => !a.startsWith('--') && !['--at', '--except'].includes(args[i - 1])).flatMap((a) => a.split(',')).filter(Boolean);
 let chosen;
-if (flag('--all-pending')) chosen = tests.filter((t) => movable(t) && !except.has(t.slug));
+const byNameOnly = (t) => t.kind === 'paper';
+const PAPER_PILOT = new Set(JSON.parse(fs.readFileSync('src/data/paper-pilot.json', 'utf8')).papers);
+if (flag('--all-pending')) chosen = tests.filter((t) => movable(t) && !byNameOnly(t) && !except.has(t.slug));
 else {
   if (!named.length) { console.error('name the tests (slugs) or say --all-pending'); process.exit(2); }
   chosen = named.map((s) => tests.find((t) => t.slug === s) || (console.error(`no test called ${s}`), process.exit(2)));
 }
 for (const s of except) if (!tests.some((t) => t.slug === s)) { console.error(`--except: no test called ${s}`); process.exit(2); }
+const outsidePilot = chosen.filter((t) => t.kind === 'paper' && !PAPER_PILOT.has(t.slug));
+if (outsidePilot.length) { console.error(`not in the pilot (src/data/paper-pilot.json), left alone: ${outsidePilot.map((t) => t.slug).join(', ')}`); process.exit(2); }
 const notPending = chosen.filter((t) => !movable(t));
 if (notPending.length) { console.error(`already in force, left alone: ${notPending.map((t) => t.slug).join(', ')}`); chosen = chosen.filter(movable); }
 if (!chosen.length) { console.error('nothing to activate'); process.exit(1); }
@@ -77,9 +89,10 @@ if (!flag('--write')) { console.log('Nothing written (add --write).'); process.e
 const schedule = fs.existsSync(SCHEDULE) ? JSON.parse(fs.readFileSync(SCHEDULE, 'utf8')) : {};
 for (const t of chosen) {
   schedule[t.slug] = at;
-  if (t.kind === 'textbook') { t.rec.requiredFrom = at; fs.writeFileSync(t.file, JSON.stringify(t.rec, null, 2) + '\n'); }
+  if (t.kind !== 'reading') { t.rec.requiredFrom = at; fs.writeFileSync(t.file, JSON.stringify(t.rec, null, 2) + '\n'); }
 }
 fs.writeFileSync(SCHEDULE, JSON.stringify(Object.fromEntries(Object.entries(schedule).sort()), null, 2) + '\n');
 if (chosen.some((t) => t.kind === 'reading')) execFileSync('node', ['tools/import-readings.mjs', '--write'], { stdio: 'inherit' });
 execFileSync('node', ['tools/gen-worker-catalog.mjs'], { stdio: 'inherit' });
+console.log(`Also hold each in the suite's Worker as not yet required: add ${chosen.map((t) => `"${t.slug}":"2099-01-01T00:00:00Z"`).join(', ')} to TEST_REQUIRED_FROM in test/wrangler.local.jsonc (test/required-tests.test.mjs checks it).`);
 console.log(`Written. Now: npm run build && test/run-tests.sh, then deploy BEFORE ${at}.`);

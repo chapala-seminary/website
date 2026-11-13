@@ -135,6 +135,16 @@
     if (Array.isArray(c.tests)) return c.tests.map(function (t) { return typeof t === "string" ? { slug: t } : t; });
     return c.textbook ? [{ slug: c.textbook, page: c.textbookPage, kind: c.textbookKind || "textbook" }] : [];
   }
+  /* Then the course's final synthesis exam and ministry paper (#318, 11 Nov
+     2026): from cts-required-tests.js where the page loads it, else from the
+     course object (`assessments`, unit pages). Each holds a master's
+     completion only once dated, by the same testCounts. */
+  function assessmentsOf(c) {
+    if (!c) return [];
+    var map = window.CTS_REQUIRED_ASSESSMENTS, code = String(c.code || "").toUpperCase();
+    if (map && code && Object.prototype.hasOwnProperty.call(map, code)) return map[code] || [];
+    return Array.isArray(c.assessments) ? c.assessments : [];
+  }
   function testCounts(t) {
     if (!t || !("requiredFrom" in t)) return true;
     var dates = {}; try { dates = JSON.parse(get("cts_required_from") || "{}"); } catch (e) {}
@@ -147,7 +157,7 @@
   // the tests still standing between a master's student and this course, in order
   function pendingTests(c) {
     if (!c || !mastersTrack(c)) return [];
-    return testsOf(c).filter(function (t) { return t && t.slug && testCounts(t) && !textbookPassed(t.slug); });
+    return testsOf(c).concat(assessmentsOf(c)).filter(function (t) { return t && t.slug && testCounts(t) && !textbookPassed(t.slug); });
   }
   function textbookHolds(c) { return pendingTests(c).length > 0; }
 
