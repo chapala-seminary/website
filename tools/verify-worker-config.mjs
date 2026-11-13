@@ -125,6 +125,8 @@ ok(JSON.stringify(prod.env?.beta?.routes) === JSON.stringify([{ pattern: 'beta.c
 ok(!prod.routes && !prod.route, 'production claims no address before the cutover', JSON.stringify(prod.routes || prod.route));
 ok(prod.env?.beta?.vars?.OUTREACH_MODE !== 'send',
   'beta does not write to students (its students are people testing the site)');
+ok(prod.env?.beta?.vars?.WELCOME_MODE !== 'send',
+  'beta does not send the welcome note either (its students are people testing the site)');
 ok(prod.vars?.DIGEST_MODE === 'send', 'production emails the Monday summary');
 ok(prod.env?.beta?.vars?.DIGEST_MODE !== 'send',
   'beta does not email a Monday summary (it shared the live inbox and was mistaken for it)');

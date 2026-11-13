@@ -215,7 +215,9 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   const apB = q1(`SELECT id FROM appeals WHERE student_id = '${B.code}'`)[0].id;
   eq(flashOf(await spost(`/staff/grading/appeals/${apB}/decide`, { ruling: 'overturn', verdict: 'met', note: 'ok' })), 'overturned-passed', 'a student with no confirmed email is not emailed');
   await sleep(1500);
-  ok(!emailLog().includes(B.email), 'and nothing is logged as sent to them');
+  // the welcome note on registering (worker/outreach.js sendWelcome) is the only mail they may have had
+  const toB = emailLog().split('\n').filter((x) => x.includes('email (log mode): ' + B.email));
+  ok(toB.every((x) => / \| (Welcome to Chapala|Bienvenido\/a al Seminario|Bienvenue au Séminaire)/.test(x)), 'and nothing about the appeal is logged as sent to them', toB);
   eq(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${B.code}'`)[0].n, 1, 'but the unit is still passed');
   const after = await (await sget('/staff/grading/appeals')).text();
   ok(/Appeal outcomes, last 4 weeks/.test(after) && /overturned/.test(after), 'the page tracks appeal outcomes');
