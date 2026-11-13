@@ -52,6 +52,13 @@ existing production baseline/token/enablement setup is complete. Read
   exports, short-answer text.
 - **Don't break URLs.** Every page keeps its `.html` name; `tools/verify-cutover.mjs` guards this.
 - **Don't lose student progress.** `localStorage` keys are a contract.
+- **A course's required readings are other works than its textbook** (Dr. Cook,
+  13 Nov 2026). Never summarize the textbook's own book as a "reading". Choose
+  public-domain works by other authors, or at least other works. Before
+  proposing or changing a course's readings, run
+  `node tools/audit-elective-readings.mjs --course <code>` and fix any
+  SAME_SOURCE_AS_TEXTBOOK or QUOTES_TEXTBOOK_PASSAGES flag. Record:
+  `../brain/decisions/2026-11-13-website-elective-readings-must-be-independent-of-the-textbook.md`.
 - Before committing: `npm run build && test/run-tests.sh`. Build on the Mac —
   `node_modules` are macOS binaries.
 - The journey suite (`npm run test:e2e`, `docs/e2e-journeys.md`) runs whole
