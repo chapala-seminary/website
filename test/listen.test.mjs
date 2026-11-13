@@ -221,7 +221,9 @@ try {
   await page.waitForFunction(() => window.__said.length > 0);
   const selectedVoice = await page.evaluate(() => window.__said[0].voice);
   ok(selectedVoice === 'Test English Second', 'the chosen voice actually speaks');
-  await page.locator('#cts-listen [data-act="stop"]').click();
+  // Stop if still reading; the short fake reading may already have ended and hidden Stop
+  // (a timing flake, 12 Nov 2026). The reload below ends playback either way.
+  await page.evaluate(() => { const b = document.querySelector('#cts-listen [data-act="stop"]'); if (b && !b.hidden && b.offsetParent) b.click(); });
   await page.reload();
   ok((await voiceSelect.inputValue()).includes('Test English Second'), 'chosen voice survives reloading the page');
   ok((await page.locator('#cts-listen .cts-listen-help-text').textContent()).includes('General management'), 'the Samsung speech-settings steps are present');
