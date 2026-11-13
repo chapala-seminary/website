@@ -19,6 +19,9 @@ CONFIG=test/wrangler.local.jsonc
 
 node tools/private-units.mjs --check
 node --test test/release-governance.test.mjs
+# The correspondence console (correspondence/, issue #163): its own Worker
+# and database; these run on Node's SQLite with no server.
+node --test correspondence/test/*.test.mjs
 # Faculty-review World Library catalog; counts, URLs, filters, accessibility.
 node --test test/world-library-v1.test.mjs
 node --test test/ethics-unit-links.test.mjs
