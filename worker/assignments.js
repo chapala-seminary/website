@@ -202,6 +202,46 @@ async function creditPaper(env, student, def, slug) {
   catch (e) { console.error('paper course check failed', e && e.message); }
 }
 
+/* A faculty member passes a paper the AI marked "revise" or could not grade,
+   after the student asked for a review by email (Dr. Cook, 11 Nov 2026,
+   #318: appeals for papers). The AI's scores stay as they were; the ruling,
+   who made it and the earlier status are kept in record_json, and the
+   faculty note is what the student reads. Credit and the email follow as for
+   a pass. Only a paper still at "revise" or "unavailable" changes. */
+export async function passPaperByFaculty(env, id, { by, note }) {
+  const row = await rowById(env, id);
+  if (!row) return { error: 'No such paper.', status: 404 };
+  if (row.status !== 'revise' && row.status !== 'unavailable') return { error: row.status === 'passed' ? 'This paper has already passed.' : 'This paper is still waiting for the AI.', status: 409 };
+  const def = paperDef(row.slug);
+  if (!def) return { error: 'This paper is no longer in the catalog.', status: 409 };
+  let rec = {};
+  try { rec = row.record_json ? JSON.parse(row.record_json) : {}; } catch { rec = {}; }
+  rec.faculty = { by, at: nowIso(), note, before: row.status, total: row.total };
+  const res = await env.DB.prepare(
+    `UPDATE assignments SET status = 'passed', feedback = ?, record_json = ?, graded_at = ? WHERE id = ? AND status = ? RETURNING id`)
+    .bind(note, JSON.stringify(rec), nowIso(), id, row.status).first();
+  if (!res) return { error: 'This paper changed meanwhile; reload the page.', status: 409 };
+  const student = await loadStudent(env, row.student_id);
+  if (student) {
+    await creditPaper(env, student, def, row.slug);
+    try {
+      if (emailConfigured(env) && student.email && student.email_verified_at) {
+        const site = env.SITE_ORIGIN || 'https://chapalaseminary.org';
+        await sendEmail(env, { to: student.email, ...facultyPaperEmail({ name: student.name, note, link: languageLink(site, `${def.page}.html`, row.lang || student.lang), lang: row.lang || student.lang }) });
+      }
+    } catch (e) { console.error('paper email failed', e && e.message); }
+  }
+  return { ok: true, emailed: !!(student && emailConfigured(env) && student.email && student.email_verified_at) };
+}
+export function facultyPaperEmail({ name, note, link, lang }) {
+  lang = emailLanguage(lang);
+  return {
+    en: { subject: 'Your ministry assignment has been reviewed', text: `Dear ${name},\n\nThe faculty of Chapala Theological Seminary has reviewed your ministry assignment, and it meets the standard.\n\n${note}\n\nThe assignment page:\n${link}\n\nChapala Theological Seminary` },
+    es: { subject: 'Su tarea ministerial ha sido revisada', text: `Estimado/a ${name}:\n\nLa facultad del Seminario Teológico de Chapala ha revisado su tarea ministerial, y cumple el nivel.\n\n${note}\n\nLa página de la tarea:\n${link}\n\nSeminario Teológico de Chapala` },
+    fr: { subject: 'Votre travail pastoral a été revu', text: `Bonjour ${name},\n\nLa faculté du Séminaire théologique de Chapala a revu votre travail pastoral : il atteint le niveau requis.\n\n${note}\n\nLa page du travail :\n${link}\n\nSéminaire théologique de Chapala` },
+  }[lang];
+}
+
 /* The result by email, only to a confirmed address. Never fails the request. */
 export function paperEmail({ name, passed, total, pass, link, lang }) {
   lang = emailLanguage(lang);

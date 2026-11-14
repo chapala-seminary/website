@@ -470,7 +470,7 @@ ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'PUT' })).status === 40
 const STATE = process.env.STATE, CONFIG = process.env.CONFIG || 'test/wrangler.local.jsonc';
 let rowsOf = null;
 if (STATE) {
-  const { execFileSync } = await import('node:child_process');
+  const { execFileSync } = await import('./lib/d1-exec.mjs');
   const q = (command) => JSON.parse((s => s.slice(s.indexOf('[')))(execFileSync('npx',
     ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE, '--config', CONFIG, '--json', '--command', command],
     { stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 64 * 1024 * 1024 }).toString()))[0].results;

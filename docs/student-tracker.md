@@ -148,11 +148,12 @@ In `wrangler.jsonc` `vars`:
 | var | production | beta |
 |---|---|---|
 | `OUTREACH_MODE` | `send` | `off`: nobody is written to; `/staff/notes` still shows who would be |
+| `WELCOME_MODE` | `send`: one welcome note right after a student registers with an email address (`worker/outreach.js` `sendWelcome`; Wayne, 12 Nov 2026) | `off` |
 | `OUTREACH_FROM` | `Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>` | the same |
 | `OUTREACH_REPLY_TO` | not set: falls back to `EMAIL_REPLY_TO` (`info@`) | the same |
 | `SITE_ORIGIN` | `https://chapalaseminary.org` | `https://beta.chapalaseminary.org` |
 
-To stop all notes at once, set `OUTREACH_MODE` to `off` and deploy. The
+To stop all notes at once, set `OUTREACH_MODE` and `WELCOME_MODE` to `off` and deploy. The
 roster and the weekly summary keep working.
 
 Two staff endpoints run the same code by hand. Both need the Access sign-in,

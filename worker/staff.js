@@ -52,7 +52,7 @@ import catalog from './catalog.json';
 import { handleGrading } from './staff-grading.js';
 import { handleStaffGroups } from './coord.js';
 import { confirmInvitePage, runConfirmInvites, sendSample } from './confirm-invite.js';
-import { candidates, runOutreach, digest, sendDigest, note, programLevel, PROGRAM_NAMES, QUIET_DAYS, NOT_STARTED_DAYS } from './outreach.js';
+import { candidates, runOutreach, digest, sendDigest, note, welcomeNote, programLevel, PROGRAM_NAMES, QUIET_DAYS, NOT_STARTED_DAYS } from './outreach.js';
 
 const DAY = 86400000;
 const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), (c) => c.charCodeAt(0));
@@ -231,7 +231,8 @@ async function notesPage(env, user) {
   const site = (env.SITE_ORIGIN || 'https://chapalaseminary.org').replace(/\/+$/, '');
   const sample = { name: 'María López', last_unit: Object.keys(catalog.courses).includes('acts') ? 'acts 3' : '' };
   const ex = (kind, lang) => note(kind, { ...sample, lang }, { stopUrl: `${site}/stop-notes/…`, site });
-  const block = (kind, lang, title) => { const m = ex(kind, lang); return `<h3>${title}</h3><pre>Subject: ${esc(m.subject)}\n\n${esc(m.text)}</pre>`; };
+  const block = (kind, lang, title) => { const m = kind === 'welcome' ? welcomeNote({ ...sample, lang }, { stopUrl: `${site}/stop-notes/…`, site }) : ex(kind, lang); return `<h3>${title}</h3><pre>Subject: ${esc(m.subject)}\n\n${esc(m.text)}</pre>`; };
+  const welcomeMode = env.WELCOME_MODE === 'send' ? 'ON: sent right after registering' : 'OFF: not sent (WELCOME_MODE is not "send")';
   const mode = env.OUTREACH_MODE === 'send' ? 'ON: notes are sent once a day' : 'OFF: nothing is sent (OUTREACH_MODE is not "send")';
   return html(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex"><title>CTS notes to students</title><style>${STYLE}</style></head><body>
@@ -244,6 +245,8 @@ Never when they have no email, asked not to be written to, or have finished thei
 ${list.map(({ kind, st }) => `<tr><td>${esc(st.name)}</td><td>${esc(st.email)}</td><td>${esc(st.lang || 'both')}</td><td>${kind === 'quiet' ? `quiet ${QUIET_DAYS}+ days` : 'not started'}</td><td>${esc(String(st.last_progress_at).slice(0, 10))}</td></tr>`).join('') || '<tr><td colspan="5">nobody today</td></tr>'}
 </tbody></table></div>
 <h2>What the notes say</h2>
+<p>The welcome note goes once, right after a student registers with an email address. It is ${welcomeMode}.</p>
+${block('welcome', 'en', 'Welcome, on registering (English)')}${block('welcome', 'es', 'Welcome, on registering (Spanish)')}
 ${block('quiet', 'en', 'Quiet for three weeks (English)')}${block('quiet', 'es', 'Quiet for three weeks (Spanish)')}
 ${block('not_started', 'en', 'Not started after a week (English)')}${block('not_started', 'es', 'Not started after a week (Spanish)')}
 <p><small>A student whose language is not known gets both, English first.</small></p>

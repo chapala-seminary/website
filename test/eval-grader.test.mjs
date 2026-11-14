@@ -456,4 +456,12 @@ const items = readItemFiles();
   assert.equal(g.budget.sent, 1); assert.equal(g.budget.stopped, true);
   ok('budget gate: real usage priced, missing usage charged at ceiling, in-flight reserved, stop is sticky');
 }
+{
+  // The fallback is a reasoning model: at 550 tokens every reply stopped unfinished (Nov 2026).
+  const { maxTokensFor, isReasoningModel } = await import('../worker/grading/model.js');
+  assert.equal(maxTokensFor('@cf/meta/llama-3.3-70b-instruct-fp8-fast', 550), 550, 'the primary model keeps its limit');
+  assert.ok(isReasoningModel('@cf/openai/gpt-oss-120b') && maxTokensFor('@cf/openai/gpt-oss-120b', 550) >= 4000, 'the reasoning fallback gets room to think and still answer');
+  assert.equal(maxTokensFor('@cf/openai/gpt-oss-20b', 1600), 6400, 'a long paper reply scales up for a reasoning model');
+  ok('reply length: the reasoning fallback is not cut off mid-answer');
+}
 console.log(`eval-grader tests: ${n} groups passed`);

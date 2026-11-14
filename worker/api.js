@@ -24,8 +24,8 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { activationEnvironment, activatedTests } from './test-activation.js';
-import { testContext } from './test-context.js';
+import { activationEnvironment } from './test-activation.js';
+import { testContext, browserRequiredFrom } from './test-context.js';
 import { gradingRoute } from './grading/routes.js';
 import { assignmentRoute } from './assignments.js';
 import { isLive, legacySyncOpen, legacyCohortMember } from './grading/mode.js';
@@ -34,6 +34,7 @@ import { SINGLES } from './grading/singles.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
+import { sendWelcome } from './outreach.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
 import { awardTitle, officialTitle } from './award-names.js';
 
@@ -128,11 +129,13 @@ async function loadState(env, id) {
     'SELECT id, name, email, email_verified_at, country, track, goal, heard, lang, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
-  const [progress, completions, certs, textbooks] = await Promise.all([
+  const [progress, completions, certs, textbooks, honors] = await Promise.all([
     env.DB.prepare('SELECT course, unit, completed_at FROM unit_progress WHERE student_id = ? ORDER BY course, unit').bind(id).all(),
     env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
     env.DB.prepare('SELECT verify_code, level, course, title, issued_at, revoked_at FROM certificates WHERE student_id = ? ORDER BY issued_at').bind(id).all(),
     env.DB.prepare('SELECT textbook, passed_at FROM textbook_results WHERE student_id = ? ORDER BY textbook').bind(id).all(),
+    // before migration 0020 is applied there is no table: no honors, not a failed load
+    env.DB.prepare('SELECT course, data, recorded_at FROM honors_readings WHERE student_id = ? ORDER BY course').bind(id).all().catch(() => ({ results: [] })),
   ]);
   // Each completion carries the track it was earned on and the course name
   // the certificate page wrote, so a device restored from a code can rebuild
@@ -148,7 +151,7 @@ async function loadState(env, id) {
   return {
     student,
     thmStudyPlan,
-    requiredFrom: activatedTests(env),
+    requiredFrom: browserRequiredFrom(env),
     progress: progress.results ?? [],
     doneCodes: done.map(d => d.code),
     completions: done,
@@ -157,12 +160,33 @@ async function loadState(env, id) {
     // the textbook tests passed (migration 0009): a course's completion on the
     // master's tracks waits for its textbook's (worker/awards.js)
     textbooks: textbooks.results ?? [],
+    // honors reading attestations (migration 0020): optional, on the student's
+    // honor, never credit; kept so a new browser shows "with honors" too
+    honors: honors.results ?? [],
     // The required-reading tests this record does not need: a master's
     // completion of the course it held before the test was activated
     // (worker/awards.js exemptBefore). The browser keeps them so its pages say
     // what the record says (cts-sync.js). Never a pass: passes are above.
     exemptions: exemptionsFor(done, testContext(env, done)),
   };
+}
+
+/* Honors readings the browser holds (cts_honors_v1:<course>). They are the
+ * student's own attestation, not graded credit, so they are kept in every
+ * grading mode. The first one recorded for a course stands. */
+function honorsRows(id, raw) {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Map();
+  for (const h of raw.slice(0, 200)) {
+    if (!h || typeof h !== 'object') continue;
+    const course = String(h.course || '');
+    if (!/^[A-Za-z0-9]{1,40}$/.test(course) || seen.has(course)) continue;
+    const data = typeof h.data === 'string' ? h.data : '';
+    if (!data || data.length > 4000) continue;
+    try { if (!JSON.parse(data) || typeof JSON.parse(data) !== 'object') continue; } catch { continue; }
+    seen.set(course, data);
+  }
+  return [...seen].map(([course, data]) => [id, course, data, now()]);
 }
 
 /* A textbook test passed on any device stays passed, with the earliest time
@@ -235,7 +259,7 @@ function completionRows(id, raw, tracks, studentTrack) {
 
 /* ---- routes -------------------------------------------------------------- */
 
-async function register(request, env) {
+async function register(request, env, ctx) {
   const b = await body(request);
   const name = str(b.name, MAX.name, { required: true, field: 'name' });
   const track = trackName((str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase());
@@ -272,7 +296,16 @@ async function register(request, env) {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
       .bind(id, name, email, canonicalCountry(str(b.country, MAX.country, { field: 'country' })),
         track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
-    if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
+    if (res.meta?.changes) {
+      /* The welcome note (worker/outreach.js sendWelcome; Wayne, 12 Nov 2026):
+         after the response, so registering never waits on the mail service
+         or fails because of it. No address, no note. */
+      if (email) {
+        const welcome = sendWelcome(env, id);
+        if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(welcome); else await welcome;
+      }
+      return json({ code: id, student: (await loadState(env, id)).student }, 201);
+    }
   }
   throw new HttpError(503, 'could not allocate a student code, please try again');
 }
@@ -365,6 +398,12 @@ async function sync(request, env) {
        WHERE excluded.passed_at < textbook_results.passed_at`)
       .bind(...row));
 
+  // In a batch of their own, after the record's: a Worker deployed before
+  // migration 0020 is applied loses only the honors, never the sync.
+  const honorsStatements = honorsRows(id, b.honors).map((row) => env.DB.prepare(
+    `INSERT INTO honors_readings (student_id, course, data, recorded_at) VALUES (?, ?, ?, ?)
+     ON CONFLICT(student_id, course) DO NOTHING`).bind(...row));
+
   // A completion's level only rises: a row with none takes the first any
   // device reports, and a Certificate or Associate completion is raised when a
   // device reports it done at a higher level (the student did the further
@@ -409,6 +448,9 @@ async function sync(request, env) {
           OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
+  if (honorsStatements.length) {
+    try { await env.DB.batch(honorsStatements); } catch (e) { console.error('honors not kept', e?.message || e); }
+  }
 
   /* In the cutover window the server, not the browser, decides what the
      imported units complete: the same check a live pass runs, at the
@@ -623,7 +665,7 @@ async function emailMyCode(request, env) {
     .bind(email).all()).results ?? [];
   if (students.length)
     await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin, lang: lang(b.lang) || students[0]?.lang }) });
-  return json({ ok: true, requiredFrom: activatedTests(env) });
+  return json({ ok: true, requiredFrom: browserRequiredFrom(env) });
 }
 
 async function emailStart(request, env) {
@@ -766,6 +808,9 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM assignments WHERE student_id = ?').bind(g),
     ]),
   ]);
+  // apart, like the sync's: before migration 0020 there is nothing to delete
+  try { await env.DB.batch(gone.map((g) => env.DB.prepare('DELETE FROM honors_readings WHERE student_id = ?').bind(g))); }
+  catch (e) { console.error('honors not deleted', e?.message || e); }
   return json({ deleted: true });
 }
 
@@ -970,7 +1015,7 @@ export async function handle(request, env, ctx) {
     if (!env?.DB) throw new HttpError(503, 'student records are not configured');
     env = await activationEnvironment(env);
 
-    if (path === '/api/register' && method === 'POST') return await register(request, env);
+    if (path === '/api/register' && method === 'POST') return await register(request, env, ctx);
     if (path === '/api/sync' && method === 'POST')
       return await guarded(request, env, 'student', () => sync(request, env));
 
@@ -1016,7 +1061,7 @@ export async function handle(request, env, ctx) {
       });
       });
     }
-    if (path === '/api/health') return json({ ok: true, requiredFrom: activatedTests(env) });
+    if (path === '/api/health') return json({ ok: true, requiredFrom: browserRequiredFrom(env) });
 
     // AI grading: attempts, multiple choice, written answers, appeals, the shadow trial.
     if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'

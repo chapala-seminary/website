@@ -9,6 +9,8 @@
  *   GET  /staff/grading/synonyms.json      "Download approved synonyms" (tools/apply-accepts.mjs reads it)
  *   GET  /staff/grading/copying            identical short answers from different students
  *   GET  /staff/grading/usage              AI calls and cost, the queue, the oldest waiting answer
+ *   GET  /staff/grading/papers             ministry papers the AI graded: read and spot-check (#318)
+ *   POST /staff/grading/papers/<id>/pass   a faculty review: pass a paper the AI marked "revise" or could not grade
  *   POST /staff/grading/appeals/<id>/claim | release | decide
  *   POST /staff/grading/pending/<gradeId>/grade
  *   POST /staff/grading/calibration/mark
@@ -31,15 +33,17 @@ import { isoWeek, lastWeeks, calibrationSample, calibrationAgreement, aiRecord, 
   estimateCost, possibleCopying, SAMPLE_SIZE, AGREEMENT_FLOOR } from './grading/review.js';
 import { sendEmail, emailConfigured } from './email.js';
 import { appealEmail } from './grading/appeal-email.js';
+import catalog from './catalog.json';
+import { passPaperByFaculty } from './assignments.js';
 
 const DAY = 86400000;
 const WRITTEN = { sa: ['met', 'partly', 'not_met'], fill: ['right', 'wrong'] };
 const LABEL = { met: 'met', partly: 'partly', not_met: 'not met', right: 'right', wrong: 'wrong', pending: 'pending' };
-const TABS = [['appeals', 'Appeals'], ['pending', 'Pending'], ['calibration', 'Calibration'], ['rulings', 'Fill-in rulings'], ['copying', 'Possible copying'], ['usage', 'Usage']];
+const TABS = [['appeals', 'Appeals'], ['pending', 'Pending'], ['calibration', 'Calibration'], ['rulings', 'Fill-in rulings'], ['copying', 'Possible copying'], ['papers', 'Papers'], ['usage', 'Usage']];
 const FLASH = {
   claimed: 'You have taken this appeal.', released: 'Released.', upheld: 'The first result stands.', overturned: 'Changed.',
   passed: 'The student now passes this test.', course: 'The course is now complete.', emailed: 'The student has been emailed.',
-  graded: 'Graded.', marked: 'Your mark is saved.', kept: 'Kept: this answer is now always right.', rejected: 'Rejected: this answer is now always wrong.',
+  graded: 'Graded.', paperpassed: 'The paper now passes; the student has the credit.', marked: 'Your mark is saved.', kept: 'Kept: this answer is now always right.', rejected: 'Rejected: this answer is now always wrong.',
 };
 
 const one = async (env, sql, ...b) => await env.DB.prepare(sql).bind(...b).first();
@@ -78,7 +82,8 @@ ${note ? `<div class="flash">${esc(note)}</div>` : ''}${body}</body></html>`);
 async function tabCounts(env) {
   const open = (await one(env, `SELECT COUNT(*) AS n FROM appeals WHERE status = 'open'`))?.n || 0;
   const held = (await facultyHeld(env))?.n || 0;
-  return { appeals: open, pending: held };
+  const stuck = (await one(env, `SELECT COUNT(*) AS n FROM assignments WHERE status = 'unavailable'`))?.n || 0;
+  return { appeals: open, pending: held, papers: stuck };
 }
 
 /* ---- showing a question and an answer --------------------------------------------- */
@@ -450,6 +455,42 @@ ${g.map((r) => { const s = names.get(r.student_id); return `<tr><td>student ${s 
 ${cards.join('\n') || '<p>No identical answers.</p>'}`, flash);
 }
 
+/* ---- Papers (#318, 11 Nov 2026) ------------------------------------------------------------------ */
+
+/* The ministry papers, as the AI graded them, for a person to read: the
+   papers it could not grade at all ("unavailable": never passed by default)
+   first, then the most recent results. Read-only: a faculty spot check, so
+   the seminary can see how the AI scores before papers are required. Nothing
+   here changes a result. */
+const PAPER_STATUS = { passed: 'passed', revise: 'to revise', unavailable: 'the AI could not grade it', pending: 'waiting for the AI' };
+async function papersTab(env, kit, user, flash) {
+  const { esc } = kit;
+  const cols = `p.id, p.slug, p.version, p.format, p.topic, p.lang, p.body_text, p.notes_text, p.word_count, p.status, p.scores_json, p.total,
+    p.feedback, p.model, p.tries, p.last_error, p.submitted_at, p.graded_at, s.rowid AS n, s.name`;
+  const stuck = await all(env, `SELECT ${cols} FROM assignments p LEFT JOIN students s ON s.id = p.student_id WHERE p.status = 'unavailable' ORDER BY p.submitted_at LIMIT 50`);
+  const recent = await all(env, `SELECT ${cols} FROM assignments p LEFT JOIN students s ON s.id = p.student_id WHERE p.status IN ('passed', 'revise') ORDER BY p.graded_at DESC LIMIT 50`);
+  const card = (r) => {
+    const def = (catalog.assessments || {})[r.slug] || {};
+    let scores = []; try { scores = r.scores_json ? JSON.parse(r.scores_json) : []; } catch { scores = []; }
+    const crit = new Map((def.criteria || []).map((c) => [c.id, c]));
+    return `<div class="card"><h3>${esc(def.title?.en || r.slug)}</h3>
+<p class="meta">student ${esc(r.n ?? '?')}${r.name ? ' (' + esc(r.name) + ')' : ''} · version ${esc(r.version)} · ${esc(r.format)} · topic ${esc(r.topic)} · ${esc(r.lang)} · ${esc(r.word_count)} words · submitted ${esc(short(r.submitted_at))}</p>
+<div class="meta">Result: <strong class="${r.status === 'passed' ? 'good' : r.status === 'unavailable' ? 'bad' : ''}">${esc(PAPER_STATUS[r.status] || r.status)}</strong>`
+      + (r.total != null ? ` · ${esc(r.total)} of 100 (pass ${esc(def.pass ?? '?')})` : '') + (r.model ? ` · ${esc(r.model)}` : '')
+      + (r.status === 'unavailable' ? ` · ${esc(r.tries)} tries${r.last_error ? ': ' + esc(String(r.last_error).slice(0, 120)) : ''}` : '') + '</div>'
+      + (scores.length ? `<ul class="pts">${scores.map((c) => `<li>${esc(crit.get(c.id)?.en || c.id)}: <strong>${esc(c.score)}</strong> of ${esc(crit.get(c.id)?.points ?? '?')}${c.capped ? ' (cut to half: no real quotation)' : ''}${c.quote ? ` <em>“${esc(c.quote)}”</em>` : ''}${c.comment ? ' — ' + esc(c.comment) : ''}</li>`).join('')}</ul>` : '')
+      + (r.feedback ? `<div class="meta">Feedback the student saw: ${esc(r.feedback)}</div>` : '')
+      + (r.status === 'revise' || r.status === 'unavailable' ? `<form method="post" action="/staff/grading/papers/${encodeURIComponent(r.id)}/pass">
+<div class="meta">If the student asked for a review and the paper meets the standard: the note the student will read (required; one or two sentences in the student's language):</div>
+<textarea name="note" rows="2" maxlength="500" required></textarea><div class="row"><button>Pass this paper</button></div></form>` : '')
+      + `<details><summary>The paper</summary><div class="ans">${esc(r.body_text)}</div>${r.notes_text ? `<div class="meta">Study notes:</div><div class="ans">${esc(r.notes_text)}</div>` : ''}</details></div>`;
+  };
+  return frame(kit, 'papers', user, await tabCounts(env), `
+<p>Ministry papers are graded by the AI against each course's rubric. This page is for reading them -- a spot check of how the AI scores -- and for reviews: a student who believes a grade is wrong may email the seminary (the paper page says so), and a faculty member can pass a paper the AI marked "to revise" or could not grade, with a note the student reads. The AI's scores stay on record. A paper the AI could not grade is never passed by default; it is listed first.</p>
+<h2>The AI could not grade these</h2>${stuck.map(card).join('\n') || '<p>None.</p>'}
+<h2>Recently graded</h2>${recent.map(card).join('\n') || '<p>No papers graded yet.</p>'}`, flash);
+}
+
 /* ---- Usage -------------------------------------------------------------------------------------- */
 
 async function usageTab(env, kit, user, flash) {
@@ -500,12 +541,21 @@ export async function handleGrading(request, env, user, url, path, kit) {
     if (path === '/staff/grading/synonyms.json') return await synonyms(env, kit, user);
     if (path === '/staff/grading/copying') return await copyingTab(env, kit, user, flash);
     if (path === '/staff/grading/usage') return await usageTab(env, kit, user, flash);
+    if (path === '/staff/grading/papers') return await papersTab(env, kit, user, flash);
   }
   if (method === 'POST') {
     if ((m = /^\/staff\/grading\/appeals\/(\d+)\/(claim|release|decide)$/.exec(path))) return await appealAction(env, kit, user, +m[1], m[2], request);
     if ((m = /^\/staff\/grading\/pending\/(\d+)\/grade$/.exec(path))) return await pendingAction(env, kit, user, +m[1], request);
     if (path === '/staff/grading/calibration/mark') return await calibrationMark(env, kit, user, request);
     if (path === '/staff/grading/rulings/decide') return await rulingDecide(env, kit, user, request);
+    if ((m = /^\/staff\/grading\/papers\/([^/]+)\/pass$/.exec(path))) {
+      const form = await request.formData().catch(() => null);
+      const note = form ? text(form, 'note', 500) : '';
+      if (!note) return refuse(kit, 400, 'A note for the student is required.');
+      const r = await passPaperByFaculty(env, decodeURIComponent(m[1]), { by: user, note });
+      if (r.error) return refuse(kit, r.status, r.error);
+      return back('papers', r.emailed ? 'paperpassed-emailed' : 'paperpassed');
+    }
   }
   return kit.html('<p>No such page.</p>', 404);
 }

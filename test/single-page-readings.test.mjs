@@ -41,6 +41,8 @@ function scratch(readings) {
     fs.writeFileSync(path.join(dir, 'src/content/readings', name), JSON.stringify(json));
   fs.cpSync(path.join(ROOT, 'public'), path.join(dir, 'public'), { recursive: true });
   fs.cpSync(path.join(ROOT, 'worker'), path.join(dir, 'worker'), { recursive: true });
+  // the recorded activation moments: the generator checks a dated paper against them (#318)
+  fs.cpSync(path.join(ROOT, 'src/data'), path.join(dir, 'src/data'), { recursive: true });
   return dir;
 }
 const gen = (dir) => spawnSync(process.execPath, [path.join(ROOT, 'tools/gen-worker-catalog.mjs')], { cwd: dir, encoding: 'utf8' });

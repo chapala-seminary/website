@@ -5,10 +5,14 @@
  * against the rubric printed on the course's master's page
  * (src/content/papers/<slug>.json; worker/assignments.js). 80 of 100 meets
  * the standard; below that the student revises and submits again. No file
- * upload and no faculty step. The pledge ("This paper is my own work") and the
+ * upload. The pledge ("This paper is my own work") and the
  * note for AI assistants come with the layout (cts-integrity.js, mounted on
  * #tb-questions with data-pledge="paper"). The page's script is
- * public/assets/js/cts-paper.js. Not a requirement of any track yet. */
+ * public/assets/js/cts-paper.js. Not a requirement of any track yet: a
+ * paper becomes one only when Dr. Cook dates it (tools/activate-required.mjs;
+ * a three-course pilot first, 12 Nov 2026). A faculty member may pass a paper
+ * on review (worker/assignments.js passPaperByFaculty, /staff/grading/papers). */
+import { existsSync } from 'node:fs';
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
@@ -29,6 +33,11 @@ const { paper, course, accent } = Astro.props;
 const entry = (catalog as any).assessments?.[paper.slug];
 if (!entry || entry.kind !== 'paper') throw new Error(`worker/catalog.json does not carry the paper ${paper.slug}: run node tools/gen-worker-catalog.mjs`);
 const masters = paper.page.replace(/Paper$/, 'Masters');
+// A course without a master's page yet (Islam, 11 Nov 2026) links back to its first unit.
+const hasMasters = existsSync(`public/${masters}.html`);
+const back = hasMasters
+  ? { href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }
+  : { href: `/${paper.page.replace(/Paper$/, 'Unit1')}.html`, en: 'The course', es: 'El curso', fr: 'Le cours' };
 const data = JSON.stringify({
   slug: paper.slug, title: paper.title, pass: paper.pass, minWords: paper.minWords, maxChars: paper.maxChars,
   minNotesWords: paper.minNotesWords, maxNotesChars: paper.maxNotesChars, formats: paper.formats,
@@ -37,13 +46,13 @@ const data = JSON.stringify({
 const book = { slug: paper.slug, page: paper.page, course: paper.course, title: { ...paper.title, fr: paper.title.en }, edition: 'paper' };
 ---
 <Textbook kind="paper" book={book} course={course} accent={accent} sync={true} scripts={['/assets/js/cts-paper.js']}
-  back={{ href: `/${masters}.html`, en: "Master's requirements", es: 'Requisitos de maestría', fr: 'Exigences du master' }}>
+  back={back}>
   <section class="card tb-about" data-cts-chrome>
     <h2><span class="lang-en">Ministry assignment</span><span class="lang-es">Tarea ministerial</span><span class="lang-fr">Travail pastoral</span></h2>
     <p>
-      <span class="lang-en">About 1,200–1,800 words, written by you, on one of the topics below, applied to your own church or ministry setting. Choose a format, choose a topic, and paste your paper into the box (no file upload). A sermon also needs its study notes: how you interpreted the passage and the sources you used. The paper is scored against the rubric below; {paper.pass} of 100 meets the standard. Below that you receive the scores and comments, revise, and submit a new version (up to three a day).</span>
-      <span class="lang-es">Unas 1.200–1.800 palabras, escritas por usted, sobre uno de los temas siguientes, aplicadas a su propia iglesia o ministerio. Elija un formato, elija un tema y pegue su trabajo en el cuadro (no se suben archivos). Un sermón necesita además sus notas de estudio: cómo interpretó el pasaje y las fuentes que usó. El trabajo se evalúa con la rúbrica de abajo; {paper.pass} de 100 cumple el nivel. Si no lo alcanza, recibe las puntuaciones y los comentarios, lo revisa y envía una nueva versión (hasta tres al día).</span>
-      <span class="lang-fr">Environ 1 200 à 1 800 mots, écrits par vous, sur l’un des sujets ci-dessous, appliqués à votre propre Église ou ministère. Choisissez un format et un sujet, puis collez votre travail dans la case (pas d’envoi de fichier). Un sermon demande aussi ses notes d’étude. Le travail est noté selon la grille ci-dessous ; {paper.pass} sur 100 atteint le niveau requis. Sinon, vous recevez les notes et les commentaires, vous révisez et vous envoyez une nouvelle version (trois au plus par jour).</span>
+      <span class="lang-en">Recommended length: 1,200–1,800 words (submission minimum 1,000 words, including study notes), written by you, on one of the topics below, applied to your own church or ministry setting. Choose a format, choose a topic, and paste your paper into the box (no file upload). A sermon also needs its study notes: how you interpreted the passage and the sources you used. The paper is scored against the rubric below; {paper.pass} of 100 meets the standard. Below that you receive the scores and comments, revise, and submit a new version (up to three a day).</span>
+      <span class="lang-es">Extensión recomendada: 1.200–1.800 palabras (mínimo de entrega: 1.000 palabras, incluidas las notas de estudio), escritas por usted, sobre uno de los temas siguientes, aplicadas a su propia iglesia o ministerio. Elija un formato, elija un tema y pegue su trabajo en el cuadro (no se suben archivos). Un sermón necesita además sus notas de estudio: cómo interpretó el pasaje y las fuentes que usó. El trabajo se evalúa con la rúbrica de abajo; {paper.pass} de 100 cumple el nivel. Si no lo alcanza, recibe las puntuaciones y los comentarios, lo revisa y envía una nueva versión (hasta tres al día).</span>
+      <span class="lang-fr">Longueur conseillée : 1 200 à 1 800 mots (minimum accepté : 1 000 mots, notes d’étude comprises), écrits par vous, sur l’un des sujets ci-dessous, appliqués à votre propre Église ou ministère. Choisissez un format et un sujet, puis collez votre travail dans la case (pas d’envoi de fichier). Un sermon demande aussi ses notes d’étude. Le travail est noté selon la grille ci-dessous ; {paper.pass} sur 100 atteint le niveau requis. Sinon, vous recevez les notes et les commentaires, vous révisez et vous envoyez une nouvelle version (trois au plus par jour).</span>
     </p>
     <p>
       <span class="lang-en">This assignment is being introduced for the M.Div. and Th.M. tracks and is not yet required: nothing in any student's course, certificate or degree depends on it. A paper that meets the standard is kept in your record. Your paper is stored with your record so that you can see it and revise it; Delete My Record removes it.</span>

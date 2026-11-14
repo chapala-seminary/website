@@ -11,6 +11,7 @@
  * { slug: ISO time }. tools/verify-worker-config.mjs refuses the variable in
  * the deployed configuration. */
 import { activatedTests } from './test-activation.js';
+import catalog from './catalog.json';
 
 export function testRequiredFrom(env) {
   if (env.EMAIL_MODE !== 'log' || env.RESEND_API_KEY || !env.TEST_REQUIRED_FROM) return undefined;
@@ -20,4 +21,17 @@ export function testRequiredFrom(env) {
  * and level the server wrote, and the server's clock. */
 export function testContext(env, completions) {
   return { completions: completions || [], now: new Date().toISOString(), requiredFrom: { ...activatedTests(env), ...testRequiredFrom(env) } };
+}
+
+/* The dates the browser is sent (cts_required_from): beta's activation, and
+ * -- in the test suite only -- the suite's own dates for the finals and
+ * papers. Their real dates are in the pages already (cts-required-tests.js,
+ * Unit.astro); without this the suite's browser would hold a master's course
+ * for a paper the suite's Worker does not require (#318, 11 Nov 2026). The
+ * textbook and reading tests' suite dates stay server-side, as before. */
+export function browserRequiredFrom(env) {
+  const out = { ...activatedTests(env) };
+  const t = testRequiredFrom(env);
+  if (t) for (const [slug, at] of Object.entries(t)) if ((catalog.assessments || {})[slug]) out[slug] = at;
+  return out;
 }

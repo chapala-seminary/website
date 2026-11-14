@@ -38,6 +38,7 @@ const EXCLUDE = new Set([
 /** Standalone pages worth indexing, with the weight each carries. */
 const STANDALONE: Record<string, number> = {
   'CTSAbout.html': 0.7,
+  'FreeOnlineSeminary.html': 0.8, // bilingual guide for prospective students
   'CTSBeforeYouBegin.html': 0.7,
   'CTSCatalog.html': 0.7,
   'CTSResources.html': 0.7,

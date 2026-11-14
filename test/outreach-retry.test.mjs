@@ -9,7 +9,7 @@
 // any outreach row -- failed or not -- stopped that student's note for good.
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
@@ -73,7 +73,8 @@ const second = await runUntil(23, [NEW, QUIET]);
 ok(!second[NEW], 'once a getting-started note has gone out, it is not sent again');
 ok(!second[QUIET], 'once a quiet note has gone out, that quiet spell gets no second note');
 
-const rows = db(`SELECT kind, status FROM outreach WHERE student_id IN ('${newCode}', '${quietCode}') ORDER BY id`)[0];
+// the progress notes only: both students also got a welcome note on registering (sendWelcome)
+const rows = db(`SELECT kind, status FROM outreach WHERE student_id IN ('${newCode}', '${quietCode}') AND kind <> 'welcome' ORDER BY id`)[0];
 ok(rows.filter((r) => r.status === 'failed').length === 2 && rows.filter((r) => r.status === 'sent').length === 2,
   'the record keeps both the failed attempts and the notes that went out', JSON.stringify(rows));
 

@@ -18,6 +18,9 @@ import { loadThmStudyPlan } from './study-plans.js';
  *                Wayne to write to himself if he wants to.
  *   not_started  registered 7 days ago or more, not one unit passed. Once.
  *
+ * and, right after registration rather than in the daily run, a welcome
+ * note (sendWelcome, below; WELCOME_MODE).
+ *
  * and writes to each in the language they read the site in (both languages
  * when it is not known). Every note says how to stop them; the link leads to
  * a page with a button, because mail scanners open links on their own and a
@@ -226,6 +229,119 @@ async function contactToken(env, studentId) {
   return (await env.DB.prepare('SELECT token FROM contact_tokens WHERE student_id = ?').bind(studentId).first()).token;
 }
 
+/* ---- the welcome note (Wayne, 12 Nov 2026) --------------------------------
+ *
+ * "I wanted automatic email ... including welcome and thanks for registering."
+ *
+ * One note, once, right after a student registers with an email address: thank
+ * you, how to begin, how the site works. Sent from the same address as the
+ * notes above (OUTREACH_FROM, replies to OUTREACH_REPLY_TO) and with the same
+ * "stop" link; recorded in the outreach table as kind 'welcome', so the weekly
+ * summary lists it and it never goes twice.
+ *
+ * It never carries the student code: the address is not verified at
+ * registration, and a code sent to a mistyped address would hand someone else
+ * the student's record (worker/api.js register()).
+ *
+ * Config: WELCOME_MODE "send" sends it; anything else (or unset) sends nothing.
+ */
+export function welcomeNote(st, { stopUrl, site }) {
+  const lang = ['es', 'fr'].includes(st.lang) ? st.lang : 'en';
+  const first = siteLink(site, 'CTSUnit1.html', lang);
+  const catalogLink = siteLink(site, 'index.html#catalog', lang);
+  const n = firstName(st.name);
+  const body = {
+    en: [
+      `Dear ${n},`,
+      '',
+      'Welcome to Chapala Theological Seminary, and thank you for registering. We are glad you are here.',
+      '',
+      'Every course is free and you study at your own pace: there are no deadlines and no fees. Most students begin with Old Testament Survey, one of the seven foundation courses:',
+      '',
+      `  ${first}`,
+      '',
+      `All the courses are listed here: ${catalogLink}`,
+      '',
+      'When you registered, the site showed you a student code. Please write it down and keep it private, like a password: it is how you get your progress back on another device or browser. If you lose it, you can ask the site to email it to this address.',
+      '',
+      'If you have a question, or something on the website gets in your way, just reply to this email. We read every reply.',
+    ],
+    es: [
+      `Estimado/a ${n}:`,
+      '',
+      'Bienvenido/a al Seminario Teológico de Chapala, y gracias por inscribirse. Nos alegra tenerle con nosotros.',
+      '',
+      'Todos los cursos son gratuitos y usted estudia a su propio ritmo: no hay fechas límite ni costos. La mayoría de los estudiantes empiezan con Panorama del Antiguo Testamento, uno de los siete cursos de fundamento:',
+      '',
+      `  ${first}`,
+      '',
+      `Todos los cursos están aquí: ${catalogLink}`,
+      '',
+      'Al inscribirse, el sitio le mostró un código de estudiante. Por favor anótelo y manténgalo privado, como una contraseña: con él recupera su progreso en otro dispositivo o navegador. Si lo pierde, puede pedir al sitio que se lo envíe a este correo.',
+      '',
+      'Si tiene alguna pregunta, o algo en el sitio le impide avanzar, simplemente responda a este correo. Leemos cada respuesta.',
+    ],
+    // French typography: a no-break space before « : », a narrow one before « ? ».
+    fr: [
+      `Bonjour ${n},`,
+      '',
+      'Bienvenue au Séminaire théologique de Chapala, et merci de votre inscription. Nous sommes heureux de vous compter parmi nous.',
+      '',
+      'Tous les cours sont gratuits et vous étudiez à votre rythme : il n’y a ni date limite ni frais. La plupart des étudiants commencent par le Survol de l’Ancien Testament, l’un des sept cours fondamentaux :',
+      '',
+      `  ${first}`,
+      '',
+      `Tous les cours sont présentés ici : ${catalogLink}`,
+      '',
+      'Lors de votre inscription, le site vous a montré un code d’étudiant. Notez-le et gardez-le pour vous, comme un mot de passe : il vous permet de retrouver votre progression sur un autre appareil ou navigateur. Si vous le perdez, vous pouvez demander au site de vous l’envoyer à cette adresse.',
+      '',
+      'Si vous avez une question, ou si quelque chose sur le site vous bloque, répondez simplement à ce message. Nous lisons chaque réponse.',
+    ],
+  };
+  const host = site.replace(/^https?:\/\//, '');
+  const sign = { en: ['', 'With warm regards,', 'Wayne Cook', 'Chapala Theological Seminary'],
+                 es: ['', 'Con un cordial saludo,', 'Wayne Cook', 'Seminario Teológico de Chapala'],
+                 fr: ['', 'Bien cordialement,', 'Wayne Cook', 'Séminaire théologique de Chapala'] };
+  const stop = {
+    en: ['', '--', `You are receiving this because you registered at ${host}. To stop notes about your progress: ${stopUrl}`],
+    es: ['', '--', `Recibe este mensaje porque se inscribió en ${host}. Para no recibir más mensajes sobre su progreso: ${stopUrl}`],
+    fr: ['', '--', `Vous recevez ce message parce que vous avez créé un dossier d’étudiant sur ${host}. Pour ne plus recevoir de messages sur votre progression : ${stopUrl}`],
+  };
+  const subject = { en: 'Welcome to Chapala Theological Seminary', es: 'Bienvenido/a al Seminario Teológico de Chapala', fr: 'Bienvenue au Séminaire théologique de Chapala' };
+  return { subject: subject[lang], text: [...body[lang], ...sign[lang], ...stop[lang]].join('\n') };
+}
+
+/* Sends the welcome note to a student who has just registered, at most once.
+ * Never throws: a failed send is recorded (status 'failed') and registration
+ * is not affected. Returns what it did, for tests. */
+export async function sendWelcome(env, studentId, { asOf = new Date() } = {}) {
+  try {
+    if (env.WELCOME_MODE !== 'send') return { status: 'off' };
+    const st = await env.DB.prepare('SELECT id, name, email, lang, contact_opt_out_at, merged_into FROM students WHERE id = ?').bind(studentId).first();
+    if (!st || st.merged_into || st.contact_opt_out_at) return { status: 'skipped' };
+    const email = String(st.email || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.toLowerCase() === TESTER_EMAIL) return { status: 'skipped' };
+    const sent = await env.DB.prepare("SELECT 1 FROM outreach WHERE student_id = ? AND kind = 'welcome' AND status = 'sent' LIMIT 1").bind(st.id).first();
+    if (sent) return { status: 'already' };
+    const site = origin(env);
+    let status = 'sent', error = null, msg = null;
+    try {
+      if (!emailConfigured(env)) throw new Error('email is not configured');
+      msg = welcomeNote(st, { stopUrl: `${site}/stop-notes/${await contactToken(env, st.id)}`, site });
+      await sendEmail({ ...env, EMAIL_FROM: env.OUTREACH_FROM || env.EMAIL_FROM,
+                        EMAIL_REPLY_TO: env.OUTREACH_REPLY_TO || env.EMAIL_REPLY_TO }, { to: email, ...msg });
+    } catch (e) {
+      status = 'failed'; error = String(e && e.message || e).slice(0, 300);
+    }
+    await env.DB.prepare('INSERT INTO outreach (student_id, kind, status, error, sent_at) VALUES (?, ?, ?, ?, ?)')
+      .bind(st.id, 'welcome', status, error, asOf.toISOString()).run();
+    return { status, ...(error ? { error } : {}), ...(emailLogOnly(env) && msg ? { message: msg } : {}) };
+  } catch (e) {
+    console.error('welcome note error', e && e.stack || e);
+    return { status: 'error' };
+  }
+}
+
 /* The daily run. Returns what it did (or, when not sending, would do). */
 export async function runOutreach(env, { asOf = new Date(), send = env.OUTREACH_MODE === 'send' } = {}) {
   const list = await candidates(env, asOf);
@@ -278,7 +394,7 @@ export async function digest(env, asOf = new Date()) {
   const byStudent = {};
   for (const f of finished) (byStudent[f.name] ??= []).push(courseName(f.code));
   const gradingLine = await gradingDigestLine(env, asOf);
-  const KIND = { quiet: 'quiet 3 weeks', not_started: 'not started after a week', confirm_invite: 'please confirm your registration' };
+  const KIND = { quiet: 'quiet 3 weeks', not_started: 'not started after a week', confirm_invite: 'please confirm your registration', welcome: 'welcome on registering' };
   const lines = [
     `The week to ${day(asOf.toISOString())}`,
     `${total} students; ${active} made progress in the last ${QUIET_DAYS} days.`,

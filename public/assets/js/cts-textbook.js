@@ -271,6 +271,11 @@
         left = left.filter(function (t) { return t.slug !== slug; });
         if (!left.length) return "";
         var t = left[0], rd = t.kind === "reading";
+        if (t.kind === "final" || t.kind === "paper") {   // #318: a dated final or paper, after the tests
+          var fin = t.kind === "final";
+          return " " + bi({ en: "The course also needs its " + (fin ? "final synthesis exam" : "ministry paper") + ": ", es: "El curso también necesita su " + (fin ? "examen final de síntesis" : "tarea ministerial") + ": ", fr: "Le cours exige aussi " + (fin ? "son examen final de synthèse" : "son travail ministériel") + " : " })
+            + '<a href="/' + esc(t.page) + '.html">' + bi({ en: "go to it", es: "ir", fr: "y aller" }) + "</a>.";
+        }
         return " " + bi({ en: "The course also needs its " + (rd ? "required-reading test" : "textbook test") + ": ", es: "El curso también necesita su " + (rd ? "examen de lecturas requeridas" : "examen del libro de texto") + ": ", fr: "Le cours exige aussi " + (rd ? "l\u2019examen des lectures obligatoires" : "l\u2019examen du manuel") + "\u00a0: " })
           + '<a href="/' + esc(t.page) + 'Test.html">' + bi({ en: "take it", es: "preséntelo", fr: "passez-le" }) + "</a>.";
       } catch (e) { return ""; }

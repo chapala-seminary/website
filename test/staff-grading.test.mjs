@@ -12,7 +12,8 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execFileSync, spawnSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
+import { execFileSync } from './lib/d1-exec.mjs';
 import { isoWeek, lastWeeks, weekStart, estimateCost } from '../worker/grading/review.js';
 import { exactFill } from '../worker/grading/text.js';
 import { appealEmail } from '../worker/grading/appeal-email.js';
@@ -131,7 +132,7 @@ async function failedUnit(unit, opts = {}) {
 }
 
 /* ---- who may see these pages ---------------------------------------------------------------- */
-const TABS = ['', '/appeals', '/pending', '/calibration', '/calibration.json', '/rulings', '/synonyms.json', '/copying', '/usage'];
+const TABS = ['', '/appeals', '/pending', '/calibration', '/calibration.json', '/rulings', '/synonyms.json', '/copying', '/papers', '/usage'];
 const other = crypto.generateKeyPairSync('rsa', { modulusLength: 2048 }).privateKey;
 for (const p of TABS) {
   const noTok = await fetch(BASE + '/staff/grading' + p, { redirect: 'manual' });
@@ -139,18 +140,49 @@ for (const p of TABS) {
   const forged = await fetch(BASE + '/staff/grading' + p, { headers: { 'cf-access-jwt-assertion': token({ key: other }) }, redirect: 'manual' });
   ok(forged.status === 403, `/staff/grading${p} with a token signed by another key is refused`);
 }
-for (const p of ['/appeals/1/claim', '/appeals/1/decide', '/pending/1/grade', '/calibration/mark', '/rulings/decide']) {
+for (const p of ['/appeals/1/claim', '/appeals/1/decide', '/pending/1/grade', '/calibration/mark', '/rulings/decide', '/papers/x/pass']) {
   const r = await fetch(BASE + '/staff/grading' + p, { method: 'POST', redirect: 'manual', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'a=b' });
   ok(r.status === 403, `POST /staff/grading${p} without Access is refused (${r.status})`);
 }
 
 /* ---- every tab renders ------------------------------------------------------------------------- */
-for (const [p, label] of [['', 'Appeals'], ['/appeals', 'Appeals'], ['/pending', 'Pending'], ['/calibration', 'Calibration'], ['/rulings', 'Fill-in rulings'], ['/copying', 'Possible copying'], ['/usage', 'Usage']]) {
+for (const [p, label] of [['', 'Appeals'], ['/appeals', 'Appeals'], ['/pending', 'Pending'], ['/calibration', 'Calibration'], ['/rulings', 'Fill-in rulings'], ['/copying', 'Possible copying'], ['/papers', 'Papers'], ['/usage', 'Usage']]) {
   const r = await sget('/staff/grading' + p);
   const page = await r.text();
   ok(r.status === 200 && /text\/html/.test(r.headers.get('content-type')), `/staff/grading${p} renders (${r.status})`);
   ok(r.headers.get('cache-control') === 'no-store' && /noindex/.test(r.headers.get('x-robots-tag') || ''), `/staff/grading${p} is never cached or indexed`);
   ok(page.includes(WAYNE) && page.includes(label) && !/CTS-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(page), `/staff/grading${p} names the signed-in person and shows no student code`);
+}
+/* ---- papers: read-only spot check of the AI's paper grades (#318) ------------------------------------ */
+{
+  const sid = `CTS-PAPR-${Date.now().toString(36).toUpperCase().slice(-4).padStart(4, '0')}-TEST`;
+  const at = new Date().toISOString();
+  const P1 = crypto.randomUUID(), P2 = crypto.randomUUID();   // as worker/assignments.js names a paper
+  db(`INSERT INTO students (id, name, email, country, track, created_at, updated_at) VALUES ('${sid}', 'Paper Reader Test', 'paper-reader@example.test', 'MX', 'mdiv', '${at}', '${at}')`);
+  db(`INSERT INTO assignments (id, student_id, slug, version, format, topic, lang, body_text, word_count, status, scores_json, total, feedback, model, tries, submitted_at, graded_at)
+      VALUES ('${P1}', '${sid}', 'otspaper', 1, 'study', 'covenant', 'en', 'A made-up paper about the covenants for the staff test.', 1100, 'passed',
+              '[{"id":"exegesis","score":25,"quote":"about the covenants","comment":"sound"}]', 86, 'Clear and well argued.', 'fake-model', 1, '${at}', '${at}'),
+             ('${P2}', '${sid}', 'otspaper', 2, 'study', 'covenant', 'en', 'A second made-up paper the AI could not grade.', 1200, 'unavailable', NULL, NULL, NULL, NULL, 6, '${at}', '${at}')`);
+  const page = await (await sget('/staff/grading/papers')).text();
+  ok(/made-up paper about the covenants/.test(page) && /86 of 100/.test(page) && /Clear and well argued/.test(page), 'the Papers tab shows a graded paper, its score and feedback');
+  ok(/could not grade it/.test(page) && /second made-up paper/.test(page), 'and lists a paper the AI could not grade, first');
+  ok(/Papers <small>\(\d+\)<\/small>/.test(page), 'the tab counts the papers the AI could not grade');
+  ok(!/CTS-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(page), 'and shows no student code');
+  ok(!page.includes(`papers/${P1}/pass`), 'a passed paper offers no review action');
+  ok(page.includes(`papers/${P2}/pass`), 'a paper the AI could not grade offers "Pass this paper"');
+  // a faculty review, after the student asked by email (#318)
+  ok((await fetch(BASE + `/staff/grading/papers/${P2}/pass`, { method: 'POST', redirect: 'manual', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'note=x' })).status === 403, 'passing a paper without Access is refused');
+  ok((await spost(`/staff/grading/papers/${P2}/pass`, { note: 'x' }, WAYNE, { origin: 'https://evil.example' })).status === 403, 'and from another site');
+  ok((await spost(`/staff/grading/papers/${P2}/pass`, { note: '' })).status === 400, 'a review needs a note for the student');
+  ok((await spost(`/staff/grading/papers/${P1}/pass`, { note: 'Fine.' })).status === 409, 'a paper that already passed cannot be passed again');
+  const r = await spost(`/staff/grading/papers/${P2}/pass`, { note: 'Reviewed by the faculty: it meets the standard.' });
+  ok(r.status === 303 && /paperpassed/.test(r.headers.get('location') || ''), `a faculty member passes the paper (${r.status} ${r.headers.get('location')})`);
+  const row = q1(`SELECT status, feedback, record_json FROM assignments WHERE id = '${P2}'`)[0] || {};
+  ok(row.status === 'passed' && /meets the standard/.test(row.feedback || ''), 'the paper now passes, with the note as its feedback', row);
+  ok(JSON.parse(row.record_json || '{}').faculty?.by === WAYNE && JSON.parse(row.record_json || '{}').faculty?.before === 'unavailable', 'the ruling, who made it and the earlier status are kept', row.record_json);
+  ok((q1(`SELECT COUNT(*) AS n FROM textbook_results WHERE student_id = '${sid}' AND textbook = 'otspaper'`)[0] || {}).n === 1, 'and the student has the paper\'s credit');
+  ok((await spost(`/staff/grading/papers/${P2}/pass`, { note: 'again' })).status === 409, 'a second review changes nothing');
+  db(`DELETE FROM students WHERE id = '${sid}'`);
 }
 ok((await sget('/staff/grading/nothing')).status === 404, 'an unknown grading page is a 404');
 ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark cannot be made with GET');
@@ -214,7 +246,9 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   const apB = q1(`SELECT id FROM appeals WHERE student_id = '${B.code}'`)[0].id;
   eq(flashOf(await spost(`/staff/grading/appeals/${apB}/decide`, { ruling: 'overturn', verdict: 'met', note: 'ok' })), 'overturned-passed', 'a student with no confirmed email is not emailed');
   await sleep(1500);
-  ok(!emailLog().includes(B.email), 'and nothing is logged as sent to them');
+  // the welcome note on registering (worker/outreach.js sendWelcome) is the only mail they may have had
+  const toB = emailLog().split('\n').filter((x) => x.includes('email (log mode): ' + B.email));
+  ok(toB.every((x) => / \| (Welcome to Chapala|Bienvenido\/a al Seminario|Bienvenue au Séminaire)/.test(x)), 'and nothing about the appeal is logged as sent to them', toB);
   eq(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${B.code}'`)[0].n, 1, 'but the unit is still passed');
   const after = await (await sget('/staff/grading/appeals')).text();
   ok(/Appeal outcomes, last 4 weeks/.test(after) && /overturned/.test(after), 'the page tracks appeal outcomes');

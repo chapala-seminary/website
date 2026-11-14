@@ -71,11 +71,18 @@ export async function addUsage(env, model, { calls = 0, input = 0, output = 0, e
   } catch (e) { console.error('ai_usage error', e && e.message); }
 }
 
+/** The reply length to allow. A reasoning model (gpt-oss, the fallback) spends
+ *  much of its budget thinking before it writes the JSON: at the old limit every
+ *  fallback reply stopped at exactly 550 tokens, unfinished, and failed (Nov 2026).
+ *  `normal` is what a plain model needs; a reasoning model gets far more. */
+export const isReasoningModel = (model) => /gpt-oss/.test(String(model || ''));
+export const maxTokensFor = (model, normal) => (isReasoningModel(model) ? Math.max(4000, normal * 4) : normal);
+
 async function call(env, model, kind, lang, items, version, more = [], deadline = Date.now() + GRADING_BUDGET_MS) {
   return await runModel(env, model, {
     messages: [...buildMessages(kind, lang, items, version), ...more],
     response_format: { type: 'json_schema', json_schema: schema(kind) },
-    max_tokens: 250 * items.length + 300,
+    max_tokens: maxTokensFor(model, 250 * items.length + 300),
     temperature: 0,
   }, { deadline });
 }
