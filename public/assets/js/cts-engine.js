@@ -1227,6 +1227,7 @@
         renderQuestions();
         fetchMissingMc();
         redrawAtUnlock();
+        autoRecord();          // a pass left unrecorded on an earlier visit
       });
     });
   }
@@ -1274,6 +1275,7 @@
       live.mcRes[q.qid] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? stored : -1), why: r.data.why == null ? null : r.data.why };
       saveState();
       renderQuestions();
+      autoRecord();
     });
   }
 
@@ -1296,6 +1298,7 @@
       absorbGraded(r.data, fill);
       saveState();
       renderQuestions();
+      autoRecord();
       for (var n = i + 1; n < fill.length; n++) {
         if (!fillChecked[n]) { var next = document.querySelector('input[data-fill="' + n + '"]'); if (next) next.focus(); break; }
       }
@@ -1307,6 +1310,53 @@
     absorb(by);
     // an item the reply left out stays unchecked: nothing is assumed
     return by;
+  }
+
+  /* Record a pass without waiting for Submit (Wayne, 14 Nov 2026). Students
+     answered everything, saw every answer marked right, and left without
+     pressing Submit, so the pass was never recorded. When the server's own
+     verdicts already show every required part complete and at or above 90%,
+     submit for them. Written answers that still need grading are never sent
+     on the student's behalf: those wait for the student's own Submit. */
+  var autoTried = null;
+  function readyToRecord() {
+    if (!LIVE || live.status !== "ready" || live.working || unitPassed || !live.attemptId) return false;
+    if (lockedMinutes() || autoTried === live.attemptId) return false;
+    var mcOK = mcPassed;
+    if (!mcOK) {
+      var right = 0;
+      for (var i = 0; i < mc.length; i++) {
+        var m = live.mcRes[mc[i].qid];
+        if (!m) return false;
+        if (m.right) right++;
+      }
+      mcOK = right >= needMC();
+    }
+    if (!mcOK) return false;
+    if (fillCounts()) {
+      var fr = 0;
+      for (var f = 0; f < fill.length; f++) {
+        var x = live.fillRes[fill[f].qid];
+        if (!x || x.verdict === "pending") return false;
+        if (x.verdict === "right") fr++;
+      }
+      if (fr < needFill()) return false;
+    }
+    if (saCounts()) {
+      for (var k = 0; k < sa.length; k++) {
+        var y = live.saRes[sa[k].qid];
+        if (!y || y.verdict !== "met") return false;
+      }
+    }
+    return true;
+  }
+  function autoRecord() {
+    if (!readyToRecord()) return;
+    autoTried = live.attemptId;
+    say(bi({ en: "Every required answer is in and passing. Recording your result now…",
+             es: "Todas las respuestas requeridas están completas y aprobadas. Registrando su resultado…",
+             fr: "Toutes les réponses requises sont complètes et réussies. Enregistrement de votre résultat…" }), C_GOOD);
+    liveSubmit();
   }
 
   // ---- Submit: the unchecked fill-ins, the written answers, then the attempt ----
