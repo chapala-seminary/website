@@ -116,7 +116,10 @@ export async function takeUnit(page, { pages, prefix, n, lang = 'en', wrongMc = 
   await answerMultipleChoice(page, bank, { wrong: wrongMc });
   await answerFillIns(page, bank, { lang, answer: fill });
   if (sa) for (let i = 0; i < sa.length; i++) if (sa[i]) await page.locator(`textarea[data-sa="${i}"]`).fill(essay(sa[i]));
-  await page.locator('#submitExamBtn').click();
+  // A passing exam with nothing left to grade is recorded without Submit
+  // (cts-engine.js autoRecord, 14 Nov 2026): the button is then busy or gone.
+  const submit = page.locator('#submitExamBtn');
+  if (await submit.isVisible() && await submit.isEnabled()) await submit.click({ timeout: 5_000 }).catch(() => {});
   return bank;
 }
 
