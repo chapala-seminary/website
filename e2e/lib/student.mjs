@@ -92,8 +92,12 @@ export async function answerFillIns(page, bank, { lang = 'en', answer } = {}) {
     const text = answer?.(i, q) ?? (q.answer[lang] || q.answer.en);
     // The live engine re-renders questions as replies arrive; one retry
     // covers a field cleared by a late re-render before Check ran.
+    // A track that does not count fill-ins passes on multiple choice alone, and
+    // the pass is recorded at once (cts-engine.js autoRecord): nothing to check.
+    const input = page.locator(`input[data-fill="${i}"]`);
+    if (!(await input.isEditable().catch(() => false))) return;
     for (let attempt = 0; attempt < 2; attempt++) {
-      await page.locator(`input[data-fill="${i}"]`).fill(text);
+      await input.fill(text);
       await page.locator(`button[data-fill-check="${i}"]`).click();
       const done = await page.locator(answered(`.question[data-fill="${i}"]`)).first()
         .waitFor({ timeout: 30_000 }).then(() => true, () => false);
@@ -116,7 +120,10 @@ export async function takeUnit(page, { pages, prefix, n, lang = 'en', wrongMc = 
   await answerMultipleChoice(page, bank, { wrong: wrongMc });
   await answerFillIns(page, bank, { lang, answer: fill });
   if (sa) for (let i = 0; i < sa.length; i++) if (sa[i]) await page.locator(`textarea[data-sa="${i}"]`).fill(essay(sa[i]));
-  await page.locator('#submitExamBtn').click();
+  // A passing exam with nothing left to grade is recorded without Submit
+  // (cts-engine.js autoRecord, 14 Nov 2026): the button is then busy or gone.
+  const submit = page.locator('#submitExamBtn');
+  if (await submit.isVisible() && await submit.isEnabled()) await submit.click({ timeout: 5_000 }).catch(() => {});
   return bank;
 }
 

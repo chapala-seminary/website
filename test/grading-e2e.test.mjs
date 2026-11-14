@@ -171,6 +171,10 @@ ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect'), 'a wron
 ok(!(await has(p, '.question[data-fill="2"]', 'Answer: ')) && !(await has(p, '.question[data-fill="2"]', 'Not quite: look again')), 'and, while the attempt is open, neither the answer wanted nor the model\'s comment on it is shown', (await p.locator('.question[data-fill="2"]').innerText()).slice(0, 300));
 ok(await has(p, '.question[data-fill="2"]', 'Request a human review') && !(await has(p, '.question[data-fill="0"]', 'Request a human review')),
   'a wrong fill-in offers a human review; an exact one does not');
+// reflections written before the last fill-in: a page with reflection text
+// waits for Submit rather than recording the pass by itself (autoRecord)
+await p.locator('textarea[data-sa="0"]').fill('My reflection on the first question, written in my own words for this unit.');
+await p.locator('textarea[data-sa="1"]').fill('A second reflection of mine, also in my own words, about the next question.');
 for (let i = 3; i < john1.fill.length; i++) await fillOne(p, i, john1.fill[i].answer.en);
 
 // the appeal, from the page
@@ -182,8 +186,6 @@ ok(await waitText(p, 'Human review requested.'), 'the appeal is confirmed on the
 // short answers do not count on this track: no model answer before Submit, then only beside what was written
 ok(await has(p, '.cts-ai-note', 'written answers do not count on your track'), 'the page says the written answers are for reflection on this track');
 ok(!(await body(p)).includes(john1.sa[0].model.en.slice(0, 30)), 'no model answer is on screen before Submit');
-await p.locator('textarea[data-sa="0"]').fill('My reflection on the first question, written in my own words for this unit.');
-await p.locator('textarea[data-sa="1"]').fill('A second reflection of mine, also in my own words, about the next question.');
 await p.locator('#submitExamBtn').click();
 ok(await waitText(p, 'Unit 1 passed'), 'Submit: the server passes the unit (19/20 multiple choice, 10/10 fill-in)', (await body(p)).slice(0, 300));
 ok(await has(p, '.question[data-sa="0"] .model-answer', john1.sa[0].model.en.slice(0, 30)) && await p.locator('.question[data-sa="2"] .model-answer').count() === 0,
