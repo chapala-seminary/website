@@ -92,8 +92,12 @@ export async function answerFillIns(page, bank, { lang = 'en', answer } = {}) {
     const text = answer?.(i, q) ?? (q.answer[lang] || q.answer.en);
     // The live engine re-renders questions as replies arrive; one retry
     // covers a field cleared by a late re-render before Check ran.
+    // A track that does not count fill-ins passes on multiple choice alone, and
+    // the pass is recorded at once (cts-engine.js autoRecord): nothing to check.
+    const input = page.locator(`input[data-fill="${i}"]`);
+    if (!(await input.isEditable().catch(() => false))) return;
     for (let attempt = 0; attempt < 2; attempt++) {
-      await page.locator(`input[data-fill="${i}"]`).fill(text);
+      await input.fill(text);
       await page.locator(`button[data-fill-check="${i}"]`).click();
       const done = await page.locator(answered(`.question[data-fill="${i}"]`)).first()
         .waitFor({ timeout: 30_000 }).then(() => true, () => false);

@@ -1342,7 +1342,11 @@
       }
       if (fr < needFill()) return false;
     }
-    if (saCounts()) {
+    if (!saCounts()) {
+      // a reflection the student is writing on a track where it is not graded:
+      // let them finish it and press Submit to see the model answers beside it
+      for (var r = 0; r < sa.length; r++) if (String(saAnswers[r] || "").trim()) return false;
+    } else {
       for (var k = 0; k < sa.length; k++) {
         var y = live.saRes[sa[k].qid];
         if (!y || y.verdict !== "met") return false;
