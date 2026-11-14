@@ -1572,6 +1572,16 @@
     var sb = submitEl();
     if (sb) sb.disabled = !!(live.working || unitPassed || st === "unregistered" || st === "connecting" || st === "loading" || st === "pending");
 
+    // Master's students stopped at the written answers without knowing they
+    // were required (production check, 14 Nov 2026): say so before question 1.
+    if (show && saCounts() && sa.length && !unitPassed) {
+      var nS = needSA(), tS = sa.length;
+      out += '<p class="small cts-sa-required" style="border-left:3px solid #8a5a00;padding-left:.6em">' + bi({
+        en: "Your program includes " + tS + " written answers at the end of this exam, and " + nS + " of them must meet the standard to pass. Write them in your own words, then press Submit: written answers are graded only when you submit.",
+        es: "Su programa incluye " + tS + " respuestas escritas al final de este examen, y " + nS + " deben cumplir el estándar para aprobar. Escríbalas con sus propias palabras y luego pulse Enviar: las respuestas escritas se califican solo al enviar.",
+        fr: "Votre programme comprend " + tS + " réponses écrites à la fin de cet examen, et " + nS + " doivent répondre à l’exigence pour réussir. Rédigez-les avec vos propres mots, puis appuyez sur Envoyer : les réponses écrites sont corrigées seulement à l’envoi."
+      }) + "</p>";
+    }
     if (show && mc.length) {
       if (!split) out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple", fr: "Questions à choix multiple" }) + "</h3>";
       if (mcPassed) out += '<p class="small">' + bi(G.S.mcKept) + "</p>";
