@@ -256,7 +256,8 @@ await p.goto(`${BASE}/CTSALUnit10.html`, { waitUntil: 'load' });
 ok(await ready(p), 'the last unit of the course shows its questions');
 await mcAll(p, al10);
 await fillAll(p, al10);
-await p.locator('#submitExamBtn').click();
+// nothing left to grade and passing: the page records the pass itself (autoRecord)
+if (await p.locator('#submitExamBtn').isEnabled()) await p.locator('#submitExamBtn').click({ timeout: 5000 }).catch(() => {});
 ok(await waitText(p, 'Unit 10 passed'), 'the last unit passes');
 {
   const rows = q1(`SELECT track, source FROM course_completions WHERE student_id = '${codeA}' AND code = 'CTSAL'`);

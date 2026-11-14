@@ -118,7 +118,11 @@ export async function takeUnit(page, { pages, prefix, n, lang = 'en', wrongMc = 
   const bank = unitBank(prefix, n);
   await openExam(page, { pages, n, lang });
   await answerMultipleChoice(page, bank, { wrong: wrongMc });
-  await answerFillIns(page, bank, { lang, answer: fill });
+  // A track that does not count fill-ins passes on multiple choice alone, and the
+  // page records that pass at once (cts-engine.js autoRecord): no fill-ins then.
+  const fillCounts = await page.evaluate(() => { const l = window.CTS_ENGINE?.live?.(); return !(l && l.S && l.S.needs) || !!l.S.needs.fill; });
+  if (fillCounts) await answerFillIns(page, bank, { lang, answer: fill });
+  else await page.waitForFunction(() => !window.CTS_ENGINE?.live?.()?.working, null, { timeout: 30_000 }).catch(() => {});
   if (sa) for (let i = 0; i < sa.length; i++) if (sa[i]) await page.locator(`textarea[data-sa="${i}"]`).fill(essay(sa[i]));
   // A passing exam with nothing left to grade is recorded without Submit
   // (cts-engine.js autoRecord, 14 Nov 2026): the button is then busy or gone.
