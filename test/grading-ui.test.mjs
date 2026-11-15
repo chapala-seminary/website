@@ -406,9 +406,10 @@ if (want(10)) {
   await ready(p);
   ok(await has(p, '.cts-ai-note', 'do not count on your track and are not graded'), 'the written section says it is not graded on this track');
   await mcAll(p);
-  await saAll(p, []);
-  await p.locator('#submitExamBtn').click();
-  ok(await waitText(p, 'Unit 1 passed'), 'the certificate track passes on multiple choice');
+  // A pass is recorded without waiting for Submit (Wayne, 14 Nov 2026): the
+  // last right answer completes everything this track needs.
+  ok(await waitText(p, 'Unit 1 passed'), 'the certificate track passes on multiple choice, recorded without pressing Submit');
+  ok(stub.log.filter((c) => c.path.endsWith('/submit')).length === 1, 'the attempt is submitted exactly once');
   ok(stub.calls('/grade').length === 0, 'no written answer is sent to be graded');
   await ctx.close();
 }
