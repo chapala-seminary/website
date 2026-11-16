@@ -34,6 +34,11 @@ const courses = [
 const knownMissing = [
   'elecrefonereadings:24:sw',
   'elecwestworeadings:27:sw',
+  // Readings v2 (16 Nov 2026, website #336): the five Baptist electives' new
+  // reading tests are EN/ES/FR; their Swahili (prompts and room digests) is
+  // queued for translation. Remove these when the Swahili lands.
+  ...['one', 'two', 'three', 'four', 'five'].flatMap((n) =>
+    Array.from({ length: 40 }, (_, i) => `elecbap${n}readings:${i + 1}:sw`)),
 ].sort();
 
 test('all 20 denominational reading manifests: identity, question distribution, four-language blanks', () => {
