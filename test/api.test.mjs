@@ -129,6 +129,25 @@ ok(told(s.body).join(',') === 'course:CTSNT:sent',
 const repeat = await jpost('/api/sync', { code: CODE, progress: [], doneCodes: ['CTSOTS', 'CTSNT'] });
 ok(told(repeat.body).length === 0, `re-reporting both courses from another device tells the seminary nothing (${told(repeat.body)})`);
 
+/* Concurrent last-unit/completion reports must share one durable notification
+ * claim. A unique D1 row is reserved before email, so no two requests receive
+ * permission to send the same completion event. */
+{
+  const r = await jpost('/api/register', {
+    name: 'Concurrent Completion Student',
+    email: 'concurrent-completion@example.org',
+    track: 'cert',
+  });
+  const replies = await Promise.all(Array.from({ length: 12 }, () =>
+    jpost('/api/sync', { code: r.body.code, progress: [], doneCodes: ['CTSPM'] })));
+  const notices = replies.flatMap((x) => x.body.notifications || [])
+    .filter((x) => x.kind === 'course' && x.code === 'CTSPM');
+  ok(notices.length === 1,
+    `twelve concurrent reports reserve one notification before email (${JSON.stringify(notices)})`);
+  const again = await jpost('/api/sync', { code: r.body.code, progress: [], doneCodes: ['CTSPM'] });
+  ok(told(again.body).length === 0, 'the claimed completion is not announced again');
+}
+
 // A course's level only rises: Associate recorded, a stale device's
 // Certificate report does not lower it, a master's report raises it, and the
 // Associate is not awarded from Certificate-level work.
