@@ -110,6 +110,23 @@ function batchMessage(student, evs) {
   };
 }
 
+/* Atomically reserve one event before email is sent. The unique index is the
+ * concurrency gate: exactly one request gets a row and therefore permission
+ * to send. A failed send keeps the claimed row for retryFailed(); a concurrent
+ * request observes the existing row and does nothing. */
+async function claim(env, student, ev) {
+  const t = now();
+  const result = await env.DB.prepare(
+    `INSERT INTO notifications (student_id, kind, code, status, attempts, error, created_at, sent_at)
+     VALUES (?, ?, ?, 'sending', 0, NULL, ?, NULL)
+     ON CONFLICT(student_id, kind, code) DO NOTHING`)
+    .bind(student.id, ev.kind, ev.code, t).run();
+  if (!result?.meta?.changes) return null;
+  return await env.DB.prepare(
+    'SELECT id FROM notifications WHERE student_id = ? AND kind = ? AND code = ?')
+    .bind(student.id, ev.kind, ev.code).first();
+}
+
 async function attempt(env, student, ev, row) {
   const t = now();
   let status = 'sent', error = null;
@@ -140,14 +157,13 @@ async function attempt(env, student, ev, row) {
 export async function notifyBatch(env, student, evs) {
   try {
     const fresh = [];
+    const rows = [];
     for (const ev of evs) {
-      const seen = await env.DB.prepare(
-        'SELECT id FROM notifications WHERE student_id = ? AND kind = ? AND code = ?')
-        .bind(student.id, ev.kind, ev.code).first();
-      if (!seen) fresh.push(ev);
+      const row = await claim(env, student, ev);
+      if (row) { fresh.push(ev); rows.push(row); }
     }
-    if (fresh.length < 2) return (await Promise.all(fresh.map((ev) => notify(env, student, ev)))).filter(Boolean);
-    return await attemptBatch(env, student, fresh, null);
+    if (fresh.length < 2) return (await Promise.all(fresh.map((ev, i) => attempt(env, student, ev, rows[i])))).filter(Boolean);
+    return await attemptBatch(env, student, fresh, rows);
   } catch (e) {
     console.error('notification error', e);
     return evs.map((ev) => ({ kind: ev.kind, code: ev.code, status: 'failed', error: String(e && e.message || e) }));
@@ -179,11 +195,9 @@ async function attemptBatch(env, student, evs, rows) {
  *  Never throws: a notice must not fail the request that records the event. */
 export async function notify(env, student, ev) {
   try {
-    const seen = await env.DB.prepare(
-      'SELECT id FROM notifications WHERE student_id = ? AND kind = ? AND code = ?')
-      .bind(student.id, ev.kind, ev.code).first();
-    if (seen) return null;
-    return await attempt(env, student, ev, null);
+    const row = await claim(env, student, ev);
+    if (!row) return null;
+    return await attempt(env, student, ev, row);
   } catch (e) {
     console.error('notification error', e);
     return { kind: ev.kind, code: ev.code, status: 'failed', error: String(e && e.message || e) };
@@ -191,14 +205,21 @@ export async function notify(env, student, ev) {
 }
 
 /** Retry this student's failed notices, a few at a time, on their next sync.
- *  Returns what it retried. The certificate details a retry needs are looked
- *  up again from the tables, so a row is enough to rebuild the message. */
+ *  A claimed send that was interrupted before it could record sent/failed is
+ *  recovered after a 15-minute lease; it is not eligible while another normal
+ *  request is still sending. Returns what it retried. The certificate details
+ *  a retry needs are looked up again from the tables, so a row is enough to
+ *  rebuild the message. */
 export async function retryFailed(env, student) {
   const out = [];
   try {
     const all = (await env.DB.prepare(
       `SELECT id, kind, code FROM notifications
-       WHERE student_id = ? AND status = 'failed' AND attempts < ? ORDER BY created_at LIMIT 200`)
+       WHERE student_id = ? AND (
+         (status = 'failed' AND attempts < ?)
+         OR (status = 'sending' AND attempts = 0
+             AND julianday(created_at) <= julianday('now', '-15 minutes'))
+       ) ORDER BY created_at LIMIT 200`)
       .bind(student.id, MAX_ATTEMPTS).all()).results ?? [];
     // Failed course notices go again the way they first went: several
     // together as one email, so a batch that failed is not retried as a flood.
