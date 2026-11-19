@@ -46,10 +46,29 @@ function rewriteLinks(root, file, lang, files) {
 function addLanguageBlocks(root, file, lang) {
   const data = `src/data/interface/rooms/${lang}/${file.replace(/\.html$/, '')}.json`;
   if (!fs.existsSync(data)) return;
-  const { after, blocks } = JSON.parse(fs.readFileSync(data, 'utf8'));
+  const { after, blocks, cards } = JSON.parse(fs.readFileSync(data, 'utf8'));
   const anchors = root.querySelectorAll(after);
   if (anchors.length !== blocks.length) throw new Error(`${data}: ${blocks.length} blocks, but ${file} has ${anchors.length} "${after}"`);
   anchors.forEach((node, i) => node.insertAdjacentHTML('afterend', blocks[i]));
+  // Reading-card metadata belongs beside the English card text, just like the
+  // digest translation. Preserve the source's intentional <em> book titles.
+  if (cards) {
+    const articles = root.querySelectorAll('#cts-readings article.reading');
+    if (articles.length !== cards.length) throw new Error(`${data}: ${cards.length} cards, but ${file} has ${articles.length} reading articles`);
+    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const fields = [
+      ['.num .lang-en', 'label', 'span', false],
+      ['h3 .lang-en', 'title', 'span', false],
+      ['.byline .lang-en', 'source', 'span', true],
+      ['p.lang-en', 'caption', 'p', false],
+    ];
+    articles.forEach((article, i) => fields.forEach(([selector, key, tag, markup]) => {
+      const english = article.querySelector(selector);
+      if (!english || typeof cards[i][key] !== 'string' || !cards[i][key].trim()) throw new Error(`${data}: missing ${key} for reading ${i + 1}`);
+      const translated = markup ? cards[i][key] : esc(cards[i][key]);
+      english.insertAdjacentHTML('afterend', `<${tag} class="lang-${lang}">${translated}</${tag}>`);
+    }));
+  }
 }
 /* The single-page courses: src/data/interface/static/<lang>/<Course>.json pairs
    English passages with their translation (tools/import-language-static.mjs).

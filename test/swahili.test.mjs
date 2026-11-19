@@ -186,9 +186,11 @@ try {
   // B-C1 textbook and room in Swahili
   await page.goto(`${BASE}/sw/CTSTextbookElecBapOne.html`);
   ok(/Urithi au Ukweli\?/.test(await page.locator('.tb-book').first().innerText()), 'the B-C1 textbook is in Swahili');
-  await page.goto(`${BASE}/sw/CTSElecBap1Readings.html`);
+  // The B-C1 room's readings were replaced (readings v2, website #336) and await
+  // Swahili, so the room check uses a core room that has its Swahili digests.
+  await page.goto(`${BASE}/sw/CTS1PeterReadings.html`);
   // the digests sit in a reader that opens on demand, so the text is checked, not what is on screen
-  ok(/Chemchemi Baharini/.test(await page.locator('body').textContent()), 'the B-C1 readings are in Swahili');
+  ok(/Kuzaliwa Upya Kuingia Katika Tumaini Hai/.test(await page.locator('body').textContent()), 'a reading room\'s digests are in Swahili (1 Peter)');
 
   // the other languages are untouched: no Swahili on their pages
   for (const l of ['', 'es/', 'fr/']) {

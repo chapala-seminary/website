@@ -81,8 +81,11 @@
 
   var KEY = "cts_pledge:" + location.pathname;
   /* "cts_pledge_all" lets the automated tests open exams without ticking each box; it is no secret and needs none. */
-  function pledged() { try { return sessionStorage.getItem(KEY) === "1" || sessionStorage.getItem("cts_pledge_all") === "1"; } catch (e) { return false; } }
-  function remember(on) { try { if (on) sessionStorage.setItem(KEY, "1"); else sessionStorage.removeItem(KEY); } catch (e) {} }
+  /* The tick is also kept in memory: some phone and in-app browsers block
+     sessionStorage, and then a ticked box must still open the exam (18 Nov). */
+  var ticked = false;
+  function pledged() { if (ticked) return true; try { return sessionStorage.getItem(KEY) === "1" || sessionStorage.getItem("cts_pledge_all") === "1"; } catch (e) { return false; } }
+  function remember(on) { ticked = !!on; try { if (on) sessionStorage.setItem(KEY, "1"); else sessionStorage.removeItem(KEY); } catch (e) {} }
 
   function pledgeBox(onChange, paper) {
     var box = document.createElement("div");

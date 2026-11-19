@@ -26,6 +26,17 @@ body[data-page-lang="fr"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl,.pan
   #teach-es,#sa-note-es,#sa-badge-es,#titleEs,#t-title-es){display:none!important}
 body[data-page-lang="fr"] :is(.lang-en,.en-only,.block-en,.teach-en,.en-lbl):has(~ .lang-fr){display:none!important}
 
+
+/* Swahili Baptist reading cards: a translated metadata sibling is inserted after the English one by tools/language-pages.mjs. Keep English/Spanish
+   for the optional source view and for fallback cards, but do not display
+   them alongside the native Swahili label, title, source, or caption.
+   Scope this to the translated reading cards only: other untranslated
+   interface text must keep its existing fallback behavior. */
+body[data-page-lang="sw"] #cts-readings article.reading :is(.num, h3, .byline) > :is(.lang-en, .lang-es):has(~ .lang-sw),
+body[data-page-lang="sw"] #cts-readings article.reading :is(.num, h3, .byline) > .lang-sw ~ :is(.lang-en, .lang-es),
+body[data-page-lang="sw"] #cts-readings article.reading > p.lang-en:has(~ p.lang-sw),
+body[data-page-lang="sw"] #cts-readings article.reading > p.lang-sw ~ p.lang-es {display:none!important}
+
 /* Question sources belong directly below the translated wording. */
 [data-show-source="true"] .question .cts-text-pair:has(>.cts-source),
 [data-show-source="true"] .cts-fill-q .cts-text-pair:has(>.cts-source),
