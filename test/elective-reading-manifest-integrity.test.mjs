@@ -39,6 +39,8 @@ const knownMissing = [
   // queued for translation. Remove these when the Swahili lands.
   ...['one', 'two', 'three', 'four', 'five'].flatMap((n) =>
     Array.from({ length: 40 }, (_, i) => `elecbap${n}readings:${i + 1}:sw`)),
+  // Pentecostal elective 1 (readings v2): same, Swahili queued.
+  ...Array.from({ length: 40 }, (_, i) => `elecpconereadings:${i + 1}:sw`),
 ].sort();
 
 test('all 20 denominational reading manifests: identity, question distribution, four-language blanks', () => {
