@@ -384,14 +384,37 @@
   function units(o) {
     var secs = {};
     function st(n) { return state.unitState[n]; }
+    /* Re-assessment at a higher level (#351, cts-level-gate.js): a section passed
+       at a lower level than the student's present one opens for a fresh attempt
+       at that level. Decided once per page load, in memory; the earlier pass,
+       completion and certificate stay recorded. */
+    function levelNow() {
+      var t = (state.registration && state.registration.track) || lsGet("cts_track") || "cert";
+      return window.CTSLevelGate ? window.CTSLevelGate.currentLevel(t, ctsIsAssociate() ? "assoc" : "") : "cert";
+    }
+    var reopened = {};
+    function covered(n) {
+      if (!(n in reopened)) {
+        var LG = window.CTSLevelGate, s = st(n), ok = true;
+        if (LG && o.code && s && s.passed) {
+          var lj = function (k) { try { var a = JSON.parse(lsGet(k) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
+          ok = LG.covers({ stored: s.level, code: o.code, track: levelNow(),
+            lists: { done: lj("cts_done_codes"), assoc: lj("cts_assoc_done_codes"), thm: lj("cts_thm_done_codes"), mdiv: lj("cts_mdiv_done_codes") } });
+        }
+        reopened[n] = !ok;
+      }
+      return !reopened[n];
+    }
+    function sectionPassed(n) { return !!st(n).passed && covered(n); }
     function cfgFor(n) {
       var cfg = {
         scope: o.scopePrefix + n,
         keys: { attempt: "cts_" + o.course + "_u" + n + "_attempt", pending: "cts_" + o.course + "_u" + n + "_pending" },
         n: { mc: (UNITS[n].mcq || []).length, fill: 0, sa: (UNITS[n][o.saKey] || []).length },
-        passed: function () { return !!st(n).passed; },
+        passed: function () { return sectionPassed(n); },
         markPassed: function () {
-          st(n).passed = true; st(n).lockedUntil = 0; saveState(); renderUnitNav(); updateProgress();
+          st(n).passed = true; st(n).level = levelNow(); reopened[n] = false;
+          st(n).lockedUntil = 0; saveState(); renderUnitNav(); updateProgress();
           if (window.CTS_SYNC) { try { window.CTS_SYNC.sync(); } catch (e) {} }
         },
         lock: function () { return st(n).lockedUntil || 0; },
@@ -438,7 +461,7 @@
         host: host, questions: qs, state: st(n),
         counts: function () { return c.fillCounts(); },
         lockedUntil: function () { return st(n).lockedUntil || 0; },
-        passed: function () { return !!st(n).passed; },
+        passed: function () { return sectionPassed(n); },
         save: saveState,
         live: { attemptId: function () { return c.attemptId; }, ensure: function () { return c.ensure(); }, onChecked: function () {} }
       });
@@ -492,7 +515,7 @@
           { sel: "textarea[data-live-sa]", ev: "input", fn: function (t) { c.cfg.setSa(+t.getAttribute("data-live-sa"), t.value); saveState(); } }
         ]);
       }
-      var sb = document.querySelector('#unit' + n + ' .submit-btn'); if (sb) sb.disabled = !!(c.working || s.passed || c.status === "unregistered");
+      var sb = document.querySelector('#unit' + n + ' .submit-btn'); if (sb) sb.disabled = !!(c.working || sectionPassed(n) || c.status === "unregistered");
     }
 
     // the page's own functions, now live
@@ -514,7 +537,7 @@
       o.units.forEach(function (n) {
         if (!UNITS[n] || !st(n)) return;
         var c = sec(n);
-        if (!st(n).passed && (lsGet(c.cfg.keys.attempt) || lsGet(c.cfg.keys.pending))) c.start();
+        if (!sectionPassed(n) && (lsGet(c.cfg.keys.attempt) || lsGet(c.cfg.keys.pending))) c.start();
         else if ((st(n).lockedUntil || 0) > Date.now()) { c.status = "locked"; watch(n); }
       });
     }
