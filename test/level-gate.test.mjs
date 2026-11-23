@@ -63,3 +63,16 @@ test('Track spellings the site has used map to the right level', () => {
   assert.equal(LG.currentLevel('cert'), 'cert');
   assert.equal(LG.currentLevel(undefined), 'cert');
 });
+
+test("the seminary's record wins over a stale master's entry in the browser lists (22 Nov 2026)", () => {
+  // browser lists wrongly say Th.M.; the record says Certificate: the unit opens again
+  assert.equal(LG.covers({ code: 'CTSST', track: 'mdiv', lists: lists({ done: ['CTSST'], thm: ['CTSST'] }), record: { CTSST: 'cert' } }), false);
+  // the record says master's: final, even if the lists are empty
+  assert.equal(LG.covers({ code: 'CTSST', track: 'thm', lists: lists(), record: { CTSST: 'mdiv' } }), true);
+  // a pass stored with its own level still comes first
+  assert.equal(LG.covers({ stored: 'thm', code: 'CTSST', track: 'thm', lists: lists(), record: { CTSST: 'cert' } }), true);
+  // a course the record does not hold falls back to the lists, as before
+  assert.equal(LG.covers({ code: 'CTSST', track: 'thm', lists: lists({ thm: ['CTSST'] }), record: { WISESPEAK: 'cert' } }), true);
+  // no record at all: unchanged behaviour
+  assert.equal(LG.covers({ code: 'CTSST', track: 'thm', lists: lists({ thm: ['CTSST'] }) }), true);
+});

@@ -296,6 +296,14 @@
       if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); return true; }
       return false;
     }
+    // The level the seminary's record holds for each course, as the server
+    // sent it: the unit pages' re-assessment gate (cts-level-gate.js, #351)
+    // trusts it over the browser's own lists, which only ever grow.
+    if (Array.isArray(state.completions)) {
+      var recordLevels = {};
+      state.completions.forEach(function (c) { if (c && c.code && c.track) recordLevels[String(c.code).toUpperCase()] = String(c.track).toLowerCase(); });
+      set('cts_record_levels', JSON.stringify(recordLevels));
+    }
     (state.completions || []).forEach(function (c) {
       if (!c || !c.code) return;
       var lists = { mdiv: 'cts_mdiv_done_codes', thm: 'cts_thm_done_codes', assoc: 'cts_assoc_done_codes' };

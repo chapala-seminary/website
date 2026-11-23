@@ -253,6 +253,7 @@
     var s = student() || {};
     return LG.covers({
       stored: lsGet(LEVEL_KEY), code: U.completion.code, track: track(), goal: lsGet("cts_goal") || s.goal,
+      record: jget("cts_record_levels", {}),
       lists: { done: jget("cts_done_codes", []), assoc: jget("cts_assoc_done_codes", []),
                thm: jget("cts_thm_done_codes", []), mdiv: jget("cts_mdiv_done_codes", []) }
     });

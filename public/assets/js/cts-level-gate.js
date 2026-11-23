@@ -21,6 +21,11 @@
  *   2. otherwise, the level the whole course is recorded at in the degree
  *      lists (cts_done_codes / cts_assoc_done_codes / cts_thm_done_codes /
  *      cts_mdiv_done_codes) -- the upgrade case this exists for;
+ *   2a. but where the seminary's record (the server, saved by cts-sync.js as
+ *      cts_record_levels) holds the course, its level wins over the degree
+ *      lists: those lists only ever grow in the browser, so a stale or
+ *      mistaken master's entry there would keep a Certificate-level course
+ *      closed (Cristian's case, 22 Nov 2026). Nothing is removed from them.
  *   3. otherwise unknown, and the pass is honoured as before. A student part
  *      way through a course is never sent back over units already passed.
  */
@@ -67,17 +72,24 @@
     return null;
   }
 
-  /* o: { stored, code, lists, track, goal }
+  // the level the seminary's record holds for a course: { CODE: track }
+  function recordLevel(code, record) {
+    if (!record || typeof record !== "object") return null;
+    var want = String(code || "").toUpperCase();
+    return want && Object.prototype.hasOwnProperty.call(record, want) ? norm(record[want]) : null;
+  }
+
+  /* o: { stored, code, lists, record, track, goal }
      -> true when the pass in the browser is enough at the current level */
   function covers(o) {
     o = o || {};
     var now = currentLevel(o.track, o.goal);
-    var at = norm(o.stored) || courseLevel(o.code, o.lists);
+    var at = norm(o.stored) || recordLevel(o.code, o.record) || courseLevel(o.code, o.lists);
     if (!at) return true;                       // unknown: honoured, as before
     return RANK[at] >= RANK[now];
   }
 
-  var api = { covers: covers, currentLevel: currentLevel, courseLevel: courseLevel, norm: norm };
+  var api = { covers: covers, currentLevel: currentLevel, courseLevel: courseLevel, recordLevel: recordLevel, norm: norm };
   if (typeof module === "object" && module.exports) module.exports = api;
   if (root) root.CTSLevelGate = api;
 })(typeof window !== "undefined" ? window : null);

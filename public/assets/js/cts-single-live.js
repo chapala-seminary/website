@@ -398,7 +398,8 @@
         var LG = window.CTSLevelGate, s = st(n), ok = true;
         if (LG && o.code && s && s.passed) {
           var lj = function (k) { try { var a = JSON.parse(lsGet(k) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } };
-          ok = LG.covers({ stored: s.level, code: o.code, track: levelNow(),
+          var rec; try { rec = JSON.parse(lsGet("cts_record_levels") || "{}"); } catch (e) { rec = {}; }
+          ok = LG.covers({ stored: s.level, code: o.code, track: levelNow(), record: rec,
             lists: { done: lj("cts_done_codes"), assoc: lj("cts_assoc_done_codes"), thm: lj("cts_thm_done_codes"), mdiv: lj("cts_mdiv_done_codes") } });
         }
         reopened[n] = !ok;
