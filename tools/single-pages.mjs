@@ -25,6 +25,7 @@ import { COURSES, fillBank } from './single-pages-lib.mjs';
 
 const LIVE_JS = '/assets/js/cts-single-live.js?v=20261014a';
 const GRADING_JS = '/assets/js/cts-grading.js';
+const LEVEL_JS = '/assets/js/cts-level-gate.js';
 
 /* ---- finding things in the page script ---------------------------------------- */
 function scripts(html) {
@@ -116,7 +117,7 @@ const UNITS_CFG = {
   narrative: { course: 'storytel', scopePrefix: 'sp:CTS_Narrative_Preaching-u', saKey: 'essays', saText: { en: 'promptEn', es: 'promptEs', fr: 'promptFr' }, fillKey: 'narrative' },
   wisespeak: { course: 'wisespeak', scopePrefix: 'sp:CTS_WiseSpeak_Preaching-u', saKey: 'essays', saText: { en: 'promptEn', es: 'promptEs', fr: 'promptFr' }, fillKey: 'wisespeak' },
 };
-const tags = `</script>\n<script src="${GRADING_JS}"></script>\n<script src="${LIVE_JS}"></script>\n<script>\n`;
+const tags = `</script>\n<script src="${GRADING_JS}"></script>\n<script src="${LEVEL_JS}"></script>\n<script src="${LIVE_JS}"></script>\n<script>\n`;
 
 export function livePage(html, courseKey, file) {
   const c = COURSES[courseKey];
@@ -130,7 +131,7 @@ export function livePage(html, courseKey, file) {
     code = code.replace(tailRe, () => `${tags}CTSSingleLive.ethics(${JSON.stringify({ scope: `sp:${c.page(unit)}` })});\n`);
   } else {
     code = stripUnitsData(code);
-    const cfg = { ...UNITS_CFG[courseKey], units: c.units };
+    const cfg = { ...UNITS_CFG[courseKey], units: c.units, code: c.code };
     const marker = '// ============= INIT =============';
     if (!code.includes(marker)) throw new Error(`${file}: no INIT marker in the page script`);
     code = code.replace(marker, () => `${tags}CTSSingleLive.units(${JSON.stringify(cfg)});\n${marker}`);
