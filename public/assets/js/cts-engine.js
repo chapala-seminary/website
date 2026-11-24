@@ -122,7 +122,8 @@
      to a Unit 13 that does not exist. */
   function nextWhere() {
     var m = /Unit(\d+)\.html$/.exec(U.nextHref || "");
-    return m ? { en: "Unit " + m[1], es: "Unidad " + m[1], fr: "Unité " + m[1] } : { en: "the Certificate", es: "el Certificado", fr: "le certificat" };
+    var nx = m && U.nextPosition ? U.nextPosition : (m && m[1]);   // a course with a reading order shows positions
+    return m ? { en: "Unit " + nx, es: "Unidad " + nx, fr: "Unité " + nx } : { en: "the Certificate", es: "el Certificado", fr: "le certificat" };
   }
   /* Associate of Divinity students study at certificate rigor (cts_track
      stays "cert", so their lockout is the certificate one) but record the
@@ -534,7 +535,7 @@
       : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es, fr: "Aller à " + nextWhere().fr }
       : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso", fr: "Voir votre progression dans ce cours" } : null;
     var h = '<div class="cts-passed" role="status">' +
-      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada", fr: "Unité " + U.unit + " réussie" }) + "</p>" +
+      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + (U.position || U.unit) + " passed", es: "Unidad " + (U.position || U.unit) + " aprobada", fr: "Unité " + (U.position || U.unit) + " réussie" }) + "</p>" +
       "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
                    es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : "."), fr: "Votre progression est enregistrée" + (total ? " : " + n + " unités réussies sur " + total + "." : ".") }) + "</p>";
     if (tbAssess) h += "<p>" + bi(pending.length > 1
@@ -1077,8 +1078,8 @@
     if (unitPassed || testMode()) return true;
     // LIVE: a unit submitted and waiting to be graded does not hold the student back
     if (LIVE && live && live.status === "pending") return true;
-    alert(pick({ en: "Please pass Unit " + U.unit + " first.",
-                 es: "Por favor apruebe la Unidad " + U.unit + " primero.", fr: "Veuillez réussir l’unité " + U.unit + " d’abord." }));
+    alert(pick({ en: "Please pass Unit " + (U.position || U.unit) + " first.",
+                 es: "Por favor apruebe la Unidad " + (U.position || U.unit) + " primero.", fr: "Veuillez réussir l’unité " + (U.position || U.unit) + " d’abord." }));
     return false;
   }
 
