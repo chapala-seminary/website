@@ -237,6 +237,30 @@
   var unitPassed = !!progress["unit" + U.unit];
   var mcPassed   = lsGet(KEY.mcPassed) === "1";
 
+  /* Re-assessment at a higher level (#351). A passed unit is final only at
+     the level it was passed at: a student who finished the course on the
+     Certificate track and is now on the Associate goal or a master's track
+     is let into a fresh attempt at the new level, which the server needs
+     before it raises the completion (worker/grading/attempts.js
+     earnedLevel). Only in memory: the earlier pass, the course's earlier
+     completion and its certificate stay recorded. cts-level-gate.js decides;
+     a page without it keeps the old behaviour. */
+  var LEVEL_KEY = "cts_" + U.course + "_u" + U.unit + "_level";   // new key: the level a pass was made at
+  function levelNow() { return isMasters() ? "thm" : isAssociate() ? "assoc" : "cert"; }
+  function passCovers() {
+    var LG = window.CTSLevelGate;
+    if (!LIVE || !LG || !U.completion || !U.completion.code) return true;
+    var s = student() || {};
+    return LG.covers({
+      stored: lsGet(LEVEL_KEY), code: U.completion.code, track: track(), goal: lsGet("cts_goal") || s.goal,
+      record: jget("cts_record_levels", {}),
+      lists: { done: jget("cts_done_codes", []), assoc: jget("cts_assoc_done_codes", []),
+               thm: jget("cts_thm_done_codes", []), mdiv: jget("cts_mdiv_done_codes", []) }
+    });
+  }
+  var reassessing = unitPassed && !passCovers();
+  if (reassessing) { unitPassed = false; mcPassed = false; }
+
   /* Model answers for short-answer work: the tracks where it does not count
      see them on submit; tracks whose short answer is graded see them once the
      unit is passed. Multiple choice is corrected on click for everyone. */
@@ -1444,6 +1468,8 @@
 
   function livePass(R, quiet) {
     unitPassed = true; mcPassed = true; graded = true; live.status = "passed"; live.working = "";
+    reassessing = false;
+    lsSet(LEVEL_KEY, levelNow());
     progress["unit" + U.unit] = true;
     lsSet(KEY.progress, JSON.stringify(progress));
     writeLegacy(U.unit);

@@ -301,6 +301,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
     <script is:inline src={version('/assets/js/cts-record.js')} defer></script>
     {live && <script is:inline src={version('/assets/js/cts-grading.js')} defer></script>}
+    {live && <script is:inline src={version('/assets/js/cts-level-gate.js')} defer></script>}
     <script is:inline src={version('/assets/js/cts-engine.js')} defer></script>
     {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)} defer></script>)}
     {/* The lesson and the exam are never shown together, so the browser's

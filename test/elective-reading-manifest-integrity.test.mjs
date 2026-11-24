@@ -32,8 +32,7 @@ const courses = [
 // Remove each entry when its prompt is corrected and reviewed. Run --strict
 // to require zero omissions before an owner-approved production release.
 const knownMissing = [
-  'elecrefonereadings:24:sw',
-  'elecwestworeadings:27:sw',
+  // elecrefonereadings:24 and elecwestworeadings:27 fixed in #201 (Nov 2026).
   // Readings v2 (16 Nov 2026, website #336): the five Baptist electives' new
   // reading tests are EN/ES/FR; their Swahili (prompts and room digests) is
   // queued for translation. Remove these when the Swahili lands.

@@ -29,6 +29,8 @@ node --test test/track-sync-ack.test.mjs
 # Legacy Associate goals must reach the server on an ordinary sync poll.
 node --test test/track-adopt-poll.test.mjs
 node --test test/degree-count-dedupe.test.mjs
+# Higher-level re-assessment of units already passed at a lower level (#351).
+node --test test/level-gate.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
 # Synthetic end-to-end submit choreography: receipts, chunked grading and safe retry.
