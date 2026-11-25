@@ -37,7 +37,8 @@ try{
  ('CTS-TEST-0000-0012','CTSOTS','cert','2001-01-01T00:00:00Z');
  `);
  sql(migration);await start();
- const policy=(await get('/api/health')).requiredFrom;
+ // Ministry papers (catalog.assessments) carry their own dated holds in the local config; this test is about the staged reading/textbook tests.
+ const policy=Object.fromEntries(Object.entries((await get('/api/health')).requiredFrom).filter(([slug])=>!(catalog.assessments||{})[slug]));
  const EIGHT=['otsreadings','ntreadings','streadings','evangelismreadings','pmreadings','chreadings','wisespeakreadings','hermeneuticsreadings'];
  check(Object.keys(policy).length===71,'71 staged requirements activate (79 less the eight awaiting faculty review)');
  check(EIGHT.every(slug=>!(slug in policy)),'the eight reading tests awaiting faculty review stay optional (Wayne, 18 Oct 2026)');
