@@ -10,7 +10,7 @@
  * Plain JavaScript, so the Worker, the build tools and the TypeScript pages
  * can all import it.
  */
-export const SITE_LANGUAGES = ['en', 'es', 'fr', 'sw'];
+export const SITE_LANGUAGES = ['en', 'es', 'fr', 'sw', 'pt'];
 
 /* The languages whose words are written into the layouts beside the English
    (lang-en / lang-es / lang-fr spans). A later language gets its interface
@@ -19,13 +19,13 @@ export const LAYOUT_LANGUAGES = ['en', 'es', 'fr'];
 export const DICTIONARY_LANGUAGES = SITE_LANGUAGES.filter((l) => !LAYOUT_LANGUAGES.includes(l));
 
 /* Each language's own name, as the language toggle shows it. */
-export const LANGUAGE_NAMES = { en: 'English', es: 'Español', fr: 'Français', sw: 'Kiswahili' };
+export const LANGUAGE_NAMES = { en: 'English', es: 'Español', fr: 'Français', sw: 'Kiswahili', pt: 'Português' };
 
 /* The name of the source language (English) in each reader's language, for
    the "Show English" control and the fallback notice. */
-export const ENGLISH_IN = { es: 'inglés', fr: 'anglais', sw: 'Kiingereza' };
+export const ENGLISH_IN = { es: 'inglés', fr: 'anglais', sw: 'Kiingereza', pt: 'inglês' };
 
 /* Locale tags for dates and country names. */
-export const LOCALE = { en: 'en-US', es: 'es-MX', fr: 'fr-FR', sw: 'sw-KE' };
+export const LOCALE = { en: 'en-US', es: 'es-MX', fr: 'fr-FR', sw: 'sw-KE', pt: 'pt-BR' };
 
 export const isSiteLanguage = (code) => SITE_LANGUAGES.includes(code);
