@@ -108,7 +108,7 @@ function page(b, parts, missing, lang = 'es') {
 <h1>${esc(L.title(b))}</h1>
 <p class="by">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</p>
 </header>
-${lang === 'es' ? readerEditorialNotice(b.key, 'es') : ''}<div class="note"><p>${L.note(b)}</p></div>
+${readerEditorialNotice(b.key, lang)}<div class="note"><p>${L.note(b)}</p></div>
 ${toc}
 ${body}
 <footer class="doc">${L.footer(b)}</footer>

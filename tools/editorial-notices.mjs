@@ -4,5 +4,6 @@ const notices = JSON.parse(fs.readFileSync(new URL('../src/data/editorial-notice
 export function readerEditorialNotice(book, lang) {
   if (book !== 'joshua') return '';
   const n = notices.blaikie;
+  if (!n.title[lang]) return '';
   return `<div class="note" data-cts-editorial="blaikie" lang="${lang}"><p><b>${n.title[lang]}.</b> ${n.body[lang]}</p></div>\n`;
 }
