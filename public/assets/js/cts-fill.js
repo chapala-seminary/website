@@ -92,7 +92,7 @@
     return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas|le|les|l|une|des) (?=\S)/, "");
   }
 
-  function fillCodes() { return window.CTSLanguage?.lang === "fr" ? ["fr", "en"] : ["en", "es"]; }
+  function fillCodes() { var l = window.CTSLanguage?.lang; return l === "fr" || l === "pt" ? [l, "en"] : ["en", "es"]; }
 
   function need(n) { return Math.ceil(n * PASS_RATIO); }
   function esc(v) {

@@ -32,6 +32,7 @@ export function fillCodes(lang) {
   if (lang === 'fr') return ['fr', 'en'];
   // Languages added after French (src/lib/languages.mjs): the reader's and the source.
   if (lang === 'sw') return ['sw', 'en'];
+  if (lang === 'pt') return ['pt', 'en'];
   return ['en', 'es'];
 }
 

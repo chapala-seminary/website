@@ -175,8 +175,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   const line = fs.readFileSync(new URL('./wrangler.local.jsonc', import.meta.url), 'utf8').split('\n').find((l) => /^\s*"TEST_REQUIRED_FROM":/.test(l));
   let held = {};
   try { held = JSON.parse(JSON.parse(line.trim().replace(/^"TEST_REQUIRED_FROM":\s*/, '').replace(/,$/, ''))); } catch (e) {}
-  // pentecostalreadings is the canary held as active since 2001 (below), dated or not
-  const missing = Object.keys(dated).filter((slug) => slug !== 'pentecostalreadings' && (!(slug in held) || Date.parse(held[slug]) <= Date.now()));
+  const missing = Object.keys(dated).filter((slug) => !(slug in held) || Date.parse(held[slug]) <= Date.now());
   ok(!missing.length, 'every dated test is held at "not yet required" in the suite\'s Worker', missing);
   ok(held.pentecostalreadings === '2001-01-01T00:00:00Z', 'and the rule is still tested on pentecostalreadings, active since 2001');
 }
@@ -197,10 +196,9 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   // (#318) sit in the same schedule and are checked in masters-assessments.test.mjs
   const dated = Object.entries(SCHED).filter(([slug]) => catalog.textbooks[slug]);
   const electives = dated.filter(([slug]) => slug.startsWith('elec'));
-  // Dr. Cook, 24 Nov 2026: every pending textbook and reading test from 1 Dec 2026
-  ok(dated.length === 121, 'post-activation: 121 explicitly dated examinations in the academic schedule', dated.length);
-  ok(electives.length === 40 && dated.length - electives.length === 81,
-    'post-activation: 40 elective and 81 foundation/core textbook and reading tests', {
+  ok(dated.length === 48, 'post-activation: 48 explicitly dated examinations in the academic schedule', dated.length);
+  ok(electives.length === 40 && dated.length - electives.length === 8,
+    'post-activation: 40 elective and eight foundation/core reading tests', {
       elective: electives.length, core: dated.length - electives.length,
     });
 
