@@ -78,7 +78,7 @@ try{
  await fetch(base+'/api/student/'+reg.body.code,{method:'DELETE'});
  browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
  const page=await browser.newPage();await page.goto(base+'/CTSUnit1.html?cts_lang=en');
- await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===71);
+ await page.waitForFunction((papers)=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).filter(slug=>!papers.includes(slug)).length===71,Object.keys(catalog.assessments||{}));
  check(await page.locator('#cts-master-requirements').count()===0,'activation policy loads without injecting a page-top notice');
  await page.evaluate(()=>window.CTS_SYNC.restore('CTS-TEST-0000-0011'));
  check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_oldtestament_exempt')),'older exemption follows recovery to another browser');
