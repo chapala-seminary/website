@@ -161,22 +161,26 @@ img.cts-sig{max-height:50px;width:auto;max-width:92%;display:block;margin:2px au
 </div>
 <script>
 const COURSE = 'elecref1';
-const totalUnits = 10;
+const totalUnits = 12;
+// Reading order (src/data/unit-order.json): units keep their stored numbers; the grid shows positions.
+const ORDER = [1, 2, 3, 11, 4, 5, 6, 7, 8, 12, 9, 10];
+// A completion recorded before the course grew from 10 to 12 units keeps the course (src/data/unit-legacy.json).
+const LEGACY_UNITS = 10;
 const PROGRESS_KEY = `cts_${COURSE}_progress`;
 
 let progress = {};
 try { progress = JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch (e) { progress = {}; }
 
-const unitTitlesEn = ["Unit 1 - What Does \"Reformed\" Mean? Names, Roots, and the Shape of the Tradition","Unit 2 - Zwingli and Bullinger in Zurich: The First Reformed City","Unit 3 - John Calvin and Geneva: Teacher, Pastor and City","Unit 4 - The Reformed Faith Spreads: France, the Netherlands, Hungary and the Palatinate","Unit 5 - John Knox and the Scottish Reformation","Unit 6 - The Synod of Dort (1618-19)","Unit 7 - The Puritans and the Westminster Assembly","Unit 8 - Reformed Churches in America: Presbyterian and Dutch Reformed; Princeton","Unit 9 - Reformed Missions and Churches in Latin America, Africa, and Asia","Unit 10 - Division, Liberalism, and Confessional Renewal in the Twentieth Century and Today"];
+const unitTitlesEn = ["Unit 1 - What Does \"Reformed\" Mean? Names, Roots, and the Shape of the Tradition", "Unit 2 - Zwingli and Bullinger in Zurich: The First Reformed City", "Unit 3 - John Calvin and Geneva: Teacher, Pastor and City", "Unit 5 - The Reformed Faith Spreads: France, the Netherlands, Hungary and the Palatinate", "Unit 6 - John Knox and the Scottish Reformation", "Unit 7 - The Synod of Dort (1618-19)", "Unit 8 - The Puritans and the Westminster Assembly", "Unit 9 - Reformed Churches in America: Presbyterian and Dutch Reformed; Princeton", "Unit 11 - Reformed Missions and Churches in Latin America, Africa, and Asia", "Unit 12 - Division, Liberalism, and Confessional Renewal in the Twentieth Century and Today", "Unit 4 - Calvin's Institutes, from Pastor's Handbook to Reformed Influence", "Unit 10 - Presbyterianism in Brazil"];
 
 function updateProgressGrid() {
     const grid = document.getElementById('progressGrid');
     if (!grid) return;
     grid.innerHTML = '';
-    for (let i = 1; i <= totalUnits; i++) {
+    ORDER.forEach((i, k) => {
         const cls = progress[`unit${i}`] ? 'completed' : '';
-        grid.innerHTML += `<a href="CTSElecRef1Unit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${i}</a>`;
-    }
+        grid.innerHTML += `<a href="CTSElecRef1Unit${i}.html" class="${cls}" title="${unitTitlesEn[i-1]}">${k + 1}</a>`;
+    });
 }
 
 function countCompleted() {
@@ -198,7 +202,13 @@ function displayStudentGreeting() {
 function renderCertificate() {
     const isEs = document.body.classList.contains('lang-es');
     const completed = countCompleted();
-    const allDone = completed >= totalUnits;
+    let doneCodes = [];
+    ['cts_done_codes', 'cts_mdiv_done_codes', 'cts_thm_done_codes'].forEach(k => {
+        try { const a = JSON.parse(localStorage.getItem(k) || '[]'); if (Array.isArray(a)) doneCodes = doneCodes.concat(a); } catch (e) {}
+    });
+    let legacyDone = Array.isArray(doneCodes) && doneCodes.map(String).map(c => c.toUpperCase()).includes('CTSELECREF1');
+    for (let i = 1; i <= LEGACY_UNITS; i++) { if (!progress[`unit${i}`]) legacyDone = false; }
+    const allDone = completed >= totalUnits || legacyDone;
 
     document.getElementById('certWrap').style.display = allDone ? 'block' : 'none';
     document.getElementById('lockMsg').style.display = allDone ? 'none' : 'block';

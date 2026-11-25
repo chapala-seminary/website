@@ -214,6 +214,7 @@ node test/french-readings.test.mjs
 # completions the record held before a reading test was activated: the rule
 # itself, case by case, without a server.
 node test/required-tests.test.mjs
+node test/unit-legacy.test.mjs
 # The master's ministry paper as a course requirement (#318): none in force as
 # shipped; once a pilot paper is dated, a master's course needs it, except a
 # master's completion from before the date. Never the final (Dr. Cook, 12 Nov 2026).
