@@ -10,7 +10,7 @@
 /** Lower-case, punctuation to spaces, one space between words, a space at each end. */
 export function normalise(s) {
   return ' ' + String(s || '').toLowerCase().normalize('NFC')
-    .replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ') + ' ';
+    .replace(/[^\p{L}\p{M}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ') + ' ';
 }
 
 /* Accents do not decide a fill-in (Dr. Cook's beta pass, 30 Sept 2026):
@@ -33,6 +33,7 @@ export function fillCodes(lang) {
   // Languages added after French (src/lib/languages.mjs): the reader's and the source.
   if (lang === 'sw') return ['sw', 'en'];
   if (lang === 'pt') return ['pt', 'en'];
+  if (lang === 'ta') return ['ta', 'en'];
   return ['en', 'es'];
 }
 
