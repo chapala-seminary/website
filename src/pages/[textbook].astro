@@ -72,6 +72,8 @@ const excerpts = ('excerpts' in book.files);
         <>
           <a class="btn" href={`/${pdf?.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span><span class="lang-fr">PDF (anglais)</span></a>
           <a class="btn" href={`/${pdf?.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span><span class="lang-fr">PDF (espagnol)</span></a>
+          {pdf?.fr && <a class="btn lang-fr" href={`/${pdf.fr}`} download>PDF (français)</a>}
+          {pdf?.sw && <a class="btn lang-sw" href={`/${pdf.sw}`} download>PDF (Kiswahili)</a>}
         </>
       )}
     </div>
