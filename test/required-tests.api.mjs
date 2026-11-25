@@ -13,6 +13,10 @@
 // a student who finished before activation would already hold it.
 
 import { execFileSync } from './lib/d1-exec.mjs';
+import catalog from '../worker/catalog.json' with { type: 'json' };
+// Ministry papers (catalog.assessments) are exempted alongside the tests for a pre-activation
+// master's completion (#395); these checks are about the reading and textbook tests.
+const tests = (list) => (list || []).filter((slug) => !(catalog.assessments || {})[slug]);
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
@@ -98,7 +102,7 @@ for (const [track, extra] of [['cert', {}], ['cert', { goal: 'assoc' }]]) {
     await jpost('/api/sync', { code: c, progress: allUnits, textbooks: [{ slug: BOOK, passedAt: AT }], ...done('mdiv') });
     const st = (await jget(`/api/student/${c}`)).body;
     ok(has(st, 'mdiv'), 'Case 1: the earlier M.Div. completion is still in the record', st.completions);
-    ok(JSON.stringify(st.exemptions) === JSON.stringify([READ]), 'Case 1: the record names the reading test as not needed for it', st.exemptions);
+    ok(JSON.stringify(tests(st.exemptions)) === JSON.stringify([READ]), 'Case 1: the record names the reading test as not needed for it', st.exemptions);
     const cert = await jpost('/api/certificate', { code: c, level: 'course', course: 'pentecostal', title: 'Pentecostalism & the Charismatic Movement' });
     ok(cert.status === 201, `Case 1: its certificate is issued without the reading test (${cert.status}: ${cert.body?.error})`);
   }
