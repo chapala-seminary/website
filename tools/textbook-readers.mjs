@@ -21,15 +21,15 @@ const STAGED = path.join(resolveKeysRoot('.') || '../assessment-keys', 'textbook
 
 const WRITE = process.argv.includes('--write'), STRICT = process.argv.includes('--strict');
 const BOOKS = [
-  { key: 'joshua', title: 'El libro de Josué', series: 'The Expositor’s Bible', author: 'William Garden Blaikie', year: '1893', gutenberg: 42319,
+  { key: 'joshua', slug: 'joshua', title: 'El libro de Josué', sw: 'Kitabu cha Yoshua', series: 'The Expositor’s Bible', author: 'William Garden Blaikie', year: '1893', gutenberg: 42319,
     english: 'CTSJoshua_Blaikie_English.html', out: 'public/textbooks/CTSJoshua_Blaikie_Spanish.html', room: 'CTSJoshReadings.html',
     bank: path.join(STAGED, 'joshua-blaikie.bank.v4-balanced.json'),
     groups: [['I', 'II', 'III'], ['X', 'XI'], ['XVIII', 'XIX', 'XX'], ['XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI'], ['XXX', 'XXXI', 'XXXII', 'XXXIII']] },
-  { key: 'galatians', title: 'La epístola a los Gálatas', series: 'The Expositor’s Bible', author: 'George G. Findlay', year: '1888', gutenberg: 42645,
+  { key: 'galatians', slug: 'galatiansfindlay', title: 'La epístola a los Gálatas', sw: 'Waraka kwa Wagalatia', series: 'The Expositor’s Bible', author: 'George G. Findlay', year: '1888', gutenberg: 42645,
     english: 'CTSGalatians_Findlay_English.html', out: 'public/textbooks/CTSGalatians_Findlay_Spanish.html', room: 'CTSGalatiansReadings.html',
     bank: path.join(STAGED, 'galatians-findlay.bank.v2-balanced.json'),
     groups: [['IV'], ['X'], ['XIV', 'XVI'], ['XXII', 'XXV'], ['XXVI', 'XXVII']] },
-  { key: 'romans', title: 'La epístola de san Pablo a los Romanos', series: 'The Expositor’s Bible', author: 'Handley C. G. Moule', year: '1894', gutenberg: 48858,
+  { key: 'romans', slug: 'romansmoule', title: 'La epístola de san Pablo a los Romanos', sw: 'Waraka wa Mtakatifu Paulo kwa Warumi', series: 'The Expositor’s Bible', author: 'Handley C. G. Moule', year: '1894', gutenberg: 48858,
     english: 'CTSRomans_Moule_English.html', out: 'public/textbooks/CTSRomans_Moule_Spanish.html', room: 'CTSRomansReadings.html',
     bank: path.join(STAGED, 'romans-moule.bank.v3-balanced.json'),
     groups: [['III', 'VIII'], ['IX', 'XII'], ['XIV', 'XVII'], ['XX', 'XXIV'], ['XXV', 'XXIX']] },
@@ -56,17 +56,30 @@ function render(md) {
 }
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
 
-function page(b, parts, missing) {
+/* Each language's page text. Spanish first (Dr. Cook, 10 Oct 2026); Swahili
+   from docs/readers/textbooks/<book>/sw/ when that folder exists. */
+const LANGS = {
+  es: { suffix: 'Spanish', title: (b) => b.title, chapter: 'Capítulo', toc: 'Capítulos asignados', group: 'grupo', pending: 'En preparación: capítulos',
+    kind: 'capítulos asignados en español, CTS', room: '← Sala de lecturas del curso', kicker: 'Libro de texto de maestría · capítulos asignados · traducción de CTS',
+    note: (b) => `<b>Nota de CTS.</b> Traducción íntegra y fiel, párrafo por párrafo, de los capítulos asignados para el examen del libro de texto de maestría. Conserva las opiniones y la terminología del autor y de su época, que CTS no necesariamente comparte. Las citas bíblicas siguen la Reina-Valera 1960 cuando el pasaje es claramente el mismo. Los capítulos llevan la numeración de la edición inglesa (Project Gutenberg n.º ${b.gutenberg}).`,
+    footer: (b) => `Traducción al español de Chapala Theological Seminary (Seminario Teológico de Chapala), 2026, de la obra original en inglés de ${esc(b.author)}, que es de dominio público. <a href="../${b.room}">Volver a la sala de lecturas</a>` },
+  sw: { suffix: 'Swahili', title: (b) => b.sw, chapter: 'Sura', toc: 'Sura zilizoagizwa', group: 'kundi', pending: 'Zinaandaliwa: sura',
+    kind: 'sura zilizoagizwa kwa Kiswahili, CTS', room: '← Chumba cha masomo cha kozi', kicker: 'Kitabu cha kiada cha shahada ya uzamili · sura zilizoagizwa · tafsiri ya CTS',
+    note: (b) => `<b>Neno la CTS.</b> Tafsiri kamili na aminifu, aya kwa aya, ya sura zilizoagizwa kwa ajili ya mtihani wa kitabu cha kiada cha shahada ya uzamili. Inahifadhi maoni na istilahi za mwandishi na za wakati wake, ambazo CTS haikubaliani nazo lazima. Nukuu za Biblia zinafuata Biblia Takatifu (Union Version) pale kifungu kilipo wazi kuwa kilekile. Sura zinafuata namba za toleo la Kiingereza (Project Gutenberg na. ${b.gutenberg}).`,
+    footer: (b) => `Tafsiri ya Kiswahili ya Chapala Theological Seminary (Seminari ya Kitheolojia ya Chapala), 2026, ya kazi asilia ya Kiingereza ya ${esc(b.author)}, ambayo ni mali ya umma. <a href="../${b.room}">Rudi kwenye chumba cha masomo</a>` },
+};
+function page(b, parts, missing, lang = 'es') {
+  const L = LANGS[lang];
   const groupOf = (ch) => b.groups.findIndex((g) => g.includes(ch)) + 1;
-  const toc = `<nav class="toc"><b>Capítulos asignados</b><ol>${parts.map((p) => `<li><a href="#chapter-${p.ch}">${esc(p.title || 'Capítulo ' + p.ch)}</a> <span class="grp">· grupo ${groupOf(p.ch)}</span></li>`).join('')}</ol>${missing.length ? `<p class="pending">En preparación: capítulos ${missing.join(', ')}.</p>` : ''}</nav>`;
-  const body = parts.map((p) => `<section id="chapter-${p.ch}">\n<h2>${esc(p.title || 'Capítulo ' + p.ch)}</h2>\n${p.html}\n</section>`).join('\n');
+  const toc = `<nav class="toc"><b>${L.toc}</b><ol>${parts.map((p) => `<li><a href="#chapter-${p.ch}">${esc(p.title || L.chapter + ' ' + p.ch)}</a> <span class="grp">· ${L.group} ${groupOf(p.ch)}</span></li>`).join('')}</ol>${missing.length ? `<p class="pending">${L.pending} ${missing.join(', ')}.</p>` : ''}</nav>`;
+  const body = parts.map((p) => `<section id="chapter-${p.ch}">\n<h2>${esc(p.title || L.chapter + ' ' + p.ch)}</h2>\n${p.html}\n</section>`).join('\n');
   return `<!DOCTYPE html>
-<!-- Written by tools/textbook-readers.mjs from docs/readers/textbooks/${b.key}/es/: edit the translation there, then run node tools/textbook-readers.mjs --write. -->
-<html lang="es">
+<!-- Written by tools/textbook-readers.mjs from docs/readers/textbooks/${b.key}/${lang}/: edit the translation there, then run node tools/textbook-readers.mjs --write. -->
+<html lang="${lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(b.title)} (${esc(b.author)}) — capítulos asignados en español, CTS</title>
+<title>${esc(L.title(b))} (${esc(b.author)}) — ${L.kind}</title>
 <style>
   :root{--ink:#2b2124; --soft:#6f5b60; --line:#e6dccf; --paper:#fbf8f3; --accent:#7a4a1e; --note:#f3ebe0;}
   *{box-sizing:border-box;}
@@ -89,16 +102,16 @@ function page(b, parts, missing) {
 </head>
 <body>
 <div class="wrap">
-<p class="back"><a href="../${b.room}">← Sala de lecturas del curso</a> · <a href="${b.english}">English edition</a></p>
+<p class="back"><a href="../${b.room}">${L.room}</a> · <a href="${b.english}">English edition</a></p>
 <header class="doc">
-<p class="kicker">Libro de texto de maestría · capítulos asignados · traducción de CTS</p>
-<h1>${esc(b.title)}</h1>
+<p class="kicker">${L.kicker}</p>
+<h1>${esc(L.title(b))}</h1>
 <p class="by">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</p>
 </header>
-${readerEditorialNotice(b.key, 'es')}<div class="note"><p><b>Nota de CTS.</b> Traducción íntegra y fiel, párrafo por párrafo, de los capítulos asignados para el examen del libro de texto de maestría. Conserva las opiniones y la terminología del autor y de su época, que CTS no necesariamente comparte. Las citas bíblicas siguen la Reina-Valera 1960 cuando el pasaje es claramente el mismo. Los capítulos llevan la numeración de la edición inglesa (Project Gutenberg n.º ${b.gutenberg}).</p></div>
+${lang === 'es' ? readerEditorialNotice(b.key, 'es') : ''}<div class="note"><p>${L.note(b)}</p></div>
 ${toc}
 ${body}
-<footer class="doc">Traducción al español de Chapala Theological Seminary (Seminario Teológico de Chapala), 2026, de la obra original en inglés de ${esc(b.author)}, que es de dominio público. <a href="../${b.room}">Volver a la sala de lecturas</a></footer>
+<footer class="doc">${L.footer(b)}</footer>
 </div>
 </body>
 </html>
@@ -129,6 +142,36 @@ for (const b of BOOKS) {
   }
   console.log(`${b.key}: ${chs.length - missing.length} of ${chs.length} chapters translated; ${ok} Spanish answers found${waiting ? `, ${waiting} on chapters not yet translated` : ''}`);
   if (WRITE && parts.length) { fs.writeFileSync(b.out, page(b, parts, missing)); console.log(`  wrote ${b.out}`); }
+}
+/* Later languages: the site's own textbook key (assessment-keys/textbooks/<slug>.json)
+   holds each question's answer in that language and its group ("chapter"). */
+const KEYS_ROOT = resolveKeysRoot('.') || '../assessment-keys';
+for (const lang of Object.keys(LANGS).filter((l) => l !== 'es')) for (const b of BOOKS) {
+  const dir = `docs/readers/textbooks/${b.key}/${lang}`;
+  if (!fs.existsSync(dir)) continue;
+  const chs = b.groups.flat(), parts = [], missing = [], texts = {};
+  for (const ch of chs) {
+    const f = path.join(dir, `${ch}.md`);
+    if (!fs.existsSync(f)) { missing.push(ch); continue; }
+    const md = fs.readFileSync(f, 'utf8');
+    parts.push({ ch, ...render(md) });
+    texts[ch] = fold(md);
+  }
+  if (missing.length && STRICT) problems++;
+  const keyFile = path.join(KEYS_ROOT, 'textbooks', `${b.slug}.json`);
+  let ok = 0, waiting = 0;
+  for (const [i, q] of (fs.existsSync(keyFile) ? JSON.parse(fs.readFileSync(keyFile, 'utf8')).test.questions : []).entries()) {
+    const group = b.groups[q.chapter - 1] || [];
+    if (!q.answer?.[lang]) continue;
+    if (group.some((ch) => texts[ch] === undefined)) { waiting++; continue; }
+    const t = ' ' + group.map((ch) => texts[ch]).join(' ') + ' ';
+    const answers = [q.answer[lang], ...(q.accept?.[lang] || [])].map(fold);
+    if (answers.some((a) => t.includes(` ${a} `))) ok++;
+    else { console.error(`${b.key} ${lang} question ${i + 1} (group ${q.chapter}): no answer of [${[q.answer[lang], ...(q.accept?.[lang] || [])].join(' / ')}] in the translation`); problems++; }
+  }
+  console.log(`${b.key} (${lang}): ${chs.length - missing.length} of ${chs.length} chapters translated; ${ok} answers found${waiting ? `, ${waiting} on chapters not yet translated` : ''}`);
+  const out = b.out.replace('_Spanish.html', `_${LANGS[lang].suffix}.html`);
+  if (WRITE && parts.length) { fs.writeFileSync(out, page(b, parts, missing, lang)); console.log(`  wrote ${out}`); }
 }
 if (problems) { console.error(`FAIL: ${problems} problem(s)`); process.exit(1); }
 console.log('PASS');
