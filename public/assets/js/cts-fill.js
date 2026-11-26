@@ -45,7 +45,7 @@
 
   function normalise(s) {
     return " " + String(s || "").toLowerCase().normalize("NFC")
-      .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
+      .replace(/[^\p{L}\p{M}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
   }
 
   /* A fill-in is right when the student's words, normalised, are exactly the
@@ -92,7 +92,7 @@
     return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas|le|les|l|une|des) (?=\S)/, "");
   }
 
-  function fillCodes() { var l = window.CTSLanguage?.lang; return l === "fr" || l === "pt" ? [l, "en"] : ["en", "es"]; }
+  function fillCodes() { var l = window.CTSLanguage?.lang; return l === "fr" || l === "pt" || l === "ta" ? [l, "en"] : ["en", "es"]; }
 
   function need(n) { return Math.ceil(n * PASS_RATIO); }
   function esc(v) {

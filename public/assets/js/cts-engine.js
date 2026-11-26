@@ -285,7 +285,7 @@
   // need another yes/no branch in the grader. "both" remains a legacy mode.
   function sourceLang() { return U.sourceLang || "en"; }
   function languages() {
-    return Array.from(new Set(["en", "es", "fr", "sw", "pt", sourceLang()].concat(U.langs || [])));
+    return Array.from(new Set(["en", "es", "fr", "sw", "pt", "ta", sourceLang()].concat(U.langs || [])));
   }
   function readerLang() {
     var b = document.body, codes = languages();
@@ -835,7 +835,7 @@
 
   function normalise(s) {
     return " " + String(s || "").toLowerCase().normalize("NFC")
-      .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
+      .replace(/[^\p{L}\p{M}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
   }
   function keywordPass(ks, answer, minHits, lang) {
     if (!usableKeywords(ks)) return false;
@@ -1110,7 +1110,7 @@
   var savedAttempt = saved.attemptId || null;
 
   var C_GOOD = "#1f6b3b", C_BAD = "#8a1f1f", C_WARN = "#8a5a00", C_GREY = "#555";
-  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" || l === "sw" || l === "pt" ? l : "en"; }
+  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" || l === "sw" || l === "pt" || l === "ta" ? l : "en"; }
   function idxOf(a) {
     if (typeof a === "number") return a;
     if (typeof a === "string" && /^\d+$/.test(a)) return +a;
