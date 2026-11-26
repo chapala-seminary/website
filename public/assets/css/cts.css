@@ -107,6 +107,11 @@ hr{border:0;border-top:1px solid var(--rule);margin:var(--s5) 0}
    scrolls away with the page; wider screens keep it pinned. Reading rooms keep
    it pinned on phones too: their bar is short (tools/verify-room-language.mjs). */
 @media (max-width:700px){body:not(.cts-room) .cts-nav{position:static;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--paper)}}
+/* Short screens (a tablet with its keyboard open, a phone sideways): the pinned
+   bar would cover most of what is left, so it scrolls with the page (#398). */
+@media (max-height:560px){body:not(.cts-room) .cts-nav{position:static;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--paper)}}
+/* The floating email box steps aside while the student types (cts-sync.js, #398). */
+html.cts-typing #cts-email-optional,html.cts-typing #cts-email-confirm{display:none!important}
 .cts-nav .wrap{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;
                justify-content:space-between;padding-block:var(--s2)}
 /* min-width:0 on every flex child: without it a long row of unit pills sets a

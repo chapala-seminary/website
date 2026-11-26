@@ -374,6 +374,8 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # the textbook draw, a visitor who has not registered. dist/ is the live build.
   node test/grading-ui.test.mjs "http://127.0.0.1:$PORT"
   node test/wayne-live-feedback.test.mjs "http://127.0.0.1:$PORT"
+  # A tablet with its keyboard open can still type into every answer field (#398).
+  node test/tablet-keyboard.test.mjs "http://127.0.0.1:$PORT"
   # ...and the same pages against the real Worker, with no stub: a student takes
   # a unit, a textbook test and the last unit of a course; a master's student
   # fails, is locked, retakes and has a pending answer finished by the cron; an
