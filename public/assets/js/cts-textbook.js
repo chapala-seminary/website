@@ -64,7 +64,7 @@
      take the reader's and English; old pages keep English and Spanish. */
   function readerCodes() {
     var l = window.CTSLanguage && window.CTSLanguage.lang;
-    return l === "fr" || l === "sw" ? [l, "en"] : ["en", "es"];
+    return l === "fr" || l === "sw" || l === "pt" || l === "ta" ? [l, "en"] : ["en", "es"];
   }
   function bi(o) { if (window.CTSLanguage) return window.CTSLanguage.bi(o); return '<span class="lang-en">' + o.en + '</span><span class="lang-es">' + o.es + "</span>"; }
   function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
@@ -548,7 +548,7 @@
         });
       });
     }
-    function serverLang() { var l = document.documentElement.lang; return l === "es" || l === "fr" || l === "sw" ? l : (document.body.classList.contains("lang-es") ? "es" : window.CTSLanguage && (window.CTSLanguage.lang === "fr" || window.CTSLanguage.lang === "sw") ? window.CTSLanguage.lang : "en"); }
+    function serverLang() { var l = document.documentElement.lang; return l === "es" || l === "fr" || l === "sw" || l === "pt" || l === "ta" ? l : (document.body.classList.contains("lang-es") ? "es" : window.CTSLanguage && (window.CTSLanguage.lang === "fr" || window.CTSLanguage.lang === "sw") ? window.CTSLanguage.lang : "en"); }
 
     function liveSubmit() {
       if (lockRemaining()) { renderStatus(); return; }
