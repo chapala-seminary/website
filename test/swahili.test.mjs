@@ -104,7 +104,7 @@ try {
   // the toggle: four choices, the fourth "Kiswahili"; the choice is remembered
   const choice = page.locator('.cts-language-choices a[data-cts-lang="sw"]');
   eq(await choice.textContent(), 'Kiswahili', 'the toggle says Kiswahili');
-  eq(await page.locator('.cts-language-choices a').count(), 5, 'five languages (Portuguese added)');
+  eq(await page.locator('.cts-language-choices a').count(), 6, 'six languages (Portuguese and Tamil added)');
   // the redesigned home page and the Study Library offer Kiswahili too
   // (in a browser of their own: the home page leaves state behind that the lesson checks must not see)
   const homeCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
@@ -116,7 +116,7 @@ try {
     eq(await sw.count(), 1, `${file} offers Kiswahili`);
     eq((await sw.textContent()).trim(), 'Kiswahili', `${file}: the choice says Kiswahili`);
     ok(await sw.isVisible(), `${file}: Kiswahili is visible at 390px`);
-    eq(await home.locator('.cts-language-choices a').count(), 5, `${file}: five languages`);
+    eq(await home.locator('.cts-language-choices a').count(), 6, `${file}: six languages`);
     const res = await home.goto(`${BASE}/sw/${file}`);
     eq(res.status(), 200, `/sw/${file}`);
   }
