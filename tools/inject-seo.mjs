@@ -10,7 +10,7 @@ import { parse } from 'node-html-parser';
 import {
   PAGE_META, courseLandingMeta, unitMeta, organizationJsonLd, websiteJsonLd,
   programsJsonLd, facultyJsonLd, breadcrumbJsonLd, localeUrl, SITE, SITE_NAME,
-  isPrivatePage, landingFile,
+  isPrivatePage, landingFile, HOME_DESCRIPTION_MORE,
 } from '../src/lib/seo.ts';
 
 const LANGUAGES = ['en', 'es', 'fr'];
@@ -140,6 +140,17 @@ export function injectSeo(dir) {
     for (const file of fs.readdirSync(folder).filter((f) => f.endsWith('.html'))) {
       if (applyPage(path.join(folder, file), file, lang)) n++;
     }
+  }
+  for (const [lang, description] of Object.entries(HOME_DESCRIPTION_MORE)) {
+    const filePath = path.join(dir, lang, 'index.html');
+    if (!fs.existsSync(filePath)) continue;
+    const root = parse(fs.readFileSync(filePath, 'utf8'), { comment: true, parseNoneClosedTags: true });
+    const head = root.querySelector('head');
+    if (!head) continue;
+    for (const [attr, name] of [['name', 'description'], ['property', 'og:description'], ['name', 'twitter:description']])
+      ensureMeta(head, attr, name, description);
+    fs.writeFileSync(filePath, root.toString());
+    n++;
   }
   return n;
 }
