@@ -539,6 +539,29 @@
      6 Nov 2026; Wayne chose a small strip). On a narrow screen it starts as one
      line; tapping the line opens the whole box, and × puts it away for this
      visit, exactly as "Keep studying" does. Wider screens keep the full box. */
+  /* Tablets (issue #398, Redmi Pad 2): when the on-screen keyboard opens, the
+     visible area shrinks to about half the screen, and the floating email box
+     sat on top of the answer fields, so a tap meant for a field landed on the
+     box. While the student is typing anywhere outside the box, the box steps
+     aside (html.cts-typing in cts.css) and comes back when they finish. */
+  (function () {
+    function typing(el) {
+      if (!el || !el.tagName) return false;
+      if (el.closest && el.closest('#cts-email-optional, #cts-email-confirm')) return false;
+      var t = el.tagName;
+      if (t === 'TEXTAREA' || t === 'SELECT' || el.isContentEditable) return true;
+      return t === 'INPUT' && !/^(button|submit|reset|checkbox|radio|range|color|file|image|hidden)$/i.test(el.type || '');
+    }
+    var root = document.documentElement, timer = 0;
+    document.addEventListener('focusin', function (e) {
+      clearTimeout(timer);
+      if (typing(e.target)) root.classList.add('cts-typing');
+    });
+    document.addEventListener('focusout', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { if (!typing(document.activeElement)) root.classList.remove('cts-typing'); }, 150);
+    });
+  })();
   function compactOnPhone(note, code, label) {
     if (!(window.matchMedia && window.matchMedia('(max-width: 700px)').matches)) return;
     var parts = Array.prototype.slice.call(note.children);
