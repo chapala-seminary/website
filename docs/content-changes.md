@@ -1422,3 +1422,29 @@ after the page loads was not: it showed the English title, and two checks
 a French title, the list uses it, and those checks speak French. So does the
 note that appears once three readings are chosen. The record kept in this
 browser is still the English title.
+
+## 26 November 2026 — English errata found by the Portuguese and Tamil translators
+
+Dr. Cook approved fixing the errors in the English that the translators found
+(the list and each worker's report are in assessment-keys
+`review/english-errata-2026-11-26/`). AI-written corrections, for faculty review.
+
+* **Answer key:** New Testament Survey unit 12, MC 10 → C (Old Testament
+  prophetic imagery, as the lesson teaches).
+* **Pastoral Ministry unit 12** (b027 and MC 10): Dr. Cook's career in the
+  right order — pastor, Canadian Southern Baptist Seminary, Louisiana prison
+  chaplaincy (Rayburn, then Deputy Warden at Elayn Hunt), Lakeside
+  Presbyterian and Chapala Theological Seminary.
+* **About 85 lessons and 350 questions in some 50 courses:** wrong counts,
+  verses, dates and names; garbled or duplicated text; questions, models,
+  keywords and rubrics that tested what the lesson does not teach; glued or
+  truncated keywords that could never match (CTSCG, CTSCS); Christian
+  Counseling unit 8 MC 11–20, which repeated MC 1–10, replaced.
+* Every changed language was changed with the English and is marked
+  machine-written from the new source. `tools/fix-questions.mjs` (new) applies
+  question fixes across the public and private halves and re-stamps them.
+* Not changed (for Dr. Cook): Wesleyan 3 unit 9 (a unit from another course),
+  Reformed 1 file numbering, the static Ethics/Narrative/Counseling pages,
+  third-person "Wayne" in older question stems, and the Ice-Box Cookie story
+  setup in Apologetics unit 1.
+* Content and prose baselines re-recorded.
