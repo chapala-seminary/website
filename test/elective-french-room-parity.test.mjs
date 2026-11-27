@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'node-html-parser';
 import { loadStore, augmentHtml } from '../tools/french-readings-lib.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -48,6 +49,7 @@ const failures = [];
 let entriesChecked = 0;
 let machine = 0;
 let rooms = 0;
+let builtRooms = 0;
 const fail = (page, message) => failures.push(`${page}: ${message}`);
 
 for (const tradition of ['PC', 'Bap', 'Wes', 'Ref']) {
@@ -86,15 +88,66 @@ for (const tradition of ['PC', 'Bap', 'Wes', 'Ref']) {
       const result = augmentHtml(html, roomMemory(files, store));
       if (result.missing !== 0) fail(page, `${result.missing} English blocks lack French`);
       if (result.inserted < 5) fail(page, `only ${result.inserted} French blocks inserted`);
+      const generated = parse(result.html, { comment: true, parseNoneClosedTags: true });
+      const cards = generated.querySelectorAll('article.reading');
+      if (cards.length !== 5) fail(page, `generated French source has ${cards.length} reading cards`);
+      for (const [i, card] of cards.entries()) {
+        const detail = card.querySelector('details.digest-inline');
+        const en = detail?.querySelectorAll('.dg-block.lang-en') || [];
+        const fr = detail?.querySelectorAll('.dg-block.lang-fr') || [];
+        if (en.length !== 1 || fr.length !== 1) {
+          fail(page, `reading ${i + 1} has ${en.length} English and ${fr.length} French full digests`);
+          continue;
+        }
+        const text = fr[0].text.trim();
+        if (text.length < 1000 || fr[0].querySelectorAll('h2').length < 5 || fr[0].querySelectorAll('p').length < 5)
+          fail(page, `reading ${i + 1} French digest is not substantive (${text.length} characters)`);
+      }
     } catch (err) { fail(page, `French build check threw: ${err.message}`); }
+
+    // The full build creates the actual /fr/ route from this generated markup.
+    // Check that output as well when the test is run after `npm run build`.
+    const builtFile = path.join(ROOT, 'dist', 'fr', `${page}.html`);
+    if (fs.existsSync(builtFile)) {
+      const built = parse(fs.readFileSync(builtFile, 'utf8'), { comment: true, parseNoneClosedTags: true });
+      const activeFrench = built.querySelector('[data-cts-lang="fr"][aria-current="page"]');
+      const languageChoices = built.querySelector('[role="group"][aria-label="Langue"]');
+      const sourceToggle = built.querySelector('#cts-show-source');
+      if (built.querySelector('html')?.getAttribute('lang') !== 'fr' || !activeFrench || !languageChoices)
+        fail(page, 'generated French route does not expose accessible French language choices');
+      if (!sourceToggle || sourceToggle.hasAttribute('disabled') ||
+        !sourceToggle.closest('label')?.text.includes('Afficher'))
+        fail(page, 'generated French route does not offer an accessible English-source toggle');
+      const builtCards = built.querySelectorAll('article.reading');
+      if (builtCards.length !== 5) fail(page, `generated French route has ${builtCards.length} reading cards`);
+      for (const [i, card] of builtCards.entries()) {
+        const frenchTitle = card.querySelector('h3 .cts-reading[lang="fr"]');
+        const detail = card.querySelector('details.digest-inline');
+        const frenchDigest = detail?.querySelectorAll('.dg-block .cts-reading[lang="fr"]') || [];
+        const text = frenchDigest.map((block) => block.text.trim()).join(' ');
+        if (!frenchTitle?.text.trim()) fail(page, `reading ${i + 1} has no French card title`);
+        if (text.length < 1000 || !detail?.querySelector('.dg-block h2 .cts-reading[lang="fr"]'))
+          fail(page, `reading ${i + 1} generated French digest is not substantive (${text.length} characters)`);
+      }
+      if (!built.querySelector('#cts-att-name') || !built.querySelector('#cts-att-oath') ||
+        !built.querySelector('label[for="cts-att-name"] .cts-reading[lang="fr"]') ||
+        !built.querySelector('.cts-oath label .cts-reading[lang="fr"]'))
+        fail(page, 'generated French route is missing its translated honors controls');
+      if (!built.querySelector(`a[href*="/fr/${page}Test.html"]`))
+        fail(page, 'generated French route is missing its French reading-test link');
+      builtRooms++;
+    }
     rooms++;
   }
 }
 
 if (rooms !== 20) fail('all electives', `only ${rooms} of 20 rooms inspected`);
+if (fs.existsSync(path.join(ROOT, 'dist', 'fr')) && builtRooms !== 20)
+  fail('generated French routes', `only ${builtRooms} of 20 built French routes inspected`);
 if (failures.length) {
   console.error(`Elective French room parity: ${failures.length} failure(s):\n${failures.join('\n')}`);
   process.exitCode = 1;
 } else {
-  console.log(`Elective French room parity: ${rooms}/20 rooms, ${entriesChecked} nonblank bilingual entries, ${machine} machine-status entries; no missing French blocks. Human/rights review NOT certified.`);
+  const built = builtRooms === 20 ? ', 20 generated French routes checked' : '';
+  console.log(`Elective French room parity: ${rooms}/20 rooms${built}, ${entriesChecked} nonblank bilingual entries, ${machine} machine-status entries; five substantive French digests per room. Human/rights review NOT certified.`);
 }
