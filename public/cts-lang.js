@@ -4,7 +4,7 @@
   "use strict";
   var body = document.body;
   if (!body || !body.dataset.pageLang) return;
-  var codes = ["en", "es", "fr", "sw"], current = body.dataset.pageLang;
+  var codes = ["en", "es", "fr", "sw", "pt", "ta"], current = body.dataset.pageLang;
   var source = body.dataset.sourceLang || "en", file = body.dataset.languagePage;
   var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
   var set = function (k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
@@ -134,7 +134,7 @@
 
   function resolve() {
     var s = lsGet(KEY);
-    if (s === 'es' || s === 'en' || s === 'fr' || s === 'sw') return s; // an explicit prior choice wins (French is kept, not reset)
+    if (['es', 'en', 'fr', 'sw', 'pt', 'ta'].indexOf(s) !== -1) return s; // an explicit prior choice wins (French is kept, not reset)
     var n = (navigator.language || navigator.userLanguage || '').toLowerCase();
     return n.indexOf('es') === 0 ? 'es' : 'en';          // else default by browser language
   }
