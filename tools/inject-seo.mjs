@@ -75,13 +75,21 @@ function ensureLd(head, type, data) {
   head.insertAdjacentHTML('beforeend', `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`);
 }
 
-function applyPage(filePath, file, lang) {
+function applyPage(filePath, file, lang, descriptionOnly) {
   const html = fs.readFileSync(filePath, 'utf8');
   if (!new RegExp('</head>', 'i').test(html)) return false;
   const root = parse(html, { comment: true, parseNoneClosedTags: true });
   const head = root.querySelector('head');
   const title = root.querySelector('title');
   if (!head || !title) return false;
+  // Later-language homepages have localized descriptions but retain their
+  // existing title, structured data and all other metadata.
+  if (descriptionOnly) {
+    for (const [attr, name] of [['name', 'description'], ['property', 'og:description'], ['name', 'twitter:description']])
+      ensureMeta(head, attr, name, descriptionOnly);
+    fs.writeFileSync(filePath, root.toString());
+    return true;
+  }
 
   if (isPrivatePage(file) && !head.querySelector('meta[name="robots"]'))
     head.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
@@ -144,13 +152,7 @@ export function injectSeo(dir) {
   for (const [lang, description] of Object.entries(HOME_DESCRIPTION_MORE)) {
     const filePath = path.join(dir, lang, 'index.html');
     if (!fs.existsSync(filePath)) continue;
-    const root = parse(fs.readFileSync(filePath, 'utf8'), { comment: true, parseNoneClosedTags: true });
-    const head = root.querySelector('head');
-    if (!head) continue;
-    for (const [attr, name] of [['name', 'description'], ['property', 'og:description'], ['name', 'twitter:description']])
-      ensureMeta(head, attr, name, description);
-    fs.writeFileSync(filePath, root.toString());
-    n++;
+    if (applyPage(filePath, 'index.html', lang, description)) n++;
   }
   return n;
 }
