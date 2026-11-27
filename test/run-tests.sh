@@ -29,6 +29,8 @@ node --test test/track-sync-ack.test.mjs
 # Legacy Associate goals must reach the server on an ordinary sync poll.
 node --test test/track-adopt-poll.test.mjs
 node --test test/degree-count-dedupe.test.mjs
+# Higher-level re-assessment of units already passed at a lower level (#351).
+node --test test/level-gate.test.mjs
 node test/eight-optional.test.mjs
 node test/grading-mode.test.mjs
 # Synthetic end-to-end submit choreography: receipts, chunked grading and safe retry.
@@ -212,6 +214,7 @@ node test/french-readings.test.mjs
 # completions the record held before a reading test was activated: the rule
 # itself, case by case, without a server.
 node test/required-tests.test.mjs
+node test/unit-legacy.test.mjs
 # The master's ministry paper as a course requirement (#318): none in force as
 # shipped; once a pilot paper is dated, a master's course needs it, except a
 # master's completion from before the date. Never the final (Dr. Cook, 12 Nov 2026).
@@ -371,6 +374,8 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # the textbook draw, a visitor who has not registered. dist/ is the live build.
   node test/grading-ui.test.mjs "http://127.0.0.1:$PORT"
   node test/wayne-live-feedback.test.mjs "http://127.0.0.1:$PORT"
+  # A tablet with its keyboard open can still type into every answer field (#398).
+  node test/tablet-keyboard.test.mjs "http://127.0.0.1:$PORT"
   # ...and the same pages against the real Worker, with no stub: a student takes
   # a unit, a textbook test and the last unit of a course; a master's student
   # fails, is locked, retakes and has a pending answer finished by the cron; an

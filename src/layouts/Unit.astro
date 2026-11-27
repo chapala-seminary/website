@@ -10,6 +10,7 @@
 import { shell } from '../lib/shell';
 import { version } from '../lib/version';
 import catalog from '../../worker/catalog.json';
+import unitOrder from '../data/unit-order.json';
 import { live, liveUnit, unitScope } from '../lib/grading-mode';
 import { CODES } from '../lib/countries.mjs';
 
@@ -61,8 +62,14 @@ const cls = bodyClass && /\blang-(en|es|both)\b/.test(bodyClass) ? bodyClass
 // Situations runs 0..12). Which are finished is the engine's business at
 // runtime, because it is the only thing that knows what this browser has
 // completed.
-const pills = unitNumbers
-  .map((n) => ({ n, href: `${pagePrefix}Unit${n}.html`, here: n === unit.unit }));
+// A course with a reading order (src/data/unit-order.json) shows its pills in
+// that order, labelled by position; data-unit keeps the stored number, which
+// is what the engine and every saved progress record use.
+const order = (unitOrder as Record<string, number[]>)[pagePrefix];
+const position = (n: number) => (order && order.includes(n) ? order.indexOf(n) + 1 : n);
+const pills = (order ? order.filter((n) => unitNumbers.includes(n)) : unitNumbers)
+  .map((n) => ({ n, label: position(n), href: `${pagePrefix}Unit${n}.html`, here: n === unit.unit }));
+const shownUnit = position(unit.unit);
 
 // What finishing this course records (public/assets/js/cts-record.js): the
 // code the certificate page and the degrees use, the name the degree pages
@@ -86,7 +93,10 @@ const assessments = Object.entries(asMap).filter(([, a]) => a.code === cat.code 
    model answers, keywords, rubrics or multiple-choice keys, and every
    question has its id. Shadow mode: the unit exactly as it was. */
 const unitData = live ? liveUnit(unit, unitScope(pagePrefix, unit.unit)) : unit;
+const nextStored = /Unit(\d+)\.html$/.exec(unit.nextHref || '');
 const unitJson = JSON.stringify({ ...unitData,
+  // positions in the reading order, for the words the engine shows (src/data/unit-order.json)
+  ...(order ? { position: shownUnit, nextPosition: nextStored ? position(Number(nextStored[1])) : null } : {}),
   completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units,
                 // the course's Master's textbook, which the master's tracks must pass the test of
                 textbook: first,
@@ -144,7 +154,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
       {' · '}
       <a href={`/${pagePrefix}Course.html`}><span class="lang-en">Course</span><span class="lang-es">Curso</span><span class="lang-fr">Cours</span></a>
       {' · '}
-      <span class="lang-en">Unit {unit.unit}</span><span class="lang-es">Unidad {unit.unit}</span><span class="lang-fr">Unité {unit.unit}</span>
+      <span class="lang-en">Unit {shownUnit}</span><span class="lang-es">Unidad {shownUnit}</span><span class="lang-fr">Unité {shownUnit}</span>
     </nav>
 
     <nav class="cts-nav" aria-label="Course units" data-cts-chrome>
@@ -158,7 +168,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
                   class={p.here ? 'here' : ''}
                   data-unit={p.n}
                   aria-current={p.here ? 'page' : undefined}
-                >{p.n}</a>
+                >{p.label}</a>
               </li>
             ))}
           </ul>
@@ -301,6 +311,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
     <script is:inline src={version('/assets/js/cts-record.js')} defer></script>
     {live && <script is:inline src={version('/assets/js/cts-grading.js')} defer></script>}
+    {live && <script is:inline src={version('/assets/js/cts-level-gate.js')} defer></script>}
     <script is:inline src={version('/assets/js/cts-engine.js')} defer></script>
     {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)} defer></script>)}
     {/* The lesson and the exam are never shown together, so the browser's

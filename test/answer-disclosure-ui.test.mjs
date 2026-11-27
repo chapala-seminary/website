@@ -145,7 +145,8 @@ ok(!(await text(p, '#questionsContainer')).includes(bank.mc[0].why.en.slice(0, 3
 await click(p, 0, wrongOf(bank.mc[0]));
 await noKeyShown(p, bank, 0, '4: the retake, open');
 for (let i = 1; i < bank.mc.length; i++) await click(p, i, bank.mc[i].answer);
-await p.locator('#submitExamBtn').click();
+// passing with nothing left to grade: the page records the pass itself (autoRecord)
+if (await p.locator('#submitExamBtn').isEnabled()) await p.locator('#submitExamBtn').click({ timeout: 5000 }).catch(() => {});
 ok(await waitText(p, 'Unit 5 passed'), '4: the retake passes (19 of 20)');
 ok(await waitText(p, bank.mc[0].why.en.slice(0, 30)), '4: after the pass the explanation of the missed question appears');
 ok(await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${bank.mc[0].answer}"]`).count() === 1

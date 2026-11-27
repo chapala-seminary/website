@@ -111,6 +111,19 @@ export function certificateLevel(raw) {
   return m ? (m[1].toLowerCase() === 'mdiv' ? 'mdiv' : 'thm') : null;
 }
 
+/** The unit list a course had before it gained units (worker/catalog.json
+ *  courses.<slug>.legacy), when the record holds a completion of the course
+ *  the server wrote before the change; else null. The student keeps the
+ *  course they finished (Presbyterian History, 10 to 12 units, Nov 2026). */
+export function legacyUnits(slug, ctx) {
+  const r = resolveCourse(slug);
+  const leg = r && r.slug && catalog.courses[r.slug] && catalog.courses[r.slug].legacy;
+  if (!leg || !ctx || !Array.isArray(ctx.completions)) return null;
+  const held = ctx.completions.some((row) => row && row.completed_at && String(row.completed_at) < leg.before
+    && (canonicalCode(row.code) || String(row.code || '').toUpperCase()) === r.code);
+  return held ? leg.units : null;
+}
+
 /** null when the record supports the award, else a short reason.
  *  `level` is the student's level (studentLevel) and `textbooks` the slugs of
  *  the tests the record holds: on the master's tracks a course with a
@@ -119,7 +132,7 @@ export function certificateLevel(raw) {
  *  until both are. `ctx` is what testShortfall needs for a test with an
  *  activation date: { completions, now }. */
 export function courseShortfall(slug, unitsDone, level, textbooks, ctx) {
-  const need = courseUnits(slug);
+  const need = legacyUnits(slug, ctx) || courseUnits(slug);
   if (!need) return resolveCourse(slug) ? 'no units: check the completion code' : 'unknown course';
   const have = new Set(unitsDone.map(Number));
   const missing = need.filter((u) => !have.has(u));

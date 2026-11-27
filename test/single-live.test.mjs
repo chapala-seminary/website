@@ -98,7 +98,11 @@ async function clickSubmit(p, selector) {
   // The fixed notice can otherwise cover Submit on a long single-page course.
   const keep = p.locator('#cts-email-confirm').getByRole('button', { name: /^(Keep studying|Seguir estudiando|Continuer à étudier)$/ });
   if (await keep.isVisible()) await keep.click();
-  await p.locator(selector).click();
+  // A unit page whose answers are all in and passing records the pass itself
+  // (cts-engine.js autoRecord); Submit is then busy or done.
+  const btn = p.locator(selector);
+  if (selector === '#submitExamBtn' && !(await btn.isEnabled())) return;
+  await btn.click();
 }
 async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag = 'met' } = {}) {
   const u = U(s.unit);

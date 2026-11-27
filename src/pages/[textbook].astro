@@ -66,12 +66,14 @@ const excerpts = ('excerpts' in book.files);
       {web ? (
         <>
           <a class="btn" href={`/${web.en}`}><span class="lang-en">Full book (English)</span><span class="lang-es">Libro completo (inglés)</span><span class="lang-fr">Livre complet (anglais)</span></a>
-          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span><span class="lang-fr">Chapitres assignés (espagnol)</span></a>{web.fr && <a class="btn lang-fr" href={`/${web.fr}`}>Chapitres assignés (français)</a>}
+          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span><span class="lang-fr">Chapitres assignés (espagnol)</span></a>{web.fr && <a class="btn lang-fr" href={`/${web.fr}`}>Chapitres assignés (français)</a>}{web.sw && <a class="btn lang-sw" href={`/${web.sw}`}>Sura zilizoagizwa (Kiswahili)</a>}
         </>
       ) : excerpts ? null : (
         <>
           <a class="btn" href={`/${pdf?.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span><span class="lang-fr">PDF (anglais)</span></a>
           <a class="btn" href={`/${pdf?.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span><span class="lang-fr">PDF (espagnol)</span></a>
+          {pdf?.fr && <a class="btn lang-fr" href={`/${pdf.fr}`} download>PDF (français)</a>}
+          {pdf?.sw && <a class="btn lang-sw" href={`/${pdf.sw}`} download>PDF (Kiswahili)</a>}
         </>
       )}
     </div>

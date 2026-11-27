@@ -267,6 +267,8 @@ export function carryFrench(previous, next, say = console.log) {
       if (previous.tr?.[field]) (next.tr ??= {})[field] = previous.tr[field];
     } else say(`${next.slug}: ${field} changed in English; its ${langs.join(', ')} translation was dropped`);
   }
+  // A later language's PDF (tools/textbook-pdfs.mjs) stays while its body does.
+  for (const l of extra(previous.files?.pdf)) if (next.files?.pdf && next.body?.[l]) next.files.pdf[l] = previous.files.pdf[l];
   const oldQ = previous.test?.questions || [], newQ = next.test?.questions || [];
   newQ.forEach((q, i) => {
     const o = oldQ[i];

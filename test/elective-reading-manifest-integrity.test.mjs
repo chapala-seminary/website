@@ -32,8 +32,8 @@ const courses = [
 // Remove each entry when its prompt is corrected and reviewed. Run --strict
 // to require zero omissions before an owner-approved production release.
 const knownMissing = [
-  'elecrefonereadings:24:sw',
-  'elecwestworeadings:27:sw',
+  // elecrefonereadings:24 and elecwestworeadings:27 fixed in #201 (Nov 2026).
+  // Baptist readings v2 Swahili landed Nov 2026 (launch first, native review after).
 ].sort();
 
 test('all 20 denominational reading manifests: identity, question distribution, four-language blanks', () => {

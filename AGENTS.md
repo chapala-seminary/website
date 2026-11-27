@@ -58,7 +58,7 @@ existing production baseline/token/enablement setup is complete. Read
   proposing or changing a course's readings, run
   `node tools/audit-elective-readings.mjs --course <code>` and fix any
   SAME_SOURCE_AS_TEXTBOOK or QUOTES_TEXTBOOK_PASSAGES flag. Record:
-  `../brain/decisions/2026-11-13-website-elective-readings-must-be-independent-of-the-textbook.md`.
+  [decision and implementation record](https://github.com/chapala-seminary/website/pull/331).
 - Before committing: `npm run build && test/run-tests.sh`. Build on the Mac —
   `node_modules` are macOS binaries.
 - The journey suite (`npm run test:e2e`, `docs/e2e-journeys.md`) runs whole

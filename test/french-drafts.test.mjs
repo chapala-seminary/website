@@ -3,8 +3,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
+import {SITE_LANGUAGES} from '../src/lib/languages.mjs';
+// Send the browser only the French and English text: with every language the payload crashes Chromium.
+const drop=new Set(SITE_LANGUAGES.filter(l=>l!=='fr'&&l!=='en'));
+const trim=v=>Array.isArray(v)?v.map(trim):v&&typeof v==='object'?Object.fromEntries(Object.entries(v).filter(([k])=>!drop.has(k)).map(([k,x])=>[k,trim(x)])):v;
 const units=[];
-for(const course of fs.readdirSync('src/content/lessons'))for(const f of fs.readdirSync('src/content/lessons/'+course).filter(x=>x.endsWith('.json'))){const l=JSON.parse(fs.readFileSync(`src/content/lessons/${course}/${f}`,'utf8'));if(l.langs.includes('fr'))units.push(JSON.parse(fs.readFileSync(`src/content/units/${course}/${f}`,'utf8')));}
+for(const course of fs.readdirSync('src/content/lessons'))for(const f of fs.readdirSync('src/content/lessons/'+course).filter(x=>x.endsWith('.json'))){const l=JSON.parse(fs.readFileSync(`src/content/lessons/${course}/${f}`,'utf8'));if(l.langs.includes('fr')){const u=JSON.parse(fs.readFileSync(`src/content/units/${course}/${f}`,'utf8'));units.push({course:u.course,unit:u.unit,mc:trim(u.mc||[]),fill:trim(u.fill||[]),sa:trim(u.sa||[])});}}
 // Every packet course unit (tools/import-french-drafts.mjs; test/french-import.test.mjs names any missing one)
 // plus the 13 Old Testament Survey units drafted by Claude (13 Oct 2026). Count-based so new drafts don't break it.
 // Genesis short answers have no keywords in any language (English source); their

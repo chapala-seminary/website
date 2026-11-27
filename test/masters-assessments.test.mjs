@@ -41,7 +41,9 @@ const PILOT = [
 /* ---- what each pilot course has ---------------------------------------- */
 
 const PILOT_LIST = JSON.parse(fs.readFileSync('src/data/paper-pilot.json', 'utf8')).papers;
-ok(JSON.stringify([...PILOT_LIST].sort()) === JSON.stringify(PILOT.map((p) => p.paper).sort()), 'the pilot is Old Testament Survey, Hermeneutics and Pastoral Ministries', PILOT_LIST);
+// Dr. Cook, 24 Nov 2026: the paper is required in every master's course (a three-course pilot from 12 Nov)
+const ALL_PAPERS = fs.readdirSync('src/content/papers').filter((f) => f.endsWith('.json')).map((f) => JSON.parse(fs.readFileSync('src/content/papers/' + f, 'utf8')).slug).sort();
+ok(JSON.stringify([...PILOT_LIST].sort()) === JSON.stringify(ALL_PAPERS) && PILOT.every((p) => PILOT_LIST.includes(p.paper)), 'every course\'s paper may be dated, the first three pilot papers included', PILOT_LIST);
 for (const p of PILOT) {
   ok(JSON.stringify(A.assessmentsFor(p.code)) === JSON.stringify([p.paper]), `${p.code}: its paper only, never its final`, A.assessmentsFor(p.code));
   ok(catalog.assessments[p.final]?.kind === 'final', `${p.code}: the final still exists as an optional exam`);
@@ -116,7 +118,9 @@ for (const p of PILOT) {
 {
   const { activatedTests } = await import('../worker/test-activation.js');
   const on = activatedTests({ MASTER_TESTS_ACTIVE_FROM: '2026-10-01T00:00:00.000Z' });
-  ok(Object.keys(on).length > 0, 'beta activation does activate undated textbook tests (sanity)');
+  // since 24 Nov 2026 every textbook and reading test carries a date, so there may be none left undated
+  const undated = Object.values(JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8')).textbooks || {}).filter((t) => t.requiredFrom === null).length;
+  ok(undated === 0 || Object.keys(on).length > 0, 'beta activation does activate undated textbook tests (sanity)', { undated });
   ok(!Object.keys(on).some((s) => catalog.assessments[s]), 'beta activation never activates a final or paper: only an explicit date does', Object.keys(on).filter((s) => catalog.assessments[s]));
   const { testContext } = await import('../worker/test-context.js');
   const ctx = testContext({ MASTER_TESTS_ACTIVE_FROM: '2026-10-01T00:00:00.000Z' }, []);

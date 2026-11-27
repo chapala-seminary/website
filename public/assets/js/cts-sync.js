@@ -187,7 +187,7 @@
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
       // the language the student reads in, for notes the seminary sends them
-      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' ? l : null; })(get('cts_lang')),
+      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' || l === 'sw' || l === 'pt' || l === 'ta' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
       // honors readings (cts_honors_v1:<course>): the student's own attestation,
@@ -295,6 +295,14 @@
       if (!Array.isArray(list)) list = [];
       if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); return true; }
       return false;
+    }
+    // The level the seminary's record holds for each course, as the server
+    // sent it: the unit pages' re-assessment gate (cts-level-gate.js, #351)
+    // trusts it over the browser's own lists, which only ever grow.
+    if (Array.isArray(state.completions)) {
+      var recordLevels = {};
+      state.completions.forEach(function (c) { if (c && c.code && c.track) recordLevels[String(c.code).toUpperCase()] = String(c.track).toLowerCase(); });
+      set('cts_record_levels', JSON.stringify(recordLevels));
     }
     (state.completions || []).forEach(function (c) {
       if (!c || !c.code) return;
@@ -531,6 +539,29 @@
      6 Nov 2026; Wayne chose a small strip). On a narrow screen it starts as one
      line; tapping the line opens the whole box, and × puts it away for this
      visit, exactly as "Keep studying" does. Wider screens keep the full box. */
+  /* Tablets (issue #398, Redmi Pad 2): when the on-screen keyboard opens, the
+     visible area shrinks to about half the screen, and the floating email box
+     sat on top of the answer fields, so a tap meant for a field landed on the
+     box. While the student is typing anywhere outside the box, the box steps
+     aside (html.cts-typing in cts.css) and comes back when they finish. */
+  (function () {
+    function typing(el) {
+      if (!el || !el.tagName) return false;
+      if (el.closest && el.closest('#cts-email-optional, #cts-email-confirm')) return false;
+      var t = el.tagName;
+      if (t === 'TEXTAREA' || t === 'SELECT' || el.isContentEditable) return true;
+      return t === 'INPUT' && !/^(button|submit|reset|checkbox|radio|range|color|file|image|hidden)$/i.test(el.type || '');
+    }
+    var root = document.documentElement, timer = 0;
+    document.addEventListener('focusin', function (e) {
+      clearTimeout(timer);
+      if (typing(e.target)) root.classList.add('cts-typing');
+    });
+    document.addEventListener('focusout', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { if (!typing(document.activeElement)) root.classList.remove('cts-typing'); }, 150);
+    });
+  })();
   function compactOnPhone(note, code, label) {
     if (!(window.matchMedia && window.matchMedia('(max-width: 700px)').matches)) return;
     var parts = Array.prototype.slice.call(note.children);

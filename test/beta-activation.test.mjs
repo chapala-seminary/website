@@ -37,7 +37,8 @@ try{
  ('CTS-TEST-0000-0012','CTSOTS','cert','2001-01-01T00:00:00Z');
  `);
  sql(migration);await start();
- const policy=(await get('/api/health')).requiredFrom;
+ // Ministry papers (catalog.assessments) carry their own dated holds in the local config; this test is about the staged reading/textbook tests.
+ const policy=Object.fromEntries(Object.entries((await get('/api/health')).requiredFrom).filter(([slug])=>!(catalog.assessments||{})[slug]));
  const EIGHT=['otsreadings','ntreadings','streadings','evangelismreadings','pmreadings','chreadings','wisespeakreadings','hermeneuticsreadings'];
  check(Object.keys(policy).length===71,'71 staged requirements activate (79 less the eight awaiting faculty review)');
  check(EIGHT.every(slug=>!(slug in policy)),'the eight reading tests awaiting faculty review stay optional (Wayne, 18 Oct 2026)');
@@ -77,7 +78,7 @@ try{
  await fetch(base+'/api/student/'+reg.body.code,{method:'DELETE'});
  browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
  const page=await browser.newPage();await page.goto(base+'/CTSUnit1.html?cts_lang=en');
- await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===71);
+ await page.waitForFunction((papers)=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).filter(slug=>!papers.includes(slug)).length===71,Object.keys(catalog.assessments||{}));
  check(await page.locator('#cts-master-requirements').count()===0,'activation policy loads without injecting a page-top notice');
  await page.evaluate(()=>window.CTS_SYNC.restore('CTS-TEST-0000-0011'));
  check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_oldtestament_exempt')),'older exemption follows recovery to another browser');

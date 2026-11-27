@@ -51,7 +51,7 @@
     tooLong: { en: "This answer is too long. Shorten it to ", es: "Esta respuesta es demasiado larga. Acórtela a ", fr: "Cette réponse est trop longue. Réduisez-la à " },
     expand: { en: "This answer is too short to evaluate. Please expand it to explain your understanding of the question.", es: "Esta respuesta es demasiado corta para evaluarla. Amplíela para explicar su comprensión de la pregunta.", fr: "Cette réponse est trop courte pour être évaluée. Développez-la pour expliquer votre compréhension de la question." },
     wait: { en: "Grading… this can take up to a minute.", es: "Calificando… puede tardar hasta un minuto.", fr: "Correction… cela peut prendre jusqu’à une minute." },
-    passed: { en: "You passed the final synthesis exam.", es: "Aprobó el examen final de síntesis.", fr: "Vous avez réussi l’examen final de synthèse." },
+    passed: { en: "You passed the optional review exam.", es: "Aprobó el examen de repaso opcional.", fr: "Vous avez réussi l’examen de révision facultatif." },
     failed: { en: "Not passed this time. Review the course and try again after the wait.", es: "Esta vez no aprobó. Repase el curso e inténtelo de nuevo después de la espera.", fr: "Pas réussi cette fois. Revoyez le cours et réessayez après le délai." },
     pendingAll: { en: "Submitted — some answers are still being graded. This page will update.", es: "Enviado: algunas respuestas aún se están calificando. Esta página se actualizará.", fr: "Envoyé : certaines réponses sont encore en cours de correction. Cette page se mettra à jour." },
     locked: { en: "You may try again after ", es: "Puede intentarlo de nuevo después de las ", fr: "Vous pourrez réessayer après " },

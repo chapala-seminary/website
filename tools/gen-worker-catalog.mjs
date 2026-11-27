@@ -106,6 +106,18 @@ for (const [slug, c] of Object.entries(courses)) {
   if (!completions[code]) { console.error(`${slug}: no certificate page writes completion code ${code}`); process.exit(2); }
   c.code = code;
 }
+// A course that gained units (src/data/unit-legacy.json) keeps its old unit
+// list for completions recorded before the change, so a student who finished
+// the shorter course keeps the course (worker/awards.js courseShortfall).
+{
+  const legacy = JSON.parse(fs.readFileSync('src/data/unit-legacy.json', 'utf8'));
+  for (const [slug, l] of Object.entries(legacy)) {
+    if (slug.startsWith('_')) continue;
+    if (!courses[slug]) { console.error(`src/data/unit-legacy.json: no course ${slug}`); process.exit(2); }
+    if (!l.units.every((u) => courses[slug].units.includes(u)) || !/^\d{4}-\d\d-\d\dT/.test(l.before)) { console.error(`src/data/unit-legacy.json: ${slug} needs units the course has and an ISO "before"`); process.exit(2); }
+    courses[slug].legacy = { units: l.units, before: l.before };
+  }
+}
 // The course's title in each language, from the catalog the front page is
 // built from (src/content/courses), matched by its first unit page. The
 // notes the seminary sends students name the course they stopped in, and a

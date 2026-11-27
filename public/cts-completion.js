@@ -171,14 +171,20 @@
   function reportable() {
     var code = pageCode();
     if (DEGREE_PAGES.indexOf(code) !== -1) return true;
+    /* A master's-track student must have the course at that level, not only an
+       earlier Certificate/Associate pass: otherwise the M.Div. page offered
+       "Notify the seminary" and mailed false M.Div. completions (Rafael, 17 Nov 2026). */
+    var t = track();
+    var key = /M\.Div/.test(t) ? "cts_mdiv_done_codes" : /Th\.M/.test(t) ? "cts_thm_done_codes" : "cts_done_codes";
     try {
-      var a = JSON.parse(localStorage.getItem("cts_done_codes") || "[]");
+      var a = JSON.parse(localStorage.getItem(key) || "[]");
       return Array.isArray(a) && a.indexOf(code) !== -1;
     } catch (e) { return false; }
   }
 
   function record(payload, alsoEmail) {
-    if (localStorage.getItem(recKey) || !reportable()) {   // never double-count; never report what is not recorded
+    if (!reportable()) return;                             // never report, or mail, what is not recorded at this level
+    if (localStorage.getItem(recKey)) {                    // never double-count
       if (alsoEmail) openMail(payload);
       return;
     }
@@ -254,7 +260,7 @@
       tries++;
       var dip = diplomaVisible();
       var nm = findName();
-      if (dip || nm) {
+      if ((dip || nm) && reportable()) {
         clearInterval(iv);
         buildPanel(dip || document.body, ctx);
       } else if (tries > 60) {        // ~30s; give up quietly (page never unlocked)

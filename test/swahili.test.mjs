@@ -104,7 +104,7 @@ try {
   // the toggle: four choices, the fourth "Kiswahili"; the choice is remembered
   const choice = page.locator('.cts-language-choices a[data-cts-lang="sw"]');
   eq(await choice.textContent(), 'Kiswahili', 'the toggle says Kiswahili');
-  eq(await page.locator('.cts-language-choices a').count(), 4, 'four languages');
+  eq(await page.locator('.cts-language-choices a').count(), 6, 'six languages (Portuguese and Tamil added)');
   // the redesigned home page and the Study Library offer Kiswahili too
   // (in a browser of their own: the home page leaves state behind that the lesson checks must not see)
   const homeCtx = await browser.newContext({ viewport: { width: 390, height: 844 }, locale: 'en-US' });
@@ -116,7 +116,7 @@ try {
     eq(await sw.count(), 1, `${file} offers Kiswahili`);
     eq((await sw.textContent()).trim(), 'Kiswahili', `${file}: the choice says Kiswahili`);
     ok(await sw.isVisible(), `${file}: Kiswahili is visible at 390px`);
-    eq(await home.locator('.cts-language-choices a').count(), 4, `${file}: four languages`);
+    eq(await home.locator('.cts-language-choices a').count(), 6, `${file}: six languages`);
     const res = await home.goto(`${BASE}/sw/${file}`);
     eq(res.status(), 200, `/sw/${file}`);
   }
@@ -186,9 +186,11 @@ try {
   // B-C1 textbook and room in Swahili
   await page.goto(`${BASE}/sw/CTSTextbookElecBapOne.html`);
   ok(/Urithi au Ukweli\?/.test(await page.locator('.tb-book').first().innerText()), 'the B-C1 textbook is in Swahili');
-  await page.goto(`${BASE}/sw/CTSElecBap1Readings.html`);
+  // The B-C1 room's readings were replaced (readings v2, website #336) and await
+  // Swahili, so the room check uses a core room that has its Swahili digests.
+  await page.goto(`${BASE}/sw/CTS1PeterReadings.html`);
   // the digests sit in a reader that opens on demand, so the text is checked, not what is on screen
-  ok(/Chemchemi Baharini/.test(await page.locator('body').textContent()), 'the B-C1 readings are in Swahili');
+  ok(/Kuzaliwa Upya Kuingia Katika Tumaini Hai/.test(await page.locator('body').textContent()), 'a reading room\'s digests are in Swahili (1 Peter)');
 
   // the other languages are untouched: no Swahili on their pages
   for (const l of ['', 'es/', 'fr/']) {

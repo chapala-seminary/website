@@ -122,7 +122,8 @@
      to a Unit 13 that does not exist. */
   function nextWhere() {
     var m = /Unit(\d+)\.html$/.exec(U.nextHref || "");
-    return m ? { en: "Unit " + m[1], es: "Unidad " + m[1], fr: "Unité " + m[1] } : { en: "the Certificate", es: "el Certificado", fr: "le certificat" };
+    var nx = m && U.nextPosition ? U.nextPosition : (m && m[1]);   // a course with a reading order shows positions
+    return m ? { en: "Unit " + nx, es: "Unidad " + nx, fr: "Unité " + nx } : { en: "the Certificate", es: "el Certificado", fr: "le certificat" };
   }
   /* Associate of Divinity students study at certificate rigor (cts_track
      stays "cert", so their lockout is the certificate one) but record the
@@ -237,6 +238,30 @@
   var unitPassed = !!progress["unit" + U.unit];
   var mcPassed   = lsGet(KEY.mcPassed) === "1";
 
+  /* Re-assessment at a higher level (#351). A passed unit is final only at
+     the level it was passed at: a student who finished the course on the
+     Certificate track and is now on the Associate goal or a master's track
+     is let into a fresh attempt at the new level, which the server needs
+     before it raises the completion (worker/grading/attempts.js
+     earnedLevel). Only in memory: the earlier pass, the course's earlier
+     completion and its certificate stay recorded. cts-level-gate.js decides;
+     a page without it keeps the old behaviour. */
+  var LEVEL_KEY = "cts_" + U.course + "_u" + U.unit + "_level";   // new key: the level a pass was made at
+  function levelNow() { return isMasters() ? "thm" : isAssociate() ? "assoc" : "cert"; }
+  function passCovers() {
+    var LG = window.CTSLevelGate;
+    if (!LIVE || !LG || !U.completion || !U.completion.code) return true;
+    var s = student() || {};
+    return LG.covers({
+      stored: lsGet(LEVEL_KEY), code: U.completion.code, track: track(), goal: lsGet("cts_goal") || s.goal,
+      record: jget("cts_record_levels", {}),
+      lists: { done: jget("cts_done_codes", []), assoc: jget("cts_assoc_done_codes", []),
+               thm: jget("cts_thm_done_codes", []), mdiv: jget("cts_mdiv_done_codes", []) }
+    });
+  }
+  var reassessing = unitPassed && !passCovers();
+  if (reassessing) { unitPassed = false; mcPassed = false; }
+
   /* Model answers for short-answer work: the tracks where it does not count
      see them on submit; tracks whose short answer is graded see them once the
      unit is passed. Multiple choice is corrected on click for everyone. */
@@ -260,7 +285,7 @@
   // need another yes/no branch in the grader. "both" remains a legacy mode.
   function sourceLang() { return U.sourceLang || "en"; }
   function languages() {
-    return Array.from(new Set(["en", "es", "fr", "sw", sourceLang()].concat(U.langs || [])));
+    return Array.from(new Set(["en", "es", "fr", "sw", "pt", "ta", sourceLang()].concat(U.langs || [])));
   }
   function readerLang() {
     var b = document.body, codes = languages();
@@ -510,7 +535,7 @@
       : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es, fr: "Aller à " + nextWhere().fr }
       : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso", fr: "Voir votre progression dans ce cours" } : null;
     var h = '<div class="cts-passed" role="status">' +
-      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada", fr: "Unité " + U.unit + " réussie" }) + "</p>" +
+      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + (U.position || U.unit) + " passed", es: "Unidad " + (U.position || U.unit) + " aprobada", fr: "Unité " + (U.position || U.unit) + " réussie" }) + "</p>" +
       "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
                    es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : "."), fr: "Votre progression est enregistrée" + (total ? " : " + n + " unités réussies sur " + total + "." : ".") }) + "</p>";
     if (tbAssess) h += "<p>" + bi(pending.length > 1
@@ -810,7 +835,7 @@
 
   function normalise(s) {
     return " " + String(s || "").toLowerCase().normalize("NFC")
-      .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
+      .replace(/[^\p{L}\p{M}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
   }
   function keywordPass(ks, answer, minHits, lang) {
     if (!usableKeywords(ks)) return false;
@@ -1053,8 +1078,8 @@
     if (unitPassed || testMode()) return true;
     // LIVE: a unit submitted and waiting to be graded does not hold the student back
     if (LIVE && live && live.status === "pending") return true;
-    alert(pick({ en: "Please pass Unit " + U.unit + " first.",
-                 es: "Por favor apruebe la Unidad " + U.unit + " primero.", fr: "Veuillez réussir l’unité " + U.unit + " d’abord." }));
+    alert(pick({ en: "Please pass Unit " + (U.position || U.unit) + " first.",
+                 es: "Por favor apruebe la Unidad " + (U.position || U.unit) + " primero.", fr: "Veuillez réussir l’unité " + (U.position || U.unit) + " d’abord." }));
     return false;
   }
 
@@ -1085,7 +1110,7 @@
   var savedAttempt = saved.attemptId || null;
 
   var C_GOOD = "#1f6b3b", C_BAD = "#8a1f1f", C_WARN = "#8a5a00", C_GREY = "#555";
-  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" || l === "sw" ? l : "en"; }
+  function serverLang() { var l = readerLang(); return l === "en" || l === "es" || l === "fr" || l === "sw" || l === "pt" || l === "ta" ? l : "en"; }
   function idxOf(a) {
     if (typeof a === "number") return a;
     if (typeof a === "string" && /^\d+$/.test(a)) return +a;
@@ -1227,6 +1252,7 @@
         renderQuestions();
         fetchMissingMc();
         redrawAtUnlock();
+        autoRecord();          // a pass left unrecorded on an earlier visit
       });
     });
   }
@@ -1274,6 +1300,7 @@
       live.mcRes[q.qid] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? stored : -1), why: r.data.why == null ? null : r.data.why };
       saveState();
       renderQuestions();
+      autoRecord();
     });
   }
 
@@ -1296,6 +1323,7 @@
       absorbGraded(r.data, fill);
       saveState();
       renderQuestions();
+      autoRecord();
       for (var n = i + 1; n < fill.length; n++) {
         if (!fillChecked[n]) { var next = document.querySelector('input[data-fill="' + n + '"]'); if (next) next.focus(); break; }
       }
@@ -1307,6 +1335,57 @@
     absorb(by);
     // an item the reply left out stays unchecked: nothing is assumed
     return by;
+  }
+
+  /* Record a pass without waiting for Submit (Wayne, 14 Nov 2026). Students
+     answered everything, saw every answer marked right, and left without
+     pressing Submit, so the pass was never recorded. When the server's own
+     verdicts already show every required part complete and at or above 90%,
+     submit for them. Written answers that still need grading are never sent
+     on the student's behalf: those wait for the student's own Submit. */
+  var autoTried = null;
+  function readyToRecord() {
+    if (!LIVE || live.status !== "ready" || live.working || unitPassed || !live.attemptId) return false;
+    if (lockedMinutes() || autoTried === live.attemptId) return false;
+    var mcOK = mcPassed;
+    if (!mcOK) {
+      var right = 0;
+      for (var i = 0; i < mc.length; i++) {
+        var m = live.mcRes[mc[i].qid];
+        if (!m) return false;
+        if (m.right) right++;
+      }
+      mcOK = right >= needMC();
+    }
+    if (!mcOK) return false;
+    if (fillCounts()) {
+      var fr = 0;
+      for (var f = 0; f < fill.length; f++) {
+        var x = live.fillRes[fill[f].qid];
+        if (!x || x.verdict === "pending") return false;
+        if (x.verdict === "right") fr++;
+      }
+      if (fr < needFill()) return false;
+    }
+    if (!saCounts()) {
+      // a reflection the student is writing on a track where it is not graded:
+      // let them finish it and press Submit to see the model answers beside it
+      for (var r = 0; r < sa.length; r++) if (String(saAnswers[r] || "").trim()) return false;
+    } else {
+      for (var k = 0; k < sa.length; k++) {
+        var y = live.saRes[sa[k].qid];
+        if (!y || y.verdict !== "met") return false;
+      }
+    }
+    return true;
+  }
+  function autoRecord() {
+    if (!readyToRecord()) return;
+    autoTried = live.attemptId;
+    say(bi({ en: "Every required answer is in and passing. Recording your result now…",
+             es: "Todas las respuestas requeridas están completas y aprobadas. Registrando su resultado…",
+             fr: "Toutes les réponses requises sont complètes et réussies. Enregistrement de votre résultat…" }), C_GOOD);
+    liveSubmit();
   }
 
   // ---- Submit: the unchecked fill-ins, the written answers, then the attempt ----
@@ -1390,6 +1469,8 @@
 
   function livePass(R, quiet) {
     unitPassed = true; mcPassed = true; graded = true; live.status = "passed"; live.working = "";
+    reassessing = false;
+    lsSet(LEVEL_KEY, levelNow());
     progress["unit" + U.unit] = true;
     lsSet(KEY.progress, JSON.stringify(progress));
     writeLegacy(U.unit);
@@ -1518,6 +1599,16 @@
     var sb = submitEl();
     if (sb) sb.disabled = !!(live.working || unitPassed || st === "unregistered" || st === "connecting" || st === "loading" || st === "pending");
 
+    // Master's students stopped at the written answers without knowing they
+    // were required (production check, 14 Nov 2026): say so before question 1.
+    if (show && saCounts() && sa.length && !unitPassed) {
+      var nS = needSA(), tS = sa.length;
+      out += '<p class="small cts-sa-required" style="border-left:3px solid #8a5a00;padding-left:.6em">' + bi({
+        en: "Your program includes " + tS + " written answers at the end of this exam, and " + nS + " of them must meet the standard to pass. Write them in your own words, then press Submit: written answers are graded only when you submit.",
+        es: "Su programa incluye " + tS + " respuestas escritas al final de este examen, y " + nS + " deben cumplir el estándar para aprobar. Escríbalas con sus propias palabras y luego pulse Enviar: las respuestas escritas se califican solo al enviar.",
+        fr: "Votre programme comprend " + tS + " réponses écrites à la fin de cet examen, et " + nS + " doivent répondre à l’exigence pour réussir. Rédigez-les avec vos propres mots, puis appuyez sur Envoyer : les réponses écrites sont corrigées seulement à l’envoi."
+      }) + "</p>";
+    }
     if (show && mc.length) {
       if (!split) out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple", fr: "Questions à choix multiple" }) + "</h3>";
       if (mcPassed) out += '<p class="small">' + bi(G.S.mcKept) + "</p>";

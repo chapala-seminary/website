@@ -9,5 +9,6 @@ const notice = notices[kind];
     <span class="lang-en"><strong>{notice.title.en}.</strong> {notice.body.en}</span>
     <span class="lang-es"><strong>{notice.title.es}.</strong> {notice.body.es}</span>
     <span class="lang-fr"><strong>{notice.title.fr}.</strong> {notice.body.fr}</span>
+    {"sw" in notice.title && <span class="lang-sw"><strong>{(notice.title as Record<string, string>).sw}.</strong> {(notice.body as Record<string, string>).sw}</span>}
   </p>
 </div>

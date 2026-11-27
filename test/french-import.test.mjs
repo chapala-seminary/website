@@ -92,9 +92,12 @@ try {
     });
     await page.addScriptTag({ path: path.resolve('public/assets/js/cts-engine.js') });
     await page.evaluate(() => document.dispatchEvent(new Event('DOMContentLoaded')));
-    return page.evaluate(({ units, lang }) => units.flatMap(u => u.sa.map((q, i) => ({
+    // In batches: all units at once is over 100 MB since Tamil joined, too large for one page.evaluate.
+    const out = [];
+    for (let b = 0; b < units.length; b += 40) out.push(...await page.evaluate(({ units, lang }) => units.flatMap(u => u.sa.map((q, i) => ({
       key: `${u.key} SA ${i + 1}`, graded: !!(q.keywords && q.prompt?.[lang]),
-      passes: !!(q.keywords && q.prompt?.[lang]) && window.CTS_ENGINE.shortAnswerRight(q, q.prompt[lang]) }))), { units, lang });
+      passes: !!(q.keywords && q.prompt?.[lang]) && window.CTS_ENGINE.shortAnswerRight(q, q.prompt[lang]) }))), { units: units.slice(b, b + 40), lang }));
+    return out;
   };
   const [fr, en] = [await grader('fr'), await grader('en')];
   // A pasted French question must fail, unless the English question already

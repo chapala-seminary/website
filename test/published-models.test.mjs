@@ -3,13 +3,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
+import { SITE_LANGUAGES } from '../src/lib/languages.mjs';
+// Send the browser only English, Spanish and French: with every language the payload crashes Chromium.
+const drop = new Set(SITE_LANGUAGES.filter(l => !['en', 'es', 'fr'].includes(l)));
+const trim = v => Array.isArray(v) ? v.map(trim) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).filter(([k]) => !drop.has(k)).map(([k, x]) => [k, trim(x)])) : v;
 const units = [];
 for (const course of fs.readdirSync('src/content/lessons')) {
   for (const file of fs.readdirSync('src/content/lessons/' + course).filter(f => f.endsWith('.json'))) {
-    units.push(JSON.parse(fs.readFileSync(`src/content/units/${course}/${file}`, 'utf8')));
+    const u = JSON.parse(fs.readFileSync(`src/content/units/${course}/${file}`, 'utf8'));
+    units.push({ ...u, mc: trim(u.mc || []), fill: trim(u.fill || []), sa: trim(u.sa || []) });
   }
 }
-assert.equal(units.length, 678);  // 466 + 200 denominational elective units (24 Oct 2026) + 12 Islam (7 Nov 2026)
+assert.equal(units.length, 680);  // 466 + 200 denominational elective units (24 Oct 2026) + 12 Islam (7 Nov 2026) + 2 Presbyterian History (24 Nov 2026)
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   const page = await browser.newPage();
