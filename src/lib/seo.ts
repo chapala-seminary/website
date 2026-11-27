@@ -128,21 +128,22 @@ export function localeUrl(file: string, lang: Lang) {
 }
 
 type Copy = { title: string; description: string };
+const pageCopy = (title: string, description: string): Copy => ({ title, description });
+
+/* The home page's description for the dictionary languages (Swahili,
+   Portuguese, Tamil), which PAGE_META does not cover; tools/inject-seo.mjs
+   writes it into /sw/, /pt/ and /ta/index.html. */
+export const HOME_DESCRIPTION_MORE: Record<'sw' | 'pt' | 'ta', string> = {
+  sw: 'Kozi za bure za Biblia na theolojia kwa Kiingereza na Kihispania, zenye tafsiri za Kifaransa, Kiswahili, Kireno na Kitamil. Soma kwa simu yako.',
+  pt: 'Cursos gratuitos de Bíblia e teologia em inglês e espanhol, com traduções em francês, suaíli, português e tâmil. Estude no celular e ganhe um certificado.',
+  ta: 'ஆங்கிலம், ஸ்பானிய மொழிகளில் இலவச வேதாகம, இறையியல் பாடநெறிகள்; பிரெஞ்சு, சுவாஹிலி, போர்த்துகீசியம், தமிழ் மொழிபெயர்ப்புகளுடன். கைபேசியில் படியுங்கள்.',
+};
 
 export const PAGE_META: Record<string, Record<Lang, Copy>> = {
   'index.html': {
-    en: {
-      title: 'Free Online Seminary | CTS',
-      description: 'Free self-study Bible and theology courses in English, Spanish, and French. Study on your phone and earn a class certificate.',
-    },
-    es: {
-      title: 'Seminario teológico gratis | STC',
-      description: 'Cursos bíblicos y teológicos gratis en español, inglés y francés. Estudie en su teléfono y obtenga un certificado de clase.',
-    },
-    fr: {
-      title: 'Séminaire en ligne gratuit | STC',
-      description: 'Cours de Bible et de théologie gratuits en français, en anglais et en espagnol. Étudiez à votre rythme. Ministère à Ajijic.',
-    },
+    en: pageCopy('Free Online Seminary | CTS', 'Free Bible and theology courses in English and Spanish, with French, Swahili, Portuguese and Tamil translations. Study on your phone; earn a certificate.'),
+    es: pageCopy('Seminario teológico gratis | STC', 'Cursos bíblicos y teológicos gratis en español e inglés, con traducciones al francés, suajili, portugués y tamil. Estudie en su teléfono.'),
+    fr: pageCopy('Séminaire en ligne gratuit | STC', 'Cours de Bible et de théologie gratuits en anglais et en espagnol, traduits en français, swahili, portugais et tamoul. Étudiez à votre rythme.'),
   },
   'CTSAbout.html': {
     en: {

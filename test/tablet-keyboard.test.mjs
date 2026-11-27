@@ -21,8 +21,11 @@ try {
     await page.waitForSelector('#cts-email-optional', { timeout: 8000 });
     await page.tap('#cts-pledge-check');
     await page.getByRole('button', { name: /passer l.examen/i }).tap();
+    // Opening the exam starts /api/attempt; a tap does not await its response.
+    const selector = '#questionsContainer input[type=text]:visible, #questionsContainer textarea:visible';
+    await page.locator(selector).nth(9).waitFor({ state: 'visible' });
     await page.setViewportSize({ width: w, height: h });            // the keyboard opens
-    const fields = await page.$$('#questionsContainer input[type=text]:visible, #questionsContainer textarea:visible');
+    const fields = await page.$$(selector);
     assert.ok(fields.length >= 10, `written-answer fields are shown (${fields.length})`);
     const failed = [];
     for (const [i, f] of fields.entries()) {
