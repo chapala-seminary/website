@@ -128,6 +128,7 @@ export function localeUrl(file: string, lang: Lang) {
 }
 
 type Copy = { title: string; description: string };
+const pageCopy = (title: string, description: string): Copy => ({ title, description });
 
 /* The home page's description for the dictionary languages (Swahili,
    Portuguese, Tamil), which PAGE_META does not cover; tools/inject-seo.mjs
@@ -140,18 +141,9 @@ export const HOME_DESCRIPTION_MORE: Record<'sw' | 'pt' | 'ta', string> = {
 
 export const PAGE_META: Record<string, Record<Lang, Copy>> = {
   'index.html': {
-    en: {
-      title: 'Free Online Seminary | CTS',
-      description: 'Free Bible and theology courses in English and Spanish, with French, Swahili, Portuguese and Tamil translations. Study on your phone; earn a certificate.',
-    },
-    es: {
-      title: 'Seminario teológico gratis | STC',
-      description: 'Cursos bíblicos y teológicos gratis en español e inglés, con traducciones al francés, suajili, portugués y tamil. Estudie en su teléfono.',
-    },
-    fr: {
-      title: 'Séminaire en ligne gratuit | STC',
-      description: 'Cours de Bible et de théologie gratuits en anglais et en espagnol, traduits en français, swahili, portugais et tamoul. Étudiez à votre rythme.',
-    },
+    en: pageCopy('Free Online Seminary | CTS', 'Free Bible and theology courses in English and Spanish, with French, Swahili, Portuguese and Tamil translations. Study on your phone; earn a certificate.'),
+    es: pageCopy('Seminario teológico gratis | STC', 'Cursos bíblicos y teológicos gratis en español e inglés, con traducciones al francés, suajili, portugués y tamil. Estudie en su teléfono.'),
+    fr: pageCopy('Séminaire en ligne gratuit | STC', 'Cours de Bible et de théologie gratuits en anglais et en espagnol, traduits en français, swahili, portugais et tamoul. Étudiez à votre rythme.'),
   },
   'CTSAbout.html': {
     en: {
