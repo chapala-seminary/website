@@ -22,7 +22,8 @@ Actual primary: main, 726ace61bbf8f7d2bbe261a8ccde887237714e82.
 Explicit implementation/PR base: beta, d1dda57247c818fad2247351b4196869aa28f0ea.
 CTS is outside generic feature-batching adoption. Isolated writer branch:
 codex/portuguese-coverage-20261127. Connector identity was satoshisound; new
-publication requires chapalatheological-ai, not the parent's scoped exception.
+Robert subsequently authorized satoshisound for beta publication; documentation
+PR #418 records both permitted accounts while preserving human production gates.
 The 27 November review note was read as a proposal, not canonical policy.
 
 ## Reproduce the inventory
@@ -48,7 +49,10 @@ unaudited. Compare file hashes before reusing the report; regenerate after beta
 moves. Tests distinguish missing, stale, machine and reported human status,
 and verify blank options and exclusion of key/rubric text.
 
-At pinned beta: 3,151 source/reference files, 86,001 English language fields;
+Refreshed against beta e73359d2bb08db0d6d9939970a6c9483d68edf40 (#406),
+merged only into this isolated branch. Manifest source commit
+1028d1336bf5ed704f22fa1d18571f73c265ea60 contains that beta plus inventory
+tooling/docs; it does not include later #331/#412 changes. At this baseline: 3,152 source/reference files, 86,001 English language fields;
 9,155 missing Portuguese fields, 36,046 machine/unreviewed lesson fields,
 40,800 other present but unreviewed fields. Missing fields contain 976,537
 English source word occurrences, including repeated navigation/metadata. This
@@ -110,12 +114,11 @@ activation dates in every tranche. Private grading material stays private.
 
 ## Current verification and publication limits
 
-Focused inventory tests pass. The baseline build passed and observed 1,877 Portuguese HTML routes, all declaring
+Focused inventory tests pass. The baseline build passed and observed 1,878 Portuguese HTML routes, all declaring
 Portuguese, with 157 missing dictionary entries. This is a built-file audit, not
 a live interaction claim. The full feature suite is running; independent
-review remains pending; this baseline is not ready to merge. No PR publication,
-beta deployment or live acceptance is claimed. Identity must be corrected to
-chapalatheological-ai before new GitHub writes. The source manifest PR is the
+review remains pending; this baseline is not ready to merge. No beta deployment or live acceptance is claimed. Robert authorized satoshisound
+for beta publication; the separate documentation candidate is PR #418. The source manifest PR is the
 first delivery; subsequent tranches stay open until their own acceptance passes.
 
 ## First foundation private coverage (counts only)
@@ -128,3 +131,12 @@ lacks PT on ten primary-answer maps, ten alternates, four models and sixteen
 rubric fields. Rubric source fallback can be intentional; Wayne must decide the
 required language coverage. Counts do not establish answer acceptance, option
 meaning or faculty approval. The private audit output remains local.
+
+## Foundation linked-reader backlog refresh (28 November)
+
+The OTS room contains five inline digests, but the masters page additionally
+links five separate Part II readers (21,361 English words). Standalone Part I
+readers and the complete-books shelf also require coverage and source alignment.
+Do not mark the foundation journey complete from the five inline cards alone.
+Wayne must approve theological terms and Scripture choices. Existing publisher
+Portuguese resources should be linked after availability/rights verification.
