@@ -57,7 +57,7 @@
     if (b.dataset.pageLang) return b.dataset.pageLang;
     if (b.classList.contains('es') || b.classList.contains('lang-es')) return 'es';
     var l = (b.getAttribute('data-lang') || document.documentElement.lang || 'en').slice(0, 2);
-    return l === 'es' || l === 'fr' ? l : 'en';
+    return l === 'es' || l === 'fr' || l === 'pt' ? l : 'en';
   }
   function t(o) { return o[lang()] || o.en; }
 
@@ -138,11 +138,40 @@
     verifyLine: { en: 'Verification', es: 'Verificación', fr: 'Vérification' }
   };
 
+  // Portuguese machine draft; faculty language review remains pending.
+  var PT = {
+    "head": "Registrar este certificado no seminário",
+    "why": "Um certificado registrado recebe um código de verificação que qualquer pessoa pode consultar em chapalaseminary.org/pt/verify. O seminário precisa primeiro de um endereço de e-mail confirmado para entrar em contato e enviar uma cópia.",
+    "email": "Seu endereço de e-mail",
+    "send": "Enviar e-mail de confirmação",
+    "methods": "O e-mail também contém um link de confirmação. Depois de usá-lo, recarregue esta página do certificado.",
+    "general": "Confirme seu e-mail antes de solicitar um certificado",
+    "sent": "Enviamos um código de 6 dígitos para",
+    "codePh": "Código de 6 dígitos",
+    "confirm": "Confirmar",
+    "change": "Usar outro e-mail",
+    "working": "Um momento…",
+    "verified": "E-mail confirmado. Registrando seu certificado…",
+    "done": "Registrado no seminário. Código de verificação:",
+    "doneSub": "Ele está impresso no seu certificado. Qualquer pessoa pode verificá-lo em",
+    "mailed": "Uma cópia foi enviada por e-mail para",
+    "notYet": "O registro do seminário ainda não mostra todas as partes deste título. Seu progresso é sincronizado automaticamente; aguarde um momento e tente novamente.",
+    "retry": "Tentar novamente",
+    "bad": "Este endereço de e-mail não parece válido.",
+    "wrong": "Este código não está correto.",
+    "expired": "Este código expirou. Solicite um novo.",
+    "wait": "Aguarde um momento antes de solicitar outro código.",
+    "noMail": "O e-mail ainda não está configurado no seminário. Você pode imprimir seu certificado; volte mais tarde para registrá-lo.",
+    "offline": "Não foi possível contatar o seminário. Verifique sua conexão e tente novamente.",
+    "verifyLine": "Verificação"
+};
+  Object.keys(PT).forEach(function (key) { S[key].pt = PT[key]; });
+
   var root, a, code, state = { step: 'email', email: '', verifyCode: null, emailed: false, msg: null, busy: false };
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   // A French page links to the French verification page (worker/api.js).
-  function verifyUrl(vc) { return location.origin + (lang() === 'fr' ? '/fr/verify/' : '/verify/') + encodeURIComponent(vc); }
+  function verifyUrl(vc) { return location.origin + (['fr', 'pt'].indexOf(lang()) >= 0 ? '/' + lang() + '/verify/' : '/verify/') + encodeURIComponent(vc); }
 
   function render() {
     if (!root) return;

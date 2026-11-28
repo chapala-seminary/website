@@ -81,7 +81,7 @@ export function whereTheyWere(lastUnit, lang) {
   const c = m && catalog.courses[m[1]];
   if (!c) return null;
   const n = +m[2];
-  const name = c.title?.[['es', 'fr'].includes(lang) ? lang : 'en'] || catalog.completions[c.code]?.name?.replace(/\s*\|\s*$/, '') || m[1];
+  const name = c.title?.[['es', 'fr', 'pt'].includes(lang) ? lang : 'en'] || catalog.completions[c.code]?.name?.replace(/\s*\|\s*$/, '') || m[1];
   const next = c.units.find((u) => u > n);
   return { course: name, unit: n, page: `${c.pages}Unit${next ?? c.units[0]}.html`, finished: next === undefined };
 }
@@ -92,7 +92,7 @@ const firstName = (name) => String(name || '').trim().split(/\s+/)[0] || '';
  * the explicit choice (?cts_lang=) so a device that remembers another
  * language still opens it in this one (public/cts-lang.js). */
 function siteLink(site, page, lang) {
-  if (lang !== 'es' && lang !== 'fr') return `${site}/${page}`;
+  if (lang !== 'es' && lang !== 'fr' && lang !== 'pt') return `${site}/${page}`;
   const [path, hash] = page.split('#');
   return `${site}/${lang}/${path}?cts_lang=${lang}${hash ? '#' + hash : ''}`;
 }
@@ -100,7 +100,7 @@ function siteLink(site, page, lang) {
 /* The notes themselves. Plain text, short, in the student's language; both
  * languages, English first, when the language is not known. */
 export function note(kind, st, { stopUrl, site }) {
-  const lang = ['es', 'fr'].includes(st.lang) ? st.lang : 'en';
+  const lang = ['es', 'fr', 'pt'].includes(st.lang) ? st.lang : 'en';
   const where = whereTheyWere(st.last_unit, lang);
   const goPage = where && !where.finished ? where.page : 'index.html#catalog';
   const go = siteLink(site, goPage, lang);
@@ -170,19 +170,33 @@ export function note(kind, st, { stopUrl, site }) {
     '',
     'Si vous avez rencontré une difficulté — site inaccessible, cours verrouillé, doute sur le point de départ —, répondez simplement à ce message. Nous lisons chaque réponse.',
   ];
+  const pt = kind === 'quiet' ? [
+    `Olá, ${n},`, '',
+    where ? `Faz algumas semanas desde sua última unidade (${where.course}, Unidade ${where.unit}), por isso gostaria de saber como você está.`
+      : 'Faz algumas semanas desde seu último progresso nos cursos, por isso gostaria de saber como você está.',
+    'Não há prazo nem pressão. Quando estiver pronto, você pode continuar de onde parou:', '', `  ${go}`, '',
+    'Se algo no site dificultou seus estudos — uma página que não abria, um exame que não era corrigido, um curso que continuava bloqueado — responda a este e-mail e conte-nos. Lemos todas as respostas, e isso nos ajuda a melhorar o site para todos.',
+  ] : [
+    `Olá, ${n},`, '',
+    'Obrigado por se inscrever no Seminário Teológico de Chapala. Gostaria de saber se você conseguiu começar.',
+    'A maioria dos estudantes começa com Panorama do Antigo Testamento, um dos sete cursos fundamentais:', '', `  ${first}`, '',
+    'Se algo impediu você de começar — o site não carregava, um curso estava bloqueado, você não sabia por onde começar — responda a este e-mail e conte-nos. Lemos todas as respostas.',
+  ];
   const host = site.replace(/^https?:\/\//, '');
   const sign = { en: ['', 'With warm regards,', 'Wayne Cook', 'Chapala Theological Seminary'],
                  es: ['', 'Con un cordial saludo,', 'Wayne Cook', 'Seminario Teológico de Chapala'],
+                 pt: ['', 'Atenciosamente,', 'Wayne Cook', 'Seminário Teológico de Chapala'],
                  fr: ['', 'Bien cordialement,', 'Wayne Cook', 'Séminaire théologique de Chapala'] };
   const stop = {
+    pt: ['', '--', `Você recebeu esta mensagem porque se inscreveu em ${host}. Para deixar de receber mensagens sobre seu progresso: ${stopUrl}`],
     en: ['', '--', `You are receiving this because you registered at ${host}. To stop notes about your progress: ${stopUrl}`],
     es: ['', '--', `Recibe este mensaje porque se inscribió en ${host}. Para no recibir más mensajes sobre su progreso: ${stopUrl}`],
     fr: ['', '--', `Vous recevez ce message parce que vous avez créé un dossier d’étudiant sur ${host}. Pour ne plus recevoir de messages sur votre progression : ${stopUrl}`],
   };
   const subject = kind === 'quiet'
-    ? { en: 'How is your study going?', es: '¿Cómo van sus estudios?', fr: 'Comment avancent vos études ?' }
-    : { en: 'Getting started at Chapala Theological Seminary', es: 'Para comenzar en el Seminario Teológico de Chapala', fr: 'Commencer vos études au Séminaire théologique de Chapala' };
-  const body = { en, es, fr }[lang];
+    ? { pt: 'Como vão seus estudos?', en: 'How is your study going?', es: '¿Cómo van sus estudios?', fr: 'Comment avancent vos études ?' }
+    : { pt: 'Começando no Seminário Teológico de Chapala', en: 'Getting started at Chapala Theological Seminary', es: 'Para comenzar en el Seminario Teológico de Chapala', fr: 'Commencer vos études au Séminaire théologique de Chapala' };
+  const body = { en, es, fr, pt }[lang];
   return { subject: subject[lang], text: [...body, ...sign[lang], ...stop[lang]].join('\n') };
 }
 
@@ -246,11 +260,19 @@ async function contactToken(env, studentId) {
  * Config: WELCOME_MODE "send" sends it; anything else (or unset) sends nothing.
  */
 export function welcomeNote(st, { stopUrl, site }) {
-  const lang = ['es', 'fr'].includes(st.lang) ? st.lang : 'en';
+  const lang = ['es', 'fr', 'pt'].includes(st.lang) ? st.lang : 'en';
   const first = siteLink(site, 'CTSUnit1.html', lang);
   const catalogLink = siteLink(site, 'index.html#catalog', lang);
   const n = firstName(st.name);
   const body = {
+    pt: [
+      `Olá, ${n},`, '',
+      'Boas-vindas ao Seminário Teológico de Chapala e obrigado por se inscrever. Ficamos felizes em receber você.', '',
+      'Todos os cursos são gratuitos e você estuda no seu próprio ritmo: não há prazos nem taxas. A maioria dos estudantes começa com Panorama do Antigo Testamento, um dos sete cursos fundamentais:', '',
+      `  ${first}`, '', `Todos os cursos estão aqui: ${catalogLink}`, '',
+      'Ao se inscrever, o site mostrou seu código de estudante. Anote-o e mantenha-o em segredo, como uma senha: ele permite recuperar seu progresso em outro dispositivo ou navegador. Se o perder, você pode pedir ao site que o envie para este endereço de e-mail.', '',
+      'Se tiver alguma dúvida ou se algo no site dificultar seus estudos, basta responder a este e-mail. Lemos todas as respostas.',
+    ],
     en: [
       `Dear ${n},`,
       '',
@@ -301,13 +323,15 @@ export function welcomeNote(st, { stopUrl, site }) {
   const host = site.replace(/^https?:\/\//, '');
   const sign = { en: ['', 'With warm regards,', 'Wayne Cook', 'Chapala Theological Seminary'],
                  es: ['', 'Con un cordial saludo,', 'Wayne Cook', 'Seminario Teológico de Chapala'],
+                 pt: ['', 'Atenciosamente,', 'Wayne Cook', 'Seminário Teológico de Chapala'],
                  fr: ['', 'Bien cordialement,', 'Wayne Cook', 'Séminaire théologique de Chapala'] };
   const stop = {
+    pt: ['', '--', `Você recebeu esta mensagem porque se inscreveu em ${host}. Para deixar de receber mensagens sobre seu progresso: ${stopUrl}`],
     en: ['', '--', `You are receiving this because you registered at ${host}. To stop notes about your progress: ${stopUrl}`],
     es: ['', '--', `Recibe este mensaje porque se inscribió en ${host}. Para no recibir más mensajes sobre su progreso: ${stopUrl}`],
     fr: ['', '--', `Vous recevez ce message parce que vous avez créé un dossier d’étudiant sur ${host}. Pour ne plus recevoir de messages sur votre progression : ${stopUrl}`],
   };
-  const subject = { en: 'Welcome to Chapala Theological Seminary', es: 'Bienvenido/a al Seminario Teológico de Chapala', fr: 'Bienvenue au Séminaire théologique de Chapala' };
+  const subject = { pt: 'Boas-vindas ao Seminário Teológico de Chapala', en: 'Welcome to Chapala Theological Seminary', es: 'Bienvenido/a al Seminario Teológico de Chapala', fr: 'Bienvenue au Séminaire théologique de Chapala' };
   return { subject: subject[lang], text: [...body[lang], ...sign[lang], ...stop[lang]].join('\n') };
 }
 

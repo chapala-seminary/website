@@ -18,6 +18,8 @@ STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
 node tools/private-units.mjs --check
+node --test test/portuguese-services.test.mjs
+node test/portuguese-pdf.test.mjs
 node --test test/release-governance.test.mjs
 # The correspondence console (correspondence/, issue #163): its own Worker
 # and database; these run on Node's SQLite with no server.

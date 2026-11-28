@@ -857,8 +857,46 @@ function verifyPageFr(cert, typed) {
     <br><a href="/fr/index.html">chapalaseminary.org</a>
   </footer>`);
 }
+function verifyPagePt(cert, typed) {
+  const lookup = typed === undefined;
+  const ok = cert && !cert.revoked_at;
+  const title = lookup ? 'Verificar um certificado' : ok ? 'Certificado verificado'
+    : cert ? 'Certificado revogado' : 'Certificado não encontrado';
+  const date = iso => {
+    const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ''));
+    const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    return match && months[+match[2] - 1] ? `${+match[3]} de ${months[+match[2] - 1]} de ${match[1]}` : String(iso || '').slice(0, 10);
+  };
+  const rows = lookup ? `
+      <p>Digite o código de verificação do certificado.</p>
+      <form action="/pt/verify" method="get">
+        <label for="verify-code">Código de verificação</label>
+        <input id="verify-code" name="code" required maxlength="32" autocomplete="off" spellcheck="false">
+        <button type="submit">Verificar</button>
+      </form>` : ok ? `
+      <dl>
+        <dt>Concedido a</dt><dd>${esc(cert.student_name)}</dd>
+        <dt>Título</dt><dd>${esc(awardTitle(cert, 'pt'))}</dd>
+        <dt>Emitido em</dt><dd>${esc(date(cert.issued_at))}</dd>
+        <dt>Código</dt><dd class="code">${esc(cert.verify_code)}</dd>
+      </dl>` : `
+      <p class="muted">${cert ? 'Este certificado foi revogado.' : 'Não foi emitido nenhum certificado com este código:'}
+        <span class="code">${esc(typed || '')}</span></p>`;
+  return verifyShell('pt', `${title} · Seminário Teológico de Chapala`, `
+  ${lookup ? '' : `<div class="status ${ok ? 'ok' : 'no'}">${ok ? '✓ Verificado' : '· Não verificado'}</div>`}
+  <h1>Seminário Teológico de Chapala</h1>
+  <p class="muted">Tradução preliminar em português; revisão de idioma pendente.</p>
+  <h2>${title}</h2>
+  ${rows}
+  <footer>
+    Esta página confirma que o seminário emitiu este certificado. O Seminário
+    Teológico de Chapala não é uma instituição credenciada.
+    <br><a href="/pt/index.html?cts_lang=pt">chapalaseminary.org</a>
+  </footer>`);
+}
 function verifyPage(cert, typed, lang) {
   if (lang === 'fr') return verifyPageFr(cert, typed);
+  if (lang === 'pt') return verifyPagePt(cert, typed);
   const lookup = typed === undefined;
   const ok = cert && !cert.revoked_at;
   const title = lookup ? 'Verify a certificate · Verificar un certificado' : ok ? 'Certificate verified · Certificado verificado'
@@ -999,10 +1037,10 @@ export async function handle(request, env, ctx) {
   try {
     // /fr/verify and /fr/verify/<code> are the French page (verifyPageFr).
     // /es/verify keeps the bilingual page every Spanish link already uses.
-    const routed = /^\/(es|fr)(\/verify(?:\/.*)?)$/.exec(path);
+    const routed = /^\/(es|fr|pt)(\/verify(?:\/.*)?)$/.exec(path);
     const verifyPath = routed ? routed[2] : path;
     const verifyLang = routed ? routed[1] : null;
-    const verifyBase = verifyLang === 'fr' ? '/fr/verify' : '/verify';
+    const verifyBase = ['fr', 'pt'].includes(verifyLang) ? `/${verifyLang}/verify` : '/verify';
     if (verifyPath === '/verify' && method === 'GET') {
       const code = (url.searchParams.get('code') || '').trim();
       if (code) return new Response(null, { status: 303, headers: {

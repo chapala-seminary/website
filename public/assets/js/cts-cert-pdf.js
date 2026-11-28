@@ -45,15 +45,33 @@
     if (b.dataset.pageLang && W[b.dataset.pageLang]) return b.dataset.pageLang;
     if (b.classList.contains('es') || b.classList.contains('lang-es') || b.classList.contains('spanish')) return 'es';
     var l = b.getAttribute('data-lang') || document.documentElement.lang || '';
-    if (l) return l.slice(0, 2) === 'es' ? 'es' : 'en';
-    return get('cts_lang') === 'es' ? 'es' : 'en';
+    if (l) return W[l.slice(0, 2)] ? l.slice(0, 2) : 'en';
+    return W[get('cts_lang')] ? get('cts_lang') : 'en';
   }
   // The second link offers the other language a reader is likely to want:
   // English for a Spanish or French reader, Spanish for an English one.
-  var OTHER = { en: 'es', es: 'en', fr: 'en' };
+  var OTHER = { en: 'es', es: 'en', fr: 'en', pt: 'en' };
 
   // ---- the words -------------------------------------------------------------
   var W = {
+    pt: {
+      school: 'Seminário Teológico de Chapala',
+      awarded: 'Este certificado é concedido a',
+      course: 'em reconhecimento pela conclusão com êxito do curso',
+      body: 'por ter cumprido fielmente o programa de estudos prescrito e passado em todos os exames de unidade exigidos, recebe este certificado com todos os direitos e privilégios correspondentes.',
+      honors: 'Com Honras',
+      author: 'Autor do curso', director: 'Diretor do Seminário',
+      dateOf: 'Data de conclusão: ',
+      known: 'Por este documento se declara que',
+      confer: 'tendo cumprido fielmente todos os requisitos prescritos pelo Corpo Docente, recebe o grau de',
+      conferCert: 'tendo cumprido fielmente todos os requisitos prescritos pelo Corpo Docente, recebe o',
+      rights: 'com todos os direitos, honras e privilégios correspondentes.',
+      given: 'Concedido em Chapala, Jalisco — ',
+      professor: 'Professor', semDirector: 'Diretor do Seminário', founder: 'Fundador',
+      verify: 'Código de verificação: ',
+      button: 'Baixar PDF', other: 'Download in English', busy: 'Preparando…',
+      failed: 'Não foi possível criar o PDF neste dispositivo. Use Imprimir / Salvar.'
+    },
     en: {
       school: 'Chapala Theological Seminary',
       awarded: 'This certificate is awarded to',
@@ -112,23 +130,25 @@
   };
   // as the Certificate Maker words the band: "<program> Track" / "Programa: <program>"
   var TRACK = {
-    certificate: { en: 'Certificate of Ministry Track', es: 'Programa: Certificado de Ministerio', fr: 'Parcours Certificat de ministère' },
-    associate: { en: 'Associate of Divinity Track', es: 'Programa: Asociado en Divinidad', fr: 'Parcours Diplôme associé en théologie' },
-    thm: { en: 'Master of Theology Track', es: 'Programa: Maestría en Teología', fr: 'Parcours Master en théologie' },
-    mdiv: { en: 'Master of Divinity Track', es: 'Programa: Maestría en Divinidad', fr: 'Parcours Master en théologie pastorale' }
+    certificate: { en: 'Certificate of Ministry Track', es: 'Programa: Certificado de Ministerio', fr: 'Parcours Certificat de ministère', pt: 'Programa: Certificado de Ministério' },
+    associate: { en: 'Associate of Divinity Track', es: 'Programa: Asociado en Divinidad', fr: 'Parcours Diplôme associé en théologie', pt: 'Programa: Grau Associado em Divindade' },
+    thm: { en: 'Master of Theology Track', es: 'Programa: Maestría en Teología', fr: 'Parcours Master en théologie', pt: 'Programa: Mestrado em Teologia' },
+    mdiv: { en: 'Master of Divinity Track', es: 'Programa: Maestría en Divinidad', fr: 'Parcours Master en théologie pastorale', pt: 'Programa: Mestrado em Divindade' }
   };
   var DEGREE_NAME = {
-    certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', fr: 'Certificat de ministère', abbr: 'C.Min.' },
-    associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad', fr: 'Diplôme associé en théologie', abbr: 'A.Div.' },
-    thm: { en: 'Master of Theology', es: 'Maestría en Teología', fr: 'Master en théologie', abbr: 'Th.M.' },
-    mdiv: { en: 'Master of Divinity', es: 'Maestría en Divinidad', fr: 'Master en théologie pastorale', abbr: 'M.Div.' }
+    certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', fr: 'Certificat de ministère', pt: 'Certificado de Ministério', abbr: 'C.Min.' },
+    associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad', fr: 'Diplôme associé en théologie', pt: 'Grau Associado em Divindade', abbr: 'A.Div.' },
+    thm: { en: 'Master of Theology', es: 'Maestría en Teología', fr: 'Master en théologie', pt: 'Mestrado em Teologia', abbr: 'Th.M.' },
+    mdiv: { en: 'Master of Divinity', es: 'Maestría en Divinidad', fr: 'Master en théologie pastorale', pt: 'Mestrado em Divindade', abbr: 'M.Div.' }
   };
   var MONTHS = {
+    pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
     en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
     fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
   };
   function dateText(lang, d) {
+    if (lang === 'pt') return d.getDate() + ' de ' + MONTHS.pt[d.getMonth()] + ' de ' + d.getFullYear();
     if (lang === 'fr') return (d.getDate() === 1 ? '1er' : d.getDate()) + ' ' + MONTHS.fr[d.getMonth()] + ' ' + d.getFullYear();
     return lang === 'es' ? d.getDate() + ' de ' + MONTHS.es[d.getMonth()] + ' de ' + d.getFullYear()
                          : MONTHS.en[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
@@ -285,6 +305,10 @@
       doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(110, 110, 110);
       centre(doc, W[lang].verify + vc.code + ' · ' + vc.url, y + 76);
     }
+    if (lang === 'pt') {
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(7); doc.setTextColor(110, 110, 110);
+      centre(doc, 'Tradução preliminar em português; revisão de idioma pendente.', y + 90);
+    }
   }
 
   function coursePdf(doc, lang, sig, who, when) {
@@ -292,7 +316,7 @@
     var names = window.CTS_CERT_NAMES || {};
     var course = names[file] ? names[file][lang] || names[file].en : (document.body.getAttribute('data-course') || '');
     doc.setTextColor.apply(doc, BLUE); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
-    spaced(doc, lang === 'fr' ? 'SÉMINAIRE THÉOLOGIQUE DE CHAPALA · CHAPALA THEOLOGICAL SEMINARY' : 'CHAPALA THEOLOGICAL SEMINARY · SEMINARIO TEOLÓGICO DE CHAPALA', 76, 1.2);
+    spaced(doc, lang === 'pt' ? 'SEMINÁRIO TEOLÓGICO DE CHAPALA · CHAPALA THEOLOGICAL SEMINARY' : lang === 'fr' ? 'SÉMINAIRE THÉOLOGIQUE DE CHAPALA · CHAPALA THEOLOGICAL SEMINARY' : 'CHAPALA THEOLOGICAL SEMINARY · SEMINARIO TEOLÓGICO DE CHAPALA', 76, 1.2);
     doc.setTextColor.apply(doc, NAVY); doc.setFont('times', 'bold'); doc.setFontSize(23);
     centre(doc, w.school, 104);
     doc.setDrawColor.apply(doc, GOLD); doc.setLineWidth(1.6); doc.line(f.Wp / 2 - 60, 116, f.Wp / 2 + 60, 116);
@@ -320,11 +344,13 @@
     // comes from the same unverified localStorage selection, not D1.
     var browserSelection = file === 'ctshermeneuticscertificate.html';
     var selectedBand = {
+      pt: 'PROGRAMA ESCOLHIDO NESTE NAVEGADOR: ',
       en: 'BROWSER-SELECTED PROGRAM: ',
       es: 'PROGRAMA ELEGIDO EN ESTE NAVEGADOR: ',
       fr: 'PROGRAMME CHOISI SUR CET APPAREIL : '
     };
     var selectedNote = {
+      pt: 'Esta escolha no navegador não comprova o nível acadêmico dos créditos obtidos. Consulte o registro verificável do certificado do seminário.',
       en: 'This browser selection does not verify the level of earned course credit. Check the seminary\'s verified certificate record.',
       es: 'Esta selección no verifica el nivel académico aprobado. Consulte el certificado verificable del seminario.',
       fr: 'Ce choix ne prouve pas le niveau de crédits obtenus. Consultez le certificat vérifiable du séminaire.'
