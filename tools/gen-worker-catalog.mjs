@@ -131,19 +131,26 @@ for (const [slug, c] of Object.entries(courses)) {
     const j = JSON.parse(fs.readFileSync(path.join('src/content/courses', f), 'utf8'));
     if (j.entry && j.title) titles[j.entry] = j.title;
   }
-  const both = (t) => ({ en: t.en, es: t.es, fr: t.fr });
+  const ptTitles = JSON.parse(fs.readFileSync('src/data/interface/pt.json', 'utf8'))['@course'];
+  const ptAliases = { CTS_WiseSpeak_Preaching: 'CTSPreaching', CTS_Narrative_Preaching: 'CTSNarrative', ethics_unit01: 'CTSEthics' };
+  const portuguese = prefix => {
+    const title = ptTitles[ptAliases[prefix] || prefix];
+    if (!title) throw new Error(`${prefix}: no Portuguese course title in interface/pt.json`);
+    return title;
+  };
+  const both = (t, prefix) => ({ en: t.en, es: t.es, fr: t.fr, pt: portuguese(prefix) });
   for (const [slug, c] of Object.entries(courses)) {
     const t = titles[`${c.pages}Unit${c.units[0]}.html`];
     if (!t?.en || !t?.es || !t?.fr) { console.error(`${slug}: no English, Spanish and French title in src/content/courses for ${c.pages}Unit${c.units[0]}.html`); process.exit(2); }
-    c.title = both(t);
-    completions[c.code].title = both(t);
+    c.title = both(t, c.pages);
+    completions[c.code].title = both(t, c.pages);
   }
   // The single-page courses, by the code their certificate page names.
   const PAGES = { COUNSELING: 'CTSCounseling.html', STORYTEL: 'CTS_Narrative_Preaching.html', WISESPEAK: 'CTS_WiseSpeak_Preaching.html', ETHICS: 'ethics_unit01.html' };
   for (const [code, entry] of Object.entries(PAGES)) {
     const t = titles[entry];
     if (!completions[code] || !t?.en || !t?.es || !t?.fr) { console.error(`${code}: no completion code or no English, Spanish and French title for ${entry}`); process.exit(2); }
-    completions[code].title = both(t);
+    completions[code].title = both(t, entry.replace(/\.html$/, ''));
   }
 }
 // And every course a degree requires must be one a page can actually record,

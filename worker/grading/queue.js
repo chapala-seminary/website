@@ -15,7 +15,7 @@
 import { gradeBatch, CHUNK } from './model.js';
 import { normAnswer } from './text.js';
 import { loadKeys, loadAttempt, loadStudent, settle, cacheDecision, nowIso } from './attempts.js';
-import { sendEmail, emailConfigured, emailLanguage } from '../email.js';
+import { sendEmail, emailConfigured, emailLanguage, languageLink } from '../email.js';
 
 export const MAX_TRIES = 6;
 export const ESCALATE_HOURS = 24;
@@ -33,9 +33,11 @@ async function escalate(env, gradeId, why) {
 }
 
 /* What a student is told when a pending result is in. Short, in their language. */
-function gradedEmail(name, status, lang, origin) {
+export function gradedEmail(name, status, lang, origin) {
   const site = origin || 'https://chapalaseminary.org';
+  const ptSite = languageLink(site, 'index.html', 'pt');
   const m = {
+    pt: { subject: 'Suas respostas escritas foram corrigidas', text: `Olá, ${name},\n\nSuas respostas escritas no Seminário Teológico de Chapala foram corrigidas. ${status === 'passed' ? 'Você passou.' : 'Você não passou desta vez; pode tentar novamente após o período de espera.'}\n\nAbra ${ptSite} e vá à página em que estava para ver cada resultado.\n\nSeminário Teológico de Chapala` },
     en: { subject: 'Your written answers have been graded', text: `Dear ${name},\n\nYour written answers at Chapala Theological Seminary have been graded. ${status === 'passed' ? 'You passed.' : 'You did not pass this time; you may try again after the wait.'}\n\nOpen ${site} and go to the page you were on to see each result.\n\nChapala Theological Seminary` },
     es: { subject: 'Sus respuestas escritas han sido calificadas', text: `Estimado/a ${name}:\n\nSus respuestas escritas en el Seminario Teológico de Chapala han sido calificadas. ${status === 'passed' ? 'Usted aprobó.' : 'Esta vez no aprobó; puede intentarlo de nuevo después de la espera.'}\n\nAbra ${site} y vaya a la página en la que estaba para ver cada resultado.\n\nSeminario Teológico de Chapala` },
     fr: { subject: 'Vos réponses écrites ont été corrigées', text: `Bonjour ${name},\n\nVos réponses écrites au Séminaire théologique de Chapala ont été corrigées. ${status === 'passed' ? 'Vous avez réussi.' : 'Vous n’avez pas réussi cette fois ; vous pouvez réessayer après le délai.'}\n\nOuvrez ${site} et allez à la page où vous étiez pour voir chaque résultat.\n\nSéminaire théologique de Chapala` },

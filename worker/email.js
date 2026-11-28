@@ -117,19 +117,28 @@ export async function sendEmail(env, msg) {
 }
 
 /** One language per student message. Legacy records default to English. */
-export const emailLanguage = value => ['en', 'es', 'fr'].includes(value) ? value : 'en';
-const localePage = (page, lang) => (lang === 'en' ? '' : lang + '/') + String(page || '').replace(/^(?:en|es|fr)\//, '');
+export const emailLanguage = value => ['en', 'es', 'fr', 'pt'].includes(value) ? value : 'en';
+const localePage = (page, lang) => (lang === 'en' ? '' : lang + '/') + String(page || '').replace(/^(?:en|es|fr|pt)\//, '');
 /* A page link in the student's language. Spanish and French links also name
  * the choice (?cts_lang=), so a device that remembers another language still
  * opens the page in the language of the email (public/cts-lang.js). */
 export function languageLink(site, page, lang) {
   lang = emailLanguage(lang);
-  const url = `${site}/${localePage(page, lang)}`;
-  return lang === 'en' ? url : `${url}?cts_lang=${lang}`;
+  const relative = localePage(page, lang);
+  if (lang === 'en') return `${site}/${relative}`;
+  const hashAt = relative.indexOf('#');
+  const fragment = hashAt < 0 ? '' : relative.slice(hashAt);
+  const route = hashAt < 0 ? relative : relative.slice(0, hashAt);
+  const queryAt = route.indexOf('?');
+  const pathname = queryAt < 0 ? route : route.slice(0, queryAt);
+  const query = new URLSearchParams(queryAt < 0 ? '' : route.slice(queryAt + 1));
+  query.set('cts_lang', lang);
+  return `${String(site).replace(/\/$/, '')}/${pathname}?${query}${fragment}`;
 }
 /* French: a no-break space before « : », a narrow one before « ? ! ; ». */
 export function verificationEmail(code, link, language) {
   const messages = {
+    pt: { subject: `Código de verificação ${code}`, text: `Seu código de verificação do Seminário Teológico de Chapala é ${code}\nDigite-o na página de confirmação de e-mail ou do certificado. Ele expira em 15 minutos.\n${link ? "Ou abra este link e pressione Confirmar e-mail:\n" + link + "\n\n" : "\n"}Se você não solicitou este código, ignore esta mensagem.` },
     en: { subject: `Verification code ${code}`, text: `Your Chapala Theological Seminary verification code is ${code}\nEnter it on the email confirmation or certificate page. It expires in 15 minutes.\n${link ? "Or open this link and press Confirm email:\n" + link + "\n\n" : "\n"}If you did not ask for this, ignore this message.` },
     es: { subject: `Código de verificación ${code}`, text: `Su código de verificación del Seminario Teológico de Chapala es ${code}\nEscríbalo en la página de confirmación del correo o del certificado. Vence en 15 minutos.\n${link ? "O abra este enlace y pulse Confirmar correo:\n" + link + "\n\n" : "\n"}Si no lo solicitó, ignore este mensaje.` },
     fr: { subject: `Code de vérification ${code}`, text: `Votre code de vérification du Séminaire théologique de Chapala est ${code}\nSaisissez-le sur la page de confirmation de l’adresse e-mail ou sur la page du certificat. Il expire dans 15 minutes.\n${link ? "Vous pouvez aussi ouvrir ce lien et appuyer sur « Confirmer l’adresse e-mail » :\n" + link + "\n\n" : "\n"}Si vous n’avez pas fait cette demande, ignorez ce message.` },
@@ -141,6 +150,7 @@ export function codeEmail({ students, origin, lang }) {
   const page = languageLink(origin || 'https://chapalaseminary.org', 'cts-backup.html', lang);
   const list = students.map(s => `  ${s.name}: ${s.id}`).join('\n');
   return {
+    pt: { subject: 'Seu código de estudante', text: `Você solicitou seu(s) código(s) de estudante do Seminário Teológico de Chapala:\n\n${list}\n\nPara restaurar seu progresso, abra ${page} e digite seu código em "Restaurar a partir de um código". Mantenha-o em segredo, como uma senha.\n\nSe você não fez esta solicitação, ignore esta mensagem.` },
     en: { subject: 'Your student code', text: `You asked for your Chapala Theological Seminary student code(s):\n\n${list}\n\nTo restore your progress, open ${page} and enter your code under "Restore from a code". Keep it private, like a password.\n\nIf you did not ask for this, ignore this message.` },
     es: { subject: 'Su código de estudiante', text: `Usted solicitó su(s) código(s) de estudiante del Seminario Teológico de Chapala:\n\n${list}\n\nPara restaurar su progreso, abra ${page} e ingrese su código en "Restaurar desde un código". Manténgalo privado, como una contraseña.\n\nSi no lo solicitó, ignore este mensaje.` },
     fr: { subject: 'Votre code d’étudiant', text: `Vous avez demandé votre code d’étudiant (ou vos codes) du Séminaire théologique de Chapala :\n\n${list}\n\nPour retrouver votre progression, ouvrez ${page} et saisissez votre code sous « Restaurer à partir d’un code ». Gardez-le pour vous, comme un mot de passe.\n\nSi vous n’avez pas fait cette demande, ignorez ce message.` },
@@ -150,9 +160,10 @@ export function certificateEmail({ name, award, code, page, origin, lang }) {
   lang = emailLanguage(lang);
   const site = origin || 'https://chapalaseminary.org';
   // The French verification page is /fr/verify (worker/api.js verifyPage).
-  const verify = `${site}/${lang === 'fr' ? 'fr/' : ''}verify/${code}`;
+  const verify = `${site}/${['fr', 'pt'].includes(lang) ? lang + '/' : ''}verify/${encodeURIComponent(code)}`;
   const print = page ? languageLink(site, page, lang) : site;
   return {
+    pt: { subject: `Seu certificado: ${award}`, text: `Olá, ${name},\n\nSeu certificado do Seminário Teológico de Chapala foi registrado:\n\n  ${award}\n  Código de verificação: ${code}\n  Qualquer pessoa pode verificá-lo em ${verify}\n\nPara imprimi-lo ou salvá-lo em PDF, abra ${print} no dispositivo em que você estuda.\n\nSeminário Teológico de Chapala` },
     en: { subject: `Your certificate: ${award}`, text: `Dear ${name},\n\nYour certificate from Chapala Theological Seminary is registered:\n\n  ${award}\n  Verification code: ${code}\n  Anyone can check it at ${verify}\n\nTo print it or save it as a PDF, open ${print} on the device where you study.\n\nChapala Theological Seminary` },
     es: { subject: `Su certificado: ${award}`, text: `Estimado/a ${name}:\n\nSu certificado del Seminario Teológico de Chapala está registrado:\n\n  ${award}\n  Código de verificación: ${code}\n  Cualquiera puede comprobarlo en ${verify}\n\nPara imprimirlo o guardarlo como PDF, abra ${print} en el dispositivo donde estudia.\n\nSeminario Teológico de Chapala` },
     fr: { subject: `Votre certificat : ${award}`, text: `Bonjour ${name},\n\nVotre certificat du Séminaire théologique de Chapala est enregistré :\n\n  ${award}\n  Code de vérification : ${code}\n  Chacun peut le vérifier sur ${verify}\n\nPour l’imprimer ou l’enregistrer en PDF, ouvrez ${print} sur l’appareil sur lequel vous étudiez.\n\nSéminaire théologique de Chapala` },

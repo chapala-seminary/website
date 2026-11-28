@@ -11,10 +11,10 @@
 import catalog from './catalog.json';
 
 export const PROGRAM_NAMES = {
-  certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', fr: 'Certificat de ministère' },
-  associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad', fr: 'Diplôme associé en théologie' },
-  thm: { en: 'Master of Theology (Th.M.)', es: 'Maestría en Teología (Th.M.)', fr: 'Master en théologie (Th.M.)' },
-  mdiv: { en: 'Master of Divinity (M.Div.)', es: 'Maestría en Divinidad (M.Div.)', fr: 'Master en théologie pastorale (M.Div.)' },
+  certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', fr: 'Certificat de ministère', pt: 'Certificado de Ministério' },
+  associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad', fr: 'Diplôme associé en théologie', pt: 'Grau Associado em Divindade' },
+  thm: { en: 'Master of Theology (Th.M.)', es: 'Maestría en Teología (Th.M.)', fr: 'Master en théologie (Th.M.)', pt: 'Mestrado em Teologia (Th.M.)' },
+  mdiv: { en: 'Master of Divinity (M.Div.)', es: 'Maestría en Divinidad (M.Div.)', fr: 'Master en théologie pastorale (M.Div.)', pt: 'Mestrado em Divindade (M.Div.)' },
 };
 
 /* The title of record, built on the server from the award and the student's
@@ -56,10 +56,10 @@ function programIn(title) {
  * when it cannot be named in that language. */
 export function awardTitle(award, lang) {
   const { level, course, title } = award || {};
-  if (lang !== 'fr') return title;
-  if (level && level !== 'course') return PROGRAM_NAMES[level]?.fr || title;
-  const name = courseTitle(course, 'fr');
+  if (!['fr', 'pt'].includes(lang)) return title;
+  if (level && level !== 'course') return PROGRAM_NAMES[level]?.[lang] || title;
+  const name = courseTitle(course, lang);
   if (!name) return title;
   const program = programIn(title);
-  return program ? `${name} — ${PROGRAM_NAMES[program].fr}` : name;
+  return program ? `${name} — ${PROGRAM_NAMES[program][lang]}` : name;
 }

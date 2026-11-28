@@ -67,7 +67,7 @@ Disallow: /
 const isCanonical = (request) =>
   CANONICAL.has(new URL(request.url).hostname.toLowerCase());
 
-const PRIVATE_PATH = /^(?:\/(?:es|fr))?\/(?:admin|verify|staff|coord)(?:\/|$)|(?:\/(?:es|fr))?\/(?:cts-backup|cts-confirm-email)\.html$|Certificate\.html$/i;
+const PRIVATE_PATH = /^(?:\/(?:es|fr|pt))?\/(?:admin|verify|staff|coord)(?:\/|$)|(?:\/(?:es|fr|pt))?\/(?:cts-backup|cts-confirm-email)\.html$|Certificate\.html$/i;
 const isPrivatePath = (path) => PRIVATE_PATH.test(path);
 
 const SECURITY = {
@@ -142,7 +142,7 @@ async function route(request, env, ctx) {
   if (path === '/api' || path.startsWith('/api/')) return await handle(request, env, ctx);
   if (path === '/verify' || path.startsWith('/verify/')) return await handle(request, env);
   // The verification page in a reader's language: /fr/verify (worker/api.js).
-  if (/^\/(?:es|fr)\/verify(?:\/|$)/.test(path)) return await handle(request, env);
+  if (/^\/(?:es|fr|pt)\/verify(?:\/|$)/.test(path)) return await handle(request, env);
   if (path === '/staff' || path.startsWith('/staff/')) return await handleStaff(request, env);
   // Coordinator-led paper study (worker/coord.js): its own Access sign-in.
   if (path === '/coord' || path.startsWith('/coord/')) return await handleCoord(request, env);

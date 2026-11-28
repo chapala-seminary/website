@@ -36,6 +36,8 @@ for (const f of fs.readdirSync('src/content/courses')) {
   courses[f.replace(/\.json$/, '')] = JSON.parse(fs.readFileSync(path.join('src/content/courses', f), 'utf8'));
 }
 
+const ptTitles = JSON.parse(fs.readFileSync('src/data/interface/pt.json', 'utf8'))['@course'];
+const ptAliases = { CTS_WiseSpeak_Preaching: 'CTSPreaching', CTS_Narrative_Preaching: 'CTSNarrative', ethics_unit01: 'CTSEthics' };
 const names = {};
 const problems = [];
 for (const f of fs.readdirSync('public').filter((f) => /certificate/i.test(f) && f.endsWith('.html')).sort()) {
@@ -45,8 +47,10 @@ for (const f of fs.readdirSync('public').filter((f) => /certificate/i.test(f) &&
   const c = courses[key];
   if (!c) { problems.push(`${f}: no catalog entry for "${base}"`); continue; }
   const m = byCatalog[key];
+  const pt = ptTitles[ptAliases[key] || key];
+  if (!pt) { problems.push(`${f}: no Portuguese title for ${key}`); continue; }
   // French: the catalog's name (the Certificate Maker has no French yet).
-  names[f.toLowerCase()] = m ? { en: m.en, es: m.es, fr: c.title.fr, authors: m.authors } : { en: c.title.en, es: c.title.es, fr: c.title.fr, authors: ['cook'] };
+  names[f.toLowerCase()] = m ? { en: m.en, es: m.es, fr: c.title.fr, pt, authors: m.authors } : { en: c.title.en, es: c.title.es, fr: c.title.fr, pt, authors: ['cook'] };
 }
 if (problems.length) { problems.forEach((p) => console.error('  ' + p)); process.exit(1); }
 
@@ -60,9 +64,11 @@ for (const [code, c] of Object.entries(cat.completions)) {
   const m = MAKER[slug] || MAKER[single];
   const fallback = Object.values(courses).find((x) => (x.code || '').toUpperCase() === code || `CTS${(x.code || '').toUpperCase().replace(/^CTS/, '')}` === code);
   const fr = c.title?.fr || fallback?.title.fr;
-  byCode[code] = m ? { en: m.en, es: m.es, ...(fr ? { fr } : {}) }
-    : fallback ? { en: fallback.title.en, es: fallback.title.es, ...(fr ? { fr } : {}) }
-    : { en: c.name.replace(/\s*\|\s*$/, ''), es: c.name.replace(/\s*\|\s*$/, ''), ...(fr ? { fr } : {}) };
+  const pt = c.title?.pt;
+  if (!pt) { console.error(`${code}: no Portuguese completion title`); process.exit(1); }
+  byCode[code] = m ? { en: m.en, es: m.es, ...(fr ? { fr } : {}), pt }
+    : fallback ? { en: fallback.title.en, es: fallback.title.es, ...(fr ? { fr } : {}), pt }
+    : { en: c.name.replace(/\s*\|\s*$/, ''), es: c.name.replace(/\s*\|\s*$/, ''), ...(fr ? { fr } : {}), pt };
 }
 
 const text = '/* The course name on each course certificate, English, Spanish and French, and its\n' +

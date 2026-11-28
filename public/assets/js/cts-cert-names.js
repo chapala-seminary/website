@@ -7,6 +7,7 @@ window.CTS_CERT_NAMES = {
   "en": "1 Peter Intensive",
   "es": "1 Pedro: Curso Intensivo",
   "fr": "Cours intensif sur 1 Pierre",
+  "pt": "1 Pedro — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -15,6 +16,7 @@ window.CTS_CERT_NAMES = {
   "en": "Church Administration & Leadership",
   "es": "Administración y Liderazgo de la Iglesia",
   "fr": "Administration et leadership de l’Église",
+  "pt": "Administração e Liderança da Igreja",
   "authors": [
    "cook"
   ]
@@ -23,6 +25,7 @@ window.CTS_CERT_NAMES = {
   "en": "Acts Intensive",
   "es": "Hechos: Curso Intensivo",
   "fr": "Cours intensif sur les Actes",
+  "pt": "Atos dos Apóstolos — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -31,6 +34,7 @@ window.CTS_CERT_NAMES = {
   "en": "Acts Intensive",
   "es": "Hechos: Curso Intensivo",
   "fr": "Cours intensif sur les Actes",
+  "pt": "Atos dos Apóstolos — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -39,6 +43,7 @@ window.CTS_CERT_NAMES = {
   "en": "Acts Intensive",
   "es": "Hechos: Curso Intensivo",
   "fr": "Cours intensif sur les Actes",
+  "pt": "Atos dos Apóstolos — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -47,6 +52,7 @@ window.CTS_CERT_NAMES = {
   "en": "Apologetics",
   "es": "Apologética",
   "fr": "Apologétique",
+  "pt": "Apologética",
   "authors": [
    "cook"
   ]
@@ -55,6 +61,7 @@ window.CTS_CERT_NAMES = {
   "en": "How We Got the Bible",
   "es": "Cómo Obtuvimos la Biblia",
   "fr": "Comment nous avons reçu la Bible",
+  "pt": "Como Recebemos a Bíblia",
   "authors": [
    "cook"
   ]
@@ -63,6 +70,7 @@ window.CTS_CERT_NAMES = {
   "en": "Bible Characters II",
   "es": "Personajes Bíblicos II",
   "fr": "Personnages de la Bible II",
+  "pt": "Personagens Bíblicos II",
   "authors": [
    "cook"
   ]
@@ -71,6 +79,7 @@ window.CTS_CERT_NAMES = {
   "en": "Bible Characters",
   "es": "Personajes Bíblicos",
   "fr": "Personnages de la Bible",
+  "pt": "Personagens Bíblicos",
   "authors": [
    "cook"
   ]
@@ -79,6 +88,7 @@ window.CTS_CERT_NAMES = {
   "en": "Christian Education",
   "es": "Educación Cristiana",
   "fr": "Éducation chrétienne",
+  "pt": "Educação Cristã",
   "authors": [
    "Andi Cook"
   ]
@@ -87,6 +97,7 @@ window.CTS_CERT_NAMES = {
   "en": "Christian Education",
   "es": "Educación Cristiana",
   "fr": "Éducation chrétienne",
+  "pt": "Educação Cristã",
   "authors": [
    "Andi Cook"
   ]
@@ -95,6 +106,7 @@ window.CTS_CERT_NAMES = {
   "en": "Christian Education",
   "es": "Educación Cristiana",
   "fr": "Éducation chrétienne",
+  "pt": "Educação Cristã",
   "authors": [
    "Andi Cook"
   ]
@@ -103,6 +115,7 @@ window.CTS_CERT_NAMES = {
   "en": "Church Growth",
   "es": "Crecimiento de la Iglesia",
   "fr": "Croissance de l’Église",
+  "pt": "Crescimento da Igreja",
   "authors": [
    "cook"
   ]
@@ -111,6 +124,7 @@ window.CTS_CERT_NAMES = {
   "en": "Church History",
   "es": "Historia de la Iglesia",
   "fr": "Histoire de l’Église",
+  "pt": "História da Igreja",
   "authors": [
    "cook"
   ]
@@ -119,6 +133,7 @@ window.CTS_CERT_NAMES = {
   "en": "Church History",
   "es": "Historia de la Iglesia",
   "fr": "Histoire de l’Église",
+  "pt": "História da Igreja",
   "authors": [
    "cook"
   ]
@@ -127,6 +142,7 @@ window.CTS_CERT_NAMES = {
   "en": "Church History",
   "es": "Historia de la Iglesia",
   "fr": "Histoire de l’Église",
+  "pt": "História da Igreja",
   "authors": [
    "cook"
   ]
@@ -135,6 +151,7 @@ window.CTS_CERT_NAMES = {
   "en": "Counseling Situations",
   "es": "Situaciones de Consejería",
   "fr": "Situations de relation d’aide",
+  "pt": "Situações de Aconselhamento",
   "authors": [
    "cook"
   ]
@@ -143,6 +160,7 @@ window.CTS_CERT_NAMES = {
   "en": "Counseling",
   "es": "Consejería",
   "fr": "Relation d’aide",
+  "pt": "Aconselhamento Bíblico",
   "authors": [
    "cook"
   ]
@@ -151,6 +169,7 @@ window.CTS_CERT_NAMES = {
   "en": "Cults & World Religions",
   "es": "Sectas y Religiones del Mundo",
   "fr": "Sectes et religions du monde",
+  "pt": "Seitas e Religiões Mundiais",
   "authors": [
    "cook"
   ]
@@ -159,6 +178,7 @@ window.CTS_CERT_NAMES = {
   "en": "Doctrinal Preaching",
   "es": "Predicación Doctrinal",
   "fr": "Prédication doctrinale",
+  "pt": "Pregação Doutrinária",
   "authors": [
    "cook"
   ]
@@ -167,6 +187,7 @@ window.CTS_CERT_NAMES = {
   "en": "Deacon Family Ministry Plan",
   "es": "Plan de Ministerio Familiar de Diáconos",
   "fr": "Plan de ministère familial des diacres",
+  "pt": "Plano de Ministério Diaconal às Famílias",
   "authors": [
    "cook"
   ]
@@ -175,6 +196,7 @@ window.CTS_CERT_NAMES = {
   "en": "Baptist History and Denominational Development",
   "es": "Historia y desarrollo denominacional de los bautistas",
   "fr": "Histoire des baptistes et développement de la dénomination",
+  "pt": "História Batista e Desenvolvimento Denominacional",
   "authors": [
    "cook"
   ]
@@ -183,6 +205,7 @@ window.CTS_CERT_NAMES = {
   "en": "Baptist Theology and Distinctive Doctrines",
   "es": "Teología bautista y doctrinas distintivas",
   "fr": "Théologie baptiste et doctrines distinctives",
+  "pt": "Teologia Batista e Doutrinas Distintivas",
   "authors": [
    "cook"
   ]
@@ -191,6 +214,7 @@ window.CTS_CERT_NAMES = {
   "en": "Congregational Church Government and Baptist Polity",
   "es": "Gobierno congregacional de la iglesia y política bautista",
   "fr": "Le gouvernement congrégationaliste de l'Église et l'ordre baptiste",
+  "pt": "Governo Eclesiástico Congregacional e Organização Batista",
   "authors": [
    "cook"
   ]
@@ -199,6 +223,7 @@ window.CTS_CERT_NAMES = {
   "en": "Baptist Worship, Ordinances, and Preaching",
   "es": "Culto, ordenanzas y predicación bautistas",
   "fr": "Culte, ordonnances et prédication chez les baptistes",
+  "pt": "Culto, Ordenanças e Pregação Batistas",
   "authors": [
    "cook"
   ]
@@ -207,6 +232,7 @@ window.CTS_CERT_NAMES = {
   "en": "Baptist Pastoral Ministry, Missions, and Church Leadership",
   "es": "Ministerio pastoral, misiones y liderazgo de la iglesia bautista",
   "fr": "Le ministère pastoral baptiste, les missions et la conduite de l'Église",
+  "pt": "Ministério Pastoral, Missões e Liderança da Igreja Batista",
   "authors": [
    "cook"
   ]
@@ -215,6 +241,7 @@ window.CTS_CERT_NAMES = {
   "en": "History and Development of Pentecostalism",
   "es": "Historia y desarrollo del pentecostalismo",
   "fr": "Histoire et développement du pentecôtisme",
+  "pt": "História e Desenvolvimento do Pentecostalismo",
   "authors": [
    "cook"
   ]
@@ -223,6 +250,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pentecostal and Charismatic Theology",
   "es": "Teología pentecostal y carismática",
   "fr": "Théologie pentecôtiste et charismatique",
+  "pt": "Teologia Pentecostal e Carismática",
   "authors": [
    "cook"
   ]
@@ -231,6 +259,7 @@ window.CTS_CERT_NAMES = {
   "en": "The Holy Spirit, Spiritual Gifts, and Discernment",
   "es": "El Espíritu Santo, los dones espirituales y el discernimiento",
   "fr": "Le Saint-Esprit, les dons spirituels et le discernement",
+  "pt": "O Espírito Santo, os Dons Espirituais e o Discernimento",
   "authors": [
    "cook"
   ]
@@ -239,6 +268,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pentecostal Worship, Preaching, and Ministry",
   "es": "Adoración, predicación y ministerio pentecostal",
   "fr": "Adoration, prédication et ministère pentecôtistes",
+  "pt": "Culto, Pregação e Ministério Pentecostais",
   "authors": [
    "cook"
   ]
@@ -247,6 +277,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pentecostal Pastoral Leadership and Global Missions",
   "es": "Liderazgo pastoral pentecostal y misiones globales",
   "fr": "Leadership pastoral pentecôtiste et missions mondiales",
+  "pt": "Liderança Pastoral e Missões Mundiais Pentecostais",
   "authors": [
    "cook"
   ]
@@ -255,6 +286,7 @@ window.CTS_CERT_NAMES = {
   "en": "History of the Reformation and Reformed Churches",
   "es": "Historia de la Reforma y de las iglesias reformadas",
   "fr": "Histoire de la Réforme et des Églises réformées",
+  "pt": "História da Reforma e das Igrejas Reformadas",
   "authors": [
    "cook"
   ]
@@ -263,6 +295,7 @@ window.CTS_CERT_NAMES = {
   "en": "Reformed Theology and the Doctrines of Grace",
   "es": "Teología reformada y las doctrinas de la gracia",
   "fr": "Théologie réformée et doctrines de la grâce",
+  "pt": "Teologia Reformada e as Doutrinas da Graça",
   "authors": [
    "cook"
   ]
@@ -271,6 +304,7 @@ window.CTS_CERT_NAMES = {
   "en": "Covenant Theology, Scripture, and Reformed Confessions",
   "es": "Teología del pacto, la Escritura y las confesiones reformadas",
   "fr": "Théologie de l'alliance, Écriture et confessions de foi réformées",
+  "pt": "Teologia da Aliança, Escrituras e Confissões Reformadas",
   "authors": [
    "cook"
   ]
@@ -279,6 +313,7 @@ window.CTS_CERT_NAMES = {
   "en": "Presbyterian Polity, Worship, and Sacraments",
   "es": "Gobierno, culto y sacramentos presbiterianos",
   "fr": "Gouvernement d'Église, culte et sacrements presbytériens",
+  "pt": "Governo, Culto e Sacramentos Presbiterianos",
   "authors": [
    "cook"
   ]
@@ -287,6 +322,7 @@ window.CTS_CERT_NAMES = {
   "en": "Reformed Pastoral Ministry, Preaching, and Missions",
   "es": "Ministerio pastoral, predicación y misiones reformados",
   "fr": "Le ministère pastoral réformé, la prédication et les missions",
+  "pt": "Ministério Pastoral, Pregação e Missões Reformados",
   "authors": [
    "cook"
   ]
@@ -295,6 +331,7 @@ window.CTS_CERT_NAMES = {
   "en": "John Wesley and the History of Methodism",
   "es": "John Wesley y la historia del metodismo",
   "fr": "John Wesley et l'histoire du méthodisme",
+  "pt": "John Wesley e a História do Metodismo",
   "authors": [
    "cook"
   ]
@@ -303,6 +340,7 @@ window.CTS_CERT_NAMES = {
   "en": "Wesleyan Theology and the Doctrine of Salvation",
   "es": "Teología wesleyana y la doctrina de la salvación",
   "fr": "Théologie wesleyenne et doctrine du salut",
+  "pt": "Teologia Wesleyana e a Doutrina da Salvação",
   "authors": [
    "cook"
   ]
@@ -311,6 +349,7 @@ window.CTS_CERT_NAMES = {
   "en": "Holiness, Sanctification, and Christian Perfection",
   "es": "Santidad, santificación y perfección cristiana",
   "fr": "Sainteté, sanctification et perfection chrétienne",
+  "pt": "Santidade, Santificação e Perfeição Cristã",
   "authors": [
    "cook"
   ]
@@ -319,6 +358,7 @@ window.CTS_CERT_NAMES = {
   "en": "Methodist and Nazarene Polity, Worship, and Sacraments",
   "es": "Gobierno, culto y sacramentos metodistas y nazarenos",
   "fr": "Gouvernement, culte et sacrements méthodistes et nazaréens",
+  "pt": "Governo, Culto e Sacramentos Metodistas e Nazarenos",
   "authors": [
    "cook"
   ]
@@ -327,6 +367,7 @@ window.CTS_CERT_NAMES = {
   "en": "Wesleyan Pastoral Ministry, Evangelism, and Global Missions",
   "es": "Ministerio pastoral wesleyano, evangelización y misiones mundiales",
   "fr": "Le ministère pastoral wesleyen, l'évangélisation et les missions mondiales",
+  "pt": "Ministério Pastoral, Evangelismo e Missões Mundiais Wesleyanos",
   "authors": [
    "cook"
   ]
@@ -335,6 +376,7 @@ window.CTS_CERT_NAMES = {
   "en": "Evangelistic Preaching",
   "es": "Predicación Evangelística",
   "fr": "Prédication d’évangélisation",
+  "pt": "Pregação Evangelística",
   "authors": [
    "cook"
   ]
@@ -343,6 +385,7 @@ window.CTS_CERT_NAMES = {
   "en": "Evangelism",
   "es": "Evangelismo",
   "fr": "Évangélisation",
+  "pt": "Evangelismo",
   "authors": [
    "cook"
   ]
@@ -351,6 +394,7 @@ window.CTS_CERT_NAMES = {
   "en": "Evangelism",
   "es": "Evangelismo",
   "fr": "Évangélisation",
+  "pt": "Evangelismo",
   "authors": [
    "cook"
   ]
@@ -359,6 +403,7 @@ window.CTS_CERT_NAMES = {
   "en": "Evangelism",
   "es": "Evangelismo",
   "fr": "Évangélisation",
+  "pt": "Evangelismo",
   "authors": [
    "cook"
   ]
@@ -367,6 +412,7 @@ window.CTS_CERT_NAMES = {
   "en": "Galatians Intensive",
   "es": "Gálatas: Curso Intensivo",
   "fr": "Cours intensif sur Galates",
+  "pt": "Gálatas — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -375,6 +421,7 @@ window.CTS_CERT_NAMES = {
   "en": "Genesis Intensive",
   "es": "Génesis: Curso Intensivo",
   "fr": "Cours intensif sur la Genèse",
+  "pt": "Gênesis — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -383,6 +430,7 @@ window.CTS_CERT_NAMES = {
   "en": "The Doctrine of the Holy Spirit",
   "es": "La Doctrina del Espíritu Santo",
   "fr": "La doctrine du Saint-Esprit",
+  "pt": "O Espírito Santo",
   "authors": [
    "cook"
   ]
@@ -391,6 +439,7 @@ window.CTS_CERT_NAMES = {
   "en": "Hermeneutics",
   "es": "Hermenéutica",
   "fr": "Herméneutique",
+  "pt": "Hermenêutica: Interpretando as Escrituras",
   "authors": [
    "cook"
   ]
@@ -399,6 +448,7 @@ window.CTS_CERT_NAMES = {
   "en": "Defending the Christian Faith in Conversation with Islam",
   "es": "Defensa de la fe cristiana en diálogo con el islam",
   "fr": "Défendre la foi chrétienne en dialogue avec l’islam",
+  "pt": "Defendendo a Fé Cristã no Diálogo com o Islã",
   "authors": [
    "cook"
   ]
@@ -407,6 +457,7 @@ window.CTS_CERT_NAMES = {
   "en": "The Gospel of John",
   "es": "El Evangelio de Juan",
   "fr": "L’Évangile de Jean",
+  "pt": "O Evangelho de João",
   "authors": [
    "cook"
   ]
@@ -415,6 +466,7 @@ window.CTS_CERT_NAMES = {
   "en": "Joshua Intensive",
   "es": "Josué: Curso Intensivo",
   "fr": "Cours intensif sur Josué",
+  "pt": "Josué",
   "authors": [
    "cook"
   ]
@@ -423,6 +475,7 @@ window.CTS_CERT_NAMES = {
   "en": "Joshua Intensive",
   "es": "Josué: Curso Intensivo",
   "fr": "Cours intensif sur Josué",
+  "pt": "Josué",
   "authors": [
    "cook"
   ]
@@ -431,6 +484,7 @@ window.CTS_CERT_NAMES = {
   "en": "Joshua Intensive",
   "es": "Josué: Curso Intensivo",
   "fr": "Cours intensif sur Josué",
+  "pt": "Josué",
   "authors": [
    "cook"
   ]
@@ -439,6 +493,7 @@ window.CTS_CERT_NAMES = {
   "en": "Language Appreciation",
   "es": "Apreciación de los Idiomas Bíblicos",
   "fr": "Initiation aux langues bibliques",
+  "pt": "Apreciação das Línguas Bíblicas",
   "authors": [
    "cook"
   ]
@@ -447,6 +502,7 @@ window.CTS_CERT_NAMES = {
   "en": "Language Appreciation",
   "es": "Apreciación de los Idiomas Bíblicos",
   "fr": "Initiation aux langues bibliques",
+  "pt": "Apreciação das Línguas Bíblicas",
   "authors": [
    "cook"
   ]
@@ -455,6 +511,7 @@ window.CTS_CERT_NAMES = {
   "en": "Language Appreciation",
   "es": "Apreciación de los Idiomas Bíblicos",
   "fr": "Initiation aux langues bibliques",
+  "pt": "Apreciação das Línguas Bíblicas",
   "authors": [
    "cook"
   ]
@@ -463,6 +520,7 @@ window.CTS_CERT_NAMES = {
   "en": "The Life of Christ",
   "es": "La Vida de Cristo",
   "fr": "La vie du Christ",
+  "pt": "A Vida de Cristo",
   "authors": [
    "cook"
   ]
@@ -471,6 +529,7 @@ window.CTS_CERT_NAMES = {
   "en": "Matthew Intensive",
   "es": "Mateo: Curso Intensivo",
   "fr": "Cours intensif sur Matthieu",
+  "pt": "Mateus — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -479,6 +538,7 @@ window.CTS_CERT_NAMES = {
   "en": "World Missions",
   "es": "Misiones Mundiales",
   "fr": "Missions mondiales",
+  "pt": "Missões Mundiais",
   "authors": [
    "cook"
   ]
@@ -487,6 +547,7 @@ window.CTS_CERT_NAMES = {
   "en": "New Testament Survey",
   "es": "Panorama del Nuevo Testamento",
   "fr": "Survol du Nouveau Testament",
+  "pt": "Panorama do Novo Testamento",
   "authors": [
    "cook"
   ]
@@ -495,6 +556,7 @@ window.CTS_CERT_NAMES = {
   "en": "New Testament Survey",
   "es": "Panorama del Nuevo Testamento",
   "fr": "Survol du Nouveau Testament",
+  "pt": "Panorama do Novo Testamento",
   "authors": [
    "cook"
   ]
@@ -503,6 +565,7 @@ window.CTS_CERT_NAMES = {
   "en": "New Testament Survey",
   "es": "Panorama del Nuevo Testamento",
   "fr": "Survol du Nouveau Testament",
+  "pt": "Panorama do Novo Testamento",
   "authors": [
    "cook"
   ]
@@ -511,6 +574,7 @@ window.CTS_CERT_NAMES = {
   "en": "Narrative Preaching",
   "es": "Predicación Narrativa",
   "fr": "Prédication narrative",
+  "pt": "Pregação Narrativa",
   "authors": [
    "cook"
   ]
@@ -519,6 +583,7 @@ window.CTS_CERT_NAMES = {
   "en": "Old Testament Survey",
   "es": "Panorama del Antiguo Testamento",
   "fr": "Survol de l’Ancien Testament",
+  "pt": "Panorama do Antigo Testamento",
   "authors": [
    "cook"
   ]
@@ -527,6 +592,7 @@ window.CTS_CERT_NAMES = {
   "en": "Old Testament Survey",
   "es": "Panorama del Antiguo Testamento",
   "fr": "Survol de l’Ancien Testament",
+  "pt": "Panorama do Antigo Testamento",
   "authors": [
    "cook"
   ]
@@ -535,6 +601,7 @@ window.CTS_CERT_NAMES = {
   "en": "Old Testament Survey",
   "es": "Panorama del Antiguo Testamento",
   "fr": "Survol de l’Ancien Testament",
+  "pt": "Panorama do Antigo Testamento",
   "authors": [
    "cook"
   ]
@@ -543,6 +610,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pastoral Ministries",
   "es": "Ministerio Pastoral",
   "fr": "Ministères pastoraux",
+  "pt": "Ministérios Pastorais",
   "authors": [
    "cook"
   ]
@@ -551,6 +619,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pastoral Ministries",
   "es": "Ministerio Pastoral",
   "fr": "Ministères pastoraux",
+  "pt": "Ministérios Pastorais",
   "authors": [
    "cook"
   ]
@@ -559,6 +628,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pastoral Ministries",
   "es": "Ministerio Pastoral",
   "fr": "Ministères pastoraux",
+  "pt": "Ministérios Pastorais",
   "authors": [
    "cook"
   ]
@@ -567,6 +637,7 @@ window.CTS_CERT_NAMES = {
   "en": "Practical Theology",
   "es": "Teología Práctica",
   "fr": "Théologie pratique",
+  "pt": "Teologia Prática",
   "authors": [
    "cook",
    "rogers"
@@ -576,6 +647,7 @@ window.CTS_CERT_NAMES = {
   "en": "Parables of the Bible",
   "es": "Las Parábolas de la Biblia",
   "fr": "Les paraboles de la Bible",
+  "pt": "Parábolas da Bíblia",
   "authors": [
    "cook"
   ]
@@ -584,6 +656,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pentateuch",
   "es": "Pentateuco",
   "fr": "Le Pentateuque",
+  "pt": "O Pentateuco",
   "authors": [
    "rogers"
   ]
@@ -592,6 +665,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pentecostalism & the Charismatic Movement",
   "es": "El Pentecostalismo y el Movimiento Carismático",
   "fr": "Le pentecôtisme et le mouvement charismatique",
+  "pt": "O Pentecostalismo e o Movimento Carismático",
   "authors": [
    "cook"
   ]
@@ -600,6 +674,7 @@ window.CTS_CERT_NAMES = {
   "en": "Preaching (WiseSpeak)",
   "es": "Predicación (WiseSpeak)",
   "fr": "Prédication",
+  "pt": "Pregação",
   "authors": [
    "cook"
   ]
@@ -608,6 +683,7 @@ window.CTS_CERT_NAMES = {
   "en": "Psalms",
   "es": "Salmos",
   "fr": "Le livre des Psaumes",
+  "pt": "Salmos",
   "authors": [
    "cook"
   ]
@@ -616,6 +692,7 @@ window.CTS_CERT_NAMES = {
   "en": "Psalms",
   "es": "Salmos",
   "fr": "Le livre des Psaumes",
+  "pt": "Salmos",
   "authors": [
    "cook"
   ]
@@ -624,6 +701,7 @@ window.CTS_CERT_NAMES = {
   "en": "Psalms",
   "es": "Salmos",
   "fr": "Le livre des Psaumes",
+  "pt": "Salmos",
   "authors": [
    "cook"
   ]
@@ -632,6 +710,7 @@ window.CTS_CERT_NAMES = {
   "en": "Ruth and Esther",
   "es": "Rut y Ester",
   "fr": "Ruth et Esther",
+  "pt": "Rute e Ester",
   "authors": [
    "Glenda Rogers"
   ]
@@ -640,6 +719,7 @@ window.CTS_CERT_NAMES = {
   "en": "Radical Christianity",
   "es": "Cristianismo Radical",
   "fr": "Le christianisme radical",
+  "pt": "Cristianismo Radical",
   "authors": [
    "cook"
   ]
@@ -648,6 +728,7 @@ window.CTS_CERT_NAMES = {
   "en": "Revelation Intensive",
   "es": "Apocalipsis: Curso Intensivo",
   "fr": "Cours intensif sur l’Apocalypse",
+  "pt": "Apocalipse — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -656,6 +737,7 @@ window.CTS_CERT_NAMES = {
   "en": "Revelation Intensive",
   "es": "Apocalipsis: Curso Intensivo",
   "fr": "Cours intensif sur l’Apocalypse",
+  "pt": "Apocalipse — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -664,6 +746,7 @@ window.CTS_CERT_NAMES = {
   "en": "Revelation Intensive",
   "es": "Apocalipsis: Curso Intensivo",
   "fr": "Cours intensif sur l’Apocalypse",
+  "pt": "Apocalipse — Estudo Intensivo",
   "authors": [
    "cook"
   ]
@@ -672,6 +755,7 @@ window.CTS_CERT_NAMES = {
   "en": "Romans",
   "es": "Romanos",
   "fr": "L’Épître aux Romains",
+  "pt": "Epístola aos Romanos",
   "authors": [
    "cook",
    "rogers"
@@ -681,6 +765,7 @@ window.CTS_CERT_NAMES = {
   "en": "Systematic Theology",
   "es": "Teología Sistemática",
   "fr": "Théologie systématique",
+  "pt": "Teologia Sistemática",
   "authors": [
    "cook"
   ]
@@ -689,6 +774,7 @@ window.CTS_CERT_NAMES = {
   "en": "World Religions",
   "es": "Religiones del Mundo",
   "fr": "Les religions du monde",
+  "pt": "Religiões Mundiais",
   "authors": [
    "cook"
   ]
@@ -697,6 +783,7 @@ window.CTS_CERT_NAMES = {
   "en": "World Religions",
   "es": "Religiones del Mundo",
   "fr": "Les religions du monde",
+  "pt": "Religiões Mundiais",
   "authors": [
    "cook"
   ]
@@ -705,6 +792,7 @@ window.CTS_CERT_NAMES = {
   "en": "World Religions",
   "es": "Religiones del Mundo",
   "fr": "Les religions du monde",
+  "pt": "Religiões Mundiais",
   "authors": [
    "cook"
   ]
@@ -713,6 +801,7 @@ window.CTS_CERT_NAMES = {
   "en": "Christian Worship",
   "es": "Adoración Cristiana",
   "fr": "Le culte",
+  "pt": "Adoração Cristã",
   "authors": [
    "cook"
   ]
@@ -721,6 +810,7 @@ window.CTS_CERT_NAMES = {
   "en": "Christian Worship",
   "es": "Adoración Cristiana",
   "fr": "Le culte",
+  "pt": "Adoração Cristã",
   "authors": [
    "cook"
   ]
@@ -729,6 +819,7 @@ window.CTS_CERT_NAMES = {
   "en": "Christian Worship",
   "es": "Adoración Cristiana",
   "fr": "Le culte",
+  "pt": "Adoração Cristã",
   "authors": [
    "cook"
   ]
@@ -737,6 +828,7 @@ window.CTS_CERT_NAMES = {
   "en": "Pastoral & Christian Ethics",
   "es": "Ética Pastoral y Cristiana",
   "fr": "Éthique chrétienne",
+  "pt": "Ética Pastoral e Cristã",
   "authors": [
    "cook"
   ]
@@ -747,331 +839,397 @@ window.CTS_COURSE_NAMES = {
  "CTS1PETER": {
   "en": "1 Peter Intensive",
   "es": "1 Pedro: Curso Intensivo",
-  "fr": "Cours intensif sur 1 Pierre"
+  "fr": "Cours intensif sur 1 Pierre",
+  "pt": "1 Pedro — Estudo Intensivo"
  },
  "CTSAL": {
   "en": "Church Administration & Leadership",
   "es": "Administración y Liderazgo de la Iglesia",
-  "fr": "Administration et leadership de l’Église"
+  "fr": "Administration et leadership de l’Église",
+  "pt": "Administração e Liderança da Igreja"
  },
  "CTSACTS": {
   "en": "Acts Intensive",
   "es": "Hechos: Curso Intensivo",
-  "fr": "Cours intensif sur les Actes"
+  "fr": "Cours intensif sur les Actes",
+  "pt": "Atos dos Apóstolos — Estudo Intensivo"
  },
  "CTSAPOL": {
   "en": "Apologetics",
   "es": "Apologética",
-  "fr": "Apologétique"
+  "fr": "Apologétique",
+  "pt": "Apologética"
  },
  "CTSBIBLE": {
   "en": "How We Got the Bible",
   "es": "Cómo Obtuvimos la Biblia",
-  "fr": "Comment nous avons reçu la Bible"
+  "fr": "Comment nous avons reçu la Bible",
+  "pt": "Como Recebemos a Bíblia"
  },
  "CTSBIBLECHARACTERS2": {
   "en": "Bible Characters II",
   "es": "Personajes Bíblicos II",
-  "fr": "Personnages de la Bible II"
+  "fr": "Personnages de la Bible II",
+  "pt": "Personagens Bíblicos II"
  },
  "CTSBIBLECHARACTERS": {
   "en": "Bible Characters",
   "es": "Personajes Bíblicos",
-  "fr": "Personnages de la Bible"
+  "fr": "Personnages de la Bible",
+  "pt": "Personagens Bíblicos"
  },
  "CTSCE": {
   "en": "Christian Education",
   "es": "Educación Cristiana",
-  "fr": "Éducation chrétienne"
+  "fr": "Éducation chrétienne",
+  "pt": "Educação Cristã"
  },
  "CTSCG": {
   "en": "Church Growth",
   "es": "Crecimiento de la Iglesia",
-  "fr": "Croissance de l’Église"
+  "fr": "Croissance de l’Église",
+  "pt": "Crescimento da Igreja"
  },
  "CTSCH": {
   "en": "Church History",
   "es": "Historia de la Iglesia",
-  "fr": "Histoire de l’Église"
+  "fr": "Histoire de l’Église",
+  "pt": "História da Igreja"
  },
  "CTSCS": {
   "en": "Counseling Situations",
   "es": "Situaciones de Consejería",
-  "fr": "Situations de relation d’aide"
+  "fr": "Situations de relation d’aide",
+  "pt": "Situações de Aconselhamento"
  },
  "COUNSELING": {
   "en": "Counseling",
   "es": "Consejería",
-  "fr": "Relation d’aide"
+  "fr": "Relation d’aide",
+  "pt": "Aconselhamento Bíblico"
  },
  "CTSCULTS": {
   "en": "Cults & World Religions",
   "es": "Sectas y Religiones del Mundo",
-  "fr": "Sectes et religions du monde"
+  "fr": "Sectes et religions du monde",
+  "pt": "Seitas e Religiões Mundiais"
  },
  "CTSDP": {
   "en": "Doctrinal Preaching",
   "es": "Predicación Doctrinal",
-  "fr": "Prédication doctrinale"
+  "fr": "Prédication doctrinale",
+  "pt": "Pregação Doutrinária"
  },
  "CTSDEACONFAMILYMINISTRY": {
   "en": "Deacon Family Ministry Plan",
   "es": "Plan de Ministerio Familiar de Diáconos",
-  "fr": "Plan de ministère familial des diacres"
+  "fr": "Plan de ministère familial des diacres",
+  "pt": "Plano de Ministério Diaconal às Famílias"
  },
  "CTSELECBAP1": {
   "en": "Baptist History and Denominational Development",
   "es": "Historia y desarrollo denominacional de los bautistas",
-  "fr": "Histoire des baptistes et développement de la dénomination"
+  "fr": "Histoire des baptistes et développement de la dénomination",
+  "pt": "História Batista e Desenvolvimento Denominacional"
  },
  "CTSELECBAP2": {
   "en": "Baptist Theology and Distinctive Doctrines",
   "es": "Teología bautista y doctrinas distintivas",
-  "fr": "Théologie baptiste et doctrines distinctives"
+  "fr": "Théologie baptiste et doctrines distinctives",
+  "pt": "Teologia Batista e Doutrinas Distintivas"
  },
  "CTSELECBAP3": {
   "en": "Congregational Church Government and Baptist Polity",
   "es": "Gobierno congregacional de la iglesia y política bautista",
-  "fr": "Le gouvernement congrégationaliste de l'Église et l'ordre baptiste"
+  "fr": "Le gouvernement congrégationaliste de l'Église et l'ordre baptiste",
+  "pt": "Governo Eclesiástico Congregacional e Organização Batista"
  },
  "CTSELECBAP4": {
   "en": "Baptist Worship, Ordinances, and Preaching",
   "es": "Culto, ordenanzas y predicación bautistas",
-  "fr": "Culte, ordonnances et prédication chez les baptistes"
+  "fr": "Culte, ordonnances et prédication chez les baptistes",
+  "pt": "Culto, Ordenanças e Pregação Batistas"
  },
  "CTSELECBAP5": {
   "en": "Baptist Pastoral Ministry, Missions, and Church Leadership",
   "es": "Ministerio pastoral, misiones y liderazgo de la iglesia bautista",
-  "fr": "Le ministère pastoral baptiste, les missions et la conduite de l'Église"
+  "fr": "Le ministère pastoral baptiste, les missions et la conduite de l'Église",
+  "pt": "Ministério Pastoral, Missões e Liderança da Igreja Batista"
  },
  "CTSELECPC1": {
   "en": "History and Development of Pentecostalism",
   "es": "Historia y desarrollo del pentecostalismo",
-  "fr": "Histoire et développement du pentecôtisme"
+  "fr": "Histoire et développement du pentecôtisme",
+  "pt": "História e Desenvolvimento do Pentecostalismo"
  },
  "CTSELECPC2": {
   "en": "Pentecostal and Charismatic Theology",
   "es": "Teología pentecostal y carismática",
-  "fr": "Théologie pentecôtiste et charismatique"
+  "fr": "Théologie pentecôtiste et charismatique",
+  "pt": "Teologia Pentecostal e Carismática"
  },
  "CTSELECPC3": {
   "en": "The Holy Spirit, Spiritual Gifts, and Discernment",
   "es": "El Espíritu Santo, los dones espirituales y el discernimiento",
-  "fr": "Le Saint-Esprit, les dons spirituels et le discernement"
+  "fr": "Le Saint-Esprit, les dons spirituels et le discernement",
+  "pt": "O Espírito Santo, os Dons Espirituais e o Discernimento"
  },
  "CTSELECPC4": {
   "en": "Pentecostal Worship, Preaching, and Ministry",
   "es": "Adoración, predicación y ministerio pentecostal",
-  "fr": "Adoration, prédication et ministère pentecôtistes"
+  "fr": "Adoration, prédication et ministère pentecôtistes",
+  "pt": "Culto, Pregação e Ministério Pentecostais"
  },
  "CTSELECPC5": {
   "en": "Pentecostal Pastoral Leadership and Global Missions",
   "es": "Liderazgo pastoral pentecostal y misiones globales",
-  "fr": "Leadership pastoral pentecôtiste et missions mondiales"
+  "fr": "Leadership pastoral pentecôtiste et missions mondiales",
+  "pt": "Liderança Pastoral e Missões Mundiais Pentecostais"
  },
  "CTSELECREF1": {
   "en": "History of the Reformation and Reformed Churches",
   "es": "Historia de la Reforma y de las iglesias reformadas",
-  "fr": "Histoire de la Réforme et des Églises réformées"
+  "fr": "Histoire de la Réforme et des Églises réformées",
+  "pt": "História da Reforma e das Igrejas Reformadas"
  },
  "CTSELECREF2": {
   "en": "Reformed Theology and the Doctrines of Grace",
   "es": "Teología reformada y las doctrinas de la gracia",
-  "fr": "Théologie réformée et doctrines de la grâce"
+  "fr": "Théologie réformée et doctrines de la grâce",
+  "pt": "Teologia Reformada e as Doutrinas da Graça"
  },
  "CTSELECREF3": {
   "en": "Covenant Theology, Scripture, and Reformed Confessions",
   "es": "Teología del pacto, la Escritura y las confesiones reformadas",
-  "fr": "Théologie de l'alliance, Écriture et confessions de foi réformées"
+  "fr": "Théologie de l'alliance, Écriture et confessions de foi réformées",
+  "pt": "Teologia da Aliança, Escrituras e Confissões Reformadas"
  },
  "CTSELECREF4": {
   "en": "Presbyterian Polity, Worship, and Sacraments",
   "es": "Gobierno, culto y sacramentos presbiterianos",
-  "fr": "Gouvernement d'Église, culte et sacrements presbytériens"
+  "fr": "Gouvernement d'Église, culte et sacrements presbytériens",
+  "pt": "Governo, Culto e Sacramentos Presbiterianos"
  },
  "CTSELECREF5": {
   "en": "Reformed Pastoral Ministry, Preaching, and Missions",
   "es": "Ministerio pastoral, predicación y misiones reformados",
-  "fr": "Le ministère pastoral réformé, la prédication et les missions"
+  "fr": "Le ministère pastoral réformé, la prédication et les missions",
+  "pt": "Ministério Pastoral, Pregação e Missões Reformados"
  },
  "CTSELECWES1": {
   "en": "John Wesley and the History of Methodism",
   "es": "John Wesley y la historia del metodismo",
-  "fr": "John Wesley et l'histoire du méthodisme"
+  "fr": "John Wesley et l'histoire du méthodisme",
+  "pt": "John Wesley e a História do Metodismo"
  },
  "CTSELECWES2": {
   "en": "Wesleyan Theology and the Doctrine of Salvation",
   "es": "Teología wesleyana y la doctrina de la salvación",
-  "fr": "Théologie wesleyenne et doctrine du salut"
+  "fr": "Théologie wesleyenne et doctrine du salut",
+  "pt": "Teologia Wesleyana e a Doutrina da Salvação"
  },
  "CTSELECWES3": {
   "en": "Holiness, Sanctification, and Christian Perfection",
   "es": "Santidad, santificación y perfección cristiana",
-  "fr": "Sainteté, sanctification et perfection chrétienne"
+  "fr": "Sainteté, sanctification et perfection chrétienne",
+  "pt": "Santidade, Santificação e Perfeição Cristã"
  },
  "CTSELECWES4": {
   "en": "Methodist and Nazarene Polity, Worship, and Sacraments",
   "es": "Gobierno, culto y sacramentos metodistas y nazarenos",
-  "fr": "Gouvernement, culte et sacrements méthodistes et nazaréens"
+  "fr": "Gouvernement, culte et sacrements méthodistes et nazaréens",
+  "pt": "Governo, Culto e Sacramentos Metodistas e Nazarenos"
  },
  "CTSELECWES5": {
   "en": "Wesleyan Pastoral Ministry, Evangelism, and Global Missions",
   "es": "Ministerio pastoral wesleyano, evangelización y misiones mundiales",
-  "fr": "Le ministère pastoral wesleyen, l'évangélisation et les missions mondiales"
+  "fr": "Le ministère pastoral wesleyen, l'évangélisation et les missions mondiales",
+  "pt": "Ministério Pastoral, Evangelismo e Missões Mundiais Wesleyanos"
  },
  "CTSEVANPREACH": {
   "en": "Evangelistic Preaching",
   "es": "Predicación Evangelística",
-  "fr": "Prédication d’évangélisation"
+  "fr": "Prédication d’évangélisation",
+  "pt": "Pregação Evangelística"
  },
  "CTSEVANGELISM": {
   "en": "Evangelism",
   "es": "Evangelismo",
-  "fr": "Évangélisation"
+  "fr": "Évangélisation",
+  "pt": "Evangelismo"
  },
  "CTSGALATIANS": {
   "en": "Galatians Intensive",
   "es": "Gálatas: Curso Intensivo",
-  "fr": "Cours intensif sur Galates"
+  "fr": "Cours intensif sur Galates",
+  "pt": "Gálatas — Estudo Intensivo"
  },
  "CTSGENESIS": {
   "en": "Genesis Intensive",
   "es": "Génesis: Curso Intensivo",
-  "fr": "Cours intensif sur la Genèse"
+  "fr": "Cours intensif sur la Genèse",
+  "pt": "Gênesis — Estudo Intensivo"
  },
  "CTSHS": {
   "en": "The Doctrine of the Holy Spirit",
   "es": "La Doctrina del Espíritu Santo",
-  "fr": "La doctrine du Saint-Esprit"
+  "fr": "La doctrine du Saint-Esprit",
+  "pt": "O Espírito Santo"
  },
  "CTSHERMENEUTICS": {
   "en": "Hermeneutics",
   "es": "Hermenéutica",
-  "fr": "Herméneutique"
+  "fr": "Herméneutique",
+  "pt": "Hermenêutica: Interpretando as Escrituras"
  },
  "CTSISLAM": {
   "en": "Defending the Christian Faith in Conversation with Islam",
   "es": "Defensa de la fe cristiana en diálogo con el islam",
-  "fr": "Défendre la foi chrétienne en dialogue avec l’islam"
+  "fr": "Défendre la foi chrétienne en dialogue avec l’islam",
+  "pt": "Defendendo a Fé Cristã no Diálogo com o Islã"
  },
  "CTSJOHN": {
   "en": "The Gospel of John",
   "es": "El Evangelio de Juan",
-  "fr": "L’Évangile de Jean"
+  "fr": "L’Évangile de Jean",
+  "pt": "O Evangelho de João"
  },
  "CTSJOSH": {
   "en": "Joshua Intensive",
   "es": "Josué: Curso Intensivo",
-  "fr": "Cours intensif sur Josué"
+  "fr": "Cours intensif sur Josué",
+  "pt": "Josué"
  },
  "CTSLA": {
   "en": "Language Appreciation",
   "es": "Apreciación de los Idiomas Bíblicos",
-  "fr": "Initiation aux langues bibliques"
+  "fr": "Initiation aux langues bibliques",
+  "pt": "Apreciação das Línguas Bíblicas"
  },
  "CTSLOC": {
   "en": "The Life of Christ",
   "es": "La Vida de Cristo",
-  "fr": "La vie du Christ"
+  "fr": "La vie du Christ",
+  "pt": "A Vida de Cristo"
  },
  "CTSMATT": {
   "en": "Matthew Intensive",
   "es": "Mateo: Curso Intensivo",
-  "fr": "Cours intensif sur Matthieu"
+  "fr": "Cours intensif sur Matthieu",
+  "pt": "Mateus — Estudo Intensivo"
  },
  "CTSMISSIONS": {
   "en": "World Missions",
   "es": "Misiones Mundiales",
-  "fr": "Missions mondiales"
+  "fr": "Missions mondiales",
+  "pt": "Missões Mundiais"
  },
  "CTSNT": {
   "en": "New Testament Survey",
   "es": "Panorama del Nuevo Testamento",
-  "fr": "Survol du Nouveau Testament"
+  "fr": "Survol du Nouveau Testament",
+  "pt": "Panorama do Novo Testamento"
  },
  "STORYTEL": {
   "en": "Narrative Preaching",
   "es": "Predicación Narrativa",
-  "fr": "Prédication narrative"
+  "fr": "Prédication narrative",
+  "pt": "Pregação Narrativa"
  },
  "CTSOTS": {
   "en": "Old Testament Survey",
   "es": "Panorama del Antiguo Testamento",
-  "fr": "Survol de l’Ancien Testament"
+  "fr": "Survol de l’Ancien Testament",
+  "pt": "Panorama do Antigo Testamento"
  },
  "CTSPM": {
   "en": "Pastoral Ministries",
   "es": "Ministerio Pastoral",
-  "fr": "Ministères pastoraux"
+  "fr": "Ministères pastoraux",
+  "pt": "Ministérios Pastorais"
  },
  "CTSPT": {
   "en": "Practical Theology",
   "es": "Teología Práctica",
-  "fr": "Théologie pratique"
+  "fr": "Théologie pratique",
+  "pt": "Teologia Prática"
  },
  "CTSPARABLES": {
   "en": "Parables of the Bible",
   "es": "Las Parábolas de la Biblia",
-  "fr": "Les paraboles de la Bible"
+  "fr": "Les paraboles de la Bible",
+  "pt": "Parábolas da Bíblia"
  },
  "CTSPENT": {
   "en": "Pentateuch",
   "es": "Pentateuco",
-  "fr": "Le Pentateuque"
+  "fr": "Le Pentateuque",
+  "pt": "O Pentateuco"
  },
  "CTSPENTECOSTAL": {
   "en": "Pentecostalism & the Charismatic Movement",
   "es": "El Pentecostalismo y el Movimiento Carismático",
-  "fr": "Le pentecôtisme et le mouvement charismatique"
+  "fr": "Le pentecôtisme et le mouvement charismatique",
+  "pt": "O Pentecostalismo e o Movimento Carismático"
  },
  "WISESPEAK": {
   "en": "Preaching (WiseSpeak)",
   "es": "Predicación (WiseSpeak)",
-  "fr": "Prédication"
+  "fr": "Prédication",
+  "pt": "Pregação"
  },
  "CTSPSALMS": {
   "en": "Psalms",
   "es": "Salmos",
-  "fr": "Le livre des Psaumes"
+  "fr": "Le livre des Psaumes",
+  "pt": "Salmos"
  },
  "CTSRE": {
   "en": "Ruth and Esther",
   "es": "Rut y Ester",
-  "fr": "Ruth et Esther"
+  "fr": "Ruth et Esther",
+  "pt": "Rute e Ester"
  },
  "CTSRADICAL": {
   "en": "Radical Christianity",
   "es": "Cristianismo Radical",
-  "fr": "Le christianisme radical"
+  "fr": "Le christianisme radical",
+  "pt": "Cristianismo Radical"
  },
  "CTSREV": {
   "en": "Revelation Intensive",
   "es": "Apocalipsis: Curso Intensivo",
-  "fr": "Cours intensif sur l’Apocalypse"
+  "fr": "Cours intensif sur l’Apocalypse",
+  "pt": "Apocalipse — Estudo Intensivo"
  },
  "CTSROMANS": {
   "en": "Romans",
   "es": "Romanos",
-  "fr": "L’Épître aux Romains"
+  "fr": "L’Épître aux Romains",
+  "pt": "Epístola aos Romanos"
  },
  "CTSST": {
   "en": "Systematic Theology",
   "es": "Teología Sistemática",
-  "fr": "Théologie systématique"
+  "fr": "Théologie systématique",
+  "pt": "Teologia Sistemática"
  },
  "CTSWR": {
   "en": "World Religions",
   "es": "Religiones del Mundo",
-  "fr": "Les religions du monde"
+  "fr": "Les religions du monde",
+  "pt": "Religiões Mundiais"
  },
  "CTSWORSHIP": {
   "en": "Christian Worship",
   "es": "Adoración Cristiana",
-  "fr": "Le culte"
+  "fr": "Le culte",
+  "pt": "Adoração Cristã"
  },
  "ETHICS": {
   "en": "Pastoral & Christian Ethics",
   "es": "Ética Pastoral y Cristiana",
-  "fr": "Éthique chrétienne"
+  "fr": "Éthique chrétienne",
+  "pt": "Ética Pastoral e Cristã"
  }
 };

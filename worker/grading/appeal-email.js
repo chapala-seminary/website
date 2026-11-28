@@ -3,12 +3,19 @@
    reviewed it: Wayne may have the review prepared for him (6 Nov 2026), so the
    email does not claim a faculty member did it alone. Plain words, in the student's
    language, never the faculty note. Pure text: no imports but the language rule. */
-import { emailLanguage } from '../email.js';
+import { emailLanguage, languageLink } from '../email.js';
 
 export function appealEmail({ name, upheld, passed, courseDone, feedback, site, lang }) {
   lang = emailLanguage(lang);
-  const fb = feedback ? { en: `\n\nComment from the review: ${feedback}`, es: `\n\nComentario de la revisión: ${feedback}`, fr: `\n\nCommentaire de la révision : ${feedback}` }[lang] : '';
+  const fb = feedback ? { pt: `\n\nComentário da revisão: ${feedback}`, en: `\n\nComment from the review: ${feedback}`, es: `\n\nComentario de la revisión: ${feedback}`, fr: `\n\nCommentaire de la révision : ${feedback}` }[lang] : '';
+  const ptSite = languageLink(site || 'https://chapalaseminary.org', 'index.html', 'pt');
   const T = {
+    pt: {
+      subject: upheld ? 'Revisamos sua resposta novamente' : 'Sua resposta foi alterada',
+      text: `Olá, ${name},\n\nVocê pediu ao Seminário Teológico de Chapala que revisasse uma resposta escrita. ` +
+        (upheld ? 'Ela foi revisada, e o resultado inicial foi mantido.' : `Ela foi revisada, e agora sua resposta conta como correta.${passed ? ' Agora você passou neste exame.' : ''}${courseDone ? ' Agora você concluiu o curso.' : ''}`) +
+        `${fb}\n\nAbra ${ptSite} e vá à página em que estava para ver o resultado.\n\nSeminário Teológico de Chapala`,
+    },
     en: {
       subject: upheld ? 'We looked again at your answer' : 'Your answer has been changed',
       text: `Dear ${name},\n\nYou asked Chapala Theological Seminary to look again at a written answer. ` +
