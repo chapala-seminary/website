@@ -34,9 +34,15 @@ the deployment guard checks that the tested checkout is clean. The beta job
 allows 75 minutes because the complete browser suite can take over 40 minutes
 before publication begins.
 
-## AI release account (20 October 2026)
+## Agent publishing accounts (updated 27 November 2026)
 
-For routine repository edits, the connected agent selects `chapalatheological-ai`.
+For routine beta code/content edits and publication of PRs targeting beta, the connected agent may
+use `chapalatheological-ai` or Robert's `satoshisound` account (Robert, 27 November
+2026). Both may push to beta or merge beta PRs under the same testing and
+deployment guards. Record which account published the work and distinguish
+agent-authored changes/review from Robert's human acceptance. This does not grant
+an agent permission to push or merge main, approve its own work as a human, or
+change production/deployment authority.
 Verify the authenticated account first (`gh api user --jq .login` in a CLI,
 or the connected GitHub identity operation) and verify write access to
 `chapala-seminary/website`. Do not use `ChapalaTheological1` for agent

@@ -24,20 +24,25 @@ to the brain's `main`. The rules are in `../brain/AGENT_RULES.md`.
 
 ## Staging and release
 
-Agents using `chapalatheological-ai` may push code and content directly to
+Agents using `chapalatheological-ai` or Robert's `satoshisound` account may push
+code and content directly to
 `beta`, or merge beta PRs, without human review or dual-AI agreement evidence.
 Start from current beta and keep changes focused. The beta Action builds,
 tests, deploys and verifies the release; a failed build/test blocks publication.
 Test the published beta site before promoting.
 
-The agent opens `beta` -> `main` after the exact beta commit's deployment and
+The agent opens `beta` -> `main` as `chapalatheological-ai` after the exact beta commit's deployment and
 live verification pass. Wayne approves that commit and merges using his human
 `ChapalaTheological1` account. Robert's approval is not required. A new beta
 commit needs fresh testing and Wayne approval. The AI cannot push or merge main.
 Robert's `satoshisound` account may approve any PR at its current commit,
 regardless of author or source branch. His own PRs need no second reviewer;
 GitHub cannot formally self-approve. Build/test checks still apply.
-Keep human and AI accounts separate. Main deployment uses Actions once its
+These approval exceptions describe Robert's human actions. Agent-authored work
+using `satoshisound` is not human approval and cannot invoke his production
+review bypass.
+Verify and record the publishing account; never use Wayne's `ChapalaTheological1`
+account for agent-authored work. Main deployment uses Actions once its
 existing production baseline/token/enablement setup is complete. Read
 `docs/beta-staging.md` and `docs/content-release-workflow.md`.
 
