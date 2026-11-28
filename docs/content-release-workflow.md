@@ -2,14 +2,17 @@
 
 ## Daily workflow
 
-1. Use the separate `chapalatheological-ai` account with repository Write access.
+1. Use `chapalatheological-ai` or Robert's `satoshisound` account with repository
+   Write access for agent beta work (Robert, 27 November 2026). Verify and record
+   the account. Agent-authored work using Robert's account is not his human
+   approval; never use `ChapalaTheological1` for agent authorship.
    Start from current beta. Push content or code directly to `beta`, or merge a
    beta PR without human review. No dual-AI agreement links are required.
 2. The beta Action builds, runs the complete suite, deploys to the separate beta
    Worker/database and verifies the published version and activation policy.
    Failed builds/tests block publication. Check the exact release stamp and
    affected journeys on beta; a failed final probe can follow an actual deploy.
-3. When ready, the agent opens `beta` -> `main`. Wayne checks beta and approves
+3. When ready, the agent opens `beta` -> `main` as `chapalatheological-ai`. Wayne checks beta and approves
    the exact current commit using `ChapalaTheological1`, then merges. Robert
    review is not required, including for technical changes. New commits need
    fresh tests and Wayne approval. The agent cannot push or merge main.
@@ -49,8 +52,11 @@ and mandatory Robert review. Synchronize production policy updates back to beta.
 
 ## Credentials and first production activation
 
-Use `chapalatheological-ai`, never Wayne's human administrator identity. For
-CLI access, `gh api user --jq .login` must show the AI account. Use a fine-grained
+Use `chapalatheological-ai` or `satoshisound` for beta work, never Wayne's human
+administrator identity. For CLI access, `gh api user --jq .login` must show the
+selected permitted account. This beta publishing grant does not authorize an
+agent to push or merge main, impersonate Robert's approval, or change production
+authority. Use a fine-grained
 token restricted to this repository with Contents and Pull requests read/write,
 metadata read, and optional Actions/check read. Grant no Administration or
 Workflows access. Keep tokens in the credential store/integration, not files/chat.
